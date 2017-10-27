@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Devcave - jaskinia programisty, blog programistyczny.">
+    <meta name="author" content="Codeboy">
+    <title>Webpack - moduły - łączenie kilku plików JS CSS - devcave.pl</title>
+
+    <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly">
+    <link rel="shortcut icon" href="/img/logo.ico">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/devcave.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <link type="application/atom+xml" rel="alternate" href="https://c0deboy.github.io/devcave/feed.xml" title="devcave.pl" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a href="https://www.jaki-jezyk-programowania.pl/#formularz-kontaktowy">Kontakt</a>
+                </li>
+                <li>
+                    <a href="/moje-projekty">Moje projekty</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="post-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <div class="post-heading">
+                    <h1>Webpack - zarządzanie modułami</h1>
+                    
+                    <h2 class="subheading">Dzielimy pliki Javascript i CSS na moduły</h2>
+                    
+                    <span class="meta">
+                    
+                    22
+                    maja
+                      
+                    2017
+                     <span class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></span> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container post">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <hr class="header-hr">
+
+                <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#webpack">Webpack</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#instalacja">Instalacja</a></li>
+<li class="toc-entry toc-h2"><a href="#konfiguracja">Konfiguracja</a></li>
+<li class="toc-entry toc-h2"><a href="#lączenie-plików">Lączenie plików</a></li>
+<li class="toc-entry toc-h2"><a href="#webpack--babel">Webpack + Babel</a></li>
+<li class="toc-entry toc-h2"><a href="#css">CSS</a></li>
+<li class="toc-entry toc-h2"><a href="#edit">EDIT:</a></li>
+</ul>
+</li>
+</ul>
+
+                <hr>
+
+				        <p>Dzielenie kodu na moduły pozwala odseparować niezwiązane ze sobą części, co wpływa na porządek w projekcie. Gdy pracujemy z danym elementem strony nie chcemy przecież przekopywać się przez masę innych niezwiązanych ze sobą funkcji w celu znalezienia tego, czego szukamy. No dobrze, podzielimy nasz kod, np. na 15 plików JS i 10 plików CSS, ale czy to oznacza, że teraz powinniśmy załączyć 15 tagów &#60;script&#62; i 10 tagów &#60;link&#62; w pliku HTML? Oczywiście, że nie! Duża ilość osobno podpiętych plików znacząco wpływa na wydajność ładowania naszej aplikacji, gdyż każdy plik to osobne żądanie HTTP. Tu z pomocą przychodzi nam Webpack.</p>
+
+<h1 id="webpack">Webpack</h1>
+
+<p>Webpack - jest to narzędzie, które pozwoli nam spiąć wszystkie nasze moduły w jeden plik, tzw. bundle. Dzięki temu później będziemy mogli załączyć na stronę pojedynczy plik, co jest dużo bardziej wydajnym rozwiązaniem. Ponadto, Webpack może dla nas zoptymalizować wielkość plików czy nawet przetranspilować kod ES6 używając Babel i wiele więcej. Wszystko dzięki dodatkowym loaderom i pluginom.</p>
+
+<h2 id="instalacja">Instalacja</h2>
+
+<p>Webpack dodajemy do naszych dev-zależności poleceniem:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install webpack --save-dev</code></pre></figure>
+
+<h2 id="konfiguracja">Konfiguracja</h2>
+
+<p>Konfiguracja Webpacka przechowywana jest domyślnie w pliku <span class="file">webpack.config.js</span>, a jej podstawowa wersja wygląda tak:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">entry</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">home</span><span class="p">:</span> <span class="s1">'./js/main.js'</span><span class="p">,</span>
+    <span class="na">start</span><span class="p">:</span> <span class="s1">'./js/start.js'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'dist'</span><span class="p">),</span>
+    <span class="na">filename</span><span class="p">:</span> <span class="s1">'[name].bundle.js'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span></code></pre></figure>
+
+<hx>Gdzie:</hx>
+<ul>
+  <li>entry - para nazwa - ścieżka, gdzie podajemy nazwę oraz wskazujemy plik, który łączy moduły.</li>
+  <li>path - folder, do którego będą trafiać nasze paczki.</li>
+  <li>filename - nazwa paczki, która powstanie z nazwy w entry i “.bundle.js”</li>
+</ul>
+
+<h2 id="lączenie-plików">Lączenie plików</h2>
+
+<p>Aby Webpack wiedział jakie pliki ma połączyć, musimy to podać w plikach zadeklarowanych w entry. Służy do tego metoda:</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"> <span class="nx">require</span><span class="p">(</span><span class="s1">'scieżka'</span><span class="p">);</span> </code></pre></figure>
+<p>Dla przykładu:</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./nav.js'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./laptop.js'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./typing.js'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./startBtn'</span><span class="p">);</span> </code></pre></figure>
+
+<p class="note">
+Zamiast scieżki można też podać nazwę pakietu zainstalowanego przez npm, tak jak w przykładzie: <code class="highlight language-js" data-lang="js"><span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span></code>
+</p>
+
+<h2 id="webpack--babel">Webpack + Babel</h2>
+
+<p>Teraz pozostało dla ułatwienia stworzyć sobie skrypt, który będzie uruchamiał webpacka. W tym celu do pliku <span class="file">package.json</span> dodajemy  linię:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...</span>
+<span class="s2">"scripts"</span><span class="err">:</span> <span class="p">{</span>
+	<span class="c1">//...</span>
+    <span class="s2">"build"</span><span class="err">:</span> <span class="s2">"webpack"</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="c1">//...</span></code></pre></figure>
+
+<p>i teraz możemy stworzyć nasze pliki polecenim:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm run build</code></pre></figure>
+
+<p>Aby stworzyć zoptymalizowaną wersję, musimy do skryptu przekazać parametr -p. Parametry do skryptów poprzedzamy –, a więc w ten sposób:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm run build -- -p</code></pre></figure>
+
+<p class="warning">
+Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie działa z ES6. Problem ten rozwiąże Babel.
+</p>
+
+<p>Babel transpiluje kod ES6 na zrozumiały dla starszych przeglądarek. Standardowo instalujemy go za pomocą npm:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install babel-loader babel-core babel-preset-es2015 --save-dev</code></pre></figure>
+
+<p>Ponadto musimy dodać go do konfiguracji w <span class="file">webpack.config.js</span></p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...</span>
+  <span class="nl">module</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">js$/</span><span class="p">,</span>
+        <span class="na">loader</span><span class="p">:</span> <span class="s1">'babel-loader'</span><span class="p">,</span>
+        <span class="na">query</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'es2015'</span><span class="p">,</span> <span class="p">{</span> <span class="na">modules</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}],</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span></code></pre></figure>
+
+<h2 id="css">CSS</h2>
+
+<p>Pliki JS mamy z głowy, ale co z CSS? Do nich musimy pobrać kolejny loader, gdyż Webpack domyślnie wspiera tylko JS. A więc:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install css-loader style-loader --save-dev</code></pre></figure>
+
+<p>Następnie dodajemy loadery oraz plik CSS do <span class="file">webpack.config.js</span>:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">entry</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">home</span><span class="p">:</span> <span class="s1">'./js/home/main.js'</span><span class="p">,</span>
+    <span class="nx">global</span><span class="err">:</span> <span class="s1">'./css/main.css'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="c1">//...</span>
+  <span class="nx">module</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">js$/</span><span class="p">,</span>
+        <span class="na">loader</span><span class="p">:</span> <span class="s1">'babel-loader'</span><span class="p">,</span>
+        <span class="na">query</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'es2015'</span><span class="p">,</span> <span class="p">{</span> <span class="na">modules</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}],</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="p">[</span><span class="s1">'style-loader'</span><span class="p">,</span> <span class="s1">'css-loader'</span><span class="p">],</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span></code></pre></figure>
+
+<p>Pliki możemy łączyć standardowo za pomocą funkcji @import, np. plik <span class="file">main.css</span> może wyglądać tak:</p>
+
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="k">@import</span> <span class="sx">url('./home/plik1.css')</span><span class="p">;</span>
+<span class="k">@import</span> <span class="sx">url('./home/plik2.css')</span><span class="p">;</span>
+<span class="k">@import</span> <span class="sx">url('./home/plik3.css')</span><span class="p">;</span>
+<span class="c">/*itd.*/</span></code></pre></figure>
+
+<p>Jednak Webpack nie łączy tą metoda wszystkich importów w jeden plik. Dodaje go inline do DOM, co ma kilka wad. Wydajność jest lepsza tylko dla małych ilości CSS. Uniemożliwia to ładowanie naszych plików CSS do cache przeglądarki, bo poprostu ich nie ma! Wtedy, za każdym odświeżeniem strony wszystko musi być załadowane od nowa, co w przypadku dużych ilości styli nie jest zbyt optymalne. Rozwiązaniem jest plugin ExtractTextPlugin, dzięki któremu połączymy pliki CSS w jeden i będziemy go mogli tradycyjnie załączyć w HTML. Instalacja:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install extract-text-webpack-plugin --save-dev</code></pre></figure>
+
+<p>Następnie w pliku <span class="file">webpack.config.js</span> dodajemy stałą:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">ExtractTextPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'extract-text-webpack-plugin'</span><span class="p">);</span></code></pre></figure>
+
+<p>Oraz podmieniamy loadery CSS i definiujemy nowy plugin:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...</span>
+	<span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
+      <span class="c1">//...</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="nx">ExtractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">({</span>
+          <span class="na">fallback</span><span class="p">:</span> <span class="s1">'style-loader'</span><span class="p">,</span>
+          <span class="na">use</span><span class="p">:</span> <span class="s1">'css-loader'</span><span class="p">,</span>
+        <span class="p">}),</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="nx">plugins</span><span class="err">:</span> <span class="p">[</span>
+      <span class="k">new</span> <span class="nx">ExtractTextPlugin</span><span class="p">(</span><span class="s1">'./[name].bundle.css'</span><span class="p">),</span>
+    <span class="p">],</span></code></pre></figure>
+
+<p>Teraz, dzięki Webpackowi, możemy dzielić do woli pliki JS i CSS, a ostatecznie załączymy ich tzw. bundle.</p>
+
+<p class="warning">
+Jeśli w twoich plikach, które łączysz, wystepują importy czcionek (np. w Bootstrap) Webpack wyrzuci błędy. Można to rozwiązać z pomocą <a href="https://github.com/webpack-contrib/url-loader">url-loader</a>, <u>jednak warto je pominąć</u>, gdyż często załączane jest kilka formatów (woff, woff2, eot, ttf). Url-loader przetworzyłby je wszystkie, co skutkowałoby ogromnym plikiem CSS. Normalnie, przeglądarka wybiera tylko jeden odpowiedni, a resztę pomija. Dlatego lepiej skorzystać z opcji dla css-loader, która wyłącza przetwarzanie @import url(), ale normalnie działa z @import:
+</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">		<span class="c1">//...</span>
+		<span class="p">{</span>
+        <span class="nl">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
+        <span class="nx">use</span><span class="err">:</span> <span class="nx">ExtractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">({</span>
+          <span class="na">fallback</span><span class="p">:</span> <span class="s1">'style-loader'</span><span class="p">,</span>
+          <span class="na">use</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">loader</span><span class="p">:</span> <span class="s1">'css-loader'</span><span class="p">,</span>
+            <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">url</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="p">},</span>
+          <span class="p">},</span>
+        <span class="p">}),</span>
+      <span class="p">},</span></code></pre></figure>
+
+<p>Będziemy musieli wtedy inaczej łączyć pliki CSS (bez url()), np:</p>
+
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="k">@import</span> <span class="s2">'./home/plik1.css'</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">'./home/plik2.css'</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">'./home/plik3.css'</span><span class="p">;</span>
+<span class="c">/*itd.*/</span></code></pre></figure>
+
+<h2 id="edit">EDIT:</h2>
+
+<p class="warning">Okazuje się, że jeśli z podaną konfiguracją używamy kilka "entries" na raz (zarówno pliki JS jak i CSS) powstają duplikaty dla plików CSS w wersji JS. Aby to obejść musimy nieco zmienić konfigurację <span class="file">webpack.config.js</span> :
+</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">ExtractTextPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'extract-text-webpack-plugin'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">entry</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'home.bundle.js'</span><span class="p">:</span> <span class="s1">'./js/home/main.js'</span><span class="p">,</span>
+    <span class="s1">'home.bundle.css'</span><span class="p">:</span> <span class="s1">'./css/home/merge.css'</span><span class="p">,</span>
+    <span class="s1">'faq.bundle.js'</span><span class="p">:</span> <span class="s1">'./js/faq.js'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'dist'</span><span class="p">),</span>
+    <span class="na">filename</span><span class="p">:</span> <span class="s1">'[name]'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">js$/</span><span class="p">,</span>
+        <span class="na">loader</span><span class="p">:</span> <span class="s1">'babel-loader'</span><span class="p">,</span> <span class="p">{</span> <span class="na">modules</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+        <span class="na">query</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'es2015'</span><span class="p">],</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
+        <span class="na">use</span><span class="p">:</span> <span class="nx">ExtractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">({</span>
+          <span class="na">fallback</span><span class="p">:</span> <span class="s1">'style-loader'</span><span class="p">,</span>
+          <span class="na">use</span><span class="p">:</span> <span class="s1">'css-loader'</span><span class="p">,</span>
+        <span class="p">}),</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+    <span class="k">new</span> <span class="nx">ExtractTextPlugin</span><span class="p">(</span><span class="s1">'./[name]'</span><span class="p">),</span>
+  <span class="p">],</span>
+<span class="p">};</span></code></pre></figure>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/dajsiepoznac2017/npm-zaleznosci-i-ESLint" data-toggle="tooltip" data-placement="top" title="NPM i ESLint">&larr; Poprzedni post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium" data-toggle="tooltip" data-placement="top" title="Git - usuwanie pliku z repozytorium">Następny post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr>
+                
+                
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://blog.jaki-jezyk-programowania.pl/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly";
+this.page.identifier = "/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</article>
+
+
+
+<hr>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/C0deboy">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="mailto:lasota.marcinm@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/devcave.min.js"></script>
+
+    
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

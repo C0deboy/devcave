@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Devcave - jaskinia programisty, blog programistyczny.">
+    <meta name="author" content="Codeboy">
+    <title>Jak wykluczyć ruch z localhost w Google Analitics? - devcave.pl</title>
+
+    <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/jekyll-filtrowanie-danych-localhost">
+    <link rel="shortcut icon" href="/img/logo.ico">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/devcave.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <link type="application/atom+xml" rel="alternate" href="https://c0deboy.github.io/devcave/feed.xml" title="devcave.pl" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a href="https://www.jaki-jezyk-programowania.pl/#formularz-kontaktowy">Kontakt</a>
+                </li>
+                <li>
+                    <a href="/moje-projekty">Moje projekty</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="post-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <div class="post-heading">
+                    <h1>Wykluczamy ruch z localhost w Google Analitics</h1>
+                    
+                    <h2 class="subheading">Rozbudowujemy blog na Jekyllu 4#</h2>
+                    
+                    <span class="meta">
+                    
+                    2
+                    kwietnia
+                      
+                    2017
+                     <span class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></span> <span class="site-tag"><a href='/archiwum#jekyll'>Jekyll</a></span> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container post">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <hr class="header-hr">
+
+                <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#filtry-ga-nie-sprawdziły-się">Filtry GA nie sprawdziły się</a></li>
+<li class="toc-entry toc-h2"><a href="#uniwersalna-metoda">Uniwersalna metoda</a></li>
+<li class="toc-entry toc-h2"><a href="#jekyll">Jekyll</a></li>
+</ul>
+
+                <hr>
+
+				        <p>Statystyki Google Analitics są zbierane z każdego miejsca gdzie załączymy skrypt, więc i nawet wtedy, gdy testujemy naszą stronę na localhost. Zbieranie własnych wejść na stronę (i to jeszcze podczas testowania, gdzie co chwilę odświeżamy stronę) nie za bardzo ma sens, więc w tym poście pozbędziemy się tego.</p>
+
+<h2 id="filtry-ga-nie-sprawdziły-się">Filtry GA nie sprawdziły się</h2>
+
+<p>Standardowa metoda filtrowania ruchu wewnętrznego w Google Analitcs:</p>
+
+<ol>
+  <li>Przejdź do konta strony i wybierz administracja.</li>
+  <li>Następnie opcja ‘Wszystkie filtry’ i ‘dodaj filtr’.</li>
+  <li>Jako ‘Typ filtra’ wybierz ‘Predefiniowany’.</li>
+  <li>Kliknij menu ‘Wybierz typ filtra’ i wybierz ‘Wyklucz’.</li>
+  <li>Kliknij menu ‘Wybierz źródło lub miejsce docelowe’ i wybierz ‘ruch z adresów IP’.</li>
+  <li>Kliknij menu ‘Wybierz wyrażenie’ i wybierz ‘rozpoczyna się od’.</li>
+  <li>I Wpisujemy adresy IP, które chcemy wykluczyć.</li>
+</ol>
+
+<p><u>nie sprawdzała się</u> w moim przypadku dla localhost, więc pokaże jak wykluczyć zbieranie danych z localhost w nieco inny sposób.</p>
+
+<p><span class="note">Nasze zmiany mają wpływ tylko na przyszłość, co oznacza ze wcześniej zebrane dane z localhost nie zostaną wykluczone i żadną metodą nie jesteśmy w stanie tego zrobić.</span></p>
+
+<h2 id="uniwersalna-metoda">Uniwersalna metoda</h2>
+
+<p>Sprawimy, aby nasz skrypt GA wykonywał się tylko na oficjalnej domenie (w moim przypadku: blog.jaki-jezyk-programowania.pl). Aby to zrobić wystarczy go opakować w następującego ifa:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span> <span class="o">==</span> <span class="s2">"blog.jaki-jezyk-programowania.pl"</span><span class="p">){</span>
+    <span class="c1">//kod Google Analitics</span>
+  <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
+
+<p>I gotowe. Skrypt GA wykona się tylko na naszej domenie (a więc nie wykona się ani na localhost, ani na 127.0.0.1 ani na żadnej innej domenie różnej od podanej).</p>
+
+<h2 id="jekyll">Jekyll</h2>
+
+<p>W Jekyllu również zadziała powyższa metoda, ale można to też zrobić w inny sposób. Przyda nam się to też do innych rzeczy (np. można pozbyć się komentarzy Disqus podczas testów).</p>
+
+<p>Jekyll posiada zmienną środowiskową <code class="highlight language-text" data-lang="text">jekyll.environment</code>, za pomocą której możemy decydować, co zostanie wygenerowane podczas testowania strony (wtedy ma wartość <code class="highlight language-text" data-lang="text">development</code> i jest to wartość domyślna), a co dla wersji gotowej do wrzucenia na serwer (wartość <code class="highlight language-text" data-lang="text">production</code>).</p>
+
+<p>Tak więc jeśli nie chcemy, aby coś pojawiało się podczas testowania strony, opakowujemy to w tagi liquid z następującym ifem:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">{% if jekyll.environment == "production" %}
+   //tu zawartość, której nie chcemy podczas testowania
+{% endif %}</code></pre></figure>
+
+<p>Dzięki temu zawartość między tym ifem nie zostanie wygenerowana przez komendy:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">bundle <span class="nb">exec </span>jekyll serve
+
+bundle <span class="nb">exec </span>jekyll build</code></pre></figure>
+
+<p>Aby wygenerować tą treść i pliki gotowe do wrzucenia na serwer, będziemy musieli podać zmienną “JEKYLL_ENV” ustawioną na “production” przed komendą, która generuje nam stronę:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">JEKYLL_ENV</span><span class="o">=</span>production bundle <span class="nb">exec </span>jekyll build</code></pre></figure>
+
+<p>W przypadku z Google Analitics nasz plik <span class="file">google-analytics.html</span>, który “includujemy” będzie wyglądał tak:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">{% if jekyll.environment == "production" %}
+<span class="nt">&lt;script&gt;</span>
+  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">g</span><span class="p">,</span><span class="nx">r</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">){</span><span class="nx">i</span><span class="p">[</span><span class="s1">'GoogleAnalyticsObject'</span><span class="p">]</span><span class="o">=</span><span class="nx">r</span><span class="p">;</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">||</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="p">(</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">||</span><span class="p">[]).</span><span class="nx">push</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)},</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">l</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="k">new</span> <span class="nb">Date</span><span class="p">();</span><span class="nx">a</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">o</span><span class="p">),</span>
+  <span class="nx">m</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">o</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span><span class="nx">a</span><span class="p">.</span><span class="nx">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">a</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">g</span><span class="p">;</span><span class="nx">m</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">)</span>
+  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">'script'</span><span class="p">,</span><span class="s1">'https://www.google-analytics.com/analytics.js'</span><span class="p">,</span><span class="s1">'ga'</span><span class="p">);</span>
+
+  <span class="nx">ga</span><span class="p">(</span><span class="s1">'create'</span><span class="p">,</span> <span class="s1">'UA-90973428-2'</span><span class="p">,</span> <span class="s1">'auto'</span><span class="p">);</span>
+  <span class="nx">ga</span><span class="p">(</span><span class="s1">'send'</span><span class="p">,</span> <span class="s1">'pageview'</span><span class="p">);</span>
+
+<span class="nt">&lt;/script&gt;</span>
+{% endif %}</code></pre></figure>
+
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/dajsiepoznac2017/formularz-kontaktowy-dostepnosc" data-toggle="tooltip" data-placement="top" title="Dodajemy formularz kontaktowy 4#">&larr; Poprzedni post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/dajsiepoznac2017/google-like-a-pro" data-toggle="tooltip" data-placement="top" title="Google like a pro">Następny post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr>
+                
+                
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://blog.jaki-jezyk-programowania.pl/dajsiepoznac2017/jekyll-filtrowanie-danych-localhost";
+this.page.identifier = "/dajsiepoznac2017/jekyll-filtrowanie-danych-localhost";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</article>
+
+
+
+<hr>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/C0deboy">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="mailto:lasota.marcinm@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/devcave.min.js"></script>
+
+    
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

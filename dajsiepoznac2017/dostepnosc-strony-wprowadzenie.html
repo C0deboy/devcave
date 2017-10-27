@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Devcave - jaskinia programisty, blog programistyczny.">
+    <meta name="author" content="Codeboy">
+    <title>Co to jest dostępność strony i jak ją poprawić? - devcave.pl</title>
+
+    <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/dostepnosc-strony-wprowadzenie">
+    <link rel="shortcut icon" href="/img/logo.ico">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/devcave.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <link type="application/atom+xml" rel="alternate" href="https://c0deboy.github.io/devcave/feed.xml" title="devcave.pl" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a href="https://www.jaki-jezyk-programowania.pl/#formularz-kontaktowy">Kontakt</a>
+                </li>
+                <li>
+                    <a href="/moje-projekty">Moje projekty</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="post-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <div class="post-heading">
+                    <h1>Poprawiamy dostępność strony</h1>
+                    
+                    <h2 class="subheading">Wprowadzenie</h2>
+                    
+                    <span class="meta">
+                    
+                    14
+                    marca
+                      
+                    2017
+                     <span class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></span> <span class="site-tag"><a href='/archiwum#dostępność'>Dostępność</a></span> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container post">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <hr class="header-hr">
+
+                <h1 id="co-to-jest-dostępność-strony-i-dlaczego-jest-to-ważne">Co to jest dostępność strony i dlaczego jest to ważne?</h1>
+
+<p>Dostępność oznacza w jakim stopniu i jak łatwo coś może zostać użyte przez ludzi, nawet tych, których możliwości są ograniczone (np. wzrok, słuch, ruch). Jest to ważne zarówno w życiu realnym (np. podjazdy dla wózków inwalidzkich czy sygnalizacja dźwiękowa na przejściach dla pieszych) jak i w web developmencie (projektowanie dostępnych stron). Bez tego część użytkowników naszej strony/aplikacji może być całkowicie wykluczona z użytkowania.</p>
+
+<p class="note">
+Według Światowej Organizacji Zdrowia około 15% populacji na świecie żyje z jakimś rodzajem dysfunkcji.
+</p>
+
+<p>To, co tworzymy, powinno trafiać do jak największego grona odbiorców. Nasza strona nie może być uzależniona od konkretnego urządzenia/przeglądarki, a jej obsługa nie powinna być ograniczona np. tylko do myszki.</p>
+
+<p>Na dostępność strony wpływa też jej semantyka, która również poprawia SEO, czyli pozycję w wyszukiwarce oraz łatwość jej znalezienia.</p>
+
+<p>Dostępnością naszego produktu powinniśmy się zajmować od początku projektu, gdyż im będzie większy i bardziej rozbudowany, tym trudniej to naprawić.</p>
+
+<p>Pomogą nam w tym dwa dodatki do Chrome:</p>
+<ul>
+  <li><a href="https://chrome.google.com/webstore/detail/accessibility-developer-t/fpkknkljclfencbdbgkenhalefipecmb">Accessibility Developer Tools</a> - dodaje nam do Developer Tools (pod F12) zakładkę Accessibility w sekcji Elements, gdzie możemy zbadać atrybuty, które mają znaczenie dla dostępności danego elementu oraz test Accessibility do Audits, która sprawdzi naszą stronę pod tym względem i wskaże to, co powinniśmy zmienić.</li>
+  <li><a href="https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=pl">ChromeVox</a> - czytnik ekranu lub, jak kto woli, screen reader, dzięki któremu możemy zobaczyć jak nasza strona jest odbierana przez ludzi zdanych tylko na słuch, którzy korzystają z takich narzędzi.</li>
+</ul>
+
+<p class="warning">
+Testy, które sprawdzają naszą stronę pod kątem dostępności, nie rozwiążą wszystkich naszych problemów. Musimy połączyć wiele narzędzi, wiedzy, doświadczenia i własnego testowania, aby dostać pełen obraz. Warto samemu przejść się po stronie za pomocą narzędzi, z których mogą korzystać inne osoby (np. screen reader czy klawiatura).
+</p>
+
+<p>Podsumowując, dostępność strony to jej bardzo ważny aspekt, a korzystają na tym nie tylko ludzie z dysfunkcjami, dlatego nie powinniśmy tego zaniedbywać. Świadczy to również o naszej moralności i poprawia publiczny wizerunek.</p>
+
+
+                <hr>
+
+				        <h1 id="co-to-jest-dostępność-strony-i-dlaczego-jest-to-ważne">Co to jest dostępność strony i dlaczego jest to ważne?</h1>
+
+<p>Dostępność oznacza w jakim stopniu i jak łatwo coś może zostać użyte przez ludzi, nawet tych, których możliwości są ograniczone (np. wzrok, słuch, ruch). Jest to ważne zarówno w życiu realnym (np. podjazdy dla wózków inwalidzkich czy sygnalizacja dźwiękowa na przejściach dla pieszych) jak i w web developmencie (projektowanie dostępnych stron). Bez tego część użytkowników naszej strony/aplikacji może być całkowicie wykluczona z użytkowania.</p>
+
+<p class="note">
+Według Światowej Organizacji Zdrowia około 15% populacji na świecie żyje z jakimś rodzajem dysfunkcji.
+</p>
+
+<p>To, co tworzymy, powinno trafiać do jak największego grona odbiorców. Nasza strona nie może być uzależniona od konkretnego urządzenia/przeglądarki, a jej obsługa nie powinna być ograniczona np. tylko do myszki.</p>
+
+<p>Na dostępność strony wpływa też jej semantyka, która również poprawia SEO, czyli pozycję w wyszukiwarce oraz łatwość jej znalezienia.</p>
+
+<p>Dostępnością naszego produktu powinniśmy się zajmować od początku projektu, gdyż im będzie większy i bardziej rozbudowany, tym trudniej to naprawić.</p>
+
+<p>Pomogą nam w tym dwa dodatki do Chrome:</p>
+<ul>
+  <li><a href="https://chrome.google.com/webstore/detail/accessibility-developer-t/fpkknkljclfencbdbgkenhalefipecmb">Accessibility Developer Tools</a> - dodaje nam do Developer Tools (pod F12) zakładkę Accessibility w sekcji Elements, gdzie możemy zbadać atrybuty, które mają znaczenie dla dostępności danego elementu oraz test Accessibility do Audits, która sprawdzi naszą stronę pod tym względem i wskaże to, co powinniśmy zmienić.</li>
+  <li><a href="https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=pl">ChromeVox</a> - czytnik ekranu lub, jak kto woli, screen reader, dzięki któremu możemy zobaczyć jak nasza strona jest odbierana przez ludzi zdanych tylko na słuch, którzy korzystają z takich narzędzi.</li>
+</ul>
+
+<p class="warning">
+Testy, które sprawdzają naszą stronę pod kątem dostępności, nie rozwiążą wszystkich naszych problemów. Musimy połączyć wiele narzędzi, wiedzy, doświadczenia i własnego testowania, aby dostać pełen obraz. Warto samemu przejść się po stronie za pomocą narzędzi, z których mogą korzystać inne osoby (np. screen reader czy klawiatura).
+</p>
+
+<p>Podsumowując, dostępność strony to jej bardzo ważny aspekt, a korzystają na tym nie tylko ludzie z dysfunkcjami, dlatego nie powinniśmy tego zaniedbywać. Świadczy to również o naszej moralności i poprawia publiczny wizerunek.</p>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/dajsiepoznac2017/jekyll-disqus-comments-google-analitics" data-toggle="tooltip" data-placement="top" title="Statystyki i komentarze na blogu">&larr; Poprzedni post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/dajsiepoznac2017/formularz-kontaktowy-HTML-JS" data-toggle="tooltip" data-placement="top" title="Dodajemy formularz kontaktowy 1#">Następny post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr>
+                
+                
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://blog.jaki-jezyk-programowania.pl/dajsiepoznac2017/dostepnosc-strony-wprowadzenie";
+this.page.identifier = "/dajsiepoznac2017/dostepnosc-strony-wprowadzenie";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</article>
+
+
+
+<hr>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/C0deboy">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="mailto:lasota.marcinm@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/devcave.min.js"></script>
+
+    
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

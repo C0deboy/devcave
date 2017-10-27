@@ -1,0 +1,29 @@
+---
+layout:     post
+titleSEO:	"Jak wyglądają poczatki projektu-moje doświadczenia"
+title:      "Początki projektu"
+subtitle:   "Jak to było + trochę liczb"
+date:       2017-03-03 12:00:00
+author:     "Codeboy"
+category:   DajSiePoznac2017
+tags:	DajSiePoznac2017
+comments:   true
+toc:        true
+---
+
+# Początki, ach te początki
+
+Początki strony były kiepskie, jak pewnie w przypadku większości pierwszych projektów. Przez stronę przeleciało wiele lepszych, gorszych pomysłów. Niektóre z nich zostały wdrożone, niektóre poszły w niepamięć. Doszedłem do wniosku, że nie ma sensu kończyć projektu w 100% zanim się go komuś pokaże i wiele osób myśli podobnie. Kluczową rolę w projekcie odgrywa feedback. Często bywa tak, że skończymy projekt, a później okazuję się, że wyrzucimy połowę rzeczy, które się nie sprawdziły i były nie potrzebnie rozwijane. Pół biedy, jeśli nie włożyliśmy w to dużego wysiłku, ale gdy wyrzucamy coś, nad czym pracowaliśmy większą ilość czasu, to jest to co najmniej smutne. Dlatego warto dzielić się projektem w czasie rozwoju, dzięki czemu dowiemy się o wszystkich niewypałach dużo wcześniej. Nasza praca nie pójdzie na marne i nie będziemy rozwijać rzeczy, która są skazane na porażkę już w fazie początkowej.
+
+# Pokazujemy projekt
+
+Tak więc po stworzeniu podstawowych funkcjonalności strony założyłem wątki na dwóch forach, aby dostać feedback. Jak można było się spodziewać poszła spora fala krytyki. Ale czy to źle? Wręcz przeciwnie. Dzięki temu od razu było wiadomo, co do poprawy, co się podoba, a co nie. Tym bardziej, że byłem świadom niedoskonałości projektu i nie „urażało to moich uczuć” ;). Gdyby nie to, pewnie do teraz rozwijałbym rzeczy, które już w podstawowej wersji były do odrzucenia. Jest to także okazja do uzyskania wielu rad, sugestii, a nawet mogą trafić się osoby, które znacznie nam pomogą. Oczywiście projekt nie dostał tylko krytyki. Wielu osobom podobała się inicjatywa, ale podkreślały, że jest sporo do poprawy. Typowego hejtu nie było na tyle, aby o tym wspominać.
+
+# Zaskoczenie
+
+Co bardzo pozytywnie mnie zaskoczyło, to ilość wejść, zarówno w wątki na forach, jaki i na samą stronę. W następnym dniu po opublikowaniu było prawie 2500 odsłon strony :O. Później oczywiście ruch stopniowo malał i aktualnie jest prawie 10 000 wyświetleń. Na jednym z forów w chwili obecnej jest prawie 4500 wejść i 74 odpowiedzi, podczas gdy inne wątki w tej samej kategorii miały po 200-300 wyświetleń. Te liczby, jak i feedback, dodały mi wiele motywacji.
+
+Tak więc, polecam wszystkim dzielenie się projektem, zanim dopniemy wszystko na ostatni guzik. Niesie to ze sobą same pozytywy, jednak należy podejść do tego z dystansem. Nie powinniśmy też uważać się za alfę i omegę, bo zostawimy po sobie złe wrażenie i nikt nie będzie chciał nam pomóc. Gdy będziemy przyjaźni, skorzy do współpracy i będziemy wyciągać wnioski z każdej konstruktywnej krytyki, ludzie będą chętniej nam pomagać. Można trafić też na typowych hejterów i buców, jednak dosyć łatwo to rozróżniać. Wszystkie takie odpowiedzi należy ignorować i nawet nie wdawać się w dyskusję ;).
+
+![Wychillowany Garfield](/img/garfield.png){: class="img-responsive center-block"}
+

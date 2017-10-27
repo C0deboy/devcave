@@ -1,0 +1,26 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+  	<atom:link href="{{ site.url }}/{{ page.path }}" rel="self" type="application/rss+xml" />
+    <title>{{ site.title | xml_escape }}</title>
+	<description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>	
+    <link>{{ site.url }}</link>
+    {% for post in site.posts %}
+      {% assign tags = post.tags %}
+      {% for tag in tags %}
+      	{% if tag == 'DajSiePoznac2017' %}
+          <item>
+            <title>{{ post.title | xml_escape }}</title>
+            <description>{{ post.content | xml_escape }}</description>
+            <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+            <link>{{ post.url | prepend: site.url }}</link>
+            <guid isPermaLink="true">{{ post.url | prepend: site.url }}</guid>
+          </item>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </channel>
+</rss>

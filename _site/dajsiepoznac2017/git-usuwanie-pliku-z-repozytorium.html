@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Devcave - jaskinia programisty, blog programistyczny.">
+    <meta name="author" content="Codeboy">
+    <title>GitHub - jak usunąć pliku z repozytorium - Git - devcave.pl</title>
+
+    <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium">
+    <link rel="shortcut icon" href="/img/logo.ico">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/devcave.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <link type="application/atom+xml" rel="alternate" href="https://c0deboy.github.io/devcave/feed.xml" title="devcave.pl" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a href="https://www.jaki-jezyk-programowania.pl/#formularz-kontaktowy">Kontakt</a>
+                </li>
+                <li>
+                    <a href="/moje-projekty">Moje projekty</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="post-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <div class="post-heading">
+                    <h1>Git - usuwanie pliku z repozytorium</h1>
+                    
+                    <h2 class="subheading">Każdemu się zdarza...</h2>
+                    
+                    <span class="meta">
+                    
+                    24
+                    maja
+                      
+                    2017
+                     <span class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></span> <span class="site-tag"><a href='/archiwum#git'>Git</a></span> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container post">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <hr class="header-hr">
+
+                <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#bfg-repo-cleaner">BFG Repo-Cleaner</a></li>
+</ul>
+
+                <hr>
+
+				        <p>Komu nie zdarzyło się chociaż raz przez pomyłkę / nieuwagę / niewiedzę wrzucić wrażliwy plik do repozytorium? Jeśli tobie, to zazdroszczę. Jednak nie wszystko stracone! Można się go pozbyć.</p>
+
+<h1>BFG Repo-Cleaner</h1>
+<p>Z pomocą przychodzi <a href="https://rtyley.github.io/bfg-repo-cleaner/">BFG</a>! Pobieramy go z oficjalnej strony i kilkoma poleceniami pozbędziemy się niechcianego pliku z repozytorium Git-a:</p>
+
+<p><u>Zakładam, że pobrany plik jest na pulpicie.</u>
+Otwieramy konsolę i przechodzimy na pulpit:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>Desktop</code></pre></figure>
+
+<p>Następnie musimy sklonować nasze repozytorium:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone --mirror https://github.com/Nazwa-użytkownika/nazwa-repozytorium</code></pre></figure>
+
+<p class="note">
+Jeśli używasz GitHub Desktop - dodaj ścieżkę do cmd git-a do zmiennej systemowej Path, aby móc korzystać z gita także w terminalu. Powinna wyglądać mniej więcej tak: <span class="path">C:\Users\Nazwa-użytkownika\AppData\Local\GitHub\PortableGit_(id)\cmd</span>. Zmienne systemowe znajdziesz w <span class="path">Panel sterowania -&gt; System i zabezpieczenia -&gt; System -&gt; Zaawansowane ustawienia systemu -&gt; Zmienne środowiskowe -&gt; Zmienne Systemowe</span>. <u>Pamiętaj o średniku przed wklejeniem ścieżki</u>.
+</p>
+
+<p>Jak pewnie zauważyłeś, jest to plik jar, więc do jego uruchomienia będzie potrzebna nam Java.</p>
+
+<p class="note">
+Jeśli nie masz <a href="https://www.java.com/pl/download/">Javy</a>, zaopatrz się w nią! Jeśli nie chcesz za każdym razem podawać pełnej ścieżki (domyślnie: <span class="path">C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Java\jdk1.7.0\bin</span>) do plików wykonywalnych Javy, dodaj ją również do [Path](https://www.java.com/pl/download/help/path.xml).
+</p>
+
+<p>Uruchamiamy go z flagą –delete-files oraz nazwą pliku(<u>nie ścieżka</u>)</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">java -jar bfg-wersja.jar --delete-files nazwa-pliku.x</code></pre></figure>
+
+<p>Następnie przechodzimy do sklonowanego repozytorium</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>nazwa-repozytorium.git</code></pre></figure>
+
+<p>I uruchamiamy komendę:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git reflog expire --expire<span class="o">=</span>now --all <span class="o">&amp;&amp;</span> git gc --prune<span class="o">=</span>now --aggressive</code></pre></figure>
+
+<p>Gdy nie było po drodze żadnych błędów i jesteśmy zadowoleni z wyniku, możemy pushować ;)</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git push</code></pre></figure>
+
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly" data-toggle="tooltip" data-placement="top" title="Webpack - zarządzanie modułami">&larr; Poprzedni post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/dajsiepoznac2017/podsumowanie-dsp2017" data-toggle="tooltip" data-placement="top" title="Podsumowanie DSP2017">Następny post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr>
+                
+                
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://blog.jaki-jezyk-programowania.pl/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium";
+this.page.identifier = "/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</article>
+
+
+
+<hr>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/C0deboy">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="mailto:lasota.marcinm@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/devcave.min.js"></script>
+
+    
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

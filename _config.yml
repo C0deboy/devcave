@@ -1,0 +1,21 @@
+# Site settings
+title: devcave.pl
+email: lasota.marcinm@gmail.com
+copyright_name: devcave
+description: "Devcave - jaskinia programisty, blog programistyczny."
+baseurl: ""
+url: "https://c0deboy.github.io/devcave"
+github_username:  C0deboy
+email_username: lasota.marcinm@gmail.com
+# Google Analytics
+# To enable google analytics, uncomment below line with a valid Google Tracking ID
+google_tracking_id: UA-90973428-2
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:title
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+include: ["_pages"]
+gems: [jekyll-paginate, jekyll-feed, rouge, jekyll-sitemap, jekyll-toc]

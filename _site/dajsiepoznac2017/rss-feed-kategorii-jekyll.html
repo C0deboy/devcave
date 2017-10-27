@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Devcave - jaskinia programisty, blog programistyczny.">
+    <meta name="author" content="Codeboy">
+    <title>Jak dodać RSS feed kategorii na blogu - Jekyll - devcave.pl</title>
+
+    <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/rss-feed-kategorii-jekyll">
+    <link rel="shortcut icon" href="/img/logo.ico">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/devcave.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <link type="application/atom+xml" rel="alternate" href="https://c0deboy.github.io/devcave/feed.xml" title="devcave.pl" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a href="https://www.jaki-jezyk-programowania.pl/#formularz-kontaktowy">Kontakt</a>
+                </li>
+                <li>
+                    <a href="/moje-projekty">Moje projekty</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="post-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <div class="post-heading">
+                    <h1>Dodajemy RSS feed kategorii</h1>
+                    
+                    <h2 class="subheading">Rozbudowujemy blog na Jekyllu 1#</h2>
+                    
+                    <span class="meta">
+                    
+                    5
+                    marca
+                      
+                    2017
+                     <span class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></span> <span class="site-tag"><a href='/archiwum#jekyll'>Jekyll</a></span> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container post">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <hr class="header-hr">
+
+                <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#co-to-jest-rss">Co to jest RSS?</a></li>
+<li class="toc-entry toc-h1"><a href="#dodajemy-rss-feed-kategorii">Dodajemy RSS feed kategorii</a></li>
+</ul>
+
+                <hr>
+
+				        <h1 id="co-to-jest-rss">Co to jest RSS?</h1>
+
+<p>RSS umożliwia agregację (łączenie) treści z wielu źródeł w jednym miejscu. Może to być przydatne, jeśli śledzimy wiele blogów czy serwisów. Z jednego miejsca mamy możliwość sprawdzania co nowego zostało opublikowane na każdym z nich. To jedno miejsce, to czytnik RSS, jednak od momentu, kiedy Google zlikwidował swój egzemplarz, RSS stracił dużo na popularności. Istnieją alternatywy takie jak np. <a href="https://feedly.com/i/welcome">Feedly</a>, więc ciągle jest to możliwe, lecz już nie tak popularne jak kiedyś.</p>
+
+<h1 id="dodajemy-rss-feed-kategorii">Dodajemy RSS feed kategorii</h1>
+
+<p>Jest to wymagane w konkursie DajSięPoznać2017, więc bez tego się nie obejdzie.</p>
+
+<p>Standardowy feed jest generowany automatycznie przez <a href="http://jekyll.tips/jekyll-casts/rss-feed/">jekyll-feed</a>. Jeśli chcemy jednak napisać swój ręcznie, wystarczy, że w głównym katalogu bloga dodamy plik <span class="file">feed.xml</span>, gdzie będziemy mogli to zrobić.</p>
+
+<p>My jednak zajmiemy się feedem ograniczonym do jednej kategorii. Tworzymy więc plik <span class="file">feed.nazwakategorii.xml</span>, w naszym przypadku <span class="file">feed.dajsiepoznac2017.xml</span>. Może wyglądać jak nasz główny feed, który przykładowo zapisany jest tak:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml">---
+layout: null
+---
+<span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">"2.0"</span> <span class="na">xmlns:atom=</span><span class="s">"http://www.w3.org/2005/Atom"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;atom:link</span> <span class="na">href=</span><span class="s">"{{ site.url }}/{{ page.path }}"</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">type=</span><span class="s">"application/rss+xml"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>{{ site.title | xml_escape }}<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;description&gt;</span>{% if site.description %}{{ site.description | xml_escape }}{% endif %}<span class="nt">&lt;/description&gt;</span>  
+    <span class="nt">&lt;link&gt;</span>{{ site.url }}<span class="nt">&lt;/link&gt;</span>
+    {% for post in site.posts limit:10 %}
+        <span class="nt">&lt;item&gt;</span>
+          <span class="nt">&lt;title&gt;</span>{{ post.title | xml_escape }}<span class="nt">&lt;/title&gt;</span>
+          <span class="nt">&lt;description&gt;</span>{{ post.content | xml_escape }}<span class="nt">&lt;/description&gt;</span>
+          <span class="nt">&lt;pubDate&gt;</span>{{ post.date | date_to_rfc822 }}<span class="nt">&lt;/pubDate&gt;</span>
+          <span class="nt">&lt;link&gt;</span>{{ post.url | prepend: site.url }}<span class="nt">&lt;/link&gt;</span>
+          <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">"true"</span><span class="nt">&gt;</span>{{ post.url | prepend: site.url }}<span class="nt">&lt;/guid&gt;</span>
+        <span class="nt">&lt;/item&gt;</span>
+    {% endfor %}
+  <span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span></code></pre></figure>
+
+<p>z tym, że musimy dodać małego ifa, który ograniczy feed do danej kategorii:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml">---
+layout: null
+---
+<span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;rss</span> <span class="na">version=</span><span class="s">"2.0"</span> <span class="na">xmlns:atom=</span><span class="s">"http://www.w3.org/2005/Atom"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;atom:link</span> <span class="na">href=</span><span class="s">"{{ site.url }}/{{ page.path }}"</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">type=</span><span class="s">"application/rss+xml"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>{{ site.title | xml_escape }}<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;description&gt;</span>{% if site.description %}{{ site.description | xml_escape }}{% endif %}<span class="nt">&lt;/description&gt;</span>  
+    <span class="nt">&lt;link&gt;</span>{{ site.url }}<span class="nt">&lt;/link&gt;</span>
+    {% for post in site.posts limit:10 %}
+      {% if post.tag == 'DajSiePoznac2017' %}
+        <span class="nt">&lt;item&gt;</span>
+          <span class="nt">&lt;title&gt;</span>{{ post.title | xml_escape }}<span class="nt">&lt;/title&gt;</span>
+          <span class="nt">&lt;description&gt;</span>{{ post.content | xml_escape }}<span class="nt">&lt;/description&gt;</span>
+          <span class="nt">&lt;pubDate&gt;</span>{{ post.date | date_to_rfc822 }}<span class="nt">&lt;/pubDate&gt;</span>
+          <span class="nt">&lt;link&gt;</span>{{ post.url | prepend: site.url }}<span class="nt">&lt;/link&gt;</span>
+          <span class="nt">&lt;guid</span> <span class="na">isPermaLink=</span><span class="s">"true"</span><span class="nt">&gt;</span>{{ post.url | prepend: site.url }}<span class="nt">&lt;/guid&gt;</span>
+        <span class="nt">&lt;/item&gt;</span>
+        {% endif %}
+    {% endfor %}
+  <span class="nt">&lt;/channel&gt;</span>
+<span class="nt">&lt;/rss&gt;</span></code></pre></figure>
+
+<p>I feed kategorii jest gotowy. Jeśli dokonujesz jakichś zmian sprawdź, czy twój feed przechodzi <a href="https://validator.w3.org/feed/">walidację</a> oraz czy się prawidłowo wykonuje. Możesz to zobaczyć pod adresem <a href="http://localhost:4000/feed.dajsiepoznac2017.xml">localhost:4000/feed.dajsiepoznac2017.xml</a>, gdy testujesz, a oficjalny link w moim wypadku wygląda tak:<br />
+<a href="https://blog.jaki-jezyk-programowania.pl/feed.dajsiepoznac2017.xml">blog.jaki-jezyk-programowania.pl/feed.dajsiepoznac2017.xml</a>.</p>
+
+<p>Gdy wszystko jest poprawnie to wyświetli nam się cała struktura postów. W naszym przypadku będzie to również cała zawartość posta.</p>
+
+<p>Zwróć uwagę na:</p>
+<ul>
+  <li>site.title - często zamiennie z site.name</li>
+  <li>post.tag - często zamiennie z post.tags</li>
+  <li>‘DajSiePoznac2017’ - nazwa kategorii musi się zgadzać z kategorią zdefiniowaną w naszym poście. Wielkość liter ma znaczenie.</li>
+</ul>
+
+<p>Możesz sprawdzić jakie masz zdefiniowane wartości w pliku <span class="file">_config.yml</span>, u mnie to:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"># Site settings
+title: Codeboy - blog
+header-img: img/home-header.jpg
+email: kontakt@jaki-jezyk-programowania.pl
+copyright_name: jaki-jezyk-programowania
+description: "Blog konkursowy DajSięPoznać2017. Opisuję tu rozwój projektu jaki-jezyk-programowania.pl, mojego bloga, a może czasem trafi się też coś innego."
+baseurl: ""
+url: "https://www.blog.jaki-jezyk-programowania.pl"
+github_username:  Codeboy
+email_username:  kontakt@jaki-jezyk-programowania.pl</code></pre></figure>
+
+<p>oraz bezpośrednio w poście, u mnie:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml">---
+layout:     post
+title:      "Dodajemy RSS feed kategorii"
+subtitle:   "Rozbudowujemy blog na Jekyllu 1#"
+date:       2017-03-05 12:00:00
+author:     "Codeboy"
+category:   DajSiePoznac2017
+tag: DajSiePoznac2017
+comments:   true
+toc:        true
+---</code></pre></figure>
+
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/dajsiepoznac2017/instalacja-jekyll" data-toggle="tooltip" data-placement="top" title="Tworzymy blog z pomocą narzędzia Jekyll">&larr; Poprzedni post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/dajsiepoznac2017/jekyll-disqus-comments-google-analitics" data-toggle="tooltip" data-placement="top" title="Statystyki i komentarze na blogu">Następny post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr>
+                
+                
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://blog.jaki-jezyk-programowania.pl/dajsiepoznac2017/rss-feed-kategorii-jekyll";
+this.page.identifier = "/dajsiepoznac2017/rss-feed-kategorii-jekyll";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</article>
+
+
+
+<hr>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/C0deboy">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="mailto:lasota.marcinm@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/devcave.min.js"></script>
+
+    
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Devcave - jaskinia programisty, blog programistyczny.">
+    <meta name="author" content="Codeboy">
+    <title>Matura z informatyki - przydatne funkcje - Java - devcave.pl</title>
+
+    <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie">
+    <link rel="shortcut icon" href="/img/logo.ico">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/devcave.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <link type="application/atom+xml" rel="alternate" href="https://c0deboy.github.io/devcave/feed.xml" title="devcave.pl" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a href="https://www.jaki-jezyk-programowania.pl/#formularz-kontaktowy">Kontakt</a>
+                </li>
+                <li>
+                    <a href="/moje-projekty">Moje projekty</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="post-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <div class="post-heading">
+                    <h1>Matura z informatyki - przydatne funkcje - Java</h1>
+                    
+                    <h2 class="subheading">Zbiór funkcji, które używałem rozwiązując zadania maturalne.</h2>
+                    
+                    <span class="meta">
+                    
+                    25
+                    kwietnia
+                      
+                    2017
+                     <span class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></span> <span class="site-tag"><a href='/archiwum#matura-informatyka'>Matura-Informatyka</a></span> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container post">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <hr class="header-hr">
+
+                <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#wczytanie-pliku">Wczytanie pliku</a></li>
+<li class="toc-entry toc-h2"><a href="#konwersja-liczb">Konwersja liczb</a></li>
+<li class="toc-entry toc-h2"><a href="#zaokroglanie-liczb">Zaokroglanie liczb</a></li>
+<li class="toc-entry toc-h2"><a href="#maxmin-wartość">Max/min wartość</a></li>
+<li class="toc-entry toc-h2"><a href="#suma-wartości">Suma wartości</a></li>
+<li class="toc-entry toc-h2"><a href="#odwracanie-stringa">Odwracanie stringa</a></li>
+<li class="toc-entry toc-h2"><a href="#operowanie-na-literach-w-słowie">Operowanie na literach w słowie</a></li>
+<li class="toc-entry toc-h2"><a href="#znajdowanie-podciągów-w-stringach">Znajdowanie podciągów w stringach</a></li>
+<li class="toc-entry toc-h2"><a href="#ilości-liter---statystyka">Ilości liter - statystyka</a></li>
+</ul>
+
+                <hr>
+
+				        <p>W tym poście zaprezentuję funkcje, z których korzystałem rozwiązując zadania maturalne z informatyki. Nie wiem jak w innych językach, ale w Javie jest całkiem sporo wbudowanych, które od razu robią za nas robotę. Jeśli znasz jakieś lepsze/szybsze sposoby na któreś rozwiązanie lub jeszcze inne przydatne funkcje, których nie wymieniłem, to daj znać!</p>
+
+<h2 id="wczytanie-pliku">Wczytanie pliku</h2>
+
+<p>Od tego zawsze zaczynamy. Ja korzystam z funkcji, która pakuje wszystkie dane z pliku tekstowego do tablicy o rożnych wymiarach, w zależności od zadania. Przykładowo dla tego typu danych:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">AIHAHGHBEAFJAJDI HGIHFEHHJGBCBGD
+FBJHCFFGADD EHADJAJBJBEGD
+JHGHADJ AGFEHHEHIAEJFC
+...</code></pre></figure>
+
+<p>wygląda tak:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span><span class="o">[][]</span> <span class="nf">readFile</span><span class="o">(</span><span class="n">String</span> <span class="n">file</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+    <span class="n">String</span><span class="o">[][]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">1000</span><span class="o">][</span><span class="mi">2</span><span class="o">];</span>
+    <span class="n">Scanner</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"C:\\sciezka\\do\\pliku\\"</span><span class="o">+</span><span class="n">file</span><span class="o">));</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">()){</span>
+        <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="n">i</span><span class="o">++;</span>
+    <span class="o">}</span>
+    <span class="n">data</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="k">return</span> <span class="n">array</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="note">
+Należy pamiętać o escape'owaniu ukośników (\\\\) w ścieżce do pliku.
+</p>
+
+<h2 id="konwersja-liczb">Konwersja liczb</h2>
+<p>Jak wiadomo to podstawa. Uzyskamy to szybko dzięki dwóm metodom, które przyjmują liczbę oraz system liczbowy jako argumenty:</p>
+<hX>Z różnych systemów na dziesiętny</hX>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">convertToInt</span><span class="o">(</span><span class="n">String</span> <span class="n">number</span><span class="o">,</span> <span class="kt">int</span> <span class="n">base</span><span class="o">){</span>
+    <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">base</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<hX>I z dziesiętnego na inny:</hX>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">convertInt</span><span class="o">(</span><span class="kt">int</span> <span class="n">number</span><span class="o">,</span> <span class="kt">int</span> <span class="n">base</span><span class="o">){</span>
+    <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">base</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<h2 id="zaokroglanie-liczb">Zaokroglanie liczb</h2>
+
+<p>Równie często jest to nam potrzebne. Gdy mamy podać tylko wydrukowany wynik to jest to całkiem proste. Z pomocą przychodzi printf, np:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%.2f%n"</span><span class="o">,</span> <span class="mf">265.335</span><span class="o">);</span>
+<span class="c1">//265,34</span></code></pre></figure>
+
+<hX>Gdzie:</hX>
+<ul>
+  <li>%.2 - określa precyzję, czyli ilość miejsc po przecinku, w tym przypadku 2</li>
+  <li>f - typ danych, w tym przypadku float</li>
+  <li>%n - nowa linia</li>
+</ul>
+
+<p>Jeśli jednak musimy operować na zaokrąglonych liczbach, potrzebne jest nam coś więcej.</p>
+
+<p>Na Stack OverFlow często znajdowałem takie rozwiązanie:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">x</span><span class="o">*</span><span class="mf">100.0</span><span class="o">)/</span><span class="mf">100.0</span></code></pre></figure>
+
+<p>gdzie zera określają dokładność “przybliżenia”. Jednak nie zawsze zwraca to prawidłową odpowiedź. Przykładowo, jeśli za “x” podstawimy 265.335, to dostaniemy 265.33, co jest oczywiście niepoprawnym wynikiem, bo powinniśmy dostać 265.34.</p>
+
+<p>Ja rozwiązałem to w ten sposób:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">round</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">rounded</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">Locale</span><span class="o">.</span><span class="na">ROOT</span><span class="o">,</span><span class="s">"%."</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="s">"f"</span><span class="o">,</span> <span class="n">x</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">Double</span><span class="o">.</span><span class="na">parseDouble</span><span class="o">(</span><span class="n">rounded</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Wykorzystuje to podobną metodę co printf, tyle że później parsujemy to na double.</p>
+
+<p class="note">
+Zauważ, że tutaj, jako argument podałem jeszcze Locale.ROOT. Wynika to z tego, że w różnych regionach inaczej jest formatowany tekst i tak dla Polski w metodzie printf/format separatorem liczby typu double jest ",", co całkowicie nam psuje obliczenia, bo typ double korzysta z ".". Zmiana Locale na ROOT rozwiązuje ten problem.
+</p>
+
+<h2 id="maxmin-wartość">Max/min wartość</h2>
+<p>W zadaniach zazwyczaj proszą o maksymalną lub minimalną wartość z jakiegoś zbioru. Gdy dane przetrzymujemy w tablicy mamy do tego gotowe funkcje:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">max</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span>
+<span class="o">}</span>
+    
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">min</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">).</span><span class="na">min</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<h2 id="suma-wartości">Suma wartości</h2>
+
+<p>Również czasem sumowanie wszystkich wartości się zdarza i tu też mamy gotowca:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">).</span><span class="na">sum</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Wszystko dzięki streamom, które są z nami od Java 8. Jeśli operujemy na listach, też mamy gotowe metody do wyznaczania min/max:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">numbers</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">));</span>
+
+<span class="n">Collections</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
+<span class="c1">//4</span>
+<span class="n">Collections</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
+<span class="c1">//1</span></code></pre></figure>
+
+<p>Chociaż do sumowania już jest nieco mniej przyjaźnie i musimy użyć streamów:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">numbers</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span><span class="o">-&gt;</span><span class="n">i</span><span class="o">.</span><span class="na">intValue</span><span class="o">()).</span><span class="na">sum</span><span class="o">()</span>
+<span class="c1">//10</span></code></pre></figure>
+
+<h2 id="odwracanie-stringa">Odwracanie stringa</h2>
+
+<p>Często w zadaniach trzeba odwracać stringi (np. aby sprawdzić czy są tzw. “palindromami”). Można to zrobić błyskawicznie z pomocą StringBuildera.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">reverse</span><span class="o">(</span><span class="n">String</span> <span class="n">string</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">StringBuilder</span><span class="o">(</span><span class="n">string</span><span class="o">).</span><span class="na">reverse</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<h2 id="operowanie-na-literach-w-słowie">Operowanie na literach w słowie</h2>
+<p>Tu znacznie ułatwia sprawę funkcja, która każdy znak pakuje nam do tablicy, dzięki czemu później łatwo możemy na nich operować:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">char</span><span class="o">[]</span> <span class="n">letters</span> <span class="o">=</span> <span class="s">"Anagram"</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+<span class="c1">//[A, n, a, g, r, a, m]</span></code></pre></figure>
+
+<h2 id="znajdowanie-podciągów-w-stringach">Znajdowanie podciągów w stringach</h2>
+<p>Sprawdzanie czy dany ciąg znaków zawiera inny podciąg jest bajecznie proste:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="s">"fooandbar"</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"and"</span><span class="o">);</span>
+<span class="c1">//true</span></code></pre></figure>
+
+<p>Zdarzyło się też porównywać prefiksy lub sufiksy między stringami, ale również do tego mamy gotowe metody, które sprawdzają czy ciąg zaczyna się lub kończy podanym stringiem:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="s">"fooandbar"</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"foo"</span><span class="o">);</span>
+<span class="c1">//true</span>
+<span class="s">"fooandbar"</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s">"bar"</span><span class="o">);</span>
+<span class="c1">//true</span></code></pre></figure>
+
+<p>Czasem jednak musimy dobrać się do środka ciągów. W jednym zadaniu, z genotypu trzeba było wyciągać geny, które rozpoczynały się od “AA” a kończyły na “BB” i na nich przeprowadzać operację. Do tego typu zadań warto znać klasy Pattern i Matcher oraz umieć posługiwać się regexami. Do tego zadania użyłem metodę podobną do tej, jednak tę przerobiłem do ogólnego użytku, nie tylko pod zadanie:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getMatchesBetween</span><span class="o">(</span><span class="n">String</span> <span class="n">string</span><span class="o">,</span> <span class="n">String</span> <span class="n">a</span><span class="o">,</span> <span class="n">String</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Pattern</span> <span class="n">between</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">a</span><span class="o">+</span><span class="s">"(.*?)"</span><span class="o">+</span><span class="n">b</span><span class="o">);</span>
+    <span class="n">Matcher</span> <span class="n">next</span> <span class="o">=</span> <span class="n">between</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">string</span><span class="o">);</span>
+    
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">matches</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    
+    <span class="k">while</span><span class="o">(</span><span class="n">next</span><span class="o">.</span><span class="na">find</span><span class="o">()){</span>
+        <span class="n">matches</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">next</span><span class="o">.</span><span class="na">group</span><span class="o">());</span>
+    <span class="o">}</span>
+    
+    <span class="k">return</span> <span class="n">matches</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">matches</span><span class="o">.</span><span class="na">size</span><span class="o">()]);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>W skrócie, znajduję nam wszystkie podciągi miedzy argumentami a i b, oraz pakuje je do listy, którą na koniec konwertujemy na tablicę.</p>
+
+<p>Gdybyśmy mieli tylko sprawdzać czy dany ciąg pasuje do innego podciągu, moglibyśmy się posłużyć tą metodą:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="s">"fooandbar"</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"foo(.*?)bar"</span><span class="o">);</span>
+<span class="c1">//true</span></code></pre></figure>
+
+<p class="note">
+Kluczowy w tych metodach jest regex: <span class="s">(.\*?)</span> gdzie <span class="s">.</span> oznacza dowolny znak, a <span class="s">\*?</span> to "leniwy" kawntyfikator? (ang. Reluctant quantifier), który określa, że <span class="s">.</span> (dowolny znak) może się wystąpić zero lub więcej razy. Jeśli, np. nie uznawalibyśmy pustych ciągów między a i b to użylibyśmy kwantyfikatora <span class="s">+?</span>, który określa, że znak musi wystąpić co najmniej raz. Z kolei inny rodzaj kwantyfikatora - zachłanny (ang. greedy), w np. w postaci <span class="s">*</span> pobrałby najwięcej ile się da, czyli w naszym przypadku od znalezienia pierwszego 'AA'  po ostatnie 'BB'. Różnica miedzy kwantyfikatorami leniwymi a zachłannymi polega na tym, że ten pierwszy dopasuje najmniej jak się da, a drugi jak najwięcej. Po więcej info odsyłam do dokumentacji <a href="https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html">Pattern</a>
+</p>
+
+<p>Zaprezentuje to na przykładzie. Dajmy na to, że mamy taką o to tablicę z danymi:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">String</span><span class="o">[]</span> <span class="n">genotypes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+        <span class="n">genotypes</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s">"EBEAADDEDCBCAEBABBDBEADBBDAABBDDACDDECECECBBDDBCBEDAEBDAADCE"</span><span class="o">;</span>
+        <span class="n">genotypes</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="s">"BCBAAEEDDBEDCBBCCABDAACEBBEBCCCCCABDDDBBAACCEDDCBBCEAAEEADBBDE"</span><span class="o">;</span>
+        <span class="n">genotypes</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="s">"AADDEEDBBCCEEBBDEEDDAAAACDCDDCDBBEAADDEDDBBDCDDCDCAA"</span><span class="o">;</span></code></pre></figure>
+
+<p>i wywołując tą metodę na każdym elemencie tej tablicy, dostaniemy nową tablicę z dopasowaniami, które tu w tym przykładzie od razu drukuję:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">genotype</span> <span class="o">:</span> <span class="n">genotypes</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">getMatchesBetween</span><span class="o">(</span><span class="n">genotype</span><span class="o">,</span> <span class="s">"AA"</span><span class="o">,</span> <span class="s">"BB"</span><span class="o">)));</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>i output dla poszczególnych kwantyfikatorów wygląda następująco:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//dla (.*?)</span>
+<span class="o">[</span><span class="n">AADDEDCBCAEBABB</span><span class="o">,</span> <span class="n">AABB</span><span class="o">]</span>
+<span class="o">[</span><span class="n">AAEEDDBEDCBB</span><span class="o">,</span> <span class="n">AACEBB</span><span class="o">,</span> <span class="n">AACCEDDCBB</span><span class="o">,</span> <span class="n">AAEEADBB</span><span class="o">]</span>
+<span class="o">[</span><span class="n">AADDEEDBB</span><span class="o">,</span> <span class="n">AAAACDCDDCDBB</span><span class="o">,</span> <span class="n">AADDEDDBB</span><span class="o">]</span>
+
+<span class="c1">//dla (.+?)</span>
+<span class="o">[</span><span class="n">AADDEDCBCAEBABB</span><span class="o">,</span> <span class="n">AABBDDACDDECECECBB</span><span class="o">]</span>
+<span class="o">[</span><span class="n">AAEEDDBEDCBB</span><span class="o">,</span> <span class="n">AACEBB</span><span class="o">,</span> <span class="n">AACCEDDCBB</span><span class="o">,</span> <span class="n">AAEEADBB</span><span class="o">]</span>
+<span class="o">[</span><span class="n">AADDEEDBB</span><span class="o">,</span> <span class="n">AAAACDCDDCDBB</span><span class="o">,</span> <span class="n">AADDEDDBB</span><span class="o">]</span>
+
+<span class="c1">//dla (.*)</span>
+<span class="o">[</span><span class="n">AADDEDCBCAEBABBDBEADBBDAABBDDACDDECECECBB</span><span class="o">]</span>
+<span class="o">[</span><span class="n">AAEEDDBEDCBBCCABDAACEBBEBCCCCCABDDDBBAACCEDDCBBCEAAEEADBB</span><span class="o">]</span>
+<span class="o">[</span><span class="n">AADDEEDBBCCEEBBDEEDDAAAACDCDDCDBBEAADDEDDBB</span><span class="o">]</span></code></pre></figure>
+
+<h2 id="ilości-liter---statystyka">Ilości liter - statystyka</h2>
+<p>Trafiały się też zadania gdzie trzeba było znaleźć ilości liter w słowie i wykonać na tym różne operacje (np. sprawdzanie czy słowa są anagramami). Napisałem do tego taką funkcję, która zwraca tablicę z liczbą poszczególnych liter:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">countLetters</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">letters</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">26</span><span class="o">];</span><span class="c1">//26 liter w alfabecie</span>
+    <span class="k">for</span> <span class="o">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">word</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="n">letters</span><span class="o">[</span><span class="n">word</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)-</span><span class="sc">'A'</span><span class="o">]++;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">letters</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Kluczowym czynnikiem jest tu operacja <code class="highlight language-java" data-lang="java"><span class="n">word</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)-</span><span class="sc">'A'</span></code>, dzięki której obliczane jest miejsce w tablicy, które powinno zostać policzone w aktualnej iteracji.</p>
+
+<p class="idea">
+Jeśli nie wiesz co tu się dzieje, to znak jest przechowywany jako liczba (np. alfabet wielkich liter przyjmuje wartości od 60 - dla A, do 90 - dla Z), a my metodą charAt wyciągamy aktualny znak, dajmy na to 'B'(61) i odejmujemy od tego 'A'(60), zatem dostajemy pozycję 1 (61-60).
+</p>
+
+<p>Nasza tablica dla pewnego słowa po wydrukowaniu wyglądałaby tak:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z</span>
+  <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">]</span></code></pre></figure>
+
+<p>&lt;[ class=”idea”&gt;
+Warto wiedzieć też, że można inkrementować znaki!
+&lt;/[&gt;</p>
+
+<p>Przykładowo:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">char</span> <span class="n">a</span> <span class="o">=</span> <span class="sc">'A'</span><span class="o">;</span>
+<span class="n">a</span><span class="o">++;</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+<span class="c1">//B</span></code></pre></figure>
+
+<p>Mając już taką wiedzę, możemy dostarczyć pełne statystyki jakiegoś tekstu. W jednym z zadań to własnie trzeba było zrobić. Najpierw wpakowałem wszystkie słowa do tablicy i następnie stworzyłem funkcję, która na podstawie podananej tablicy ze słowami, drukuje nam statystyki danego tekstu:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">letterStats</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">lettersCount</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">26</span><span class="o">];</span>
+    
+    <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">word</span> <span class="o">:</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
+        
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">word</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">lettersCount</span><span class="o">[</span><span class="n">word</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)-</span><span class="sc">'A'</span><span class="o">]++;</span>
+            
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="kt">double</span> <span class="n">numberOfallLetters</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">lettersCount</span><span class="o">).</span><span class="na">sum</span><span class="o">();</span>
+    <span class="kt">char</span> <span class="n">a</span> <span class="o">=</span> <span class="sc">'A'</span><span class="o">;</span>
+    
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">count</span> <span class="o">:</span> <span class="n">lettersCount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">percentage</span> <span class="o">=</span> <span class="n">count</span><span class="o">*</span><span class="mf">100.0</span><span class="o">/</span><span class="n">numberOfallLetters</span><span class="o">;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">++</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">" ("</span> <span class="o">+</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">Locale</span><span class="o">.</span><span class="na">ROOT</span><span class="o">,</span> <span class="s">"%.2f"</span><span class="o">,</span> <span class="n">percentage</span><span class="o">)</span> <span class="o">+</span> <span class="s">"%)"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>A wyglądało to tak:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">A: 632 (7.55%)
+B: 196 (2.34%)
+C: 162 (1.94%)
+D: 422 (5.04%)
+E: 1093 (13.06%)
+F: 213 (2.55%)
+G: 151 (1.80%)
+H: 566 (6.76%)
+I: 522 (6.24%)
+J: 2 (0.02%)
+K: 64 (0.76%)
+L: 402 (4.80%)
+M: 193 (2.31%)
+N: 557 (6.66%)
+O: 641 (7.66%)
+P: 93 (1.11%)
+Q: 6 (0.07%)
+R: 524 (6.26%)
+S: 485 (5.80%)
+T: 792 (9.46%)
+U: 185 (2.21%)
+V: 84 (1.00%)
+W: 196 (2.34%)
+X: 3 (0.04%)
+Y: 185 (2.21%)
+Z: 0 (0.00%)</code></pre></figure>
+
+<p>I do tej pory to by było na tyle. Jeśli uzbieram większy zbiór przydatnych funkcji lub algorytmów, to przeleję to na kolejny wpis.</p>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/dajsiepoznac2017/co-dalej-z-projektem-jaki-jezyk-programowania" data-toggle="tooltip" data-placement="top" title="Co dalej z projektem jaki-jezyk-programowania.pl">&larr; Poprzedni post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/dajsiepoznac2017/formularz-kontaktowy-refaktoryzacja" data-toggle="tooltip" data-placement="top" title="Dodajemy formularz kontaktowy 5#">Następny post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr>
+                
+                
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://blog.jaki-jezyk-programowania.pl/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie";
+this.page.identifier = "/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</article>
+
+
+
+<hr>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/C0deboy">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="mailto:lasota.marcinm@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/devcave.min.js"></script>
+
+    
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+---
+layout: default
+description: "Jaskinia programisty"
+---
+
+<!-- Page Header -->
+<header class="intro-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <div class="inline">
+            <img class="header-logo" src="/img/devcave.png" alt="Logo"/>
+          </div>
+          <div class="inline">
+            <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+            <hr class="small">
+            <span class="subheading">{{ page.description }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      {% for post in paginator.posts %}
+      <div class="post-preview">
+        <a href="{{ post.url | prepend: site.baseurl }}">
+          <h2 class="post-title">{{ post.title }}</h2>
+          {% if post.subtitle %}
+          <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+          {% endif %}
+        </a>
+
+        <p class="post-meta">
+          {% assign m = post.date | date: "%-m" %}
+          {{ post.date | date: "%-d" }}
+          {% case m %}
+          {% when '1' %}stycznia
+          {% when '2' %}lutego
+          {% when '3' %}marca
+          {% when '4' %}kwietnia
+          {% when '5' %}maja
+          {% when '6' %}czerwca
+          {% when '7' %}lipca
+          {% when '8' %}sierpnia
+          {% when '9' %}września
+          {% when '10' %}października
+          {% when '11' %}listopada
+          {% when '12' %}grudnia
+          {% endcase %}
+          {{ post.date | date: "%Y" }}
+          {% assign tags = post.tags | sort %}{% for tag in tags %} <span class="site-tag"><a href='/archive#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></span> {% endfor %}</p>
+      </div>
+      <hr>
+      {% endfor %}
+
+      <!-- Pager -->
+      {% if paginator.total_pages > 1 %}
+      <ul class="pager">
+        {% if paginator.previous_page %}
+        <li class="previous">
+          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Nowsze posty</a>
+        </li>
+        {% endif %}
+        {% if paginator.next_page %}
+        <li class="next">
+          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Starsze posty &rarr;</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<hr>
+
+

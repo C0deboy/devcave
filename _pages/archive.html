@@ -1,0 +1,56 @@
+---
+layout: page
+title: "Archiwum"
+description: "Znajdziesz tu każdy wpis."
+header-img: "img/archive-header.jpg"
+permalink: "/archiwum/"
+---
+<div>
+  <h2 class="page-header">{{ site.posts | size }}
+      <small> - Ilość wszystkich postów</small>
+  </h2>
+</div>
+
+<div>
+  <p>Wyszukaj według tagów:</p>
+  {% assign tags = site.tags | sort %}
+  {% for tag in tags %}
+   <span class="site-tag">
+      <a href="#{{ tag | first | slugify }}">
+              {{ tag[0] }} ({{ tag | last | size }})
+      </a>
+  </span>
+  {% endfor %}
+</div>
+
+<div class="archive">
+    {% for tag in tags %}
+      <h2 id="{{ tag[0] | slugify }}">{{ tag[0] }}</h2>
+      <ul>
+        {% for post in tag[1] %}
+          <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> | 
+          <small>
+            {% assign m = post.date | date: "%-m" %}
+            {{ post.date | date: "%-d" }}
+            {% case m %}
+              {% when '1' %}stycznia
+              {% when '2' %}lutego
+              {% when '3' %}marca
+              {% when '4' %}kwietnia
+              {% when '5' %}maja
+              {% when '6' %}czerwca
+              {% when '7' %}lipca
+              {% when '8' %}sierpnia
+              {% when '9' %}września
+              {% when '10' %}października
+              {% when '11' %}listopada
+              {% when '12' %}grudnia
+            {% endcase %}
+            {{ post.date | date: "%Y" }}
+          </small>
+          <br>{{ post.subtitle }}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  </div>
+</div>

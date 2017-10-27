@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Devcave - jaskinia programisty, blog programistyczny.">
+    <meta name="author" content="Codeboy">
+    <title>Jak dodać statystyki strony i komentarze na blogu? - devcave.pl</title>
+
+    <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/jekyll-disqus-comments-google-analitics">
+    <link rel="shortcut icon" href="/img/logo.ico">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/devcave.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <link type="application/atom+xml" rel="alternate" href="https://c0deboy.github.io/devcave/feed.xml" title="devcave.pl" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a href="https://www.jaki-jezyk-programowania.pl/#formularz-kontaktowy">Kontakt</a>
+                </li>
+                <li>
+                    <a href="/moje-projekty">Moje projekty</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="post-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <div class="post-heading">
+                    <h1>Statystyki i komentarze na blogu</h1>
+                    
+                    <h2 class="subheading">Rozbudowujemy blog na Jekyllu 2#</h2>
+                    
+                    <span class="meta">
+                    
+                    10
+                    marca
+                      
+                    2017
+                     <span class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></span> <span class="site-tag"><a href='/archiwum#jekyll'>Jekyll</a></span> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container post">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <hr class="header-hr">
+
+                <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#statystyki-google-analytics">Statystyki Google Analytics</a></li>
+<li class="toc-entry toc-h1"><a href="#komentarze-disqus">Komentarze Disqus</a></li>
+</ul>
+
+                <hr>
+
+				        <p>Dzięki statystykom strony będziemy mogli śledzić wiele ciekawych rzeczy. Między innymi ruch na stronie, czyli ile razy została wyświetlona, jakie podstrony odwiedzane były najczęściej, ile czasu użytkownik znajdował się na poszczególnych stronach i jak znalazł naszą stronę. Jest to tylko niewielka część funkcji, jaką oferują tego typu narzędzia. W dostarczanych raportach można wręcz tonąć.</p>
+
+<p>Komentarze są również przydatnym narzędziem do kontaktu z użytkownikami strony, a więc i to warto dodać do naszego bloga.</p>
+
+<p>Zrobimy to w najszybszy i najłatwiejszy sposób. Posłużymy się gotowymi narzędziami:</p>
+<ul>
+  <li>Google Analytics</li>
+  <li>Disqus</li>
+</ul>
+
+<p>Dodanie ich do naszego bloga na Jekyllu jest bardzo proste.</p>
+
+<h1 id="statystyki-google-analytics">Statystyki Google Analytics</h1>
+
+<p>Aby nasza strona mogła korzystać z Google Analytics, konieczne będzie posiadanie konta Google. Gdy takie posiadamy wystarczy <a href="https://www.google.com/analytics/">zalogować się</a> do panelu administracyjnego i utworzyć profil dla naszej strony. Dostaniemy identyfikator śledzenia postaci UA-XXXXXXXX-X oraz kod Javascript, który odpowiada za zbieranie danych. Będziemy musieli dodać go do wszystkich stron w obrębie naszego bloga/strony.</p>
+
+<p>W tym celu tworzymy plik np. <span class="file">google-analytics.html</span>  w folderze <span class="folder">_includes</span>, który znajduje się w katalogu naszego projektu i umieszczamy w nim kod, który otrzymaliśmy. Wygląda tak:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
+  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">g</span><span class="p">,</span><span class="nx">r</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">){</span><span class="nx">i</span><span class="p">[</span><span class="s1">'GoogleAnalyticsObject'</span><span class="p">]</span><span class="o">=</span><span class="nx">r</span><span class="p">;</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">||</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="p">(</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">||</span><span class="p">[]).</span><span class="nx">push</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)},</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">l</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="k">new</span> <span class="nb">Date</span><span class="p">();</span><span class="nx">a</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">o</span><span class="p">),</span>
+  <span class="nx">m</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">o</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span><span class="nx">a</span><span class="p">.</span><span class="nx">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">a</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">g</span><span class="p">;</span><span class="nx">m</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">)</span>
+  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">'script'</span><span class="p">,</span><span class="s1">'https://www.google-analytics.com/analytics.js'</span><span class="p">,</span><span class="s1">'ga'</span><span class="p">);</span>
+
+  <span class="nx">ga</span><span class="p">(</span><span class="s1">'create'</span><span class="p">,</span> <span class="s1">'UA-XXXXXXXX-X'</span><span class="p">,</span> <span class="s1">'auto'</span><span class="p">);</span>
+  <span class="nx">ga</span><span class="p">(</span><span class="s1">'send'</span><span class="p">,</span> <span class="s1">'pageview'</span><span class="p">);</span>
+
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
+
+<p>Ostatnim krokiem pozostało załączyć plik, który utworzyliśmy (<span class="file">google-analytics.html</span>) do wszystkich podstron. W Jekyllu wystarczy dodać instrukcję:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">{% include google-analytics.html %}</code></pre></figure>
+
+<p>na końcu pliku <span class="file">default.html</span> (zaraz przed zamknięciem tagu <code class="highlight language-html" data-lang="html"><span class="nt">&lt;body&gt;</span></code>), który znajduje się w folderze <span class="file">_layouts</span>. U mnie wygląda to tak:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"pl"</span><span class="nt">&gt;</span>
+
+{% include head.html %}
+
+<span class="nt">&lt;body&gt;</span>
+
+    {% include nav.html %}
+
+    {{ content }}
+
+    {% include footer.html %}
+
+    {% include google-analytics.html %}
+
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
+<p>Trzeba wiedzieć, że do statystyk liczą się też wejścia z localhost lub 127.0.0.1, czyli wtedy, gdy testujemy lokalnie nasze zmiany. Nie powinno to być brane pod uwagę w naszych statystykach, więc warto wykluczyć te adresy. Można to zrobić bezpośrednio w Google Analitcs:</p>
+
+<ol>
+  <li>Przejdź do konta strony i wybierz administracja.</li>
+  <li>Następnie opcja ‘Wszystkie filtry’ i ‘dodaj filtr’.</li>
+  <li>Jako ‘Typ filtra’ wybierz ‘Predefiniowany’.</li>
+  <li>Kliknij menu ‘Wybierz typ filtra’ i wybierz ‘Wyklucz’.</li>
+  <li>Kliknij menu ‘Wybierz źródło lub miejsce docelowe’ i wybierz ‘ruch z adresów IP’.</li>
+  <li>Kliknij menu ‘Wybierz wyrażenie’ i wybierz ‘rozpoczyna się od’.</li>
+  <li>I Wpisujemy adresy IP, które chcemy wykluczyć.</li>
+</ol>
+
+<p class="note">Filtry działają tylko dla przyszłego ruchu, co oznacza ze wcześniej zebrane dane z localhost nie zostaną wykluczone.</p>
+
+<p class="warning">W moim przypadku to filtrowanie jednak nie działało dla localhost, więc zrobiłem to w nieco inny sposób. Zajrzyj do tego <a href="https://c0deboy.github.io/devcave/dajsiepoznac2017/jekyll-filtrowanie-danych-localhost">postu</a></p>
+
+<h1 id="komentarze-disqus">Komentarze Disqus</h1>
+
+<p>Tu postępujemy podobnie, a nawet prościej. Zakładamy konto na <a href="https://disqus.com/">Disqus</a>. Tworzymy konto strony. Discus wspiera Jekylla, więc podczas wyboru platformy na której stoi nasz blog będzie dostępna opcja Jekyll.</p>
+
+<p>Tu również dostaniemy kod, który będziemy załączać pod postami. W tym celu tworzymy plik np. <span class="file">disqus.html</span> w folderze <span class="folder">_includes</span>. Kod, który otrzymasz, musi pojawić się miedzy {% if page.comments %} i {% endif %}, aby komentarze pojawiały się tylko tam gdzie chcemy. Ostatecznie plik u mnie wygląda tak:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">{% if page.comments %}
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"disqus_thread"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+
+<span class="kd">var</span> <span class="nx">disqus_config</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="s2">"{{ site.url }}{{ page.url }}"</span><span class="p">;</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">identifier</span> <span class="o">=</span> <span class="s2">"{{ page.id }}"</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">document</span><span class="p">,</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'https://jaki-jezyk-programowania.disqus.com/embed.js'</span><span class="p">;</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'data-timestamp'</span><span class="p">,</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+<span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">head</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+<span class="p">})();</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;noscript&gt;</span>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://disqus.com/?ref_noscript"</span><span class="nt">&gt;</span> komentarze by Disqus.<span class="nt">&lt;/a&gt;&lt;/noscript&gt;</span>
+{% endif %}</code></pre></figure>
+
+<p>Zwróć uwagę na:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">this.page.url = "{{ site.url }}{{ page.url }}";</code></pre></figure>
+
+<p>gdzie powinien być adres URL twoich stron jako zmienna. Domyślnie jest to {{ site.url }}{{ page.url }}, ale gdy dodawałem RSS feed kategori musiał byc / między tagami czyli:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">{{ site.url }}/{{ page.url }}</code></pre></figure>
+
+<p class="warning">
+Warto sprawdzić linki w wygenerowanych plikach w folderze <span class="folder">_site</span>
+</p>
+<p>.</p>
+
+<p>Teraz wystarczy dodać do konfiguracji naszego postu opcję ‘comments:   true’ i system komentarzy pod tym postem zostanie włączony. Dla przykładu dla tego postu konfiguracja wygląda tak:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">---
+layout:     post
+title:      "Statystyki i komentarze na blogu"
+subtitle:   "Rozbudowujemy blog na Jekyllu 2#"
+date:       2017-03-10 12:00:00
+author:     "Codeboy"
+category:   DajSiePoznac2017
+tag: DajSiePoznac2017
+comments:   true
+toc:        true
+---</code></pre></figure>
+
+<p>I gotowe. Mamy statystyki i komentarze na blogu.</p>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/dajsiepoznac2017/rss-feed-kategorii-jekyll" data-toggle="tooltip" data-placement="top" title="Dodajemy RSS feed kategorii">&larr; Poprzedni post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/dajsiepoznac2017/dostepnosc-strony-wprowadzenie" data-toggle="tooltip" data-placement="top" title="Poprawiamy dostępność strony">Następny post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr>
+                
+                
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://blog.jaki-jezyk-programowania.pl/dajsiepoznac2017/jekyll-disqus-comments-google-analitics";
+this.page.identifier = "/dajsiepoznac2017/jekyll-disqus-comments-google-analitics";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</article>
+
+
+
+<hr>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/C0deboy">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="mailto:lasota.marcinm@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/devcave.min.js"></script>
+
+    
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

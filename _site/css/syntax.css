@@ -120,7 +120,7 @@
 
 .warning {
     background-color: #e5e5e5;
-    color: tomato;
+    color: #e80000;
     padding: 4px 5px 4px 5px;
 }
 
@@ -131,6 +131,7 @@
 .idea {
     background-color: #e5e5e5;
     font-size: .9em;
+    color: #282828;
 }
 
 .idea::before { 

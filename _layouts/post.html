@@ -2,7 +2,6 @@
 layout: default
 ---
 
-<!-- Post Header -->
 <header class="post-header">
     <div class="container">
         <div class="row">
@@ -13,7 +12,7 @@ layout: default
                     {% if page.subtitle %}
                     <h2 class="subheading">{{ page.subtitle }}</h2>
                     {% endif %}
-                    <span class="meta">
+                    <p class="meta">
                     {% assign m = page.date | date: "%-m" %}
                     {{ page.date | date: "%-d" }}
                     {% case m %}
@@ -30,20 +29,21 @@ layout: default
                       {% when '11' %}listopada
                       {% when '12' %}grudnia
                     {% endcase %}
-                    {{ page.date | date: "%Y" }}
-                     {% assign tags = page.tags | sort %}{% for tag in tags %}<span class="site-tag"><a href='/archiwum#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></span> {% endfor %}</span>
+                    {{ page.date | date: "%Y" }}</p>
+                     {% assign tags = page.tags | sort %}{% for tag in tags %}<div class="site-tag"><a href='/archiwum#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div> {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Post Content -->
 <article>
     <div class="container post">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <hr class="header-hr">
+
+                <span>Spis treści:</span>
 
                 {{ content | toc_only }}
 
@@ -74,8 +74,6 @@ layout: default
     </div>
 
 </article>
-
-
 
 <hr>
 

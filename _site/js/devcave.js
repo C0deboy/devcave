@@ -1,14 +1,22 @@
+
+if (JSON.parse(localStorage.getItem('dark-mode'))) {
+  document.body.classList.add('dark-mode');
+}
+
+document.querySelector('.dark-mode-btn').addEventListener('click', () => {
+  const darkMode = document.body.classList.toggle('dark-mode');
+  localStorage.setItem('dark-mode', darkMode);
+});
+
 // Tooltip Init
 $(() => {
   $("[data-toggle='tooltip']").tooltip();
 });
 
-// make all images responsive
 $(() => {
   $('img').addClass('img-responsive center-block');
 });
 
-// responsive tables
 $(document).ready(() => {
   $('table').wrap("<div class='table-responsive'></div>");
   $('table').addClass('table');

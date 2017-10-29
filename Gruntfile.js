@@ -28,22 +28,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        banner: '/*!\n' +
-            ' * <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-            ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-            ' * Licensed under <%= pkg.license %> (https://spdx.org/licenses/<%= pkg.license %>)\n' +
-            ' */\n',
-        usebanner: {
-            dist: {
-                options: {
-                    position: 'top',
-                    banner: '<%= banner %>'
-                },
-                files: {
-                    src: ['css/<%= pkg.name %>.css', 'css/<%= pkg.name %>.min.css', 'js/<%= pkg.name %>.min.js']
-                }
-            }
-        },
         watch: {
             scripts: {
                 files: ['js/<%= pkg.name %>.js'],
@@ -65,10 +49,8 @@ module.exports = function(grunt) {
     // Load the plugins.
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-banner');
-    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify', 'less', 'usebanner']);
+    grunt.registerTask('default', ['uglify', 'less']);
 
 };

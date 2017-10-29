@@ -53,8 +53,8 @@ description: "Jaskinia programisty"
           {% when '11' %}listopada
           {% when '12' %}grudnia
           {% endcase %}
-          {{ post.date | date: "%Y" }}
-          {% assign tags = post.tags | sort %}{% for tag in tags %} <span class="site-tag"><a href='/archive#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></span> {% endfor %}</p>
+          {{ post.date | date: "%Y" }}</p>
+          {% assign tags = post.tags | sort %}{% for tag in tags %}<div class="site-tag"><a href='/archive#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div> {% endfor %}
       </div>
       <hr>
       {% endfor %}

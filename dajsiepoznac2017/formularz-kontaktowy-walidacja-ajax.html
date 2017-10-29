@@ -181,7 +181,8 @@ Treść
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">$</span><span class="p">(</span><span class="s1">'.emailFormSubmit'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
     <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">'&lt;i class="fa fa-spinner fa-pulse fa-2x fa-fw"&gt;&lt;/i&gt;'</span><span class="p">;</span>
-    <span class="c1">//reszta</span>
+    <span class="c1">//reszta
+</span>
   <span class="p">});</span></code></pre></figure>
 
 <p>W funkcji anonimowej odbieramy to zdarzenie <code class="highlight"><span class="nx">event</span></code> i wywołujemy na nim metodę <code class="highlight language-javascript" data-lang="javascript"><span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span></code>, która zapobiega domyślnemu zachowaniu przycisku “submit”. Gdybyśmy tego nie zrobili to wykonałaby się wbudowana walidacja w HTML5, a po jej pomyślnym przejściu przeniosłoby nas do pliku <span class="file">emailform.php</span>, tak jak to określiliśmy w atrybucie <code class="highlight"><span class="na">action</span></code> w formularzu. Jest to coś dokładnie odwrotnego od tego, co byśmy chcieli, więc powstrzymujemy to i wykorzystamy AJAX, aby dostać odpowiedź z pliku <span class="file">emailform.php</span> bez przeładowania strony, zaraz pod naszym formularzem.</p>
@@ -258,7 +259,8 @@ AJAX umożliwia wysyłanie i odbieranie danych z serwera w sposób asynchroniczn
 <p>Na jej podstawie zdecydujemy czy wysłać dane:</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="k">if</span><span class="p">(</span><span class="nx">isValid</span><span class="o">===</span><span class="kc">true</span><span class="p">){</span>
-    	<span class="c1">//tu pojawi się AJAX</span>
+    	<span class="c1">//tu pojawi się AJAX
+</span>
     <span class="p">}</span></code></pre></figure>
 
 <p>Ostatnim krokiem jest wykonanie żądania AJAX. JQuery strasznie ułatwia sprawę:</p>

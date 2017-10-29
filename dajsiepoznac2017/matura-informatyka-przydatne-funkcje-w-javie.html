@@ -226,7 +226,8 @@ Zauważ, że tutaj, jako argument podałem jeszcze Locale.ROOT. Wynika to z tego
 <span class="n">numbers</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">));</span>
 
 <span class="n">Collections</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
-<span class="c1">//4</span>
+<span class="c1">//4
+</span>
 <span class="n">Collections</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
 <span class="c1">//1</span></code></pre></figure>
 
@@ -258,7 +259,8 @@ Zauważ, że tutaj, jako argument podałem jeszcze Locale.ROOT. Wynika to z tego
 <p>Zdarzyło się też porównywać prefiksy lub sufiksy między stringami, ale również do tego mamy gotowe metody, które sprawdzają czy ciąg zaczyna się lub kończy podanym stringiem:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="s">"fooandbar"</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"foo"</span><span class="o">);</span>
-<span class="c1">//true</span>
+<span class="c1">//true
+</span>
 <span class="s">"fooandbar"</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s">"bar"</span><span class="o">);</span>
 <span class="c1">//true</span></code></pre></figure>
 
@@ -303,17 +305,20 @@ Kluczowy w tych metodach jest regex: <span class="s">(.\*?)</span> gdzie <span c
 
 <p>i output dla poszczególnych kwantyfikatorów wygląda następująco:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//dla (.*?)</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//dla (.*?)
+</span>
 <span class="o">[</span><span class="n">AADDEDCBCAEBABB</span><span class="o">,</span> <span class="n">AABB</span><span class="o">]</span>
 <span class="o">[</span><span class="n">AAEEDDBEDCBB</span><span class="o">,</span> <span class="n">AACEBB</span><span class="o">,</span> <span class="n">AACCEDDCBB</span><span class="o">,</span> <span class="n">AAEEADBB</span><span class="o">]</span>
 <span class="o">[</span><span class="n">AADDEEDBB</span><span class="o">,</span> <span class="n">AAAACDCDDCDBB</span><span class="o">,</span> <span class="n">AADDEDDBB</span><span class="o">]</span>
 
-<span class="c1">//dla (.+?)</span>
+<span class="c1">//dla (.+?)
+</span>
 <span class="o">[</span><span class="n">AADDEDCBCAEBABB</span><span class="o">,</span> <span class="n">AABBDDACDDECECECBB</span><span class="o">]</span>
 <span class="o">[</span><span class="n">AAEEDDBEDCBB</span><span class="o">,</span> <span class="n">AACEBB</span><span class="o">,</span> <span class="n">AACCEDDCBB</span><span class="o">,</span> <span class="n">AAEEADBB</span><span class="o">]</span>
 <span class="o">[</span><span class="n">AADDEEDBB</span><span class="o">,</span> <span class="n">AAAACDCDDCDBB</span><span class="o">,</span> <span class="n">AADDEDDBB</span><span class="o">]</span>
 
-<span class="c1">//dla (.*)</span>
+<span class="c1">//dla (.*)
+</span>
 <span class="o">[</span><span class="n">AADDEDCBCAEBABBDBEADBBDAABBDDACDDECECECBB</span><span class="o">]</span>
 <span class="o">[</span><span class="n">AAEEDDBEDCBBCCABDAACEBBEBCCCCCABDDDBBAACCEDDCBBCEAAEEADBB</span><span class="o">]</span>
 <span class="o">[</span><span class="n">AADDEEDBBCCEEBBDEEDDAAAACDCDDCDBBEAADDEDDBB</span><span class="o">]</span></code></pre></figure>
@@ -322,7 +327,8 @@ Kluczowy w tych metodach jest regex: <span class="s">(.\*?)</span> gdzie <span c
 <p>Trafiały się też zadania gdzie trzeba było znaleźć ilości liter w słowie i wykonać na tym różne operacje (np. sprawdzanie czy słowa są anagramami). Napisałem do tego taką funkcję, która zwraca tablicę z liczbą poszczególnych liter:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">countLetters</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">letters</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">26</span><span class="o">];</span><span class="c1">//26 liter w alfabecie</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">letters</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">26</span><span class="o">];</span><span class="c1">//26 liter w alfabecie
+</span>
     <span class="k">for</span> <span class="o">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">word</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++</span> <span class="o">)</span> <span class="o">{</span>
         <span class="n">letters</span><span class="o">[</span><span class="n">word</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)-</span><span class="sc">'A'</span><span class="o">]++;</span>
     <span class="o">}</span>
@@ -337,7 +343,8 @@ Jeśli nie wiesz co tu się dzieje, to znak jest przechowywany jako liczba (np. 
 
 <p>Nasza tablica dla pewnego słowa po wydrukowaniu wyglądałaby tak:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z
+</span>
   <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">]</span></code></pre></figure>
 
 <p>&lt;[ class=”idea”&gt;

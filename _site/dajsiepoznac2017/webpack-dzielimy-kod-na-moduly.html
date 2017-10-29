@@ -174,9 +174,11 @@ Zamiast scieżki można też podać nazwę pakietu zainstalowanego przez npm, ta
 
 <p>Teraz pozostało dla ułatwienia stworzyć sobie skrypt, który będzie uruchamiał webpacka. W tym celu do pliku <span class="file">package.json</span> dodajemy  linię:</p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...
+</span>
 <span class="s2">"scripts"</span><span class="err">:</span> <span class="p">{</span>
-	<span class="c1">//...</span>
+	<span class="c1">//...
+</span>
     <span class="s2">"build"</span><span class="err">:</span> <span class="s2">"webpack"</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="c1">//...</span></code></pre></figure>
@@ -199,7 +201,8 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
 
 <p>Ponadto musimy dodać go do konfiguracji w <span class="file">webpack.config.js</span></p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...
+</span>
   <span class="nl">module</span><span class="p">:</span> <span class="p">{</span>
     <span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
@@ -224,7 +227,8 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
     <span class="nl">home</span><span class="p">:</span> <span class="s1">'./js/home/main.js'</span><span class="p">,</span>
     <span class="nx">global</span><span class="err">:</span> <span class="s1">'./css/main.css'</span><span class="p">,</span>
   <span class="p">},</span>
-  <span class="c1">//...</span>
+  <span class="c1">//...
+</span>
   <span class="nx">module</span><span class="err">:</span> <span class="p">{</span>
     <span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
@@ -258,9 +262,11 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
 
 <p>Oraz podmieniamy loadery CSS i definiujemy nowy plugin:</p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...
+</span>
 	<span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
-      <span class="c1">//...</span>
+      <span class="c1">//...
+</span>
       <span class="p">{</span>
         <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
         <span class="na">use</span><span class="p">:</span> <span class="nx">ExtractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">({</span>
@@ -279,7 +285,8 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
 Jeśli w twoich plikach, które łączysz, wystepują importy czcionek (np. w Bootstrap) Webpack wyrzuci błędy. Można to rozwiązać z pomocą <a href="https://github.com/webpack-contrib/url-loader">url-loader</a>, <u>jednak warto je pominąć</u>, gdyż często załączane jest kilka formatów (woff, woff2, eot, ttf). Url-loader przetworzyłby je wszystkie, co skutkowałoby ogromnym plikiem CSS. Normalnie, przeglądarka wybiera tylko jeden odpowiedni, a resztę pomija. Dlatego lepiej skorzystać z opcji dla css-loader, która wyłącza przetwarzanie @import url(), ale normalnie działa z @import:
 </p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js">		<span class="c1">//...</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js">		<span class="c1">//...
+</span>
 		<span class="p">{</span>
         <span class="nl">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
         <span class="nx">use</span><span class="err">:</span> <span class="nx">ExtractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">({</span>

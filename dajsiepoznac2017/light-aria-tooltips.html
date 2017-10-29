@@ -1,43 +1,35 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
+    
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - jaskinia programisty, blog programistyczny.">
+<meta name="author" content="Codeboy">
+<title>light aria tooltips pure js - devcave.pl</title>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Devcave - jaskinia programisty, blog programistyczny.">
-    <meta name="author" content="Codeboy">
-    <title>light aria tooltips pure js - devcave.pl</title>
+<link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/light-aria-tooltips">
+<link rel="shortcut icon" href="/img/logo.ico">
 
-    <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/light-aria-tooltips">
-    <link rel="shortcut icon" href="/img/logo.ico">
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/devcave.css">
+<link rel="stylesheet" href="/css/syntax.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/devcave.css">
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 
-    <!-- Custom Fonts -->
-    <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-
-    <link type="application/atom+xml" rel="alternate" href="https://c0deboy.github.io/devcave/feed.xml" title="devcave.pl" />
+<link type="application/atom+xml" rel="alternate" href="https://c0deboy.github.io/devcave/feed.xml" title="devcave.pl" />
 
 </head>
-
 
 <body>
 
@@ -59,18 +51,23 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/o-mnie/">O mnie</a>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
                 </li>
 
                 <li>
-                    <a href="/archiwum/">Archiwum</a>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
                 </li>
 
                 <li>
-                    <a href="https://www.jaki-jezyk-programowania.pl/#formularz-kontaktowy">Kontakt</a>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
                 </li>
                 <li>
-                    <a href="/moje-projekty">Moje projekty</a>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom" title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -80,8 +77,7 @@
 </nav>
 
 
-    <!-- Post Header -->
-<header class="post-header">
+    <header class="post-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -91,25 +87,26 @@
                     
                     <h2 class="subheading">Ta, aria... kocham dostępność ♥</h2>
                     
-                    <span class="meta">
+                    <p class="meta">
                     
                     13
                     kwietnia
                       
-                    2017
-                     <span class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></span> </span>
+                    2017</p>
+                     <div class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></div> 
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Post Content -->
 <article>
     <div class="container post">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <hr class="header-hr">
+
+                <span>Spis treści:</span>
 
                 <ul class="section-nav">
 <li class="toc-entry toc-h2"><a href="#ah-ta-dostępność">Ah ta dostępność…</a></li>
@@ -203,8 +200,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 </article>
 
-
-
 <hr>
 
 
@@ -215,33 +210,29 @@ s.setAttribute('data-timestamp', +new Date());
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center social-buttons">
                     <li>
-                        <a href="/feed.xml">
+                        <a href="/feed.xml" data-toggle="tooltip" data-placement="top" title="RSS">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
                     </li>
-                    
-                    
                     <li>
-                        <a href="https://github.com/C0deboy">
+                        <a href="https://github.com/C0deboy" data-toggle="tooltip" data-placement="top" title="Github">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
                     </li>
-                    
                     <li>
-                        <a href="mailto:lasota.marcinm@gmail.com">
+                        <a href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-placement="top" title="lasota.marcinm@gmail.com">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
                     </li>
-                    
                 </ul>
                 <p class="copyright text-muted">Copyright &copy; devcave 2017</p>
             </div>

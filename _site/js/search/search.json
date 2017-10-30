@@ -1,0 +1,199 @@
+
+
+[
+  
+  
+    
+    
+      
+      {
+        "title": "Projekt jaki-jezyk-programowania.pl",
+        "titleSEO": null,
+        "subtitle": "Wprowadzenie",
+        "date": "1 marca 2017",
+        "url": "/dajsiepoznac2017/wprowadzenie"
+      },
+    
+      
+      {
+        "title": "Początki projektu",
+        "titleSEO": "Jak wyglądają poczatki projektu-moje doświadczenia",
+        "subtitle": "Jak to było + trochę liczb",
+        "date": "3 marca 2017",
+        "url": "/dajsiepoznac2017/poczatki"
+      },
+    
+      
+      {
+        "title": "Tworzymy blog z pomocą narzędzia Jekyll",
+        "titleSEO": "Jak założyc bloga z pomocą narzędzia Jekyll?",
+        "subtitle": "Instalacja + Ubuntu w Windowsie",
+        "date": "4 marca 2017",
+        "url": "/dajsiepoznac2017/instalacja-jekyll"
+      },
+    
+      
+      {
+        "title": "Dodajemy RSS feed kategorii",
+        "titleSEO": "Jak dodać RSS feed kategorii na blogu - Jekyll",
+        "subtitle": "Rozbudowujemy blog na Jekyllu 1#",
+        "date": "5 marca 2017",
+        "url": "/dajsiepoznac2017/rss-feed-kategorii-jekyll"
+      },
+    
+      
+      {
+        "title": "Statystyki i komentarze na blogu",
+        "titleSEO": "Jak dodać statystyki strony i komentarze na blogu?",
+        "subtitle": "Rozbudowujemy blog na Jekyllu 2#",
+        "date": "10 marca 2017",
+        "url": "/dajsiepoznac2017/jekyll-disqus-comments-google-analitics"
+      },
+    
+      
+      {
+        "title": "Poprawiamy dostępność strony",
+        "titleSEO": "Co to jest dostępność strony i jak ją poprawić?",
+        "subtitle": "Wprowadzenie",
+        "date": "14 marca 2017",
+        "url": "/dajsiepoznac2017/dostepnosc-strony-wprowadzenie"
+      },
+    
+      
+      {
+        "title": "Dodajemy formularz kontaktowy 1#",
+        "titleSEO": "Jak dodać formularz kontaktowy do strony? HTML JS",
+        "subtitle": "Założenia + struktura HTML + obsługa otwierania / zamykania",
+        "date": "16 marca 2017",
+        "url": "/dajsiepoznac2017/formularz-kontaktowy-HTML-JS"
+      },
+    
+      
+      {
+        "title": "Dodajemy formularz kontaktowy 2#",
+        "titleSEO": "Formularz kontaktowy- walidacja + AJAX",
+        "subtitle": "Walidacja Javascript + AJAX",
+        "date": "23 marca 2017",
+        "url": "/dajsiepoznac2017/formularz-kontaktowy-walidacja-ajax"
+      },
+    
+      
+      {
+        "title": "Dodajemy formularz kontaktowy 3#",
+        "titleSEO": "Formularz kontaktowy-walidacja-php-swiftmailer",
+        "subtitle": "Walidacja PHP + Swiftmailer",
+        "date": "26 marca 2017",
+        "url": "/dajsiepoznac2017/formularz-kontaktowy-php-swiftmailer"
+      },
+    
+      
+      {
+        "title": "Dodajemy formularz kontaktowy 4#",
+        "titleSEO": "Formularz kontaktowy - dostępność",
+        "subtitle": "Poprawiamy dostępność formularza",
+        "date": "30 marca 2017",
+        "url": "/dajsiepoznac2017/formularz-kontaktowy-dostepnosc"
+      },
+    
+      
+      {
+        "title": "Wykluczamy ruch z localhost w Google Analitics",
+        "titleSEO": "Jak wykluczyć ruch z localhost w Google Analitics?",
+        "subtitle": "Rozbudowujemy blog na Jekyllu 4#",
+        "date": "2 kwietnia 2017",
+        "url": "/dajsiepoznac2017/jekyll-filtrowanie-danych-localhost"
+      },
+    
+      
+      {
+        "title": "Google like a pro",
+        "titleSEO": "Jak googlować jak PRO",
+        "subtitle": "Przydatne sposoby googlowania",
+        "date": "7 kwietnia 2017",
+        "url": "/dajsiepoznac2017/google-like-a-pro"
+      },
+    
+      
+      {
+        "title": "Light aria tooltips",
+        "titleSEO": "light aria tooltips pure js",
+        "subtitle": "Ta, aria... kocham dostępność ♥",
+        "date": "13 kwietnia 2017",
+        "url": "/dajsiepoznac2017/light-aria-tooltips"
+      },
+    
+      
+      {
+        "title": "Co dalej z projektem jaki-jezyk-programowania.pl",
+        "titleSEO": "Co dalej z projektem jaki-jezyk-programowania",
+        "subtitle": "Projekt nie umiera, plany na przyszłość.",
+        "date": "22 kwietnia 2017",
+        "url": "/dajsiepoznac2017/co-dalej-z-projektem-jaki-jezyk-programowania"
+      },
+    
+      
+      {
+        "title": "Matura z informatyki - przydatne funkcje - Java",
+        "titleSEO": "Matura z informatyki - przydatne funkcje - Java",
+        "subtitle": "Zbiór funkcji, które używałem rozwiązując zadania maturalne.",
+        "date": "25 kwietnia 2017",
+        "url": "/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie"
+      },
+    
+      
+      {
+        "title": "Dodajemy formularz kontaktowy 5#",
+        "titleSEO": "Formularz kontaktowy - refaktoryzacja",
+        "subtitle": "Sporo zmian, większa uniwersalność",
+        "date": "18 maja 2017",
+        "url": "/dajsiepoznac2017/formularz-kontaktowy-refaktoryzacja"
+      },
+    
+      
+      {
+        "title": "NPM i ESLint",
+        "titleSEO": "NPM i ESLint",
+        "subtitle": "Dodajemy zależności oraz dbamy o styl!",
+        "date": "20 maja 2017",
+        "url": "/dajsiepoznac2017/npm-zaleznosci-i-ESLint"
+      },
+    
+      
+      {
+        "title": "Webpack - zarządzanie modułami",
+        "titleSEO": "Webpack - moduły - łączenie kilku plików JS CSS",
+        "subtitle": "Dzielimy pliki Javascript i CSS na moduły",
+        "date": "22 maja 2017",
+        "url": "/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly"
+      },
+    
+      
+      {
+        "title": "Git - usuwanie pliku z repozytorium",
+        "titleSEO": "GitHub - jak usunąć pliku z repozytorium - Git",
+        "subtitle": "Każdemu się zdarza...",
+        "date": "24 maja 2017",
+        "url": "/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium"
+      },
+    
+      
+      {
+        "title": "Podsumowanie DSP2017",
+        "titleSEO": "Podsumowanie DSP2017",
+        "subtitle": "Wrażenia po konkursie DajSiePoznać2017",
+        "date": "30 maja 2017",
+        "url": "/dajsiepoznac2017/podsumowanie-dsp2017"
+      },
+    
+      
+      {
+        "title": "Moja droga do pierwszej pracy",
+        "titleSEO": "Droga do pierwszej pracy pragramisty",
+        "subtitle": "Od początku do końca",
+        "date": "29 października 2017",
+        "url": "/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy"
+      }
+    
+  
+]
+

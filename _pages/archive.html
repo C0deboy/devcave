@@ -5,7 +5,35 @@ description: "Znajdziesz tu każdy wpis."
 header-img: "img/archive-header.jpg"
 permalink: "/archiwum/"
 ---
+
+<div class="search-engine">
+  <label>
+    Wyszukaj po tytule/podtytule:
+    <input class="search-value" placeholder="Wpisz szukaną frazę"/>
+  </label>
+
+  <div class="search-results"></div>
+
+  <script type="text/javascript" src="/js/search/fetch.js"></script>
+  <script type="text/javascript" src="/js/search/search.js"></script>
+
+  <script type="text/javascript">
+
+    const search = new jekyllSearch(
+      '/js/search/search.json',
+      '.search-value',
+      '.search-results',
+    );
+
+    search.init();
+
+    search.getUrlSearchQuery();
+
+  </script>
+</div>
+
 <div>
+  <h1>Wszytkie wpisy:</h1>
   <h2 class="page-header">{{ site.posts | size }}
       <small> - Ilość wszystkich postów</small>
   </h2>

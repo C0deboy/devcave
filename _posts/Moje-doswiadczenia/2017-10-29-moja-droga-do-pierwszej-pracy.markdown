@@ -70,21 +70,7 @@ Po całym procesie miałem mieszane uczucia. Nie byłem pewny czy poszło mi wys
 
 W końcu, pewnego dnia zadzwonił telefon. Byłem tak ze zestresowany, że ciężko mi było mówić. Powiedzieli mi, że rozmowa poszła mi dobrze, z językiem angielskim raczej nie będę miał problemu (firma ma klientów zagranicznych), jednak napisana przeze mnie aplikacja nie była idealna. Mimo wszystko, po chwili dowiedziałem się, że DOSTAŁEM PRACE! Ulga jaką poczułem była nie do opisania. Dostałem dobrą rekomendację od programisty, z którym miałem rozmowę kwalifikacyjną, wydawałem im się na ambitną osobą i uznali, że dadzą mi szansę. W dodatku, podobno jestem pierwszą tak młodą osobą przyjętą do pracy w historii firmy. To też fajne uczucie :D
 
-Pracę zaczynam od nowego roku. Umowę mam już podpisaną. Dodatkowo firma zabezpiecza się też umową szkoleniową. Jest to tak skonstruowane, że wcześniej niż po 2 latach raczej nie będę chciał odejść, bo musiałbym oddać część pieniędzy za odbyte szkolenia. Jest to kwota rzędu 30 000 złotych. Stawka ta maleje wraz z czasem i zanika po 2 latach. Jest to jedna rzecz, która trochę mi nie pasowała. Nie planowałem zostawać w lokalnym mieście dłużej niż rok. To mi trochę pokrzyżowało plany, jednak mimo wszystko częściowo rozumiem to zabezpieczenie i jestem szczęśliwy, że mi się udało. Mam nadzieję, że przyjemnie będzie mi się tam pracowało, nabiorę sporo doświadczenia i będzie to miło wspominał.
-
-Firma to Transition Technologies PSC S.A., czym się zajmuję można zobaczyć na [oficjalnej stronie](https://ttpsc.pl/), a tu kilka zdjęć:
-
-![Transition Technology budynek](/img/tt.png)
-![Transition Technology wnętrze](/img/tt2.png)
-![Transition Technology wnętrze](/img/tt3.png)
-![Transition Technology wnętrze](/img/tt4.png)
-
-A tu korytarz do jaskiń ;)
-
-![Transition Technology wnętrze](/img/tt5.png)
-
-Jednak zdjęć z wewnątrz jaskiń nie znalazłem online :D
-
+Pracę zaczynam od nowego roku. Umowę mam już podpisaną. Jestem zadowolony, że mi się udało. Mam nadzieję, że przyjemnie będzie mi się tam pracowało, nabiorę sporo doświadczenia i będę to miło wspominał.
 
 
 

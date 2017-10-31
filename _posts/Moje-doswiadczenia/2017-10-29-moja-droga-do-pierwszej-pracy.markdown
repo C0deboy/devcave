@@ -72,6 +72,17 @@ W końcu, pewnego dnia zadzwonił telefon. Byłem tak ze zestresowany, że cię�
 
 Pracę zaczynam od nowego roku. Umowę mam już podpisaną. Jestem zadowolony, że mi się udało. Mam nadzieję, że przyjemnie będzie mi się tam pracowało, nabiorę sporo doświadczenia i będę to miło wspominał.
 
+# Podsumowanie
+
+Nie uważam, że przyszło mi to jakoś łatwo. Poświęciłem na to dużo wolnego czasu i włożyłem w to sporo wysiłku. Pracę znalazłem stosunkowo szybko, nawet w mieście takim jak Kielce, gdzie rynek dla programistów jest ubogi. Więcej trwał proces czekania na odpowiedź niż szukałem pracy.
+
+Co do studiów, to żałuję i nie żałuję. Z jednej strony fajna sprawa, z drugiej cieszę się, że mogę sobie pracować nad własnymi rzeczami i wreszcie zacznę zarabiać w swoim zawodzie, a co najważniejsze – nabierać komercyjnego doświadczenia. Jak słyszę moich znajomych jak to mają na studiach to chyba nawet bardziej jestem za tą pracą :D Oczywiście jeszcze nie jest powiedziane, że kiedyś na nie nie trafię.
+
+Swoją drogą planuję zrobić wpis właśnie o pracy vs studia ;) Może też coś w stylu technikum vs liceum? Zawsze zadajemy sobie dużo pytań podczas tych wyborów i sam robiłem wiele "researchów" na ten temat ;)
+
+Może ktoś przez ten wpis zda sobie sprawę, że już pora wyjść z jaskini i zacząć się rozglądać za pierwszą pracą? Kto wie ;)
+
+
 
 
 

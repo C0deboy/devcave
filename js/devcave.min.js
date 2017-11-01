@@ -6,6 +6,9 @@ if (JSON.parse(localStorage.getItem('dark-mode'))) {
 document.querySelector('.dark-mode-btn').addEventListener('click', (e) => {
   const darkMode = document.body.classList.toggle('dark-mode');
   e.target.blur();
+  try {
+    DISQUS.reset({ reload: true });
+  } catch (e) {}
   localStorage.setItem('dark-mode', darkMode);
 });
 

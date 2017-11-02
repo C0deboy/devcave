@@ -12,10 +12,10 @@
 <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium">
 <link rel="shortcut icon" href="/img/logo.ico">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/devcave.css">
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -126,7 +126,7 @@ Otwieramy konsolę i przechodzimy na pulpit:</p>
 
 <p>Następnie musimy sklonować nasze repozytorium:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone --mirror https://github.com/Nazwa-użytkownika/nazwa-repozytorium</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone <span class="nt">--mirror</span> https://github.com/Nazwa-użytkownika/nazwa-repozytorium</code></pre></figure>
 
 <p class="note">
 Jeśli używasz GitHub Desktop - dodaj ścieżkę do cmd git-a do zmiennej systemowej Path, aby móc korzystać z gita także w terminalu. Powinna wyglądać mniej więcej tak: <span class="path">C:\Users\Nazwa-użytkownika\AppData\Local\GitHub\PortableGit_(id)\cmd</span>. Zmienne systemowe znajdziesz w <span class="path">Panel sterowania -&gt; System i zabezpieczenia -&gt; System -&gt; Zaawansowane ustawienia systemu -&gt; Zmienne środowiskowe -&gt; Zmienne Systemowe</span>. <u>Pamiętaj o średniku przed wklejeniem ścieżki</u>.
@@ -140,7 +140,7 @@ Jeśli nie masz <a href="https://www.java.com/pl/download/">Javy</a>, zaopatrz s
 
 <p>Uruchamiamy go z flagą –delete-files oraz nazwą pliku(<u>nie ścieżka</u>)</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">java -jar bfg-wersja.jar --delete-files nazwa-pliku.x</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">java <span class="nt">-jar</span> bfg-wersja.jar <span class="nt">--delete-files</span> nazwa-pliku.x</code></pre></figure>
 
 <p>Następnie przechodzimy do sklonowanego repozytorium</p>
 
@@ -148,7 +148,7 @@ Jeśli nie masz <a href="https://www.java.com/pl/download/">Javy</a>, zaopatrz s
 
 <p>I uruchamiamy komendę:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git reflog expire --expire<span class="o">=</span>now --all <span class="o">&amp;&amp;</span> git gc --prune<span class="o">=</span>now --aggressive</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git reflog expire <span class="nt">--expire</span><span class="o">=</span>now <span class="nt">--all</span> <span class="o">&amp;&amp;</span> git gc <span class="nt">--prune</span><span class="o">=</span>now <span class="nt">--aggressive</span></code></pre></figure>
 
 <p>Gdy nie było po drodze żadnych błędów i jesteśmy zadowoleni z wyniku, możemy pushować ;)</p>
 
@@ -241,11 +241,11 @@ s.setAttribute('data-timestamp', +new Date());
 </footer>
 
 
-<script src="/js/libs/jquery.min.js"></script>
+<script src="/dist/js/libs/jquery.min.js"></script>
 
-<script src="/js/libs/bootstrap.min.js"></script>
+<script src="/dist/js/libs/bootstrap.min.js"></script>
 
-<script src="/js/devcave.min.js"></script>
+<script src="/dist/js/devcave.min.js"></script>
 
     
 

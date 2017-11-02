@@ -192,6 +192,15 @@
         "subtitle": "Od początku do końca",
         "date": "29 października 2017",
         "url": "/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy"
+      },
+    
+      
+      {
+        "title": "Przełącznik motywu, tryb nocny na blogu/stronie",
+        "titleSEO": "Jak zrobić tryb nocny/ciemny, przełącznik motywu na blogu/stronie",
+        "subtitle": "Tryb ciemny/jasny w łatwy sposób, tylko JS.",
+        "date": "2 listopada 2017",
+        "url": "/frontend/przelacznik-motywu-ciemny-na-strone"
       }
     
   

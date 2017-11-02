@@ -12,10 +12,10 @@
 <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/instalacja-jekyll">
 <link rel="shortcut icon" href="/img/logo.ico">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/devcave.css">
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -158,8 +158,8 @@
 
 <p>Możemy to sprawdzić za pomocą komend:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ruby -v
-gcc -v
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ruby <span class="nt">-v</span>
+gcc <span class="nt">-v</span>
 
 make –v</code></pre></figure>
 
@@ -243,8 +243,8 @@ Panel sterowania-&gt; Programy-&gt; Programy i funkcje-&gt; Włącz lub wyłącz
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install curl
 
-gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-curl -sSL https://get.rvm.io | bash -s stable
+gpg2 <span class="nt">--keyserver</span> hkp://keys.gnupg.net <span class="nt">--recv-keys</span> 409B6B1796C275462A1703113804BB82D39DC0E3
+curl <span class="nt">-sSL</span> https://get.rvm.io | bash <span class="nt">-s</span> stable
 
 <span class="nb">source</span> ~/.rvm/scripts/rvm
 
@@ -255,7 +255,7 @@ rvm use 2.4.0 –default</code></pre></figure>
 
 <p>Jeśli wszystko poszło poprawnie to po tej komendzie:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ruby -v</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ruby <span class="nt">-v</span></code></pre></figure>
 
 <p>powinna ukazać nam się zainstalowana wersja Ruby.</p>
 
@@ -265,12 +265,12 @@ rvm use 2.4.0 –default</code></pre></figure>
 
 <p>Więc, żeby nie trzeba było robić tego ręcznie, warto dodać to do pliku .bashrc, aby wykonywało się automatycznie :</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">"source ~/.rvm/scripts/rvm"</span> &gt;&gt; ~/.bashrc</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">"source ~/.rvm/scripts/rvm"</span> <span class="o">&gt;&gt;</span> ~/.bashrc</code></pre></figure>
 
 <h2 id="gcc-i-make">GCC i Make:</h2>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install make
-sudo apt-get install gcc</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get install make
+<span class="nb">sudo </span>apt-get install gcc</code></pre></figure>
 
 <p>I dalej istalacja przebiega tak jak <a href="#wymagania">wcześniej</a>, tylko dwie ważne uwagi:</p>
 
@@ -278,7 +278,7 @@ sudo apt-get install gcc</code></pre></figure>
 W moim przypadku, aby poprawnie uruchamiać komende serve musiałem dodać parametr --no-watch:
 </p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">bundle <span class="nb">exec </span>jekyll serve --no-watch</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">bundle <span class="nb">exec </span>jekyll serve <span class="nt">--no-watch</span></code></pre></figure>
 
 <p class="warning">
 Jeśli chcemy swobodnie edytować pliki na systemie Windows musimy stworzyć projekt w Windowsie, a nie w Ubuntu, ponieważ jeśli będziemy chcieli modyfikować pliki Ubuntu z poziomu Windowsa, uszkodzimy je.
@@ -377,11 +377,11 @@ s.setAttribute('data-timestamp', +new Date());
 </footer>
 
 
-<script src="/js/libs/jquery.min.js"></script>
+<script src="/dist/js/libs/jquery.min.js"></script>
 
-<script src="/js/libs/bootstrap.min.js"></script>
+<script src="/dist/js/libs/bootstrap.min.js"></script>
 
-<script src="/js/devcave.min.js"></script>
+<script src="/dist/js/devcave.min.js"></script>
 
     
 

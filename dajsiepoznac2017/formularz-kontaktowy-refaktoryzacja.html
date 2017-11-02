@@ -12,10 +12,10 @@
 <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/formularz-kontaktowy-refaktoryzacja">
 <link rel="shortcut icon" href="/img/logo.ico">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/devcave.css">
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -146,9 +146,9 @@
 
 <p>Elementy są pobierane automatycznie pętlą i tworzą obiekt JSON:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">formDataElements</span> <span class="o">=</span> <span class="p">{};</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">formDataElements</span> <span class="o">=</span> <span class="p">{};</span>
 
-<span class="kr">const</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.form-data'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.form-data'</span><span class="p">);</span>
 <span class="nx">inputs</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">el</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)]</span> <span class="o">=</span> <span class="nx">el</span><span class="p">;</span>
 <span class="p">});</span></code></pre></figure>
@@ -161,7 +161,7 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
 
 <p>Nasze komunikaty o błędach teraz przechowywane są w jednym obiekcie JSON, aby można było je łatwiej modyfikować, a co najważniejsze, tylko w jednym miejscu. Dodatkowo posługuję się funkcjami strzałkowymi, które w czytelny sposób budują komunikat ze zmiennych podanych w ich parametrach.</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">customErrors</span> <span class="o">=</span> <span class="p">{</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">customErrors</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'tooShort'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">min</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">"Pole "</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s2">" musi zawierać co najmniej "</span> <span class="o">+</span> <span class="nx">min</span> <span class="o">+</span> <span class="s2">" znaki!"</span><span class="p">,</span>
     <span class="s1">'tooLong'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">"Pole "</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s2">" może zawierać co najwyżej "</span> <span class="o">+</span> <span class="nx">max</span> <span class="o">+</span> <span class="s2">" znaków!"</span><span class="p">,</span>
     <span class="s1">'empty'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">"Pole "</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s2">" nie może być puste!"</span><span class="p">,</span>
@@ -172,17 +172,17 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
 
 <p>Mniejsza zmiana dotknęła zamykania formularza, gdzie teraz wszystkie pola są czyszczone przez pętlę, a nie ręcznie:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">input</span> <span class="k">in</span> <span class="nx">formDataElements</span><span class="p">)</span> <span class="p">{</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">input</span> <span class="k">in</span> <span class="nx">formDataElements</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">input</span><span class="p">].</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>oraz również wartości inputów do wysłania pobierane są pętlą (z wyjątkiem recaptcha):</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="p">{</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'g-recaptcha-response'</span><span class="p">:</span> <span class="nx">grecaptcha</span><span class="p">.</span><span class="nx">getResponse</span><span class="p">(),</span>
 <span class="p">};</span>
 
-<span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">el</span> <span class="k">in</span> <span class="nx">formDataElements</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">el</span> <span class="k">in</span> <span class="nx">formDataElements</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">formData</span><span class="p">[</span><span class="nx">el</span><span class="p">]</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">value</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -208,18 +208,18 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">validateEmailForm</span><span class="p">()</span> <span class="p">{</span>
 	<span class="kd">let</span> <span class="nx">valid</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">el</span> <span class="k">in</span> <span class="nx">formDataElements</span><span class="p">)</span> <span class="p">{</span>
-	    <span class="kr">const</span> <span class="nx">fieldName</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">innerText</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">el</span> <span class="k">in</span> <span class="nx">formDataElements</span><span class="p">)</span> <span class="p">{</span>
+	    <span class="kd">const</span> <span class="nx">fieldName</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">innerText</span><span class="p">;</span>
 
 	    <span class="k">if</span> <span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valueMissing</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
 	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="s1">'empty'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">));</span>
 	    <span class="p">}</span>
 	    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">validity</span><span class="p">.</span><span class="nx">tooShort</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-	        <span class="kr">const</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'minlength'</span><span class="p">);</span>
+	        <span class="kd">const</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'minlength'</span><span class="p">);</span>
 	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="s1">'tooShort'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">min</span><span class="p">));</span>
 	    <span class="p">}</span>
 	    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">validity</span><span class="p">.</span><span class="nx">tooLong</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-	        <span class="kr">const</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'maxlength'</span><span class="p">);</span>
+	        <span class="kd">const</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'maxlength'</span><span class="p">);</span>
 	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="s1">'tooLong'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">max</span><span class="p">));</span>
 	    <span class="p">}</span>
 	    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">validity</span><span class="p">.</span><span class="nx">typeMismatch</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
@@ -244,7 +244,7 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="kr">const</span> <span class="nx">errorMessageEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">errorMessageEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
     <span class="nx">errorMessageEl</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"error"</span><span class="p">);</span>
     <span class="nx">errorMessageEl</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'wrongInput'</span><span class="p">);</span>
     <span class="nx">errorMessageEl</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">alert</span><span class="p">;</span>
@@ -277,7 +277,7 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
 
 <p>Tu też sporo zmian. Podpiąłem <a href="https://getcomposer.org/">Composera</a> do zarządzania zależnościami. Do walidacji stworzona jest funkcja korzystająca z zewnętrznego narzędzia do walidacji danych: <a href="https://github.com/Respect/Validation">Respect Validation</a>. Błędy przechowywane są teraz w tablicy, a email zostanie wysłany tylko wtedy, gdy będzie pusta:</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="k">function</span> <span class="nf">validateContactForm</span><span class="p">(</span><span class="k">array</span> <span class="nv">$form</span><span class="p">)</span><span class="o">:</span> <span class="k">array</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nf">validateContactForm</span><span class="p">(</span><span class="k">array</span> <span class="nv">$form</span><span class="p">)</span><span class="o">:</span> <span class="k">array</span>
 <span class="p">{</span>
     <span class="nv">$errors</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="nv">$rules</span> <span class="o">=</span> <span class="p">[</span>
@@ -302,12 +302,11 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
     <span class="p">}</span>
     <span class="k">return</span> <span class="nv">$errors</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Plik konfiguracyjny <span class="file">settings.php</span> został wzbogacony o treści komunikatów, które są podmieniane z tymi z RespectValidation:</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="k">return</span> <span class="p">[</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="p">[</span>
     <span class="s1">'reCaptcha'</span> <span class="o">=&gt;</span> <span class="p">[</span>
         <span class="s1">'secret'</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
     <span class="p">],</span>
@@ -327,11 +326,10 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
         <span class="s1">'Sent'</span>      <span class="o">=&gt;</span> <span class="s1">'Wysłano! Dzięki za wiadomość'</span>
     <span class="p">],</span>
 <span class="p">];</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>Cały kod został również podzielony na osobne funkcje, z drobnymi modyfikacjami:</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="k">function</span> <span class="nf">validateReCaptcha</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$code</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nf">validateReCaptcha</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$code</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
 <span class="p">{</span>
     <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://www.google.com/recaptcha/api/siteverify?'</span> <span class="o">.</span> <span class="nb">http_build_query</span><span class="p">([</span>
             <span class="s1">'secret'</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/settings.php'</span><span class="p">)[</span><span class="s1">'reCaptcha'</span><span class="p">][</span><span class="s1">'secret'</span><span class="p">],</span>
@@ -376,12 +374,11 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
     <span class="nv">$mailer</span> <span class="o">=</span> <span class="nx">getMailer</span><span class="p">();</span>
     <span class="k">return</span> <span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nx">prepareMail</span><span class="p">(</span><span class="nv">$params</span><span class="p">));</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>A obsługa wysłania formularza znajduję się w osobnym pliku <span class="file">ajaxsend.php</span>:</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/functions.php'</span><span class="p">;</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/functions.php'</span><span class="p">;</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$errors</span> <span class="o">=</span> <span class="nx">validateContactForm</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">))</span> <span class="p">{</span>
     <span class="nb">http_response_code</span><span class="p">(</span><span class="mi">400</span><span class="p">);</span>
@@ -396,8 +393,7 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
         <span class="k">echo</span> <span class="nb">json_encode</span><span class="p">([</span><span class="s1">'status'</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/settings.php'</span><span class="p">)[</span><span class="s1">'validationMessages'</span><span class="p">][</span><span class="s1">'NotSent'</span><span class="p">]]);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>Całość prezentuję się w następujący sposób:</p>
 
 <script async="" src="//jsfiddle.net/C0deboy/Lmjmmyfc/embed/result,js,html,css/dark/"></script>
@@ -489,11 +485,11 @@ s.setAttribute('data-timestamp', +new Date());
 </footer>
 
 
-<script src="/js/libs/jquery.min.js"></script>
+<script src="/dist/js/libs/jquery.min.js"></script>
 
-<script src="/js/libs/bootstrap.min.js"></script>
+<script src="/dist/js/libs/bootstrap.min.js"></script>
 
-<script src="/js/devcave.min.js"></script>
+<script src="/dist/js/devcave.min.js"></script>
 
     
 

@@ -14,13 +14,13 @@ permalink: "/archiwum/"
 
   <div class="search-results"></div>
 
-  <script type="text/javascript" src="/js/search/fetch.js"></script>
-  <script type="text/javascript" src="/js/search/search.js"></script>
+  <script src="/dist/js/search/fetch.min.js"></script>
+  <script src="/dist/js/search/search.min.js"></script>
 
-  <script type="text/javascript">
+  <script>
 
     const search = new jekyllSearch(
-      '/js/search/search.json',
+      '/dist/js/search/search.json',
       '.search-value',
       '.search-results',
     );

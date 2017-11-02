@@ -12,10 +12,10 @@
 <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/formularz-kontaktowy-HTML-JS">
 <link rel="shortcut icon" href="/img/logo.ico">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/devcave.css">
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -259,12 +259,12 @@ nieprawidłowa domena dla klucza witryny".
 
 <p>Wczytujemy wszystkie elementy formularza:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kr">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'from'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="kr">const</span> <span class="nx">subject</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'subject'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="kr">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'message'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="kr">const</span> <span class="nx">recaptcha</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">".g-recaptcha"</span><span class="p">);</span>
-  <span class="kr">const</span> <span class="nx">formAlert</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">".emailFormAlert"</span><span class="p">);</span>
-  <span class="kr">const</span> <span class="nx">contactForm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#contact'</span><span class="p">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'from'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">subject</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'subject'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'message'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">recaptcha</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">".g-recaptcha"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">formAlert</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">".emailFormAlert"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">contactForm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#contact'</span><span class="p">);</span></code></pre></figure>
 
 <p class="note">
 Część za pomocą JS, jeden za pomocą JQuery. Ma to znaczenie, ponieważ metody Jquery są dostępne tylko dla obiektów JQuery. I odwrotnie. Metody JS są dostępne tylko dla obieków JS'a.
@@ -290,8 +290,8 @@ Część za pomocą JS, jeden za pomocą JQuery. Ma to znaczenie, ponieważ meto
 
 <p>oraz dwie funkcje dla przycisków, które po kliknięciu otwierają/zamykają formularz. Pobierzemy również przyciski do stałych, gdyż póżniej będziemy je jeszcze wykorzystywać, więc nie ma sensu za każdym razem robić nowego odwołania:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kr">const</span> <span class="nx">closeContactBtn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#close-contact-btn'</span><span class="p">);</span>
-  <span class="kr">const</span> <span class="nx">openContactBtn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#open-contact-btn'</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">closeContactBtn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#close-contact-btn'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">openContactBtn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#open-contact-btn'</span><span class="p">);</span>
 
   <span class="nx">openContactBtn</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nx">toggleContactForm</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
@@ -392,11 +392,11 @@ s.setAttribute('data-timestamp', +new Date());
 </footer>
 
 
-<script src="/js/libs/jquery.min.js"></script>
+<script src="/dist/js/libs/jquery.min.js"></script>
 
-<script src="/js/libs/bootstrap.min.js"></script>
+<script src="/dist/js/libs/bootstrap.min.js"></script>
 
-<script src="/js/devcave.min.js"></script>
+<script src="/dist/js/devcave.min.js"></script>
 
     
 

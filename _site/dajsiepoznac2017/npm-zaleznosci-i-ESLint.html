@@ -12,10 +12,10 @@
 <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/npm-zaleznosci-i-ESLint">
 <link rel="shortcut icon" href="/img/logo.ico">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/devcave.css">
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -140,18 +140,18 @@
 
 <p>Następnie, aby pobrać nasze zależności i je dołączyć do pliku <span class="file">package.json</span> wykonujemy polecenie:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install nazwa-pakietu --save</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install nazwa-pakietu <span class="nt">--save</span></code></pre></figure>
 
 <p>gdy paczki są niezbędne do uruchamiania środowiska/aplikacji (np. JQuery, Bootstrap), lub</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install nazwa-pakietu --save-dev</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install nazwa-pakietu <span class="nt">--save-dev</span></code></pre></figure>
 
 <p>gdy paczka niezbędna jest do rozwijania i testowania aplikacji (np. ESLint).</p>
 
 <p>Wszystkie nasz paczki  trafiaja do folderu <span class="folder">node_modules</span>. Znajdziemy tam też całą masę innych zależności, które są wymagane przez nasze zależności, więc nie powinniśmy się przestraszyć ilością podfolderów w nim zawartych. Nasze paczki znajdziemy po tej samej nazwie, którą wywołaliśmy do instalacji, a interesujące nas pliki zazwyczaj w podfolderze <span class="folder">dist</span>. Dla przykładu, w HTML załączamy je w ten sposób:</p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- Head --&gt;</span>
-<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"node_modules/bootstrap/dist/css/bootstrap.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"node_modules/bootstrap/dist/css/libs/bootstrap.min.css"</span><span class="nt">&gt;</span>
 <span class="c">&lt;!-- Body --&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"node_modules/jquery/dist/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"node_modules/bootstrap/dist/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
@@ -164,7 +164,7 @@
 
 <p>Instalujemy ESLint i dodajemy do zależności, ale z parametrem -dev, gdyż to potrzebne jest tylko nam - developerom.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install eslint --save-dev</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install eslint <span class="nt">--save-dev</span></code></pre></figure>
 
 <h2 id="konfiguracja">Konfiguracja</h2>
 <p>Potrzebny będzie nam plik konfiguracyjny <span class="file">.eslintrc.json </span>. Możemy automatycznie go wygenerować za pomocą polecenia:</p>
@@ -292,11 +292,11 @@ s.setAttribute('data-timestamp', +new Date());
 </footer>
 
 
-<script src="/js/libs/jquery.min.js"></script>
+<script src="/dist/js/libs/jquery.min.js"></script>
 
-<script src="/js/libs/bootstrap.min.js"></script>
+<script src="/dist/js/libs/bootstrap.min.js"></script>
 
-<script src="/js/devcave.min.js"></script>
+<script src="/dist/js/devcave.min.js"></script>
 
     
 

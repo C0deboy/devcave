@@ -47,7 +47,7 @@ Wszystkie nasz paczki  trafiaja do folderu <span class="folder">node_modules</sp
 
 {% highlight html %}
 <!-- Head -->
-<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/libs/bootstrap.min.css">
 <!-- Body -->
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

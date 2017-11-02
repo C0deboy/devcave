@@ -12,10 +12,10 @@
 <link rel="canonical" href="https://c0deboy.github.io/devcave/archiwum/">
 <link rel="shortcut icon" href="/img/logo.ico">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/devcave.css">
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -102,13 +102,13 @@
 
   <div class="search-results"></div>
 
-  <script type="text/javascript" src="/js/search/fetch.js"></script>
-  <script type="text/javascript" src="/js/search/search.js"></script>
+  <script src="/dist/js/search/fetch.min.js"></script>
+  <script src="/dist/js/search/search.min.js"></script>
 
-  <script type="text/javascript">
+  <script>
 
     const search = new jekyllSearch(
-      '/js/search/search.json',
+      '/dist/js/search/search.json',
       '.search-value',
       '.search-results',
     );
@@ -122,7 +122,7 @@
 
 <div>
   <h1>Wszytkie wpisy:</h1>
-  <h2 class="page-header">21
+  <h2 class="page-header">22
       <small> - Ilość wszystkich postów</small>
   </h2>
 </div>
@@ -150,8 +150,20 @@
   </div>
   
    <div class="site-tag">
+      <a href="#frontend">
+              Frontend (1)
+      </a>
+  </div>
+  
+   <div class="site-tag">
       <a href="#git">
               Git (1)
+      </a>
+  </div>
+  
+   <div class="site-tag">
+      <a href="#jak-zrobić">
+              Jak-zrobić (1)
       </a>
   </div>
   
@@ -468,6 +480,21 @@
         
       </ul>
     
+      <h2 id="frontend">Frontend</h2>
+      <ul>
+        
+          <li><a href="/frontend/przelacznik-motywu-ciemny-na-strone">Przełącznik motywu, tryb nocny na blogu/stronie</a> | 
+          <small>
+            
+            2
+            listopada
+              
+            2017
+          </small>
+          <br>Tryb ciemny/jasny w łatwy sposób, tylko JS.</li>
+        
+      </ul>
+    
       <h2 id="git">Git</h2>
       <ul>
         
@@ -480,6 +507,21 @@
             2017
           </small>
           <br>Każdemu się zdarza...</li>
+        
+      </ul>
+    
+      <h2 id="jak-zrobić">Jak-zrobić</h2>
+      <ul>
+        
+          <li><a href="/frontend/przelacznik-motywu-ciemny-na-strone">Przełącznik motywu, tryb nocny na blogu/stronie</a> | 
+          <small>
+            
+            2
+            listopada
+              
+            2017
+          </small>
+          <br>Tryb ciemny/jasny w łatwy sposób, tylko JS.</li>
         
       </ul>
     
@@ -620,11 +662,11 @@
 </footer>
 
 
-<script src="/js/libs/jquery.min.js"></script>
+<script src="/dist/js/libs/jquery.min.js"></script>
 
-<script src="/js/libs/bootstrap.min.js"></script>
+<script src="/dist/js/libs/bootstrap.min.js"></script>
 
-<script src="/js/devcave.min.js"></script>
+<script src="/dist/js/devcave.min.js"></script>
 
     
 

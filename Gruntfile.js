@@ -1,56 +1,74 @@
-module.exports = function(grunt) {
-
-    // Project configuration.
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        uglify: {
-            main: {
-                src: 'js/<%= pkg.name %>.js',
-                dest: 'js/<%= pkg.name %>.min.js'
-            }
+module.exports = function (grunt) {
+  // Project configuration.
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    babel: {
+      options: {
+        presets: ['env'],
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'js/',
+          src: ['*.js'],
+          dest: 'dist/js',
+          ext: '.min.js',
+        }]
+      },
+    },
+    uglify: {
+      dev: {
+        files: [{
+          expand: true,
+          cwd: 'dist/js/',
+          src: ['**/*.js', '!libs/*.js'],
+          dest: 'dist/js',
+          ext: '.min.js',
+        }]
+      }
+    },
+    cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'css/',
+          src: ['*.css'],
+          dest: 'dist/css',
+          ext: '.min.css',
+        }],
+      },
+    },
+    watch: {
+      babel: {
+        files: ['js/*.js'],
+        tasks: ['babel'],
+        options: {
+          spawn: false,
         },
-        less: {
-            expanded: {
-                options: {
-                    paths: ["css"]
-                },
-                files: {
-                    "css/<%= pkg.name %>.css": "less/<%= pkg.name %>.less"
-                }
-            },
-            minified: {
-                options: {
-                    paths: ["css"],
-                    cleancss: true
-                },
-                files: {
-                    "css/<%= pkg.name %>.min.css": "less/<%= pkg.name %>.less"
-                }
-            }
+      },
+      scripts: {
+        files: ['dist/js/*.js'],
+        tasks: ['uglify'],
+        options: {
+          spawn: false,
         },
-        watch: {
-            scripts: {
-                files: ['js/<%= pkg.name %>.js'],
-                tasks: ['uglify'],
-                options: {
-                    spawn: false,
-                },
-            },
-            less: {
-                files: ['less/*.less'],
-                tasks: ['less'],
-                options: {
-                    spawn: false,
-                }
-            },
+      },
+      css: {
+        files: 'css/*.css',
+        tasks: ['cssmin'],
+        options: {
+          spawn: false,
         },
-    });
+      },
+    },
+  });
 
-    // Load the plugins.
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-less');
+  // Load the plugins.
+  grunt.loadNpmTasks('grunt-babel');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-    // Default task(s).
-    grunt.registerTask('default', ['uglify', 'less']);
-
+  // Default task(s).
+  grunt.registerTask('default', ['babel', 'uglify', 'cssmin']);
 };

@@ -1,15 +1,17 @@
 ---
 layout:     post
 titleSEO:	"Zasady projektowania obiektowego SOLID DRY KISS"
-title:      "Notatnik Juniora 1#"
-subtitle:   "Zasady projektowania obiektowego"
-date:       2017-08-10 12:00:00
+title:      "Zasady projektowania obiektowego"
+subtitle:   "Notatnik Juniora 1#"
+date:       2017-11-1 12:00:00
 author:     "Codeboy"
 category:   Notatnik-Juniora
 tags:	    Notatnik-Juniora Dobre-praktyki
 comments:   true
 toc:        true
 ---
+
+Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik, zachęcam do dokopania się do każdej z zasad na własną rękę ;)
 
 # Ogólne
 
@@ -25,16 +27,21 @@ toc:        true
 ## KISS - Keep it simple, stupid!
 - Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc ławy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku.
 - Większość systemów działa najlepiej, gdy polegają na prostocie, a nie na złożoności.
+- Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia.
+- Gdy po jakimś czasie wracasz do **swojego** kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;)
 
-<p class="advantages">Plusy</p>
-- Szybciej i łatwiej zrozumieć mniej złożony system.
-- Mniejsza ilość bugów, łatwość w utrzymaniu i modyfikowaniu kodu.
+Można to rozszerzyć o:
 
-## Code for the Maintainer
+### Code for the Maintainer
 - Czyli, programuj tak jakbyś to robił dla osoby, która będzie później utrzymywać ten kod. Rób to tak jakby to był brutalny psychopata, który wie gdzie mieszkasz.
 - Dlaczego? Utrzymywanie kodu to (przeważnie) najbardziej wymagająca i większa część pracy programistów. Nie powinniśmy utrudniać sobie tego zadania.
-- Zadbaj o to, aby nie trzeba było się zbytnio głowić nad kawałkiem Twojego kodu. Staraj się robić to tak, żeby nawet Junior mógł z przyjemnością przysiąść do lektury twojego kodu.
+- Zadbaj o to, aby nie trzeba było się zbytnio głowić nad kawałkiem Twojego kodu.
 - Zawsze pozostaw po sobie kod czystszy niż go zastałeś.
+
+<p class="advantages">Plusy</p>
+- Szybciej i łatwiej zrozumieć kod.
+- Mniejsza ilość potencjalnych bugów.
+- łatwość w utrzymaniu i modyfikowaniu kodu.
 
 ## SOLID
 
@@ -42,20 +49,43 @@ toc:        true
 - Klasa powinna być odpowiedzialna za pojedynczy obszar. Nie powinno być więcej powodów niż jeden, aby klasa się zmieniła.
 - Odpowiedzialność może być zdefiniowana jako powód do zmiany, zatem klasa powinna mieć tylko jeden taki powód, a więc jedną odpowiedzialność.
 - Klasa realizuję pojedyncze zadanie.
+- Gdy wymagana jest zmiana, powinna ona objąć tylko jedną klasę lub pakiet.
+
+<p class="advantages">Plusy</p>
+- Lepsza czytelność kodu.
+- Łatwość w utrzymaniu i modyfikowaniu kodu.
+- Nie musimy skakać po kilku pakietach/klasach, aby wprowadzić pojedyńczą zmianę.
 
 ### O - Open/closed principle
 - Powinieneś być w stanie rozszerzać swoje klasy bez jej modyfikacji.
 - Klasy powinny być otwarte na rozszerzanie, a zamknięte na modyfikację.
 - Polegaj na abstrakcji i polimorfizmie
+- Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowoane przez ify czy konstrukcję switch.
+
+<p class="advantages">Plusy</p>
+- Łatwiejsze i bardziej stabline rozbudowywanie systemu.
+- Minimalizujemy potrzebę modyfikowania instniejącego kodu w wielu miejscach, gdy dodajemy np. kolejny przypadek czegoś.
 
 ### L - Liskov substitution principle
 - Klasy w programie powinny być podmienialne przez swoje podklasy bez naruszania poprawności programu, czyli klasa dziedzicząca musi być dobrym odpowiednikiem klasy bazowej.
+- Podklasa nie powinna robić mniej niż klasa bazowa. Czyli zawsze powinna robić więcej.
+- Zobacz popularny przykład "Square extends Rectangle"
+
+<p class="advantages">Plusy</p>
+- Przewidywalne zachowania obiektów
 
 ### I - Interface segregation principle
-- “Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu. Powinno się projektować małe i zwarte interfejsy.
+- “Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu.
+- Powinno się projektować małe i zwarte interfejsy.
+- Klasa nie powinna implementować interfejsu, przez który naruszy [Single responsibility principle](#S---Single-responsibility-principle)
+
+<p class="advantages">Plusy</p>
+- Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z 'grubego' interfejsu.
+- Nie naruszanie [Single responsibility principle](#S---Single-responsibility-principle)
 
 ### D - Dependency inversion principle
-- Niskopoziomowe klasy powinny zależeć od wysoko poziomowych, a oba od swoich abstrakcji. Powinniśmy dbać o poziomy abstrakcji i zależności.
+- Niskopoziomowe klasy powinny zależeć od wysoko poziomowych, a oba od swoich abstrakcji.
+- Abstrakcję nie powinny polegać na szczegółach implementacyjnych. To one powinny polegać na abstrakcji.
 
 <hr>
 

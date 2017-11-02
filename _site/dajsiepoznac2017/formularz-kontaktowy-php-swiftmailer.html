@@ -12,10 +12,10 @@
 <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/formularz-kontaktowy-php-swiftmailer">
 <link rel="shortcut icon" href="/img/logo.ico">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/devcave.css">
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -187,10 +187,9 @@ Przygotujmy sobie jeszcze oddzielny plik konfiguracyjny z wrażliwymi danymi, kt
 </ul>
 
 <p>Jest to nieco lepszy sposób, gdyż nie zaśmiecamy sobie pliku zwykłymi zmiennymi globalnymi, w przypadku gdybyśmy to zadeklarowali tak:</p>
-<div class="language-php highlighter-rouge"><pre class="highlight"><code>  <span class="nv">$secretKey</span> <span class="o">=</span> <span class="s2">"XXX"</span><span class="p">;</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$secretKey</span> <span class="o">=</span> <span class="s2">"XXX"</span><span class="p">;</span>
  <span class="c1">//itd.
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 <p>Teraz wystarczy dodać nazwę naszego pliku z danymi do <span class="file">.gitignore</span> i będzie on ignorowany przez GIT-a.</p>
 
 <p>Również powiniśmy zablokować dostęp do tego pliku na naszym serwerze. Aby to zrobić wystarczy dodać kilka linijek do pliku <span class="file">.htaccess</span> na naszym serwerze:</p>
@@ -202,24 +201,21 @@ deny from all
 
 <p>Pobieramy i przypisujemy sobie naszą tablicę do zmiennej $config:</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code>  <span class="nv">$config</span> <span class="o">=</span> <span class="k">require_once</span> <span class="s1">'emailconfig.php'</span><span class="p">;</span>
-</code></pre>
-</div>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$config</span> <span class="o">=</span> <span class="k">require_once</span> <span class="s1">'emailconfig.php'</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>I teraz będziemy mogli uzyskać dostęp do naszych danych w następujący sposób:</p>
-<div class="language-php highlighter-rouge"><pre class="highlight"><code>  <span class="nv">$secretKey</span> <span class="o">=</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">'secretKey'</span><span class="p">];</span>
-</code></pre>
-</div>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$secretKey</span> <span class="o">=</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">'secretKey'</span><span class="p">];</span>
+</code></pre></div></div>
 
 <h2 id="odbieramy-dane-wysłane-za-pomocą-ajax">Odbieramy dane wysłane za pomocą AJAX</h2>
 
 <p>Przechowywane są one w tablicy super globalnej $_POST, tak jak to zdefiniowaliśmy w żądaniu AJAX w parametrze “type”.</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code>  <span class="nv">$userEmail</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">'userEmail'</span><span class="p">];</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$userEmail</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">'userEmail'</span><span class="p">];</span>
   <span class="nv">$subject</span> <span class="o">=</span> <span class="nb">filter_var</span> <span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'subject'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">,</span> <span class="nx">FILTER_FLAG_NO_ENCODE_QUOTES</span><span class="p">);</span>
   <span class="nv">$messageText</span> <span class="o">=</span> <span class="nb">filter_var</span> <span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'message'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">,</span> <span class="nx">FILTER_FLAG_NO_ENCODE_QUOTES</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hX>Gdzie:</hX>
 <ul>
@@ -228,24 +224,22 @@ deny from all
 
 <p>Zanim przejdziemy do walidacji, odbierzmy jeszcze odpowiedź reCAPTCHA i przypiszmy do zmiennej $answear.</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code>  <span class="nv">$checkIfBot</span> <span class="o">=</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="s1">'https://www.google.com/recaptcha/api/siteverify?secret='</span><span class="o">.</span><span class="nv">$secretKey</span><span class="o">.</span><span class="s1">'&amp;response='</span><span class="o">.</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'g-recaptcha-response'</span><span class="p">]);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$checkIfBot</span> <span class="o">=</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="s1">'https://www.google.com/recaptcha/api/siteverify?secret='</span><span class="o">.</span><span class="nv">$secretKey</span><span class="o">.</span><span class="s1">'&amp;response='</span><span class="o">.</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">'g-recaptcha-response'</span><span class="p">]);</span>
   <span class="nv">$recaptcha</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$checkIfBot</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <hX>Gdzie:</hX>
 <ul>
   <li><code class="highlight"><span class="k">file_get_contents</span>()</code> - ta funkcja zwraca zawartość plików jako string. W naszym przypadku będzie to odpowiedź wygenerowana na podstawie danych w URL, które są przesyłane tak jak metodą GET, o której wspominałem <a href="https://c0deboy.github.io/devcave/dajsiepoznac2017/formularz-kontaktowy-HTML-JS#get-post">wcześniej</a>.</li>
   <li><code class="highlight"><span class="k">json_decode</span>()</code> - dekoduje dane JSON. Dzięki temu będziemy mogli później uzyskać dostęp do odpowiedzi w ten sposób:</li>
 </ul>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="nv">$recaptcha</span><span class="o">-&gt;</span><span class="na">success</span>
-</code></pre>
-</div>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$recaptcha</span><span class="o">-&gt;</span><span class="na">success</span>
+</code></pre></div></div>
 <h1 id="walidacja-php">Walidacja PHP</h1>
 
 <p>Sprawdzamy poszczególne dane od użytkownika oraz odpowiedź reCAPTCHA i tworzymy zmienną $alert, która będzie przetrzymywać komunikaty:</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code>  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">filter_var</span><span class="p">(</span><span class="nv">$userEmail</span><span class="p">,</span> <span class="nx">FILTER_VALIDATE_EMAIL</span><span class="p">)){</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">filter_var</span><span class="p">(</span><span class="nv">$userEmail</span><span class="p">,</span> <span class="nx">FILTER_VALIDATE_EMAIL</span><span class="p">)){</span>
     <span class="nv">$alert</span> <span class="o">=</span> <span class="s1">'Podaj poprawny email!'</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$subject</span><span class="p">)){</span>
@@ -257,8 +251,7 @@ deny from all
   <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nv">$recaptcha</span><span class="o">-&gt;</span><span class="na">success</span><span class="o">===</span><span class="kc">false</span><span class="p">){</span>
     <span class="nv">$alert</span> <span class="o">=</span> <span class="s1">'Potwierdź, że nie jesteś robotem!'</span><span class="p">;</span>
   <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <hX>Gdzie:</hX>
 <ul>
   <li><code class="highlight"><span class="nx">FILTER_VALIDATE_EMAIL</span></code> - ten filtr sprawdza czy zmienna jest poprawnym adresem email. Jeśli tak zwraca “true”. Zauważ, że przed funkcją jest negacja(!). Jeśli email nie jest podany zwraca “false”, więc nie ma potrzeby sprawdzać tego osobno.</li>
@@ -267,7 +260,7 @@ deny from all
 
 <p>I możemy wreszcie skonfigurować połączenie za pomocą Swiftmailera, wysłać wiadomość i wyświetlić komunikat w zależności czy się to powiodło czy nie:</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code>  <span class="k">else</span> <span class="p">{</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">else</span> <span class="p">{</span>
     <span class="nv">$transport</span> <span class="o">=</span> <span class="nx">Swift_SmtpTransport</span><span class="o">::</span><span class="na">newInstance</span><span class="p">(</span><span class="nv">$config</span><span class="p">[</span><span class="s1">'mailServer'</span><span class="p">],</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">'port'</span><span class="p">])</span>
       <span class="o">-&gt;</span><span class="na">setUsername</span><span class="p">(</span><span class="nv">$config</span><span class="p">[</span><span class="s1">'username'</span><span class="p">])</span>
       <span class="o">-&gt;</span><span class="na">setPassword</span><span class="p">(</span><span class="nv">$config</span><span class="p">[</span><span class="s1">'password'</span><span class="p">])</span>
@@ -291,8 +284,7 @@ deny from all
       <span class="nv">$alert</span> <span class="o">=</span> <span class="s1">'Coś poszło nie tak.'</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>Myślę, że ten kod jest w miarę jasny. Jeśli zastanawiasz się co za co odpowiada odsyłam do <a href="http://swiftmailer.org/docs/introduction.html">dokumentacji</a>.</p>
 
 <h2 id="jak-odebrać-błedy--komunikaty-php-przez-ajax">Jak odebrać błedy / komunikaty PHP przez AJAX?</h2>
@@ -444,11 +436,11 @@ s.setAttribute('data-timestamp', +new Date());
 </footer>
 
 
-<script src="/js/libs/jquery.min.js"></script>
+<script src="/dist/js/libs/jquery.min.js"></script>
 
-<script src="/js/libs/bootstrap.min.js"></script>
+<script src="/dist/js/libs/bootstrap.min.js"></script>
 
-<script src="/js/devcave.min.js"></script>
+<script src="/dist/js/devcave.min.js"></script>
 
     
 

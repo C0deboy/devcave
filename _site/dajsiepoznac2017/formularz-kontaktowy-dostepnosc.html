@@ -12,10 +12,10 @@
 <link rel="canonical" href="https://c0deboy.github.io/devcave/dajsiepoznac2017/formularz-kontaktowy-dostepnosc">
 <link rel="shortcut icon" href="/img/logo.ico">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/devcave.css">
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -199,7 +199,7 @@
 
 <p>Zrealizujmy to:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kr">const</span> <span class="nx">firstInput</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'input[name="from"]'</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">firstInput</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'input[name="from"]'</span><span class="p">);</span>
 
   <span class="nx">closeContactBtn</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'keydown'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
    <span class="k">if</span> <span class="p">((</span><span class="nx">e</span><span class="p">.</span><span class="nx">which</span> <span class="o">===</span> <span class="mi">9</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">e</span><span class="p">.</span><span class="nx">shiftKey</span><span class="p">))</span> <span class="p">{</span><span class="c1">//tab
@@ -251,7 +251,7 @@ Możesz to przetestować wyłączając Javascript w przeglądarce. W Chrome to: 
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="c1">//...
 </span>
-  <span class="kr">const</span> <span class="nx">contactForm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#contact'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">contactForm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#contact'</span><span class="p">);</span>
   <span class="nx">contactForm</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">"contact-nojs"</span><span class="p">);</span>
   <span class="c1">//...</span></code></pre></figure>
 
@@ -346,11 +346,11 @@ s.setAttribute('data-timestamp', +new Date());
 </footer>
 
 
-<script src="/js/libs/jquery.min.js"></script>
+<script src="/dist/js/libs/jquery.min.js"></script>
 
-<script src="/js/libs/bootstrap.min.js"></script>
+<script src="/dist/js/libs/bootstrap.min.js"></script>
 
-<script src="/js/devcave.min.js"></script>
+<script src="/dist/js/devcave.min.js"></script>
 
     
 

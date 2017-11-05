@@ -113,9 +113,19 @@
 .warning::before,
 .note::before,
 .idea::before,
-.advantages::before {
+.advantages::before,
+blockquote::before {
     font-family: FontAwesome;
     padding: 0px 8px 0px 5px;
+}
+
+blockquote p {
+    margin: 0 0 0 10px;
+    display: inline-block;
+}
+
+blockquote::before {
+    content: "\f10e";
 }
 
 .warning {

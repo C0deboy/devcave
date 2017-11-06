@@ -1,7 +1,7 @@
 ---
 layout:     post
 titleSEO:  "Liceum czy technikum dla programisty? Co wybrać?"
-title:      "Licemu vs technikum - co wybrać jako programista?"
+title:      "Liceum vs technikum - co wybrać jako programista?"
 subtitle:   "Moje spostrzeżenia i podsumowanie 4 lat w technikum"
 date:       2017-11-5 10:00:00
 author:     "Codeboy"

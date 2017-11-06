@@ -1,19 +1,15 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <div class="navbar-header">
             <a class="navbar-brand" href="{{ site.baseurl }}/"><img src="/img/devcave.png"> {{ site.title }}</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+                Menu
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <nav id="site-nav" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a class="nav-el" href="{{ site.baseurl }}/o-mnie/">O mnie</a>
@@ -35,8 +31,6 @@
                     </button>
                 </li>
             </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+        </nav>
     </div>
-    <!-- /.container -->
-</nav>
+</div>

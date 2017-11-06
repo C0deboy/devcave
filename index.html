@@ -26,13 +26,14 @@ description: "Jaskinia programisty"
 <!-- Main Content -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <div class="col-lg-6 col-lg-offset-1 col-md-8">
+      <h1>Ostatnie wpisy:</h1>
       {% for post in paginator.posts %}
       <div class="post-preview">
         <a href="{{ post.url | prepend: site.baseurl }}">
-          <h2 class="post-title">{{ post.title }}</h2>
+          <h1 class="post-title">{{ post.title }}</h1>
           {% if post.subtitle %}
-          <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+          <h2 class="post-subtitle">{{ post.subtitle }}</h2>
           {% endif %}
         </a>
 
@@ -54,9 +55,10 @@ description: "Jaskinia programisty"
           {% when '12' %}grudnia
           {% endcase %}
           {{ post.date | date: "%Y" }}</p>
-          {% assign tags = post.tags | sort %}{% for tag in tags %}<div class="site-tag"><a href='/archive#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div> {% endfor %}
+        {% assign tags = post.tags | sort %}{% for tag in tags %}
+        <div class="site-tag"><a href='/archive#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div>
+        {% endfor %}
       </div>
-      <hr>
       {% endfor %}
 
       <!-- Pager -->
@@ -64,7 +66,8 @@ description: "Jaskinia programisty"
       <ul class="pager">
         {% if paginator.previous_page %}
         <li class="previous">
-          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Nowsze posty</a>
+          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Nowsze
+            posty</a>
         </li>
         {% endif %}
         {% if paginator.next_page %}
@@ -74,6 +77,32 @@ description: "Jaskinia programisty"
         {% endif %}
       </ul>
       {% endif %}
+    </div>
+
+    <div class="col-lg-4 col-md-4">
+      <div class="row top-posts">
+        <h1>Najpopularniejsze wpisy:</h1>
+        <span class="text-muted">Top {{ site.top_posts | size }}</span>
+        <ul>
+          {% for post in site.top_posts %}
+          <li class="post-preview row">
+            <div class="top-position">{{forloop.index}}#</div>
+            <div class="top-entry">
+              <a href="{{ post.content }}">
+                <h4>{{ post.title }}</h4>
+              </a>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="row post-preview books">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+          <img src="img/books.png"/>
+          <h3>Polecane książki dla programisty na jaki-jezyk-programowania.pl</h3>
+        </a>
+      </div>
     </div>
   </div>
 </div>

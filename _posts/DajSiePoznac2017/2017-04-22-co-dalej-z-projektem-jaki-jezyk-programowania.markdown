@@ -6,7 +6,7 @@ subtitle:   "Projekt nie umiera, plany na przyszłość."
 date:       2017-04-22 00:00:00
 author:     "Codeboy"
 category:   DajSiePoznac2017
-tags:       DajSiePoznac2017
+tags:       DajSiePoznac2017 Jaki-jezyk-programowania
 comments:   true
 toc:        true
 ---

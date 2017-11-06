@@ -6,7 +6,7 @@ subtitle:   "Jak to było + trochę liczb"
 date:       2017-03-03 12:00:00
 author:     "Codeboy"
 category:   DajSiePoznac2017
-tags:	DajSiePoznac2017
+tags:	    DajSiePoznac2017 Jaki-jezyk-programowania
 comments:   true
 toc:        true
 ---

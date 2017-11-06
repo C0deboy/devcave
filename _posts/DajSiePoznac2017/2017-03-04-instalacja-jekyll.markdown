@@ -6,7 +6,7 @@ subtitle:   "Instalacja + Ubuntu w Windowsie"
 date:       2017-03-04 12:00:00
 author:     "Codeboy"
 category:   DajSiePoznac2017
-tags:	DajSiePoznac2017 Jekyll
+tags:	    DajSiePoznac2017 Jekyll
 comments:   true
 toc:        true
 ---

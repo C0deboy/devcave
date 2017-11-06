@@ -1,1 +1,1 @@
-Sitemap: https://c0deboy.github.io/devcave/sitemap.xml
+Sitemap: https://devcave.pl/sitemap.xml

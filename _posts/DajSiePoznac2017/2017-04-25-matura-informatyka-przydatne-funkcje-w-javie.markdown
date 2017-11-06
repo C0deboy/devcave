@@ -6,7 +6,7 @@ subtitle:   "Zbiór funkcji, które używałem rozwiązując zadania maturalne."
 date:       2017-04-25 00:13:00
 author:     "Codeboy"
 category:   DajSiePoznac2017
-tags:       DajSiePoznac2017 Matura-Informatyka
+tags:       DajSiePoznac2017 Matura-Informatyka Java
 comments:   true
 toc:        true
 ---

@@ -6,7 +6,7 @@ subtitle:   "Dzielimy pliki Javascript i CSS na moduły"
 date:       2017-05-22 0:12:00
 author:     "Codeboy"
 category:   DajSiePoznac2017
-tags:       DajSiePoznac2017
+tags:       DajSiePoznac2017 Javascript
 comments:   true
 toc:        true
 ---

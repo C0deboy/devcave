@@ -5,7 +5,7 @@ subtitle:   "Wprowadzenie"
 date:       2017-03-01 12:00:00
 author:     "Codeboy"
 category:   DajSiePoznac2017
-tags:       DajSiePoznac2017
+tags:       DajSiePoznac2017 Jaki-jezyk-programowania
 comments:   true
 toc: true
 ---

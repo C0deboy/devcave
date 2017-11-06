@@ -2,14 +2,17 @@
 title: devcave.pl
 email: lasota.marcinm@gmail.com
 copyright_name: devcave
-description: "Devcave - jaskinia programisty, blog programistyczny."
+description: "Devcave - jaskinia programisty. Blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych, dla każdego programisty."
 baseurl: ""
-url: "https://c0deboy.github.io/devcave"
+url: "https://devcave.pl"
 github_username:  C0deboy
 email_username: lasota.marcinm@gmail.com
 # Google Analytics
 # To enable google analytics, uncomment below line with a valid Google Tracking ID
 google_tracking_id: UA-90973428-2
+
+collections:
+- top_posts
 
 # Build settings
 markdown: kramdown

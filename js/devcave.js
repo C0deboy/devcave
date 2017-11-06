@@ -21,37 +21,27 @@ $(() => {
   $('img').addClass('img-responsive center-block');
 });
 
-$(document).ready(() => {
-  $('table').wrap("<div class='table-responsive'></div>");
-  $('table').addClass('table');
-});
-
-// Navigation Scripts to Show Header on Scroll-Up
-jQuery(document).ready(($) => {
-  const MQL = 1170;
-
-  // primary navigation slide-in effect
-  if ($(window).width() > MQL) {
-    const headerHeight = $('.navbar-custom').height();
-    $(window).on('scroll', {
-      previousTop: 0,
-    },
-    function () {
-      const currentTop = $(window).scrollTop();
-      // check if user is scrolling up
-      if (currentTop < this.previousTop) {
-        // if scrolling up...
-        if (currentTop > 0 && $('.navbar-custom').hasClass('is-fixed')) {
-          $('.navbar-custom').addClass('is-visible');
-        } else {
-          $('.navbar-custom').removeClass('is-visible is-fixed');
-        }
-      } else {
-        // if scrolling down...
-        $('.navbar-custom').removeClass('is-visible');
-        if (currentTop > headerHeight && !$('.navbar-custom').hasClass('is-fixed')) $('.navbar-custom').addClass('is-fixed');
-      }
-      this.previousTop = currentTop;
-    });
+function dynamicNavbar() {
+  const navbarCustom = $('.navbar-custom');
+  const headerHeight = navbarCustom.height();
+  const currentTop = $(window).scrollTop();
+  if (currentTop < this.previousTop) {
+    if (currentTop > 0 && navbarCustom.hasClass('is-fixed')) {
+      navbarCustom.addClass('is-visible');
+    } else {
+      navbarCustom.removeClass('is-visible is-fixed');
+    }
+  } else {
+    navbarCustom.removeClass('is-visible');
+    $('.navbar-collapse').removeClass('in');
+    if (currentTop > headerHeight && !navbarCustom.hasClass('is-fixed')) navbarCustom.addClass('is-fixed');
   }
+  this.previousTop = currentTop;
+}
+
+$(document).ready(($) => {
+  $(window).on('scroll', {
+    previousTop: 0,
+  }, dynamicNavbar);
 });
+

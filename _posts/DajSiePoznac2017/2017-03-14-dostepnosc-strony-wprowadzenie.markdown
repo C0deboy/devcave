@@ -6,8 +6,8 @@ subtitle:   "Wprowadzenie"
 date:       2017-03-14 0:01:00
 author:     "Codeboy"
 category:   DajSiePoznac2017
-tags:	DajSiePoznac2017 Dostępność
-comments:	 true
+tags:	    DajSiePoznac2017 HTML Dostępność
+comments:	true
 ---
 # Co to jest dostępność strony i dlaczego jest to ważne?
 

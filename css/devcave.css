@@ -56,7 +56,7 @@ h3 {
 }
 
 a {
-  color: #0e74bb;
+  color: #0079cc;
 }
 a:hover,
 a:focus {
@@ -259,7 +259,7 @@ hr.small {
 }
 
 .post-preview {
-  box-shadow: 0 0 5px 0 black;
+  box-shadow: 0 0 5px 0 #000;
   padding: 1px 10px 20px;
   margin-top: 30px;
 }
@@ -349,6 +349,7 @@ footer .copyright {
   padding: 10px 5px;
   background-color: inherit;
   border-radius: 0;
+  box-shadow: 0 1px 3px 0 #747474;
 }
 @media only screen and (min-width: 768px) {
   .pager li > a,
@@ -360,7 +361,7 @@ footer .copyright {
 .pager li > a:hover,
 .pager li > a:focus {
   color: white;
-  background-color: #0089e8;
+  background-color: #0079cc;
   border: 1px solid #0089e8;
 }
 .pager .disabled > a,
@@ -471,14 +472,12 @@ pre {
   background-color: rgba(155, 155, 155, 0.16);
 }
 
-@media (max-width: 768px){
-  .navbar ul{
-    text-align: right;
-  }
+.navbar-right{
+  text-align: right;
 }
 
 .site-tag {
-  background: rgb(15, 112, 169);
+  background: #0079cc;
   display: inline-block;
   margin: 4px 7px 0px 0;
   box-shadow: 0 2px 5px 1px #272727;

@@ -210,6 +210,15 @@
         "subtitle": "Moje spostrzeżenia i podsumowanie 4 lat w technikum",
         "date": "5 listopada 2017",
         "url": "/wybory-programisty/liceum-vs-technikum-co-wybrac"
+      },
+    
+      
+      {
+        "title": "Wyszukiwarka na statycznych stronach/blogu bez backendu",
+        "titleSEO": "Jak zrobić wyszukiwarkę na blogu bez backendu?",
+        "subtitle": "Tylko Javascript, na przykładzie bloga na Jekyllu",
+        "date": "10 listopada 2017",
+        "url": "/frontend/wyszukiwarka-na-blogu-bez-backendu"
       }
     
   

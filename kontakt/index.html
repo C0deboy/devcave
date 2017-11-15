@@ -100,7 +100,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <p>Możesz napisać do mnie w każdej sprawie. Chcesz o czymś pogadać, masz jakąś propozycję, a może chcesz zrobić razem jakiś projekt lub gierkę? Cokolwiek chodzi Ci po głowie, nie zastanawiaj się i napisz! Chętnie nawiąże nowe znajomości i rozważę wszelkie propozycje ;)  </p>
+    <p>Możesz napisać do mnie w każdej sprawie. Chcesz o czymś pogadać, masz jakąś propozycję, a może chcesz zrobić razem jakiś projekt? Cokolwiek chodzi Ci po głowie, nie zastanawiaj się i napisz! Chętnie nawiąże nowe znajomości i rozważę wszelkie propozycje ;)  </p>
   </div>
 
   <div class="col-md-12">
@@ -112,7 +112,7 @@
         </a>
       </li>
       <li>
-        <button class="contact-link" type="button" id="open-contact-btn">
+        <button class="main-btn" type="button" id="open-contact-btn">
           Formularz kontaktowy
           <i class="fa fa-envelope" aria-hidden="true"></i>
         </button>
@@ -154,16 +154,16 @@
 
 <div id="formularz-kontaktowy" class="contact" role="dialog" aria-label="Formularz kontaktowy" aria-hidden="true">
   <form class="emailForm" method="POST" action="https://formspree.io/lasota.marcinm@gmail.com">
-    <label class="beside" aria-live="polite">
+    <label class="half" aria-live="polite">
       Twój email
       <input class="form-data" name="email" type="email" placeholder="Wpisz tu twój email" required>
     </label>
-    <label class="beside" aria-live="polite">
+    <label class="half" aria-live="polite">
       Temat
       <input class="form-data" name="_subject" placeholder="Wpisz tu temat wiadomości" minlength="4" maxlength="78"
              required>
     </label>
-    <label style="clear:both;" aria-live="polite">
+    <label aria-live="polite">
       Wiadomość
       <textarea class="form-data" name="message" placeholder="Wpisz tu twoją wiadomość" minlength="4"
                 maxlength="6000" required></textarea>
@@ -172,7 +172,7 @@
       <div class="g-recaptcha" tabindex="-1" data-sitekey="6LcyTjYUAAAAAAzWkuwU9AEYynQaZWAHRM5nVTNj"
            data-callback="recaptchaClearErr"></div>
     </label>
-    <button class="emailFormSubmit" name="submit" type="submit">Wyślij</button>
+    <button class="emailFormSubmit main-btn" name="submit" type="submit">Wyślij</button>
 
     <div class="emailFormAlert" aria-live="polite"></div>
   </form>
@@ -182,7 +182,6 @@
     <i class="fa fa-times close-form"></i>
   </button>
 </div>
-
 
         </div>
     </div>
@@ -196,27 +195,23 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center social-buttons">
                     <li>
-                        <a href="/feed.xml" data-toggle="tooltip" data-placement="top" title="RSS">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                            </span>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-placement="top" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/C0deboy" data-toggle="tooltip" data-placement="top" title="Github">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-placement="top" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-placement="top" title="lasota.marcinm@gmail.com">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                            </span>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-placement="top" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-placement="top" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
                         </a>
                     </li>
                 </ul>

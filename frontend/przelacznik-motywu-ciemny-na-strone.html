@@ -158,7 +158,15 @@
   <span class="nl">color</span><span class="p">:</span> <span class="m">#e2e2e2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>Wiadomo, jęśli masz więcej elementów, którym będziesz chciał zmienić wygląd po przełączeniu motywu, tym więcej będziesz musiał stworzyć dodatkowych klas i dodać je później dynamicznie w JS do tych konkretnych elementów.</p>
+<p>Wiadomo, jęśli masz więcej elementów, którym będziesz chciał zmienić wygląd po przełączeniu motywu, tym więcej modyfikacji CSS będziesz musiał dokonać. Jeśli chcesz, żeby inne elementy też zmieniały swój wygląd, to będziesz musiał stworzyć selector w CSS, który dziedziczy po <code class="highlight"><span class="na">.dark-mode</span></code>, czyli np. jeśli masz element div z klasą “whatever”, jego wersję dla ciemnego motywu zdefiniujesz tak:</p>
+
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.dark-mode</span> <span class="nc">.whatever</span> <span class="p">{</span>
+    <span class="py">key</span><span class="p">:</span> <span class="n">property</span><span class="p">;</span>
+    <span class="py">key</span><span class="p">:</span> <span class="n">property</span><span class="p">;</span>
+    <span class="py">key</span><span class="p">:</span> <span class="n">property</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">W</span> <span class="nt">rezultacie</span> <span class="nt">te</span> <span class="nt">warto</span><span class="err">ś</span><span class="nt">ci</span> <span class="nt">b</span><span class="err">ę</span><span class="nt">d</span><span class="err">ą</span> <span class="nt">si</span><span class="err">ę</span> <span class="nt">za</span><span class="err">łą</span><span class="nt">cza</span><span class="err">ć</span> <span class="nt">tylko</span> <span class="nt">wtedy</span><span class="o">,</span> <span class="nt">kiedy</span> <span class="nt">body</span> <span class="nt">b</span><span class="err">ę</span><span class="nt">dzie</span> <span class="nt">mia</span><span class="err">ł</span><span class="nt">o</span> <span class="nt">klas</span><span class="err">ę</span> <span class="o">&lt;</span><span class="nt">code</span> <span class="nt">class</span><span class="o">=</span><span class="s1">"highlight"</span><span class="o">&gt;&lt;</span><span class="nt">span</span> <span class="nt">class</span><span class="o">=</span><span class="s1">"na"</span><span class="o">&gt;</span><span class="nc">.dark-mode</span><span class="o">&lt;/</span><span class="nt">span</span><span class="o">&gt;&lt;/</span><span class="nt">code</span><span class="o">&gt;.</span></code></pre></figure>
 
 <h1 id="dostosowywanie-strony-do-zmian">Dostosowywanie strony do zmian</h1>
 
@@ -184,12 +192,12 @@ Jeśli używasz Disqus na swojej stronie, to przy zmianie motywu sekcja komentar
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy" data-toggle="tooltip" data-placement="top" title="Moja droga do pierwszej pracy">&larr; Poprzedni post</a>
+                        <a class="box-effect" href="/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy" data-toggle="tooltip" data-placement="top" title="Moja droga do pierwszej pracy"><i class="fa fa-arrow-left" aria-hidden="true"></i> Poprzedni post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/wybory-programisty/liceum-vs-technikum-co-wybrac" data-toggle="tooltip" data-placement="top" title="Liceum vs technikum - co wybrać jako programista?">Następny post &rarr;</a>
+                        <a class="box-effect" href="/wybory-programisty/liceum-vs-technikum-co-wybrac" data-toggle="tooltip" data-placement="top" title="Liceum vs technikum - co wybrać jako programista?">Następny post <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </li>
                     
                 </ul>
@@ -233,27 +241,23 @@ s.setAttribute('data-timestamp', +new Date());
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center social-buttons">
                     <li>
-                        <a href="/feed.xml" data-toggle="tooltip" data-placement="top" title="RSS">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                            </span>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-placement="top" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/C0deboy" data-toggle="tooltip" data-placement="top" title="Github">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-placement="top" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-placement="top" title="lasota.marcinm@gmail.com">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                            </span>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-placement="top" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-placement="top" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
                         </a>
                     </li>
                 </ul>

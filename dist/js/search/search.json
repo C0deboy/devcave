@@ -219,6 +219,15 @@
         "subtitle": "Tylko Javascript, na przykładzie bloga na Jekyllu",
         "date": "10 listopada 2017",
         "url": "/frontend/wyszukiwarka-na-blogu-bez-backendu"
+      },
+    
+      
+      {
+        "title": "Formularz kontaktowy bez backendu/bez PHP",
+        "titleSEO": "Jak zrobić formularz kontaktowy na stronie bez PHP - bez backendu?",
+        "subtitle": "Tylko HTML, Javascript i jQuery(opcjonalnie).",
+        "date": "15 listopada 2017",
+        "url": "/frontend/formularz-kontaktowy-bez-backendu"
       }
     
   

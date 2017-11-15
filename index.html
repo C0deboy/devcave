@@ -29,7 +29,7 @@ description: "Jaskinia programisty"
     <div class="col-lg-6 col-lg-offset-1 col-md-8">
       <h1>Ostatnie wpisy:</h1>
       {% for post in paginator.posts %}
-      <div class="post-preview">
+      <div class="post-preview box-effect">
         <a href="{{ post.url | prepend: site.baseurl }}">
           <h1 class="post-title">{{ post.title }}</h1>
           {% if post.subtitle %}
@@ -56,7 +56,7 @@ description: "Jaskinia programisty"
           {% endcase %}
           {{ post.date | date: "%Y" }}</p>
         {% assign tags = post.tags | sort %}{% for tag in tags %}
-        <div class="site-tag"><a href='/archive#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div>
+        <div class="site-tag"><a href='/archiwum#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div>
         {% endfor %}
       </div>
       {% endfor %}
@@ -66,13 +66,13 @@ description: "Jaskinia programisty"
       <ul class="pager">
         {% if paginator.previous_page %}
         <li class="previous">
-          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Nowsze
+          <a class="box-effect" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Nowsze
             posty</a>
         </li>
         {% endif %}
         {% if paginator.next_page %}
         <li class="next">
-          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Starsze posty &rarr;</a>
+          <a class="box-effect" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Starsze posty <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </li>
         {% endif %}
       </ul>
@@ -85,7 +85,7 @@ description: "Jaskinia programisty"
         <span class="text-muted">Top {{ site.top_posts | size }}</span>
         <ul>
           {% for post in site.top_posts %}
-          <li class="post-preview row">
+          <li class="box-effect row">
             <div class="top-position">{{forloop.index}}#</div>
             <div class="top-entry">
               <a href="{{ post.content }}">
@@ -97,10 +97,10 @@ description: "Jaskinia programisty"
         </ul>
       </div>
 
-      <div class="row post-preview books">
+      <div class="row box-effect books">
         <a href="https://jaki-jezyk-programowania.pl/ksiazki">
           <img src="img/books.png"/>
-          <h3>Polecane książki dla programisty na jaki-jezyk-programowania.pl</h3>
+          <h3>Zobacz polecane książki na mojej stronie jaki-jezyk-programowania.pl</h3>
         </a>
       </div>
     </div>

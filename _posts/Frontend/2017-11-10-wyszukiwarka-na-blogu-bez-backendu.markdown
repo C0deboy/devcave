@@ -6,7 +6,7 @@ subtitle:   "Tylko Javascript, na przykładzie bloga na Jekyllu"
 date:       2017-11-10 12:00:00
 author:     "Codeboy"
 category:   Frontend
-tags:	    Frontend Jak-zrobic
+tags:	    Frontend Jak-zrobić
 comments:   true
 toc:        true
 ---

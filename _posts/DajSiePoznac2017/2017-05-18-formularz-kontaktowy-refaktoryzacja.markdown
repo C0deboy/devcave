@@ -24,7 +24,7 @@ Jeśli trafiłeś tu bezpośrednio, zajrzyj do [pierwszego postu]({{ site.url }}
 
 # Zmiany
 
-Refaktoryzacja objęła zarówno stronę frontendową, jak i backendową. Kod jest teraz bardziej uniwersalny, łatwiejszy do modyfikacji. Stworzyłem dla niego również osobne [repozytorium](https://github.com/C0deboy/Email-form) na GitHubie.
+Refaktoryzacja objęła zarówno stronę frontendową, jak i backendową. Kod jest teraz bardziej uniwersalny, łatwiejszy do modyfikacji. Stworzyłem dla niego również osobne [repozytorium](https://github.com/C0deboy/Email-form) na GitHubie, gdzie znajdziesz najaktualniejszą wersję.
 
 # Javascript
 

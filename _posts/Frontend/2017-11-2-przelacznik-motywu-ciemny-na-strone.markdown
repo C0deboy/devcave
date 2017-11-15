@@ -75,7 +75,20 @@ U mnie klasa CSS zmieniającą motyw jest aż tak prosta:
 
 {% endhighlight %}
 
-Wiadomo, jęśli masz więcej elementów, którym będziesz chciał zmienić wygląd po przełączeniu motywu, tym więcej będziesz musiał stworzyć dodatkowych klas i dodać je później dynamicznie w JS do tych konkretnych elementów.
+Wiadomo, jęśli masz więcej elementów, którym będziesz chciał zmienić wygląd po przełączeniu motywu, tym więcej modyfikacji CSS będziesz musiał dokonać. Jeśli chcesz, żeby inne elementy też zmieniały swój wygląd, to będziesz musiał stworzyć selector w CSS, który dziedziczy po <code class="highlight"><span class="na">.dark-mode</span></code>, czyli np. jeśli masz element div z klasą "whatever", jego wersję dla ciemnego motywu zdefiniujesz tak:
+
+{% highlight css %}
+
+.dark-mode .whatever {
+    key: property;
+    key: property;
+    key: property;
+}
+
+W rezultacie te wartości będą się załączać tylko wtedy, kiedy body będzie miało klasę <code class="highlight"><span class="na">.dark-mode</span></code>.
+
+{% endhighlight %}
+
 
 # Dostosowywanie strony do zmian
 

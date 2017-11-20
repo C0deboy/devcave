@@ -119,7 +119,7 @@ categories: jekyll update
 ---
 {% endhighlight %}
 
-gdzie definiujemy dane postu. Dalej pozostaje już tylko dodać treść, którą tworzymy, jak w zwykłym pliku HTML z małym dodatkiem - (językiem szablonowym?) [Liquid](https://jekyllrb.com/docs/templates/). Dzięki niemu m.in wprowadzamy zmienne i instrukcje, które pobierają treść do szablonów.
+gdzie definiujemy dane postu. Dalej pozostaje już tylko dodać treść, którą tworzymy, jak w zwykłym pliku HTML z małym dodatkiem - (językiem szablonowym?) [Liquid](https://jekyllrb.com/docs/templates/). Dzięki niemu m.in. wprowadzamy zmienne i instrukcje, które pobierają treść do szablonów.
 
 Gdy zrobiliśmy jakieś zmiany i chcemy je przetestować konieczne jest zatrzymanie serwera (ctrl+v) i uruchomienie go od nowa.
 

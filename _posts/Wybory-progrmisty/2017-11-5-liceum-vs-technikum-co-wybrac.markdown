@@ -77,7 +77,7 @@ Nic nie umiejąc, wystarczy przyjść chwilę wcześniej na egzamin, wystukać p
 
 ## Praktyki
 
-W technikum mamy miesięczne praktyki i jest to jedyna rzecz, którą dobrze wspominam ze swojej szkoły. To dlatego, że miałem okazję wyjechać do Anglii (praktycznie za free) na miesiąc. Było to przyjemne doświadczenie, jednak nie związane z programowaniem. Pewnie napiszę kiedyś o tym osobny post i tu podlinkuję ;)
+W technikum mamy miesięczne praktyki i jest to jedyna rzecz, którą dobrze wspominam ze swojej szkoły. To dlatego, że miałem okazję wyjechać do Anglii (praktycznie za free) na miesiąc. Było to przyjemne doświadczenie, jednak nie związane z programowaniem. Z tego powodu to również nie przydało mi się to do budowania CV. Pewnie napiszę kiedyś o tym osobny post i tu podlinkuję.  I oto on - [wpis]({{ site.url }}{% post_url /Moje-doswiadczenia/2017-11-20-praktyki-zawodowe-w-technikum-informatycznym %}) ;)
 
 W skrócie, jeśli uda Ci się trafić na coś fajnego (co nie jest łatwe) to będzie to przyjemnie doświadczenie. W przeciwnym wypadku będziesz podawał papier do drukarki i zapisywał sobie odbyte godziny praktyk (może się tak trafić nawet na projekcie zagranicznym).
 

@@ -20,7 +20,7 @@ Formularz jest ulepszoną wersją tego, który tworzyłem podczas DSP2017. Tyle,
 - Jest otwierany w formie okienka za pomocą przycisku.
 - Jest wysyłany asynchronicznie, wykorzystując AJAX - czyli bez przeładowania strony.
 - Walidacja odbywa się w Javascript z wykorzystaniem Validation API. Gdy coś jest nie tak, użytkownik dostaje wiadomość.
-- Zadbałem też o kwestie dostępności, np. komunikaty mogą być odczytane przez czytniki ekranowe, obsługa klawiaturą (m. in. zamykanie ESC czy zapętlone tabowanie) itd.
+- Zadbałem też o kwestie dostępności, np. komunikaty mogą być odczytane przez czytniki ekranowe, obsługa klawiaturą (m.in. zamykanie ESC czy zapętlone tabowanie) itd.
 - Jest w pełni responsywny - poprawnie wyświetla się na każdym ekranie.
 - Formularz można też otworzyć z linka, np. [jaki-jezyk-programowania.pl/#formularz-kontaktowy](https://jaki-jezyk-programowania.pl/#formularz-kontaktowy)
 

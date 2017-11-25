@@ -646,4 +646,43 @@ pre {
   color: inherit;
 }
 
+.book {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 15px;
+  width: 300px;
+  vertical-align: top;
+  margin: auto;
+}
+
+.book img {
+  margin: 10px auto;
+}
+
+.book a {
+  background: #222222;
+  border-radius: 5px;
+  color: #ffffff;
+  display: inline-block;
+  margin: 10px auto 10px auto;
+  text-align: center;
+  border: 0;
+  padding: 5px 5px;
+}
+
+.book p {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.book .helion-ksiazkasm3 {
+  font-size: .7em;
+}
+
+.book-section p {
+  text-align: center;
+}
+
 

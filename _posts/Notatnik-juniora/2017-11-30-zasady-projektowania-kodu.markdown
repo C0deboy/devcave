@@ -18,6 +18,7 @@ Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowani
 ## DRY - Don’t Repeat Yourself
 - Jedna z podstawowych zasad programowania - **nie powtarzaj się**. Wielokrotne użycie tego samego kodu to podstawa programowania. Nie ma miejsca na kopiuj/wklej.
 - Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać.
+- Nie dotyczy testów i dokumentacji*
 
 <p class="advantages">Plusy</p>
 
@@ -25,7 +26,7 @@ Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowani
 - Zmiana implementacji tylko w jednym miejscu.
 
 ## KISS - Keep it simple, stupid!
-- Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc ławy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku.
+- Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc łatwy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku.
 - Większość systemów działa najlepiej, gdy polegają na prostocie, a nie na złożoności.
 - Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia.
 - Gdy po jakimś czasie wracasz do **swojego** kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;)
@@ -36,6 +37,8 @@ Można to rozszerzyć o zasadę:
 - Czyli, programuj tak jakbyś to robił dla osoby, która będzie później utrzymywać ten kod. "Rób to tak jakby to był brutalny psychopata, który wie gdzie mieszkasz".
 - Dlaczego? Utrzymywanie kodu to (przeważnie) najbardziej wymagająca i większa część pracy programistów. Nie powinniśmy utrudniać sobie tego zadania.
 - Zadbaj o to, aby nie trzeba było się zbytnio głowić nad kawałkiem Twojego kodu.
+
+### Boy scout rule
 - Zawsze pozostaw po sobie kod czystszy niż go zastałeś.
 
 <p class="advantages">Plusy</p>

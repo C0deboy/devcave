@@ -1,9 +1,9 @@
 ---
 layout:     post
-titleSEO:	"Zasady projektowania obiektowego SOLID DRY KISS"
+titleSEO:	"Co to jest SOLID DRY KISS - zasady projektowania obiektowego"
 title:      "Zasady projektowania obiektowego"
 subtitle:   "Notatnik Juniora 1#"
-date:       2017-11-1 12:00:00
+date:       2017-11-30 12:00:00
 author:     "Codeboy"
 category:   Notatnik-Juniora
 tags:	    Notatnik-Juniora Dobre-praktyki
@@ -11,7 +11,7 @@ comments:   true
 toc:        true
 ---
 
-Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik, zachęcam do dokopania się do każdej z zasad na własną rękę ;)
+Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami ;)
 
 # Ogólne
 
@@ -30,10 +30,10 @@ Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowani
 - Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia.
 - Gdy po jakimś czasie wracasz do **swojego** kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;)
 
-Można to rozszerzyć o:
+Można to rozszerzyć o zasadę:
 
 ### Code for the Maintainer
-- Czyli, programuj tak jakbyś to robił dla osoby, która będzie później utrzymywać ten kod. Rób to tak jakby to był brutalny psychopata, który wie gdzie mieszkasz.
+- Czyli, programuj tak jakbyś to robił dla osoby, która będzie później utrzymywać ten kod. "Rób to tak jakby to był brutalny psychopata, który wie gdzie mieszkasz".
 - Dlaczego? Utrzymywanie kodu to (przeważnie) najbardziej wymagająca i większa część pracy programistów. Nie powinniśmy utrudniać sobie tego zadania.
 - Zadbaj o to, aby nie trzeba było się zbytnio głowić nad kawałkiem Twojego kodu.
 - Zawsze pozostaw po sobie kod czystszy niż go zastałeś.
@@ -60,7 +60,7 @@ Można to rozszerzyć o:
 - Powinieneś być w stanie rozszerzać swoje klasy bez jej modyfikacji.
 - Klasy powinny być otwarte na rozszerzanie, a zamknięte na modyfikację.
 - Polegaj na abstrakcji i polimorfizmie
-- Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowoane przez ify czy konstrukcję switch.
+- Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowane przez ify czy konstrukcję switch.
 
 <p class="advantages">Plusy</p>
 - Łatwiejsze i bardziej stabline rozbudowywanie systemu.
@@ -69,23 +69,29 @@ Można to rozszerzyć o:
 ### L - Liskov substitution principle
 - Klasy w programie powinny być podmienialne przez swoje podklasy bez naruszania poprawności programu, czyli klasa dziedzicząca musi być dobrym odpowiednikiem klasy bazowej.
 - Podklasa nie powinna robić mniej niż klasa bazowa. Czyli zawsze powinna robić więcej.
-- Zobacz popularny przykład "Square extends Rectangle"
+- Zobacz popularny przykład złego zastosowania dziedziczenia "Square extends Rectangle"
 
 <p class="advantages">Plusy</p>
 - Przewidywalne zachowania obiektów
 
 ### I - Interface segregation principle
-- “Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu.
+- Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu.
 - Powinno się projektować małe i zwarte interfejsy.
 - Klasa nie powinna implementować interfejsu, przez który naruszy [Single responsibility principle](#S---Single-responsibility-principle)
 
 <p class="advantages">Plusy</p>
-- Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z 'grubego' interfejsu.
+- Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z "dużego" interfejsu.
 - Nie naruszanie [Single responsibility principle](#S---Single-responsibility-principle)
 
 ### D - Dependency inversion principle
-- Niskopoziomowe klasy powinny zależeć od wysoko poziomowych, a oba od swoich abstrakcji.
-- Abstrakcję nie powinny polegać na szczegółach implementacyjnych. To one powinny polegać na abstrakcji.
+- Niskopoziomowe klasy powinny zależeć od klas wysoko poziomowych, a obie od swoich abstrakcji.
+- Abstrakcję nie powinny polegać na szczegółach implementacyjnych. 
+- Szczegóły implementacyjne powinny polegać na abstrakcji.
+- czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).
+
+<p class="advantages">Plusy</p>
+- minimalizowanie zależności (loose coupling)
+- elastyczność - łatwiej wprowadzać zmiany 
 
 <hr>
 
@@ -97,25 +103,30 @@ Można to rozszerzyć o:
   - Obiektu stworzonego wewnątrz tej metody.
   - Bezpośredniego pola obiektu.
   - Np. nie powinno się stosować wywołań typu A.getB().getC().getD.getName().
-- Dlaczego? Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali.
+  
+<p class="advantages">Plusy</p>
+- Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali
 
 ## SLAP - Single Level of Abstraction Principle
 - Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali.
-- Wpływa to na czytelność i łatwiejsze utrzymanie kodu.
+
+<p class="advantages">Plusy</p>
+- Czytelność i łatwiejsze utrzymanie kodu
 
 ## Composition Over Inheritance
 - Kompozycja ponad dziedziczenie, czyli preferuj relacje B "zawiera/używa A" zamiast "jest A".
-- Zmniejsza to zależności między klasami. Używając dziedziczenia łatwiej też o złamanie [Liskov substitution principle](#l---liskov-substitution-principle)
 - W większości wypadów możemy całkowicie zrezygnować z dziedziczenia w naszej aplikacji (Oczywiście chodzi o dziedziczenie z **klas**, nie z interfejsów). Jest to zalecany sposób projektowania aplikacji.
 - Stosuj dziedziczenie tylko gdy [LSP](#l---liskov-substitution-principle) nie jest złamana i naprawdę tego potrzebujesz.
+
+<p class="advantages">Plusy</p>
+- Zmniejsza to zależności między klasami
+- Używając dziedziczenia łatwiej też o złamanie [Liskov substitution principle](#l---liskov-substitution-principle)
 
 ## Encapsulate What Changes
 - Miejsca, które są najbardziej prawdopodobne do zmiany powinny być schowane (zhermetyzowane) pod API.
 
 <p class="advantages">Plusy</p>
-
 - Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę
-
 
 <hr>
 
@@ -124,14 +135,27 @@ Można to rozszerzyć o:
 ## CPP - Common Closure Principle
 - Klasy zmieniające się razem powinny być pakietowane razem
 - Izolacja zmian do zakresu pakietu
-- Ściśle powiązana z OCP na poziomie klas
-- Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie. Zasada minimalizuje liczbę pakietów do zmiany w przypadku zmiany wymagań.
+- Ściśle powiązana z [OCP](#o---open/closed-principle) na poziomie klas
+- Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie. 
+
+<p class="advantages">Plusy</p>
+- Minimalizuje to liczbę pakietów do zmiany w przypadku zmiany wymagań.
+- Nie trzeba przeszukiwać kilku różnych pakietów w celu wprowadzenia zmiany
 
 ## REP - Reuse-release equivalence principle
-- Reużywalność pakietu jest ściśle związana z jego cyklem wytwórczym
+- Ponownie użycie kodu to nie kopiowanie klasy z jednego projektu do drugiego. Jeżeli chcemy użyć ponownie kod to należy go wydzielić do biblioteki czy modułu, który później możemy użyć ponownie.
+- Klasy, które są przeznaczone do ponownego wykorzystania, powinien być w jednej paczce, która może stać się reużywalną biblioteką. Nie powinny się tam znaleźć te, które nie są przeznaczone do ponownego wykorzystania. W skrócie - albo wszystkie są reużywalne, albo żadne.
+- Powinny to być również klasy, które są z jednej "rodziny". Klasy niezwiązane z przeznaczeniem pakietu nie powinny się tam znaleźć.
+
+<p class="advantages">Plusy</p>
+
+- Gdy autor oryginalnego kodu wprowadzi zmianę – w szczególności poprawi jakiś błąd – wówczas każdy może w łatwy sposób skorzystać ze zmian pobierając nową wersję biblioteki, zamiast zmieniać coś samodzielnie - a w przypadku, gdy my jesteśmy autorami, dokonywać zmian w co najmniej dwóch miejscach za każdym razem.
 
 ## CRP - Common-reuse principle
 - Klasy wspólnie używane powinny być wspólnie pakietowane
+
+<p class="advantages">Plusy</p>
+- Lepsza spójność i czytelność systemu
 
 <hr>
 
@@ -139,8 +163,10 @@ Można to rozszerzyć o:
 
 ## Minimise Coupling
 - Minimalizuj powiązania między pakietami/klasami. Mniejsza ilość zależności jest lepsza.
-- Dlaczego? Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B.
 - Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie [Law of Demeter](#LoD---Law-of-Demeter)
+
+<p class="advantages">Plusy</p>
+- Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B.
 
 ## ADP - Acyclic dependencies principle
 - Zasada ta mówi, że w strukturze zależności nie powinno być zapętleń/cykli.
@@ -152,10 +178,16 @@ A &larr;-------- C
 </pre>
 - Możemy temu zapobiec stosując [Dependency inversion principle](#D---Dependency-inversion-principle), wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności.
 
+<p class="advantages">Plusy</p>
+- łatwiej zrozumieć i utrzymać system
+
 ## SDP - Stable-dependencies principle
 - Pakiet, który jest zmienny nie powinien zależeć od pakietu, który jest trudny do zmiany.
 - Zależności tego pakietu powinny być bardziej stabilne niż on sam.
 - Taką samą zasadę możemy stosować w przypadku klas.
+
+<p class="advantages">Plusy</p>
+- Zmniejsza efekt łancuchowej reakcji, która wymusza modyfikację kodu w kilku innych miejscach po wprowadzeniu jednej zmiany
 
 ## SAP - Stable-abstractions principle
 - Stabilny pakiet (trudny do zmiany) powinien być maksymalnie abstrakcyjny (czyli np. w większości operować na interfejsach), aby jego stabilność nie uniemożliwiała jego rozszerzania.

@@ -18,7 +18,6 @@ Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowani
 ## DRY - Don’t Repeat Yourself
 - Jedna z podstawowych zasad programowania - **nie powtarzaj się**. Wielokrotne użycie tego samego kodu to podstawa programowania. Nie ma miejsca na kopiuj/wklej.
 - Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać.
-- Nie dotyczy testów i dokumentacji*
 
 <p class="advantages">Plusy</p>
 

@@ -1,4 +1,261 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.6.2">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2017-11-26T13:16:59+01:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - jaskinia programisty. Blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych, dla każdego programisty.</subtitle><entry><title type="html">Jak uczyć się do matury z informatyki?</title><link href="https://devcave.pl/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki" rel="alternate" type="text/html" title="Jak uczyć się do matury z informatyki?" /><published>2017-11-25T13:00:00+01:00</published><updated>2017-11-25T13:00:00+01:00</updated><id>https://devcave.pl/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki</id><content type="html" xml:base="https://devcave.pl/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki">&lt;p&gt;Pierwsze, co trzeba sobie uświadomić, to to, że matura z informatyki nie wymaga od nas jakiejś bardzo dobrej znajomości programowania. Niestety, to, na czym trzeba się skupić to Excel i Access. Z programowania wystarczą podstawy programowania proceduralnego.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.6.2">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2017-11-30T14:54:19+01:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - jaskinia programisty. Blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych, dla każdego programisty.</subtitle><entry><title type="html">Zasady projektowania obiektowego</title><link href="https://devcave.pl/notatnik-juniora/zasady-projektowania-kodu" rel="alternate" type="text/html" title="Zasady projektowania obiektowego" /><published>2017-11-30T13:00:00+01:00</published><updated>2017-11-30T13:00:00+01:00</updated><id>https://devcave.pl/notatnik-juniora/zasady-projektowania-kodu</id><content type="html" xml:base="https://devcave.pl/notatnik-juniora/zasady-projektowania-kodu">&lt;p&gt;Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami ;)&lt;/p&gt;
+
+&lt;h1 id=&quot;ogólne&quot;&gt;Ogólne&lt;/h1&gt;
+
+&lt;h2 id=&quot;dry---dont-repeat-yourself&quot;&gt;DRY - Don’t Repeat Yourself&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Jedna z podstawowych zasad programowania - &lt;strong&gt;nie powtarzaj się&lt;/strong&gt;. Wielokrotne użycie tego samego kodu to podstawa programowania. Nie ma miejsca na kopiuj/wklej.&lt;/li&gt;
+  &lt;li&gt;Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lepsza czytelność kodu oraz łatwość w utrzymaniu.&lt;/li&gt;
+  &lt;li&gt;Zmiana implementacji tylko w jednym miejscu.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;kiss---keep-it-simple-stupid&quot;&gt;KISS - Keep it simple, stupid!&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc ławy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku.&lt;/li&gt;
+  &lt;li&gt;Większość systemów działa najlepiej, gdy polegają na prostocie, a nie na złożoności.&lt;/li&gt;
+  &lt;li&gt;Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia.&lt;/li&gt;
+  &lt;li&gt;Gdy po jakimś czasie wracasz do &lt;strong&gt;swojego&lt;/strong&gt; kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Można to rozszerzyć o zasadę:&lt;/p&gt;
+
+&lt;h3 id=&quot;code-for-the-maintainer&quot;&gt;Code for the Maintainer&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Czyli, programuj tak jakbyś to robił dla osoby, która będzie później utrzymywać ten kod. “Rób to tak jakby to był brutalny psychopata, który wie gdzie mieszkasz”.&lt;/li&gt;
+  &lt;li&gt;Dlaczego? Utrzymywanie kodu to (przeważnie) najbardziej wymagająca i większa część pracy programistów. Nie powinniśmy utrudniać sobie tego zadania.&lt;/li&gt;
+  &lt;li&gt;Zadbaj o to, aby nie trzeba było się zbytnio głowić nad kawałkiem Twojego kodu.&lt;/li&gt;
+  &lt;li&gt;Zawsze pozostaw po sobie kod czystszy niż go zastałeś.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Szybciej i łatwiej zrozumieć kod.&lt;/li&gt;
+  &lt;li&gt;Mniejsza ilość potencjalnych bugów.&lt;/li&gt;
+  &lt;li&gt;łatwość w utrzymaniu i modyfikowaniu kodu.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;solid&quot;&gt;SOLID&lt;/h2&gt;
+
+&lt;h3 id=&quot;s---single-responsibility-principle&quot;&gt;S - Single responsibility principle&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Klasa powinna być odpowiedzialna za pojedynczy obszar. Nie powinno być więcej powodów niż jeden, aby klasa się zmieniła.&lt;/li&gt;
+  &lt;li&gt;Odpowiedzialność może być zdefiniowana jako powód do zmiany, zatem klasa powinna mieć tylko jeden taki powód, a więc jedną odpowiedzialność.&lt;/li&gt;
+  &lt;li&gt;Klasa realizuję pojedyncze zadanie.&lt;/li&gt;
+  &lt;li&gt;Gdy wymagana jest zmiana, powinna ona objąć tylko jedną klasę lub pakiet.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Lepsza czytelność kodu.&lt;/li&gt;
+  &lt;li&gt;Łatwość w utrzymaniu i modyfikowaniu kodu.&lt;/li&gt;
+  &lt;li&gt;Nie musimy skakać po kilku pakietach/klasach, aby wprowadzić pojedyńczą zmianę.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;o---openclosed-principle&quot;&gt;O - Open/closed principle&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Powinieneś być w stanie rozszerzać swoje klasy bez jej modyfikacji.&lt;/li&gt;
+  &lt;li&gt;Klasy powinny być otwarte na rozszerzanie, a zamknięte na modyfikację.&lt;/li&gt;
+  &lt;li&gt;Polegaj na abstrakcji i polimorfizmie&lt;/li&gt;
+  &lt;li&gt;Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowane przez ify czy konstrukcję switch.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Łatwiejsze i bardziej stabline rozbudowywanie systemu.&lt;/li&gt;
+  &lt;li&gt;Minimalizujemy potrzebę modyfikowania instniejącego kodu w wielu miejscach, gdy dodajemy np. kolejny przypadek czegoś.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;l---liskov-substitution-principle&quot;&gt;L - Liskov substitution principle&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Klasy w programie powinny być podmienialne przez swoje podklasy bez naruszania poprawności programu, czyli klasa dziedzicząca musi być dobrym odpowiednikiem klasy bazowej.&lt;/li&gt;
+  &lt;li&gt;Podklasa nie powinna robić mniej niż klasa bazowa. Czyli zawsze powinna robić więcej.&lt;/li&gt;
+  &lt;li&gt;Zobacz popularny przykład złego zastosowania dziedziczenia “Square extends Rectangle”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Przewidywalne zachowania obiektów&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;i---interface-segregation-principle&quot;&gt;I - Interface segregation principle&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu.&lt;/li&gt;
+  &lt;li&gt;Powinno się projektować małe i zwarte interfejsy.&lt;/li&gt;
+  &lt;li&gt;Klasa nie powinna implementować interfejsu, przez który naruszy &lt;a href=&quot;#S---Single-responsibility-principle&quot;&gt;Single responsibility principle&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z “dużego” interfejsu.&lt;/li&gt;
+  &lt;li&gt;Nie naruszanie &lt;a href=&quot;#S---Single-responsibility-principle&quot;&gt;Single responsibility principle&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;d---dependency-inversion-principle&quot;&gt;D - Dependency inversion principle&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Niskopoziomowe klasy powinny zależeć od klas wysoko poziomowych, a obie od swoich abstrakcji.&lt;/li&gt;
+  &lt;li&gt;Abstrakcję nie powinny polegać na szczegółach implementacyjnych.&lt;/li&gt;
+  &lt;li&gt;Szczegóły implementacyjne powinny polegać na abstrakcji.&lt;/li&gt;
+  &lt;li&gt;czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;minimalizowanie zależności (loose coupling)&lt;/li&gt;
+  &lt;li&gt;elastyczność - łatwiej wprowadzać zmiany&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;lod---law-of-demeter&quot;&gt;LoD - Law of Demeter&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nie rozmawiaj z obcymi. Rozmawiaj tylko z przyjaciółmi.&lt;/li&gt;
+  &lt;li&gt;Co to znaczy? Metoda obiektu powinna wywoływać metody tylko od:
+    &lt;ul&gt;
+      &lt;li&gt;Swojego obiektu.&lt;/li&gt;
+      &lt;li&gt;Argumentu przekazanego do metody.&lt;/li&gt;
+      &lt;li&gt;Obiektu stworzonego wewnątrz tej metody.&lt;/li&gt;
+      &lt;li&gt;Bezpośredniego pola obiektu.&lt;/li&gt;
+      &lt;li&gt;Np. nie powinno się stosować wywołań typu A.getB().getC().getD.getName().&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;slap---single-level-of-abstraction-principle&quot;&gt;SLAP - Single Level of Abstraction Principle&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Czytelność i łatwiejsze utrzymanie kodu&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;composition-over-inheritance&quot;&gt;Composition Over Inheritance&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Kompozycja ponad dziedziczenie, czyli preferuj relacje B “zawiera/używa A” zamiast “jest A”.&lt;/li&gt;
+  &lt;li&gt;W większości wypadów możemy całkowicie zrezygnować z dziedziczenia w naszej aplikacji (Oczywiście chodzi o dziedziczenie z &lt;strong&gt;klas&lt;/strong&gt;, nie z interfejsów). Jest to zalecany sposób projektowania aplikacji.&lt;/li&gt;
+  &lt;li&gt;Stosuj dziedziczenie tylko gdy &lt;a href=&quot;#l---liskov-substitution-principle&quot;&gt;LSP&lt;/a&gt; nie jest złamana i naprawdę tego potrzebujesz.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Zmniejsza to zależności między klasami&lt;/li&gt;
+  &lt;li&gt;Używając dziedziczenia łatwiej też o złamanie &lt;a href=&quot;#l---liskov-substitution-principle&quot;&gt;Liskov substitution principle&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;encapsulate-what-changes&quot;&gt;Encapsulate What Changes&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Miejsca, które są najbardziej prawdopodobne do zmiany powinny być schowane (zhermetyzowane) pod API.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;projektowanie-pakietów&quot;&gt;Projektowanie pakietów&lt;/h1&gt;
+
+&lt;h2 id=&quot;cpp---common-closure-principle&quot;&gt;CPP - Common Closure Principle&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Klasy zmieniające się razem powinny być pakietowane razem&lt;/li&gt;
+  &lt;li&gt;Izolacja zmian do zakresu pakietu&lt;/li&gt;
+  &lt;li&gt;Ściśle powiązana z &lt;a href=&quot;#o---open/closed-principle&quot;&gt;OCP&lt;/a&gt; na poziomie klas&lt;/li&gt;
+  &lt;li&gt;Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Minimalizuje to liczbę pakietów do zmiany w przypadku zmiany wymagań.&lt;/li&gt;
+  &lt;li&gt;Nie trzeba przeszukiwać kilku różnych pakietów w celu wprowadzenia zmiany&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;rep---reuse-release-equivalence-principle&quot;&gt;REP - Reuse-release equivalence principle&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ponownie użycie kodu to nie kopiowanie klasy z jednego projektu do drugiego. Jeżeli chcemy użyć ponownie kod to należy go wydzielić do biblioteki czy modułu, który później możemy użyć ponownie.&lt;/li&gt;
+  &lt;li&gt;Klasy, które są przeznaczone do ponownego wykorzystania, powinien być w jednej paczce, która może stać się reużywalną biblioteką. Nie powinny się tam znaleźć te, które nie są przeznaczone do ponownego wykorzystania. W skrócie - albo wszystkie są reużywalne, albo żadne.&lt;/li&gt;
+  &lt;li&gt;Powinny to być również klasy, które są z jednej “rodziny”. Klasy niezwiązane z przeznaczeniem pakietu nie powinny się tam znaleźć.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Gdy autor oryginalnego kodu wprowadzi zmianę – w szczególności poprawi jakiś błąd – wówczas każdy może w łatwy sposób skorzystać ze zmian pobierając nową wersję biblioteki, zamiast zmieniać coś samodzielnie - a w przypadku, gdy my jesteśmy autorami, dokonywać zmian w co najmniej dwóch miejscach za każdym razem.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;crp---common-reuse-principle&quot;&gt;CRP - Common-reuse principle&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Klasy wspólnie używane powinny być wspólnie pakietowane&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Lepsza spójność i czytelność systemu&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;zależności-miedzy-pakietami--klasami&quot;&gt;Zależności miedzy pakietami / klasami&lt;/h1&gt;
+
+&lt;h2 id=&quot;minimise-coupling&quot;&gt;Minimise Coupling&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Minimalizuj powiązania między pakietami/klasami. Mniejsza ilość zależności jest lepsza.&lt;/li&gt;
+  &lt;li&gt;Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie &lt;a href=&quot;#LoD---Law-of-Demeter&quot;&gt;Law of Demeter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;adp---acyclic-dependencies-principle&quot;&gt;ADP - Acyclic dependencies principle&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Zasada ta mówi, że w strukturze zależności nie powinno być zapętleń/cykli.&lt;/li&gt;
+  &lt;li&gt;Przykładowa struktura łamiąca tą zasadę będzie gdy: pakiet A ma zależność w pakiecie B, który ma zależność w pakiecie C, który z kolei ma zależność w pakiecie A.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&quot;text-diagram&quot;&gt;
+A &amp;larr;-------- C
+|           &amp;uarr;
+'---&amp;rarr; B ----&lt;sup&gt;|&lt;/sup&gt;
+&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;Możemy temu zapobiec stosując &lt;a href=&quot;#D---Dependency-inversion-principle&quot;&gt;Dependency inversion principle&lt;/a&gt;, wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;łatwiej zrozumieć i utrzymać system&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;sdp---stable-dependencies-principle&quot;&gt;SDP - Stable-dependencies principle&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Pakiet, który jest zmienny nie powinien zależeć od pakietu, który jest trudny do zmiany.&lt;/li&gt;
+  &lt;li&gt;Zależności tego pakietu powinny być bardziej stabilne niż on sam.&lt;/li&gt;
+  &lt;li&gt;Taką samą zasadę możemy stosować w przypadku klas.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Zmniejsza efekt łancuchowej reakcji, która wymusza modyfikację kodu w kilku innych miejscach po wprowadzeniu jednej zmiany&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;sap---stable-abstractions-principle&quot;&gt;SAP - Stable-abstractions principle&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Stabilny pakiet (trudny do zmiany) powinien być maksymalnie abstrakcyjny (czyli np. w większości operować na interfejsach), aby jego stabilność nie uniemożliwiała jego rozszerzania.&lt;/li&gt;
+  &lt;li&gt;Niestabilny pakiet (łatwy do zmiany) powinien byc maksymalnie konkretny (czyli w większości operować na implementacjach) jako że jego niestabilność pozwala w łatwy sposób zmienić jego konkretną implementację.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Codeboy</name></author><category term="Notatnik-Juniora" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><summary type="html">Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami ;) Ogólne DRY - Don’t Repeat Yourself Jedna z podstawowych zasad programowania - nie powtarzaj się. Wielokrotne użycie tego samego kodu to podstawa programowania. Nie ma miejsca na kopiuj/wklej. Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać. Plusy Lepsza czytelność kodu oraz łatwość w utrzymaniu. Zmiana implementacji tylko w jednym miejscu. KISS - Keep it simple, stupid! Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc ławy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku. Większość systemów działa najlepiej, gdy polegają na prostocie, a nie na złożoności. Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia. Gdy po jakimś czasie wracasz do swojego kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;) Można to rozszerzyć o zasadę: Code for the Maintainer Czyli, programuj tak jakbyś to robił dla osoby, która będzie później utrzymywać ten kod. “Rób to tak jakby to był brutalny psychopata, który wie gdzie mieszkasz”. Dlaczego? Utrzymywanie kodu to (przeważnie) najbardziej wymagająca i większa część pracy programistów. Nie powinniśmy utrudniać sobie tego zadania. Zadbaj o to, aby nie trzeba było się zbytnio głowić nad kawałkiem Twojego kodu. Zawsze pozostaw po sobie kod czystszy niż go zastałeś. Plusy Szybciej i łatwiej zrozumieć kod. Mniejsza ilość potencjalnych bugów. łatwość w utrzymaniu i modyfikowaniu kodu. SOLID S - Single responsibility principle Klasa powinna być odpowiedzialna za pojedynczy obszar. Nie powinno być więcej powodów niż jeden, aby klasa się zmieniła. Odpowiedzialność może być zdefiniowana jako powód do zmiany, zatem klasa powinna mieć tylko jeden taki powód, a więc jedną odpowiedzialność. Klasa realizuję pojedyncze zadanie. Gdy wymagana jest zmiana, powinna ona objąć tylko jedną klasę lub pakiet. Plusy Lepsza czytelność kodu. Łatwość w utrzymaniu i modyfikowaniu kodu. Nie musimy skakać po kilku pakietach/klasach, aby wprowadzić pojedyńczą zmianę. O - Open/closed principle Powinieneś być w stanie rozszerzać swoje klasy bez jej modyfikacji. Klasy powinny być otwarte na rozszerzanie, a zamknięte na modyfikację. Polegaj na abstrakcji i polimorfizmie Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowane przez ify czy konstrukcję switch. Plusy Łatwiejsze i bardziej stabline rozbudowywanie systemu. Minimalizujemy potrzebę modyfikowania instniejącego kodu w wielu miejscach, gdy dodajemy np. kolejny przypadek czegoś. L - Liskov substitution principle Klasy w programie powinny być podmienialne przez swoje podklasy bez naruszania poprawności programu, czyli klasa dziedzicząca musi być dobrym odpowiednikiem klasy bazowej. Podklasa nie powinna robić mniej niż klasa bazowa. Czyli zawsze powinna robić więcej. Zobacz popularny przykład złego zastosowania dziedziczenia “Square extends Rectangle” Plusy Przewidywalne zachowania obiektów I - Interface segregation principle Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu. Powinno się projektować małe i zwarte interfejsy. Klasa nie powinna implementować interfejsu, przez który naruszy Single responsibility principle Plusy Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z “dużego” interfejsu. Nie naruszanie Single responsibility principle D - Dependency inversion principle Niskopoziomowe klasy powinny zależeć od klas wysoko poziomowych, a obie od swoich abstrakcji. Abstrakcję nie powinny polegać na szczegółach implementacyjnych. Szczegóły implementacyjne powinny polegać na abstrakcji. czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna). Plusy minimalizowanie zależności (loose coupling) elastyczność - łatwiej wprowadzać zmiany LoD - Law of Demeter Nie rozmawiaj z obcymi. Rozmawiaj tylko z przyjaciółmi. Co to znaczy? Metoda obiektu powinna wywoływać metody tylko od: Swojego obiektu. Argumentu przekazanego do metody. Obiektu stworzonego wewnątrz tej metody. Bezpośredniego pola obiektu. Np. nie powinno się stosować wywołań typu A.getB().getC().getD.getName(). Plusy Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali SLAP - Single Level of Abstraction Principle Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali. Plusy Czytelność i łatwiejsze utrzymanie kodu Composition Over Inheritance Kompozycja ponad dziedziczenie, czyli preferuj relacje B “zawiera/używa A” zamiast “jest A”. W większości wypadów możemy całkowicie zrezygnować z dziedziczenia w naszej aplikacji (Oczywiście chodzi o dziedziczenie z klas, nie z interfejsów). Jest to zalecany sposób projektowania aplikacji. Stosuj dziedziczenie tylko gdy LSP nie jest złamana i naprawdę tego potrzebujesz. Plusy Zmniejsza to zależności między klasami Używając dziedziczenia łatwiej też o złamanie Liskov substitution principle Encapsulate What Changes Miejsca, które są najbardziej prawdopodobne do zmiany powinny być schowane (zhermetyzowane) pod API. Plusy Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę Projektowanie pakietów CPP - Common Closure Principle Klasy zmieniające się razem powinny być pakietowane razem Izolacja zmian do zakresu pakietu Ściśle powiązana z OCP na poziomie klas Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie. Plusy Minimalizuje to liczbę pakietów do zmiany w przypadku zmiany wymagań. Nie trzeba przeszukiwać kilku różnych pakietów w celu wprowadzenia zmiany REP - Reuse-release equivalence principle Ponownie użycie kodu to nie kopiowanie klasy z jednego projektu do drugiego. Jeżeli chcemy użyć ponownie kod to należy go wydzielić do biblioteki czy modułu, który później możemy użyć ponownie. Klasy, które są przeznaczone do ponownego wykorzystania, powinien być w jednej paczce, która może stać się reużywalną biblioteką. Nie powinny się tam znaleźć te, które nie są przeznaczone do ponownego wykorzystania. W skrócie - albo wszystkie są reużywalne, albo żadne. Powinny to być również klasy, które są z jednej “rodziny”. Klasy niezwiązane z przeznaczeniem pakietu nie powinny się tam znaleźć. Plusy Gdy autor oryginalnego kodu wprowadzi zmianę – w szczególności poprawi jakiś błąd – wówczas każdy może w łatwy sposób skorzystać ze zmian pobierając nową wersję biblioteki, zamiast zmieniać coś samodzielnie - a w przypadku, gdy my jesteśmy autorami, dokonywać zmian w co najmniej dwóch miejscach za każdym razem. CRP - Common-reuse principle Klasy wspólnie używane powinny być wspólnie pakietowane Plusy Lepsza spójność i czytelność systemu Zależności miedzy pakietami / klasami Minimise Coupling Minimalizuj powiązania między pakietami/klasami. Mniejsza ilość zależności jest lepsza. Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie Law of Demeter Plusy Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B. ADP - Acyclic dependencies principle Zasada ta mówi, że w strukturze zależności nie powinno być zapętleń/cykli. Przykładowa struktura łamiąca tą zasadę będzie gdy: pakiet A ma zależność w pakiecie B, który ma zależność w pakiecie C, który z kolei ma zależność w pakiecie A. A &amp;larr;-------- C | &amp;uarr; '---&amp;rarr; B ----| Możemy temu zapobiec stosując Dependency inversion principle, wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności. Plusy łatwiej zrozumieć i utrzymać system SDP - Stable-dependencies principle Pakiet, który jest zmienny nie powinien zależeć od pakietu, który jest trudny do zmiany. Zależności tego pakietu powinny być bardziej stabilne niż on sam. Taką samą zasadę możemy stosować w przypadku klas. Plusy Zmniejsza efekt łancuchowej reakcji, która wymusza modyfikację kodu w kilku innych miejscach po wprowadzeniu jednej zmiany SAP - Stable-abstractions principle Stabilny pakiet (trudny do zmiany) powinien być maksymalnie abstrakcyjny (czyli np. w większości operować na interfejsach), aby jego stabilność nie uniemożliwiała jego rozszerzania. Niestabilny pakiet (łatwy do zmiany) powinien byc maksymalnie konkretny (czyli w większości operować na implementacjach) jako że jego niestabilność pozwala w łatwy sposób zmienić jego konkretną implementację.</summary></entry><entry><title type="html">Jak uczyć się do matury z informatyki?</title><link href="https://devcave.pl/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki" rel="alternate" type="text/html" title="Jak uczyć się do matury z informatyki?" /><published>2017-11-25T13:00:00+01:00</published><updated>2017-11-25T13:00:00+01:00</updated><id>https://devcave.pl/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki</id><content type="html" xml:base="https://devcave.pl/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki">&lt;p&gt;Pierwsze, co trzeba sobie uświadomić, to to, że matura z informatyki nie wymaga od nas jakiejś bardzo dobrej znajomości programowania. Niestety, to, na czym trzeba się skupić to Excel i Access. Z programowania wystarczą podstawy programowania proceduralnego.&lt;/p&gt;
 
 &lt;h1 id=&quot;jak-wygląda-matura-z-informatyki&quot;&gt;Jak wygląda matura z informatyki?&lt;/h1&gt;
 &lt;p&gt;Matura z informatyki jest podzielona na dwie części. W pierwszej mamy do dyspozycji tylko długopis i kalkulator, a w drugiej komputer.&lt;/p&gt;
@@ -694,227 +951,4 @@ Jeśli nie masz &lt;a href=&quot;https://www.java.com/pl/download/&quot;&gt;Javy
 
 &lt;p&gt;Gdy nie było po drodze żadnych błędów i jesteśmy zadowoleni z wyniku, możemy pushować ;)&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git push&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Codeboy</name></author><category term="DajSiePoznac2017" /><category term="DajSiePoznac2017" /><category term="Git" /><summary type="html">Komu nie zdarzyło się chociaż raz przez pomyłkę / nieuwagę / niewiedzę wrzucić wrażliwy plik do repozytorium? Jeśli tobie, to zazdroszczę. Jednak nie wszystko stracone! Można się go pozbyć. BFG Repo-Cleaner Z pomocą przychodzi BFG! Pobieramy go z oficjalnej strony i kilkoma poleceniami pozbędziemy się niechcianego pliku z repozytorium Git-a: Zakładam, że pobrany plik jest na pulpicie. Otwieramy konsolę i przechodzimy na pulpit: cd Desktop Następnie musimy sklonować nasze repozytorium: git clone --mirror https://github.com/Nazwa-użytkownika/nazwa-repozytorium Jeśli używasz GitHub Desktop - dodaj ścieżkę do cmd git-a do zmiennej systemowej Path, aby móc korzystać z gita także w terminalu. Powinna wyglądać mniej więcej tak: C:\Users\Nazwa-użytkownika\AppData\Local\GitHub\PortableGit_(id)\cmd. Zmienne systemowe znajdziesz w Panel sterowania -&amp;gt; System i zabezpieczenia -&amp;gt; System -&amp;gt; Zaawansowane ustawienia systemu -&amp;gt; Zmienne środowiskowe -&amp;gt; Zmienne Systemowe. Pamiętaj o średniku przed wklejeniem ścieżki. Jak pewnie zauważyłeś, jest to plik jar, więc do jego uruchomienia będzie potrzebna nam Java. Jeśli nie masz Javy, zaopatrz się w nią! Jeśli nie chcesz za każdym razem podawać pełnej ścieżki (domyślnie: C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Java\jdk1.7.0\bin) do plików wykonywalnych Javy, dodaj ją również do [Path](https://www.java.com/pl/download/help/path.xml). Uruchamiamy go z flagą –delete-files oraz nazwą pliku(nie ścieżka) java -jar bfg-wersja.jar --delete-files nazwa-pliku.x Następnie przechodzimy do sklonowanego repozytorium cd nazwa-repozytorium.git I uruchamiamy komendę: git reflog expire --expire=now --all &amp;amp;&amp;amp; git gc --prune=now --aggressive Gdy nie było po drodze żadnych błędów i jesteśmy zadowoleni z wyniku, możemy pushować ;) git push</summary></entry><entry><title type="html">Webpack - zarządzanie modułami</title><link href="https://devcave.pl/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly" rel="alternate" type="text/html" title="Webpack - zarządzanie modułami" /><published>2017-05-22T02:12:00+02:00</published><updated>2017-05-22T02:12:00+02:00</updated><id>https://devcave.pl/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly</id><content type="html" xml:base="https://devcave.pl/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly">&lt;p&gt;Dzielenie kodu na moduły pozwala odseparować niezwiązane ze sobą części, co wpływa na porządek w projekcie. Gdy pracujemy z danym elementem strony nie chcemy przecież przekopywać się przez masę innych niezwiązanych ze sobą funkcji w celu znalezienia tego, czego szukamy. No dobrze, podzielimy nasz kod, np. na 15 plików JS i 10 plików CSS, ale czy to oznacza, że teraz powinniśmy załączyć 15 tagów &amp;#60;script&amp;#62; i 10 tagów &amp;#60;link&amp;#62; w pliku HTML? Oczywiście, że nie! Duża ilość osobno podpiętych plików znacząco wpływa na wydajność ładowania naszej aplikacji, gdyż każdy plik to osobne żądanie HTTP. Tu z pomocą przychodzi nam Webpack.&lt;/p&gt;
-
-&lt;h1 id=&quot;webpack&quot;&gt;Webpack&lt;/h1&gt;
-
-&lt;p&gt;Webpack - jest to narzędzie, które pozwoli nam spiąć wszystkie nasze moduły w jeden plik, tzw. bundle. Dzięki temu później będziemy mogli załączyć na stronę pojedynczy plik, co jest dużo bardziej wydajnym rozwiązaniem. Ponadto, Webpack może dla nas zoptymalizować wielkość plików czy nawet przetranspilować kod ES6 używając Babel i wiele więcej. Wszystko dzięki dodatkowym loaderom i pluginom.&lt;/p&gt;
-
-&lt;h2 id=&quot;instalacja&quot;&gt;Instalacja&lt;/h2&gt;
-
-&lt;p&gt;Webpack dodajemy do naszych dev-zależności poleceniem:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;npm install webpack &lt;span class=&quot;nt&quot;&gt;--save-dev&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;konfiguracja&quot;&gt;Konfiguracja&lt;/h2&gt;
-
-&lt;p&gt;Konfiguracja Webpacka przechowywana jest domyślnie w pliku &lt;span class=&quot;file&quot;&gt;webpack.config.js&lt;/span&gt;, a jej podstawowa wersja wygląda tak:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./js/main.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./js/start.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'dist'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'[name].bundle.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;hx&gt;Gdzie:&lt;/hx&gt;
-&lt;ul&gt;
-  &lt;li&gt;entry - para nazwa - ścieżka, gdzie podajemy nazwę oraz wskazujemy plik, który łączy moduły.&lt;/li&gt;
-  &lt;li&gt;path - folder, do którego będą trafiać nasze paczki.&lt;/li&gt;
-  &lt;li&gt;filename - nazwa paczki, która powstanie z nazwy w entry i “.bundle.js”&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;lączenie-plików&quot;&gt;Lączenie plików&lt;/h2&gt;
-
-&lt;p&gt;Aby Webpack wiedział jakie pliki ma połączyć, musimy to podać w plikach zadeklarowanych w entry. Służy do tego metoda:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'scieżka'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;Dla przykładu:&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'jquery'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./nav.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./laptop.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./typing.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./startBtn'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p class=&quot;note&quot;&gt;
-Zamiast scieżki można też podać nazwę pakietu zainstalowanego przez npm, tak jak w przykładzie: &lt;code class=&quot;highlight language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'jquery'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;
-&lt;/p&gt;
-
-&lt;h2 id=&quot;webpack--babel&quot;&gt;Webpack + Babel&lt;/h2&gt;
-
-&lt;p&gt;Teraz pozostało dla ułatwienia stworzyć sobie skrypt, który będzie uruchamiał webpacka. W tym celu do pliku &lt;span class=&quot;file&quot;&gt;package.json&lt;/span&gt; dodajemy  linię:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//...
-&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;c1&quot;&gt;//...
-&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;webpack&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;i teraz możemy stworzyć nasze pliki polecenim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;npm run build&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Aby stworzyć zoptymalizowaną wersję, musimy do skryptu przekazać parametr -p. Parametry do skryptów poprzedzamy –, a więc w ten sposób:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;npm run build &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p class=&quot;warning&quot;&gt;
-Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie działa z ES6. Problem ten rozwiąże Babel.
-&lt;/p&gt;
-
-&lt;p&gt;Babel transpiluje kod ES6 na zrozumiały dla starszych przeglądarek. Standardowo instalujemy go za pomocą npm:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;npm install babel-loader babel-core babel-preset-es2015 &lt;span class=&quot;nt&quot;&gt;--save-dev&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Ponadto musimy dodać go do konfiguracji w &lt;span class=&quot;file&quot;&gt;webpack.config.js&lt;/span&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//...
-&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;loaders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;js$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'babel-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;presets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'es2015'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}],&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;css&quot;&gt;CSS&lt;/h2&gt;
-
-&lt;p&gt;Pliki JS mamy z głowy, ale co z CSS? Do nich musimy pobrać kolejny loader, gdyż Webpack domyślnie wspiera tylko JS. A więc:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;npm install css-loader style-loader &lt;span class=&quot;nt&quot;&gt;--save-dev&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Następnie dodajemy loadery oraz plik CSS do &lt;span class=&quot;file&quot;&gt;webpack.config.js&lt;/span&gt;:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;  &lt;span class=&quot;nx&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./js/home/main.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;global&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./css/main.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;//...
-&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;loaders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;js$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'babel-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;presets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'es2015'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}],&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;css$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'style-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'css-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Pliki możemy łączyć standardowo za pomocą funkcji @import, np. plik &lt;span class=&quot;file&quot;&gt;main.css&lt;/span&gt; może wyglądać tak:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;url('./home/plik1.css')&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;url('./home/plik2.css')&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;url('./home/plik3.css')&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;/*itd.*/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Jednak Webpack nie łączy tą metoda wszystkich importów w jeden plik. Dodaje go inline do DOM, co ma kilka wad. Wydajność jest lepsza tylko dla małych ilości CSS. Uniemożliwia to ładowanie naszych plików CSS do cache przeglądarki, bo poprostu ich nie ma! Wtedy, za każdym odświeżeniem strony wszystko musi być załadowane od nowa, co w przypadku dużych ilości styli nie jest zbyt optymalne. Rozwiązaniem jest plugin ExtractTextPlugin, dzięki któremu połączymy pliki CSS w jeden i będziemy go mogli tradycyjnie załączyć w HTML. Instalacja:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;npm install extract-text-webpack-plugin &lt;span class=&quot;nt&quot;&gt;--save-dev&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Następnie w pliku &lt;span class=&quot;file&quot;&gt;webpack.config.js&lt;/span&gt; dodajemy stałą:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ExtractTextPlugin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'extract-text-webpack-plugin'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Oraz podmieniamy loadery CSS i definiujemy nowy plugin:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//...
-&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;loaders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;//...
-&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;css$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ExtractTextPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;fallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'style-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'css-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ExtractTextPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./[name].bundle.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Teraz, dzięki Webpackowi, możemy dzielić do woli pliki JS i CSS, a ostatecznie załączymy ich tzw. bundle.&lt;/p&gt;
-
-&lt;p class=&quot;warning&quot;&gt;
-Jeśli w twoich plikach, które łączysz, wystepują importy czcionek (np. w Bootstrap) Webpack wyrzuci błędy. Można to rozwiązać z pomocą &lt;a href=&quot;https://github.com/webpack-contrib/url-loader&quot;&gt;url-loader&lt;/a&gt;, &lt;u&gt;jednak warto je pominąć&lt;/u&gt;, gdyż często załączane jest kilka formatów (woff, woff2, eot, ttf). Url-loader przetworzyłby je wszystkie, co skutkowałoby ogromnym plikiem CSS. Normalnie, przeglądarka wybiera tylko jeden odpowiedni, a resztę pomija. Dlatego lepiej skorzystać z opcji dla css-loader, która wyłącza przetwarzanie @import url(), ale normalnie działa z @import:
-&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;		&lt;span class=&quot;c1&quot;&gt;//...
-&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nl&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;css$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ExtractTextPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;fallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'style-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;na&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'css-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Będziemy musieli wtedy inaczej łączyć pliki CSS (bez url()), np:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;'./home/plik1.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;'./home/plik2.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;'./home/plik3.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;/*itd.*/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;edit&quot;&gt;EDIT:&lt;/h2&gt;
-
-&lt;p class=&quot;warning&quot;&gt;Okazuje się, że jeśli z podaną konfiguracją używamy kilka &quot;entries&quot; na raz (zarówno pliki JS jak i CSS) powstają duplikaty dla plików CSS w wersji JS. Aby to obejść musimy nieco zmienić konfigurację &lt;span class=&quot;file&quot;&gt;webpack.config.js&lt;/span&gt; :
-&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ExtractTextPlugin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'extract-text-webpack-plugin'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;'home.bundle.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./js/home/main.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;'home.bundle.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./css/home/merge.css'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;'faq.bundle.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./js/faq.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'dist'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'[name]'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;loaders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;js$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'babel-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;presets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'es2015'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;css$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ExtractTextPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;fallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'style-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'css-loader'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ExtractTextPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./[name]'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Codeboy</name></author><category term="DajSiePoznac2017" /><category term="DajSiePoznac2017" /><category term="Javascript" /><summary type="html">Dzielenie kodu na moduły pozwala odseparować niezwiązane ze sobą części, co wpływa na porządek w projekcie. Gdy pracujemy z danym elementem strony nie chcemy przecież przekopywać się przez masę innych niezwiązanych ze sobą funkcji w celu znalezienia tego, czego szukamy. No dobrze, podzielimy nasz kod, np. na 15 plików JS i 10 plików CSS, ale czy to oznacza, że teraz powinniśmy załączyć 15 tagów &amp;#60;script&amp;#62; i 10 tagów &amp;#60;link&amp;#62; w pliku HTML? Oczywiście, że nie! Duża ilość osobno podpiętych plików znacząco wpływa na wydajność ładowania naszej aplikacji, gdyż każdy plik to osobne żądanie HTTP. Tu z pomocą przychodzi nam Webpack. Webpack Webpack - jest to narzędzie, które pozwoli nam spiąć wszystkie nasze moduły w jeden plik, tzw. bundle. Dzięki temu później będziemy mogli załączyć na stronę pojedynczy plik, co jest dużo bardziej wydajnym rozwiązaniem. Ponadto, Webpack może dla nas zoptymalizować wielkość plików czy nawet przetranspilować kod ES6 używając Babel i wiele więcej. Wszystko dzięki dodatkowym loaderom i pluginom. Instalacja Webpack dodajemy do naszych dev-zależności poleceniem: npm install webpack --save-dev Konfiguracja Konfiguracja Webpacka przechowywana jest domyślnie w pliku webpack.config.js, a jej podstawowa wersja wygląda tak: const path = require('path'); module.exports = { entry: { home: './js/main.js', start: './js/start.js', }, output: { path: path.join(__dirname, 'dist'), filename: '[name].bundle.js', }, }; Gdzie: entry - para nazwa - ścieżka, gdzie podajemy nazwę oraz wskazujemy plik, który łączy moduły. path - folder, do którego będą trafiać nasze paczki. filename - nazwa paczki, która powstanie z nazwy w entry i “.bundle.js” Lączenie plików Aby Webpack wiedział jakie pliki ma połączyć, musimy to podać w plikach zadeklarowanych w entry. Służy do tego metoda: require('scieżka'); Dla przykładu: require('jquery'); require('./nav.js'); require('./laptop.js'); require('./typing.js'); require('./startBtn'); Zamiast scieżki można też podać nazwę pakietu zainstalowanego przez npm, tak jak w przykładzie: require('jquery'); Webpack + Babel Teraz pozostało dla ułatwienia stworzyć sobie skrypt, który będzie uruchamiał webpacka. W tym celu do pliku package.json dodajemy linię: //... &quot;scripts&quot;: { //... &quot;build&quot;: &quot;webpack&quot;, }, //... i teraz możemy stworzyć nasze pliki polecenim: npm run build Aby stworzyć zoptymalizowaną wersję, musimy do skryptu przekazać parametr -p. Parametry do skryptów poprzedzamy –, a więc w ten sposób: npm run build -- -p Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie działa z ES6. Problem ten rozwiąże Babel. Babel transpiluje kod ES6 na zrozumiały dla starszych przeglądarek. Standardowo instalujemy go za pomocą npm: npm install babel-loader babel-core babel-preset-es2015 --save-dev Ponadto musimy dodać go do konfiguracji w webpack.config.js //... module: { loaders: [ { test: /\.js$/, loader: 'babel-loader', query: { presets: ['es2015', { modules: false }], }, }, ], }, CSS Pliki JS mamy z głowy, ale co z CSS? Do nich musimy pobrać kolejny loader, gdyż Webpack domyślnie wspiera tylko JS. A więc: npm install css-loader style-loader --save-dev Następnie dodajemy loadery oraz plik CSS do webpack.config.js: entry: { home: './js/home/main.js', global: './css/main.css', }, //... module: { loaders: [ { test: /\.js$/, loader: 'babel-loader', query: { presets: ['es2015', { modules: false }], }, }, { test: /\.css$/, use: ['style-loader', 'css-loader'], }, ], }, Pliki możemy łączyć standardowo za pomocą funkcji @import, np. plik main.css może wyglądać tak: @import url('./home/plik1.css'); @import url('./home/plik2.css'); @import url('./home/plik3.css'); /*itd.*/ Jednak Webpack nie łączy tą metoda wszystkich importów w jeden plik. Dodaje go inline do DOM, co ma kilka wad. Wydajność jest lepsza tylko dla małych ilości CSS. Uniemożliwia to ładowanie naszych plików CSS do cache przeglądarki, bo poprostu ich nie ma! Wtedy, za każdym odświeżeniem strony wszystko musi być załadowane od nowa, co w przypadku dużych ilości styli nie jest zbyt optymalne. Rozwiązaniem jest plugin ExtractTextPlugin, dzięki któremu połączymy pliki CSS w jeden i będziemy go mogli tradycyjnie załączyć w HTML. Instalacja: npm install extract-text-webpack-plugin --save-dev Następnie w pliku webpack.config.js dodajemy stałą: const ExtractTextPlugin = require('extract-text-webpack-plugin'); Oraz podmieniamy loadery CSS i definiujemy nowy plugin: //... loaders: [ //... { test: /\.css$/, use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader', }), }, ], plugins: [ new ExtractTextPlugin('./[name].bundle.css'), ], Teraz, dzięki Webpackowi, możemy dzielić do woli pliki JS i CSS, a ostatecznie załączymy ich tzw. bundle. Jeśli w twoich plikach, które łączysz, wystepują importy czcionek (np. w Bootstrap) Webpack wyrzuci błędy. Można to rozwiązać z pomocą url-loader, jednak warto je pominąć, gdyż często załączane jest kilka formatów (woff, woff2, eot, ttf). Url-loader przetworzyłby je wszystkie, co skutkowałoby ogromnym plikiem CSS. Normalnie, przeglądarka wybiera tylko jeden odpowiedni, a resztę pomija. Dlatego lepiej skorzystać z opcji dla css-loader, która wyłącza przetwarzanie @import url(), ale normalnie działa z @import: //... { test: /\.css$/, use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: { loader: 'css-loader', options: { url: false, }, }, }), }, Będziemy musieli wtedy inaczej łączyć pliki CSS (bez url()), np: @import './home/plik1.css'; @import './home/plik2.css'; @import './home/plik3.css'; /*itd.*/ EDIT: Okazuje się, że jeśli z podaną konfiguracją używamy kilka &quot;entries&quot; na raz (zarówno pliki JS jak i CSS) powstają duplikaty dla plików CSS w wersji JS. Aby to obejść musimy nieco zmienić konfigurację webpack.config.js : const path = require('path'); const ExtractTextPlugin = require('extract-text-webpack-plugin'); module.exports = { entry: { 'home.bundle.js': './js/home/main.js', 'home.bundle.css': './css/home/merge.css', 'faq.bundle.js': './js/faq.js', }, output: { path: path.join(__dirname, 'dist'), filename: '[name]', }, module: { loaders: [ { test: /\.js$/, loader: 'babel-loader', { modules: false }, query: { presets: ['es2015'], }, }, { test: /\.css$/, use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader', }), }, ], }, plugins: [ new ExtractTextPlugin('./[name]'), ], };</summary></entry></feed>
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git push&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Codeboy</name></author><category term="DajSiePoznac2017" /><category term="DajSiePoznac2017" /><category term="Git" /><summary type="html">Komu nie zdarzyło się chociaż raz przez pomyłkę / nieuwagę / niewiedzę wrzucić wrażliwy plik do repozytorium? Jeśli tobie, to zazdroszczę. Jednak nie wszystko stracone! Można się go pozbyć. BFG Repo-Cleaner Z pomocą przychodzi BFG! Pobieramy go z oficjalnej strony i kilkoma poleceniami pozbędziemy się niechcianego pliku z repozytorium Git-a: Zakładam, że pobrany plik jest na pulpicie. Otwieramy konsolę i przechodzimy na pulpit: cd Desktop Następnie musimy sklonować nasze repozytorium: git clone --mirror https://github.com/Nazwa-użytkownika/nazwa-repozytorium Jeśli używasz GitHub Desktop - dodaj ścieżkę do cmd git-a do zmiennej systemowej Path, aby móc korzystać z gita także w terminalu. Powinna wyglądać mniej więcej tak: C:\Users\Nazwa-użytkownika\AppData\Local\GitHub\PortableGit_(id)\cmd. Zmienne systemowe znajdziesz w Panel sterowania -&amp;gt; System i zabezpieczenia -&amp;gt; System -&amp;gt; Zaawansowane ustawienia systemu -&amp;gt; Zmienne środowiskowe -&amp;gt; Zmienne Systemowe. Pamiętaj o średniku przed wklejeniem ścieżki. Jak pewnie zauważyłeś, jest to plik jar, więc do jego uruchomienia będzie potrzebna nam Java. Jeśli nie masz Javy, zaopatrz się w nią! Jeśli nie chcesz za każdym razem podawać pełnej ścieżki (domyślnie: C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Java\jdk1.7.0\bin) do plików wykonywalnych Javy, dodaj ją również do [Path](https://www.java.com/pl/download/help/path.xml). Uruchamiamy go z flagą –delete-files oraz nazwą pliku(nie ścieżka) java -jar bfg-wersja.jar --delete-files nazwa-pliku.x Następnie przechodzimy do sklonowanego repozytorium cd nazwa-repozytorium.git I uruchamiamy komendę: git reflog expire --expire=now --all &amp;amp;&amp;amp; git gc --prune=now --aggressive Gdy nie było po drodze żadnych błędów i jesteśmy zadowoleni z wyniku, możemy pushować ;) git push</summary></entry></feed>

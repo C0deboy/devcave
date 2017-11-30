@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - jaskinia programisty. Blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych, dla każdego programisty.">
+<meta name="author" content="Codeboy">
+<title>Co to jest SOLID DRY KISS - zasady projektowania obiektowego</title>
+
+<link rel="canonical" href="https://devcave.pl/notatnik-juniora/zasady-projektowania-kodu">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+                Menu
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom" title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <header class="post-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <div class="post-heading">
+                    <h1 class="post-title">Zasady projektowania obiektowego</h1>
+                    
+                    <h2 class="post-subtitle">Notatnik Juniora 1#</h2>
+                    
+                    <p class="post-meta">
+                    
+                    30
+                    listopada
+                      
+                    2017</p>
+                     <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div> <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+    <div class="container post">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <hr class="header-hr">
+
+                <span>Spis treści:</span>
+
+                <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#ogólne">Ogólne</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#dry---dont-repeat-yourself">DRY - Don’t Repeat Yourself</a></li>
+<li class="toc-entry toc-h2"><a href="#kiss---keep-it-simple-stupid">KISS - Keep it simple, stupid!</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#code-for-the-maintainer">Code for the Maintainer</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#solid">SOLID</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#s---single-responsibility-principle">S - Single responsibility principle</a></li>
+<li class="toc-entry toc-h3"><a href="#o---openclosed-principle">O - Open/closed principle</a></li>
+<li class="toc-entry toc-h3"><a href="#l---liskov-substitution-principle">L - Liskov substitution principle</a></li>
+<li class="toc-entry toc-h3"><a href="#i---interface-segregation-principle">I - Interface segregation principle</a></li>
+<li class="toc-entry toc-h3"><a href="#d---dependency-inversion-principle">D - Dependency inversion principle</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#lod---law-of-demeter">LoD - Law of Demeter</a></li>
+<li class="toc-entry toc-h2"><a href="#slap---single-level-of-abstraction-principle">SLAP - Single Level of Abstraction Principle</a></li>
+<li class="toc-entry toc-h2"><a href="#composition-over-inheritance">Composition Over Inheritance</a></li>
+<li class="toc-entry toc-h2"><a href="#encapsulate-what-changes">Encapsulate What Changes</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#projektowanie-pakietów">Projektowanie pakietów</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#cpp---common-closure-principle">CPP - Common Closure Principle</a></li>
+<li class="toc-entry toc-h2"><a href="#rep---reuse-release-equivalence-principle">REP - Reuse-release equivalence principle</a></li>
+<li class="toc-entry toc-h2"><a href="#crp---common-reuse-principle">CRP - Common-reuse principle</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#zależności-miedzy-pakietami--klasami">Zależności miedzy pakietami / klasami</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#minimise-coupling">Minimise Coupling</a></li>
+<li class="toc-entry toc-h2"><a href="#adp---acyclic-dependencies-principle">ADP - Acyclic dependencies principle</a></li>
+<li class="toc-entry toc-h2"><a href="#sdp---stable-dependencies-principle">SDP - Stable-dependencies principle</a></li>
+<li class="toc-entry toc-h2"><a href="#sap---stable-abstractions-principle">SAP - Stable-abstractions principle</a></li>
+</ul>
+</li>
+</ul>
+
+                <hr>
+
+				        <p>Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami ;)</p>
+
+<h1 id="ogólne">Ogólne</h1>
+
+<h2 id="dry---dont-repeat-yourself">DRY - Don’t Repeat Yourself</h2>
+<ul>
+  <li>Jedna z podstawowych zasad programowania - <strong>nie powtarzaj się</strong>. Wielokrotne użycie tego samego kodu to podstawa programowania. Nie ma miejsca na kopiuj/wklej.</li>
+  <li>Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+
+<ul>
+  <li>Lepsza czytelność kodu oraz łatwość w utrzymaniu.</li>
+  <li>Zmiana implementacji tylko w jednym miejscu.</li>
+</ul>
+
+<h2 id="kiss---keep-it-simple-stupid">KISS - Keep it simple, stupid!</h2>
+<ul>
+  <li>Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc ławy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku.</li>
+  <li>Większość systemów działa najlepiej, gdy polegają na prostocie, a nie na złożoności.</li>
+  <li>Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia.</li>
+  <li>Gdy po jakimś czasie wracasz do <strong>swojego</strong> kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;)</li>
+</ul>
+
+<p>Można to rozszerzyć o zasadę:</p>
+
+<h3 id="code-for-the-maintainer">Code for the Maintainer</h3>
+<ul>
+  <li>Czyli, programuj tak jakbyś to robił dla osoby, która będzie później utrzymywać ten kod. “Rób to tak jakby to był brutalny psychopata, który wie gdzie mieszkasz”.</li>
+  <li>Dlaczego? Utrzymywanie kodu to (przeważnie) najbardziej wymagająca i większa część pracy programistów. Nie powinniśmy utrudniać sobie tego zadania.</li>
+  <li>Zadbaj o to, aby nie trzeba było się zbytnio głowić nad kawałkiem Twojego kodu.</li>
+  <li>Zawsze pozostaw po sobie kod czystszy niż go zastałeś.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Szybciej i łatwiej zrozumieć kod.</li>
+  <li>Mniejsza ilość potencjalnych bugów.</li>
+  <li>łatwość w utrzymaniu i modyfikowaniu kodu.</li>
+</ul>
+
+<h2 id="solid">SOLID</h2>
+
+<h3 id="s---single-responsibility-principle">S - Single responsibility principle</h3>
+<ul>
+  <li>Klasa powinna być odpowiedzialna za pojedynczy obszar. Nie powinno być więcej powodów niż jeden, aby klasa się zmieniła.</li>
+  <li>Odpowiedzialność może być zdefiniowana jako powód do zmiany, zatem klasa powinna mieć tylko jeden taki powód, a więc jedną odpowiedzialność.</li>
+  <li>Klasa realizuję pojedyncze zadanie.</li>
+  <li>Gdy wymagana jest zmiana, powinna ona objąć tylko jedną klasę lub pakiet.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Lepsza czytelność kodu.</li>
+  <li>Łatwość w utrzymaniu i modyfikowaniu kodu.</li>
+  <li>Nie musimy skakać po kilku pakietach/klasach, aby wprowadzić pojedyńczą zmianę.</li>
+</ul>
+
+<h3 id="o---openclosed-principle">O - Open/closed principle</h3>
+<ul>
+  <li>Powinieneś być w stanie rozszerzać swoje klasy bez jej modyfikacji.</li>
+  <li>Klasy powinny być otwarte na rozszerzanie, a zamknięte na modyfikację.</li>
+  <li>Polegaj na abstrakcji i polimorfizmie</li>
+  <li>Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowane przez ify czy konstrukcję switch.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Łatwiejsze i bardziej stabline rozbudowywanie systemu.</li>
+  <li>Minimalizujemy potrzebę modyfikowania instniejącego kodu w wielu miejscach, gdy dodajemy np. kolejny przypadek czegoś.</li>
+</ul>
+
+<h3 id="l---liskov-substitution-principle">L - Liskov substitution principle</h3>
+<ul>
+  <li>Klasy w programie powinny być podmienialne przez swoje podklasy bez naruszania poprawności programu, czyli klasa dziedzicząca musi być dobrym odpowiednikiem klasy bazowej.</li>
+  <li>Podklasa nie powinna robić mniej niż klasa bazowa. Czyli zawsze powinna robić więcej.</li>
+  <li>Zobacz popularny przykład złego zastosowania dziedziczenia “Square extends Rectangle”</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Przewidywalne zachowania obiektów</li>
+</ul>
+
+<h3 id="i---interface-segregation-principle">I - Interface segregation principle</h3>
+<ul>
+  <li>Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu.</li>
+  <li>Powinno się projektować małe i zwarte interfejsy.</li>
+  <li>Klasa nie powinna implementować interfejsu, przez który naruszy <a href="#S---Single-responsibility-principle">Single responsibility principle</a></li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z “dużego” interfejsu.</li>
+  <li>Nie naruszanie <a href="#S---Single-responsibility-principle">Single responsibility principle</a></li>
+</ul>
+
+<h3 id="d---dependency-inversion-principle">D - Dependency inversion principle</h3>
+<ul>
+  <li>Niskopoziomowe klasy powinny zależeć od klas wysoko poziomowych, a obie od swoich abstrakcji.</li>
+  <li>Abstrakcję nie powinny polegać na szczegółach implementacyjnych.</li>
+  <li>Szczegóły implementacyjne powinny polegać na abstrakcji.</li>
+  <li>czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>minimalizowanie zależności (loose coupling)</li>
+  <li>elastyczność - łatwiej wprowadzać zmiany</li>
+</ul>
+
+<hr />
+
+<h2 id="lod---law-of-demeter">LoD - Law of Demeter</h2>
+<ul>
+  <li>Nie rozmawiaj z obcymi. Rozmawiaj tylko z przyjaciółmi.</li>
+  <li>Co to znaczy? Metoda obiektu powinna wywoływać metody tylko od:
+    <ul>
+      <li>Swojego obiektu.</li>
+      <li>Argumentu przekazanego do metody.</li>
+      <li>Obiektu stworzonego wewnątrz tej metody.</li>
+      <li>Bezpośredniego pola obiektu.</li>
+      <li>Np. nie powinno się stosować wywołań typu A.getB().getC().getD.getName().</li>
+    </ul>
+  </li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali</li>
+</ul>
+
+<h2 id="slap---single-level-of-abstraction-principle">SLAP - Single Level of Abstraction Principle</h2>
+<ul>
+  <li>Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Czytelność i łatwiejsze utrzymanie kodu</li>
+</ul>
+
+<h2 id="composition-over-inheritance">Composition Over Inheritance</h2>
+<ul>
+  <li>Kompozycja ponad dziedziczenie, czyli preferuj relacje B “zawiera/używa A” zamiast “jest A”.</li>
+  <li>W większości wypadów możemy całkowicie zrezygnować z dziedziczenia w naszej aplikacji (Oczywiście chodzi o dziedziczenie z <strong>klas</strong>, nie z interfejsów). Jest to zalecany sposób projektowania aplikacji.</li>
+  <li>Stosuj dziedziczenie tylko gdy <a href="#l---liskov-substitution-principle">LSP</a> nie jest złamana i naprawdę tego potrzebujesz.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Zmniejsza to zależności między klasami</li>
+  <li>Używając dziedziczenia łatwiej też o złamanie <a href="#l---liskov-substitution-principle">Liskov substitution principle</a></li>
+</ul>
+
+<h2 id="encapsulate-what-changes">Encapsulate What Changes</h2>
+<ul>
+  <li>Miejsca, które są najbardziej prawdopodobne do zmiany powinny być schowane (zhermetyzowane) pod API.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę</li>
+</ul>
+
+<hr />
+
+<h1 id="projektowanie-pakietów">Projektowanie pakietów</h1>
+
+<h2 id="cpp---common-closure-principle">CPP - Common Closure Principle</h2>
+<ul>
+  <li>Klasy zmieniające się razem powinny być pakietowane razem</li>
+  <li>Izolacja zmian do zakresu pakietu</li>
+  <li>Ściśle powiązana z <a href="#o---open/closed-principle">OCP</a> na poziomie klas</li>
+  <li>Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Minimalizuje to liczbę pakietów do zmiany w przypadku zmiany wymagań.</li>
+  <li>Nie trzeba przeszukiwać kilku różnych pakietów w celu wprowadzenia zmiany</li>
+</ul>
+
+<h2 id="rep---reuse-release-equivalence-principle">REP - Reuse-release equivalence principle</h2>
+<ul>
+  <li>Ponownie użycie kodu to nie kopiowanie klasy z jednego projektu do drugiego. Jeżeli chcemy użyć ponownie kod to należy go wydzielić do biblioteki czy modułu, który później możemy użyć ponownie.</li>
+  <li>Klasy, które są przeznaczone do ponownego wykorzystania, powinien być w jednej paczce, która może stać się reużywalną biblioteką. Nie powinny się tam znaleźć te, które nie są przeznaczone do ponownego wykorzystania. W skrócie - albo wszystkie są reużywalne, albo żadne.</li>
+  <li>Powinny to być również klasy, które są z jednej “rodziny”. Klasy niezwiązane z przeznaczeniem pakietu nie powinny się tam znaleźć.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+
+<ul>
+  <li>Gdy autor oryginalnego kodu wprowadzi zmianę – w szczególności poprawi jakiś błąd – wówczas każdy może w łatwy sposób skorzystać ze zmian pobierając nową wersję biblioteki, zamiast zmieniać coś samodzielnie - a w przypadku, gdy my jesteśmy autorami, dokonywać zmian w co najmniej dwóch miejscach za każdym razem.</li>
+</ul>
+
+<h2 id="crp---common-reuse-principle">CRP - Common-reuse principle</h2>
+<ul>
+  <li>Klasy wspólnie używane powinny być wspólnie pakietowane</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Lepsza spójność i czytelność systemu</li>
+</ul>
+
+<hr />
+
+<h1 id="zależności-miedzy-pakietami--klasami">Zależności miedzy pakietami / klasami</h1>
+
+<h2 id="minimise-coupling">Minimise Coupling</h2>
+<ul>
+  <li>Minimalizuj powiązania między pakietami/klasami. Mniejsza ilość zależności jest lepsza.</li>
+  <li>Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie <a href="#LoD---Law-of-Demeter">Law of Demeter</a></li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B.</li>
+</ul>
+
+<h2 id="adp---acyclic-dependencies-principle">ADP - Acyclic dependencies principle</h2>
+<ul>
+  <li>Zasada ta mówi, że w strukturze zależności nie powinno być zapętleń/cykli.</li>
+  <li>Przykładowa struktura łamiąca tą zasadę będzie gdy: pakiet A ma zależność w pakiecie B, który ma zależność w pakiecie C, który z kolei ma zależność w pakiecie A.<br /></li>
+</ul>
+<pre class="text-diagram">
+A &larr;-------- C
+|           &uarr;
+'---&rarr; B ----<sup>|</sup>
+</pre>
+<ul>
+  <li>Możemy temu zapobiec stosując <a href="#D---Dependency-inversion-principle">Dependency inversion principle</a>, wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>łatwiej zrozumieć i utrzymać system</li>
+</ul>
+
+<h2 id="sdp---stable-dependencies-principle">SDP - Stable-dependencies principle</h2>
+<ul>
+  <li>Pakiet, który jest zmienny nie powinien zależeć od pakietu, który jest trudny do zmiany.</li>
+  <li>Zależności tego pakietu powinny być bardziej stabilne niż on sam.</li>
+  <li>Taką samą zasadę możemy stosować w przypadku klas.</li>
+</ul>
+
+<p class="advantages">Plusy</p>
+<ul>
+  <li>Zmniejsza efekt łancuchowej reakcji, która wymusza modyfikację kodu w kilku innych miejscach po wprowadzeniu jednej zmiany</li>
+</ul>
+
+<h2 id="sap---stable-abstractions-principle">SAP - Stable-abstractions principle</h2>
+<ul>
+  <li>Stabilny pakiet (trudny do zmiany) powinien być maksymalnie abstrakcyjny (czyli np. w większości operować na interfejsach), aby jego stabilność nie uniemożliwiała jego rozszerzania.</li>
+  <li>Niestabilny pakiet (łatwy do zmiany) powinien byc maksymalnie konkretny (czyli w większości operować na implementacjach) jako że jego niestabilność pozwala w łatwy sposób zmienić jego konkretną implementację.</li>
+</ul>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a class="box-effect" href="/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki" data-toggle="tooltip" data-placement="top" title="Jak uczyć się do matury z informatyki?"><i class="fa fa-arrow-left" aria-hidden="true"></i> Poprzedni post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                <hr>
+                
+                
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://devcave.pl/notatnik-juniora/zasady-projektowania-kodu";
+this.page.identifier = "/notatnik-juniora/zasady-projektowania-kodu";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</article>
+
+<hr>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-placement="top" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-placement="top" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-placement="top" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-placement="top" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/dist/js/libs/jquery.min.js"></script>
+
+<script src="/dist/js/libs/bootstrap.min.js"></script>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+    
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -53,7 +53,7 @@ Według mnie, książka jest skierowana (i pod tym względem jest bardzo dobra) 
  
  Poza tym można przeczytać o kilku kluczowych i kształcących błędach autora, które popełnił podczas swojej kariery, ale jeśli śledzisz go w miarę na bieżąco, to już je słyszałeś.
  
- **I tu ku refleksji** - może gdyby Maciej określił dokładniej target, a nie zapewniał, że książka jest dla każdego programisty, to negatywnych opinii i ludzi, którzy poczuli, że zmarnowali pieniądze (trochę [tego](https://lubimyczytac.pl/ksiazka/4812210/zawod-programista#reviews) jest), byłoby dużo mniej? **Bo książka jest naprawdę wartościowa, ale dla targetu, który określiłem na początku.** No ale z drugiej strony może też byłoby dużo mniej zysku...
+ **I tu ku refleksji** - może gdyby Maciej określił dokładniej target, a nie zapewniał, że książka jest dla każdego programisty, to negatywnych opinii i ludzi, którzy poczuli, że zmarnowali pieniądze (trochę [tego](http://lubimyczytac.pl/ksiazka/4812210/zawod-programista#reviews) jest), byłoby dużo mniej? **Bo książka jest naprawdę wartościowa, ale dla targetu, który określiłem na początku.** No ale z drugiej strony może też byłoby dużo mniej zysku...
  
  Swoją drogą bardzo dużo mówi spis treści, więc mniej więcej było wiadomo czego można się spodziewać.
  
@@ -87,7 +87,7 @@ Według mnie, książka jest skierowana (i pod tym względem jest bardzo dobra) 
  
 # Podsumowując
 
-Książka Zawód: Programista jest całkiem dobrą i przyjemną pozycją. Zawiera ważną, kształcącą i uświadamiającą wiedze oraz doświadczenia, **ale jest skierowane dla określonego targetu**. Idealny przypadek to gdy jesteś przed/w trakcie bycia Juniorem i/lub mało wyglądałeś poza swoje IDE i techniczne źródła, a autora mało co kojarzysz. **Wtedy można nawet ją określić jako świetną!** Jeśli masz doświadczenie w IT i jesteś "świadomym" programistą nie oczekuj masy pozyskanej wiedzy, szczególnie jeśli śledzisz autora na bieżąco.
+Książka Zawód: Programista jest całkiem dobrą i przyjemną pozycją. Zawiera ważną, kształcącą i uświadamiającą wiedzę oraz doświadczenia, **ale jest to skierowane dla określonego targetu**. Idealny przypadek to gdy jesteś przed/w trakcie bycia Juniorem i/lub mało wyglądałeś poza swoje IDE i techniczne źródła, a autora mało co kojarzysz. **Wtedy można nawet ją określić jako świetną!** Jeśli masz doświadczenie w IT i jesteś "świadomym" programistą nie oczekuj masy pozyskanej wiedzy, szczególnie jeśli śledzisz autora na bieżąco.
  
  
 

@@ -80,6 +80,7 @@ Można to rozszerzyć o zasadę:
 - Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu.
 - Powinno się projektować małe i zwarte interfejsy.
 - Klasa nie powinna implementować interfejsu, przez który naruszy [Single responsibility principle](#S---Single-responsibility-principle)
+- Klasa która implementuje interfejs nie może być zmuszana do implementowania metod, których nie potrzebuje, a tak jest często w przypadku dużych iterfejsów.
 
 <p class="advantages">Plusy</p>
 - Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z "dużego" interfejsu.

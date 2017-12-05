@@ -30,7 +30,7 @@ Książkę mimo to kupiłem - głównie jako forma podziękowania za lata dział
 
 Również doceniam trud Macieja włożony w całą swoją działalność, budowanie zasięgu jak i _self publishing_.
 
-Swoją drogą tego typu książka jest relatywnie nowatorska na naszym rynku. Można by ją tylko porównywać z książką Junior Developer, której autorem jest Matusza Kupilas. Jest najbardziej zbliżona, ale ma nieco inne założenia. Skupia się bardziej na konkretach przydatnych dla Juniora, a Zawód: Programista porusza tematy świadomego programisty w ogóle i zwraca większą uwagę na błędy i pułapki na które możesz wpaść - często na przykładzie autora.  Więc jak najbardziej takiej pozycji brakowało i luka została trafnie zapełniona.
+Swoją drogą tego typu książka jest relatywnie nowatorska na naszym rynku. Można by ją tylko porównywać z książką Junior Developer, której autorem jest Mateusz Kupilas. Jest najbardziej zbliżona, ale ma nieco inne założenia. Skupia się bardziej na konkretach przydatnych dla Juniora, a Zawód: Programista porusza tematy świadomego programisty w ogóle i zwraca większą uwagę na błędy i pułapki na które możesz wpaść - często na przykładzie autora.  Więc jak najbardziej takiej pozycji brakowało i luka została trafnie zapełniona.
 
 Wraz z książka dostajemy naklejkę na laptopa i fajną zakładkę do książek - kość ram ;)
 

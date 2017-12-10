@@ -82,13 +82,13 @@ description: "Jaskinia programisty"
     <div class="col-lg-4 col-md-4">
       <div class="row top-posts">
         <h1>Najpopularniejsze wpisy:</h1>
-        <span class="text-muted">Top {{ site.top_posts | size }}</span>
+        <span class="text-muted">Top {{ site.data.top_posts | size }}</span>
         <ul>
-          {% for post in site.top_posts %}
+          {% for post in site.data.top_posts %}
           <li class="box-effect row">
             <div class="top-position">{{forloop.index}}#</div>
             <div class="top-entry">
-              <a href="{{ post.content }}">
+              <a href="{{ post.url }}">
                 <h4>{{ post.title }}</h4>
               </a>
             </div>

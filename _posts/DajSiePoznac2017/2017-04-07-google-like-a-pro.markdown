@@ -19,7 +19,7 @@ Szukając odpowiedzi na dany problem <u>zwracaj uwagę na daty opublikowania odp
 
 Warto korzystać z opcji wyszukiwania oferowaną przez Google: Narzędzia -> Kiedykolwiek i wybieramy interesujący nas okres
 
-![Narzędzia wyszukiwania Google](/img/google/google-search-date.png){:class="img-responsive center-block"}
+![Narzędzia wyszukiwania Google](/img/google/google-search-date.png){:class="center-block"}
 
 ## 2# Za dużo wyników ze strony, której nie lubisz?
 Użyj w wyszukiwarce operatora "-site:", np. tak:
@@ -44,12 +44,12 @@ Skąd brać grafiki na stronę/projekt? Możesz skorzystać z tego:
 
 Google Grafika -> Narzędzia -> Prawa do użytkowania -> Oznaczone do ponownego wykorzystania
 
-![Narzędzia wyszukiwania Grafik Google](/img/google/google-search-grapchics.png){:class="img-responsive center-block"}
+![Narzędzia wyszukiwania Grafik Google](/img/google/google-search-grapchics.png){:class="center-block"}
 
 ## 5# Szukasz podobnej grafiki albo o innych wymiarach?
 
 Spróbuj wyszukiwania obrazem klikając na nim PPM:
-![Narzędzia wyszukiwania Grafik Google](/img/google/google-search-byimage.png){:class="img-responsive center-block"}
+![Narzędzia wyszukiwania Grafik Google](/img/google/google-search-byimage.png){:class="center-block"}
 
 ## 6# Strona, którą chciałeś odwiedzić jest offline?
 Skorzystaj z [Cachedview](http://cachedview.com/), gdzie możesz podejrzeć wcześniejsze kopie strony.

@@ -11,7 +11,7 @@ comments:   true
 toc:        true
 ---
 
-![Książka Zawód: Programista](/img/reviews/zawod-dev/book.jpg)
+![Książka Zawód: Programista](/img/reviews/zawod-dev/book.jpg){:class="center-block"}
 
 # O autorze
 
@@ -34,7 +34,7 @@ Swoją drogą tego typu książka jest relatywnie nowatorska na naszym rynku. Mo
 
 Wraz z książka dostajemy naklejkę na laptopa i fajną zakładkę do książek - kość ram ;)
 
-![Zakładka do książki Zawód: Programista](/img/reviews/zawod-dev/bonus.jpg)
+![Zakładka do książki Zawód: Programista](/img/reviews/zawod-dev/bonus.jpg){:class="center-block"}
 
 # O książce
 
@@ -65,15 +65,15 @@ Według mnie, książka jest skierowana (i pod tym względem jest bardzo dobra) 
 
  Okładka jest całkiem przyjemna, ale jakość papieru nie jest zbyt dobra. Tekst przebija się nieco na drugą stronę, co może zmniejszyć przyjemność z czytania.
   
- ![Jakość książki Zawód: Programista](/img/reviews/zawod-dev/text.jpg)
+ ![Jakość książki Zawód: Programista](/img/reviews/zawod-dev/text.jpg){:class="center-block"}
  
  Lepiej to widać tu:
 
- ![Jakość książki Zawód: Programista](/img/reviews/zawod-dev/text2.jpg)
+ ![Jakość książki Zawód: Programista](/img/reviews/zawod-dev/text2.jpg){:class="center-block"}
  
  Mimo zainwestowania w redakcję i wielokrotnego przeczytania książki przez autora, nadal można było znaleźć kilka błędów np.
  
- ![Literówka w książce Zawód: Programista](/img/reviews/zawod-dev/typo.jpg)
+ ![Literówka w książce Zawód: Programista](/img/reviews/zawod-dev/typo.jpg){:class="center-block"}
  
  Ale było tego dosyć mało i nie wpływało to na jakość czytania. Styl jak styl, kwestia gustu i nie każdemu może się spodobać. Autor korzysta z swobodnego, czasem potocznego języka. Ja nie mam co do tego żadnego problemu.
  
@@ -87,7 +87,7 @@ Według mnie, książka jest skierowana (i pod tym względem jest bardzo dobra) 
  
 # Podsumowując
 
-Książka Zawód: Programista jest całkiem dobrą i przyjemną pozycją. Zawiera ważną, kształcącą i uświadamiającą wiedzę oraz doświadczenia, **ale jest to skierowane dla określonego targetu**. Idealny przypadek to gdy jesteś przed/w trakcie bycia Juniorem i/lub mało wyglądałeś poza swoje IDE i techniczne źródła, a autora mało co kojarzysz. **Wtedy można nawet ją określić jako świetną!** Jeśli masz doświadczenie w IT i jesteś "świadomym" programistą nie oczekuj masy pozyskanej wiedzy, szczególnie jeśli śledzisz autora na bieżąco.
+Książka Zawód: Programista jest całkiem dobrą i przyjemną pozycją. Zawiera ważną i uświadamiającą wiedzę oraz doświadczenia, **ale jest to skierowane dla określonego targetu**. Idealny przypadek to gdy jesteś przed/w trakcie bycia Juniorem i/lub mało wyglądałeś poza swoje IDE i techniczne źródła, a autora mało co kojarzysz. Jeśli masz doświadczenie w IT i jesteś "świadomym" programistą nie oczekuj masy pozyskanej wiedzy, szczególnie jeśli śledzisz autora na bieżąco.
  
  
 

@@ -18,7 +18,7 @@ $(() => {
 });
 
 $(() => {
-  $('img').addClass('img-responsive center-block');
+  $('img').addClass('img-responsive');
 });
 
 function dynamicNavbar() {

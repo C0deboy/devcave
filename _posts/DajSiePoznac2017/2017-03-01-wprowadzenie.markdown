@@ -23,6 +23,6 @@ Jest to strona internetowa, która powstaje, aby ułatwić wybór języka progra
 
 Przeglądając fora internetowe cały czas natrafiałem na sterty pytań typu „Jaki język programowania wybrać, jaki najlepszy itd.”. Ponadto, gdy zaczynałem swoją przygodę z programowaniem sam zadawałem sobie te pytania i myślę, że robił to każdy z nas. Ostatnim impulsem było ponowne natknięcie się na już dosyć słynną grafikę, która przedstawiała ścieżki wyboru języka:
 
-![jaki-język-programowania-mapa](/img/chosinglang.jpg)
+![jaki-język-programowania-mapa](/img/chosinglang.jpg){:class="center-block"}
 
  Od razu po tym nasunął mi się ten pomysł. Troszkę entuzjazm spadł, gdy znalazłem podobny projekt w wersji angielskiej. Nawet design był podobny do mojej wizji strony. Jednak nie zrezygnowałem. I tak to się zaczęło. Chcę, aby osoby zaczynające naukę programowania miały ułatwioną sprawę, a odpowiedź na ich pytania była krótka – [Jaki-język-programowania.pl](https://www.jaki-jezyk-programowania.pl/) ;)

@@ -35,6 +35,10 @@ h6 {
   margin: 0 0 10px;
 }
 
+.post img {
+  vertical-align: text-bottom;
+}
+
 h1 {
   font-size: 1.6em;
 }

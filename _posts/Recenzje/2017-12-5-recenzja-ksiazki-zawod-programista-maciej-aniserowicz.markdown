@@ -11,7 +11,7 @@ comments:   true
 toc:        true
 ---
 
-![Książka Zawód: Programista](/img/reviews/zawod-dev/book.jpg){:class="center-block"}
+![Książka Zawód: Programista](/img/reviews/zawod-dev/book.png){:class="center-block"}
 
 # O autorze
 
@@ -57,13 +57,13 @@ Według mnie, książka jest skierowana (i pod tym względem jest bardzo dobra) 
  
  Swoją drogą bardzo dużo mówi spis treści, więc mniej więcej było wiadomo czego można się spodziewać.
  
- W książce znajdziemy tu też nieco motywacyjnych linijek. O wychodzeniu ze strefy komfortu itd.. Technicznej wiedzy - jak można się domyśleć - nie ma. To tak żeby nie było wątpliwości, no ale to chyba oczywiste.
+ W książce znajdziemy też nieco motywacyjnych linijek. O wychodzeniu ze strefy komfortu itd.. Technicznej wiedzy - jak można się domyśleć - nie ma. To tak żeby nie było wątpliwości, no ale to chyba oczywiste.
  
  Jeśli pasujesz do targetu, który tutaj zaprezentowałem, (szczególnie idealny przypadek, gdy dodatkowo autora mało co kojarzysz i nie śledzisz jego działalności) to ta książka będzie dla Ciebie bardzo dobra. Niesie wiele użytecznej wiedzy, bardzo uświadamia i obala mity, które reprezentują media o IT. Jest wysoce prawdopodobne, że dzięki niej nie wpadniesz w te same błędy co Maciej.
  
 ## Jakość wykonania
 
- Okładka jest całkiem przyjemna, ale jakość papieru nie jest zbyt dobra. Tekst przebija się nieco na drugą stronę, co może zmniejszyć przyjemność z czytania.
+ Okładka jest całkiem przyjemna wizualnie, niby twarda ale cienka i strasznie giętka. Po przeczytaniu książki zaczyna odstawać. Jakość papieru też nie jest zbyt dobra. Tekst przebija się nieco na drugą stronę, co może zmniejszyć przyjemność z czytania.
   
  ![Jakość książki Zawód: Programista](/img/reviews/zawod-dev/text.jpg){:class="center-block"}
  

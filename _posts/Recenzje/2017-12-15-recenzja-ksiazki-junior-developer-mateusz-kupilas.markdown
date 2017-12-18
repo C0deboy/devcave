@@ -21,7 +21,9 @@ Mateusz Kupilas, jeśli ktoś go nie zna, to programista Javy. Prowadzi bloga [j
 
 # Kontekst
 
-Podobnie jak książka Zawód: Programista, jest to pozycja wypuszczona w _self publishingu_. W przypadku tej książki najpierw był e-book, a za wersję papierową autor zabrał się rok później. Całość wystartowała dzięki akcji crowdfundingowej, która miała ustawiony cel na 3000zł. Cel ten udało się osiągnąć w niecałe 24h, a ostatecznie akcja zebrała w miesiąc trochę ponad 17 000zł, co pozwoliło na wydruk 1000 egzemplarzy (koszt około 14 000 zł). W nieco ponad rok (od pierwszego wydania e-booka) autor sprzedał 2000 egzemplarzy (w tym 600 książek z pierwszego nakładu), a przychód określił na około 75 000zł. Cena książki to 49 zł + 10zł przesyłka. Co ciekawe, autor zdaje sobie sprawę, że dla kogoś nawet taka kwota może być sporym wydatkiem i jeśli ktoś znajduje się w trudnej sytuacji, to może napisać do niego maila, a dostanie pdf-a e-booka za darmo. Autor również nie walczy zbytnio z piractwem, o czym dowiemy się z pierwszych stron.
+Podobnie jak książka Zawód: Programista, jest to pozycja wypuszczona w _self publishingu_. W przypadku tej książki najpierw był e-book, a za wersję papierową autor zabrał się rok później. Całość wystartowała dzięki akcji crowdfundingowej, która miała ustawiony cel na 3000zł. Cel ten udało się osiągnąć w niecałe 24h, a ostatecznie akcja zebrała w miesiąc trochę ponad 17 000zł, co pozwoliło na wydruk 1000 egzemplarzy (koszt około 14 000 zł). W nieco ponad rok (od pierwszego wydania e-booka) autor sprzedał 2000 egzemplarzy (w tym 600 książek z pierwszego nakładu), a przychód określił na około 75 000zł. Na dzień dzisiejszy sprzedał około 3000 egzemplarzy (co dziwne, w większości są to ebooki, bo około 2000). Łączny przychód szacuje na około 115 000 zł. Ze starego nakładu pozostało około 40 książek, a dodruk już czeka w kolejce.
+ 
+ Cena książki to 49 zł + przesyłka. Co ciekawe, autor zdaje sobie sprawę, że dla kogoś nawet taka kwota może być sporym wydatkiem i jeśli ktoś znajduje się w trudnej sytuacji, to może napisać do niego maila, a dostanie pdf-a e-booka za darmo. Autor również nie walczy zbytnio z piractwem, o czym dowiemy się z pierwszych stron.
 
 O czym jest więc ta książka? To zbiorowa odpowiedź na pytania, które najczęściej zadawali czytelnicy bloga i widzowie na YT - głównie początkujący. W efekcie mamy zbiór wiedzy dla początkujących programistów.
 
@@ -69,11 +71,12 @@ Nie można też powiedzieć, że książki się pokrywają. Owszem - trafia się
   
  ![Jakość książki Zawód: Programista](/img/reviews/junior-dev/quality.jpg){:class="center-block"}
  
- Jedna rzecz do której można się przyczepić to to, że tytuł na boku książki jest odwrotnie niż powinien być, przez co, gdy książki leżą w kolekcji jedna na drugiej to wygląda to słabo:
+ Jedna rzecz do której można się przyczepić to to, że tytuł na boku książki jest odwrotnie niż powinien być, przez co, gdy książki leżą w kolekcji jedna na drugiej, to wygląda to słabo:
  
  ![Porównanie wielkości](/img/reviews/junior-dev/size2.jpg){:class="center-block"}
-  
  
+ **W dodruku wersji papierowej, ten błąd jest już naprawiony. Nowa wersja będzie dostępna mniej więcej od stycznia 2017.**
+  
 # Podsumowując
 
 Książka Junior Developer jest całkiem dobrą i przyjemną pozycją. Jeśli jesteś początkującym programistą, masz wiele pytań i wątpliwości, szczególnie przed próbą podjęcia pierwszej pracy, to ta książka będzie dobrym przewodnikiem. Niesie wiele niezbędnych dla początkującego informacji. Jeśli autora mało kojarzysz i nie śledzisz jego działalności to prawdopodobnie z książki wyciągniesz najwięcej. 

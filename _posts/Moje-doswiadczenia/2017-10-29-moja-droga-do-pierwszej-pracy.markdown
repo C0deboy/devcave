@@ -1,6 +1,6 @@
 ---
 layout:     post
-titleSEO:	"Droga do pierwszej pracy pragramisty"
+titleSEO:	"Moja droga do pierwszej pracy jako programista"
 title:      "Moja droga do pierwszej pracy"
 subtitle:   "Od początku do końca"
 date:       2017-10-29 12:00:00

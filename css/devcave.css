@@ -531,14 +531,19 @@ pre {
   color: #404040;
 }
 
-.project {
+.project,
+.books {
   margin-top: 30px;
   background: rgba(70, 70, 70, 0.12);
   box-shadow: 0 0 5px 1px #191919;
 }
 
+.books {
+  text-align: center;
+}
+
 .project img {
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 
@@ -591,23 +596,23 @@ pre {
   padding: 0px 0 0 0;
 }
 
-.books {
+.books-ad {
   margin: 35px 0 0 0;
   padding: 5px;
 }
 
-.books > a {
+.books-ad > a {
   display: flex;
   align-items: center;
   padding: 15px;
 }
 
-.books img {
+.books-ad img {
   padding: 0 15px 0 0;
   height: 50px;
 }
 
-.books h3 {
+.books-ad h3 {
   margin: 0;
 }
 
@@ -651,13 +656,13 @@ pre {
 }
 
 .book {
-  display: flex;
+  display: inline-block;
   flex-direction: column;
-  text-align: center;
   padding: 15px;
   width: 300px;
   vertical-align: top;
-  margin: auto;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .book img {
@@ -679,6 +684,10 @@ pre {
   text-align: center;
   padding: 0;
   margin: 0;
+}
+
+.book b {
+  display: block;
 }
 
 .book .helion-ksiazkasm3 {

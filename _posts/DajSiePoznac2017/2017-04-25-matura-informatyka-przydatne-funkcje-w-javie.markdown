@@ -259,9 +259,9 @@ Nasza tablica dla pewnego słowa po wydrukowaniu wyglądałaby tak:
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0]
 {% endhighlight %}
 
-<[ class="idea">
+<p class="idea">
 Warto wiedzieć też, że można inkrementować znaki!
-</[>
+</p>
 
 Przykładowo:
 {% highlight java %}

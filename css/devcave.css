@@ -1,6 +1,6 @@
 body {
   font-family: 'Ubuntu', sans-serif;
-  font-size: calc( 14px + (25 - 20) * ( (100vw - 320px) / ( 1920 - 320) ));
+  font-size: calc( 13px + (25 - 20) * ( (100vw - 320px) / ( 1920 - 320) ));
   color: #404040;
   transition: none;
 }

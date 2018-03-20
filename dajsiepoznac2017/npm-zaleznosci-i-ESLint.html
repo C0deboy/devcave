@@ -36,10 +36,7 @@
     <div class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">
-                <img src="/img/devcave.png">
-                devcave.pl
-            </a>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
 
             <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
                 Menu
@@ -126,7 +123,7 @@
 
 <p>NPM - to menadżer pakietów, który pomoże nam opisać projekt i zdefiniować zależności, których wymaga. Od tego momentu pozbędę się wszystkich zewnętrznych bibliotek z repozytorium na Gicie, bo nie powinno ich tam być. Teraz będzie znajdował się tam sam projekt, a dzięki NPM, wszystkie zależności, które są zdefiniowane w pliku <span class="file">package.json</span> będą mogły być zainstalowane jedną prostą komendą:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install</span></code></pre></figure>
 
 <p>Oczywiście najpierw musimy mieć NPM, ale instalacja jest banalnie prosta. Ja zainstalowałem <a href="">Node.js</a>, gdzie NPM jest dołączony.</p>
 
@@ -140,11 +137,11 @@
 
 <p>Następnie, aby pobrać nasze zależności i je dołączyć do pliku <span class="file">package.json</span> wykonujemy polecenie:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install nazwa-pakietu <span class="nt">--save</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install </span>nazwa-pakietu <span class="nt">--save</span></code></pre></figure>
 
 <p>gdy paczki są niezbędne do uruchamiania środowiska/aplikacji (np. JQuery, Bootstrap), lub</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install nazwa-pakietu <span class="nt">--save-dev</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install </span>nazwa-pakietu <span class="nt">--save-dev</span></code></pre></figure>
 
 <p>gdy paczka niezbędna jest do rozwijania i testowania aplikacji (np. ESLint).</p>
 
@@ -164,7 +161,7 @@
 
 <p>Instalujemy ESLint i dodajemy do zależności, ale z parametrem -dev, gdyż to potrzebne jest tylko nam - developerom.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install eslint <span class="nt">--save-dev</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install </span>eslint <span class="nt">--save-dev</span></code></pre></figure>
 
 <h2 id="konfiguracja">Konfiguracja</h2>
 <p>Potrzebny będzie nam plik konfiguracyjny <span class="file">.eslintrc.json </span>. Możemy automatycznie go wygenerować za pomocą polecenia:</p>

@@ -36,10 +36,7 @@
     <div class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">
-                <img src="/img/devcave.png">
-                devcave.pl
-            </a>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
 
             <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
                 Menu
@@ -93,7 +90,7 @@
                     marca
                       
                     2017</p>
-                     <div class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></div> <div class="site-tag"><a href='/archiwum#formularz-kontaktowy'>Formularz-kontaktowy</a></div> 
+                     <div class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></div> 
                 </div>
             </div>
         </div>
@@ -158,7 +155,8 @@
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
   <span class="k">require_once</span> <span class="s1">'swiftmailer/lib/swift_required.php'</span><span class="p">;</span>
   <span class="c1">//dalszy kod
-</span><span class="cp">?&gt;</span></code></pre></figure>
+</span>
+<span class="cp">?&gt;</span></code></pre></figure>
 
 <p>I gotowe. Możemy korzystać ze Swiftmailera.
 Przygotujmy sobie jeszcze oddzielny plik konfiguracyjny z wrażliwymi danymi, których nie powinniśmy udostępniać. Gdy korzystamy na przykład z systemu kontroli wersji GIT, nie chcemy, aby te dane były umieszczone publicznie w naszym repozytorium.</p>
@@ -188,8 +186,8 @@ Przygotujmy sobie jeszcze oddzielny plik konfiguracyjny z wrażliwymi danymi, kt
 
 <p>Jest to nieco lepszy sposób, gdyż nie zaśmiecamy sobie pliku zwykłymi zmiennymi globalnymi, w przypadku gdybyśmy to zadeklarowali tak:</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$secretKey</span> <span class="o">=</span> <span class="s2">"XXX"</span><span class="p">;</span>
- <span class="c1">//itd.
-</span></code></pre></div></div>
+ <span class="c1">//itd.</span>
+</code></pre></div></div>
 <p>Teraz wystarczy dodać nazwę naszego pliku z danymi do <span class="file">.gitignore</span> i będzie on ignorowany przez GIT-a.</p>
 
 <p>Również powiniśmy zablokować dostęp do tego pliku na naszym serwerze. Aby to zrobić wystarczy dodać kilka linijek do pliku <span class="file">.htaccess</span> na naszym serwerze:</p>

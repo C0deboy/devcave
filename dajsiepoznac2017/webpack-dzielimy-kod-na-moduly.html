@@ -36,10 +36,7 @@
     <div class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">
-                <img src="/img/devcave.png">
-                devcave.pl
-            </a>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
 
             <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
                 Menu
@@ -133,7 +130,7 @@
 
 <p>Webpack dodajemy do naszych dev-zależności poleceniem:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install webpack <span class="nt">--save-dev</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install </span>webpack <span class="nt">--save-dev</span></code></pre></figure>
 
 <h2 id="konfiguracja">Konfiguracja</h2>
 
@@ -197,7 +194,7 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
 
 <p>Babel transpiluje kod ES6 na zrozumiały dla starszych przeglądarek. Standardowo instalujemy go za pomocą npm:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install babel-loader babel-core babel-preset-es2015 <span class="nt">--save-dev</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install </span>babel-loader babel-core babel-preset-es2015 <span class="nt">--save-dev</span></code></pre></figure>
 
 <p>Ponadto musimy dodać go do konfiguracji w <span class="file">webpack.config.js</span></p>
 
@@ -219,7 +216,7 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
 
 <p>Pliki JS mamy z głowy, ale co z CSS? Do nich musimy pobrać kolejny loader, gdyż Webpack domyślnie wspiera tylko JS. A więc:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install css-loader style-loader <span class="nt">--save-dev</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install </span>css-loader style-loader <span class="nt">--save-dev</span></code></pre></figure>
 
 <p>Następnie dodajemy loadery oraz plik CSS do <span class="file">webpack.config.js</span>:</p>
 
@@ -254,7 +251,7 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
 
 <p>Jednak Webpack nie łączy tą metoda wszystkich importów w jeden plik. Dodaje go inline do DOM, co ma kilka wad. Wydajność jest lepsza tylko dla małych ilości CSS. Uniemożliwia to ładowanie naszych plików CSS do cache przeglądarki, bo poprostu ich nie ma! Wtedy, za każdym odświeżeniem strony wszystko musi być załadowane od nowa, co w przypadku dużych ilości styli nie jest zbyt optymalne. Rozwiązaniem jest plugin ExtractTextPlugin, dzięki któremu połączymy pliki CSS w jeden i będziemy go mogli tradycyjnie załączyć w HTML. Instalacja:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm install extract-text-webpack-plugin <span class="nt">--save-dev</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install </span>extract-text-webpack-plugin <span class="nt">--save-dev</span></code></pre></figure>
 
 <p>Następnie w pliku <span class="file">webpack.config.js</span> dodajemy stałą:</p>
 

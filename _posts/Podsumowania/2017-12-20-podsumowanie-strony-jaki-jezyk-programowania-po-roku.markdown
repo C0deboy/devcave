@@ -6,7 +6,7 @@ subtitle:   "Ogólne podsumowanie projektu + statystyki"
 date:       2017-12-20 12:00:00
 author:     "Codeboy"
 category:   Podsumowania
-tags:	    Podsumowania jaki-jezyk-programowania
+tags:	    Podsumowania Jaki-jezyk-programowania
 comments:   true
 toc:        true
 ---

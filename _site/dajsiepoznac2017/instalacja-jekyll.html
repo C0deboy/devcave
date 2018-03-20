@@ -36,10 +36,7 @@
     <div class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">
-                <img src="/img/devcave.png">
-                devcave.pl
-            </a>
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
 
             <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
                 Menu
@@ -163,11 +160,11 @@ make –v</code></pre></figure>
 
 <p>Jeśli nie masz któregoś komponentu to przejdź <a href="#instalacja-jekyll-na-podsystemie-ubuntu-w-windows-10">dalej</a>, tam pokazuję jak to zainstalować. Jedyne, co musiałem dorzucić na Mincie to Ruby DevKit, bo gdy próbowałem instalować Jekylla to wyrzucało błąd.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install ruby-dev</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get <span class="nb">install </span>ruby-dev</code></pre></figure>
 
 <p>Pozostało już tylko zainstalować Jekyll i Bundler:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">gem install jekyll bundler</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">gem <span class="nb">install </span>jekyll bundler</code></pre></figure>
 
 <p>I gotowe. Aby utworzyć projekt naszego bloga wpisujemy:</p>
 
@@ -235,11 +232,11 @@ Panel sterowania-&gt; Programy-&gt; Programy i funkcje-&gt; Włącz lub wyłącz
 
 <p>W moim przypadku domyślnie komenda:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install ruby</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get <span class="nb">install </span>ruby</code></pre></figure>
 
 <p>instalowała mi starszą wersję Ruby – 1.9.1, a wymagana jest 2.0 lub nowsza. Tak więc robię to za pomocą RVM - Menadżera wersji Ruby:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install curl
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get <span class="nb">install </span>curl
 
 gpg2 <span class="nt">--keyserver</span> hkp://keys.gnupg.net <span class="nt">--recv-keys</span> 409B6B1796C275462A1703113804BB82D39DC0E3
 curl <span class="nt">-sSL</span> https://get.rvm.io | bash <span class="nt">-s</span> stable
@@ -248,7 +245,7 @@ curl <span class="nt">-sSL</span> https://get.rvm.io | bash <span class="nt">-s<
 
 rvm requirements
 
-rvm install 2.4.0
+rvm <span class="nb">install </span>2.4.0
 rvm use 2.4.0 –default</code></pre></figure>
 
 <p>Jeśli wszystko poszło poprawnie to po tej komendzie:</p>
@@ -267,8 +264,8 @@ rvm use 2.4.0 –default</code></pre></figure>
 
 <h2 id="gcc-i-make">GCC i Make:</h2>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get install make
-<span class="nb">sudo </span>apt-get install gcc</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get <span class="nb">install </span>make
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc</code></pre></figure>
 
 <p>I dalej istalacja przebiega tak jak <a href="#wymagania">wcześniej</a>, tylko dwie ważne uwagi:</p>
 

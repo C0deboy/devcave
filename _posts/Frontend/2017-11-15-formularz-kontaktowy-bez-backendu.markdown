@@ -6,7 +6,7 @@ subtitle:   "Tylko HTML, Javascript i jQuery(opcjonalnie)."
 date:       2017-11-15 12:00:00
 author:     "Codeboy"
 category:   Frontend
-tags:	    Frontend Jak-zrobić Formularz-kontaktowy
+tags:	    Frontend Jak-zrobić
 comments:   true
 toc:        true
 ---

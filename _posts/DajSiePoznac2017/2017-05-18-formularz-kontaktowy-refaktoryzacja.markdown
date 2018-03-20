@@ -6,7 +6,7 @@ subtitle:   "Sporo zmian, większa uniwersalność"
 date:       2017-05-18 0:12:00
 author:     "Codeboy"
 category:   DajSiePoznac2017
-tags:       DajSiePoznac2017 Formularz-kontaktowy
+tags:       DajSiePoznac2017
 comments:   true
 toc:        true
 ---

@@ -6,7 +6,7 @@ subtitle:   "Podpowiadam skąd najlepiej się uczyć oraz jak wygląda matura z 
 date:       2017-11-25 12:00:00
 author:     "Codeboy"
 category:   Podpowiadam-jak
-tags:	    Podpowiadam-jak Matura-Informatyka
+tags:	    Matura-Informatyka
 comments:   true
 toc:        true
 ---

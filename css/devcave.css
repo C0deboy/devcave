@@ -487,9 +487,11 @@ pre {
 .site-tag {
   background: #0079cc;
   display: inline-block;
-  margin: 4px 7px 0px 0;
-  box-shadow: 0 2px 5px 1px #272727;
-  padding: 0 3px;
+  margin: 4px 7px 0 0;
+  box-shadow: 0 1px 4px 0px #000000;
+  border: 1px solid #3c3c3c;
+  padding: 0 5px;
+  border-radius: 3px;
 }
 
 .site-tag:hover {

@@ -13,7 +13,7 @@ module.exports = function (grunt) {
           src: ['*.js'],
           dest: 'dist/js',
           ext: '.min.js',
-        }]
+        }],
       },
     },
     uglify: {
@@ -24,8 +24,8 @@ module.exports = function (grunt) {
           src: ['**/*.js', '!libs/*.js'],
           dest: 'dist/js',
           ext: '.min.js',
-        }]
-      }
+        }],
+      },
     },
     cssmin: {
       target: {
@@ -65,7 +65,7 @@ module.exports = function (grunt) {
 
   // Load the plugins.
   grunt.loadNpmTasks('grunt-babel');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-uglify-es');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
 

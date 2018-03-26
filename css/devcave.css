@@ -199,13 +199,11 @@ hr.small {
 }
 
 .intro-header {
-  background-color: #005688;
   margin: 60px 0 5px 0;
   -webkit-box-shadow: inset 0px 0px 85px rgba(0,0,0,0.4);
   -moz-box-shadow:    inset 0px 0px 85px rgba(0,0,0,0.4);
   box-shadow: inset 0px 0px 110px 40px rgba(0, 0, 0, 0.4);
-  background-image: url(/img/background.jpg);
-  background-attachment: fixed;
+  background: #005688 url(/img/background.jpg) fixed;
 }
 
 .post-heading {

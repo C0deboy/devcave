@@ -10,11 +10,14 @@
     "devDependencies": {
         "babel-core": "^6.26.0",
         "babel-preset-env": "^1.6.1",
+        "eslint": "^4.19.1",
+        "eslint-config-airbnb-base": "^12.1.0",
+        "eslint-plugin-import": "^2.9.0",
         "grunt": "~1.0.1",
         "grunt-babel": "^7.0.0",
         "grunt-contrib-cssmin": "^2.2.1",
         "grunt-contrib-less": "~1.4.1",
-        "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
+        "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
         "grunt-contrib-watch": "~1.0.0"
     }
 }

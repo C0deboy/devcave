@@ -6,6 +6,13 @@ header-img: "img/archive-header.jpg"
 permalink: "/archiwum/"
 ---
 
+<div>
+  <h1>Wszytkie wpisy:</h1>
+  <h2 class="page-header">{{ site.posts | size }}
+    <small> - Ilość wszystkich postów</small>
+  </h2>
+</div>
+
 <div class="search-engine">
   <label>
     Wyszukaj po tytule/podtytule:
@@ -30,13 +37,6 @@ permalink: "/archiwum/"
     search.getUrlSearchQuery();
 
   </script>
-</div>
-
-<div>
-  <h1>Wszytkie wpisy:</h1>
-  <h2 class="page-header">{{ site.posts | size }}
-      <small> - Ilość wszystkich postów</small>
-  </h2>
 </div>
 
 <div>

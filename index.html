@@ -26,7 +26,7 @@ description: "{ Blog programistyczny }"
 <!-- Main Content -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6 col-lg-offset-1 col-md-8">
+    <div class="col-xl-5 col-lg-6 col-xl-offset-2 col-lg-offset-1 col-md-8">
       <h1>Ostatnie wpisy:</h1>
       {% for post in paginator.posts %}
       <div class="post-preview box-effect">
@@ -79,14 +79,14 @@ description: "{ Blog programistyczny }"
       {% endif %}
     </div>
 
-    <div class="col-lg-4 col-md-4">
-      <div class="row top-posts">
+    <div class="col-xl-3 col-lg-4 col-md-4">
+      <div class="top-posts">
         <h1>Najpopularniejsze wpisy:</h1>
         <span class="text-muted">Top {{ site.data.top_posts | size }}</span>
         <ul>
           {% for post in site.data.top_posts %}
           <li class="box-effect row">
-            <div class="top-position">{{forloop.index}}#</div>
+            <div class="top-position">{{forloop.index}}</div>
             <div class="top-entry">
               <a href="{{ post.url }}">
                 <h4>{{ post.title }}</h4>
@@ -97,16 +97,22 @@ description: "{ Blog programistyczny }"
         </ul>
       </div>
 
-      <div class="row box-effect books-ad">
+      <div class="box-effect books-ad">
         <a href="https://jaki-jezyk-programowania.pl/ksiazki">
           <img src="/img/books.png"/>
           <h3>Zobacz polecane książki na: <br> jaki-jezyk-programowania.pl</h3>
         </a>
       </div>
+
+      <div class="fb-page inline box-effect">
+        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="340" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+      </div>
+
     </div>
   </div>
 </div>
 
 <hr>
+
 
 

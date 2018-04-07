@@ -28,6 +28,10 @@ h6 {
   font-size: 1.6em;
 }
 
+.post-heading .post-title {
+  font-size: 1.9em;
+}
+
 .post-subtitle {
   font-size: 1.3em;
   font-weight: 300;
@@ -207,7 +211,7 @@ hr.small {
 }
 
 .post-heading {
-  padding: 10px;
+  padding: 50px 0 0;
 }
 
 .header-logo {
@@ -260,13 +264,17 @@ hr.small {
 }
 
 .box-effect {
-  padding: 1px 10px 20px;
+  padding: 5px 10px;
   margin-top: 30px;
   box-shadow: 0 1px 3px 0 #747474;
 }
 
 .dark-mode .box-effect {
   box-shadow: 0 0 5px 0 #000;
+}
+
+.post-preview {
+  padding-bottom: 25px;
 }
 
 .post-preview > a {
@@ -283,7 +291,7 @@ hr.small {
 .post-preview > .post-meta, .post-meta {
   color: #808080;
   font-size: 18px;
-  margin: 0;
+  margin: 0 0 5px 0;
 }
 .post-preview > .post-meta > a {
   text-decoration: none;
@@ -485,7 +493,7 @@ pre {
 .site-tag {
   background: #0079cc;
   display: inline-block;
-  margin: 4px 7px 0 0;
+  margin: 10px 7px 0;
   box-shadow: 0 1px 4px 0px #000000;
   border: 1px solid #3c3c3c;
   padding: 0 5px;
@@ -533,8 +541,8 @@ pre {
 .project,
 .books {
   margin-top: 30px;
-  background: rgba(70, 70, 70, 0.12);
-  box-shadow: 0 0 5px 1px #191919;
+  background: rgba(222, 222, 222, 0.12);
+  box-shadow: 0 0px 4px 0px #000000;
 }
 
 .books {
@@ -587,7 +595,9 @@ pre {
 
 .top-posts .top-position {
   font-size: 1.5em;
-  padding: 0 8px;
+  padding: 0 10px;
+  margin: 0 7px 0 3px;
+  border-right: solid 1px #a5a5a554;
 }
 
 .top-posts ul {
@@ -596,7 +606,6 @@ pre {
 }
 
 .books-ad {
-  margin: 35px 0 0 0;
   padding: 5px;
 }
 
@@ -697,4 +706,25 @@ pre {
   text-align: center;
 }
 
+.fa-ul.custom {
+  list-style-type: disc!important;
+  margin-top: -10px;
+}
 
+a.disabled {
+  color: gray;
+  pointer-events: none;
+}
+
+.fb-page {
+  padding: 5px 5px 0;
+}
+
+@media (max-width: 380px) {
+  .fb-page {
+    width: 100%;
+  }
+  .fb-page iframe {
+    width: 100%;
+  }
+}

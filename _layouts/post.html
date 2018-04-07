@@ -8,6 +8,7 @@ layout: default
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
                 <div class="post-heading">
+
                     <h1 class="post-title">{{ page.title }}</h1>
                     {% if page.subtitle %}
                     <h2 class="post-subtitle">{{ page.subtitle }}</h2>
@@ -32,6 +33,8 @@ layout: default
                     {{ page.date | date: "%Y" }}</p>
                      {% assign tags = page.tags | sort %}{% for tag in tags %}<div class="site-tag"><a href='/archiwum#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div> {% endfor %}
                 </div>
+
+                <hr>
             </div>
         </div>
     </div>
@@ -41,7 +44,6 @@ layout: default
     <div class="container post">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <hr class="header-hr">
 
                 <span>Spis treści:</span>
 

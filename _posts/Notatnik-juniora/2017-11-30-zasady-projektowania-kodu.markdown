@@ -19,7 +19,7 @@ Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowani
 - Jedna z podstawowych zasad programowania - **nie powtarzaj się**. Wielokrotne użycie tego samego kodu to podstawa programowania. Nie ma miejsca na kopiuj/wklej.
 - Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 
 - Lepsza czytelność kodu oraz łatwość w utrzymaniu.
 - Zmiana implementacji tylko w jednym miejscu.
@@ -40,7 +40,7 @@ Można to rozszerzyć o zasadę:
 ### Boy scout rule
 - Zawsze pozostaw po sobie kod czystszy niż go zastałeś.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Szybciej i łatwiej zrozumieć kod.
 - Mniejsza ilość potencjalnych bugów.
 - łatwość w utrzymaniu i modyfikowaniu kodu.
@@ -53,7 +53,7 @@ Można to rozszerzyć o zasadę:
 - Klasa realizuję pojedyncze zadanie.
 - Gdy wymagana jest zmiana, powinna ona objąć tylko jedną klasę lub pakiet.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Lepsza czytelność kodu.
 - Łatwość w utrzymaniu i modyfikowaniu kodu.
 - Nie musimy skakać po kilku pakietach/klasach, aby wprowadzić pojedyńczą zmianę.
@@ -64,7 +64,7 @@ Można to rozszerzyć o zasadę:
 - Polegaj na abstrakcji i polimorfizmie
 - Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowane przez ify czy konstrukcję switch.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Łatwiejsze i bardziej stabline rozbudowywanie systemu.
 - Minimalizujemy potrzebę modyfikowania instniejącego kodu w wielu miejscach, gdy dodajemy np. kolejny przypadek czegoś.
 
@@ -73,7 +73,7 @@ Można to rozszerzyć o zasadę:
 - Podklasa nie powinna robić mniej niż klasa bazowa. Czyli zawsze powinna robić więcej.
 - Zobacz popularny przykład złego zastosowania dziedziczenia "Square extends Rectangle"
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Przewidywalne zachowania obiektów
 
 ### I - Interface segregation principle
@@ -82,7 +82,7 @@ Można to rozszerzyć o zasadę:
 - Klasa nie powinna implementować interfejsu, przez który naruszy [Single responsibility principle](#S---Single-responsibility-principle)
 - Klasa która implementuje interfejs nie może być zmuszana do implementowania metod, których nie potrzebuje, a tak jest często w przypadku dużych iterfejsów.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z "dużego" interfejsu.
 - Nie naruszanie [Single responsibility principle](#S---Single-responsibility-principle)
 
@@ -92,7 +92,7 @@ Można to rozszerzyć o zasadę:
 - Szczegóły implementacyjne powinny polegać na abstrakcji.
 - czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - minimalizowanie zależności (loose coupling)
 - elastyczność - łatwiej wprowadzać zmiany 
 
@@ -107,13 +107,13 @@ Można to rozszerzyć o zasadę:
   - Bezpośredniego pola obiektu.
   - Np. nie powinno się stosować wywołań typu A.getB().getC().getD.getName().
   
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali
 
 ## SLAP - Single Level of Abstraction Principle
 - Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Czytelność i łatwiejsze utrzymanie kodu
 
 ## Composition Over Inheritance
@@ -121,14 +121,14 @@ Można to rozszerzyć o zasadę:
 - W większości wypadów możemy całkowicie zrezygnować z dziedziczenia w naszej aplikacji (Oczywiście chodzi o dziedziczenie z **klas**, nie z interfejsów). Jest to zalecany sposób projektowania aplikacji.
 - Stosuj dziedziczenie tylko gdy [LSP](#l---liskov-substitution-principle) nie jest złamana i naprawdę tego potrzebujesz.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Zmniejsza to zależności między klasami
 - Używając dziedziczenia łatwiej też o złamanie [Liskov substitution principle](#l---liskov-substitution-principle)
 
 ## Encapsulate What Changes
 - Miejsca, które są najbardziej prawdopodobne do zmiany powinny być schowane (zhermetyzowane) pod API.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę
 
 <hr>
@@ -141,7 +141,7 @@ Można to rozszerzyć o zasadę:
 - Ściśle powiązana z [OCP](#o---open/closed-principle) na poziomie klas
 - Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie. 
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Minimalizuje to liczbę pakietów do zmiany w przypadku zmiany wymagań.
 - Nie trzeba przeszukiwać kilku różnych pakietów w celu wprowadzenia zmiany
 
@@ -150,14 +150,14 @@ Można to rozszerzyć o zasadę:
 - Klasy, które są przeznaczone do ponownego wykorzystania, powinien być w jednej paczce, która może stać się reużywalną biblioteką. Nie powinny się tam znaleźć te, które nie są przeznaczone do ponownego wykorzystania. W skrócie - albo wszystkie są reużywalne, albo żadne.
 - Powinny to być również klasy, które są z jednej "rodziny". Klasy niezwiązane z przeznaczeniem pakietu nie powinny się tam znaleźć.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 
 - Gdy autor oryginalnego kodu wprowadzi zmianę – w szczególności poprawi jakiś błąd – wówczas każdy może w łatwy sposób skorzystać ze zmian pobierając nową wersję biblioteki, zamiast zmieniać coś samodzielnie - a w przypadku, gdy my jesteśmy autorami, dokonywać zmian w co najmniej dwóch miejscach za każdym razem.
 
 ## CRP - Common-reuse principle
 - Klasy wspólnie używane powinny być wspólnie pakietowane
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Lepsza spójność i czytelność systemu
 
 <hr>
@@ -168,7 +168,7 @@ Można to rozszerzyć o zasadę:
 - Minimalizuj powiązania między pakietami/klasami. Mniejsza ilość zależności jest lepsza.
 - Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie [Law of Demeter](#LoD---Law-of-Demeter)
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B.
 
 ## ADP - Acyclic dependencies principle
@@ -181,7 +181,7 @@ A &larr;-------- C
 </pre>
 - Możemy temu zapobiec stosując [Dependency inversion principle](#D---Dependency-inversion-principle), wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - łatwiej zrozumieć i utrzymać system
 
 ## SDP - Stable-dependencies principle
@@ -189,7 +189,7 @@ A &larr;-------- C
 - Zależności tego pakietu powinny być bardziej stabilne niż on sam.
 - Taką samą zasadę możemy stosować w przypadku klas.
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 - Zmniejsza efekt łancuchowej reakcji, która wymusza modyfikację kodu w kilku innych miejscach po wprowadzeniu jednej zmiany
 
 ## SAP - Stable-abstractions principle

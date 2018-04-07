@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-03-26T21:06:37+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Konkurs Gynveala - gra do 20KB (strategia turowa)</title><link href="https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb" rel="alternate" type="text/html" title="Konkurs Gynveala - gra do 20KB (strategia turowa)" /><published>2018-01-22T13:00:00+01:00</published><updated>2018-01-22T13:00:00+01:00</updated><id>https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb</id><content type="html" xml:base="https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb">&lt;p&gt;&lt;a href=&quot;http://gynvael.coldwind.pl/?id=668&quot;&gt;Konkurs&lt;/a&gt; rozpoczął się jeszcze przed nowym rokiem. Polegał na stworzeniu turowej gry taktycznej do 20KB, przy użyciu tylko i wyłącznie czystego Javascriptu. Wszystko musiało być też w jednym pliku &lt;span class=&quot;file&quot;&gt;index.html&lt;/span&gt;. Nie można było więc dociągać z innych źródeł obrazków, dźwięku, css-ów czy javascriptu. Wszystko musiało być wrzucone do jednego pliku. Ten limit stanowił główne wyzwanie. Oznaczało to też, że nie ma możliwości użycia żadnej biblioteki do tworzenia gier czy jakiegoś silnika. Nagrody prezentowały się następująco:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-04-07T12:08:54+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Pierwsza praca jako programista</title><link href="https://devcave.pl/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista" rel="alternate" type="text/html" title="Pierwsza praca jako programista" /><published>2018-04-07T11:00:00+02:00</published><updated>2018-04-07T11:00:00+02:00</updated><id>https://devcave.pl/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista</id><content type="html" xml:base="https://devcave.pl/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista">&lt;p&gt;Trochę minęło czasu od ostatniego posta. Związane to było z pójściem do mojej pierwszej pracy jako programista. Przez ten okres pojawił się tylko jeden wpis związany z konkursem, a to dlatego, że nie miałem zbytnio czasu na blogowanie. Pierwsze dwa miesiące uczestniczyłem w szkoleniu organizowanym przez firmę, które było całkiem intensywne. Pracuję już ponad 3 miesiące, więc podzielę się w końcu jak to u mnie wygląda.&lt;/p&gt;
+
+&lt;p&gt;Szykuję też nową regularną serię na bloga, więc teraz wpisy będą częściej, ale wszystko po kolei.&lt;/p&gt;
+
+&lt;h1 id=&quot;pierwsza-praca&quot;&gt;Pierwsza praca&lt;/h1&gt;
+&lt;h2 id=&quot;pierwszy-dzień&quot;&gt;Pierwszy dzień&lt;/h2&gt;
+&lt;p&gt;Pierwsze kilka dni to praktycznie same formalności, wprowadzenie do procesów firmy, oprowadzenie po firmie, poznawanie osób itd.&lt;/p&gt;
+
+&lt;p&gt;Razem ze mną nowa była jeszcze jedna osoba, która znała kilka osób w firmie, więc dosyć łatwo było się zintegrować.&lt;/p&gt;
+
+&lt;h2 id=&quot;pierwsze-zadanie&quot;&gt;Pierwsze zadanie&lt;/h2&gt;
+&lt;p&gt;Więc tak jak wspomniałem - nie zostałem rzucony od razu na głęboką wodę, nie dostałem od razu żadnych tasków. W firmie gdzie pracuję najpierw jest ok. 2 miesięczne szkolenie podzielone na różne sekcje. M.in.:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Odświeżenie wiedzy na temat Javy i dobrych praktyk &lt;br /&gt;
+mini wykłady + do napisania aplikacja CRUD. Trzeba było to zrobić w czystej JavieEE, bez żadnych framworków. Miało to też na celu poznanie jakie problemy rozwiązują frameworki takie jak Spring.&lt;/li&gt;
+  &lt;li&gt;Poznawanie oprogramowania do &lt;em&gt;Product Lifecycle Management&lt;/em&gt;, którym firma głównie się zajmuje, a następnie 2 różne &lt;em&gt;case study&lt;/em&gt; z tego tematu&lt;/li&gt;
+  &lt;li&gt;Umiejętności miękkie&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;itp. We wszystkich szkoleniach był też kładziony nacisk na kontakt z klientem. Więc wykładowcy przybierali postać klienta, z którym trzeba było się kontaktować, demonstrować i w końcu oddawać tworzony przez nas produkt. Wszystko w języku angielskim, bo wszyscy klienci firmy to klienci zagraniczni.&lt;/p&gt;
+
+&lt;h2 id=&quot;pierwszy-projekt&quot;&gt;Pierwszy projekt&lt;/h2&gt;
+
+&lt;p&gt;Po szkoleniu przyszedł czas na pierwszy projekt, jednak nie był to jeszcze projekt zewnętrzny, czyli dla jakiegoś klienta firmy. Był to projekt wewnętrzny, a mianowicie narzędzie do ułatwienia pracy testerów w naszej firmie. Miało ono na celu zautomatyzowanie części ich żmudnej i powtarzalnej pracy. Robiłem to razem z tą osobą, o której wspominałem wcześniej. Dostaliśmy na to ponad miesiąc czasu. Narzędzie jest już praktycznie skończone i oddane w ręce testerów. Jak na razie jest pozytywny feedback :)&lt;/p&gt;
+
+&lt;p&gt;Bardzo przyjemnie mi się nad tym narzędziem pracowało i jestem zadowolony z efektów. Przydzielono mi już zewnętrzny projekt, gdzie wykorzystuje się narzędzie do &lt;em&gt;Product Lifecycle Management&lt;/em&gt; o którym wcześniej wspominałem. Jest to naprawdę wielka “kobyła” :D Praca z tym już nie będzie pewnie tak przyjemna, jak podczas tworzenia od zera własnego narzędzia. Mniej więcej od połowy kwietnia tym się będę zajmował.&lt;/p&gt;
+
+&lt;h2 id=&quot;ogólne-wrażenia&quot;&gt;Ogólne wrażenia&lt;/h2&gt;
+
+&lt;p&gt;Jestem całkiem zadowolony z mojej pracy. Jest miła i luźna atmosfera. Przyjemnie się pracuje.&lt;/p&gt;
+
+&lt;p&gt;Nic nie jest wymagane na sztywno. Nie ma wymogu przychodzenia np. równo o 8 i wychodzenia o 17 z przerwą o danej godzinie. Wszystko jest płynne. Jest też możliwość pracy zdalnej z której czasem korzystam.&lt;/p&gt;
+
+&lt;p&gt;W firmie jako budynku też jest całkiem miło. W pełni wyposażona kuchnia z pyszną kawą, gaming room, piłkarzyki i te sprawy. Tłuste czwartki (słodkie bułki dla każdego co czwartek :D) i często inne smakołyki na różne okazje.&lt;/p&gt;
+
+&lt;h3 id=&quot;dylemat-jeśli-chodzi-o-studia&quot;&gt;Dylemat jeśli chodzi o studia&lt;/h3&gt;
+&lt;p&gt;Czasem jak myślę o studiach, to się nawet cieszę, że się nie dostałem. Bo jeśli mam sobie porównać to co mam teraz do zakuwania matmy czy innych rzeczy, to za każdym razem wybrałbym tą pracę :D Chociaż cały czas myślę o studiach - bo może się przyda ten papier… I taki mam z tym mały dylemat. Z jednej strony pewnie dałbym radę zrobić studia zaocznie, ale jak sobie pomyślę, że mam za to jeszcze płacić to mi się odechciewa. No ale chyba innego wyjścia nie ma, bo zrezygnowanie z pracy i studia dzienne raczej nie wchodzą w grę. Zobaczymy jak to się potoczy. Może ktoś się podzieli jakimiś przemyśleniami na ten temat? ;)&lt;/p&gt;
+
+&lt;h1 id=&quot;nowa-seria&quot;&gt;Nowa seria&lt;/h1&gt;
+
+&lt;p&gt;Tak jak na początku wspomniałem, robię nową serię na bloga, a mianowicie “Effective Java” w ramach “Notatnika Juniora”, gdzie krok po kroku będę robił wpisy na kolejne tematy poruszane w  książce - trzeciej edycji &lt;em&gt;Effective Java&lt;/em&gt;, której autorem jest Joshua Blosh. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie (wydanie ze stycznia 2018). Dostałem ją jeszcze ciepłą od mojej dziewczyny, która kupiła ją z Amazonu za ponad 200zł :O. Także przerobię ją najlepiej jak potrafię, taki prezent nie może się zmarnować ;)&lt;/p&gt;
+
+&lt;p&gt;Będę to robił w formie notatki z wybranego tematu. Każdy wpis będzie miał informację do którego &lt;em&gt;itemu&lt;/em&gt; z książki się odnosi. Nie będę ograniczał się jednak tylko do książki, więc czasem może się trafić jakiś przykład ode mnie lub z innych źródeł na ten sam temat. Będę chciał ugryźć dany temat na wiele sposobów. Myślę, że wpisy będą całkiem wartościowe.&lt;/p&gt;
+
+&lt;p&gt;Obecnie mam już przygotowane 6 wpisów i zamierzam je wypuszczać co tydzień. Wszystkich &lt;em&gt;itemów&lt;/em&gt; w książce jest 90 więc jeśli chciałbym każdy z nich poruszyć to seria skończyła by się 28 grudnia 2019 roku ;D Zobaczymy jak to wyjdzie, może jak dany temat będzie krótki to wpisy będą częściej (w co wątpię) i nie gwarantuję, że przerobię wszystko.&lt;/p&gt;
+
+&lt;p&gt;Ale trzymajcie za mnie kciuki! Pierwszy wpis w następną sobotę :)&lt;/p&gt;
+
+&lt;p&gt;Miłego dnia!&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Moje-doświadczenia" /><category term="Moje-doświadczenia" /><category term="Pierwsza-praca" /><summary type="html">Trochę minęło czasu od ostatniego posta. Związane to było z pójściem do mojej pierwszej pracy jako programista. Przez ten okres pojawił się tylko jeden wpis związany z konkursem, a to dlatego, że nie miałem zbytnio czasu na blogowanie. Pierwsze dwa miesiące uczestniczyłem w szkoleniu organizowanym przez firmę, które było całkiem intensywne. Pracuję już ponad 3 miesiące, więc podzielę się w końcu jak to u mnie wygląda.</summary></entry><entry><title type="html">Konkurs Gynveala - gra do 20KB (strategia turowa)</title><link href="https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb" rel="alternate" type="text/html" title="Konkurs Gynveala - gra do 20KB (strategia turowa)" /><published>2018-01-22T13:00:00+01:00</published><updated>2018-01-22T13:00:00+01:00</updated><id>https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb</id><content type="html" xml:base="https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb">&lt;p&gt;&lt;a href=&quot;http://gynvael.coldwind.pl/?id=668&quot;&gt;Konkurs&lt;/a&gt; rozpoczął się jeszcze przed nowym rokiem. Polegał na stworzeniu turowej gry taktycznej do 20KB, przy użyciu tylko i wyłącznie czystego Javascriptu. Wszystko musiało być też w jednym pliku &lt;span class=&quot;file&quot;&gt;index.html&lt;/span&gt;. Nie można było więc dociągać z innych źródeł obrazków, dźwięku, css-ów czy javascriptu. Wszystko musiało być wrzucone do jednego pliku. Ten limit stanowił główne wyzwanie. Oznaczało to też, że nie ma możliwości użycia żadnej biblioteki do tworzenia gier czy jakiegoś silnika. Nagrody prezentowały się następująco:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Best Game Award:&lt;br /&gt;
@@ -464,7 +513,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Lepsza czytelność kodu oraz łatwość w utrzymaniu.&lt;/li&gt;
@@ -493,7 +542,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Zawsze pozostaw po sobie kod czystszy niż go zastałeś.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Szybciej i łatwiej zrozumieć kod.&lt;/li&gt;
   &lt;li&gt;Mniejsza ilość potencjalnych bugów.&lt;/li&gt;
@@ -510,7 +559,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Gdy wymagana jest zmiana, powinna ona objąć tylko jedną klasę lub pakiet.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Lepsza czytelność kodu.&lt;/li&gt;
   &lt;li&gt;Łatwość w utrzymaniu i modyfikowaniu kodu.&lt;/li&gt;
@@ -525,7 +574,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowane przez ify czy konstrukcję switch.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Łatwiejsze i bardziej stabline rozbudowywanie systemu.&lt;/li&gt;
   &lt;li&gt;Minimalizujemy potrzebę modyfikowania instniejącego kodu w wielu miejscach, gdy dodajemy np. kolejny przypadek czegoś.&lt;/li&gt;
@@ -538,7 +587,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Zobacz popularny przykład złego zastosowania dziedziczenia “Square extends Rectangle”&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Przewidywalne zachowania obiektów&lt;/li&gt;
 &lt;/ul&gt;
@@ -551,7 +600,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Klasa która implementuje interfejs nie może być zmuszana do implementowania metod, których nie potrzebuje, a tak jest często w przypadku dużych iterfejsów.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z “dużego” interfejsu.&lt;/li&gt;
   &lt;li&gt;Nie naruszanie &lt;a href=&quot;#S---Single-responsibility-principle&quot;&gt;Single responsibility principle&lt;/a&gt;&lt;/li&gt;
@@ -565,7 +614,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;minimalizowanie zależności (loose coupling)&lt;/li&gt;
   &lt;li&gt;elastyczność - łatwiej wprowadzać zmiany&lt;/li&gt;
@@ -587,7 +636,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali&lt;/li&gt;
 &lt;/ul&gt;
@@ -597,7 +646,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Czytelność i łatwiejsze utrzymanie kodu&lt;/li&gt;
 &lt;/ul&gt;
@@ -609,7 +658,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Stosuj dziedziczenie tylko gdy &lt;a href=&quot;#l---liskov-substitution-principle&quot;&gt;LSP&lt;/a&gt; nie jest złamana i naprawdę tego potrzebujesz.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Zmniejsza to zależności między klasami&lt;/li&gt;
   &lt;li&gt;Używając dziedziczenia łatwiej też o złamanie &lt;a href=&quot;#l---liskov-substitution-principle&quot;&gt;Liskov substitution principle&lt;/a&gt;&lt;/li&gt;
@@ -620,7 +669,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Miejsca, które są najbardziej prawdopodobne do zmiany powinny być schowane (zhermetyzowane) pod API.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę&lt;/li&gt;
 &lt;/ul&gt;
@@ -637,7 +686,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Minimalizuje to liczbę pakietów do zmiany w przypadku zmiany wymagań.&lt;/li&gt;
   &lt;li&gt;Nie trzeba przeszukiwać kilku różnych pakietów w celu wprowadzenia zmiany&lt;/li&gt;
@@ -650,7 +699,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Powinny to być również klasy, które są z jednej “rodziny”. Klasy niezwiązane z przeznaczeniem pakietu nie powinny się tam znaleźć.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Gdy autor oryginalnego kodu wprowadzi zmianę – w szczególności poprawi jakiś błąd – wówczas każdy może w łatwy sposób skorzystać ze zmian pobierając nową wersję biblioteki, zamiast zmieniać coś samodzielnie - a w przypadku, gdy my jesteśmy autorami, dokonywać zmian w co najmniej dwóch miejscach za każdym razem.&lt;/li&gt;
@@ -661,7 +710,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Klasy wspólnie używane powinny być wspólnie pakietowane&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Lepsza spójność i czytelność systemu&lt;/li&gt;
 &lt;/ul&gt;
@@ -676,7 +725,7 @@ Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na
   &lt;li&gt;Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie &lt;a href=&quot;#LoD---Law-of-Demeter&quot;&gt;Law of Demeter&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B.&lt;/li&gt;
 &lt;/ul&gt;
@@ -695,7 +744,7 @@ A &amp;larr;-------- C
   &lt;li&gt;Możemy temu zapobiec stosując &lt;a href=&quot;#D---Dependency-inversion-principle&quot;&gt;Dependency inversion principle&lt;/a&gt;, wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;łatwiej zrozumieć i utrzymać system&lt;/li&gt;
 &lt;/ul&gt;
@@ -707,7 +756,7 @@ A &amp;larr;-------- C
   &lt;li&gt;Taką samą zasadę możemy stosować w przypadku klas.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class=&quot;advantages&quot;&gt;Plusy&lt;/p&gt;
+&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Zmniejsza efekt łancuchowej reakcji, która wymusza modyfikację kodu w kilku innych miejscach po wprowadzeniu jednej zmiany&lt;/li&gt;
 &lt;/ul&gt;
@@ -877,94 +926,4 @@ programowania &lt;strong&gt;Python&lt;/strong&gt;, więc się załapiecie - troc
 
 &lt;p&gt;Co do uzyskanego papierka i doświadczenia z praktyk, osobiście uważam, że nie jest to zbyt wartościowe, tym bardziej dla programisty. No chyba, że trafimy na coś programistycznego, ale tak jak pisałem - z tym jest ciężko. Nie umieszczałem w swoim CV ani kwalifikacji zawodowych, ani odbytych praktyk, a pracę dostałem bez żadnych znajomości od razu po szkole. Czy jakbym załączył te informacje w CV to byłoby mi łatwiej? Nie sądzę, bo na rozmowach nawet słowo nie padło w tym kierunku.&lt;/p&gt;
 
-&lt;p&gt;Jedynie czego żałuję w tym wyjeździe to tego, że nie miałem praktyk związanych z programowaniem. No ale na to nie mamy wpływu. Dostajemy to z góry. Ogólnie wyjazd oceniam na 9/10 i szczerze polecam tę opcję. Było tak dobrze, że nie chciało nam się wracać do Polski ;)&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Moje-doświadczenia" /><category term="Moje-doświadczenia" /><summary type="html">W poście Liceum vs Technikum temat praktyk zawodowych dotknąłem tylko delikatnie i zapowiedziałem, że napiszę o tym osobny post. I oto on. Całość opiszę z perspektywy programisty. Praktyki zawodowe w Technikum Informatycznym Z założenia, praktyki zawodowe trwają przez miesiąc i mają nam dać trochę doświadczenia zawodowego oraz papier, który pomoże nam łatwiej znaleźć prace. Jak to jest naprawdę? Z tym bywa różnie. Część praktyk jest organizowana przez szkołę z firmami, z którymi współpracuje. I tu to trochę loteria, no chyba, że macie jakieś potwierdzone informacje o jakości oferowanych praktyk. Gdy nie skorzystamy z praktyk oferowanych przez szkołę, musimy coś sobie znaleźć na własną rękę. Tu już sprawa zależy od naszych starań. W obu przypadkach miałem kolegów, którzy nie robili praktycznie nic albo jakieś błahe rzeczy, typu podawanie papieru do drukarki. Jeden z nich nawet nie musiał na nie chodzić. Więc tak jak mówię - albo liczymy na szczęście, że szkoła nam zaoferuje coś ciekawego albo musimy sami się o to postarać. Jest jeszcze trzecia opcja, z której ja skorzystałem - Erasums. Erasmus Jest to projekt, który umożliwia wyjazd zagraniczny na miesięczne praktyki zawodowe. W mojej szkole mogło z niego skorzystać 20 osób z najlepszymi wynikami pośród 3 klas informatycznych (ok. 30 osobowych). Był to wyjazd do Londynu. Według mnie jest to najlepsza opcja na praktyki zawodowe, ponieważ najczęściej będzie to przyjemne doświadczenie, bez względu na to czy trafimy na jakieś dobre praktyki czy nie. Dla mnie, jak to pisałem w poście Liceum vs Technikum, był to prawie jedyny plus pójścia do technikum. Streszczę mniej więcej jak to wyglądało z mojego punktu widzenia. Kwestie finansowe Bardzo dużym plusem całego projektu jest to, że wyjaz nas praktycznie nic nie kosztuje. Jest w pełni dofinansowywany. Nie płacimy za zakwaterowanie, za wyżywienie - za nic. Do tego dostajemy jeszcze kieszonkowe na drobne wydatki, więc praktycznie wychodzimy na 0. Niektórzy mieli nawet takie szczęście (w tym ja :D), że dostawali drobne “na kawę” od pracodawców w postaci 5 funtów. Niby to mało, ale nie powinniśmy dostawać nic. Na te 20 osób były chyba tylko 3, które tak miały. Osobiście uważam, że to było sporo, bo 5 funtów * 20 (5 dni w tygodniu) = 100 funtów, a to daje w przybliżeniu 475 zł - dodatkowo. Dzięki temu cały wyjazd wyszedł nawet na plus, mimo kilku większych “niekontrolowanych” wydatków. M.in. jedno wyjście do pubu, gdzie z kolegą zostawiliśmy razem jakieś 400 zł czy przejażdżka publicznymi rowerami za około 100zł, bo nie do końca dobrze doczytaliśmy jak naliczane są opłaty :D Warunki życia Ja na pewno nie miałem co narzekać. Pokój, który dzieliłem z kolegą, był co prawda nieduży, ale nic poza tym nam nie brakowało. Mieszkanie Wszyscy uczestnicy projektu są rozrzuceni po Londynie w mniejszych 2-4 osobowych grupkach. My mieszkaliśmy w domku jednorodzinnym w dzielnicy Harrow na ulicy Brookfield Cres. Są to obrzeża Londynu. Do centrum mieliśmy jakieś 20 minut. Mieliśmy do dyspozycji dosyć mały pokój dwuosobowy, łazienkę, kuchnię i taras z niedużym podwórkiem. Ogólnie było schludnie i przyjemnie. Właściciele Razem z nami mieszkało małżeństwo, a na weekend przyjeżdżały ich dzieci. Nie zapytaliśmy o ich pochodzenie, ale nie byli to rodowici Anglicy - zresztą takich chyba już jest tam mało ;) Ogólnie byli bardzo mili i sympatyczni. Można się było bez problemu dogadać praktycznie ze wszystkim. Czasem zamienialiśmy kilka słów, ale na ogół zajmowaliśmy się swoimi sprawami. Można powiedzieć, że dobrze trafiliśmy, bo nie każdy mógł powiedzieć dobre słowo o właścicielach domu. Jedzenie Podczas wyjazdu mieliśmy zagwarantowane śniadanie, obiad i kolację. We własnym zakresie był tylko lunch w pracy. I tutaj muszę bardzo pochwalić panią domu, bo gotowała świetnie. Jak wracałem z pracy z kolegą to myśleliśmy tylko o tym co będzie dziś dobrego i jak bardzo się najemy. Czasem były tak duże porcje, że mieliśmy po 1-2 dokładki. Jednak z tego co słyszeliśmy, nie każdy miał tak dobrze jak my. Na przykład, jedna koleżanka narzekała, że codziennie na śniadanie dają jej jakąś pasze dla zwierząt :D Obowiązki To, z czego musieliśmy się wywiązywać i było obowiązkowe to: od poniedziałku do piątku bycie na praktykach, zazwyczaj od 9-10 co drugi weekend były obowiązkowe wycieczki po Londynie kilka spotkań formalnych, które były w godzinach pracy, więc nie zabierały nam dodatkowo wolnego czasu Poza tym byliśmy całkowicie wolni i mogliśmy robić co tylko chcieliśmy. Formalnie max do 22, ale z właścicielami domu mieliśmy bardzo dobre relacje i mogliśmy wracać duuużo później. Jednak nie każdy mógł sobie na to pozwolić, a niektórzy już się spalili niedługo po przyjeździe. Więc no, trzeba zrobić dobre pierwsze wrażenie ;) Praktyki Czyli wreszcie główny cel wyjazdu. Niestety, nawet na organizowanych praktykach zagranicznych zdarzało się, że praca polegała na obsłudze drukarki. Trafiło to się kilku osobom i według mnie to jest straszne. Na szczęście ja miałem trochę lepiej, ale też bez szału. Pracowałem w serwisie komputerowym po drugiej stronie Londynu. Dojazd tam zajmował mi jakoś 45 min w jedną stronę, ale nie narzekałem bardzo na to. Jeździłem tylko 2 liniami metra (w przeciwieństwie do kolegi, który musiał dojeżdżać kilkoma autobusami i metrem), zawszę miałem miejsce siedzące i mogłem sobie coś robić. Dzięki temu przeczytałem kilka książek, więc nie było to dla mnie uciążliwe. Moja praca polegała na drobnych naprawach laptopów, czasem telefonów i PC. Niestety nie było to nic związanego z programowaniem, a liczyłem na to. Szczerze mówiąc to niewiele osób miało pracę z tym związaną. Jeden znajomy zajmował się poprawianiem stronki na WordPressie i to była chyba najbardziej programistyczna praca na tym wyjeździe. Po zakończonych praktykach zaproponowali mu nawet dalsze prowadzenie strony zdalnie, więc jak widać można sobie nawet wyrobić kilka kontaktów czy znaleźć dodatkową pracę ;) Ogólnie nie wspominam tego źle, przyjemnie się pracowało. Właściciele serwisu byli sympatyczni i można było spędzić dzień w “pracy” w miłej atmosferze. Trochę z tych praktyk wyniosłem, nie można powiedzieć, że nie, ale też często naprawa polegała na reinstalacji systemu i softu + backup danych, co było dosyć nużące. Tak czy siak nie miałem najgorzej. Podsumowanie Praktyki zagraniczne wspominam wyjątkowo dobrze. Dużo się działo, zwiedziłem masę miejsc i w ogóle samo bycie w Londynie, prawie że na własną rękę, to bardzo fajne doświadczenie. Przez cały wyjazd oficjalnych spotkań było może z cztery, więc większość czasu można się było czuć, jakbyśmy żyli tam sami. Była to też dobra okazja do oswojenia się z mówionym językiem angielskim. Co do uzyskanego papierka i doświadczenia z praktyk, osobiście uważam, że nie jest to zbyt wartościowe, tym bardziej dla programisty. No chyba, że trafimy na coś programistycznego, ale tak jak pisałem - z tym jest ciężko. Nie umieszczałem w swoim CV ani kwalifikacji zawodowych, ani odbytych praktyk, a pracę dostałem bez żadnych znajomości od razu po szkole. Czy jakbym załączył te informacje w CV to byłoby mi łatwiej? Nie sądzę, bo na rozmowach nawet słowo nie padło w tym kierunku. Jedynie czego żałuję w tym wyjeździe to tego, że nie miałem praktyk związanych z programowaniem. No ale na to nie mamy wpływu. Dostajemy to z góry. Ogólnie wyjazd oceniam na 9/10 i szczerze polecam tę opcję. Było tak dobrze, że nie chciało nam się wracać do Polski ;)</summary></entry><entry><title type="html">Formularz kontaktowy bez backendu/bez PHP</title><link href="https://devcave.pl/frontend/formularz-kontaktowy-bez-backendu" rel="alternate" type="text/html" title="Formularz kontaktowy bez backendu/bez PHP" /><published>2017-11-15T13:00:00+01:00</published><updated>2017-11-15T13:00:00+01:00</updated><id>https://devcave.pl/frontend/formularz-kontaktowy-bez-backendu</id><content type="html" xml:base="https://devcave.pl/frontend/formularz-kontaktowy-bez-backendu">&lt;p&gt;Podczas DSP2017 tworzyłem formularz kontaktowy dla &lt;a href=&quot;https://jaki-jezyk-programowania.pl/&quot;&gt;jaki-jezyk-programowania.pl&lt;/a&gt; z wykorzystaniem PHP, który działał na wykupionym serwerze. Później  jednak przeniosłem swoją stronę i bloga na Github Pages, gdzie z PHP już nie można było zrobić użytku. Wysyłanie wiadomości email bez backendu wydawało mi się niemożliwe i myślałem, że już muszę zrezygnować z formularza kontaktowego na stronie. Jednak na ratunek przyszła mi strona &lt;a href=&quot;https://formspree.io/&quot;&gt;formspree.io&lt;/a&gt;, za pośrednictwem której możliwe jest wysyłanie wiadomości email na dowolnego maila.&lt;/p&gt;
-
-&lt;h1 id=&quot;co-zawiera-i-jak-działa-formularz&quot;&gt;Co zawiera i jak działa formularz?&lt;/h1&gt;
-&lt;p&gt;Formularz jest ulepszoną wersją tego, który tworzyłem podczas DSP2017. Tyle, że bez PHP. Jednak jeśli nie widziałeś wcześniejszych postów to:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Jest otwierany w formie okienka za pomocą przycisku.&lt;/li&gt;
-  &lt;li&gt;Jest wysyłany asynchronicznie, wykorzystując AJAX - czyli bez przeładowania strony.&lt;/li&gt;
-  &lt;li&gt;Walidacja odbywa się w Javascript z wykorzystaniem Validation API. Gdy coś jest nie tak, użytkownik dostaje wiadomość.&lt;/li&gt;
-  &lt;li&gt;Zadbałem też o kwestie dostępności, np. komunikaty mogą być odczytane przez czytniki ekranowe, obsługa klawiaturą (m.in. zamykanie ESC czy zapętlone tabowanie) itd.&lt;/li&gt;
-  &lt;li&gt;Jest w pełni responsywny - poprawnie wyświetla się na każdym ekranie.&lt;/li&gt;
-  &lt;li&gt;Formularz można też otworzyć z linka, np. &lt;a href=&quot;https://jaki-jezyk-programowania.pl/#formularz-kontaktowy&quot;&gt;jaki-jezyk-programowania.pl/#formularz-kontaktowy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Udostępniam go na &lt;a href=&quot;https://github.com/C0deboy/contact-form-no-backend&quot;&gt;Githubie&lt;/a&gt; w osobnym repozytorium. Podejrzyj online &lt;a href=&quot;https://c0deboy.github.io/contact-form-no-backend/&quot;&gt;tutaj&lt;/a&gt;. Możesz go wykorzystać na swojej stronie. Jedyne czego wymaga to HTML, Javascript i jQuery - ale praktycznie tylko do AJAX. Jeśli nie używasz na swojej stronie jQuery nie ma sensu dołączać tej kobyły tylko do tego. Możesz przepisać to z użyciem czegoś lżejszego lub w czystym Javascriptcie.&lt;/p&gt;
-
-&lt;h1 id=&quot;kroki-które-musisz-wykonać&quot;&gt;Kroki, które musisz wykonać&lt;/h1&gt;
-
-&lt;h2 id=&quot;pliki&quot;&gt;Pliki&lt;/h2&gt;
-&lt;p&gt;Pobierz paczkę z &lt;a href=&quot;https://github.com/C0deboy/contact-form-no-backend&quot;&gt;Githuba&lt;/a&gt;. Umieść plik JS i CSS w swoim projekcie.&lt;/p&gt;
-
-&lt;h2 id=&quot;przygotowanie-strony-z-formularzem&quot;&gt;Przygotowanie strony z formularzem&lt;/h2&gt;
-
-&lt;p&gt;Otwórz plik &lt;span class=&quot;file&quot;&gt;index.html&lt;/span&gt;, skąd będziesz mógł wziąć potrzebne elementy. Zamieszczę je również tutaj, ale z czasem mogą ulec zmianie, więc lepiej je brać bezpośrednio z &lt;span class=&quot;file&quot;&gt;index.html&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;I tak jak w tym pliku, w sekcji &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;head&amp;gt;&lt;/code&gt; na swojej stronie załącz arkusz styli CSS, reCAPTCHA i Font Awesome - jeśli chcesz mieć ładne ikonki:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;css/form.css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.google.com/recaptcha/api.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Przed końcem sekcji &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; załącz formularz:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;formularz-kontaktowy&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;contact&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dialog&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-label=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Formularz kontaktowy&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-hidden=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emailForm&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POST&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://formspree.io/your.email@example.com&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;label&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;half&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-live=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;polite&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            Twój email
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;form-data&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;email&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;email&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Wpisz tu twój email&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;label&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;half&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-live=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;polite&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            Temat
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;form-data&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_subject&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Wpisz tu temat wiadomości&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minlength=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;4&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxlength=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;78&quot;&lt;/span&gt;
-                   &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;label&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-live=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;polite&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            Wiadomość
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;textarea&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;form-data&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;message&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Wpisz tu twoją wiadomość&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minlength=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;4&quot;&lt;/span&gt;
-                      &lt;span class=&quot;na&quot;&gt;maxlength=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;6000&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/textarea&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;label&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;recaptcha-label&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-live=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;polite&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g-recaptcha&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;tabindex=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-sitekey=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;6LevbxMUAAAAAIa8dsrFNJn0S_b_t5K8INV4z2JD&quot;&lt;/span&gt;
-                 &lt;span class=&quot;na&quot;&gt;data-callback=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;recaptchaClearErr&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emailFormSubmit main-btn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;submit&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;submit&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Wyślij&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
-
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emailFormAlert&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-live=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;polite&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;button&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;close-contact-btn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;close-btn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-label=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Zamknij formularz kontaktowy&quot;&lt;/span&gt;
-            &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Zamknij formularz kontaktowy&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;i&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;fa fa-times close-form&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;oraz jQuery i plik JS z obsługą formularza:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;integrity=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;crossorigin=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;anonymous&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;js/emailform.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Następnie umieść przycisk do otwierania formularza w wybranym przez siebie miejscu:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;open-contact-btn&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main-btn&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;i&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;fa fa-envelope-o&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-hidden=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&lt;/span&gt; Formularz kontaktowy
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;twój-email-i-site-key&quot;&gt;Twój email i site key&lt;/h2&gt;
-
-&lt;p&gt;Podaj twój email w atrybucie &lt;code class=&quot;highlight&quot;&gt;&lt;span class=&quot;na&quot;&gt;action&lt;/span&gt;&lt;/code&gt; formularza:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emailForm&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POST&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://formspree.io/your.email@example.com&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- ... --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Zdobądź &lt;a href=&quot;https://www.google.com/recaptcha/admin&quot;&gt;reCAPTCHA V2&lt;/a&gt; site key i kopiuj wklej go do atrybutu &lt;code class=&quot;highlight&quot;&gt;&lt;span class=&quot;na&quot;&gt;data-sitekey&lt;/span&gt;&lt;/code&gt; w:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g-recaptcha&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;tabindex=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-sitekey=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;6Lc9_xMUAAAAAFPVNhvDKb9lMXHGI4o7-zhqkTgL&quot;&lt;/span&gt;
-                 &lt;span class=&quot;na&quot;&gt;data-callback=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;recaptchaClearErr&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;ostatni-krok&quot;&gt;Ostatni krok&lt;/h2&gt;
-&lt;p&gt;Użyj formularza i wyślij pierwszą wiadomość - obojętnie co. Dostaniesz maila od formspree.io, gdzie będziesz mógł potwierdzić, że chcesz otrzymywać maile ze swojej strony.&lt;/p&gt;
-
-&lt;p&gt;I gotowe. Od tej pory wszystkie maila wysłane za pomocą tego formularza będą trafiać na twoją skrzynkę.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Frontend" /><category term="Frontend" /><category term="Jak-zrobić" /><summary type="html">Podczas DSP2017 tworzyłem formularz kontaktowy dla jaki-jezyk-programowania.pl z wykorzystaniem PHP, który działał na wykupionym serwerze. Później jednak przeniosłem swoją stronę i bloga na Github Pages, gdzie z PHP już nie można było zrobić użytku. Wysyłanie wiadomości email bez backendu wydawało mi się niemożliwe i myślałem, że już muszę zrezygnować z formularza kontaktowego na stronie. Jednak na ratunek przyszła mi strona formspree.io, za pośrednictwem której możliwe jest wysyłanie wiadomości email na dowolnego maila. Co zawiera i jak działa formularz? Formularz jest ulepszoną wersją tego, który tworzyłem podczas DSP2017. Tyle, że bez PHP. Jednak jeśli nie widziałeś wcześniejszych postów to: Jest otwierany w formie okienka za pomocą przycisku. Jest wysyłany asynchronicznie, wykorzystując AJAX - czyli bez przeładowania strony. Walidacja odbywa się w Javascript z wykorzystaniem Validation API. Gdy coś jest nie tak, użytkownik dostaje wiadomość. Zadbałem też o kwestie dostępności, np. komunikaty mogą być odczytane przez czytniki ekranowe, obsługa klawiaturą (m.in. zamykanie ESC czy zapętlone tabowanie) itd. Jest w pełni responsywny - poprawnie wyświetla się na każdym ekranie. Formularz można też otworzyć z linka, np. jaki-jezyk-programowania.pl/#formularz-kontaktowy Udostępniam go na Githubie w osobnym repozytorium. Podejrzyj online tutaj. Możesz go wykorzystać na swojej stronie. Jedyne czego wymaga to HTML, Javascript i jQuery - ale praktycznie tylko do AJAX. Jeśli nie używasz na swojej stronie jQuery nie ma sensu dołączać tej kobyły tylko do tego. Możesz przepisać to z użyciem czegoś lżejszego lub w czystym Javascriptcie. Kroki, które musisz wykonać Pliki Pobierz paczkę z Githuba. Umieść plik JS i CSS w swoim projekcie. Przygotowanie strony z formularzem Otwórz plik index.html, skąd będziesz mógł wziąć potrzebne elementy. Zamieszczę je również tutaj, ale z czasem mogą ulec zmianie, więc lepiej je brać bezpośrednio z index.html. I tak jak w tym pliku, w sekcji &amp;lt;head&amp;gt; na swojej stronie załącz arkusz styli CSS, reCAPTCHA i Font Awesome - jeśli chcesz mieć ładne ikonki: &amp;lt;link rel=&quot;stylesheet&quot; href=&quot;css/form.css&quot;&amp;gt; &amp;lt;script src=&quot;https://www.google.com/recaptcha/api.js&quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css&quot;&amp;gt; Przed końcem sekcji &amp;lt;body&amp;gt; załącz formularz: &amp;lt;div id=&quot;formularz-kontaktowy&quot; class=&quot;contact&quot; role=&quot;dialog&quot; aria-label=&quot;Formularz kontaktowy&quot; aria-hidden=&quot;true&quot;&amp;gt; &amp;lt;form class=&quot;emailForm&quot; method=&quot;POST&quot; action=&quot;https://formspree.io/your.email@example.com&quot;&amp;gt; &amp;lt;label class=&quot;half&quot; aria-live=&quot;polite&quot;&amp;gt; Twój email &amp;lt;input class=&quot;form-data&quot; name=&quot;email&quot; type=&quot;email&quot; placeholder=&quot;Wpisz tu twój email&quot; required&amp;gt; &amp;lt;/label&amp;gt; &amp;lt;label class=&quot;half&quot; aria-live=&quot;polite&quot;&amp;gt; Temat &amp;lt;input class=&quot;form-data&quot; name=&quot;_subject&quot; placeholder=&quot;Wpisz tu temat wiadomości&quot; minlength=&quot;4&quot; maxlength=&quot;78&quot; required&amp;gt; &amp;lt;/label&amp;gt; &amp;lt;label aria-live=&quot;polite&quot;&amp;gt; Wiadomość &amp;lt;textarea class=&quot;form-data&quot; name=&quot;message&quot; placeholder=&quot;Wpisz tu twoją wiadomość&quot; minlength=&quot;4&quot; maxlength=&quot;6000&quot; required&amp;gt;&amp;lt;/textarea&amp;gt; &amp;lt;/label&amp;gt; &amp;lt;label class=&quot;recaptcha-label&quot; aria-live=&quot;polite&quot;&amp;gt; &amp;lt;div class=&quot;g-recaptcha&quot; tabindex=&quot;-1&quot; data-sitekey=&quot;6LevbxMUAAAAAIa8dsrFNJn0S_b_t5K8INV4z2JD&quot; data-callback=&quot;recaptchaClearErr&quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/label&amp;gt; &amp;lt;button class=&quot;emailFormSubmit main-btn&quot; name=&quot;submit&quot; type=&quot;submit&quot;&amp;gt;Wyślij&amp;lt;/button&amp;gt; &amp;lt;div class=&quot;emailFormAlert&quot; aria-live=&quot;polite&quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/form&amp;gt; &amp;lt;button type=&quot;button&quot; id=&quot;close-contact-btn&quot; class=&quot;close-btn&quot; aria-label=&quot;Zamknij formularz kontaktowy&quot; title=&quot;Zamknij formularz kontaktowy&quot;&amp;gt; &amp;lt;i class=&quot;fa fa-times close-form&quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;/button&amp;gt; &amp;lt;/div&amp;gt; oraz jQuery i plik JS z obsługą formularza: &amp;lt;script src=&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot; integrity=&quot;sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=&quot; crossorigin=&quot;anonymous&quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&quot;js/emailform.js&quot;&amp;gt;&amp;lt;/script&amp;gt; Następnie umieść przycisk do otwierania formularza w wybranym przez siebie miejscu: &amp;lt;button id=&quot;open-contact-btn&quot; class=&quot;main-btn&quot;&amp;gt; &amp;lt;i class=&quot;fa fa-envelope-o&quot; aria-hidden=&quot;true&quot;&amp;gt;&amp;lt;/i&amp;gt; Formularz kontaktowy &amp;lt;/button&amp;gt; Twój email i site key Podaj twój email w atrybucie action formularza: &amp;lt;form class=&quot;emailForm&quot; method=&quot;POST&quot; action=&quot;https://formspree.io/your.email@example.com&quot;&amp;gt; &amp;lt;!-- ... --&amp;gt; &amp;lt;/form&amp;gt; Zdobądź reCAPTCHA V2 site key i kopiuj wklej go do atrybutu data-sitekey w: &amp;lt;div class=&quot;g-recaptcha&quot; tabindex=&quot;-1&quot; data-sitekey=&quot;6Lc9_xMUAAAAAFPVNhvDKb9lMXHGI4o7-zhqkTgL&quot; data-callback=&quot;recaptchaClearErr&quot;&amp;gt;&amp;lt;/div&amp;gt; Ostatni krok Użyj formularza i wyślij pierwszą wiadomość - obojętnie co. Dostaniesz maila od formspree.io, gdzie będziesz mógł potwierdzić, że chcesz otrzymywać maile ze swojej strony. I gotowe. Od tej pory wszystkie maila wysłane za pomocą tego formularza będą trafiać na twoją skrzynkę.</summary></entry></feed>
+&lt;p&gt;Jedynie czego żałuję w tym wyjeździe to tego, że nie miałem praktyk związanych z programowaniem. No ale na to nie mamy wpływu. Dostajemy to z góry. Ogólnie wyjazd oceniam na 9/10 i szczerze polecam tę opcję. Było tak dobrze, że nie chciało nam się wracać do Polski ;)&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Moje-doświadczenia" /><category term="Moje-doświadczenia" /><summary type="html">W poście Liceum vs Technikum temat praktyk zawodowych dotknąłem tylko delikatnie i zapowiedziałem, że napiszę o tym osobny post. I oto on. Całość opiszę z perspektywy programisty. Praktyki zawodowe w Technikum Informatycznym Z założenia, praktyki zawodowe trwają przez miesiąc i mają nam dać trochę doświadczenia zawodowego oraz papier, który pomoże nam łatwiej znaleźć prace. Jak to jest naprawdę? Z tym bywa różnie. Część praktyk jest organizowana przez szkołę z firmami, z którymi współpracuje. I tu to trochę loteria, no chyba, że macie jakieś potwierdzone informacje o jakości oferowanych praktyk. Gdy nie skorzystamy z praktyk oferowanych przez szkołę, musimy coś sobie znaleźć na własną rękę. Tu już sprawa zależy od naszych starań. W obu przypadkach miałem kolegów, którzy nie robili praktycznie nic albo jakieś błahe rzeczy, typu podawanie papieru do drukarki. Jeden z nich nawet nie musiał na nie chodzić. Więc tak jak mówię - albo liczymy na szczęście, że szkoła nam zaoferuje coś ciekawego albo musimy sami się o to postarać. Jest jeszcze trzecia opcja, z której ja skorzystałem - Erasums. Erasmus Jest to projekt, który umożliwia wyjazd zagraniczny na miesięczne praktyki zawodowe. W mojej szkole mogło z niego skorzystać 20 osób z najlepszymi wynikami pośród 3 klas informatycznych (ok. 30 osobowych). Był to wyjazd do Londynu. Według mnie jest to najlepsza opcja na praktyki zawodowe, ponieważ najczęściej będzie to przyjemne doświadczenie, bez względu na to czy trafimy na jakieś dobre praktyki czy nie. Dla mnie, jak to pisałem w poście Liceum vs Technikum, był to prawie jedyny plus pójścia do technikum. Streszczę mniej więcej jak to wyglądało z mojego punktu widzenia. Kwestie finansowe Bardzo dużym plusem całego projektu jest to, że wyjaz nas praktycznie nic nie kosztuje. Jest w pełni dofinansowywany. Nie płacimy za zakwaterowanie, za wyżywienie - za nic. Do tego dostajemy jeszcze kieszonkowe na drobne wydatki, więc praktycznie wychodzimy na 0. Niektórzy mieli nawet takie szczęście (w tym ja :D), że dostawali drobne “na kawę” od pracodawców w postaci 5 funtów. Niby to mało, ale nie powinniśmy dostawać nic. Na te 20 osób były chyba tylko 3, które tak miały. Osobiście uważam, że to było sporo, bo 5 funtów * 20 (5 dni w tygodniu) = 100 funtów, a to daje w przybliżeniu 475 zł - dodatkowo. Dzięki temu cały wyjazd wyszedł nawet na plus, mimo kilku większych “niekontrolowanych” wydatków. M.in. jedno wyjście do pubu, gdzie z kolegą zostawiliśmy razem jakieś 400 zł czy przejażdżka publicznymi rowerami za około 100zł, bo nie do końca dobrze doczytaliśmy jak naliczane są opłaty :D Warunki życia Ja na pewno nie miałem co narzekać. Pokój, który dzieliłem z kolegą, był co prawda nieduży, ale nic poza tym nam nie brakowało. Mieszkanie Wszyscy uczestnicy projektu są rozrzuceni po Londynie w mniejszych 2-4 osobowych grupkach. My mieszkaliśmy w domku jednorodzinnym w dzielnicy Harrow na ulicy Brookfield Cres. Są to obrzeża Londynu. Do centrum mieliśmy jakieś 20 minut. Mieliśmy do dyspozycji dosyć mały pokój dwuosobowy, łazienkę, kuchnię i taras z niedużym podwórkiem. Ogólnie było schludnie i przyjemnie. Właściciele Razem z nami mieszkało małżeństwo, a na weekend przyjeżdżały ich dzieci. Nie zapytaliśmy o ich pochodzenie, ale nie byli to rodowici Anglicy - zresztą takich chyba już jest tam mało ;) Ogólnie byli bardzo mili i sympatyczni. Można się było bez problemu dogadać praktycznie ze wszystkim. Czasem zamienialiśmy kilka słów, ale na ogół zajmowaliśmy się swoimi sprawami. Można powiedzieć, że dobrze trafiliśmy, bo nie każdy mógł powiedzieć dobre słowo o właścicielach domu. Jedzenie Podczas wyjazdu mieliśmy zagwarantowane śniadanie, obiad i kolację. We własnym zakresie był tylko lunch w pracy. I tutaj muszę bardzo pochwalić panią domu, bo gotowała świetnie. Jak wracałem z pracy z kolegą to myśleliśmy tylko o tym co będzie dziś dobrego i jak bardzo się najemy. Czasem były tak duże porcje, że mieliśmy po 1-2 dokładki. Jednak z tego co słyszeliśmy, nie każdy miał tak dobrze jak my. Na przykład, jedna koleżanka narzekała, że codziennie na śniadanie dają jej jakąś pasze dla zwierząt :D Obowiązki To, z czego musieliśmy się wywiązywać i było obowiązkowe to: od poniedziałku do piątku bycie na praktykach, zazwyczaj od 9-10 co drugi weekend były obowiązkowe wycieczki po Londynie kilka spotkań formalnych, które były w godzinach pracy, więc nie zabierały nam dodatkowo wolnego czasu Poza tym byliśmy całkowicie wolni i mogliśmy robić co tylko chcieliśmy. Formalnie max do 22, ale z właścicielami domu mieliśmy bardzo dobre relacje i mogliśmy wracać duuużo później. Jednak nie każdy mógł sobie na to pozwolić, a niektórzy już się spalili niedługo po przyjeździe. Więc no, trzeba zrobić dobre pierwsze wrażenie ;) Praktyki Czyli wreszcie główny cel wyjazdu. Niestety, nawet na organizowanych praktykach zagranicznych zdarzało się, że praca polegała na obsłudze drukarki. Trafiło to się kilku osobom i według mnie to jest straszne. Na szczęście ja miałem trochę lepiej, ale też bez szału. Pracowałem w serwisie komputerowym po drugiej stronie Londynu. Dojazd tam zajmował mi jakoś 45 min w jedną stronę, ale nie narzekałem bardzo na to. Jeździłem tylko 2 liniami metra (w przeciwieństwie do kolegi, który musiał dojeżdżać kilkoma autobusami i metrem), zawszę miałem miejsce siedzące i mogłem sobie coś robić. Dzięki temu przeczytałem kilka książek, więc nie było to dla mnie uciążliwe. Moja praca polegała na drobnych naprawach laptopów, czasem telefonów i PC. Niestety nie było to nic związanego z programowaniem, a liczyłem na to. Szczerze mówiąc to niewiele osób miało pracę z tym związaną. Jeden znajomy zajmował się poprawianiem stronki na WordPressie i to była chyba najbardziej programistyczna praca na tym wyjeździe. Po zakończonych praktykach zaproponowali mu nawet dalsze prowadzenie strony zdalnie, więc jak widać można sobie nawet wyrobić kilka kontaktów czy znaleźć dodatkową pracę ;) Ogólnie nie wspominam tego źle, przyjemnie się pracowało. Właściciele serwisu byli sympatyczni i można było spędzić dzień w “pracy” w miłej atmosferze. Trochę z tych praktyk wyniosłem, nie można powiedzieć, że nie, ale też często naprawa polegała na reinstalacji systemu i softu + backup danych, co było dosyć nużące. Tak czy siak nie miałem najgorzej. Podsumowanie Praktyki zagraniczne wspominam wyjątkowo dobrze. Dużo się działo, zwiedziłem masę miejsc i w ogóle samo bycie w Londynie, prawie że na własną rękę, to bardzo fajne doświadczenie. Przez cały wyjazd oficjalnych spotkań było może z cztery, więc większość czasu można się było czuć, jakbyśmy żyli tam sami. Była to też dobra okazja do oswojenia się z mówionym językiem angielskim. Co do uzyskanego papierka i doświadczenia z praktyk, osobiście uważam, że nie jest to zbyt wartościowe, tym bardziej dla programisty. No chyba, że trafimy na coś programistycznego, ale tak jak pisałem - z tym jest ciężko. Nie umieszczałem w swoim CV ani kwalifikacji zawodowych, ani odbytych praktyk, a pracę dostałem bez żadnych znajomości od razu po szkole. Czy jakbym załączył te informacje w CV to byłoby mi łatwiej? Nie sądzę, bo na rozmowach nawet słowo nie padło w tym kierunku. Jedynie czego żałuję w tym wyjeździe to tego, że nie miałem praktyk związanych z programowaniem. No ale na to nie mamy wpływu. Dostajemy to z góry. Ogólnie wyjazd oceniam na 9/10 i szczerze polecam tę opcję. Było tak dobrze, że nie chciało nam się wracać do Polski ;)</summary></entry></feed>

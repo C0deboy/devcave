@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    
+  
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,7 @@
 <link rel="shortcut icon" href="/img/logo.ico">
 
 <link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap-xlgrid.min.css">
 <link rel="stylesheet" href="/dist/css/devcave.min.css">
 <link rel="stylesheet" href="/dist/css/syntax.min.css">
 <link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
@@ -33,7 +34,7 @@
 
 <body>
 
-    <div class="navbar navbar-default navbar-fixed-top navbar-custom">
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
@@ -74,12 +75,13 @@
 </div>
 
 
-    <header class="post-header">
+<header class="post-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
                 <div class="post-heading">
+
                     <h1 class="post-title">Zasady projektowania obiektowego</h1>
                     
                     <h2 class="post-subtitle">Notatnik Juniora 1#</h2>
@@ -92,6 +94,8 @@
                     2017</p>
                      <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div> <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div> 
                 </div>
+
+                <hr>
             </div>
         </div>
     </div>
@@ -101,7 +105,6 @@
     <div class="container post">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <hr class="header-hr">
 
                 <span>Spis treści:</span>
 
@@ -159,7 +162,7 @@
   <li>Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 
 <ul>
   <li>Lepsza czytelność kodu oraz łatwość w utrzymaniu.</li>
@@ -188,7 +191,7 @@
   <li>Zawsze pozostaw po sobie kod czystszy niż go zastałeś.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Szybciej i łatwiej zrozumieć kod.</li>
   <li>Mniejsza ilość potencjalnych bugów.</li>
@@ -205,7 +208,7 @@
   <li>Gdy wymagana jest zmiana, powinna ona objąć tylko jedną klasę lub pakiet.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Lepsza czytelność kodu.</li>
   <li>Łatwość w utrzymaniu i modyfikowaniu kodu.</li>
@@ -220,7 +223,7 @@
   <li>Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowane przez ify czy konstrukcję switch.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Łatwiejsze i bardziej stabline rozbudowywanie systemu.</li>
   <li>Minimalizujemy potrzebę modyfikowania instniejącego kodu w wielu miejscach, gdy dodajemy np. kolejny przypadek czegoś.</li>
@@ -233,7 +236,7 @@
   <li>Zobacz popularny przykład złego zastosowania dziedziczenia “Square extends Rectangle”</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Przewidywalne zachowania obiektów</li>
 </ul>
@@ -246,7 +249,7 @@
   <li>Klasa która implementuje interfejs nie może być zmuszana do implementowania metod, których nie potrzebuje, a tak jest często w przypadku dużych iterfejsów.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z “dużego” interfejsu.</li>
   <li>Nie naruszanie <a href="#S---Single-responsibility-principle">Single responsibility principle</a></li>
@@ -260,7 +263,7 @@
   <li>czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>minimalizowanie zależności (loose coupling)</li>
   <li>elastyczność - łatwiej wprowadzać zmiany</li>
@@ -282,7 +285,7 @@
   </li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali</li>
 </ul>
@@ -292,7 +295,7 @@
   <li>Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Czytelność i łatwiejsze utrzymanie kodu</li>
 </ul>
@@ -304,7 +307,7 @@
   <li>Stosuj dziedziczenie tylko gdy <a href="#l---liskov-substitution-principle">LSP</a> nie jest złamana i naprawdę tego potrzebujesz.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Zmniejsza to zależności między klasami</li>
   <li>Używając dziedziczenia łatwiej też o złamanie <a href="#l---liskov-substitution-principle">Liskov substitution principle</a></li>
@@ -315,7 +318,7 @@
   <li>Miejsca, które są najbardziej prawdopodobne do zmiany powinny być schowane (zhermetyzowane) pod API.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę</li>
 </ul>
@@ -332,7 +335,7 @@
   <li>Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Minimalizuje to liczbę pakietów do zmiany w przypadku zmiany wymagań.</li>
   <li>Nie trzeba przeszukiwać kilku różnych pakietów w celu wprowadzenia zmiany</li>
@@ -345,7 +348,7 @@
   <li>Powinny to być również klasy, które są z jednej “rodziny”. Klasy niezwiązane z przeznaczeniem pakietu nie powinny się tam znaleźć.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 
 <ul>
   <li>Gdy autor oryginalnego kodu wprowadzi zmianę – w szczególności poprawi jakiś błąd – wówczas każdy może w łatwy sposób skorzystać ze zmian pobierając nową wersję biblioteki, zamiast zmieniać coś samodzielnie - a w przypadku, gdy my jesteśmy autorami, dokonywać zmian w co najmniej dwóch miejscach za każdym razem.</li>
@@ -356,7 +359,7 @@
   <li>Klasy wspólnie używane powinny być wspólnie pakietowane</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Lepsza spójność i czytelność systemu</li>
 </ul>
@@ -371,7 +374,7 @@
   <li>Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie <a href="#LoD---Law-of-Demeter">Law of Demeter</a></li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B.</li>
 </ul>
@@ -390,7 +393,7 @@ A &larr;-------- C
   <li>Możemy temu zapobiec stosując <a href="#D---Dependency-inversion-principle">Dependency inversion principle</a>, wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>łatwiej zrozumieć i utrzymać system</li>
 </ul>
@@ -402,7 +405,7 @@ A &larr;-------- C
   <li>Taką samą zasadę możemy stosować w przypadku klas.</li>
 </ul>
 
-<p class="advantages">Plusy</p>
+<p class="pros">Plusy</p>
 <ul>
   <li>Zmniejsza efekt łancuchowej reakcji, która wymusza modyfikację kodu w kilku innych miejscach po wprowadzeniu jednej zmiany</li>
 </ul>
@@ -462,7 +465,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-    <footer>
+<footer>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -501,7 +504,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <script src="/dist/js/devcave.min.js"></script>
 
-    
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    
+  
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,7 @@
 <link rel="shortcut icon" href="/img/logo.ico">
 
 <link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap-xlgrid.min.css">
 <link rel="stylesheet" href="/dist/css/devcave.min.css">
 <link rel="stylesheet" href="/dist/css/syntax.min.css">
 <link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
@@ -33,7 +34,7 @@
 
 <body>
 
-    <div class="navbar navbar-default navbar-fixed-top navbar-custom">
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/"><img src="/img/devcave.png"> devcave.pl</a>
@@ -74,7 +75,7 @@
 </div>
 
 
-    <!-- Page Header -->
+<!-- Page Header -->
 <header class="intro-header">
   <div class="container-fluid">
     <div class="row">
@@ -97,8 +98,27 @@
 <!-- Main Content -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6 col-lg-offset-1 col-md-8">
+    <div class="col-xl-5 col-lg-6 col-xl-offset-2 col-lg-offset-1 col-md-8">
       <h1>Ostatnie wpisy:</h1>
+      
+      <div class="post-preview box-effect">
+        <a href="/dajsiepoznac2017/formularz-kontaktowy-dostepnosc">
+          <h1 class="post-title">Dodajemy formularz kontaktowy 4#</h1>
+          
+          <h2 class="post-subtitle">Poprawiamy dostępność formularza</h2>
+          
+        </a>
+
+        <p class="post-meta">
+          
+          30
+          marca
+          
+          2017</p>
+        
+        <div class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></div>
+        
+      </div>
       
       <div class="post-preview box-effect">
         <a href="/dajsiepoznac2017/formularz-kontaktowy-php-swiftmailer">
@@ -176,27 +196,6 @@
         
       </div>
       
-      <div class="post-preview box-effect">
-        <a href="/dajsiepoznac2017/jekyll-disqus-comments-google-analitics">
-          <h1 class="post-title">Statystyki i komentarze na blogu</h1>
-          
-          <h2 class="post-subtitle">Rozbudowujemy blog na Jekyllu 2#</h2>
-          
-        </a>
-
-        <p class="post-meta">
-          
-          10
-          marca
-          
-          2017</p>
-        
-        <div class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></div>
-        
-        <div class="site-tag"><a href='/archiwum#jekyll'>Jekyll</a></div>
-        
-      </div>
-      
 
       <!-- Pager -->
       
@@ -216,14 +215,14 @@
       
     </div>
 
-    <div class="col-lg-4 col-md-4">
-      <div class="row top-posts">
+    <div class="col-xl-3 col-lg-4 col-md-4">
+      <div class="top-posts">
         <h1>Najpopularniejsze wpisy:</h1>
         <span class="text-muted">Top 6</span>
         <ul>
           
           <li class="box-effect row">
-            <div class="top-position">1#</div>
+            <div class="top-position">1</div>
             <div class="top-entry">
               <a href="/moje-doświadczenia/moja-droga-do-pierwszej-pracy">
                 <h4>Moja droga do pierwszej pracy</h4>
@@ -232,7 +231,7 @@
           </li>
           
           <li class="box-effect row">
-            <div class="top-position">2#</div>
+            <div class="top-position">2</div>
             <div class="top-entry">
               <a href="/notatnik-juniora/zasady-projektowania-kodu">
                 <h4>Zasady projektowania obiektowego</h4>
@@ -241,7 +240,7 @@
           </li>
           
           <li class="box-effect row">
-            <div class="top-position">3#</div>
+            <div class="top-position">3</div>
             <div class="top-entry">
               <a href="/wybory-programisty/liceum-vs-technikum-co-wybrac">
                 <h4>Licemu vs technikum - co wybrać jako programista?</h4>
@@ -250,7 +249,7 @@
           </li>
           
           <li class="box-effect row">
-            <div class="top-position">4#</div>
+            <div class="top-position">4</div>
             <div class="top-entry">
               <a href="/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki">
                 <h4>Jak uczyć się do matury z informatyki?</h4>
@@ -259,7 +258,7 @@
           </li>
           
           <li class="box-effect row">
-            <div class="top-position">5#</div>
+            <div class="top-position">5</div>
             <div class="top-entry">
               <a href="/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie">
                 <h4>Matura z informatyki - przydatne funkcje - Java</h4>
@@ -268,7 +267,7 @@
           </li>
           
           <li class="box-effect row">
-            <div class="top-position">6#</div>
+            <div class="top-position">6</div>
             <div class="top-entry">
               <a href="/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz">
                 <h4>Recenzja książki Zawód: Programista</h4>
@@ -279,12 +278,17 @@
         </ul>
       </div>
 
-      <div class="row box-effect books-ad">
+      <div class="box-effect books-ad">
         <a href="https://jaki-jezyk-programowania.pl/ksiazki">
           <img src="/img/books.png"/>
           <h3>Zobacz polecane książki na: <br> jaki-jezyk-programowania.pl</h3>
         </a>
       </div>
+
+      <div class="fb-page inline box-effect">
+        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="340" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+      </div>
+
     </div>
   </div>
 </div>
@@ -294,7 +298,8 @@
 
 
 
-    <footer>
+
+<footer>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -333,7 +338,7 @@
 
 <script src="/dist/js/devcave.min.js"></script>
 
-    
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

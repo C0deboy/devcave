@@ -48,7 +48,7 @@ W firmie jako budynku też jest całkiem miło. W pełni wyposażona kuchnia z p
 
 
 ### Dylemat jeśli chodzi o studia
-Czasem jak myślę o studiach, to się nawet cieszę, że się nie dostałem. Bo jeśli mam sobie porównać to co mam teraz do zakuwania matmy czy innych rzeczy, to za każdym razem wybrałbym tą pracę :D Chociaż cały czas myślę o studiach - bo może się przyda ten papier... I taki mam z tym mały dylemat. Z jednej strony pewnie dałbym radę zrobić studia zaocznie, ale jak sobie pomyślę, że mam za to jeszcze płacić to mi się odechciewa. No ale chyba innego wyjścia nie ma, bo zrezygnowanie z pracy i studia dzienne raczej nie wchodzą w grę. Zobaczymy jak to się potoczy. Może ktoś się podzieli jakimiś przemyśleniami na ten temat? ;)
+Jak myślę o studiach, to się nawet cieszę, że się nie dostałem tam gdzie chciałem, bo skutkowało to pójściem do pracy i jeśli mam sobie porównać to co mam teraz do zakuwania matmy czy jakichś innych zbędnych rzeczy (wiadomo - nie wszystko), to za każdym razem wybrałbym tą pracę :D. Chociaż cały czas myślę o studiach - bo może się przyda ten papier… z drugiej strony wydaje się to całkiem zbędne, a programistycznej wiedzy tyle co kot napłakał (przynajmniej z takimi opiniami się spotykam). I taki mam z tym mały dylemat. Z jednej strony pewnie dałbym radę zrobić studia zaocznie, ale jak sobie pomyślę, że mam za to jeszcze płacić to mi się odechciewa. No ale chyba innego wyjścia nie ma jeśli już, bo zrezygnowanie z pracy i studia dzienne raczej nie wchodzą w grę. Może ktoś się podzieli jakimiś przemyśleniami na ten temat? ;)
 
 # Nowa seria
 

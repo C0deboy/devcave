@@ -720,6 +720,13 @@ a.disabled {
   padding: 5px 5px 0;
 }
 
+.fb-page iframe {
+  width: 340px;
+  height: 130px;
+  border: none;
+  overflow:hidden;
+}
+
 @media (max-width: 380px) {
   .fb-page {
     width: 100%;

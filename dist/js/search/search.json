@@ -318,6 +318,15 @@
         "subtitle": "Pierwsze zadanie, ogólne wrażenia i zapowiedź nowej serii",
         "date": "7 kwietnia 2018",
         "url": "/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista"
+      },
+    
+      
+      {
+        "title": "Static method factory  zamiast konstruktora",
+        "titleSEO": "Static method factory zamiast konstruktora",
+        "subtitle": "Zalety oraz wady tego rozwiązania",
+        "date": "14 kwietnia 2018",
+        "url": "/effective-java/static-method-factory-zamiast-konstruktora"
       }
     
   

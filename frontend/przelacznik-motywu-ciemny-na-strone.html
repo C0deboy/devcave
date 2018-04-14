@@ -76,47 +76,56 @@
 
 
 <header class="post-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                <div class="post-heading">
+        <div class="post-heading">
 
-                    <h1 class="post-title">Przełącznik motywu, tryb nocny na blogu/stronie</h1>
-                    
-                    <h2 class="post-subtitle">Tryb ciemny/jasny w łatwy sposób, tylko JS.</h2>
-                    
-                    <p class="post-meta">
-                    
-                    2
-                    listopada
-                      
-                    2017</p>
-                     <div class="site-tag"><a href='/archiwum#frontend'>Frontend</a></div> <div class="site-tag"><a href='/archiwum#jak-zrobić'>Jak-zrobić</a></div> <div class="site-tag"><a href='/archiwum#javascript'>Javascript</a></div> 
-                </div>
-
-                <hr>
-            </div>
+          <h1 class="post-title">Przełącznik motywu, tryb nocny na blogu/stronie</h1>
+          
+          <h2 class="post-subtitle">Tryb ciemny/jasny w łatwy sposób, tylko JS.</h2>
+          
+          <p class="post-meta">
+            
+            2
+            listopada
+            
+            2017</p>
+          
+          <div class="site-tag"><a href='/archiwum#frontend'>Frontend</a></div>
+          
+          <div class="site-tag"><a href='/archiwum#jak-zrobić'>Jak-zrobić</a></div>
+          
+          <div class="site-tag"><a href='/archiwum#javascript'>Javascript</a></div>
+          
         </div>
+
+        <hr>
+      </div>
     </div>
+  </div>
 </header>
 
 <article>
-    <div class="container post">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                <span>Spis treści:</span>
-
-                <ul class="section-nav">
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#przygotowywujemy-przycisk">Przygotowywujemy przycisk</a></li>
 <li class="toc-entry toc-h1"><a href="#obsługujemy-zmianę-i-zapamiętujemy-wybór-w-localstorage">Obsługujemy zmianę i zapamiętujemy wybór w LocalStorage</a></li>
 <li class="toc-entry toc-h1"><a href="#dostosowywanie-strony-do-zmian">Dostosowywanie strony do zmian</a></li>
 </ul>
 
-                <hr>
+          <hr>
+        </nav>
+        
 
-				        <p>Zawszę doceniam, gdy na stronach/blogach mamy możliwość zmiany motywu na ciemny. Jest to świetna opcja do czytania lub do przeglądania strony bez światła. Dlatego też zaimplementowałem taką funkcję na swoim blogu (w prawym górnym rogu w navbarze).</p>
+        <p>Zawszę doceniam, gdy na stronach/blogach mamy możliwość zmiany motywu na ciemny. Jest to świetna opcja do czytania lub do przeglądania strony bez światła. Dlatego też zaimplementowałem taką funkcję na swoim blogu (w prawym górnym rogu w navbarze).</p>
 
 <p>Pokażę jak to wykonałem - relatywnie szybko i bezboleśnie, na przykładzie tego bloga ;)</p>
 
@@ -193,24 +202,49 @@ Jeśli używasz Disqus na swojej stronie, to przy zmianie motywu sekcja komentar
 
 
 
-                <hr>
+        <hr>
 
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a class="box-effect" href="/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy" data-toggle="tooltip" data-placement="top" title="Moja droga do pierwszej pracy"><i class="fa fa-arrow-left" aria-hidden="true"></i> Poprzedni post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a class="box-effect" href="/wybory-programisty/liceum-vs-technikum-co-wybrac" data-toggle="tooltip" data-placement="top" title="Liceum vs technikum - co wybrać jako programista?">Następny post <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </li>
-                    
-                </ul>
+        <ul class="pager">
+          
+          <li class="previous">
+            <a class="box-effect" href="/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy"
+               data-toggle="tooltip" data-placement="top" title="Moja droga do pierwszej pracy"><i class="fa fa-arrow-left"
+                                                                                             aria-hidden="true"></i>
+              Poprzedni post</a>
+          </li>
+          
+          
+          <li class="next">
+            <a class="box-effect" href="/wybory-programisty/liceum-vs-technikum-co-wybrac"
+               data-toggle="tooltip" data-placement="top" title="Liceum vs technikum - co wybrać jako programista?">Następny post <i
+              class="fa fa-arrow-right" aria-hidden="true"></i></a>
+          </li>
+          
+        </ul>
 
-                <hr>
-                
-                
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <div class="text-center">
+  <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam informację o nowych wpisach:</p>
+
+  <div class="fb-page inline box-effect">
+    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
+            width="340" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+            allowTransparency="true"></iframe>
+  </div>
+</div>
+
+      <hr>
+
+      
 
 <div id="disqus_thread"></div>
 <script>
@@ -231,11 +265,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-            </div>
-        </div>
     </div>
-
-</article>
+  </div>
+</div>
 
 <hr>
 

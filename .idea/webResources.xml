@@ -7,6 +7,7 @@
           <resourceRoots>
             <path value="file://$PROJECT_DIR$/img" />
             <path value="file://$PROJECT_DIR$/_drafts" />
+            <path value="file://$PROJECT_DIR$/_posts" />
           </resourceRoots>
         </entryData>
       </entry>

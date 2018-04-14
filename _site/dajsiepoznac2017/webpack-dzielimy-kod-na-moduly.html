@@ -76,39 +76,44 @@
 
 
 <header class="post-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                <div class="post-heading">
+        <div class="post-heading">
 
-                    <h1 class="post-title">Webpack - zarządzanie modułami</h1>
-                    
-                    <h2 class="post-subtitle">Dzielimy pliki Javascript i CSS na moduły</h2>
-                    
-                    <p class="post-meta">
-                    
-                    22
-                    maja
-                      
-                    2017</p>
-                     <div class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></div> <div class="site-tag"><a href='/archiwum#javascript'>Javascript</a></div> 
-                </div>
-
-                <hr>
-            </div>
+          <h1 class="post-title">Webpack - zarządzanie modułami</h1>
+          
+          <h2 class="post-subtitle">Dzielimy pliki Javascript i CSS na moduły</h2>
+          
+          <p class="post-meta">
+            
+            22
+            maja
+            
+            2017</p>
+          
+          <div class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></div>
+          
+          <div class="site-tag"><a href='/archiwum#javascript'>Javascript</a></div>
+          
         </div>
+
+        <hr>
+      </div>
     </div>
+  </div>
 </header>
 
 <article>
-    <div class="container post">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                <span>Spis treści:</span>
-
-                <ul class="section-nav">
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#webpack">Webpack</a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#instalacja">Instalacja</a></li>
@@ -121,9 +126,11 @@
 </li>
 </ul>
 
-                <hr>
+          <hr>
+        </nav>
+        
 
-				        <p>Dzielenie kodu na moduły pozwala odseparować niezwiązane ze sobą części, co wpływa na porządek w projekcie. Gdy pracujemy z danym elementem strony nie chcemy przecież przekopywać się przez masę innych niezwiązanych ze sobą funkcji w celu znalezienia tego, czego szukamy. No dobrze, podzielimy nasz kod, np. na 15 plików JS i 10 plików CSS, ale czy to oznacza, że teraz powinniśmy załączyć 15 tagów &#60;script&#62; i 10 tagów &#60;link&#62; w pliku HTML? Oczywiście, że nie! Duża ilość osobno podpiętych plików znacząco wpływa na wydajność ładowania naszej aplikacji, gdyż każdy plik to osobne żądanie HTTP. Tu z pomocą przychodzi nam Webpack.</p>
+        <p>Dzielenie kodu na moduły pozwala odseparować niezwiązane ze sobą części, co wpływa na porządek w projekcie. Gdy pracujemy z danym elementem strony nie chcemy przecież przekopywać się przez masę innych niezwiązanych ze sobą funkcji w celu znalezienia tego, czego szukamy. No dobrze, podzielimy nasz kod, np. na 15 plików JS i 10 plików CSS, ale czy to oznacza, że teraz powinniśmy załączyć 15 tagów &#60;script&#62; i 10 tagów &#60;link&#62; w pliku HTML? Oczywiście, że nie! Duża ilość osobno podpiętych plików znacząco wpływa na wydajność ładowania naszej aplikacji, gdyż każdy plik to osobne żądanie HTTP. Tu z pomocą przychodzi nam Webpack.</p>
 
 <h1 id="webpack">Webpack</h1>
 
@@ -349,24 +356,49 @@ Jeśli w twoich plikach, które łączysz, wystepują importy czcionek (np. w Bo
 <span class="p">};</span></code></pre></figure>
 
 
-                <hr>
+        <hr>
 
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a class="box-effect" href="/dajsiepoznac2017/npm-zaleznosci-i-ESLint" data-toggle="tooltip" data-placement="top" title="NPM i ESLint"><i class="fa fa-arrow-left" aria-hidden="true"></i> Poprzedni post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a class="box-effect" href="/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium" data-toggle="tooltip" data-placement="top" title="Git - usuwanie pliku z repozytorium">Następny post <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </li>
-                    
-                </ul>
+        <ul class="pager">
+          
+          <li class="previous">
+            <a class="box-effect" href="/dajsiepoznac2017/npm-zaleznosci-i-ESLint"
+               data-toggle="tooltip" data-placement="top" title="NPM i ESLint"><i class="fa fa-arrow-left"
+                                                                                             aria-hidden="true"></i>
+              Poprzedni post</a>
+          </li>
+          
+          
+          <li class="next">
+            <a class="box-effect" href="/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium"
+               data-toggle="tooltip" data-placement="top" title="Git - usuwanie pliku z repozytorium">Następny post <i
+              class="fa fa-arrow-right" aria-hidden="true"></i></a>
+          </li>
+          
+        </ul>
 
-                <hr>
-                
-                
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <div class="text-center">
+  <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam informację o nowych wpisach:</p>
+
+  <div class="fb-page inline box-effect">
+    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
+            width="340" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+            allowTransparency="true"></iframe>
+  </div>
+</div>
+
+      <hr>
+
+      
 
 <div id="disqus_thread"></div>
 <script>
@@ -387,11 +419,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-            </div>
-        </div>
     </div>
-
-</article>
+  </div>
+</div>
 
 <hr>
 

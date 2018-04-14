@@ -3,79 +3,99 @@ layout: default
 ---
 
 <header class="post-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                <div class="post-heading">
+        <div class="post-heading">
 
-                    <h1 class="post-title">{{ page.title }}</h1>
-                    {% if page.subtitle %}
-                    <h2 class="post-subtitle">{{ page.subtitle }}</h2>
-                    {% endif %}
-                    <p class="post-meta">
-                    {% assign m = page.date | date: "%-m" %}
-                    {{ page.date | date: "%-d" }}
-                    {% case m %}
-                      {% when '1' %}stycznia
-                      {% when '2' %}lutego
-                      {% when '3' %}marca
-                      {% when '4' %}kwietnia
-                      {% when '5' %}maja
-                      {% when '6' %}czerwca
-                      {% when '7' %}lipca
-                      {% when '8' %}sierpnia
-                      {% when '9' %}września
-                      {% when '10' %}października
-                      {% when '11' %}listopada
-                      {% when '12' %}grudnia
-                    {% endcase %}
-                    {{ page.date | date: "%Y" }}</p>
-                     {% assign tags = page.tags | sort %}{% for tag in tags %}<div class="site-tag"><a href='/archiwum#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div> {% endfor %}
-                </div>
-
-                <hr>
-            </div>
+          <h1 class="post-title">{{ page.title }}</h1>
+          {% if page.subtitle %}
+          <h2 class="post-subtitle">{{ page.subtitle }}</h2>
+          {% endif %}
+          <p class="post-meta">
+            {% assign m = page.date | date: "%-m" %}
+            {{ page.date | date: "%-d" }}
+            {% case m %}
+            {% when '1' %}stycznia
+            {% when '2' %}lutego
+            {% when '3' %}marca
+            {% when '4' %}kwietnia
+            {% when '5' %}maja
+            {% when '6' %}czerwca
+            {% when '7' %}lipca
+            {% when '8' %}sierpnia
+            {% when '9' %}września
+            {% when '10' %}października
+            {% when '11' %}listopada
+            {% when '12' %}grudnia
+            {% endcase %}
+            {{ page.date | date: "%Y" }}</p>
+          {% assign tags = page.tags | sort %}{% for tag in tags %}
+          <div class="site-tag"><a href='/archiwum#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div>
+          {% endfor %}
         </div>
+
+        <hr>
+      </div>
     </div>
+  </div>
 </header>
 
 <article>
-    <div class="container post">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                <span>Spis treści:</span>
+        {% if page.toc == true %}
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          {{ content | toc_only }}
 
-                {{ content | toc_only }}
+          <hr>
+        </nav>
+        {% endif %}
 
-                <hr>
+        {{ content }}
 
-				        {{ content }}
+        <hr>
 
-                <hr>
+        <ul class="pager">
+          {% if page.previous.url %}
+          <li class="previous">
+            <a class="box-effect" href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}"
+               data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}"><i class="fa fa-arrow-left"
+                                                                                             aria-hidden="true"></i>
+              Poprzedni post</a>
+          </li>
+          {% endif %}
+          {% if page.next.url %}
+          <li class="next">
+            <a class="box-effect" href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}"
+               data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Następny post <i
+              class="fa fa-arrow-right" aria-hidden="true"></i></a>
+          </li>
+          {% endif %}
+        </ul>
 
-                <ul class="pager">
-                    {% if page.previous.url %}
-                    <li class="previous">
-                        <a class="box-effect" href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Poprzedni post</a>
-                    </li>
-                    {% endif %}
-                    {% if page.next.url %}
-                    <li class="next">
-                        <a class="box-effect" href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Następny post <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </li>
-                    {% endif %}
-                </ul>
-
-                <hr>
-                
-                {% include disqus.html %}
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
 </article>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      {% include facebook.html %}
+
+      <hr>
+
+      {% include disqus.html %}
+    </div>
+  </div>
+</div>
 
 <hr>
 

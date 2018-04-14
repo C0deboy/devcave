@@ -56,7 +56,7 @@ description: "{ Blog programistyczny }"
           {% endcase %}
           {{ post.date | date: "%Y" }}</p>
         {% assign tags = post.tags | sort %}{% for tag in tags %}
-        <div class="site-tag"><a href='/archiwum#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div>
+        <div class="site-tag"><a href="/archiwum#{{ tag | downcase | replace: ' ', '-' }}">{{ tag }}</a></div>
         {% endfor %}
       </div>
       {% endfor %}
@@ -104,9 +104,7 @@ description: "{ Blog programistyczny }"
         </a>
       </div>
 
-      <div class="fb-page inline box-effect">
-        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="340" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-      </div>
+      {% include facebook.html %}
 
     </div>
   </div>

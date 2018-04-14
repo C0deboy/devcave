@@ -141,6 +141,10 @@
 <lastmod>2018-04-07T11:00:00+02:00</lastmod>
 </url>
 <url>
+<loc>https://devcave.pl/effective-java/static-method-factory-zamiast-konstruktora</loc>
+<lastmod>2018-04-14T10:00:00+02:00</lastmod>
+</url>
+<url>
 <loc>https://devcave.pl/o-mnie/</loc>
 </url>
 <url>
@@ -175,5 +179,8 @@
 </url>
 <url>
 <loc>https://devcave.pl/page7/</loc>
+</url>
+<url>
+<loc>https://devcave.pl/page8/</loc>
 </url>
 </urlset>

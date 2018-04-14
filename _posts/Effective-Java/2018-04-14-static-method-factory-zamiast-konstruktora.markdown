@@ -3,7 +3,7 @@ layout:     post
 titleSEO:	"Static method factory zamiast konstruktora"
 title:      "Static method factory  zamiast konstruktora"
 subtitle:   "Zalety oraz wady tego rozwiązania"
-date:       2018-04-14 12:00:00
+date:       2018-04-14 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java

@@ -322,11 +322,11 @@
     
       
       {
-        "title": "Static method factory  zamiast konstruktora",
-        "titleSEO": "Static method factory zamiast konstruktora",
+        "title": "Static factory method zamiast konstruktora",
+        "titleSEO": "Static factory method zamiast konstruktora",
         "subtitle": "Zalety oraz wady tego rozwiązania",
         "date": "14 kwietnia 2018",
-        "url": "/effective-java/static-method-factory-zamiast-konstruktora"
+        "url": "/effective-java/static-factory-method-zamiast-konstruktora"
       }
     
   

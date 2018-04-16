@@ -2,7 +2,7 @@
 layout:     post
 titleSEO:	"Co to jest SOLID DRY KISS - zasady projektowania obiektowego"
 title:      "Zasady projektowania obiektowego"
-subtitle:   "Notatnik Juniora 1#"
+subtitle:   "SOLID, DRY, KISS itp."
 date:       2017-11-30 12:00:00
 author:     "Codeboy"
 category:   Notatnik-Juniora

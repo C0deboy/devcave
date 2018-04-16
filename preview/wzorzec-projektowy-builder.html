@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Wzorzec projektowy Builder - kiedy warto używać?</title>
+
+<link rel="canonical" href="https://devcave.pl/preview/wzorzec-projektowy-builder">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap-xlgrid.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+                Menu
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom" title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Wzorzec projektowy Builder</h1>
+            
+            <h2 class="post-subtitle">3 warianty. Kiedy jaki stosować? Wady i zalety.</h2>
+            
+            <p class="post-meta">
+              
+              21
+              kwietnia
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#wzorce-projektowe'>Wzorce-projektowe</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#budowniczy-builder---wzorzec-projektowy">Budowniczy (Builder) - wzorzec projektowy</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#inner-static-fluent-builder">Inner Static Fluent Builder</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#zalety-takiego-rozwiązania">Zalety takiego rozwiązania</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#fluent-builder">Fluent Builder</a></li>
+<li class="toc-entry toc-h2"><a href="#classic-builder-gof">Classic Builder GOF</a></li>
+<li class="toc-entry toc-h2"><a href="#wady">Wady</a></li>
+</ul>
+</li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <em>Item-2</em> z rozdziału:</p>
+
+<p class="m0">Creating and Destroying Objects</p>
+
+<ul>
+  <li><a href="/effective-java/static-factory-method-zamiast-konstruktora" id="Item-1">Item 1: Consider static factory methods instead of constructors</a></li>
+  <li><a href="" class="disabled" id="Item-2">Item 2: Consider a builder when faced with many constructor parameters</a></li>
+  <li><a href="" class="disabled" id="Item-3">Item 3: Enforce the singleton property with a private constructor or an enum type</a></li>
+  <li><a href="" class="disabled" id="Item-4">Item 4: Enforce noninstantiability with a private constructor</a></li>
+  <li><a href="" class="disabled" id="Item-5">Item 5: Prefer dependency injection to hardwiring resources</a></li>
+  <li><a href="" class="disabled" id="Item-6">Item 6: Avoid creating unnecessary objects</a></li>
+  <li><a href="" class="disabled" id="Item-7">Item 7: Eliminate obsolete object references</a></li>
+  <li><a href="" class="disabled" id="Item-8">Item 8: Avoid finalizers and cleaners</a></li>
+  <li><a href="" class="disabled" id="Item-9">Item 9: Prefer try-with-resources to try-finally</a></li>
+</ul>
+
+<script>
+    const link = document.getElementById('Item-2');
+    link.parentElement.parentElement.classList.add('fa-ul', 'custom');
+    link.parentElement.style.listStyleType = 'none';
+    const i = document.createElement('i');
+    i.classList.add('fa-li', 'fa', 'fa-arrow-right');
+    link.insertBefore(i, link.firstChild);
+</script>
+
+<hr />
+
+<p>Zazwyczaj tworzymy klasy i inicjujemy jej pola za pomocą konstruktora z argumentami lub bezargumentowym konstruktorem i setterami. Nic złego w tym nie ma dopóki ilość argumentów nie przekracza 4-5 i mamy pola, które muszą zostać dostarczone. W takich wypadkach warto zastanowić się nad lepszym rozwiązaniem.</p>
+
+<p>Weźmy na przykład taką oto klasę:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Goal</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">description</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">achieved</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Posiada 6 pól do zainicjowania, nie wszystkie są wymagane, ale część jest kluczowa. Jak w takim przypadku będzie wyglądał konstruktor, jeśli chcemy użyć tego podejścia?</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Goal</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">,</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">achieved</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">checklist</span> <span class="o">=</span> <span class="n">checklist</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">achieved</span> <span class="o">=</span> <span class="n">achieved</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Nie jest źle, ilość wymaganych argumentów nie jest jeszcze przytłaczająca. Jak wygląda instancjonowanie takiej klasy przez klienta?</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">));</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">));</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"25km"</span><span class="o">,</span> <span class="s">"New laptop"</span><span class="o">));</span>
+
+<span class="n">Checklist</span> <span class="n">checklist</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Checklist</span><span class="o">(</span><span class="s">"Todos"</span><span class="o">);</span>
+<span class="n">checklist</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="n">ListItem</span><span class="o">(</span><span class="s">"Buy shoes"</span><span class="o">));</span>
+<span class="n">checklist</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="n">ListItem</span><span class="o">(</span><span class="s">"Run every second day"</span><span class="o">));</span>
+<span class="n">checklist</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="n">ListItem</span><span class="o">(</span><span class="s">"Other"</span><span class="o">));</span>
+
+
+<span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">,</span> <span class="s">"My goal"</span><span class="o">,</span> <span class="n">levels</span><span class="o">,</span> <span class="n">checklist</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+
+<span class="c1">//goal.setDeadline();  //Optional</span>
+</code></pre></div></div>
+<p>Opcjonalnymi i wymaganymi polami można łatwo zarządzać używając konstruktorów. Możemy przypisać im wartości domyślne, wymusić utworzenie obiektu z określonymi parametrami itd.. Jednak to co zaczyna być mało praktyczne to konstruktor:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">,</span> <span class="s">"My goal"</span><span class="o">,</span> <span class="n">levels</span><span class="o">,</span> <span class="n">checklist</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Ma 5 argumentów i zaczyna to być już mało czytelne. Szczególnie dla osoby, która nie pisała tego kodu. Po jakimś czasie i dla nas samych. Nie jest od razu jasne co jest czym. Przekazujemy jakieś dwa stringi, dwie listy i jakąś wartość boolean. Obecnie niektóre IDE np. InteliJ mają funkcje, które dopisują nazwę argumentu przed nim. Jest to małe ułatwienie, jednak nie powinniśmy na tym polegać. Kod powinien być czysty sam w sobie, a nie polegać na IDE.</p>
+
+<p>Używając podejścia z bezargumentowym konstruktorem i setterami poprawia czytelność kodu:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">();</span>
+<span class="n">goal</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">);</span>
+<span class="n">goal</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">);</span>
+<span class="n">goal</span><span class="o">.</span><span class="na">setLevels</span><span class="o">(</span><span class="n">levels</span><span class="o">);</span>
+<span class="n">goal</span><span class="o">.</span><span class="na">setChecklist</span><span class="o">(</span><span class="n">checklist</span><span class="o">);</span>
+<span class="n">goal</span><span class="o">.</span><span class="na">setAchievied</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Jednak takie podejście nie gwarantuje nam spójności klasy. Nie ma tutaj opcji, aby zmusić klienta, żeby ustawił wszystkie wymagane pola. Uniemożliwia to też stworzenie klasy niezmiennej, co wymaga dodatkowego wysiłku, aby zapewnić <em>thread safety</em>. I tu z pomocą przychodzi <em>Builder</em>.</p>
+
+<h1 id="budowniczy-builder---wzorzec-projektowy">Budowniczy (Builder) - wzorzec projektowy</h1>
+
+<p>Ten wzorzec projektowy ma kilka wariantów. W książce <em>Effective Java</em> poruszany jest tylko ten pierwszy. Dwa pozostałe są jako dodatek, który warto porównać.</p>
+
+<h2 id="inner-static-fluent-builder">Inner Static Fluent Builder</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Goal</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">description</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">achieved</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Builder</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">description</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">achieved</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">name</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">description</span><span class="o">(</span><span class="n">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">levels</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="o">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">checklist</span><span class="o">(</span><span class="n">Checklist</span> <span class="n">checklist</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">checklist</span> <span class="o">=</span> <span class="n">checklist</span><span class="o">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">deadline</span><span class="o">(</span><span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">deadline</span> <span class="o">=</span> <span class="n">deadline</span><span class="o">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">achieved</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">achieved</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Goal</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Name cannot be empty"</span><span class="o">);</span>
+      <span class="o">}</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">levels</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Levels cannot be empty"</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">();</span>
+      <span class="n">goal</span><span class="o">.</span><span class="na">deadline</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">deadline</span><span class="o">;</span>
+      <span class="n">goal</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+      <span class="n">goal</span><span class="o">.</span><span class="na">checklist</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">checklist</span><span class="o">;</span>
+      <span class="n">goal</span><span class="o">.</span><span class="na">levels</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">levels</span><span class="o">;</span>
+      <span class="n">goal</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">description</span><span class="o">;</span>
+      <span class="n">goal</span><span class="o">.</span><span class="na">achieved</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">achieved</span><span class="o">;</span>
+      <span class="k">return</span> <span class="n">goal</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>W metodzie <code class="highlight language-java" data-lang="java"><span class="kd">public</span> <span class="n">Goal</span> <span class="nf">build</span><span class="o">()</span></code> możemy zweryfikować przed zbudowaniem obiektu czy wszystkie wymagane pola zostały zainicjowane (istnieje też inny fajny sposób, aby wymusić ustawienie wszystkich pól w builderze, napiszę o tym osobny post - będzie dostępny w najbliższą środę), a w poszczególnych <em>setterach</em> możemy przeprowadzić walidację pól. Stosując wzorzec <em>builder</em> możemy zagwarantować, że stworzona zostanie poprawna i kompletna klasa, zachowując czysty i łatwy w użyciu kod. Instancjowanie klasy wygląda wtedy tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">levels</span><span class="o">(</span><span class="n">levels</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">checklist</span><span class="o">(</span><span class="n">checklist</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">achieved</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+<p>Jak widać jest to dużo łatwiejsze do czytania jak i używania. Kolejne pola możemy podać w dowolnej kolejności, jest to tak zwane <em>fluent API</em>.</p>
+
+<p>Osobiście dla mnie składnia <code class="highlight language-java" data-lang="java"><span class="k">new</span> <span class="n">Goal</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span></code> wygląda paskudnie, dlatego preferuję użyć tutaj <a href="/effective-java/static-factory-method-zamiast-konstruktora"><em>static factory method</em></a>, żeby uzyskać dostęp do buildera w statyczny sposób, bez użycia <em>new</em> :</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">Builder</span> <span class="nf">builder</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">Builder</span><span class="o">();</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>I wtedy <em>buildera</em> możemy używać tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="n">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">levels</span><span class="o">(</span><span class="n">levels</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">checklist</span><span class="o">(</span><span class="n">checklist</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">achieved</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+</code></pre></div></div>
+
+<p>Możemy też uniemożliwić instancjonowanie klasy zwykłym konstruktorem dodając go jako prywatny:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nf">Goal</span><span class="o">()</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="zalety-takiego-rozwiązania">Zalety takiego rozwiązania</h3>
+
+<p class="pros"><em>Immutable</em></p>
+
+<p>Klasa jest pozbawiona setterów, więc nie możemy zmienić jej stanu w ten sposób.</p>
+
+<p class="pros">Wymuszone użycia buildera, aby utworzyć instancję klasy</p>
+
+<p>Dzięki temu możemy zapewnić, że klasa będzie zawsze spójna.</p>
+
+<p class="pros">Builder może mieć kilka parametrów <em>var args</em></p>
+
+<p>A to dzięki temu, że każdy parametr jest w oddzielnej metodzie.</p>
+
+<p>Dodatkowym plusem jest to, że możemy dodawać elementy np. do list w dynamiczny sposób, zamiast wypełniać całą listę wcześniej i przekazywać ją do konstruktora. W naszym przykładzie <em>buildera</em> będzie to wyglądać tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//...</span>
+    <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">addLevel</span><span class="o">(</span><span class="n">Level</span> <span class="n">level</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">level</span><span class="o">);</span>
+      <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">//...</span>
+</code></pre></div></div>
+<p>a użycie zamiast:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">));</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">));</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"25km"</span><span class="o">,</span> <span class="s">"New laptop"</span><span class="o">));</span>
+
+<span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="n">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">levels</span><span class="o">(</span><span class="n">levels</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">checklist</span><span class="o">(</span><span class="n">checklist</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">achieved</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+<p>to:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="n">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">addLevel</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">addLevel</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">addLevel</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"25km"</span><span class="o">,</span> <span class="s">"New laptop"</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">checklist</span><span class="o">(</span><span class="n">checklist</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">achieved</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+<p>Podobnie można by zrobić z <em>checklistą</em>.</p>
+
+<h2 id="fluent-builder">Fluent Builder</h2>
+
+<p>Tu jedyna różnica polega na tym, że <em>Builder</em> implementujemy jako osobną klasę:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">GoalBuilder</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">description</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">achieved</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">name</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">description</span><span class="o">(</span><span class="n">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">levels</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="o">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">checklist</span><span class="o">(</span><span class="n">Checklist</span> <span class="n">checklist</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">checklist</span> <span class="o">=</span> <span class="n">checklist</span><span class="o">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">deadline</span><span class="o">(</span><span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">deadline</span> <span class="o">=</span> <span class="n">deadline</span><span class="o">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">achieved</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">achieved</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">Goal</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">();</span>
+    <span class="n">goal</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+    <span class="n">goal</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="n">description</span><span class="o">);</span>
+    <span class="n">goal</span><span class="o">.</span><span class="na">setLevels</span><span class="o">(</span><span class="n">levels</span><span class="o">);</span>
+    <span class="n">goal</span><span class="o">.</span><span class="na">setChecklist</span><span class="o">(</span><span class="n">checklist</span><span class="o">);</span>
+    <span class="n">goal</span><span class="o">.</span><span class="na">setDeadline</span><span class="o">(</span><span class="n">deadline</span><span class="o">);</span>
+    <span class="n">goal</span><span class="o">.</span><span class="na">setAchieved</span><span class="o">(</span><span class="n">achieved</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">goal</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Niesie to za sobą pewne konsekwencje:</p>
+
+<p class="cons">Musimy udostępnić settery dla prywatnych pól budowanego obiektu.</p>
+
+<p class="cons">Musimy udostępnić publiczny konstruktor.</p>
+
+<p>Często takie rozwiązanie się nie sprawdza np. ze wzglęu na to, że obiekt powinien być niemutowalny, dlatego preferowana jest implementacja jako wewnętrzna statyczna klasa.</p>
+
+<p>Użycie wygląda podobnie:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GoalBuilder</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">levels</span><span class="o">(</span><span class="n">levels</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">checklist</span><span class="o">(</span><span class="n">checklist</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">achieved</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p class="idea">Pisanie builderów jest nużące i powtarzalne, dlatego powstały liczne pluginy do IDE, które generują je za nas. Dla InteliJ mamy na przykład plugin <em>Builder Generator</em>. Po zainstalowaniu wystarczy kliknąć <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> i wyskoczy nam opcja do wygenerowania buildera. <br /> <br />
+    Powstały również do tego całe biblioteki. Jedną z nich jest np. <a href="https://projectlombok.org/">Lombok</a> (Który udostępnia szereg innych funkcji). Wystarczy dorzucić do naszej klasy adnotację <code class="highlight language-java" data-lang="java"><span class="nd">@Builder</span></code> i już możemy korzystać z <em>Buildera</em> za pomocą statycznej metody <code class="highlight language-java" data-lang="java"><span class="n">builder</span><span class="o">()</span></code>.</p>
+
+<h2 id="classic-builder-gof">Classic Builder GOF</h2>
+<p>Klasyczny budowniczy od gangu czworga (<em>Gang of four</em>) adresuje całkiem inny problem i wygląda całkiem inaczej. Jest to bardziej strategia tworzenia obiektów, której celem jest oddzielenie tworzenia obiektu od jego reprezentacji, dzięki czemu ten sam proces konstrukcji jest wykorzystywany do powstawania różnych reprezentacji.</p>
+
+<p>W tym wzorców mamy kilka elementów:</p>
+
+<ul>
+  <li><em>Builder</em> - interfejs dla builderów</li>
+  <li><em>ConcreteBuilders</em> - jego implementacje, zawierają tak jakby plan wykonania poszczególnych części</li>
+  <li><em>Director</em>  - tworzy obiekty wykorzystując <em>Buildery</em>, czyli wykorzystuje plany na poszczególne części</li>
+  <li><em>Product</em> - czyli to co dostaje klient od <em>Directora</em></li>
+</ul>
+
+<p>Ten wzorzec nie ma zastosowania w naszym przykładzie z tworzeniem klasy <em>Goal</em>, ponieważ “cel” nie ma zazwyczaj predefiniowanych konkretnych implementacji. Moglibyśmy tak zrobić, ale to raczej mało realny przykład. Jako przykład mogę podać narzędzie do zbierania statystyk dla języków programowania, które tworzyłem dla mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Tam zaprojektowałem kod w podobny sposób.</p>
+
+<p><em>Builder</em>:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">DataScraper</span> <span class="o">{</span>
+
+  <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">);</span>
+
+  <span class="n">String</span> <span class="nf">getName</span><span class="o">();</span>
+
+  <span class="n">JSONObject</span> <span class="nf">getData</span><span class="o">();</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<p>U mnie jest to scraper, ale zasada podobna. Po prostu zamiast metod buildName() i buildData() są getName() i getData(). Buildery mają zazwyczaj więcej takich metod, ponieważ stosuje je się do tworzenia skoplikowanych obiektów.</p>
+
+<p><em>ConcreteBuilders</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GithubDataScraper</span> <span class="kd">implements</span> <span class="n">DataScraper</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NAME</span> <span class="o">=</span> <span class="s">"Github"</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">JSONObject</span><span class="o">&gt;</span> <span class="n">githubData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+  
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//scraping implementation for Github</span>
+  <span class="o">}</span>
+  
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">NAME</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="n">JSONObject</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">JSONObject</span><span class="o">(</span><span class="n">githubData</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StackOverflowDataScraper</span> <span class="kd">implements</span> <span class="n">DataScraper</span> <span class="o">{</span>
+ <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NAME</span> <span class="o">=</span> <span class="s">"StackOverflow"</span><span class="o">;</span>
+ <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">JSONObject</span><span class="o">&gt;</span> <span class="n">stackOverflowData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
+   <span class="c1">//scraping implementation for StackOverflow</span>
+ <span class="o">}</span>
+
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+   <span class="k">return</span> <span class="n">NAME</span><span class="o">;</span>
+ <span class="o">}</span>
+
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="n">JSONObject</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+   <span class="k">return</span> <span class="k">new</span> <span class="nf">JSONObject</span><span class="o">(</span><span class="n">stackOverflowData</span><span class="o">);</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MeetupDataScraper</span> <span class="kd">implements</span> <span class="n">DataScraper</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NAME</span> <span class="o">=</span> <span class="s">"Meetup"</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">JSONObject</span><span class="o">&gt;</span> <span class="n">meetupData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+  
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//scraping implementation for Meetup</span>
+  <span class="o">}</span>
+  
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">NAME</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="n">JSONObject</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">JSONObject</span><span class="o">(</span><span class="n">meetupData</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>i tak dalej jeszcze dla SpectrumDataScraper, TiobeIndexDataScraper i LanguageVersionsDataScraper.</p>
+
+<p><em>Director</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Statistics</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">collectFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">languages</span> <span class="o">=</span> <span class="n">languages</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">JSONObject</span> <span class="nf">build</span><span class="o">(</span><span class="n">DataScraper</span> <span class="n">dataScraper</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">JSONObject</span> <span class="n">statistics</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+    <span class="n">dataScraper</span><span class="o">.</span><span class="na">scrapDataFor</span><span class="o">(</span><span class="n">languages</span><span class="o">);</span>
+    <span class="n">statistics</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="n">dataScraper</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="n">statistics</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"data"</span><span class="o">,</span> <span class="n">dataScraper</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+    <span class="k">return</span> <span class="n">statistics</span><span class="o">;</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Tu jest nieco zmodyfikowana wersja. W książkowym przykładzie <em>Director</em> dostaje <em>Builder</em> w konstruktorze, jednak nie do końca rozumiem dlaczego tak jest. Wymusza to instancjonowanie nowego <em>Directora</em> za każdym razem, gdy tworzymy nowy obiekt. Ja zaimplementowałem to tak, że używamy cały czas tego samego <em>Directora</em> do budowania różnych obiektów. A tak wygląda użycie przez klienta.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+    <span class="n">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
+
+    <span class="n">Statistics</span> <span class="n">statistics</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">();</span>
+    <span class="n">statistics</span><span class="o">.</span><span class="na">collectFor</span><span class="o">(</span><span class="n">languages</span><span class="o">);</span>
+
+    <span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">());</span>
+    <span class="n">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">MeetupDataScraper</span><span class="o">());</span>
+    <span class="n">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">StackOverflowDataScraper</span><span class="o">());</span>
+    <span class="n">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">SpectrumDataScraper</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><em>Productem</em> jest po prostu JSONObject.</p>
+
+<p>Jeśli chciałbym to zrobić jak w książkowym przykładzie to wyglądałoby to tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
+<span class="n">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">MeetupDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
+<span class="n">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">StackOverflowDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
+<span class="n">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">SpectrumDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Tylko problem pojawia się w tym, że nie mam jak podać do <em>Directora</em> listy języków dla których ma zebrać dane. Musiałbym za każdym razem podawać go do konstruktora <em>Directora</em> lub <em>Scrapera</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
+
+<span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+<span class="n">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">MeetupDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+<span class="n">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">StackOverflowDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+<span class="n">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">SpectrumDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>lub</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
+
+<span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
+<span class="n">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">MeetupDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
+<span class="n">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">StackOverflowDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
+<span class="n">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">SpectrumDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Co jest nieco nadmiarowe i przynajmniej w tym wypadku robienie nowej instancji <em>Directora</em> za każdym razem jest zbędne.</p>
+
+<p>Widziałem też przykłady gdzie wszystko było instancjonowane w osobnej linijce… Według mnie to <em>overkill</em> bo zamiast jednej linijki:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">());</span>
+</code></pre></div></div>
+<p>musiałbym używać coś takiego:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TiobeIndexDataScraper</span> <span class="n">tiobeIndexDataScraper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">();</span>
+<span class="n">Statistics</span> <span class="n">tiobeIndexDirector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">());</span>
+<span class="n">tiobeIndexDirector</span><span class="o">.</span><span class="na">collectFor</span><span class="o">(</span><span class="n">languages</span><span class="o">):</span>
+<span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">tiobeIndexDirector</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+
+<h2 id="wady">Wady</h2>
+
+<p class="cons">Koszt tworzenia buildera</p>
+
+<p>Kod buildera jest dosyć rozwlekły. Koszt napisania buildera nie jest może zbyt duży (szczególnie jeśli zostanie wygenerowany), jednak może mieć znaczenie wydajnościowe. Dlatego ten wzorzec powinniśmy stosować tylko wtedy kiedy nasza klasa będzie mieć przynajmniej 4 wymagane pola (lub wiemy, że ta liczba urośnie). Przy mniejszej ilości parametrów jest to <em>overengineering</em>.</p>
+
+<p class="note">Gdyby w Javie występowały parametry nazwane (tak jak np. w Kotlinie), to ten wzorzec byłby zbędny. Możnaby powiedzięć, ze jest to bardziej obejście dla brakującej funkcjonalnośći języka niż wzorzec projektowy. Gdyby Java miała taki <em>feature</em> to wystarczyłoby użyć konstruktora:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"Run the marathon"</span><span class="o">,</span> 
+    <span class="n">description</span><span class="o">=</span><span class="s">"My goal"</span><span class="o">,</span>
+    <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="o">,</span>
+    <span class="n">checList</span><span class="o">=</span><span class="n">checklist</span>
+    <span class="n">achieved</span><span class="o">=</span><span class="kc">false</span><span class="o">);</span></code></pre></figure>
+
+
+
+        <hr>
+
+        <ul class="pager">
+          
+          
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <div class="text-center">
+  <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam informację o nowych wpisach:</p>
+
+  <div class="fb-page inline box-effect">
+    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+  </div>
+</div>
+
+      <hr>
+
+      
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-placement="top" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-placement="top" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-placement="top" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-placement="top" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/dist/js/libs/jquery.min.js"></script>
+
+<script src="/dist/js/libs/bootstrap.min.js"></script>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

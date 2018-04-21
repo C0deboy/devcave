@@ -201,7 +201,7 @@ Zalety takiego rozwiązania:
 {: .pros}
 *Pozwala zachować niezmienność klasy*
 
-W tym wariancie buildera nie musimy udostępniać publiczego konstruktora ani setterów, więc nie możemy zmienić jej stanu w ten sposób.
+W tym wariancie buildera nie musimy udostępniać publiczego konstruktora ani setterów dla budowanego obiektu.
 
 {: .pros}
 Wymuszone użycia buildera, aby utworzyć instancję klasy

@@ -199,9 +199,9 @@ private Goal() {
 Zalety takiego rozwiązania:
 
 {: .pros}
-*Immutable*
+*Pozwala zachować niezmienność klasy*
 
-Klasa jest pozbawiona setterów, więc nie możemy zmienić jej stanu w ten sposób.
+W tym wariancie buildera nie musimy udostępniać publiczego konstruktora ani setterów, więc nie możemy zmienić jej stanu w ten sposób.
 
 {: .pros}
 Wymuszone użycia buildera, aby utworzyć instancję klasy

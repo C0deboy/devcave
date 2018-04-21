@@ -9,7 +9,7 @@
 <meta name="author" content="Codeboy">
 <title>Wzorzec projektowy Builder - kiedy warto używać?</title>
 
-<link rel="canonical" href="https://devcave.pl/preview/wzorzec-projektowy-builder">
+<link rel="canonical" href="https://devcave.pl/effective-java/wzorzec-projektowy-builder">
 <link rel="shortcut icon" href="/img/logo.ico">
 
 <link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
@@ -116,11 +116,7 @@
           <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#budowniczy-builder---wzorzec-projektowy">Budowniczy (Builder) - wzorzec projektowy</a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#inner-static-fluent-builder">Inner Static Fluent Builder</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#zalety-takiego-rozwiązania">Zalety takiego rozwiązania</a></li>
-</ul>
-</li>
+<li class="toc-entry toc-h2"><a href="#inner-static-fluent-builder">Inner Static Fluent Builder</a></li>
 <li class="toc-entry toc-h2"><a href="#fluent-builder">Fluent Builder</a></li>
 <li class="toc-entry toc-h2"><a href="#classic-builder-gof">Classic Builder GOF</a></li>
 <li class="toc-entry toc-h2"><a href="#wady">Wady</a></li>
@@ -210,7 +206,7 @@
 
 <p>Ma 5 argumentów i zaczyna to być już mało czytelne. Szczególnie dla osoby, która nie pisała tego kodu. Po jakimś czasie i dla nas samych. Nie jest od razu jasne co jest czym. Przekazujemy jakieś dwa stringi, dwie listy i jakąś wartość boolean. Obecnie niektóre IDE np. InteliJ mają funkcje, które dopisują nazwę argumentu przed nim. Jest to małe ułatwienie, jednak nie powinniśmy na tym polegać. Kod powinien być czysty sam w sobie, a nie polegać na IDE.</p>
 
-<p>Używając podejścia z bezargumentowym konstruktorem i setterami poprawia czytelność kodu:</p>
+<p>Użycie podejścia z bezargumentowym konstruktorem i setterami poprawia czytelność kodu:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">();</span>
 <span class="n">goal</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">);</span>
@@ -220,11 +216,11 @@
 <span class="n">goal</span><span class="o">.</span><span class="na">setAchievied</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>Jednak takie podejście nie gwarantuje nam spójności klasy. Nie ma tutaj opcji, aby zmusić klienta, żeby ustawił wszystkie wymagane pola. Uniemożliwia to też stworzenie klasy niezmiennej, co wymaga dodatkowego wysiłku, aby zapewnić <em>thread safety</em>. I tu z pomocą przychodzi <em>Builder</em>.</p>
+<p>Jednak nie gwarantuje ono spójności klasy. Nie ma tutaj opcji, aby zmusić klienta, żeby ustawił wszystkie wymagane pola. Uniemożliwia to też stworzenie klasy niezmiennej, co wymaga dodatkowego wysiłku, aby zapewnić <em>thread safety</em>. I tu z pomocą przychodzi <em>Builder</em>.</p>
 
 <h1 id="budowniczy-builder---wzorzec-projektowy">Budowniczy (Builder) - wzorzec projektowy</h1>
 
-<p>Ten wzorzec projektowy ma kilka wariantów. W książce <em>Effective Java</em> poruszany jest tylko ten pierwszy. Dwa pozostałe są jako dodatek, który warto porównać.</p>
+<p>Ten wzorzec projektowy ma kilka wariantów. W książce <em>Effective Java</em> poruszany jest tylko ten pierwszy. Dwa pozostałe są jako dodatek, który warto porównać. Ogólnie mówiąc Buildery są dodatkowymi klasami, który ułatwiają tworzenie innych złożonych klas.</p>
 
 <h2 id="inner-static-fluent-builder">Inner Static Fluent Builder</h2>
 
@@ -294,7 +290,11 @@
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
-<p>W metodzie <code class="highlight language-java" data-lang="java"><span class="kd">public</span> <span class="n">Goal</span> <span class="nf">build</span><span class="o">()</span></code> możemy zweryfikować przed zbudowaniem obiektu czy wszystkie wymagane pola zostały zainicjowane (istnieje też inny fajny sposób, aby wymusić ustawienie wszystkich pól w builderze, napiszę o tym osobny post - będzie dostępny w najbliższą środę), a w poszczególnych <em>setterach</em> możemy przeprowadzić walidację pól. Stosując wzorzec <em>builder</em> możemy zagwarantować, że stworzona zostanie poprawna i kompletna klasa, zachowując czysty i łatwy w użyciu kod. Instancjowanie klasy wygląda wtedy tak:</p>
+<p>Kolejne metody służą do konfigurowania pól w klasie <code class="highlighter-rouge">Goal</code> (możemy przeprowadzić też w nich walidację), które zwracają obiekt buildera, aby umożliwić ciągłe wywoływanie kolejnych metod (Fluent API). Ostatnia z nich - <code class="highlight language-java" data-lang="java"><span class="kd">public</span> <span class="n">Goal</span> <span class="nf">build</span><span class="o">()</span></code> służy do zbudowania obiektu i najczęściej przed tym do zweryfikowania czy wszystkie wymagane pola zostały zainicjowane.</p>
+
+<p><strong>Istnieje też inny fajny sposób, aby wymusić ustawienie wszystkich pól w builderze</strong> - napisałem o tym osobny post <a href="https://bulldogjob.pl/news/348-idiotoodporne-api-klasy-czyli-jakie">idiotoodporne-api-klasy</a> dla <a href="https://bulldogjob.pl/">bulldogjob.pl</a>.</p>
+
+<p>Stosując wzorzec <em>builder</em> możemy zagwarantować, że stworzona zostanie poprawna i kompletna klasa, zachowując czysty i łatwy w użyciu kod. Instancjowanie klasy wygląda wtedy tak:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
@@ -304,7 +304,7 @@
     <span class="o">.</span><span class="na">achieved</span><span class="o">()</span>
     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 </code></pre></div></div>
-<p>Jak widać jest to dużo łatwiejsze do czytania jak i używania. Kolejne pola możemy podać w dowolnej kolejności, jest to tak zwane <em>fluent API</em>.</p>
+<p>Jak widać jest to dużo łatwiejsze do czytania jak i używania. Kolejne pola możemy podać w dowolnej kolejności, ze względu na wspomniane wcześniej <em>fluent API</em>.</p>
 
 <p>Osobiście dla mnie składnia <code class="highlight language-java" data-lang="java"><span class="k">new</span> <span class="n">Goal</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span></code> wygląda paskudnie, dlatego preferuję użyć tutaj <a href="/effective-java/static-factory-method-zamiast-konstruktora"><em>static factory method</em></a>, żeby uzyskać dostęp do buildera w statyczny sposób, bez użycia <em>new</em> :</p>
 
@@ -332,7 +332,7 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
-<h3 id="zalety-takiego-rozwiązania">Zalety takiego rozwiązania</h3>
+<p>Zalety takiego rozwiązania:</p>
 
 <p class="pros"><em>Immutable</em></p>
 
@@ -340,13 +340,13 @@
 
 <p class="pros">Wymuszone użycia buildera, aby utworzyć instancję klasy</p>
 
-<p>Dzięki temu możemy zapewnić, że klasa będzie zawsze spójna.</p>
+<p>Dzięki temu możemy zapewnić, że klasa będzie zawsze spójna (jeśli zadbamy o to w Builderze).</p>
 
 <p class="pros">Builder może mieć kilka parametrów <em>var args</em></p>
 
 <p>A to dzięki temu, że każdy parametr jest w oddzielnej metodzie.</p>
 
-<p>Dodatkowym plusem jest to, że możemy dodawać elementy np. do list w dynamiczny sposób, zamiast wypełniać całą listę wcześniej i przekazywać ją do konstruktora. W naszym przykładzie <em>buildera</em> będzie to wyglądać tak:</p>
+<p>Dodatkowym plusem jest to, że możemy dodawać elementy np. do list w dynamiczny sposób, zamiast wypełniać całą listę wcześniej i przekazywać ją do konstruktora. W przykładzie <em>buildera</em> można to zrobić np. dla listy poziomów:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//...</span>
     <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">addLevel</span><span class="o">(</span><span class="n">Level</span> <span class="n">level</span><span class="o">)</span> <span class="o">{</span>
@@ -355,7 +355,7 @@
     <span class="o">}</span>
     <span class="c1">//...</span>
 </code></pre></div></div>
-<p>a użycie zamiast:</p>
+<p>i wtedy zamiast takiego podawania poziomów:</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">));</span>
 <span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">));</span>
@@ -369,7 +369,9 @@
     <span class="o">.</span><span class="na">achieved</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 </code></pre></div></div>
-<p>to:</p>
+
+<p>Można podać tak:</p>
+
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="n">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
@@ -380,11 +382,12 @@
     <span class="o">.</span><span class="na">achieved</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 </code></pre></div></div>
-<p>Podobnie można by zrobić z <em>checklistą</em>.</p>
+
+<p>Podobnie można by zrobić z <em>checklistą</em>. Wszystko ku lepszej czytelności.</p>
 
 <h2 id="fluent-builder">Fluent Builder</h2>
 
-<p>Tu jedyna różnica polega na tym, że <em>Builder</em> implementujemy jako osobną klasę:</p>
+<p>Ten rózni sięod pierwszego tym, że <em>Builder</em> implementujemy jako osobną klasę:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">GoalBuilder</span> <span class="o">{</span>
   <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
@@ -399,43 +402,14 @@
     <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
   <span class="o">}</span>
 
-  <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">description</span><span class="o">(</span><span class="n">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
-    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
-  <span class="o">}</span>
-
-  <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">levels</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="o">;</span>
-    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
-  <span class="o">}</span>
-
-  <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">checklist</span><span class="o">(</span><span class="n">Checklist</span> <span class="n">checklist</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">checklist</span> <span class="o">=</span> <span class="n">checklist</span><span class="o">;</span>
-    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
-  <span class="o">}</span>
-
-  <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">deadline</span><span class="o">(</span><span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">deadline</span> <span class="o">=</span> <span class="n">deadline</span><span class="o">;</span>
-    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
-  <span class="o">}</span>
-
-  <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">achieved</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">achieved</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
-  <span class="o">}</span>
+  <span class="c1">//other methods..</span>
 
   <span class="kd">public</span> <span class="n">Goal</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">();</span>
-    <span class="n">goal</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
-    <span class="n">goal</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="n">description</span><span class="o">);</span>
-    <span class="n">goal</span><span class="o">.</span><span class="na">setLevels</span><span class="o">(</span><span class="n">levels</span><span class="o">);</span>
-    <span class="n">goal</span><span class="o">.</span><span class="na">setChecklist</span><span class="o">(</span><span class="n">checklist</span><span class="o">);</span>
-    <span class="n">goal</span><span class="o">.</span><span class="na">setDeadline</span><span class="o">(</span><span class="n">deadline</span><span class="o">);</span>
-    <span class="n">goal</span><span class="o">.</span><span class="na">setAchieved</span><span class="o">(</span><span class="n">achieved</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">goal</span><span class="o">;</span>
+    <span class="c1">//...</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
+
 <p>Niesie to za sobą pewne konsekwencje:</p>
 
 <p class="cons">Musimy udostępnić settery dla prywatnych pól budowanego obiektu.</p>
@@ -456,7 +430,7 @@
 </code></pre></div></div>
 
 <p class="idea">Pisanie builderów jest nużące i powtarzalne, dlatego powstały liczne pluginy do IDE, które generują je za nas. Dla InteliJ mamy na przykład plugin <em>Builder Generator</em>. Po zainstalowaniu wystarczy kliknąć <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> i wyskoczy nam opcja do wygenerowania buildera. <br /> <br />
-    Powstały również do tego całe biblioteki. Jedną z nich jest np. <a href="https://projectlombok.org/">Lombok</a> (Który udostępnia szereg innych funkcji). Wystarczy dorzucić do naszej klasy adnotację <code class="highlight language-java" data-lang="java"><span class="nd">@Builder</span></code> i już możemy korzystać z <em>Buildera</em> za pomocą statycznej metody <code class="highlight language-java" data-lang="java"><span class="n">builder</span><span class="o">()</span></code>.</p>
+    Powstały również do tego całe biblioteki. Jedną z nich jest np. <a href="https://projectlombok.org/">Lombok</a> (Który udostępnia szereg innych funkcji). Wystarczy dorzucić do klasy adnotację <code class="highlight language-java" data-lang="java"><span class="nd">@Builder</span></code> i już możemy korzystać z <em>Buildera</em> za pomocą statycznej metody <code class="highlight language-java" data-lang="java"><span class="n">builder</span><span class="o">()</span></code>.</p>
 
 <h2 id="classic-builder-gof">Classic Builder GOF</h2>
 <p>Klasyczny budowniczy od gangu czworga (<em>Gang of four</em>) adresuje całkiem inny problem i wygląda całkiem inaczej. Jest to bardziej strategia tworzenia obiektów, której celem jest oddzielenie tworzenia obiektu od jego reprezentacji, dzięki czemu ten sam proces konstrukcji jest wykorzystywany do powstawania różnych reprezentacji.</p>
@@ -470,9 +444,10 @@
   <li><em>Product</em> - czyli to co dostaje klient od <em>Directora</em></li>
 </ul>
 
-<p>Ten wzorzec nie ma zastosowania w naszym przykładzie z tworzeniem klasy <em>Goal</em>, ponieważ “cel” nie ma zazwyczaj predefiniowanych konkretnych implementacji. Moglibyśmy tak zrobić, ale to raczej mało realny przykład. Jako przykład mogę podać narzędzie do zbierania statystyk dla języków programowania, które tworzyłem dla mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Tam zaprojektowałem kod w podobny sposób.</p>
+<p>Ten wzorzec nie ma zastosowania w przykładzie z tworzeniem klasy <em>Goal</em>, ponieważ “cel” nie ma zazwyczaj predefiniowanych konkretnych implementacji. Moglibyśmy tak zrobić, ale to raczej mało realny przykład. Jako przykład mogę podać narzędzie do zbierania statystyk dla języków programowania, które tworzyłem dla mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Tam zaprojektowałem kod w podobny sposób.</p>
 
 <p><em>Builder</em>:</p>
+
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">DataScraper</span> <span class="o">{</span>
 
   <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">);</span>
@@ -482,8 +457,10 @@
   <span class="n">JSONObject</span> <span class="nf">getData</span><span class="o">();</span>
 
 <span class="o">}</span>
+
 </code></pre></div></div>
-<p>U mnie jest to scraper, ale zasada podobna. Po prostu zamiast metod buildName() i buildData() są getName() i getData(). Buildery mają zazwyczaj więcej takich metod, ponieważ stosuje je się do tworzenia skoplikowanych obiektów.</p>
+
+<p>Jest to “scraper”, ale zasada podobna. Po prostu zamiast metod z przedrostkiem <code class="highlighter-rouge">build</code>, są <code class="highlighter-rouge">get</code>. Buildery mają zazwyczaj więcej takich metod, ponieważ stosuje je się do tworzenia skoplikowanych obiektów.</p>
 
 <p><em>ConcreteBuilders</em>:</p>
 
@@ -570,7 +547,7 @@
 
 <span class="o">}</span>
 </code></pre></div></div>
-<p>Tu jest nieco zmodyfikowana wersja. W książkowym przykładzie <em>Director</em> dostaje <em>Builder</em> w konstruktorze, jednak nie do końca rozumiem dlaczego tak jest. Wymusza to instancjonowanie nowego <em>Directora</em> za każdym razem, gdy tworzymy nowy obiekt. Ja zaimplementowałem to tak, że używamy cały czas tego samego <em>Directora</em> do budowania różnych obiektów. A tak wygląda użycie przez klienta.</p>
+<p>Tu jest nieco zmodyfikowana wersja. W książkowym przykładzie <em>Director</em> dostaje <em>Builder</em> w konstruktorze, jednak nie do końca rozumiem dlaczego tak jest. Wymusza to instancjonowanie nowego <em>Directora</em> za każdym razem, gdy tworzymy nowy obiekt. Ja zaimplementowałem to tak, że używamy cały czas tego samego <em>Directora</em> do budowania różnych obiektów. A tak wygląda użycie przez klienta:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
     <span class="n">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
@@ -621,7 +598,7 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">());</span>
 </code></pre></div></div>
-<p>musiałbym używać coś takiego:</p>
+<p>byłoby coś takiego:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TiobeIndexDataScraper</span> <span class="n">tiobeIndexDataScraper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">();</span>
 <span class="n">Statistics</span> <span class="n">tiobeIndexDirector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">());</span>
@@ -629,11 +606,13 @@
 <span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">tiobeIndexDirector</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
 </code></pre></div></div>
 
+<p>To mówi chyba samo za siebie ;)</p>
+
 <h2 id="wady">Wady</h2>
 
 <p class="cons">Koszt tworzenia buildera</p>
 
-<p>Kod buildera jest dosyć rozwlekły. Koszt napisania buildera nie jest może zbyt duży (szczególnie jeśli zostanie wygenerowany), jednak może mieć znaczenie wydajnościowe. Dlatego ten wzorzec powinniśmy stosować tylko wtedy kiedy nasza klasa będzie mieć przynajmniej 4 wymagane pola (lub wiemy, że ta liczba urośnie). Przy mniejszej ilości parametrów jest to <em>overengineering</em>.</p>
+<p>Kod buildera jest dosyć rozwlekły. Koszt napisania buildera nie jest może zbyt duży (szczególnie jeśli zostanie wygenerowany), jednak może mieć znaczenie wydajnościowe. Dlatego ten wzorzec powinniśmy stosować tylko wtedy kiedy klasa będzie mieć przynajmniej 4 wymagane pola (lub wiemy, że ta liczba urośnie) i nie jest to aplikacja <em>performance-critical</em>. Przy mniejszej ilości parametrów jest to <em>overengineering</em>.</p>
 
 <p class="note">Gdyby w Javie występowały parametry nazwane (tak jak np. w Kotlinie), to ten wzorzec byłby zbędny. Możnaby powiedzięć, ze jest to bardziej obejście dla brakującej funkcjonalnośći języka niż wzorzec projektowy. Gdyby Java miała taki <em>feature</em> to wystarczyłoby użyć konstruktora:</p>
 
@@ -649,6 +628,13 @@
         <hr>
 
         <ul class="pager">
+          
+          <li class="previous">
+            <a class="box-effect" href="/effective-java/static-factory-method-zamiast-konstruktora"
+               data-toggle="tooltip" data-placement="top" title="Static factory method zamiast konstruktora"><i class="fa fa-arrow-left"
+                                                                                             aria-hidden="true"></i>
+              Poprzedni post</a>
+          </li>
           
           
         </ul>
@@ -674,6 +660,25 @@
       <hr>
 
       
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://devcave.pl/effective-java/wzorzec-projektowy-builder";
+this.page.identifier = "/effective-java/wzorzec-projektowy-builder";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
 
     </div>
   </div>

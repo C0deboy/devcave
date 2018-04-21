@@ -10,7 +10,7 @@ Ten wpis nawiązuje do tematu z *{{ include.item }}* z rozdziału:
 Creating and Destroying Objects
 
 - [Item 1: Consider static factory methods instead of constructors]({% post_url /Effective-Java/2018-04-14-static-factory-method-zamiast-konstruktora %}){: #Item-1}
-- [Item 2: Consider a builder when faced with many constructor parameters](){: .disabled #Item-2}
+- [Item 2: Consider a builder when faced with many constructor parameters]({% post_url /Effective-Java/2018-04-21-wzorzec-projektowy-builder %}){: #Item-2}
 - [Item 3: Enforce the singleton property with a private constructor or an enum type](){: .disabled #Item-3}
 - [Item 4: Enforce noninstantiability with a private constructor](){: .disabled #Item-4}
 - [Item 5: Prefer dependency injection to hardwiring resources](){: .disabled #Item-5}

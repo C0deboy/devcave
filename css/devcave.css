@@ -607,7 +607,7 @@ pre {
 
 .books-ad {
   padding: 5px;
-  margin-top: 30px;
+  margin-top: 15px;
 }
 
 .books-ad > a {
@@ -738,4 +738,59 @@ a.disabled {
 
 .m0 {
   margin: 0;
+}
+
+.ad {
+  text-align: center;
+  margin-top: 30px;
+  display: none;
+}
+
+.ad h3 {
+  margin-top: 5px;
+}
+
+.promotion-sign {
+  position: absolute;
+  font-size: .8em;
+  display: inline-block;
+  top: 0;
+  color: black;
+  background: #f8f8f8;
+  border-radius: 5px;
+  padding: 4px;
+  opacity: 1;
+  animation: .5s popup ease-out forwards;
+  animation-delay: .5s;
+  z-index: 2;
+  margin: 10px 25px;
+}
+
+.promotion-sign:before {
+  content: '';
+  display: block;
+  height: 12px;
+  z-index: -1;
+  transform: skew(0deg,-38deg);
+  width: 19px;
+  background: #f8f8f8;
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
+
+@media (max-width: 768px){
+  .promotion-sign {
+    right: 0;
+  }
+}
+
+@keyframes popup {
+  0% {transform: translateY(0px) scale3d(.2,.2,1);}
+  100% {transform: translateY(65px) scale3d(1,1,1);}
+}
+
+.close-ad {
+  background: 0;
+  border: 0;
 }

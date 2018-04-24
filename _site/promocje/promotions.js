@@ -32,10 +32,6 @@ function isPromotionActive() {
   return currentDate >= promotion.start && currentDate <= promotion.end;
 }
 
-
-
-
-
 function createPromotionMessagePopup() {
   const booksBtn = document.querySelector('.books-btn');
   if (booksBtn) {
@@ -75,7 +71,7 @@ function positionPromotionSign(booksBtn, promotionSign) {
 }
 
 function showPromotionAd() {
-  const promotionLink = document.querySelector('.ad');
+  const promotionLink = document.querySelector('.promotion-link');
   if (promotionLink) {
     promotionLink.style.display = 'block';
   }

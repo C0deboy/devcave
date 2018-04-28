@@ -19,13 +19,14 @@
 <link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="/dist/js/polyfills/array.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
 <link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
@@ -132,7 +133,7 @@
 <ul>
   <li><a href="/effective-java/static-factory-method-zamiast-konstruktora" id="Item-1">Item 1: Consider static factory methods instead of constructors</a></li>
   <li><a href="/effective-java/wzorzec-projektowy-builder" id="Item-2">Item 2: Consider a builder when faced with many constructor parameters</a></li>
-  <li><a href="" class="disabled" id="Item-3">Item 3: Enforce the singleton property with a private constructor or an enum type</a></li>
+  <li><a href="/effective-java/wzorzec-projektowy-singleton" id="Item-3">Item 3: Enforce the singleton property with a private constructor or an enum type</a></li>
   <li><a href="" class="disabled" id="Item-4">Item 4: Enforce noninstantiability with a private constructor</a></li>
   <li><a href="" class="disabled" id="Item-5">Item 5: Prefer dependency injection to hardwiring resources</a></li>
   <li><a href="" class="disabled" id="Item-6">Item 6: Avoid creating unnecessary objects</a></li>
@@ -261,9 +262,9 @@
 
 <p class="pros">Nie jest wymuszone tworzenie nowego obiektu z każdym wywołaniem</p>
 
-<p>W przeciwieństiwe do konstruktorów, statyczą fabryką możemy zwracać cały czas ten sam obiekt. Dzięki temu klasy niemutowalne moga używać wcześniej stworzonych istancji lub cachować istancję podczas jej tworzenia i później ją zwracać z każdem wywołaniem tej metody, co eliminuje tworzenie niepotrzebnych duplikatów danego obiektu.</p>
+<p>W przeciwieństwie do konstruktorów, statyczną fabryką możemy zwracać cały czas ten sam obiekt. Dzięki temu klasy niemutowalne mogą używać wcześniej stworzonych instancji lub cachować instancję podczas jej tworzenia i później ją zwracać z każdym wywołaniem tej metody, co eliminuje tworzenie niepotrzebnych duplikatów danego obiektu.</p>
 
-<p>Przykładem tu jest wcześniej pokazywana metoda <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="kt">boolean</span><span class="o">)</span></code>, która nigdy nie tworzy nowego obiektu lub <code class="highlight language-java" data-lang="java"><span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span></code>, która zwraca “scacheowaną” istancję <code class="highlighter-rouge">Integer</code>, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedzialew występują znacznie częściej, więc taka optymalizacja ma sens.</p>
+<p>Przykładem tu jest wcześniej pokazywana metoda <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="kt">boolean</span><span class="o">)</span></code>, która nigdy nie tworzy nowego obiektu lub <code class="highlight language-java" data-lang="java"><span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span></code>, która zwraca “scacheowaną” istancję <code class="highlighter-rouge">Integer</code>, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedziale występują znacznie częściej, więc taka optymalizacja ma sens.</p>
 
 <p class="pros">Może zwracać każdy podtyp zwracanego obiektu</p>
 
@@ -271,11 +272,11 @@
 
 <p>Dzięki temu możemy zdefiniować metodę na interfejsie, która zwróci nam konkretną implementację tego interfejsu.</p>
 
-<p class="note">Przed Java 8 nie było możliwe definowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu <code class="highlighter-rouge">Type</code> lądowały w nieinstancjonowalnej klasie <code class="highlighter-rouge">Types</code>. Dosyć popularnym przykładem jest <code class="highlighter-rouge">java.util.Collections</code>. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.</p>
+<p class="note">Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu <code class="highlighter-rouge">Type</code> lądowały w nieinstancjonowanej klasie <code class="highlighter-rouge">Types</code>. Dosyć popularnym przykładem jest <code class="highlighter-rouge">java.util.Collections</code>. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.</p>
 
 <p class="pros">Z każdym wywołaniem może być zwrócona inna implementacja</p>
 
-<p>A to dzięki przekazywanemu parametrowi na podstawie którego może zostać wybrana implementacja. Pozwala to np. na zwrócenie wydajniejszej implemetnacji dla konkretnego przypadku. Jest to niewidoczne dla klienta i może być rozszerzalne.</p>
+<p>A to dzięki przekazywanemu parametrowi na podstawie którego może zostać wybrana implementacja. Pozwala to np. na zwrócenie wydajniejszej implementacji dla konkretnego przypadku. Jest to niewidoczne dla klienta i może być rozszerzalne.</p>
 
 <p>Przykładem może być <code class="highlighter-rouge">EnumSet</code> z standardowej biblioteki. Nie posiada publicznego konstruktora, tylko statyczne fabryki, które zwracają różne implementację w zależności od wielkości Enuma. Jeśli ma mniej niż 64 elementy zwracany jest <code class="highlighter-rouge">RegularEnumSet</code>, w przeciwnym wypadku <code class="highlighter-rouge">JumboEnumSet</code>.</p>
 
@@ -305,7 +306,7 @@
 
 <p><em>Static factory method</em> nie ma żadnych poważnych wad. Jeśli można by się do czegoś przyczepić to:</p>
 
-<p class="cons">Klasa bez konstrukora nie może być rozszerzana</p>
+<p class="cons">Klasa bez konstruktora nie może być rozszerzana</p>
 
 <p>Jednak może to wyjść też na korzyść, bo zachęca to do używania <a href="/notatnik-juniora/zasady-projektowania-kodu#composition-over-inheritance">kompozycji zamiast dziedziczenia</a> oraz jest wymagane przez klasy <em>immutable</em>.</p>
 
@@ -313,68 +314,48 @@
 
 <p>Mały minusem jest też to, że statyczne fabryki nie są traktowane inaczej niż zwykłe metody, a więc są z nimi wymieszane. Trzeba więc przelecieć całą listę dostępnych metod w obiekcie w poszukiwaniu takiej, która zwraca ten obiekt. Przy szukaniu/tworzeniu takich metod warto zaznajomić się z konwencją nazewniczą takich metod, a najczęściej wyglądają tak:</p>
 
-<p>from - konwersja np.:</p>
+<p><code class="highlighter-rouge">from</code> - konwersja np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Date</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Date</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">instant</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>of - agregacja np.:</p>
+<p><code class="highlighter-rouge">of</code> - agregacja np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&gt;</span> <span class="n">faceCards</span> <span class="o">=</span> <span class="n">EnumSet</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">JACK</span><span class="o">,</span> <span class="n">QUEEN</span><span class="o">,</span> <span class="n">KING</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>valueOf - bardziej rozwlekła wersja from lub of np.:</p>
+<p><code class="highlighter-rouge">valueOf</code> - bardziej rozwlekła wersja <code class="highlighter-rouge">from</code> lub <code class="highlighter-rouge">of</code> np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">BigInteger</span> <span class="n">prime</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>instance lub getInstance - może zwracać obiekt opisany przez parametr np.:</p>
+<p><code class="highlighter-rouge">instance</code> lub <code class="highlighter-rouge">getInstance</code> - może zwracać obiekt opisany przez parametr np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">StackWalker</span> <span class="n">luke</span> <span class="o">=</span> <span class="n">StackWalker</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">options</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>create lub newInstance - podobnie jak instance lub getInstance, tyle, że tu za każdym razem powinien być to nowy obiekt np.:</p>
+<p><code class="highlighter-rouge">create</code> lub <code class="highlighter-rouge">newInstance</code> - podobnie jak <code class="highlighter-rouge">instance</code> lub <code class="highlighter-rouge">getInstance</code>, tyle, że tu za każdym razem powinien być to nowy obiekt np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Object</span> <span class="n">newArray</span> <span class="o">=</span> <span class="n">Array</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">classObject</span><span class="o">,</span> <span class="n">arrayLen</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>getType - podobnie jak getInstance, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:</p>
+<p><code class="highlighter-rouge">getType</code> - podobnie jak <code class="highlighter-rouge">getInstance</code>, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FileStore</span> <span class="n">fs</span> <span class="o">=</span> <span class="n">Files</span><span class="o">.</span><span class="na">getFileStore</span><span class="o">(</span><span class="n">path</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>newType - podobnie jak newInstance, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:</p>
+<p><code class="highlighter-rouge">newType</code> - podobnie jak <code class="highlighter-rouge">newInstance</code>, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="n">Files</span><span class="o">.</span><span class="na">newBufferedReader</span><span class="o">(</span><span class="n">path</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>type - zwięzła alternatywa dla getType i newType np.:</p>
+<p><code class="highlighter-rouge">type</code> - zwięzła alternatywa dla <code class="highlighter-rouge">getType</code> i <code class="highlighter-rouge">newType</code> np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Complaint</span><span class="o">&gt;</span> <span class="n">litany</span> <span class="o">=</span> <span class="n">Collections</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="n">legacyLitany</span><span class="o">);</span>
 </code></pre></div></div>
+
 <p>Jak widać statyczne fabryki mają dużo zalet, dlatego warto rozważyć ich implementowanie. Z kolei kiedy używamy jakiegoś API i są dostępne zarówno konstruktory jak i statyczne fabryki, w większości przypadków powinniśmy użyć tych drugich. Często wewnątrz uruchamiane są funkcje inicjujące, które są niezbędne do stworzenia danego obiektu lub mają znaczenie wydajnościowe.</p>
 
-
-
-        <hr>
-
-        <ul class="pager">
-          
-          <li class="previous">
-            <a class="box-effect" href="/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista"
-               data-toggle="tooltip" data-placement="top" title="Pierwsza praca jako programista"><i class="fa fa-arrow-left"
-                                                                                             aria-hidden="true"></i>
-              Poprzedni post</a>
-          </li>
-          
-          
-          <li class="next">
-            <a class="box-effect" href="/effective-java/wzorzec-projektowy-builder"
-               data-toggle="tooltip" data-placement="top" title="Wzorzec projektowy Builder">Następny post <i
-              class="fa fa-arrow-right" aria-hidden="true"></i></a>
-          </li>
-          
-        </ul>
 
       </div>
     </div>
@@ -382,9 +363,28 @@
 
 </article>
 
-<div class="container">
+<div class="container no-print">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/moje-doswiadczenia/pierwsza-praca-jako-programista"
+             data-toggle="tooltip" data-placement="top" title="Pierwsza praca jako programista"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a class="box-effect" href="/effective-java/wzorzec-projektowy-builder"
+             data-toggle="tooltip" data-placement="top" title="Wzorzec projektowy Builder">Następny post <i
+              class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        </li>
+        
+      </ul>
 
       <div class="text-center">
   <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
@@ -427,7 +427,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-<footer>
+<footer class="no-print">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">

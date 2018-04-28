@@ -19,13 +19,14 @@
 <link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="/dist/js/polyfills/array.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
 <link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
@@ -120,15 +121,15 @@
 
         <p><u>W tym poście opisuję walidację formularza po stronie użytkownika (Javascript). Ponadto pokazuję jak za pomocą AJAX, przekazać dane do pliku PHP i odebrać odpowiedź bez przeładowania strony.</u></p>
 
-<p>Jeśli trafiłeś tu bezpośrednio, zajrzyj do <a href="https://devcave.pl/dajsiepoznac2017/formularz-kontaktowy-HTML-JS">pierwszego postu</a>, gdzie opisuję założenia i tworzę podstawową strukturę formularza.</p>
+<p>Jeśli trafiłeś tu bezpośrednio, zajrzyj do <a href="/dajsiepoznac2017/formularz-kontaktowy-HTML-JS">pierwszego postu</a>, gdzie opisuję założenia i tworzę podstawową strukturę formularza.</p>
 
 <p>Wpisy w tej serii:</p>
 <ol>
-  <li><a href="https://devcave.pl/dajsiepoznac2017/formularz-kontaktowy-HTML-JS">HTML + otwieranie / zamykanie JQuery</a></li>
-  <li><a href="https://devcave.pl/dajsiepoznac2017/formularz-kontaktowy-walidacja-ajax">Walidacja HTML5/JS + AJAX</a></li>
-  <li><a href="https://devcave.pl/dajsiepoznac2017/formularz-kontaktowy-php-swiftmailer">Walidacja PHP + Swiftmailer</a></li>
-  <li><a href="https://devcave.pl/dajsiepoznac2017/formularz-kontaktowy-dostepnosc">Dostępność formularza</a></li>
-  <li><a href="https://devcave.pl/dajsiepoznac2017/formularz-kontaktowy-refaktoryzacja">Zrefaktoryzowana wersja + Github</a></li>
+  <li><a href="/dajsiepoznac2017/formularz-kontaktowy-HTML-JS">HTML + otwieranie / zamykanie JQuery</a></li>
+  <li><a href="/dajsiepoznac2017/formularz-kontaktowy-walidacja-ajax">Walidacja HTML5/JS + AJAX</a></li>
+  <li><a href="/dajsiepoznac2017/formularz-kontaktowy-php-swiftmailer">Walidacja PHP + Swiftmailer</a></li>
+  <li><a href="/dajsiepoznac2017/formularz-kontaktowy-dostepnosc">Dostępność formularza</a></li>
+  <li><a href="/dajsiepoznac2017/formularz-kontaktowy-refaktoryzacja">Zrefaktoryzowana wersja + Github</a></li>
 </ol>
 
 <p>W kolejnym poście zajmiemy się walidacją po stronie serwera (PHP) oraz wreszcie wysyłaniem wiadomości za pomocą Swiftmailer-a</p>
@@ -303,35 +304,34 @@ gdy coś się nie powiedzie w naszym pliku PHP (czyli wystąpi jakiś error) wy�
 <script async="" src="//jsfiddle.net/C0deboy/w0csm9y5/embed/result,js,html,css/dark/"></script></p>
 
 
-        <hr>
-
-        <ul class="pager">
-          
-          <li class="previous">
-            <a class="box-effect" href="/dajsiepoznac2017/formularz-kontaktowy-HTML-JS"
-               data-toggle="tooltip" data-placement="top" title="Dodajemy formularz kontaktowy 1#"><i class="fa fa-arrow-left"
-                                                                                             aria-hidden="true"></i>
-              Poprzedni post</a>
-          </li>
-          
-          
-          <li class="next">
-            <a class="box-effect" href="/dajsiepoznac2017/formularz-kontaktowy-php-swiftmailer"
-               data-toggle="tooltip" data-placement="top" title="Dodajemy formularz kontaktowy 3#">Następny post <i
-              class="fa fa-arrow-right" aria-hidden="true"></i></a>
-          </li>
-          
-        </ul>
-
       </div>
     </div>
   </div>
 
 </article>
 
-<div class="container">
+<div class="container no-print">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/dajsiepoznac2017/formularz-kontaktowy-HTML-JS"
+             data-toggle="tooltip" data-placement="top" title="Dodajemy formularz kontaktowy 1#"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a class="box-effect" href="/dajsiepoznac2017/formularz-kontaktowy-php-swiftmailer"
+             data-toggle="tooltip" data-placement="top" title="Dodajemy formularz kontaktowy 3#">Następny post <i
+              class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        </li>
+        
+      </ul>
 
       <div class="text-center">
   <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
@@ -374,7 +374,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-<footer>
+<footer class="no-print">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">

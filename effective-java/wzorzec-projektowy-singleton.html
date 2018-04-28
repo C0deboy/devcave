@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Wzorzec projektowy Singleton - kiedy warto używać?</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/wzorzec-projektowy-singleton">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/libs/bootstrap-xlgrid.min.css">
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+<link rel="stylesheet" href="/dist/css/syntax.min.css">
+<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="/dist/js/polyfills/array.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+                Menu
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom" title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Wzorzec projektowy Singleton</h1>
+            
+            <h2 class="post-subtitle">Różne warianty. Wady i zalety. Antywzorzec?</h2>
+            
+            <p class="post-meta">
+              
+              28
+              kwietnia
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#wzorce-projektowe'>Wzorce-projektowe</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#singleton">Singleton</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#public-final-field-singleton">Public final field Singleton</a></li>
+<li class="toc-entry toc-h2"><a href="#static-factory-method-singleton">Static factory method Singleton</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#singleton-i-lazy-loading">Singleton i lazy loading</a></li>
+<li class="toc-entry toc-h3"><a href="#singleton-i-serializable">Singleton i Serializable</a></li>
+<li class="toc-entry toc-h3"><a href="#singleton-i-wielowątkowość">Singleton i wielowątkowość</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#static-holder-singleton">Static holder Singleton</a></li>
+<li class="toc-entry toc-h2"><a href="#enum-singleton">Enum Singleton</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#singleton-jako-antywzorzec">Singleton jako antywzorzec</a></li>
+<li class="toc-entry toc-h1"><a href="#podsumowanie">Podsumowanie</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <em>Item-3</em> z rozdziału:</p>
+
+<p class="m0">Creating and Destroying Objects</p>
+
+<ul>
+  <li><a href="/effective-java/static-factory-method-zamiast-konstruktora" id="Item-1">Item 1: Consider static factory methods instead of constructors</a></li>
+  <li><a href="/effective-java/wzorzec-projektowy-builder" id="Item-2">Item 2: Consider a builder when faced with many constructor parameters</a></li>
+  <li><a href="/effective-java/wzorzec-projektowy-singleton" id="Item-3">Item 3: Enforce the singleton property with a private constructor or an enum type</a></li>
+  <li><a href="" class="disabled" id="Item-4">Item 4: Enforce noninstantiability with a private constructor</a></li>
+  <li><a href="" class="disabled" id="Item-5">Item 5: Prefer dependency injection to hardwiring resources</a></li>
+  <li><a href="" class="disabled" id="Item-6">Item 6: Avoid creating unnecessary objects</a></li>
+  <li><a href="" class="disabled" id="Item-7">Item 7: Eliminate obsolete object references</a></li>
+  <li><a href="" class="disabled" id="Item-8">Item 8: Avoid finalizers and cleaners</a></li>
+  <li><a href="" class="disabled" id="Item-9">Item 9: Prefer try-with-resources to try-finally</a></li>
+</ul>
+
+<script>
+    const link = document.getElementById('Item-3');
+    link.parentElement.parentElement.classList.add('fa-ul', 'custom');
+    link.parentElement.style.listStyleType = 'none';
+    const i = document.createElement('i');
+    i.classList.add('fa-li', 'fa', 'fa-arrow-right');
+    link.insertBefore(i, link.firstChild);
+</script>
+
+<hr />
+
+<p>Czasem może się zdarzyć, że:</p>
+<ul>
+  <li>klasa ma być unikatowa w systemie</li>
+  <li>chcemy zarządzać jednym spójnym obiektem dostępnym z wielu miejsc aplikacji</li>
+</ul>
+
+<p>Wtedy warto zastosować wzorzec projektowy <em>Singleton</em>.</p>
+
+<h1 id="singleton">Singleton</h1>
+<p><em>Singleton</em> jest to po prostu klasa, która jest instancjowana w systemie tylko jeden raz. Każde użycie takiej klasy odnosi się do tej samej instancji.</p>
+
+<p>Jest kilka sposobów implementacji <em>Singletona</em>.</p>
+
+<h2 id="public-final-field-singleton">Public final field Singleton</h2>
+<p>Dwa pierwsze polegają na deklarowaniu konstruktora jako prywatny i udostępnianiu statycznego dostępu do obiektu:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+  
+  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Prywatny konstruktor jest wywołany tylko raz, aby zainicjalizować <code class="highlight language-java" data-lang="java"><span class="n">Singleton</span><span class="o">.</span><span class="na">INSTANCE</span></code>. Brak publicznego konstruktora zapewnia, że w systemie będzie istnieć tylko jedna instancja tego obiektu. No chyba, że użyjemy refleksji i metody <code class="highlighter-rouge">setAccessible()</code>. Możemy wykluczyć taką opcję rzucając wyjątek w konstruktorze - jeśli instancja już istnieje:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">INSTANCE</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Singleton already constructed"</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="static-factory-method-singleton">Static factory method Singleton</h2>
+<p>Drugi sposób różni się od pierwszego tym , że udostępniania <a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a> w celu zwracania <code class="highlighter-rouge">INSTANCE</code>, tym samym zadeklarowania tego pola jako prywatne:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+  
+  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+  <span class="o">}</span>
+  
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span> 
+    <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span> 
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="highlight language-java" data-lang="java"><span class="n">Singleton</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span></code> zawsze zwróci ten sam obiekt.</p>
+
+<p class="pros">Bardziej elastyczny sposób.</p>
+
+<p>Pozwala nam w każdym momencie zmienić zdanie np. możemy sprawić, że ta klasa nie będzie już <em>Singletonem</em> bez zmieniania API.</p>
+
+<p class="pros">Możliwość napisania generycznej fabryki Singletonów.</p>
+
+<p class="pros">Referencja do metody może być użyta jako Supplier.</p>
+
+<p><code class="highlighter-rouge">Singleton::instance</code></p>
+
+<h3 id="singleton-i-lazy-loading">Singleton i lazy loading</h3>
+
+<p>Obie powyższe implementacje tworzą instancję klasy już w momencie załadowania klasy (chciwa inicjalizacja), nawet jeżeli nigdy nie zajdzie potrzeba jej wykorzystania.</p>
+
+<p>Dzięki implementacji leniwego tworzenia obiektu można odwlec w czasie moment budowania instancji oraz potencjalnie oszczędzić zasoby, jeżeli nie będzie wcale potrzeby jego utworzenia. Można to zrobić w prosty sposób:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span><span class="o">;</span>
+
+  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">INSTANCE</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Dzięki temu możemy też używać jej statycznych metod bez tworzenia instancji tej klasy.</p>
+
+<h3 id="singleton-i-serializable">Singleton i Serializable</h3>
+
+<p class="note">O serializacji będą osobne wpisy, ale dopiero w <em>Chapter 12. Serialization</em>. Jeśli nie wiesz co to jest, a chciałbyś się dowiedzieć, to polecam ten <a href="http://www.samouczekprogramisty.pl/serializacja-w-jezyku-java/">wpis</a> na blogu samouczekprogramisty.pl.</p>
+
+<p>Dodanie <code class="highlight language-java" data-lang="java"><span class="kd">implements</span> <span class="n">Serializable</span></code> do klasy nie jest wystarczające, aby singleton był rzeczywiście singletonem. Aby zagwarantować, że w systemie będzie tylko jedna klasa, musimy zadeklarować wszystkie pola jako <code class="highlighter-rouge">transient</code> oraz zdefiniować metodę:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Object</span> <span class="nf">readResolve</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nf">getInstance</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>(lub <code class="highlight language-java" data-lang="java"><span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span></code> w przypadku gdy nie korzystamy z leniwej inicjalizacji)</p>
+
+<p>Jeżeli klasa posiada taką metodę, to podczas deserializacji zwracany jest wynik jej działania.</p>
+
+<p>W przeciwnym wypadku, za każdym razem kiedy serializowana klasa zostanie deserializowana, zostanie utworzona nowa instancja singletona.</p>
+
+<h3 id="singleton-i-wielowątkowość">Singleton i wielowątkowość</h3>
+
+<p>Aby zabezpieczyć nasz naszą klasę singletona przed wielowątkowością, musimy nieco zmodyfikować metodę <code class="highlighter-rouge">getInstance()</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">INSTANCE</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Singleton</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+<p>Jest to tak zwany <em>double-check-locking pattern</em>.</p>
+
+<p>Jeśli dwa wątki jednocześnie przejdą pierwszego ifa i będą chciały pobrać instancję to zakolejkują się przed <code class="highlighter-rouge">synchronized()</code>. Dodatkowy zagnieżdżony <code class="highlighter-rouge">if</code> wyeliminuję próbę stworzenia duplikatu.</p>
+
+<p>Może dojść do sytuacji, w której jeden wątek ustawi poprawnie wartość zmiennej, ale drugi podejmie próbę jej odczytania, zanim zostanie ona jeszcze zsynchronizowana.</p>
+
+<p>Dzięki oznaczeniu zmiennej jako <code class="highlighter-rouge">volatile</code> niezależnie od tego, który wątek próbuje ją odczytać, jej wartość będzie zawsze spójna.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">volatile</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span><span class="o">;</span>
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h2 id="static-holder-singleton">Static holder Singleton</h2>
+
+<p>Jest to bezpieczne rozwiązanie, które działa zgodnie z oczekiwaniami w wielowątkowym środowisku. Dzięki niemu mamy również zapewnione leniwe tworzenie instancji.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">Holder</span><span class="o">.</span><span class="na">INSTANCE</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Singleton already constructed"</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Holder</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Holder</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>W tym rozwiązaniu cały trud poprawnej implementacji wzorca zrzucamy na maszynę wirtualną Javy. Zmienna <code class="highlighter-rouge">INSTANCE</code> zostanie zainicjowana dopiero w momencie załadowania klasy <code class="highlighter-rouge">Holder</code>, czyli podczas pierwszego wywołania metody <code class="highlighter-rouge">getInstance()</code>. W konstruktorze opcjonalnie bronimy się przed refleksją.</p>
+
+<p class="pros">Static factory method</p>
+
+<p class="pros">Lazy initialization</p>
+
+<p class="pros">Thread safe</p>
+
+<p class="pros">Dobry zamiennik za <em>double-check-locking pattern</em>, który jest uważany za antywzorzec.</p>
+
+<h2 id="enum-singleton">Enum Singleton</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Singleton</span> <span class="o">{</span>
+  <span class="n">INSTANCE</span><span class="o">;</span>
+  <span class="c1">//...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Korzystając z tego rozwiązania, osiągniemy wynik bardzo podobny do klasy <a href="#public-final-field-singleton">Public final field Singleton</a>.</p>
+
+<p>Ten sposób jednak:</p>
+
+<p class="pros pros">Jest bardziej zwięzły</p>
+
+<p class="pros">Zapewnia odpowiednią serializację od razu</p>
+
+<p>Zapewnia nienaruszalna gwarancję jednej instancji</p>
+
+<p class="pros">Jest odporny na refleksję</p>
+
+<p class="pros">Jest odporny na klonowanie</p>
+
+<p>Jeśli można się do czegoś przyczepić to:</p>
+
+<p class="cons">Brak <em>lazy loading</em></p>
+
+<p class="cons">Enum nie może rozszerzać innej klasy</p>
+
+<p>Ale za to może implementować interfejs.</p>
+
+<p>Ten sposób wydaję się nieco nienaturalny, ale w książce <em>Effective Java</em> autor mówi, że często jest to najlepszy sposób implementacji <em>Singletona</em>. Jednak <a href="#static-holder-singleton">Singleton static holder</a>  też jest całkiem dobrym rozwiązaniem - jest podobnie łatwy w implementacji, również cały ciężar poprawnej implementacji zrzucamy na mechanizmy Javy i wydaje się być bardziej naturalnym rozwiązaniem.</p>
+
+<h1 id="singleton-jako-antywzorzec">Singleton jako antywzorzec</h1>
+
+<p>Singleton przez wielu programistów uważany jest za antywzorzec projektowy. Dzieje się tak głównie dlatego, że jest on dość często nadużywany lub często niepoprawnie implementowany.</p>
+
+<p>Większość z zarzutów wobec niego przy odrobienie elastyczności można obejść lub nawet odrzucić.</p>
+
+<p class="cons">Utrudnia testowanie aplikacji</p>
+
+<p>Testy są tylko utrudnione, jeżeli w singletonie przechowywany jest stan. Należy wtedy pamiętać, by był on odpowiednio zainicjowany lub wyczyszczony przed każdym wywołaniem testu.
+Może też być problem w zmockowaniu <em>Singletona</em>, chyba, że implementuje interfejs, który służy jako jego typ.</p>
+
+<p class="cons">Zwiększa powiązania w kodzie (<em>tight coupling</em>)</p>
+
+<p class="cons">Łamie zasadę jednej odpowiedzialności (single responsibility principle)</p>
+
+<p>Klasa zaimplementowana jako singleton z założenia jest już odpowiedzialna za dwie rzeczy: za realizację swoich funkcji biznesowych oraz zarządzanie instancją.</p>
+
+<p class="cons">Łamie zasadę <a href="/notatnik-juniora/zasady-projektowania-kodu#o---openclosed-principle">otwarte-zamknięte</a> (Open/Closed principle), ponieważ nie można go rozszerzać</p>
+
+<p>W pierwotnej wersji wzorca rzeczywiście ciężko jest go rozszerzać. Można jednak połączyć singleton z fabryką i nie będzie stanowiło to już problemu.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Singleton</span> <span class="o">{</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonFactory</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="n">instance</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// singleton implementation</span>
+      <span class="o">};</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="cons">Jest to obiektowy zamiennik zmiennej globalnej</p>
+
+<p>A jak wiemy zmienne globalne to zło…</p>
+
+<h1 id="podsumowanie">Podsumowanie</h1>
+<p>Singleton nie musi być wcale zły, pod warunkiem, że zaimplementujemy go w odpowiedni sposób. Należy jednak pamiętać, by go nie nadużywać i nie starać się go wprowadzać wszędzie na siłę. Wzorzec ten powinien być stosowany raczej sporadycznie.</p>
+
+<p>Również z rozwagą trzeba podejść do przedstawianych zabezpieczeń przed różnymi atakami. W przypadku prostych aplikacji, szczególnie jeśli zajmujemy się nią tylko my, najprostsza implementacja w zupełności wystarczy.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/notatnik-juniora/idiotoodporne-api-klasy"
+             data-toggle="tooltip" data-placement="top" title="Idiotoodporne API klasy"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+  <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+  <div class="fb-page inline box-effect">
+    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+  </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+this.page.url = "https://devcave.pl/effective-java/wzorzec-projektowy-singleton";
+this.page.identifier = "/effective-java/wzorzec-projektowy-singleton";
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promocje/promotions.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-placement="top" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-placement="top" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-placement="top" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-placement="top" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/dist/js/libs/jquery.min.js"></script>
+
+<script src="/dist/js/libs/bootstrap.min.js"></script>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

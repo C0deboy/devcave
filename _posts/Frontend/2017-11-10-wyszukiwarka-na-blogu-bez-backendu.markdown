@@ -6,7 +6,7 @@ subtitle:   "Tylko Javascript, na przykładzie bloga na Jekyllu"
 date:       2017-11-10 12:00:00
 author:     "Codeboy"
 category:   Frontend
-tags:	    Frontend Jak-zrobić Javascript Jekyll
+tags:	    Frontend Javascript Jekyll
 comments:   true
 toc:        true
 ---
@@ -90,7 +90,7 @@ Czyli mamy plik z danymi o każdym poście na stronie, gotowy do obróbki.
 
 # Przeszukiwanie i pokazywanie wyników
 
-Tu całą robotę zrobi za nas Javascript. W paczce są jeszcze 2 pliki <span class="file">search.js</span> i <span class="file">fetch.js</span>. Ten drugi odpowiada za dobieranie się do wygenerowanego pliku JSON, a całą logikę realizuje <span class="file">search.js</span>. Tak więc, <span class="file">fetch.js</span> zostawiamy w spokoju, a pod własne potrzeby modyfikujemy ten pierwszy. Kluczowe są dwie metody - {% code javascript %}findResults(){% endcode %}, gdzie możemy zmodyfikować sposób dopasowywania wyników i {% code javascript %}displayResults(){% endcode %}, gdzie modyfikujemy sposób prezentacji.
+Tu całą robotę zrobi za nas Javascript. W paczce są jeszcze 2 pliki <span class="file">search-min.js</span> i <span class="file">fetch-min.js</span>. Ten drugi odpowiada za dobieranie się do wygenerowanego pliku JSON, a całą logikę realizuje <span class="file">search-min.js</span>. Tak więc, <span class="file">fetch-min.js</span> zostawiamy w spokoju, a pod własne potrzeby modyfikujemy ten pierwszy. Kluczowe są dwie metody - {% code javascript %}findResults(){% endcode %}, gdzie możemy zmodyfikować sposób dopasowywania wyników i {% code javascript %}displayResults(){% endcode %}, gdzie modyfikujemy sposób prezentacji.
 
 U siebie, wyszukiwanie zmodyfikowałem tak, aby były brane pod uwagę pojedyncze słowa, a nie całe frazy:
 

@@ -6,79 +6,96 @@ header-img: "img/archive-header.jpg"
 permalink: "/archiwum/"
 ---
 
-<div>
-  <h1>Wszytkie wpisy:</h1>
-  <h2 class="page-header">{{ site.posts | size }}
-    <small> - Ilość wszystkich postów</small>
-  </h2>
-</div>
-
-<div class="search-engine">
-  <label>
-    Wyszukaj po tytule/podtytule:
-    <input class="search-value" placeholder="Wpisz szukaną frazę"/>
-  </label>
-
-  <div class="search-results"></div>
-
-  <script src="/dist/js/search/fetch.min.js"></script>
-  <script src="/dist/js/search/search.min.js"></script>
-
-  <script>
-
-    const search = new jekyllSearch(
-      '/dist/js/search/search.json',
-      '.search-value',
-      '.search-results',
-    );
-
-    search.init();
-
-    search.getUrlSearchQuery();
-
-  </script>
-</div>
-
-<div>
-  <p>Wyszukaj według tagów:</p>
-  {% assign tags = site.tags | sort %}
-  {% for tag in tags %}
-   <div class="site-tag">
-      <a href="#{{ tag | first | slugify }}">
-              {{ tag[0] }} ({{ tag | last | size }})
-      </a>
-  </div>
-  {% endfor %}
-</div>
-
 <div class="archive">
-    {% for tag in tags %}
-      <h2 id="{{ tag[0] | slugify }}">{{ tag[0] }}</h2>
-      <ul>
-        {% for post in tag[1] %}
-          <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> | 
-          <small>
-            {% assign m = post.date | date: "%-m" %}
-            {{ post.date | date: "%-d" }}
-            {% case m %}
-              {% when '1' %}stycznia
-              {% when '2' %}lutego
-              {% when '3' %}marca
-              {% when '4' %}kwietnia
-              {% when '5' %}maja
-              {% when '6' %}czerwca
-              {% when '7' %}lipca
-              {% when '8' %}sierpnia
-              {% when '9' %}września
-              {% when '10' %}października
-              {% when '11' %}listopada
-              {% when '12' %}grudnia
-            {% endcase %}
-            {{ post.date | date: "%Y" }}
-          </small>
-          <br>{{ post.subtitle }}</li>
+    <div>
+        <h1>Wszytkie wpisy:</h1>
+        <h2 class="page-header">{{ site.posts | size }}
+            <small> - Ilość wszystkich postów</small>
+        </h2>
+    </div>
+
+    <div class="search-engine">
+        <label>
+            <h3>Wyszukaj po tytule/podtytule:</h3>
+            <input class="search-value" placeholder="Wpisz szukaną frazę"/>
+        </label>
+
+        <ul class="search-results"></ul>
+
+        <script src="/dist/js/search/fetch.min.js"></script>
+        <script src="/dist/js/search/search.min.js"></script>
+
+        <script>
+
+            const search = new jekyllSearch(
+                '/dist/js/search/search.json',
+                '.search-value',
+                '.search-results',
+            );
+
+            search.init();
+
+            search.getUrlSearchQuery();
+
+        </script>
+    </div>
+
+    <div>
+        <h3>Wyszukaj według tagów:</h3>
+        {% assign tags = site.tags | sort %}
+        {% for tag in tags %}
+        <div class="site-tag">
+            <a href="#{{ tag | first | slugify: 'latin' }}">
+                {{ tag[0] }} ({{ tag | last | size }})
+            </a>
+        </div>
         {% endfor %}
-      </ul>
+    </div>
+
+    {% for tag in tags %}
+    <div class="tag-posts" id="{{ tag[0] | slugify: 'latin' }}">
+        <h2>{{ tag[0] }}</h2>
+        <ul>
+            {% for post in tag[1] %}
+            <li>
+                {% if post.for %}
+                <div class="post-partner">
+                    <p class="m0">Post dla:</p>
+                    <a href="https://{{ post.for }}.pl"><img src="/img/{{ post.for }}.png" alt="{{ post.for }} logo"/></a>
+                </div>
+                {% endif %}
+                <div class="post-preview">
+                    <a href="{{ site.baseurl }}{{ post.url }}">
+                        <h2 class="post-title">{{ post.title }}</h2>
+                        <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        {% assign m = post.date | date: "%-m" %}
+                        {{ post.date | date: "%-d" }}
+                        {% case m %}
+                        {% when '1' %}stycznia
+                        {% when '2' %}lutego
+                        {% when '3' %}marca
+                        {% when '4' %}kwietnia
+                        {% when '5' %}maja
+                        {% when '6' %}czerwca
+                        {% when '7' %}lipca
+                        {% when '8' %}sierpnia
+                        {% when '9' %}września
+                        {% when '10' %}października
+                        {% when '11' %}listopada
+                        {% when '12' %}grudnia
+                        {% endcase %}
+                        {{ post.date | date: "%Y" }}
+                    </p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
     {% endfor %}
-  </div>
 </div>
+</div>
+
+<script src="/dist/js/archive.min.js"></script>

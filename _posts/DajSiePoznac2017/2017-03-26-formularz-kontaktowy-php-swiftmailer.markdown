@@ -13,14 +13,14 @@ toc:        true
 
 <u>W tym poście opisuję walidację danych z formularza (przesłanych przez AJAX) po stronie serwera (PHP) oraz tworzenie wiadomości, ustawienie połączenia z serwerem pocztowym oraz wreszcie wysłanie wiadomości.</u>
 
-Jeśli trafiłeś tu bezpośrednio, zajrzyj do [pierwszego postu]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %}), gdzie opisuję założenia i tworzę podstawową strukturę formularza.
+Jeśli trafiłeś tu bezpośrednio, zajrzyj do [pierwszego postu]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %}), gdzie opisuję założenia i tworzę podstawową strukturę formularza.
 
 <hX>Wpisy w tej serii:</hX>
-1. [HTML + otwieranie / zamykanie JQuery]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %})
-2. [Walidacja HTML5/JS + AJAX]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-23-formularz-kontaktowy-walidacja-ajax %})
-3. [Walidacja PHP + Swiftmailer]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-26-formularz-kontaktowy-php-swiftmailer %})
-4. [Dostępność formularza]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-30-formularz-kontaktowy-dostepnosc %})
-5. [Zrefaktoryzowana wersja + Github]({{ site.url }}{% post_url DajSiePoznac2017/2017-05-18-formularz-kontaktowy-refaktoryzacja %})
+1. [HTML + otwieranie / zamykanie JQuery]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %})
+2. [Walidacja HTML5/JS + AJAX]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-23-formularz-kontaktowy-walidacja-ajax %})
+3. [Walidacja PHP + Swiftmailer]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-26-formularz-kontaktowy-php-swiftmailer %})
+4. [Dostępność formularza]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-30-formularz-kontaktowy-dostepnosc %})
+5. [Zrefaktoryzowana wersja + Github]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-05-18-formularz-kontaktowy-refaktoryzacja %})
 
 W kolejnym poście zajmiemy się poprawą dostępności formularza.
 
@@ -119,7 +119,7 @@ Zanim przejdziemy do walidacji, odbierzmy jeszcze odpowiedź reCAPTCHA i przypis
   $recaptcha = json_decode($checkIfBot);
 ```
 <hX>Gdzie:</hX>
-- <code class="highlight"><span class="k">file_get_contents</span>()</code> - ta funkcja zwraca zawartość plików jako string. W naszym przypadku będzie to odpowiedź wygenerowana na podstawie danych w URL, które są przesyłane tak jak metodą GET, o której wspominałem <a href="{{ site.url }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %}#get-post">wcześniej</a>.
+- <code class="highlight"><span class="k">file_get_contents</span>()</code> - ta funkcja zwraca zawartość plików jako string. W naszym przypadku będzie to odpowiedź wygenerowana na podstawie danych w URL, które są przesyłane tak jak metodą GET, o której wspominałem <a href="{{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %}#get-post">wcześniej</a>.
 - <code class="highlight"><span class="k">json_decode</span>()</code> - dekoduje dane JSON. Dzięki temu będziemy mogli później uzyskać dostęp do odpowiedzi w ten sposób:
 
 ``` php?start_inline=1

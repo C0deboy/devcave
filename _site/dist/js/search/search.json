@@ -191,7 +191,7 @@
         "titleSEO": "Moja droga do pierwszej pracy jako programista",
         "subtitle": "Od początku do końca",
         "date": "29 października 2017",
-        "url": "/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy"
+        "url": "/moje-doswiadczenia/moja-droga-do-pierwszej-pracy"
       },
     
       
@@ -223,7 +223,7 @@
     
       
       {
-        "title": "Formularz kontaktowy bez backendu/bez PHP",
+        "title": "Formularz kontaktowy bez backendu",
         "titleSEO": "Jak zrobić formularz kontaktowy na stronie bez PHP - bez backendu?",
         "subtitle": "Tylko HTML, Javascript i jQuery(opcjonalnie).",
         "date": "15 listopada 2017",
@@ -236,7 +236,7 @@
         "titleSEO": "Jak wyglądają praktyki zawodowe w Technikum i Erasmus?",
         "subtitle": "Moje doświadczenia, obserwacje i relacja z projektu zagranicznego",
         "date": "20 listopada 2017",
-        "url": "/moje-do%C5%9Bwiadczenia/praktyki-zawodowe-w-technikum-informatycznym"
+        "url": "/moje-doswiadczenia/praktyki-zawodowe-w-technikum-informatycznym"
       },
     
       
@@ -317,7 +317,7 @@
         "titleSEO": "Pierwsza praca jako programista - pierwsze zadanie i wrażenia",
         "subtitle": "Pierwsze zadanie, ogólne wrażenia i zapowiedź nowej serii",
         "date": "7 kwietnia 2018",
-        "url": "/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista"
+        "url": "/moje-doswiadczenia/pierwsza-praca-jako-programista"
       },
     
       
@@ -336,6 +336,24 @@
         "subtitle": "3 warianty. Kiedy jaki stosować? Wady i zalety.",
         "date": "21 kwietnia 2018",
         "url": "/effective-java/wzorzec-projektowy-builder"
+      },
+    
+      
+      {
+        "title": "Idiotoodporne API klasy",
+        "titleSEO": "Idiotoodporne API klasy - czyli API, które prowadzi klienta za rękę",
+        "subtitle": "Czyli API, które prowadzi klienta za rękę",
+        "date": "21 kwietnia 2018",
+        "url": "/notatnik-juniora/idiotoodporne-api-klasy"
+      },
+    
+      
+      {
+        "title": "Wzorzec projektowy Singleton",
+        "titleSEO": "Wzorzec projektowy Singleton - kiedy warto używać?",
+        "subtitle": "Różne warianty. Wady i zalety. Antywzorzec?",
+        "date": "28 kwietnia 2018",
+        "url": "/effective-java/wzorzec-projektowy-singleton"
       }
     
   

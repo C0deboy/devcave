@@ -9,9 +9,10 @@ category:   Moje-doświadczenia
 tags:	    Moje-doświadczenia Pierwsza-praca
 comments:   true
 toc:        true
+permalink:  /moje-doswiadczenia/:title
 ---
 
-Trochę minęło czasu od ostatniego posta. Związane to było z pójściem do mojej pierwszej pracy jako programista. Przez ten okres pojawił się tylko jeden wpis związany z konkursem, a to dlatego, że nie miałem zbytnio czasu na blogowanie. Pierwsze dwa miesiące uczestniczyłem w szkoleniu organizowanym przez firmę, które było całkiem intensywne. Pracuję już ponad 3 miesiące, więc podzielę się w końcu jak to u mnie wygląda. 
+Trochę minęło czasu od ostatniego postu. Związane to było z pójściem do mojej pierwszej pracy jako programista. Przez ten okres pojawił się tylko jeden wpis związany z konkursem, a to dlatego, że nie miałem zbytnio czasu na blogowanie. Pierwsze dwa miesiące uczestniczyłem w szkoleniu organizowanym przez firmę, które było całkiem intensywne. Pracuję już ponad 3 miesiące, więc podzielę się w końcu jak to u mnie wygląda. 
 
 Szykuję też nową regularną serię na bloga, więc teraz wpisy będą częściej, ale wszystko po kolei.
 
@@ -22,7 +23,7 @@ Pierwsze kilka dni to praktycznie same formalności, wprowadzenie do procesów f
 Razem ze mną nowa była jeszcze jedna osoba, która znała kilka osób w firmie, więc dosyć łatwo było się zintegrować.
 
 ## Pierwsze zadanie
-Więc tak jak wspomniałem - nie zostałem rzucony od razu na głęboką wodę, nie dostałem od razu żadnych tasków. W firmie gdzie pracuję najpierw jest ok. 2 miesięczne szkolenie podzielone na różne sekcje. M.in.:
+Więc tak jak wspomniałem - nie zostałem rzucony od razu na głęboką wodę, nie dostałem od razu żadnych tasków. W firmie gdzie pracuję najpierw jest ok. 2 miesięczne szkolenie podzielone na różne sekcje, m.in.:
 
 - Odświeżenie wiedzy na temat Javy i dobrych praktyk <br>
 mini wykłady + do napisania aplikacja CRUD. Trzeba było to zrobić w czystej JavieEE, bez żadnych framworków. Miało to też na celu poznanie jakie problemy rozwiązują frameworki takie jak Spring.

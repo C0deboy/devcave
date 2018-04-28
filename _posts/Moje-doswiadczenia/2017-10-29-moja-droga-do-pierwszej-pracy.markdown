@@ -1,14 +1,15 @@
 ---
 layout:     post
-titleSEO:	"Moja droga do pierwszej pracy jako programista"
+titleSEO:	  "Moja droga do pierwszej pracy jako programista"
 title:      "Moja droga do pierwszej pracy"
 subtitle:   "Od początku do końca"
 date:       2017-10-29 12:00:00
 author:     "Codeboy"
 category:   Moje-doświadczenia
-tags:	    Pierwsza-praca Moje-doświadczenia
+tags:	      Pierwsza-praca Moje-doświadczenia
 comments:   true
 toc:        true
+permalink:  /moje-doswiadczenia/:title
 ---
 
 Minęło sporo czasu od ostatniego postu. Przez ten okres całkowicie poświęciłem się nauce Javy i jej technologii, aby jak najszybciej mieć szansę na dostanie pracy. I udało się! Chciałem się tym tutaj podzielić i przedstawić całą drogę od początku do końca.
@@ -32,7 +33,7 @@ Po drodze, na potrzeby szkolne, wykonaliśmy z kolegą [aplikację webową](/moj
 
 Następnym moim [projektem](/moje-projekty#jaki-jezyk-programowania), już nieco większym, który rozwijam do dziś, była strona [jaki-jezyk-programowania.pl](https://jaki-jezyk-programowania.pl/). Prace wystartowały w styczniu 2017 roku. To tu, podczas budowania strony, nauczyłem się najwięcej z technologii webowych. Poznałem Bootstrapa i jQuery. Zacząłem używać ES6 i buildować projekt z pomocą webpacka. O jakość kodu dbał mi ESLint. Nie mówiąc już ile pochłonąłem wiedzy teoretycznej na temat różnych technologii. Jest to projekt na który poświeciłem największą ilość czasu.
 
-Zacząłem pisać tego bloga dzięki inicjatywie DajSiePoznac2017 z wykorzystaniem narzędzia Jekyll - opisywałem to [wcześniej]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-04-instalacja-jekyll %}) na blogu. Był to nieco burzliwy okres, gdyż częstotliwość postów była 2 na tydzień, w między czasie rozwijałem [jaki-jezyk-programowania.pl](https://jaki-jezyk-programowania.pl/). Na dodatek byłem niedługo przed maturą i poświęcałem masę czasu na naukę do rozszerzeń - matematyki i informatyki, przez to bardzo mało czasu zostawało mi na programowanie. Dosłownie katowałem się tym, a koniec końców nie udało mi się uzyskać satysfakcjonującego wyniku z matury - o tym później. Co do blogowania to było to miłe doświadczenie i chyba do tego wracam ;)
+Zacząłem pisać tego bloga dzięki inicjatywie DajSiePoznac2017 z wykorzystaniem narzędzia Jekyll - opisywałem to [wcześniej]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-04-instalacja-jekyll %}) na blogu. Był to nieco burzliwy okres, gdyż częstotliwość postów była 2 na tydzień, w między czasie rozwijałem [jaki-jezyk-programowania.pl](https://jaki-jezyk-programowania.pl/). Na dodatek byłem niedługo przed maturą i poświęcałem masę czasu na naukę do rozszerzeń - matematyki i informatyki, przez to bardzo mało czasu zostawało mi na programowanie. Dosłownie katowałem się tym, a koniec końców nie udało mi się uzyskać satysfakcjonującego wyniku z matury - o tym później. Co do blogowania to było to miłe doświadczenie i chyba do tego wracam ;)
 
 Jako odskocznia od typowych projektów zacząłem tworzyć [remake](/moje-projekty#remake-tank1990) retro gry Battle City/Tank 1990 w Phaserze. Pewnie każdy ją kojarzy z dzieciństwa. Gra nie jest dokończona, zatrzymałem się na podstawowych elementach mechaniki gry (bez leveli, różnych czołgów i zbierania ulepszeń) by zająć się w pełnym wymiarze tym czym zacząłem się uczyć w między czasie - Javą, jej technologiami i OOP. Tworzenie gry było ciekawym doświadczeniem, myślę, że kiedyś do niej wrócę lub zabiorę się za jakąś nową.
 
@@ -82,7 +83,7 @@ Co do studiów, to żałuję i nie żałuję. Z jednej strony fajna sprawa, z dr
 
 Może ktoś przez ten wpis zda sobie sprawę, że już pora wyjść z jaskini i zacząć się rozglądać za pierwszą pracą? Kto wie ;)
 
-Swoją drogą, planuję kiedyś zrobić wpis właśnie na temat praca vs studia ;) Powstał już post [technikum vs liceum]({{ site.url }}{% post_url /Wybory-progrmisty/2017-11-5-liceum-vs-technikum-co-wybrac %}), więc to będzie dobre uzupełnienie.
+Swoją drogą, planuję kiedyś zrobić wpis właśnie na temat praca vs studia ;) Powstał już post [technikum vs liceum]({% post_url /Wybory-programisty/2017-11-5-liceum-vs-technikum-co-wybrac %}), więc to będzie dobre uzupełnienie.
 
 
 

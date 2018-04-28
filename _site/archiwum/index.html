@@ -19,13 +19,14 @@
 <link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="/dist/js/polyfills/array.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
 <link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
@@ -92,959 +93,1645 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xl-6 col-xl-offset-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-			<div>
-  <h1>Wszytkie wpisy:</h1>
-  <h2 class="page-header">37
-    <small> - Ilość wszystkich postów</small>
-  </h2>
+			<div class="archive">
+    <div>
+        <h1>Wszytkie wpisy:</h1>
+        <h2 class="page-header">39
+            <small> - Ilość wszystkich postów</small>
+        </h2>
+    </div>
+
+    <div class="search-engine">
+        <label>
+            <h3>Wyszukaj po tytule/podtytule:</h3>
+            <input class="search-value" placeholder="Wpisz szukaną frazę"/>
+        </label>
+
+        <ul class="search-results"></ul>
+
+        <script src="/dist/js/search/fetch.min.js"></script>
+        <script src="/dist/js/search/search.min.js"></script>
+
+        <script>
+
+            const search = new jekyllSearch(
+                '/dist/js/search/search.json',
+                '.search-value',
+                '.search-results',
+            );
+
+            search.init();
+
+            search.getUrlSearchQuery();
+
+        </script>
+    </div>
+
+    <div>
+        <h3>Wyszukaj według tagów:</h3>
+        
+        
+        <div class="site-tag">
+            <a href="#dajsiepoznac2017">
+                DajSiePoznac2017 (20)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#dobre-praktyki">
+                Dobre-praktyki (5)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#effective-java">
+                Effective-Java (3)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#frontend">
+                Frontend (3)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#inne">
+                Inne (1)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#jaki-jezyk-programowania">
+                Jaki-jezyk-programowania (4)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#java">
+                Java (6)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#javascript">
+                Javascript (4)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#jekyll">
+                Jekyll (5)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#ksiazki">
+                Książki (2)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#matura-informatyka">
+                Matura-Informatyka (2)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#moje-doswiadczenia">
+                Moje-doświadczenia (4)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#notatnik-juniora">
+                Notatnik-Juniora (5)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#pierwsza-praca">
+                Pierwsza-praca (2)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#podsumowania">
+                Podsumowania (2)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#recenzje">
+                Recenzje (2)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#top-listy">
+                Top-listy (1)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#wybory-programisty">
+                Wybory-programisty (1)
+            </a>
+        </div>
+        
+        <div class="site-tag">
+            <a href="#wzorce-projektowe">
+                Wzorce-projektowe (2)
+            </a>
+        </div>
+        
+    </div>
+
+    
+    <div class="tag-posts" id="dajsiepoznac2017">
+        <h2>DajSiePoznac2017</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/podsumowanie-dsp2017">
+                        <h2 class="post-title">Podsumowanie DSP2017</h2>
+                        <h3 class="post-subtitle">Wrażenia po konkursie DajSiePoznać2017</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        30
+                        maja
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium">
+                        <h2 class="post-title">Git - usuwanie pliku z repozytorium</h2>
+                        <h3 class="post-subtitle">Każdemu się zdarza...</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        24
+                        maja
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly">
+                        <h2 class="post-title">Webpack - zarządzanie modułami</h2>
+                        <h3 class="post-subtitle">Dzielimy pliki Javascript i CSS na moduły</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        22
+                        maja
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/npm-zaleznosci-i-ESLint">
+                        <h2 class="post-title">NPM i ESLint</h2>
+                        <h3 class="post-subtitle">Dodajemy zależności oraz dbamy o styl!</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        20
+                        maja
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/formularz-kontaktowy-refaktoryzacja">
+                        <h2 class="post-title">Dodajemy formularz kontaktowy 5#</h2>
+                        <h3 class="post-subtitle">Sporo zmian, większa uniwersalność</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        18
+                        maja
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie">
+                        <h2 class="post-title">Matura z informatyki - przydatne funkcje - Java</h2>
+                        <h3 class="post-subtitle">Zbiór funkcji, które używałem rozwiązując zadania maturalne.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        25
+                        kwietnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/co-dalej-z-projektem-jaki-jezyk-programowania">
+                        <h2 class="post-title">Co dalej z projektem jaki-jezyk-programowania.pl</h2>
+                        <h3 class="post-subtitle">Projekt nie umiera, plany na przyszłość.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        22
+                        kwietnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/light-aria-tooltips">
+                        <h2 class="post-title">Light aria tooltips</h2>
+                        <h3 class="post-subtitle">Ta, aria... kocham dostępność ♥</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        13
+                        kwietnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/google-like-a-pro">
+                        <h2 class="post-title">Google like a pro</h2>
+                        <h3 class="post-subtitle">Przydatne sposoby googlowania</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        7
+                        kwietnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/jekyll-filtrowanie-danych-localhost">
+                        <h2 class="post-title">Wykluczamy ruch z localhost w Google Analitics</h2>
+                        <h3 class="post-subtitle">Rozbudowujemy blog na Jekyllu 4#</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        2
+                        kwietnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/formularz-kontaktowy-dostepnosc">
+                        <h2 class="post-title">Dodajemy formularz kontaktowy 4#</h2>
+                        <h3 class="post-subtitle">Poprawiamy dostępność formularza</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        30
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/formularz-kontaktowy-php-swiftmailer">
+                        <h2 class="post-title">Dodajemy formularz kontaktowy 3#</h2>
+                        <h3 class="post-subtitle">Walidacja PHP + Swiftmailer</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        26
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/formularz-kontaktowy-walidacja-ajax">
+                        <h2 class="post-title">Dodajemy formularz kontaktowy 2#</h2>
+                        <h3 class="post-subtitle">Walidacja Javascript + AJAX</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        23
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/formularz-kontaktowy-HTML-JS">
+                        <h2 class="post-title">Dodajemy formularz kontaktowy 1#</h2>
+                        <h3 class="post-subtitle">Założenia + struktura HTML + obsługa otwierania / zamykania</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        16
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/dostepnosc-strony-wprowadzenie">
+                        <h2 class="post-title">Poprawiamy dostępność strony</h2>
+                        <h3 class="post-subtitle">Wprowadzenie</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        14
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/jekyll-disqus-comments-google-analitics">
+                        <h2 class="post-title">Statystyki i komentarze na blogu</h2>
+                        <h3 class="post-subtitle">Rozbudowujemy blog na Jekyllu 2#</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        10
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/rss-feed-kategorii-jekyll">
+                        <h2 class="post-title">Dodajemy RSS feed kategorii</h2>
+                        <h3 class="post-subtitle">Rozbudowujemy blog na Jekyllu 1#</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        5
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/instalacja-jekyll">
+                        <h2 class="post-title">Tworzymy blog z pomocą narzędzia Jekyll</h2>
+                        <h3 class="post-subtitle">Instalacja + Ubuntu w Windowsie</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        4
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/poczatki">
+                        <h2 class="post-title">Początki projektu</h2>
+                        <h3 class="post-subtitle">Jak to było + trochę liczb</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        3
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/wprowadzenie">
+                        <h2 class="post-title">Projekt jaki-jezyk-programowania.pl</h2>
+                        <h3 class="post-subtitle">Wprowadzenie</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        1
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="dobre-praktyki">
+        <h2>Dobre-praktyki</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-singleton">
+                        <h2 class="post-title">Wzorzec projektowy Singleton</h2>
+                        <h3 class="post-subtitle">Różne warianty. Wady i zalety. Antywzorzec?</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        28
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-partner">
+                    <p class="m0">Post dla:</p>
+                    <a href="https://bulldogjob.pl"><img src="/img/bulldogjob.png" alt="bulldogjob logo"/></a>
+                </div>
+                
+                <div class="post-preview">
+                    <a href="/notatnik-juniora/idiotoodporne-api-klasy">
+                        <h2 class="post-title">Idiotoodporne API klasy</h2>
+                        <h3 class="post-subtitle">Czyli API, które prowadzi klienta za rękę</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        21
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-builder">
+                        <h2 class="post-title">Wzorzec projektowy Builder</h2>
+                        <h3 class="post-subtitle">3 warianty. Kiedy jaki stosować? Wady i zalety.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        21
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/static-factory-method-zamiast-konstruktora">
+                        <h2 class="post-title">Static factory method zamiast konstruktora</h2>
+                        <h3 class="post-subtitle">Zalety oraz wady tego rozwiązania</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        14
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/notatnik-juniora/zasady-projektowania-kodu">
+                        <h2 class="post-title">Zasady projektowania obiektowego</h2>
+                        <h3 class="post-subtitle">SOLID, DRY, KISS itp.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        30
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="effective-java">
+        <h2>Effective-Java</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-singleton">
+                        <h2 class="post-title">Wzorzec projektowy Singleton</h2>
+                        <h3 class="post-subtitle">Różne warianty. Wady i zalety. Antywzorzec?</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        28
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-builder">
+                        <h2 class="post-title">Wzorzec projektowy Builder</h2>
+                        <h3 class="post-subtitle">3 warianty. Kiedy jaki stosować? Wady i zalety.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        21
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/static-factory-method-zamiast-konstruktora">
+                        <h2 class="post-title">Static factory method zamiast konstruktora</h2>
+                        <h3 class="post-subtitle">Zalety oraz wady tego rozwiązania</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        14
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="frontend">
+        <h2>Frontend</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/frontend/formularz-kontaktowy-bez-backendu">
+                        <h2 class="post-title">Formularz kontaktowy bez backendu</h2>
+                        <h3 class="post-subtitle">Tylko HTML, Javascript i jQuery(opcjonalnie).</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        15
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/frontend/wyszukiwarka-na-blogu-bez-backendu">
+                        <h2 class="post-title">Wyszukiwarka na statycznych stronach/blogu bez backendu</h2>
+                        <h3 class="post-subtitle">Tylko Javascript, na przykładzie bloga na Jekyllu</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        10
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/frontend/przelacznik-motywu-ciemny-na-strone">
+                        <h2 class="post-title">Przełącznik motywu, tryb nocny na blogu/stronie</h2>
+                        <h3 class="post-subtitle">Tryb ciemny/jasny w łatwy sposób, tylko JS.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        2
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="inne">
+        <h2>Inne</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/inne/konkurs-gynveala-gra-do-20kb">
+                        <h2 class="post-title">Konkurs Gynveala - gra do 20KB (strategia turowa)</h2>
+                        <h3 class="post-subtitle">Brałem udział, więc pokazuję co mi wyszło ;)</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        22
+                        stycznia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="jaki-jezyk-programowania">
+        <h2>Jaki-jezyk-programowania</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/podsumowania/podsumowanie-strony-jaki-jezyk-programowania-po-roku">
+                        <h2 class="post-title">Podsumowanie po roku - jaki-jezyk-programowania.pl</h2>
+                        <h3 class="post-subtitle">Ogólne podsumowanie projektu + statystyki</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        20
+                        grudnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/co-dalej-z-projektem-jaki-jezyk-programowania">
+                        <h2 class="post-title">Co dalej z projektem jaki-jezyk-programowania.pl</h2>
+                        <h3 class="post-subtitle">Projekt nie umiera, plany na przyszłość.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        22
+                        kwietnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/poczatki">
+                        <h2 class="post-title">Początki projektu</h2>
+                        <h3 class="post-subtitle">Jak to było + trochę liczb</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        3
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/wprowadzenie">
+                        <h2 class="post-title">Projekt jaki-jezyk-programowania.pl</h2>
+                        <h3 class="post-subtitle">Wprowadzenie</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        1
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="java">
+        <h2>Java</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-singleton">
+                        <h2 class="post-title">Wzorzec projektowy Singleton</h2>
+                        <h3 class="post-subtitle">Różne warianty. Wady i zalety. Antywzorzec?</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        28
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-partner">
+                    <p class="m0">Post dla:</p>
+                    <a href="https://bulldogjob.pl"><img src="/img/bulldogjob.png" alt="bulldogjob logo"/></a>
+                </div>
+                
+                <div class="post-preview">
+                    <a href="/notatnik-juniora/idiotoodporne-api-klasy">
+                        <h2 class="post-title">Idiotoodporne API klasy</h2>
+                        <h3 class="post-subtitle">Czyli API, które prowadzi klienta za rękę</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        21
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-builder">
+                        <h2 class="post-title">Wzorzec projektowy Builder</h2>
+                        <h3 class="post-subtitle">3 warianty. Kiedy jaki stosować? Wady i zalety.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        21
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/static-factory-method-zamiast-konstruktora">
+                        <h2 class="post-title">Static factory method zamiast konstruktora</h2>
+                        <h3 class="post-subtitle">Zalety oraz wady tego rozwiązania</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        14
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/top-listy/top-najlepszych-zr%C3%B3de%C5%82-do-nauki-javy">
+                        <h2 class="post-title">Darmowe źródła do nauki Javy i nie tylko</h2>
+                        <h3 class="post-subtitle">Przydatne linki do źródeł z których korzystam</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        10
+                        grudnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie">
+                        <h2 class="post-title">Matura z informatyki - przydatne funkcje - Java</h2>
+                        <h3 class="post-subtitle">Zbiór funkcji, które używałem rozwiązując zadania maturalne.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        25
+                        kwietnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="javascript">
+        <h2>Javascript</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/frontend/wyszukiwarka-na-blogu-bez-backendu">
+                        <h2 class="post-title">Wyszukiwarka na statycznych stronach/blogu bez backendu</h2>
+                        <h3 class="post-subtitle">Tylko Javascript, na przykładzie bloga na Jekyllu</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        10
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/frontend/przelacznik-motywu-ciemny-na-strone">
+                        <h2 class="post-title">Przełącznik motywu, tryb nocny na blogu/stronie</h2>
+                        <h3 class="post-subtitle">Tryb ciemny/jasny w łatwy sposób, tylko JS.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        2
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly">
+                        <h2 class="post-title">Webpack - zarządzanie modułami</h2>
+                        <h3 class="post-subtitle">Dzielimy pliki Javascript i CSS na moduły</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        22
+                        maja
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/npm-zaleznosci-i-ESLint">
+                        <h2 class="post-title">NPM i ESLint</h2>
+                        <h3 class="post-subtitle">Dodajemy zależności oraz dbamy o styl!</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        20
+                        maja
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="jekyll">
+        <h2>Jekyll</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/frontend/wyszukiwarka-na-blogu-bez-backendu">
+                        <h2 class="post-title">Wyszukiwarka na statycznych stronach/blogu bez backendu</h2>
+                        <h3 class="post-subtitle">Tylko Javascript, na przykładzie bloga na Jekyllu</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        10
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/jekyll-filtrowanie-danych-localhost">
+                        <h2 class="post-title">Wykluczamy ruch z localhost w Google Analitics</h2>
+                        <h3 class="post-subtitle">Rozbudowujemy blog na Jekyllu 4#</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        2
+                        kwietnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/jekyll-disqus-comments-google-analitics">
+                        <h2 class="post-title">Statystyki i komentarze na blogu</h2>
+                        <h3 class="post-subtitle">Rozbudowujemy blog na Jekyllu 2#</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        10
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/rss-feed-kategorii-jekyll">
+                        <h2 class="post-title">Dodajemy RSS feed kategorii</h2>
+                        <h3 class="post-subtitle">Rozbudowujemy blog na Jekyllu 1#</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        5
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/instalacja-jekyll">
+                        <h2 class="post-title">Tworzymy blog z pomocą narzędzia Jekyll</h2>
+                        <h3 class="post-subtitle">Instalacja + Ubuntu w Windowsie</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        4
+                        marca
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="ksiazki">
+        <h2>Książki</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas">
+                        <h2 class="post-title">Recenzja książki Junior Developer</h2>
+                        <h3 class="post-subtitle">Autor: Mateusz Kupilas</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        15
+                        grudnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz">
+                        <h2 class="post-title">Recenzja książki Zawód: Programista</h2>
+                        <h3 class="post-subtitle">Autor: Maciej Aniserowicz</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        5
+                        grudnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="matura-informatyka">
+        <h2>Matura-Informatyka</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki">
+                        <h2 class="post-title">Jak uczyć się do matury z informatyki?</h2>
+                        <h3 class="post-subtitle">Podpowiadam skąd najlepiej się uczyć oraz jak wygląda matura z informatyki</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        25
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie">
+                        <h2 class="post-title">Matura z informatyki - przydatne funkcje - Java</h2>
+                        <h3 class="post-subtitle">Zbiór funkcji, które używałem rozwiązując zadania maturalne.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        25
+                        kwietnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="moje-doswiadczenia">
+        <h2>Moje-doświadczenia</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/moje-doswiadczenia/pierwsza-praca-jako-programista">
+                        <h2 class="post-title">Pierwsza praca jako programista</h2>
+                        <h3 class="post-subtitle">Pierwsze zadanie, ogólne wrażenia i zapowiedź nowej serii</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        7
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/moje-doswiadczenia/praktyki-zawodowe-w-technikum-informatycznym">
+                        <h2 class="post-title">Praktyki w Technikum Informatycznym i Erasmus</h2>
+                        <h3 class="post-subtitle">Moje doświadczenia, obserwacje i relacja z projektu zagranicznego</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        20
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/wybory-programisty/liceum-vs-technikum-co-wybrac">
+                        <h2 class="post-title">Liceum vs technikum - co wybrać jako programista?</h2>
+                        <h3 class="post-subtitle">Moje spostrzeżenia i podsumowanie 4 lat w technikum</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        5
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/moje-doswiadczenia/moja-droga-do-pierwszej-pracy">
+                        <h2 class="post-title">Moja droga do pierwszej pracy</h2>
+                        <h3 class="post-subtitle">Od początku do końca</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        29
+                        października
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="notatnik-juniora">
+        <h2>Notatnik-Juniora</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-singleton">
+                        <h2 class="post-title">Wzorzec projektowy Singleton</h2>
+                        <h3 class="post-subtitle">Różne warianty. Wady i zalety. Antywzorzec?</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        28
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-partner">
+                    <p class="m0">Post dla:</p>
+                    <a href="https://bulldogjob.pl"><img src="/img/bulldogjob.png" alt="bulldogjob logo"/></a>
+                </div>
+                
+                <div class="post-preview">
+                    <a href="/notatnik-juniora/idiotoodporne-api-klasy">
+                        <h2 class="post-title">Idiotoodporne API klasy</h2>
+                        <h3 class="post-subtitle">Czyli API, które prowadzi klienta za rękę</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        21
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-builder">
+                        <h2 class="post-title">Wzorzec projektowy Builder</h2>
+                        <h3 class="post-subtitle">3 warianty. Kiedy jaki stosować? Wady i zalety.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        21
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/static-factory-method-zamiast-konstruktora">
+                        <h2 class="post-title">Static factory method zamiast konstruktora</h2>
+                        <h3 class="post-subtitle">Zalety oraz wady tego rozwiązania</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        14
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/notatnik-juniora/zasady-projektowania-kodu">
+                        <h2 class="post-title">Zasady projektowania obiektowego</h2>
+                        <h3 class="post-subtitle">SOLID, DRY, KISS itp.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        30
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="pierwsza-praca">
+        <h2>Pierwsza-praca</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/moje-doswiadczenia/pierwsza-praca-jako-programista">
+                        <h2 class="post-title">Pierwsza praca jako programista</h2>
+                        <h3 class="post-subtitle">Pierwsze zadanie, ogólne wrażenia i zapowiedź nowej serii</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        7
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/moje-doswiadczenia/moja-droga-do-pierwszej-pracy">
+                        <h2 class="post-title">Moja droga do pierwszej pracy</h2>
+                        <h3 class="post-subtitle">Od początku do końca</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        29
+                        października
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="podsumowania">
+        <h2>Podsumowania</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/podsumowania/podsumowanie-roku-2017-i-postanowienia-noworoczne">
+                        <h2 class="post-title">Podsumowanie roku 2017</h2>
+                        <h3 class="post-subtitle">I postanowienia noworoczne...</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        30
+                        grudnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/podsumowania/podsumowanie-strony-jaki-jezyk-programowania-po-roku">
+                        <h2 class="post-title">Podsumowanie po roku - jaki-jezyk-programowania.pl</h2>
+                        <h3 class="post-subtitle">Ogólne podsumowanie projektu + statystyki</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        20
+                        grudnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="recenzje">
+        <h2>Recenzje</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas">
+                        <h2 class="post-title">Recenzja książki Junior Developer</h2>
+                        <h3 class="post-subtitle">Autor: Mateusz Kupilas</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        15
+                        grudnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz">
+                        <h2 class="post-title">Recenzja książki Zawód: Programista</h2>
+                        <h3 class="post-subtitle">Autor: Maciej Aniserowicz</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        5
+                        grudnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="top-listy">
+        <h2>Top-listy</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/top-listy/top-najlepszych-zr%C3%B3de%C5%82-do-nauki-javy">
+                        <h2 class="post-title">Darmowe źródła do nauki Javy i nie tylko</h2>
+                        <h3 class="post-subtitle">Przydatne linki do źródeł z których korzystam</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        10
+                        grudnia
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="wybory-programisty">
+        <h2>Wybory-programisty</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/wybory-programisty/liceum-vs-technikum-co-wybrac">
+                        <h2 class="post-title">Liceum vs technikum - co wybrać jako programista?</h2>
+                        <h3 class="post-subtitle">Moje spostrzeżenia i podsumowanie 4 lat w technikum</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        5
+                        listopada
+                        
+                        2017
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="tag-posts" id="wzorce-projektowe">
+        <h2>Wzorce-projektowe</h2>
+        <ul>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-singleton">
+                        <h2 class="post-title">Wzorzec projektowy Singleton</h2>
+                        <h3 class="post-subtitle">Różne warianty. Wady i zalety. Antywzorzec?</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        28
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                
+                <div class="post-preview">
+                    <a href="/effective-java/wzorzec-projektowy-builder">
+                        <h2 class="post-title">Wzorzec projektowy Builder</h2>
+                        <h3 class="post-subtitle">3 warianty. Kiedy jaki stosować? Wady i zalety.</h3>
+                    </a>
+
+                    <p class="post-meta">
+                        
+                        21
+                        kwietnia
+                        
+                        2018
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+    
+</div>
 </div>
 
-<div class="search-engine">
-  <label>
-    Wyszukaj po tytule/podtytule:
-    <input class="search-value" placeholder="Wpisz szukaną frazę"/>
-  </label>
-
-  <div class="search-results"></div>
-
-  <script src="/dist/js/search/fetch.min.js"></script>
-  <script src="/dist/js/search/search.min.js"></script>
-
-  <script>
-
-    const search = new jekyllSearch(
-      '/dist/js/search/search.json',
-      '.search-value',
-      '.search-results',
-    );
-
-    search.init();
-
-    search.getUrlSearchQuery();
-
-  </script>
-</div>
-
-<div>
-  <p>Wyszukaj według tagów:</p>
-  
-  
-   <div class="site-tag">
-      <a href="#dajsiepoznac2017">
-              DajSiePoznac2017 (20)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#dobre-praktyki">
-              Dobre-praktyki (3)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#effective-java">
-              Effective-Java (2)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#frontend">
-              Frontend (3)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#inne">
-              Inne (1)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#jak-zrobić">
-              Jak-zrobić (3)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#jaki-jezyk-programowania">
-              Jaki-jezyk-programowania (4)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#java">
-              Java (4)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#javascript">
-              Javascript (4)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#jekyll">
-              Jekyll (5)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#książki">
-              Książki (2)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#matura-informatyka">
-              Matura-Informatyka (2)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#moje-doświadczenia">
-              Moje-doświadczenia (4)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#notatnik-juniora">
-              Notatnik-Juniora (3)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#pierwsza-praca">
-              Pierwsza-praca (2)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#podsumowania">
-              Podsumowania (2)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#recenzje">
-              Recenzje (2)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#top-listy">
-              Top-listy (1)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#wybory-programisty">
-              Wybory-programisty (1)
-      </a>
-  </div>
-  
-   <div class="site-tag">
-      <a href="#wzorce-projektowe">
-              Wzorce-projektowe (1)
-      </a>
-  </div>
-  
-</div>
-
-<div class="archive">
-    
-      <h2 id="dajsiepoznac2017">DajSiePoznac2017</h2>
-      <ul>
-        
-          <li><a href="/dajsiepoznac2017/podsumowanie-dsp2017">Podsumowanie DSP2017</a> | 
-          <small>
-            
-            30
-            maja
-              
-            2017
-          </small>
-          <br>Wrażenia po konkursie DajSiePoznać2017</li>
-        
-          <li><a href="/dajsiepoznac2017/git-usuwanie-pliku-z-repozytorium">Git - usuwanie pliku z repozytorium</a> | 
-          <small>
-            
-            24
-            maja
-              
-            2017
-          </small>
-          <br>Każdemu się zdarza...</li>
-        
-          <li><a href="/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly">Webpack - zarządzanie modułami</a> | 
-          <small>
-            
-            22
-            maja
-              
-            2017
-          </small>
-          <br>Dzielimy pliki Javascript i CSS na moduły</li>
-        
-          <li><a href="/dajsiepoznac2017/npm-zaleznosci-i-ESLint">NPM i ESLint</a> | 
-          <small>
-            
-            20
-            maja
-              
-            2017
-          </small>
-          <br>Dodajemy zależności oraz dbamy o styl!</li>
-        
-          <li><a href="/dajsiepoznac2017/formularz-kontaktowy-refaktoryzacja">Dodajemy formularz kontaktowy 5#</a> | 
-          <small>
-            
-            18
-            maja
-              
-            2017
-          </small>
-          <br>Sporo zmian, większa uniwersalność</li>
-        
-          <li><a href="/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie">Matura z informatyki - przydatne funkcje - Java</a> | 
-          <small>
-            
-            25
-            kwietnia
-              
-            2017
-          </small>
-          <br>Zbiór funkcji, które używałem rozwiązując zadania maturalne.</li>
-        
-          <li><a href="/dajsiepoznac2017/co-dalej-z-projektem-jaki-jezyk-programowania">Co dalej z projektem jaki-jezyk-programowania.pl</a> | 
-          <small>
-            
-            22
-            kwietnia
-              
-            2017
-          </small>
-          <br>Projekt nie umiera, plany na przyszłość.</li>
-        
-          <li><a href="/dajsiepoznac2017/light-aria-tooltips">Light aria tooltips</a> | 
-          <small>
-            
-            13
-            kwietnia
-              
-            2017
-          </small>
-          <br>Ta, aria... kocham dostępność ♥</li>
-        
-          <li><a href="/dajsiepoznac2017/google-like-a-pro">Google like a pro</a> | 
-          <small>
-            
-            7
-            kwietnia
-              
-            2017
-          </small>
-          <br>Przydatne sposoby googlowania</li>
-        
-          <li><a href="/dajsiepoznac2017/jekyll-filtrowanie-danych-localhost">Wykluczamy ruch z localhost w Google Analitics</a> | 
-          <small>
-            
-            2
-            kwietnia
-              
-            2017
-          </small>
-          <br>Rozbudowujemy blog na Jekyllu 4#</li>
-        
-          <li><a href="/dajsiepoznac2017/formularz-kontaktowy-dostepnosc">Dodajemy formularz kontaktowy 4#</a> | 
-          <small>
-            
-            30
-            marca
-              
-            2017
-          </small>
-          <br>Poprawiamy dostępność formularza</li>
-        
-          <li><a href="/dajsiepoznac2017/formularz-kontaktowy-php-swiftmailer">Dodajemy formularz kontaktowy 3#</a> | 
-          <small>
-            
-            26
-            marca
-              
-            2017
-          </small>
-          <br>Walidacja PHP + Swiftmailer</li>
-        
-          <li><a href="/dajsiepoznac2017/formularz-kontaktowy-walidacja-ajax">Dodajemy formularz kontaktowy 2#</a> | 
-          <small>
-            
-            23
-            marca
-              
-            2017
-          </small>
-          <br>Walidacja Javascript + AJAX</li>
-        
-          <li><a href="/dajsiepoznac2017/formularz-kontaktowy-HTML-JS">Dodajemy formularz kontaktowy 1#</a> | 
-          <small>
-            
-            16
-            marca
-              
-            2017
-          </small>
-          <br>Założenia + struktura HTML + obsługa otwierania / zamykania</li>
-        
-          <li><a href="/dajsiepoznac2017/dostepnosc-strony-wprowadzenie">Poprawiamy dostępność strony</a> | 
-          <small>
-            
-            14
-            marca
-              
-            2017
-          </small>
-          <br>Wprowadzenie</li>
-        
-          <li><a href="/dajsiepoznac2017/jekyll-disqus-comments-google-analitics">Statystyki i komentarze na blogu</a> | 
-          <small>
-            
-            10
-            marca
-              
-            2017
-          </small>
-          <br>Rozbudowujemy blog na Jekyllu 2#</li>
-        
-          <li><a href="/dajsiepoznac2017/rss-feed-kategorii-jekyll">Dodajemy RSS feed kategorii</a> | 
-          <small>
-            
-            5
-            marca
-              
-            2017
-          </small>
-          <br>Rozbudowujemy blog na Jekyllu 1#</li>
-        
-          <li><a href="/dajsiepoznac2017/instalacja-jekyll">Tworzymy blog z pomocą narzędzia Jekyll</a> | 
-          <small>
-            
-            4
-            marca
-              
-            2017
-          </small>
-          <br>Instalacja + Ubuntu w Windowsie</li>
-        
-          <li><a href="/dajsiepoznac2017/poczatki">Początki projektu</a> | 
-          <small>
-            
-            3
-            marca
-              
-            2017
-          </small>
-          <br>Jak to było + trochę liczb</li>
-        
-          <li><a href="/dajsiepoznac2017/wprowadzenie">Projekt jaki-jezyk-programowania.pl</a> | 
-          <small>
-            
-            1
-            marca
-              
-            2017
-          </small>
-          <br>Wprowadzenie</li>
-        
-      </ul>
-    
-      <h2 id="dobre-praktyki">Dobre-praktyki</h2>
-      <ul>
-        
-          <li><a href="/effective-java/wzorzec-projektowy-builder">Wzorzec projektowy Builder</a> | 
-          <small>
-            
-            21
-            kwietnia
-              
-            2018
-          </small>
-          <br>3 warianty. Kiedy jaki stosować? Wady i zalety.</li>
-        
-          <li><a href="/effective-java/static-factory-method-zamiast-konstruktora">Static factory method zamiast konstruktora</a> | 
-          <small>
-            
-            14
-            kwietnia
-              
-            2018
-          </small>
-          <br>Zalety oraz wady tego rozwiązania</li>
-        
-          <li><a href="/notatnik-juniora/zasady-projektowania-kodu">Zasady projektowania obiektowego</a> | 
-          <small>
-            
-            30
-            listopada
-              
-            2017
-          </small>
-          <br>SOLID, DRY, KISS itp.</li>
-        
-      </ul>
-    
-      <h2 id="effective-java">Effective-Java</h2>
-      <ul>
-        
-          <li><a href="/effective-java/wzorzec-projektowy-builder">Wzorzec projektowy Builder</a> | 
-          <small>
-            
-            21
-            kwietnia
-              
-            2018
-          </small>
-          <br>3 warianty. Kiedy jaki stosować? Wady i zalety.</li>
-        
-          <li><a href="/effective-java/static-factory-method-zamiast-konstruktora">Static factory method zamiast konstruktora</a> | 
-          <small>
-            
-            14
-            kwietnia
-              
-            2018
-          </small>
-          <br>Zalety oraz wady tego rozwiązania</li>
-        
-      </ul>
-    
-      <h2 id="frontend">Frontend</h2>
-      <ul>
-        
-          <li><a href="/frontend/formularz-kontaktowy-bez-backendu">Formularz kontaktowy bez backendu/bez PHP</a> | 
-          <small>
-            
-            15
-            listopada
-              
-            2017
-          </small>
-          <br>Tylko HTML, Javascript i jQuery(opcjonalnie).</li>
-        
-          <li><a href="/frontend/wyszukiwarka-na-blogu-bez-backendu">Wyszukiwarka na statycznych stronach/blogu bez backendu</a> | 
-          <small>
-            
-            10
-            listopada
-              
-            2017
-          </small>
-          <br>Tylko Javascript, na przykładzie bloga na Jekyllu</li>
-        
-          <li><a href="/frontend/przelacznik-motywu-ciemny-na-strone">Przełącznik motywu, tryb nocny na blogu/stronie</a> | 
-          <small>
-            
-            2
-            listopada
-              
-            2017
-          </small>
-          <br>Tryb ciemny/jasny w łatwy sposób, tylko JS.</li>
-        
-      </ul>
-    
-      <h2 id="inne">Inne</h2>
-      <ul>
-        
-          <li><a href="/inne/konkurs-gynveala-gra-do-20kb">Konkurs Gynveala - gra do 20KB (strategia turowa)</a> | 
-          <small>
-            
-            22
-            stycznia
-              
-            2018
-          </small>
-          <br>Brałem udział, więc pokazuję co mi wyszło ;)</li>
-        
-      </ul>
-    
-      <h2 id="jak-zrobić">Jak-zrobić</h2>
-      <ul>
-        
-          <li><a href="/frontend/formularz-kontaktowy-bez-backendu">Formularz kontaktowy bez backendu/bez PHP</a> | 
-          <small>
-            
-            15
-            listopada
-              
-            2017
-          </small>
-          <br>Tylko HTML, Javascript i jQuery(opcjonalnie).</li>
-        
-          <li><a href="/frontend/wyszukiwarka-na-blogu-bez-backendu">Wyszukiwarka na statycznych stronach/blogu bez backendu</a> | 
-          <small>
-            
-            10
-            listopada
-              
-            2017
-          </small>
-          <br>Tylko Javascript, na przykładzie bloga na Jekyllu</li>
-        
-          <li><a href="/frontend/przelacznik-motywu-ciemny-na-strone">Przełącznik motywu, tryb nocny na blogu/stronie</a> | 
-          <small>
-            
-            2
-            listopada
-              
-            2017
-          </small>
-          <br>Tryb ciemny/jasny w łatwy sposób, tylko JS.</li>
-        
-      </ul>
-    
-      <h2 id="jaki-jezyk-programowania">Jaki-jezyk-programowania</h2>
-      <ul>
-        
-          <li><a href="/podsumowania/podsumowanie-strony-jaki-jezyk-programowania-po-roku">Podsumowanie po roku - jaki-jezyk-programowania.pl</a> | 
-          <small>
-            
-            20
-            grudnia
-            
-            2017
-          </small>
-          <br>Ogólne podsumowanie projektu + statystyki</li>
-        
-          <li><a href="/dajsiepoznac2017/co-dalej-z-projektem-jaki-jezyk-programowania">Co dalej z projektem jaki-jezyk-programowania.pl</a> | 
-          <small>
-            
-            22
-            kwietnia
-              
-            2017
-          </small>
-          <br>Projekt nie umiera, plany na przyszłość.</li>
-        
-          <li><a href="/dajsiepoznac2017/poczatki">Początki projektu</a> | 
-          <small>
-            
-            3
-            marca
-              
-            2017
-          </small>
-          <br>Jak to było + trochę liczb</li>
-        
-          <li><a href="/dajsiepoznac2017/wprowadzenie">Projekt jaki-jezyk-programowania.pl</a> | 
-          <small>
-            
-            1
-            marca
-              
-            2017
-          </small>
-          <br>Wprowadzenie</li>
-        
-      </ul>
-    
-      <h2 id="java">Java</h2>
-      <ul>
-        
-          <li><a href="/effective-java/wzorzec-projektowy-builder">Wzorzec projektowy Builder</a> | 
-          <small>
-            
-            21
-            kwietnia
-              
-            2018
-          </small>
-          <br>3 warianty. Kiedy jaki stosować? Wady i zalety.</li>
-        
-          <li><a href="/effective-java/static-factory-method-zamiast-konstruktora">Static factory method zamiast konstruktora</a> | 
-          <small>
-            
-            14
-            kwietnia
-              
-            2018
-          </small>
-          <br>Zalety oraz wady tego rozwiązania</li>
-        
-          <li><a href="/top-listy/top-najlepszych-zr%C3%B3de%C5%82-do-nauki-javy">Darmowe źródła do nauki Javy i nie tylko</a> | 
-          <small>
-            
-            10
-            grudnia
-            
-            2017
-          </small>
-          <br>Przydatne linki do źródeł z których korzystam</li>
-        
-          <li><a href="/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie">Matura z informatyki - przydatne funkcje - Java</a> | 
-          <small>
-            
-            25
-            kwietnia
-              
-            2017
-          </small>
-          <br>Zbiór funkcji, które używałem rozwiązując zadania maturalne.</li>
-        
-      </ul>
-    
-      <h2 id="javascript">Javascript</h2>
-      <ul>
-        
-          <li><a href="/frontend/wyszukiwarka-na-blogu-bez-backendu">Wyszukiwarka na statycznych stronach/blogu bez backendu</a> | 
-          <small>
-            
-            10
-            listopada
-              
-            2017
-          </small>
-          <br>Tylko Javascript, na przykładzie bloga na Jekyllu</li>
-        
-          <li><a href="/frontend/przelacznik-motywu-ciemny-na-strone">Przełącznik motywu, tryb nocny na blogu/stronie</a> | 
-          <small>
-            
-            2
-            listopada
-              
-            2017
-          </small>
-          <br>Tryb ciemny/jasny w łatwy sposób, tylko JS.</li>
-        
-          <li><a href="/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly">Webpack - zarządzanie modułami</a> | 
-          <small>
-            
-            22
-            maja
-              
-            2017
-          </small>
-          <br>Dzielimy pliki Javascript i CSS na moduły</li>
-        
-          <li><a href="/dajsiepoznac2017/npm-zaleznosci-i-ESLint">NPM i ESLint</a> | 
-          <small>
-            
-            20
-            maja
-              
-            2017
-          </small>
-          <br>Dodajemy zależności oraz dbamy o styl!</li>
-        
-      </ul>
-    
-      <h2 id="jekyll">Jekyll</h2>
-      <ul>
-        
-          <li><a href="/frontend/wyszukiwarka-na-blogu-bez-backendu">Wyszukiwarka na statycznych stronach/blogu bez backendu</a> | 
-          <small>
-            
-            10
-            listopada
-              
-            2017
-          </small>
-          <br>Tylko Javascript, na przykładzie bloga na Jekyllu</li>
-        
-          <li><a href="/dajsiepoznac2017/jekyll-filtrowanie-danych-localhost">Wykluczamy ruch z localhost w Google Analitics</a> | 
-          <small>
-            
-            2
-            kwietnia
-              
-            2017
-          </small>
-          <br>Rozbudowujemy blog na Jekyllu 4#</li>
-        
-          <li><a href="/dajsiepoznac2017/jekyll-disqus-comments-google-analitics">Statystyki i komentarze na blogu</a> | 
-          <small>
-            
-            10
-            marca
-              
-            2017
-          </small>
-          <br>Rozbudowujemy blog na Jekyllu 2#</li>
-        
-          <li><a href="/dajsiepoznac2017/rss-feed-kategorii-jekyll">Dodajemy RSS feed kategorii</a> | 
-          <small>
-            
-            5
-            marca
-              
-            2017
-          </small>
-          <br>Rozbudowujemy blog na Jekyllu 1#</li>
-        
-          <li><a href="/dajsiepoznac2017/instalacja-jekyll">Tworzymy blog z pomocą narzędzia Jekyll</a> | 
-          <small>
-            
-            4
-            marca
-              
-            2017
-          </small>
-          <br>Instalacja + Ubuntu w Windowsie</li>
-        
-      </ul>
-    
-      <h2 id="książki">Książki</h2>
-      <ul>
-        
-          <li><a href="/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas">Recenzja książki Junior Developer</a> | 
-          <small>
-            
-            15
-            grudnia
-            
-            2017
-          </small>
-          <br>Autor: Mateusz Kupilas</li>
-        
-          <li><a href="/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz">Recenzja książki Zawód: Programista</a> | 
-          <small>
-            
-            5
-            grudnia
-            
-            2017
-          </small>
-          <br>Autor: Maciej Aniserowicz</li>
-        
-      </ul>
-    
-      <h2 id="matura-informatyka">Matura-Informatyka</h2>
-      <ul>
-        
-          <li><a href="/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki">Jak uczyć się do matury z informatyki?</a> | 
-          <small>
-            
-            25
-            listopada
-              
-            2017
-          </small>
-          <br>Podpowiadam skąd najlepiej się uczyć oraz jak wygląda matura z informatyki</li>
-        
-          <li><a href="/dajsiepoznac2017/matura-informatyka-przydatne-funkcje-w-javie">Matura z informatyki - przydatne funkcje - Java</a> | 
-          <small>
-            
-            25
-            kwietnia
-              
-            2017
-          </small>
-          <br>Zbiór funkcji, które używałem rozwiązując zadania maturalne.</li>
-        
-      </ul>
-    
-      <h2 id="moje-doświadczenia">Moje-doświadczenia</h2>
-      <ul>
-        
-          <li><a href="/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista">Pierwsza praca jako programista</a> | 
-          <small>
-            
-            7
-            kwietnia
-              
-            2018
-          </small>
-          <br>Pierwsze zadanie, ogólne wrażenia i zapowiedź nowej serii</li>
-        
-          <li><a href="/moje-do%C5%9Bwiadczenia/praktyki-zawodowe-w-technikum-informatycznym">Praktyki w Technikum Informatycznym i Erasmus</a> | 
-          <small>
-            
-            20
-            listopada
-              
-            2017
-          </small>
-          <br>Moje doświadczenia, obserwacje i relacja z projektu zagranicznego</li>
-        
-          <li><a href="/wybory-programisty/liceum-vs-technikum-co-wybrac">Liceum vs technikum - co wybrać jako programista?</a> | 
-          <small>
-            
-            5
-            listopada
-              
-            2017
-          </small>
-          <br>Moje spostrzeżenia i podsumowanie 4 lat w technikum</li>
-        
-          <li><a href="/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy">Moja droga do pierwszej pracy</a> | 
-          <small>
-            
-            29
-            października
-              
-            2017
-          </small>
-          <br>Od początku do końca</li>
-        
-      </ul>
-    
-      <h2 id="notatnik-juniora">Notatnik-Juniora</h2>
-      <ul>
-        
-          <li><a href="/effective-java/wzorzec-projektowy-builder">Wzorzec projektowy Builder</a> | 
-          <small>
-            
-            21
-            kwietnia
-              
-            2018
-          </small>
-          <br>3 warianty. Kiedy jaki stosować? Wady i zalety.</li>
-        
-          <li><a href="/effective-java/static-factory-method-zamiast-konstruktora">Static factory method zamiast konstruktora</a> | 
-          <small>
-            
-            14
-            kwietnia
-              
-            2018
-          </small>
-          <br>Zalety oraz wady tego rozwiązania</li>
-        
-          <li><a href="/notatnik-juniora/zasady-projektowania-kodu">Zasady projektowania obiektowego</a> | 
-          <small>
-            
-            30
-            listopada
-              
-            2017
-          </small>
-          <br>SOLID, DRY, KISS itp.</li>
-        
-      </ul>
-    
-      <h2 id="pierwsza-praca">Pierwsza-praca</h2>
-      <ul>
-        
-          <li><a href="/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista">Pierwsza praca jako programista</a> | 
-          <small>
-            
-            7
-            kwietnia
-              
-            2018
-          </small>
-          <br>Pierwsze zadanie, ogólne wrażenia i zapowiedź nowej serii</li>
-        
-          <li><a href="/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy">Moja droga do pierwszej pracy</a> | 
-          <small>
-            
-            29
-            października
-              
-            2017
-          </small>
-          <br>Od początku do końca</li>
-        
-      </ul>
-    
-      <h2 id="podsumowania">Podsumowania</h2>
-      <ul>
-        
-          <li><a href="/podsumowania/podsumowanie-roku-2017-i-postanowienia-noworoczne">Podsumowanie roku 2017</a> | 
-          <small>
-            
-            30
-            grudnia
-            
-            2017
-          </small>
-          <br>I postanowienia noworoczne...</li>
-        
-          <li><a href="/podsumowania/podsumowanie-strony-jaki-jezyk-programowania-po-roku">Podsumowanie po roku - jaki-jezyk-programowania.pl</a> | 
-          <small>
-            
-            20
-            grudnia
-            
-            2017
-          </small>
-          <br>Ogólne podsumowanie projektu + statystyki</li>
-        
-      </ul>
-    
-      <h2 id="recenzje">Recenzje</h2>
-      <ul>
-        
-          <li><a href="/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas">Recenzja książki Junior Developer</a> | 
-          <small>
-            
-            15
-            grudnia
-            
-            2017
-          </small>
-          <br>Autor: Mateusz Kupilas</li>
-        
-          <li><a href="/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz">Recenzja książki Zawód: Programista</a> | 
-          <small>
-            
-            5
-            grudnia
-            
-            2017
-          </small>
-          <br>Autor: Maciej Aniserowicz</li>
-        
-      </ul>
-    
-      <h2 id="top-listy">Top-listy</h2>
-      <ul>
-        
-          <li><a href="/top-listy/top-najlepszych-zr%C3%B3de%C5%82-do-nauki-javy">Darmowe źródła do nauki Javy i nie tylko</a> | 
-          <small>
-            
-            10
-            grudnia
-            
-            2017
-          </small>
-          <br>Przydatne linki do źródeł z których korzystam</li>
-        
-      </ul>
-    
-      <h2 id="wybory-programisty">Wybory-programisty</h2>
-      <ul>
-        
-          <li><a href="/wybory-programisty/liceum-vs-technikum-co-wybrac">Liceum vs technikum - co wybrać jako programista?</a> | 
-          <small>
-            
-            5
-            listopada
-              
-            2017
-          </small>
-          <br>Moje spostrzeżenia i podsumowanie 4 lat w technikum</li>
-        
-      </ul>
-    
-      <h2 id="wzorce-projektowe">Wzorce-projektowe</h2>
-      <ul>
-        
-          <li><a href="/effective-java/wzorzec-projektowy-builder">Wzorzec projektowy Builder</a> | 
-          <small>
-            
-            21
-            kwietnia
-              
-            2018
-          </small>
-          <br>3 warianty. Kiedy jaki stosować? Wady i zalety.</li>
-        
-      </ul>
-    
-  </div>
-</div>
+<script src="/dist/js/archive.min.js"></script>
 
 		</div>
 	</div>
@@ -1053,7 +1740,7 @@
 <hr>
 
 
-<footer>
+<footer class="no-print">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">

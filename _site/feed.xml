@@ -1,4 +1,279 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-04-25T00:51:09+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Wzorzec projektowy Builder</title><link href="https://devcave.pl/effective-java/wzorzec-projektowy-builder" rel="alternate" type="text/html" title="Wzorzec projektowy Builder" /><published>2018-04-21T12:00:00+02:00</published><updated>2018-04-21T12:00:00+02:00</updated><id>https://devcave.pl/effective-java/wzorzec-projektowy-builder</id><content type="html" xml:base="https://devcave.pl/effective-java/wzorzec-projektowy-builder">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-04-28T15:54:32+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Wzorzec projektowy Singleton</title><link href="https://devcave.pl/effective-java/wzorzec-projektowy-singleton" rel="alternate" type="text/html" title="Wzorzec projektowy Singleton" /><published>2018-04-28T14:00:00+02:00</published><updated>2018-04-28T14:00:00+02:00</updated><id>https://devcave.pl/effective-java/wzorzec-projektowy-singleton</id><content type="html" xml:base="https://devcave.pl/effective-java/wzorzec-projektowy-singleton">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;em&gt;Item-3&lt;/em&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Creating and Destroying Objects&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot; id=&quot;Item-1&quot;&gt;Item 1: Consider static factory methods instead of constructors&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/effective-java/wzorzec-projektowy-builder&quot; id=&quot;Item-2&quot;&gt;Item 2: Consider a builder when faced with many constructor parameters&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/effective-java/wzorzec-projektowy-singleton&quot; id=&quot;Item-3&quot;&gt;Item 3: Enforce the singleton property with a private constructor or an enum type&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-4&quot;&gt;Item 4: Enforce noninstantiability with a private constructor&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-5&quot;&gt;Item 5: Prefer dependency injection to hardwiring resources&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-6&quot;&gt;Item 6: Avoid creating unnecessary objects&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-7&quot;&gt;Item 7: Eliminate obsolete object references&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-8&quot;&gt;Item 8: Avoid finalizers and cleaners&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-9&quot;&gt;Item 9: Prefer try-with-resources to try-finally&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+    const link = document.getElementById('Item-3');
+    link.parentElement.parentElement.classList.add('fa-ul', 'custom');
+    link.parentElement.style.listStyleType = 'none';
+    const i = document.createElement('i');
+    i.classList.add('fa-li', 'fa', 'fa-arrow-right');
+    link.insertBefore(i, link.firstChild);
+&lt;/script&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Czasem może się zdarzyć, że:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;klasa ma być unikatowa w systemie&lt;/li&gt;
+  &lt;li&gt;chcemy zarządzać jednym spójnym obiektem dostępnym z wielu miejsc aplikacji&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Wtedy warto zastosować wzorzec projektowy &lt;em&gt;Singleton&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;singleton&quot;&gt;Singleton&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Singleton&lt;/em&gt; jest to po prostu klasa, która jest instancjowana w systemie tylko jeden raz. Każde użycie takiej klasy odnosi się do tej samej instancji.&lt;/p&gt;
+
+&lt;p&gt;Jest kilka sposobów implementacji &lt;em&gt;Singletona&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;public-final-field-singleton&quot;&gt;Public final field Singleton&lt;/h2&gt;
+&lt;p&gt;Dwa pierwsze polegają na deklarowaniu konstruktora jako prywatny i udostępnianiu statycznego dostępu do obiektu:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+  
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Prywatny konstruktor jest wywołany tylko raz, aby zainicjalizować &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;INSTANCE&lt;/span&gt;&lt;/code&gt;. Brak publicznego konstruktora zapewnia, że w systemie będzie istnieć tylko jedna instancja tego obiektu. No chyba, że użyjemy refleksji i metody &lt;code class=&quot;highlighter-rouge&quot;&gt;setAccessible()&lt;/code&gt;. Możemy wykluczyć taką opcję rzucając wyjątek w konstruktorze - jeśli instancja już istnieje:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalStateException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Singleton already constructed&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;static-factory-method-singleton&quot;&gt;Static factory method Singleton&lt;/h2&gt;
+&lt;p&gt;Drugi sposób różni się od pierwszego tym , że udostępniania &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;static factory method&lt;/a&gt; w celu zwracania &lt;code class=&quot;highlighter-rouge&quot;&gt;INSTANCE&lt;/code&gt;, tym samym zadeklarowania tego pola jako prywatne:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+  
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; 
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt; zawsze zwróci ten sam obiekt.&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Bardziej elastyczny sposób.&lt;/p&gt;
+
+&lt;p&gt;Pozwala nam w każdym momencie zmienić zdanie np. możemy sprawić, że ta klasa nie będzie już &lt;em&gt;Singletonem&lt;/em&gt; bez zmieniania API.&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Możliwość napisania generycznej fabryki Singletonów.&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Referencja do metody może być użyta jako Supplier.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Singleton::instance&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;singleton-i-lazy-loading&quot;&gt;Singleton i lazy loading&lt;/h3&gt;
+
+&lt;p&gt;Obie powyższe implementacje tworzą instancję klasy już w momencie załadowania klasy (chciwa inicjalizacja), nawet jeżeli nigdy nie zajdzie potrzeba jej wykorzystania.&lt;/p&gt;
+
+&lt;p&gt;Dzięki implementacji leniwego tworzenia obiektu można odwlec w czasie moment budowania instancji oraz potencjalnie oszczędzić zasoby, jeżeli nie będzie wcale potrzeby jego utworzenia. Można to zrobić w prosty sposób:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Dzięki temu możemy też używać jej statycznych metod bez tworzenia instancji tej klasy.&lt;/p&gt;
+
+&lt;h3 id=&quot;singleton-i-serializable&quot;&gt;Singleton i Serializable&lt;/h3&gt;
+
+&lt;p class=&quot;note&quot;&gt;O serializacji będą osobne wpisy, ale dopiero w &lt;em&gt;Chapter 12. Serialization&lt;/em&gt;. Jeśli nie wiesz co to jest, a chciałbyś się dowiedzieć, to polecam ten &lt;a href=&quot;http://www.samouczekprogramisty.pl/serializacja-w-jezyku-java/&quot;&gt;wpis&lt;/a&gt; na blogu samouczekprogramisty.pl.&lt;/p&gt;
+
+&lt;p&gt;Dodanie &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Serializable&lt;/span&gt;&lt;/code&gt; do klasy nie jest wystarczające, aby singleton był rzeczywiście singletonem. Aby zagwarantować, że w systemie będzie tylko jedna klasa, musimy zadeklarować wszystkie pola jako &lt;code class=&quot;highlighter-rouge&quot;&gt;transient&lt;/code&gt; oraz zdefiniować metodę:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;readResolve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(lub &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;/code&gt; w przypadku gdy nie korzystamy z leniwej inicjalizacji)&lt;/p&gt;
+
+&lt;p&gt;Jeżeli klasa posiada taką metodę, to podczas deserializacji zwracany jest wynik jej działania.&lt;/p&gt;
+
+&lt;p&gt;W przeciwnym wypadku, za każdym razem kiedy serializowana klasa zostanie deserializowana, zostanie utworzona nowa instancja singletona.&lt;/p&gt;
+
+&lt;h3 id=&quot;singleton-i-wielowątkowość&quot;&gt;Singleton i wielowątkowość&lt;/h3&gt;
+
+&lt;p&gt;Aby zabezpieczyć nasz naszą klasę singletona przed wielowątkowością, musimy nieco zmodyfikować metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;getInstance()&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Jest to tak zwany &lt;em&gt;double-check-locking pattern&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Jeśli dwa wątki jednocześnie przejdą pierwszego ifa i będą chciały pobrać instancję to zakolejkują się przed &lt;code class=&quot;highlighter-rouge&quot;&gt;synchronized()&lt;/code&gt;. Dodatkowy zagnieżdżony &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt; wyeliminuję próbę stworzenia duplikatu.&lt;/p&gt;
+
+&lt;p&gt;Może dojść do sytuacji, w której jeden wątek ustawi poprawnie wartość zmiennej, ale drugi podejmie próbę jej odczytania, zanim zostanie ona jeszcze zsynchronizowana.&lt;/p&gt;
+
+&lt;p&gt;Dzięki oznaczeniu zmiennej jako &lt;code class=&quot;highlighter-rouge&quot;&gt;volatile&lt;/code&gt; niezależnie od tego, który wątek próbuje ją odczytać, jej wartość będzie zawsze spójna.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;volatile&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;static-holder-singleton&quot;&gt;Static holder Singleton&lt;/h2&gt;
+
+&lt;p&gt;Jest to bezpieczne rozwiązanie, które działa zgodnie z oczekiwaniami w wielowątkowym środowisku. Dzięki niemu mamy również zapewnione leniwe tworzenie instancji.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Holder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalStateException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Singleton already constructed&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Holder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Holder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;W tym rozwiązaniu cały trud poprawnej implementacji wzorca zrzucamy na maszynę wirtualną Javy. Zmienna &lt;code class=&quot;highlighter-rouge&quot;&gt;INSTANCE&lt;/code&gt; zostanie zainicjowana dopiero w momencie załadowania klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Holder&lt;/code&gt;, czyli podczas pierwszego wywołania metody &lt;code class=&quot;highlighter-rouge&quot;&gt;getInstance()&lt;/code&gt;. W konstruktorze opcjonalnie bronimy się przed refleksją.&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Static factory method&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Lazy initialization&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Thread safe&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Dobry zamiennik za &lt;em&gt;double-check-locking pattern&lt;/em&gt;, który jest uważany za antywzorzec.&lt;/p&gt;
+
+&lt;h2 id=&quot;enum-singleton&quot;&gt;Enum Singleton&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Korzystając z tego rozwiązania, osiągniemy wynik bardzo podobny do klasy &lt;a href=&quot;#public-final-field-singleton&quot;&gt;Public final field Singleton&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Ten sposób jednak:&lt;/p&gt;
+
+&lt;p class=&quot;pros pros&quot;&gt;Jest bardziej zwięzły&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Zapewnia odpowiednią serializację od razu&lt;/p&gt;
+
+&lt;p&gt;Zapewnia nienaruszalna gwarancję jednej instancji&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Jest odporny na refleksję&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Jest odporny na klonowanie&lt;/p&gt;
+
+&lt;p&gt;Jeśli można się do czegoś przyczepić to:&lt;/p&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Brak &lt;em&gt;lazy loading&lt;/em&gt;&lt;/p&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Enum nie może rozszerzać innej klasy&lt;/p&gt;
+
+&lt;p&gt;Ale za to może implementować interfejs.&lt;/p&gt;
+
+&lt;p&gt;Ten sposób wydaję się nieco nienaturalny, ale w książce &lt;em&gt;Effective Java&lt;/em&gt; autor mówi, że często jest to najlepszy sposób implementacji &lt;em&gt;Singletona&lt;/em&gt;. Jednak &lt;a href=&quot;#static-holder-singleton&quot;&gt;Singleton static holder&lt;/a&gt;  też jest całkiem dobrym rozwiązaniem - jest podobnie łatwy w implementacji, również cały ciężar poprawnej implementacji zrzucamy na mechanizmy Javy i wydaje się być bardziej naturalnym rozwiązaniem.&lt;/p&gt;
+
+&lt;h1 id=&quot;singleton-jako-antywzorzec&quot;&gt;Singleton jako antywzorzec&lt;/h1&gt;
+
+&lt;p&gt;Singleton przez wielu programistów uważany jest za antywzorzec projektowy. Dzieje się tak głównie dlatego, że jest on dość często nadużywany lub często niepoprawnie implementowany.&lt;/p&gt;
+
+&lt;p&gt;Większość z zarzutów wobec niego przy odrobienie elastyczności można obejść lub nawet odrzucić.&lt;/p&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Utrudnia testowanie aplikacji&lt;/p&gt;
+
+&lt;p&gt;Testy są tylko utrudnione, jeżeli w singletonie przechowywany jest stan. Należy wtedy pamiętać, by był on odpowiednio zainicjowany lub wyczyszczony przed każdym wywołaniem testu.
+Może też być problem w zmockowaniu &lt;em&gt;Singletona&lt;/em&gt;, chyba, że implementuje interfejs, który służy jako jego typ.&lt;/p&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Zwiększa powiązania w kodzie (&lt;em&gt;tight coupling&lt;/em&gt;)&lt;/p&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Łamie zasadę jednej odpowiedzialności (single responsibility principle)&lt;/p&gt;
+
+&lt;p&gt;Klasa zaimplementowana jako singleton z założenia jest już odpowiedzialna za dwie rzeczy: za realizację swoich funkcji biznesowych oraz zarządzanie instancją.&lt;/p&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Łamie zasadę &lt;a href=&quot;/notatnik-juniora/zasady-projektowania-kodu#o---openclosed-principle&quot;&gt;otwarte-zamknięte&lt;/a&gt; (Open/Closed principle), ponieważ nie można go rozszerzać&lt;/p&gt;
+
+&lt;p&gt;W pierwotnej wersji wzorca rzeczywiście ciężko jest go rozszerzać. Można jednak połączyć singleton z fabryką i nie będzie stanowiło to już problemu.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SingletonFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// singleton implementation&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Jest to obiektowy zamiennik zmiennej globalnej&lt;/p&gt;
+
+&lt;p&gt;A jak wiemy zmienne globalne to zło…&lt;/p&gt;
+
+&lt;h1 id=&quot;podsumowanie&quot;&gt;Podsumowanie&lt;/h1&gt;
+&lt;p&gt;Singleton nie musi być wcale zły, pod warunkiem, że zaimplementujemy go w odpowiedni sposób. Należy jednak pamiętać, by go nie nadużywać i nie starać się go wprowadzać wszędzie na siłę. Wzorzec ten powinien być stosowany raczej sporadycznie.&lt;/p&gt;
+
+&lt;p&gt;Również z rozwagą trzeba podejść do przedstawianych zabezpieczeń przed różnymi atakami. W przypadku prostych aplikacji, szczególnie jeśli zajmujemy się nią tylko my, najprostsza implementacja w zupełności wystarczy.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><category term="Wzorce-projektowe" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item-3 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry><entry><title type="html">Idiotoodporne API klasy</title><link href="https://devcave.pl/notatnik-juniora/idiotoodporne-api-klasy" rel="alternate" type="text/html" title="Idiotoodporne API klasy" /><published>2018-04-21T15:00:00+02:00</published><updated>2018-04-21T15:00:00+02:00</updated><id>https://devcave.pl/notatnik-juniora/idiotoodporne-api-klasy</id><content type="html" xml:base="https://devcave.pl/notatnik-juniora/idiotoodporne-api-klasy">&lt;html lang=&quot;pl&quot;&gt;
+&lt;head&gt;
+  &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0; URL='https://bulldogjob.pl/news/348-idiotoodporne-api-klasy-czyli-jakie'&quot; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</content><author><name>Codeboy</name></author><category term="Notatnik-Juniora" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><summary type="html"></summary></entry><entry><title type="html">Wzorzec projektowy Builder</title><link href="https://devcave.pl/effective-java/wzorzec-projektowy-builder" rel="alternate" type="text/html" title="Wzorzec projektowy Builder" /><published>2018-04-21T12:00:00+02:00</published><updated>2018-04-21T12:00:00+02:00</updated><id>https://devcave.pl/effective-java/wzorzec-projektowy-builder</id><content type="html" xml:base="https://devcave.pl/effective-java/wzorzec-projektowy-builder">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -9,7 +284,7 @@
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot; id=&quot;Item-1&quot;&gt;Item 1: Consider static factory methods instead of constructors&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/effective-java/wzorzec-projektowy-builder&quot; id=&quot;Item-2&quot;&gt;Item 2: Consider a builder when faced with many constructor parameters&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-3&quot;&gt;Item 3: Enforce the singleton property with a private constructor or an enum type&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/effective-java/wzorzec-projektowy-singleton&quot; id=&quot;Item-3&quot;&gt;Item 3: Enforce the singleton property with a private constructor or an enum type&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-4&quot;&gt;Item 4: Enforce noninstantiability with a private constructor&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-5&quot;&gt;Item 5: Prefer dependency injection to hardwiring resources&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-6&quot;&gt;Item 6: Avoid creating unnecessary objects&lt;/a&gt;&lt;/li&gt;
@@ -257,7 +532,7 @@
 
 &lt;h2 id=&quot;fluent-builder&quot;&gt;Fluent Builder&lt;/h2&gt;
 
-&lt;p&gt;Ten rózni sięod pierwszego tym, że &lt;em&gt;Builder&lt;/em&gt; implementujemy jako osobną klasę:&lt;/p&gt;
+&lt;p&gt;Ten różni się od pierwszego tym, że &lt;em&gt;Builder&lt;/em&gt; implementujemy jako osobną klasę:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GoalBuilder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
@@ -286,7 +561,7 @@
 
 &lt;p class=&quot;cons&quot;&gt;Musimy udostępnić publiczny konstruktor.&lt;/p&gt;
 
-&lt;p&gt;Często takie rozwiązanie się nie sprawdza np. ze wzglęu na to, że obiekt powinien być niemutowalny, dlatego preferowana jest implementacja jako wewnętrzna statyczna klasa.&lt;/p&gt;
+&lt;p&gt;Często takie rozwiązanie się nie sprawdza np. ze względu na to, że obiekt powinien być niemutowalny, dlatego preferowana jest implementacja jako wewnętrzna statyczna klasa.&lt;/p&gt;
 
 &lt;p&gt;Użycie wygląda podobnie:&lt;/p&gt;
 
@@ -330,7 +605,7 @@
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Jest to “scraper”, ale zasada podobna. Po prostu zamiast metod z przedrostkiem &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt;, są &lt;code class=&quot;highlighter-rouge&quot;&gt;get&lt;/code&gt;. Buildery mają zazwyczaj więcej takich metod, ponieważ stosuje je się do tworzenia skoplikowanych obiektów.&lt;/p&gt;
+&lt;p&gt;Jest to “scraper”, ale zasada podobna. Po prostu zamiast metod z przedrostkiem &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt;, są &lt;code class=&quot;highlighter-rouge&quot;&gt;get&lt;/code&gt;. Buildery mają zazwyczaj więcej takich metod, ponieważ stosuje je się do tworzenia skomplikowanych obiektów.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;ConcreteBuilders&lt;/em&gt;:&lt;/p&gt;
 
@@ -484,7 +759,7 @@
 
 &lt;p&gt;Kod buildera jest dosyć rozwlekły. Koszt napisania buildera nie jest może zbyt duży (szczególnie jeśli zostanie wygenerowany), jednak może mieć znaczenie wydajnościowe. Dlatego ten wzorzec powinniśmy stosować tylko wtedy kiedy klasa będzie mieć przynajmniej 4 wymagane pola (lub wiemy, że ta liczba urośnie) i nie jest to aplikacja &lt;em&gt;performance-critical&lt;/em&gt;. Przy mniejszej ilości parametrów jest to &lt;em&gt;overengineering&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot;&gt;Gdyby w Javie występowały parametry nazwane (tak jak np. w Kotlinie), to ten wzorzec byłby zbędny. Możnaby powiedzięć, ze jest to bardziej obejście dla brakującej funkcjonalnośći języka niż wzorzec projektowy. Gdyby Java miała taki &lt;em&gt;feature&lt;/em&gt; to wystarczyłoby użyć konstruktora:&lt;/p&gt;
+&lt;p class=&quot;note&quot;&gt;Gdyby w Javie występowały parametry nazwane (tak jak np. w Kotlinie), to ten wzorzec byłby zbędny. Można by powiedzieć, ze jest to bardziej obejście dla brakującej funkcjonalności języka niż wzorzec projektowy. Gdyby Java miała taki &lt;em&gt;feature&lt;/em&gt; to wystarczyłoby użyć konstruktora:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Goal&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;goal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Goal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Run the marathon&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; 
@@ -502,7 +777,7 @@
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot; id=&quot;Item-1&quot;&gt;Item 1: Consider static factory methods instead of constructors&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/effective-java/wzorzec-projektowy-builder&quot; id=&quot;Item-2&quot;&gt;Item 2: Consider a builder when faced with many constructor parameters&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-3&quot;&gt;Item 3: Enforce the singleton property with a private constructor or an enum type&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/effective-java/wzorzec-projektowy-singleton&quot; id=&quot;Item-3&quot;&gt;Item 3: Enforce the singleton property with a private constructor or an enum type&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-4&quot;&gt;Item 4: Enforce noninstantiability with a private constructor&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-5&quot;&gt;Item 5: Prefer dependency injection to hardwiring resources&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;&quot; class=&quot;disabled&quot; id=&quot;Item-6&quot;&gt;Item 6: Avoid creating unnecessary objects&lt;/a&gt;&lt;/li&gt;
@@ -631,9 +906,9 @@
 
 &lt;p class=&quot;pros&quot;&gt;Nie jest wymuszone tworzenie nowego obiektu z każdym wywołaniem&lt;/p&gt;
 
-&lt;p&gt;W przeciwieństiwe do konstruktorów, statyczą fabryką możemy zwracać cały czas ten sam obiekt. Dzięki temu klasy niemutowalne moga używać wcześniej stworzonych istancji lub cachować istancję podczas jej tworzenia i później ją zwracać z każdem wywołaniem tej metody, co eliminuje tworzenie niepotrzebnych duplikatów danego obiektu.&lt;/p&gt;
+&lt;p&gt;W przeciwieństwie do konstruktorów, statyczną fabryką możemy zwracać cały czas ten sam obiekt. Dzięki temu klasy niemutowalne mogą używać wcześniej stworzonych instancji lub cachować instancję podczas jej tworzenia i później ją zwracać z każdym wywołaniem tej metody, co eliminuje tworzenie niepotrzebnych duplikatów danego obiektu.&lt;/p&gt;
 
-&lt;p&gt;Przykładem tu jest wcześniej pokazywana metoda &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;, która nigdy nie tworzy nowego obiektu lub &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;, która zwraca “scacheowaną” istancję &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt;, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedzialew występują znacznie częściej, więc taka optymalizacja ma sens.&lt;/p&gt;
+&lt;p&gt;Przykładem tu jest wcześniej pokazywana metoda &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;, która nigdy nie tworzy nowego obiektu lub &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;, która zwraca “scacheowaną” istancję &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt;, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedziale występują znacznie częściej, więc taka optymalizacja ma sens.&lt;/p&gt;
 
 &lt;p class=&quot;pros&quot;&gt;Może zwracać każdy podtyp zwracanego obiektu&lt;/p&gt;
 
@@ -641,11 +916,11 @@
 
 &lt;p&gt;Dzięki temu możemy zdefiniować metodę na interfejsie, która zwróci nam konkretną implementację tego interfejsu.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot;&gt;Przed Java 8 nie było możliwe definowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Type&lt;/code&gt; lądowały w nieinstancjonowalnej klasie &lt;code class=&quot;highlighter-rouge&quot;&gt;Types&lt;/code&gt;. Dosyć popularnym przykładem jest &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.Collections&lt;/code&gt;. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.&lt;/p&gt;
+&lt;p class=&quot;note&quot;&gt;Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Type&lt;/code&gt; lądowały w nieinstancjonowanej klasie &lt;code class=&quot;highlighter-rouge&quot;&gt;Types&lt;/code&gt;. Dosyć popularnym przykładem jest &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.Collections&lt;/code&gt;. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.&lt;/p&gt;
 
 &lt;p class=&quot;pros&quot;&gt;Z każdym wywołaniem może być zwrócona inna implementacja&lt;/p&gt;
 
-&lt;p&gt;A to dzięki przekazywanemu parametrowi na podstawie którego może zostać wybrana implementacja. Pozwala to np. na zwrócenie wydajniejszej implemetnacji dla konkretnego przypadku. Jest to niewidoczne dla klienta i może być rozszerzalne.&lt;/p&gt;
+&lt;p&gt;A to dzięki przekazywanemu parametrowi na podstawie którego może zostać wybrana implementacja. Pozwala to np. na zwrócenie wydajniejszej implementacji dla konkretnego przypadku. Jest to niewidoczne dla klienta i może być rozszerzalne.&lt;/p&gt;
 
 &lt;p&gt;Przykładem może być &lt;code class=&quot;highlighter-rouge&quot;&gt;EnumSet&lt;/code&gt; z standardowej biblioteki. Nie posiada publicznego konstruktora, tylko statyczne fabryki, które zwracają różne implementację w zależności od wielkości Enuma. Jeśli ma mniej niż 64 elementy zwracany jest &lt;code class=&quot;highlighter-rouge&quot;&gt;RegularEnumSet&lt;/code&gt;, w przeciwnym wypadku &lt;code class=&quot;highlighter-rouge&quot;&gt;JumboEnumSet&lt;/code&gt;.&lt;/p&gt;
 
@@ -675,7 +950,7 @@
 
 &lt;p&gt;&lt;em&gt;Static factory method&lt;/em&gt; nie ma żadnych poważnych wad. Jeśli można by się do czegoś przyczepić to:&lt;/p&gt;
 
-&lt;p class=&quot;cons&quot;&gt;Klasa bez konstrukora nie może być rozszerzana&lt;/p&gt;
+&lt;p class=&quot;cons&quot;&gt;Klasa bez konstruktora nie może być rozszerzana&lt;/p&gt;
 
 &lt;p&gt;Jednak może to wyjść też na korzyść, bo zachęca to do używania &lt;a href=&quot;/notatnik-juniora/zasady-projektowania-kodu#composition-over-inheritance&quot;&gt;kompozycji zamiast dziedziczenia&lt;/a&gt; oraz jest wymagane przez klasy &lt;em&gt;immutable&lt;/em&gt;.&lt;/p&gt;
 
@@ -683,46 +958,47 @@
 
 &lt;p&gt;Mały minusem jest też to, że statyczne fabryki nie są traktowane inaczej niż zwykłe metody, a więc są z nimi wymieszane. Trzeba więc przelecieć całą listę dostępnych metod w obiekcie w poszukiwaniu takiej, która zwraca ten obiekt. Przy szukaniu/tworzeniu takich metod warto zaznajomić się z konwencją nazewniczą takich metod, a najczęściej wyglądają tak:&lt;/p&gt;
 
-&lt;p&gt;from - konwersja np.:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;from&lt;/code&gt; - konwersja np.:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;of - agregacja np.:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;of&lt;/code&gt; - agregacja np.:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;faceCards&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EnumSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;JACK&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QUEEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KING&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;valueOf - bardziej rozwlekła wersja from lub of np.:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;valueOf&lt;/code&gt; - bardziej rozwlekła wersja &lt;code class=&quot;highlighter-rouge&quot;&gt;from&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;of&lt;/code&gt; np.:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;BigInteger&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BigInteger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MAX_VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;instance lub getInstance - może zwracać obiekt opisany przez parametr np.:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;instance&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;getInstance&lt;/code&gt; - może zwracać obiekt opisany przez parametr np.:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;StackWalker&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;luke&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;StackWalker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;create lub newInstance - podobnie jak instance lub getInstance, tyle, że tu za każdym razem powinien być to nowy obiekt np.:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;create&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;newInstance&lt;/code&gt; - podobnie jak &lt;code class=&quot;highlighter-rouge&quot;&gt;instance&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;getInstance&lt;/code&gt;, tyle, że tu za każdym razem powinien być to nowy obiekt np.:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arrayLen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;getType - podobnie jak getInstance, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;getType&lt;/code&gt; - podobnie jak &lt;code class=&quot;highlighter-rouge&quot;&gt;getInstance&lt;/code&gt;, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;FileStore&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFileStore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;newType - podobnie jak newInstance, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;newType&lt;/code&gt; - podobnie jak &lt;code class=&quot;highlighter-rouge&quot;&gt;newInstance&lt;/code&gt;, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;BufferedReader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;br&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newBufferedReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;type - zwięzła alternatywa dla getType i newType np.:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; - zwięzła alternatywa dla &lt;code class=&quot;highlighter-rouge&quot;&gt;getType&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;newType&lt;/code&gt; np.:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Complaint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;litany&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;legacyLitany&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Jak widać statyczne fabryki mają dużo zalet, dlatego warto rozważyć ich implementowanie. Z kolei kiedy używamy jakiegoś API i są dostępne zarówno konstruktory jak i statyczne fabryki, w większości przypadków powinniśmy użyć tych drugich. Często wewnątrz uruchamiane są funkcje inicjujące, które są niezbędne do stworzenia danego obiektu lub mają znaczenie wydajnościowe.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item-1 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry><entry><title type="html">Pierwsza praca jako programista</title><link href="https://devcave.pl/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista" rel="alternate" type="text/html" title="Pierwsza praca jako programista" /><published>2018-04-07T11:00:00+02:00</published><updated>2018-04-07T11:00:00+02:00</updated><id>https://devcave.pl/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista</id><content type="html" xml:base="https://devcave.pl/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista">&lt;p&gt;Trochę minęło czasu od ostatniego posta. Związane to było z pójściem do mojej pierwszej pracy jako programista. Przez ten okres pojawił się tylko jeden wpis związany z konkursem, a to dlatego, że nie miałem zbytnio czasu na blogowanie. Pierwsze dwa miesiące uczestniczyłem w szkoleniu organizowanym przez firmę, które było całkiem intensywne. Pracuję już ponad 3 miesiące, więc podzielę się w końcu jak to u mnie wygląda.&lt;/p&gt;
+
+&lt;p&gt;Jak widać statyczne fabryki mają dużo zalet, dlatego warto rozważyć ich implementowanie. Z kolei kiedy używamy jakiegoś API i są dostępne zarówno konstruktory jak i statyczne fabryki, w większości przypadków powinniśmy użyć tych drugich. Często wewnątrz uruchamiane są funkcje inicjujące, które są niezbędne do stworzenia danego obiektu lub mają znaczenie wydajnościowe.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item-1 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry><entry><title type="html">Pierwsza praca jako programista</title><link href="https://devcave.pl/moje-doswiadczenia/pierwsza-praca-jako-programista" rel="alternate" type="text/html" title="Pierwsza praca jako programista" /><published>2018-04-07T11:00:00+02:00</published><updated>2018-04-07T11:00:00+02:00</updated><id>https://devcave.pl/moje-doswiadczenia/pierwsza-praca-jako-programista</id><content type="html" xml:base="https://devcave.pl/moje-doswiadczenia/pierwsza-praca-jako-programista">&lt;p&gt;Trochę minęło czasu od ostatniego postu. Związane to było z pójściem do mojej pierwszej pracy jako programista. Przez ten okres pojawił się tylko jeden wpis związany z konkursem, a to dlatego, że nie miałem zbytnio czasu na blogowanie. Pierwsze dwa miesiące uczestniczyłem w szkoleniu organizowanym przez firmę, które było całkiem intensywne. Pracuję już ponad 3 miesiące, więc podzielę się w końcu jak to u mnie wygląda.&lt;/p&gt;
 
 &lt;p&gt;Szykuję też nową regularną serię na bloga, więc teraz wpisy będą częściej, ale wszystko po kolei.&lt;/p&gt;
 
@@ -733,7 +1009,7 @@
 &lt;p&gt;Razem ze mną nowa była jeszcze jedna osoba, która znała kilka osób w firmie, więc dosyć łatwo było się zintegrować.&lt;/p&gt;
 
 &lt;h2 id=&quot;pierwsze-zadanie&quot;&gt;Pierwsze zadanie&lt;/h2&gt;
-&lt;p&gt;Więc tak jak wspomniałem - nie zostałem rzucony od razu na głęboką wodę, nie dostałem od razu żadnych tasków. W firmie gdzie pracuję najpierw jest ok. 2 miesięczne szkolenie podzielone na różne sekcje. M.in.:&lt;/p&gt;
+&lt;p&gt;Więc tak jak wspomniałem - nie zostałem rzucony od razu na głęboką wodę, nie dostałem od razu żadnych tasków. W firmie gdzie pracuję najpierw jest ok. 2 miesięczne szkolenie podzielone na różne sekcje, m.in.:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Odświeżenie wiedzy na temat Javy i dobrych praktyk &lt;br /&gt;
@@ -771,7 +1047,7 @@ mini wykłady + do napisania aplikacja CRUD. Trzeba było to zrobić w czystej J
 
 &lt;p&gt;Ale trzymajcie za mnie kciuki! Pierwszy wpis w następną sobotę :)&lt;/p&gt;
 
-&lt;p&gt;Miłego dnia!&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Moje-doświadczenia" /><category term="Moje-doświadczenia" /><category term="Pierwsza-praca" /><summary type="html">Trochę minęło czasu od ostatniego posta. Związane to było z pójściem do mojej pierwszej pracy jako programista. Przez ten okres pojawił się tylko jeden wpis związany z konkursem, a to dlatego, że nie miałem zbytnio czasu na blogowanie. Pierwsze dwa miesiące uczestniczyłem w szkoleniu organizowanym przez firmę, które było całkiem intensywne. Pracuję już ponad 3 miesiące, więc podzielę się w końcu jak to u mnie wygląda.</summary></entry><entry><title type="html">Konkurs Gynveala - gra do 20KB (strategia turowa)</title><link href="https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb" rel="alternate" type="text/html" title="Konkurs Gynveala - gra do 20KB (strategia turowa)" /><published>2018-01-22T13:00:00+01:00</published><updated>2018-01-22T13:00:00+01:00</updated><id>https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb</id><content type="html" xml:base="https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb">&lt;p&gt;&lt;a href=&quot;http://gynvael.coldwind.pl/?id=668&quot;&gt;Konkurs&lt;/a&gt; rozpoczął się jeszcze przed nowym rokiem. Polegał na stworzeniu turowej gry taktycznej do 20KB, przy użyciu tylko i wyłącznie czystego Javascriptu. Wszystko musiało być też w jednym pliku &lt;span class=&quot;file&quot;&gt;index.html&lt;/span&gt;. Nie można było więc dociągać z innych źródeł obrazków, dźwięku, css-ów czy javascriptu. Wszystko musiało być wrzucone do jednego pliku. Ten limit stanowił główne wyzwanie. Oznaczało to też, że nie ma możliwości użycia żadnej biblioteki do tworzenia gier czy jakiegoś silnika. Nagrody prezentowały się następująco:&lt;/p&gt;
+&lt;p&gt;Miłego dnia!&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Moje-doświadczenia" /><category term="Moje-doświadczenia" /><category term="Pierwsza-praca" /><summary type="html">Trochę minęło czasu od ostatniego postu. Związane to było z pójściem do mojej pierwszej pracy jako programista. Przez ten okres pojawił się tylko jeden wpis związany z konkursem, a to dlatego, że nie miałem zbytnio czasu na blogowanie. Pierwsze dwa miesiące uczestniczyłem w szkoleniu organizowanym przez firmę, które było całkiem intensywne. Pracuję już ponad 3 miesiące, więc podzielę się w końcu jak to u mnie wygląda.</summary></entry><entry><title type="html">Konkurs Gynveala - gra do 20KB (strategia turowa)</title><link href="https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb" rel="alternate" type="text/html" title="Konkurs Gynveala - gra do 20KB (strategia turowa)" /><published>2018-01-22T13:00:00+01:00</published><updated>2018-01-22T13:00:00+01:00</updated><id>https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb</id><content type="html" xml:base="https://devcave.pl/inne/konkurs-gynveala-gra-do-20kb">&lt;p&gt;&lt;a href=&quot;http://gynvael.coldwind.pl/?id=668&quot;&gt;Konkurs&lt;/a&gt; rozpoczął się jeszcze przed nowym rokiem. Polegał na stworzeniu turowej gry taktycznej do 20KB, przy użyciu tylko i wyłącznie czystego Javascriptu. Wszystko musiało być też w jednym pliku &lt;span class=&quot;file&quot;&gt;index.html&lt;/span&gt;. Nie można było więc dociągać z innych źródeł obrazków, dźwięku, css-ów czy javascriptu. Wszystko musiało być wrzucone do jednego pliku. Ten limit stanowił główne wyzwanie. Oznaczało to też, że nie ma możliwości użycia żadnej biblioteki do tworzenia gier czy jakiegoś silnika. Nagrody prezentowały się następująco:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Best Game Award:&lt;br /&gt;
@@ -1024,7 +1300,7 @@ Top 3: 25 USD (or equivalent…)&lt;/p&gt;
 
 &lt;p&gt;Z projektu jestem jak najbardziej zadowolony i cieszę się, że nie wyszła z tego porażka - jak wiele osób spekulowało na forach.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Podsumowania" /><category term="Podsumowania" /><category term="Jaki-jezyk-programowania" /><summary type="html">Podczas inicjatywy DSP2017 powstały 3 wpisy, które opisują powstanie i założenia projektu jaki-jezyk-programowania.pl, trudności na początku i plany związane z projektem, które miałem w tamtym okresie: Wprowadzenie Początki projektu Co dalej z projektem jaki-jezyk-programowania.pl W tym wpisie opowiem jak to wygląda obecnie + dorzucę kilka liczb ;) Początki Dokładnie rok i pięć dni temu, poszedł pierwszy commit projektu jaki-jezyk-programowania.pl. Pomysł zrodził się kilka dni wcześniej. Zwerbowałem dwóch kolegów do projektu i od razu wykupiliśmy domenę. Cena nie była wielka, bo 12 zł, więc mała inwestycja, a mieliśmy pewność, że nikt nas nie uprzedzi. Dziś mija równo rok od jej wykupienia, właśnie ją odnowiłem za cenę 72 zł. (Domena wykupiona jest na firehost.pl, ale planuję migrować ją na OVH, tam gdzie mam domenę tego bloga. Cena odnowienia jest tam o ok. 20zł niższa.) Był to czas gdy mniej więcej zaczynałem z programowaniem webowym. Był to więc projekt, na którym uczyłem się większości technologii webowych. Można pomyśleć, że dziwne, że jako początkujący programista zabrałem się za tworzenie strony, która ma pomagać w wyborze języka programowania do danego zastosowania. I słusznie. Było to dosyć mało przemyślane i wiedza, którą posiadałem, najzwyczajniej nie umożliwiała stworzenia takiej strony o dobrej jakości. Krótko mówiąc, przyznaję, że porwałem się z motyką na słońce. No cóż, stało się. Ale pociągnąłem projekt dalej - w pojedynkę, a spowodowane to było przez kilka czynników. Gdy strona miała już funkcjonalny prototyp postanowiliśmy pokazać pomysł na forach i zebrać jakiś feedback. I zebraliśmy. Nie był zbyt pozytywny. Oczywiście znalazły się osoby, które pochwaliły pomysł, ale też i takie, które uznały go za “czerstwy”, bo widzieli podobną stronę po angielsku lub przez inny powód. Sporo osób też krytykowało wartość merytoryczną strony. I słusznie, bo wtedy była tragedia, co przyznaję. No ale w końcu to był tylko prototyp. Osoby z którymi robiłem projekt po tym zrezygnowały. Był to też okres maturalny, więc dodatkowym argumentem był czas. Wydaję mi się też, że po feedbacku tylko ja dalej wierzyłem, że coś z tego projektu będzie. Chciałem mimo wszystko dociągnąć projekt do końca. Szkoda mi było poświęconego na niego czasu. Dziś mogę powiedzieć, że nie żałuję, mimo, że poświeciłem na niego jeszcze 3-4 razy więcej czasu. Ale nie uważam tego za czas stracony. Rozwój Od tamtego momentu stale starałem się poprawiać i rozbudowywać stronę. Rozwijałem i uczyłem się wraz z projektem, który pochłaniał bardzo dużo czasu, bo w końcu sam musiałem, niemalże od postaw, mniej więcej ogarnąć każdą technologię przedstawianą na stronie. Ale dzięki temu bardzo dużo się nauczyłem. Próbowałem też znaleźć kogoś do pomocy, ale nie było odzewu, więc w 90% zrobiłem go sam. Obecnie uważam, że projekt jest na akceptowalnym poziomie, wiadomo nic nie jest idealne, ale jestem dosyć zadowolony. Strona przeszła wiele zmian, obecnie jest na GitHubie 261 commitów, nie wszystkie są jakieś znaczące, ale widać, że trochę tego było. W ostatnim czasie, gdy już miałem więcej wiedzy, postarałem się tak zrefaktoryzować kod, żeby był łatwy w modyfikacji i dodawaniu nowych technologii wraz z opisami. Obecnie jest to bardzo proste, więc projekt łatwo się rozwija. Tak wygląda wykres aktywności commitów na GitHubie: Czasem nie widać tu tego dobrze, bo na przykład dużo pracy poszło w redagowanie tekstów, a nie jest to zauważalne na wykresie. To są bardziej te “spokojniejsze” okresy. Od dwóch miesięcy wprowadziłem też sposób na monetyzację strony - podjąłem się partnerstwa z Helion i dodałem polecane książki, dzięki czemu jak ktoś kupi książkę przechodząc z mojej strony to dostaję od tego 5% prowizji. Nie jest to dużo, ale na opłacenie domeny spokojnie wystarcza. W okresie promocji nawet wychodzi trochę na plus, z czego też jestem zadowolony. Nie chciałem zaśmiecać strony reklamami, więc myślę, że jest to dobra alternatywa. Do tego nawet przydatna dla użytkowników. Statystyki Strona nie ma jakiegoś ogromnego ruchu, co nie jest dziwne, bo w końcu jest skierowana dla wąskiej grupy osób. Jest to na poziomie 100-200 wejść dziennie. W ostatnich miesiącach było nieco więcej, dzięki temu, że strona jest już jest na lepszym poziomie i ma lepszą pozycję w Google. Poza tym, przyczynił się do tego też okres promocyjny na książki. Rekord to 8063 wejść z 28 października. Wpisując fraze, “jaki język programowania”, jest na pierwszej pozycji. Jest to pewnie w dużym stopniu zasługa domeny. Z kolei dla “jaki język programowania wybrać” jest na 3 pozycji. To jest chyba najbardziej popularna opcja. Gdy pomieszamy różne frazy, jakie ludzie mogą wpisać, to też jest zazwyczaj na pierwszej stronie, więc jest dobrze. Wykres z Google Analitics od początku istnienia strony, czyli od lutego, wygląda tak: Po wystrzale 8k odsłon, ruch na stronie jest już zadowalający. Przez cały okres było: Wszystkich odsłon - 51 294 Unikalnych użytkowników - 6 318 Najczęściej były to wejścia z: facebook.com forum.pasja-informatyki.pl m.facebook.com 4programmers.net l.facebook.com devcave.pl Jeśli chodzi o zachowanie na stronie to, jak można się spodziewać, najczęściej klikana była strona “start”, czyli wizard wyboru języka. Pomijając to, najczęstsze wybory padały na: Python Java JavaScript To takie znaczące top 3. Później: C# C++ I reszta na podobnym poziomie nieco dalej. Wygląda to podobnie do obecnych trendów, jakie podają rożnego rodzaju rankingi. Podsumowując Jak na pierwszy projekt to według mnie jest dobrze. Nie można nazwać tego porażką czy coś. Projekt będzie pewnie dalej rozwijany i aktualizowany, ale już raczej z mniejszą częstotliwością. Tym bardziej, że zaczynam swoją pierwszą pracę jako Java Junior Developer. Właśnie, tak btw: oprócz matury, podczas rozwijania projektu rozwijałem się w kierunku Javy, bo z tą technologią chciałem pracować. Brałem również udział w DSP2017, gdzie trzeba było blogować z częstotliwością 2 posty na tydzień (lista postów). Ponadto, 2 miesiące spędziłem dorabiając/na wakacjach za granicą, gdzie mało dotykałem komputera. Więc był to naprawdę intensywny rok i sporo udało się zrobić :) Z projektu jestem jak najbardziej zadowolony i cieszę się, że nie wyszła z tego porażka - jak wiele osób spekulowało na forach.</summary></entry><entry><title type="html">Recenzja książki Junior Developer</title><link href="https://devcave.pl/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas" rel="alternate" type="text/html" title="Recenzja książki Junior Developer" /><published>2017-12-15T08:00:00+01:00</published><updated>2017-12-15T08:00:00+01:00</updated><id>https://devcave.pl/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas</id><content type="html" xml:base="https://devcave.pl/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas">&lt;p&gt;&lt;img src=&quot;/img/reviews/junior-dev/book.png&quot; alt=&quot;Książka Junior Developer&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;W recenzji będę się odnosił i porównywał z książka Macieja Aniserowicza - Zawód: Programista, którą też &lt;a href=&quot;https://devcave.pl/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz&quot;&gt;recenzowałem&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;W recenzji będę się odnosił i porównywał z książka Macieja Aniserowicza - Zawód: Programista, którą też &lt;a href=&quot;/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz&quot;&gt;recenzowałem&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h1 id=&quot;o-autorze&quot;&gt;O autorze&lt;/h1&gt;
 
@@ -1147,346 +1423,4 @@ Top 3: 25 USD (or equivalent…)&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;img src=&quot;/img/eng.png&quot; alt=&quot;Język Angielski&quot; /&gt; &lt;strong&gt;&lt;a href=&quot;https://github.com/kdn251/interviews&quot;&gt;github.com/kdn251/interviews&lt;/a&gt;&lt;/strong&gt; - Projekt na GitHubie, który w bardziej dogłębny sposób przygotowuje do rozmów kwalifikacyjnych. Wraz z przykładami. Znajdziemy też tam nieco zadań jakie występują w rekrutacji do firm takich jak Airbnb, Amazon, Facebook, Google, LinkedIn, Twitter, Uber.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Codeboy</name></author><category term="Top-listy" /><category term="Top-listy" /><category term="Java" /><summary type="html">YouTube Derek Banas - Świetny kanał, z tutorialami z wielu technologii. W przypadku Javy, warto zwrócić uwagę na playlisty Java Video Tutorial, Java Algorithms, Design Patterns Video Tutorial czy Object Oriented Design. Na kanale można też znaleźć podstawy do Androida. Java User Group (JUG) – to społeczność pasjonatów Javy. Wiele większych miast ma swoją grupę, która organizuje spotkania i konferencje. Na YouTube możemy znaleźć dwa JUG-i: Warsaw JUG - warszawski JUG Toruń JUG - toruński JUG Oprócz JUG-ów mamy jeszcze: confiturapl - Confitura to jedna z największych konferencji Java w Polsce. Na tych kanałach znajdziemy wiele świetnych nagrań z konferencji. Jest w czym przebierać. DevTalk - inicjatywa Macieja Aniserowicza. Prowadzi on rozmowy na różne tematy. Nie jest to związane z Javą, ale można tam znaleźć wiele przydatnych treści. Idealne do słuchania podczas przemieszczania się komunikacją miejską czy podczas innych czynności, podczas których mamy “wolne” uszy. Strony/Blogi baeldung.com - chyba obecnie najpopularniejszy blog o Javie i jej technologiach. Gdy szukam jakiegoś przykładu konkretnego zadania w Google, to zawsze pojawia się na pierwszej stronie wyników. Znajdziemy tam masę rzeczy. Od Javy, przez Springa, REST, JSON na HTTP kończąc. java-design-patterns.com - znajdziemy tu opis niemal wszystkich wzorców projektowych wraz z praktycznymi przykładami w Javie na Githubie. Najlepsze pytania na Stack OverFlow - polecam przejrzeć. Masa ważnych pytań na które warto znać odpowiedź. kobietydokodu.pl - masa przydatnych wpisów dla początkujących, szczególnie seria Niezbędnik Juniora czy Kurs Javy. programmer-competency-matrix - ciekawa tabelka, która pokazuje umiejętności programisty podzielone na kategorie i poziomy. Jeśli chcesz poćwiczyć swoje umiejętności programistycze (czasem matematyczno-algorytmiczne) to polecam strony z zadaniami: codewars.com - Platforma z zadaniami, rankingami i własnym edytorem. Do wyboru mamy wiele języków, a odpowiedzi podajemy w postaci napisanego przez nas kodu. Zadania są tworzone przez społeczność i w odróżnieniu od SPOJ-a czy Project Euler, nie wszystkie są skupione na matematyce i algorytmice. /r/dailyprogrammer/ - Wyzwania na Reddicie. Jeśli nie masz pomysłu co pisać w celach nauki, to możesz tam znaleźć coś dla siebie. Jeśli chodzi o rozmowy kwalifikacyjne to polecam: top-100-java-interview-questions - 100 pytań, z którymi powinieneś się oswoić przed szukaniem pracy. github.com/kdn251/interviews - Projekt na GitHubie, który w bardziej dogłębny sposób przygotowuje do rozmów kwalifikacyjnych. Wraz z przykładami. Znajdziemy też tam nieco zadań jakie występują w rekrutacji do firm takich jak Airbnb, Amazon, Facebook, Google, LinkedIn, Twitter, Uber.</summary></entry><entry><title type="html">Recenzja książki Zawód: Programista</title><link href="https://devcave.pl/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz" rel="alternate" type="text/html" title="Recenzja książki Zawód: Programista" /><published>2017-12-05T08:00:00+01:00</published><updated>2017-12-05T08:00:00+01:00</updated><id>https://devcave.pl/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz</id><content type="html" xml:base="https://devcave.pl/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz">&lt;p&gt;&lt;img src=&quot;/img/reviews/zawod-dev/book.png&quot; alt=&quot;Książka Zawód: Programista&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;o-autorze&quot;&gt;O autorze&lt;/h1&gt;
-
-&lt;p&gt;Maciej Aniserowicz, jeśli ktoś go nie zna (co raczej mało prawdopodobne, jeśli śledzisz polskie internety IT), to programista z kilkunastoletnim stażem. Od prawie 10 lat prowadzi bloga &lt;a href=&quot;https://devstyle.pl&quot;&gt;devstyle.pl&lt;/a&gt;, a po wypaleniu zawodowym porzucił programowanie na pełen etat i można powiedzieć, że stał się celebrytą IT. Nadal blisko swojej branży. Prowadzi vloga na YouTube oraz podcast DevTalk. Występuje na konferencjach i kilka z nich współtworzy m.in. Programistok. Ostatnim jego dorobkiem jest temat tego wpisu - książka Zawód: Programista, którą - jak sam mówił - planował od dawna.&lt;/p&gt;
-
-&lt;h1 id=&quot;kontekst&quot;&gt;Kontekst&lt;/h1&gt;
-
-&lt;p&gt;Jest to kolejna pozycja wypuszczona w &lt;em&gt;self publishingu&lt;/em&gt; i można powiedzieć, że kolejny sukces [Wydawnictwa ich nienawidzą]. Może nie jest to &lt;em&gt;“Finansowy ninja”&lt;/em&gt;, ale nadal. Maciej dzieli się raportami finansowymi i z samej przedsprzedaży wygenerowała przychód ~200 000 zł. W newsletterze pisał, że książka dalej dobrze się sprzedaje bez większej promocji z jego strony i zamówił dodruk kolejnych 6 tysięcy egzemplarzy. Czy do końca bez jego udziału? Myślę, że wystarczająco włożył wysiłku w stworzenie swojego zasięgu  i to teraz procentuje. Jestem ciekawy kolejnego raportu finansowego - już z normalnej sprzedaży.&lt;/p&gt;
-
-&lt;p&gt;Jak sam to określił ta książka jest esencją jego działalności.&lt;/p&gt;
-
-&lt;p&gt;I tu nie można się nie zgodzić. Przeglądając sam spis treści wszystko było już znajome i wiedziałem, że raczej niczego nowego się nie dowiem. &lt;strong&gt;Ale to nie jest wina autora czy słabej merytorycznie książki&lt;/strong&gt;. Ja śledzę Macieja od jego początków na YouTube. Obejrzałem/wysłuchałem większość blogów i podcastów - jak nie wszystkie.
-Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na tematy poruszane w książce, gdy stawiałem pierwsze kroki w kierunku Juniora.&lt;/p&gt;
-
-&lt;p&gt;Książkę mimo to kupiłem - głównie jako forma podziękowania za lata działalności  i wsparcia autora, ale też z małą myślą, że znajdę coś nowego. Jak przypuszczałem, większość już słyszałem/czytałem, ale mimo wszystko było to fajne odświeżenie i uporządkowanie w głowie przekazywanych przez Macieja doświadczeń. Książkę przeczytałem “na 3 razy” i nie była nużąca. Zakupu nie żałuję - tym bardziej, że była to bardziej forma podziękowania.&lt;/p&gt;
-
-&lt;p&gt;Również doceniam trud Macieja włożony w całą swoją działalność, budowanie zasięgu jak i &lt;em&gt;self publishing&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Swoją drogą tego typu książka jest relatywnie nowatorska na naszym rynku. Można by ją tylko porównywać z książką Junior Developer, której autorem jest Mateusz Kupilas. Jest najbardziej zbliżona, ale ma nieco inne założenia. Skupia się bardziej na konkretach przydatnych dla Juniora, a Zawód: Programista porusza tematy świadomego programisty w ogóle i zwraca większą uwagę na błędy i pułapki na które możesz wpaść - często na przykładzie autora.  Więc jak najbardziej takiej pozycji brakowało i luka została trafnie zapełniona.&lt;/p&gt;
-
-&lt;p&gt;Wraz z książka dostajemy naklejkę na laptopa i fajną zakładkę do książek - kość ram ;)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/reviews/zawod-dev/bonus.jpg&quot; alt=&quot;Zakładka do książki Zawód: Programista&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;o-książce&quot;&gt;O książce&lt;/h1&gt;
-
-&lt;p&gt;Według mnie, książka jest skierowana (i pod tym względem jest bardzo dobra) do:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;programistów &lt;em&gt;wannabe&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;tych co są za tym etapem, ale przed Juniorem&lt;/li&gt;
-  &lt;li&gt;i dla Juniorów.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I tu bym zakończył listę. No może są jeszcze osoby, które mało przykładają uwagi do bycia &lt;em&gt;“świadomym developerem”&lt;/em&gt; - bez względu na staż. Osoby, które mało wyglądają poza swoje IDE i źródła techniczne. Jeśli uważasz, że ostatnimi czasy tak było, to może znajdziesz w książce więcej niż mi się wydaje.&lt;/p&gt;
-
-&lt;p&gt;Ja, jako świeży Junior Java Developer, mam już to za sobą, więc ciężko mi wierzyć, że znajdzie się jakiś mid/senior, który będzie oświecony po przeczytaniu książki.&lt;/p&gt;
-
-&lt;p&gt;No bo jakie są w większości poruszane tematy w książce? Do 6 rozdziału w większości to są typowe pytania osób chcących wejść w świat programowania lub przed pierwszą pracą. Dwa ostatnie rozdziały są inne tylko w wypadku, gdy nigdy nie pomyślałeś o byciu Team Leaderem czy Freelancerem i nie robiłeś researchu na ten temat.&lt;/p&gt;
-
-&lt;p&gt;Są to ważne tematy i wartościowa wiedza, &lt;strong&gt;ale skierowana do konkretego targetu&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Poza tym można przeczytać o kilku kluczowych i kształcących błędach autora, które popełnił podczas swojej kariery, ale jeśli śledzisz go w miarę na bieżąco, to już je słyszałeś.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;I tu ku refleksji&lt;/strong&gt; - może gdyby Maciej określił dokładniej target, a nie zapewniał, że książka jest dla każdego programisty, to negatywnych opinii i ludzi, którzy poczuli, że zmarnowali pieniądze (trochę &lt;a href=&quot;http://lubimyczytac.pl/ksiazka/4812210/zawod-programista#reviews&quot;&gt;tego&lt;/a&gt; jest), byłoby dużo mniej? &lt;strong&gt;Bo książka jest naprawdę wartościowa, ale dla targetu, który określiłem na początku.&lt;/strong&gt; No ale z drugiej strony może też byłoby dużo mniej zysku…&lt;/p&gt;
-
-&lt;p&gt;Swoją drogą bardzo dużo mówi spis treści, więc mniej więcej było wiadomo czego można się spodziewać.&lt;/p&gt;
-
-&lt;p&gt;W książce znajdziemy też nieco motywacyjnych linijek. O wychodzeniu ze strefy komfortu itd.. Technicznej wiedzy - jak można się domyśleć - nie ma. To tak żeby nie było wątpliwości, no ale to chyba oczywiste.&lt;/p&gt;
-
-&lt;p&gt;Jeśli pasujesz do targetu, który tutaj zaprezentowałem, (szczególnie idealny przypadek, gdy dodatkowo autora mało co kojarzysz i nie śledzisz jego działalności) to ta książka będzie dla Ciebie bardzo dobra. Niesie wiele użytecznej wiedzy, bardzo uświadamia i obala mity, które reprezentują media o IT. Jest wysoce prawdopodobne, że dzięki niej nie wpadniesz w te same błędy co Maciej.&lt;/p&gt;
-
-&lt;h2 id=&quot;jakość-wykonania&quot;&gt;Jakość wykonania&lt;/h2&gt;
-
-&lt;p&gt;Okładka jest całkiem przyjemna wizualnie, niby twarda ale cienka i strasznie giętka. Po przeczytaniu książki zaczyna odstawać. Jakość papieru też nie jest zbyt dobra. Tekst przebija się nieco na drugą stronę, co może zmniejszyć przyjemność z czytania.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/reviews/zawod-dev/text.jpg&quot; alt=&quot;Jakość książki Zawód: Programista&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Lepiej to widać tu:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/reviews/zawod-dev/text2.jpg&quot; alt=&quot;Jakość książki Zawód: Programista&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Mimo zainwestowania w redakcję i wielokrotnego przeczytania książki przez autora, nadal można było znaleźć kilka błędów np.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/reviews/zawod-dev/typo.jpg&quot; alt=&quot;Literówka w książce Zawód: Programista&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Ale było tego dosyć mało i nie wpływało to na jakość czytania. Styl jak styl, kwestia gustu i nie każdemu może się spodobać. Autor korzysta z swobodnego, czasem potocznego języka. Ja nie mam co do tego żadnego problemu.&lt;/p&gt;
-
-&lt;p&gt;Przez książkę przeplatały się czasem te same wątki, czasem z innego punktu widzenia, czasem z rozwinięciem, ale myślę, że można było to ułożyć bardziej spójnie, co też ludzie punktują w opiniach.&lt;/p&gt;
-
-&lt;p&gt;Jedno zdanie pojawiło się tak często, że mogłoby się śnić po nocach :D. A szło to mniej więcej tak:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Programista, który wykonuje te same zadania przez 10 lat nie ma 10 lat doświadczenia, tylko rok doświadczenia powtórzony dziesięciokrotnie.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;No coż, za ponad 4 razem było trochę męczące, no ale jakie to prawdziwe!&lt;/p&gt;
-
-&lt;h1 id=&quot;podsumowując&quot;&gt;Podsumowując&lt;/h1&gt;
-
-&lt;p&gt;Książka Zawód: Programista jest całkiem dobrą i przyjemną pozycją. Zawiera ważną i uświadamiającą wiedzę oraz doświadczenia, &lt;strong&gt;ale jest to skierowane dla określonego targetu&lt;/strong&gt;. Idealny przypadek to gdy jesteś przed/w trakcie bycia Juniorem i/lub mało wyglądałeś poza swoje IDE i techniczne źródła, a autora mało co kojarzysz. Jeśli masz doświadczenie w IT i jesteś “świadomym” programistą nie oczekuj masy pozyskanej wiedzy, szczególnie jeśli śledzisz autora na bieżąco.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Recenzje" /><category term="Recenzje" /><category term="Książki" /><summary type="html">O autorze Maciej Aniserowicz, jeśli ktoś go nie zna (co raczej mało prawdopodobne, jeśli śledzisz polskie internety IT), to programista z kilkunastoletnim stażem. Od prawie 10 lat prowadzi bloga devstyle.pl, a po wypaleniu zawodowym porzucił programowanie na pełen etat i można powiedzieć, że stał się celebrytą IT. Nadal blisko swojej branży. Prowadzi vloga na YouTube oraz podcast DevTalk. Występuje na konferencjach i kilka z nich współtworzy m.in. Programistok. Ostatnim jego dorobkiem jest temat tego wpisu - książka Zawód: Programista, którą - jak sam mówił - planował od dawna. Kontekst Jest to kolejna pozycja wypuszczona w self publishingu i można powiedzieć, że kolejny sukces [Wydawnictwa ich nienawidzą]. Może nie jest to “Finansowy ninja”, ale nadal. Maciej dzieli się raportami finansowymi i z samej przedsprzedaży wygenerowała przychód ~200 000 zł. W newsletterze pisał, że książka dalej dobrze się sprzedaje bez większej promocji z jego strony i zamówił dodruk kolejnych 6 tysięcy egzemplarzy. Czy do końca bez jego udziału? Myślę, że wystarczająco włożył wysiłku w stworzenie swojego zasięgu i to teraz procentuje. Jestem ciekawy kolejnego raportu finansowego - już z normalnej sprzedaży. Jak sam to określił ta książka jest esencją jego działalności. I tu nie można się nie zgodzić. Przeglądając sam spis treści wszystko było już znajome i wiedziałem, że raczej niczego nowego się nie dowiem. Ale to nie jest wina autora czy słabej merytorycznie książki. Ja śledzę Macieja od jego początków na YouTube. Obejrzałem/wysłuchałem większość blogów i podcastów - jak nie wszystkie. Więc trudno było natrafić na coś nowego. Poza tym, bardzo dużo czytałem na tematy poruszane w książce, gdy stawiałem pierwsze kroki w kierunku Juniora. Książkę mimo to kupiłem - głównie jako forma podziękowania za lata działalności i wsparcia autora, ale też z małą myślą, że znajdę coś nowego. Jak przypuszczałem, większość już słyszałem/czytałem, ale mimo wszystko było to fajne odświeżenie i uporządkowanie w głowie przekazywanych przez Macieja doświadczeń. Książkę przeczytałem “na 3 razy” i nie była nużąca. Zakupu nie żałuję - tym bardziej, że była to bardziej forma podziękowania. Również doceniam trud Macieja włożony w całą swoją działalność, budowanie zasięgu jak i self publishing. Swoją drogą tego typu książka jest relatywnie nowatorska na naszym rynku. Można by ją tylko porównywać z książką Junior Developer, której autorem jest Mateusz Kupilas. Jest najbardziej zbliżona, ale ma nieco inne założenia. Skupia się bardziej na konkretach przydatnych dla Juniora, a Zawód: Programista porusza tematy świadomego programisty w ogóle i zwraca większą uwagę na błędy i pułapki na które możesz wpaść - często na przykładzie autora. Więc jak najbardziej takiej pozycji brakowało i luka została trafnie zapełniona. Wraz z książka dostajemy naklejkę na laptopa i fajną zakładkę do książek - kość ram ;) O książce Według mnie, książka jest skierowana (i pod tym względem jest bardzo dobra) do: programistów wannabe tych co są za tym etapem, ale przed Juniorem i dla Juniorów. I tu bym zakończył listę. No może są jeszcze osoby, które mało przykładają uwagi do bycia “świadomym developerem” - bez względu na staż. Osoby, które mało wyglądają poza swoje IDE i źródła techniczne. Jeśli uważasz, że ostatnimi czasy tak było, to może znajdziesz w książce więcej niż mi się wydaje. Ja, jako świeży Junior Java Developer, mam już to za sobą, więc ciężko mi wierzyć, że znajdzie się jakiś mid/senior, który będzie oświecony po przeczytaniu książki. No bo jakie są w większości poruszane tematy w książce? Do 6 rozdziału w większości to są typowe pytania osób chcących wejść w świat programowania lub przed pierwszą pracą. Dwa ostatnie rozdziały są inne tylko w wypadku, gdy nigdy nie pomyślałeś o byciu Team Leaderem czy Freelancerem i nie robiłeś researchu na ten temat. Są to ważne tematy i wartościowa wiedza, ale skierowana do konkretego targetu. Poza tym można przeczytać o kilku kluczowych i kształcących błędach autora, które popełnił podczas swojej kariery, ale jeśli śledzisz go w miarę na bieżąco, to już je słyszałeś. I tu ku refleksji - może gdyby Maciej określił dokładniej target, a nie zapewniał, że książka jest dla każdego programisty, to negatywnych opinii i ludzi, którzy poczuli, że zmarnowali pieniądze (trochę tego jest), byłoby dużo mniej? Bo książka jest naprawdę wartościowa, ale dla targetu, który określiłem na początku. No ale z drugiej strony może też byłoby dużo mniej zysku… Swoją drogą bardzo dużo mówi spis treści, więc mniej więcej było wiadomo czego można się spodziewać. W książce znajdziemy też nieco motywacyjnych linijek. O wychodzeniu ze strefy komfortu itd.. Technicznej wiedzy - jak można się domyśleć - nie ma. To tak żeby nie było wątpliwości, no ale to chyba oczywiste. Jeśli pasujesz do targetu, który tutaj zaprezentowałem, (szczególnie idealny przypadek, gdy dodatkowo autora mało co kojarzysz i nie śledzisz jego działalności) to ta książka będzie dla Ciebie bardzo dobra. Niesie wiele użytecznej wiedzy, bardzo uświadamia i obala mity, które reprezentują media o IT. Jest wysoce prawdopodobne, że dzięki niej nie wpadniesz w te same błędy co Maciej. Jakość wykonania Okładka jest całkiem przyjemna wizualnie, niby twarda ale cienka i strasznie giętka. Po przeczytaniu książki zaczyna odstawać. Jakość papieru też nie jest zbyt dobra. Tekst przebija się nieco na drugą stronę, co może zmniejszyć przyjemność z czytania. Lepiej to widać tu: Mimo zainwestowania w redakcję i wielokrotnego przeczytania książki przez autora, nadal można było znaleźć kilka błędów np. Ale było tego dosyć mało i nie wpływało to na jakość czytania. Styl jak styl, kwestia gustu i nie każdemu może się spodobać. Autor korzysta z swobodnego, czasem potocznego języka. Ja nie mam co do tego żadnego problemu. Przez książkę przeplatały się czasem te same wątki, czasem z innego punktu widzenia, czasem z rozwinięciem, ale myślę, że można było to ułożyć bardziej spójnie, co też ludzie punktują w opiniach. Jedno zdanie pojawiło się tak często, że mogłoby się śnić po nocach :D. A szło to mniej więcej tak: Programista, który wykonuje te same zadania przez 10 lat nie ma 10 lat doświadczenia, tylko rok doświadczenia powtórzony dziesięciokrotnie. No coż, za ponad 4 razem było trochę męczące, no ale jakie to prawdziwe! Podsumowując Książka Zawód: Programista jest całkiem dobrą i przyjemną pozycją. Zawiera ważną i uświadamiającą wiedzę oraz doświadczenia, ale jest to skierowane dla określonego targetu. Idealny przypadek to gdy jesteś przed/w trakcie bycia Juniorem i/lub mało wyglądałeś poza swoje IDE i techniczne źródła, a autora mało co kojarzysz. Jeśli masz doświadczenie w IT i jesteś “świadomym” programistą nie oczekuj masy pozyskanej wiedzy, szczególnie jeśli śledzisz autora na bieżąco.</summary></entry><entry><title type="html">Zasady projektowania obiektowego</title><link href="https://devcave.pl/notatnik-juniora/zasady-projektowania-kodu" rel="alternate" type="text/html" title="Zasady projektowania obiektowego" /><published>2017-11-30T13:00:00+01:00</published><updated>2017-11-30T13:00:00+01:00</updated><id>https://devcave.pl/notatnik-juniora/zasady-projektowania-kodu</id><content type="html" xml:base="https://devcave.pl/notatnik-juniora/zasady-projektowania-kodu">&lt;p&gt;Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami ;)&lt;/p&gt;
-
-&lt;h1 id=&quot;ogólne&quot;&gt;Ogólne&lt;/h1&gt;
-
-&lt;h2 id=&quot;dry---dont-repeat-yourself&quot;&gt;DRY - Don’t Repeat Yourself&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Jedna z podstawowych zasad programowania - &lt;strong&gt;nie powtarzaj się&lt;/strong&gt;. Wielokrotne użycie tego samego kodu to podstawa programowania. Nie ma miejsca na kopiuj/wklej.&lt;/li&gt;
-  &lt;li&gt;Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Lepsza czytelność kodu oraz łatwość w utrzymaniu.&lt;/li&gt;
-  &lt;li&gt;Zmiana implementacji tylko w jednym miejscu.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;kiss---keep-it-simple-stupid&quot;&gt;KISS - Keep it simple, stupid!&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc łatwy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku.&lt;/li&gt;
-  &lt;li&gt;Większość systemów działa najlepiej, gdy polegają na prostocie, a nie na złożoności.&lt;/li&gt;
-  &lt;li&gt;Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia.&lt;/li&gt;
-  &lt;li&gt;Gdy po jakimś czasie wracasz do &lt;strong&gt;swojego&lt;/strong&gt; kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Można to rozszerzyć o zasadę:&lt;/p&gt;
-
-&lt;h3 id=&quot;code-for-the-maintainer&quot;&gt;Code for the Maintainer&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Czyli, programuj tak jakbyś to robił dla osoby, która będzie później utrzymywać ten kod. “Rób to tak jakby to był brutalny psychopata, który wie gdzie mieszkasz”.&lt;/li&gt;
-  &lt;li&gt;Dlaczego? Utrzymywanie kodu to (przeważnie) najbardziej wymagająca i większa część pracy programistów. Nie powinniśmy utrudniać sobie tego zadania.&lt;/li&gt;
-  &lt;li&gt;Zadbaj o to, aby nie trzeba było się zbytnio głowić nad kawałkiem Twojego kodu.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;boy-scout-rule&quot;&gt;Boy scout rule&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Zawsze pozostaw po sobie kod czystszy niż go zastałeś.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Szybciej i łatwiej zrozumieć kod.&lt;/li&gt;
-  &lt;li&gt;Mniejsza ilość potencjalnych bugów.&lt;/li&gt;
-  &lt;li&gt;łatwość w utrzymaniu i modyfikowaniu kodu.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;solid&quot;&gt;SOLID&lt;/h2&gt;
-
-&lt;h3 id=&quot;s---single-responsibility-principle&quot;&gt;S - Single responsibility principle&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Klasa powinna być odpowiedzialna za pojedynczy obszar. Nie powinno być więcej powodów niż jeden, aby klasa się zmieniła.&lt;/li&gt;
-  &lt;li&gt;Odpowiedzialność może być zdefiniowana jako powód do zmiany, zatem klasa powinna mieć tylko jeden taki powód, a więc jedną odpowiedzialność.&lt;/li&gt;
-  &lt;li&gt;Klasa realizuję pojedyncze zadanie.&lt;/li&gt;
-  &lt;li&gt;Gdy wymagana jest zmiana, powinna ona objąć tylko jedną klasę lub pakiet.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Lepsza czytelność kodu.&lt;/li&gt;
-  &lt;li&gt;Łatwość w utrzymaniu i modyfikowaniu kodu.&lt;/li&gt;
-  &lt;li&gt;Nie musimy skakać po kilku pakietach/klasach, aby wprowadzić pojedyńczą zmianę.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;o---openclosed-principle&quot;&gt;O - Open/closed principle&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Powinieneś być w stanie rozszerzać swoje klasy bez jej modyfikacji.&lt;/li&gt;
-  &lt;li&gt;Klasy powinny być otwarte na rozszerzanie, a zamknięte na modyfikację.&lt;/li&gt;
-  &lt;li&gt;Polegaj na abstrakcji i polimorfizmie&lt;/li&gt;
-  &lt;li&gt;Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowane przez ify czy konstrukcję switch.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Łatwiejsze i bardziej stabline rozbudowywanie systemu.&lt;/li&gt;
-  &lt;li&gt;Minimalizujemy potrzebę modyfikowania instniejącego kodu w wielu miejscach, gdy dodajemy np. kolejny przypadek czegoś.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;l---liskov-substitution-principle&quot;&gt;L - Liskov substitution principle&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Klasy w programie powinny być podmienialne przez swoje podklasy bez naruszania poprawności programu, czyli klasa dziedzicząca musi być dobrym odpowiednikiem klasy bazowej.&lt;/li&gt;
-  &lt;li&gt;Podklasa nie powinna robić mniej niż klasa bazowa. Czyli zawsze powinna robić więcej.&lt;/li&gt;
-  &lt;li&gt;Zobacz popularny przykład złego zastosowania dziedziczenia “Square extends Rectangle”&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Przewidywalne zachowania obiektów&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;i---interface-segregation-principle&quot;&gt;I - Interface segregation principle&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu.&lt;/li&gt;
-  &lt;li&gt;Powinno się projektować małe i zwarte interfejsy.&lt;/li&gt;
-  &lt;li&gt;Klasa nie powinna implementować interfejsu, przez który naruszy &lt;a href=&quot;#S---Single-responsibility-principle&quot;&gt;Single responsibility principle&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Klasa która implementuje interfejs nie może być zmuszana do implementowania metod, których nie potrzebuje, a tak jest często w przypadku dużych iterfejsów.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z “dużego” interfejsu.&lt;/li&gt;
-  &lt;li&gt;Nie naruszanie &lt;a href=&quot;#S---Single-responsibility-principle&quot;&gt;Single responsibility principle&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;d---dependency-inversion-principle&quot;&gt;D - Dependency inversion principle&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Niskopoziomowe klasy powinny zależeć od klas wysoko poziomowych, a obie od swoich abstrakcji.&lt;/li&gt;
-  &lt;li&gt;Abstrakcję nie powinny polegać na szczegółach implementacyjnych.&lt;/li&gt;
-  &lt;li&gt;Szczegóły implementacyjne powinny polegać na abstrakcji.&lt;/li&gt;
-  &lt;li&gt;czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;minimalizowanie zależności (loose coupling)&lt;/li&gt;
-  &lt;li&gt;elastyczność - łatwiej wprowadzać zmiany&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;lod---law-of-demeter&quot;&gt;LoD - Law of Demeter&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Nie rozmawiaj z obcymi. Rozmawiaj tylko z przyjaciółmi.&lt;/li&gt;
-  &lt;li&gt;Co to znaczy? Metoda obiektu powinna wywoływać metody tylko od:
-    &lt;ul&gt;
-      &lt;li&gt;Swojego obiektu.&lt;/li&gt;
-      &lt;li&gt;Argumentu przekazanego do metody.&lt;/li&gt;
-      &lt;li&gt;Obiektu stworzonego wewnątrz tej metody.&lt;/li&gt;
-      &lt;li&gt;Bezpośredniego pola obiektu.&lt;/li&gt;
-      &lt;li&gt;Np. nie powinno się stosować wywołań typu A.getB().getC().getD.getName().&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;slap---single-level-of-abstraction-principle&quot;&gt;SLAP - Single Level of Abstraction Principle&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Czytelność i łatwiejsze utrzymanie kodu&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;composition-over-inheritance&quot;&gt;Composition Over Inheritance&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Kompozycja ponad dziedziczenie, czyli preferuj relacje B “zawiera/używa A” zamiast “jest A”.&lt;/li&gt;
-  &lt;li&gt;W większości wypadów możemy całkowicie zrezygnować z dziedziczenia w naszej aplikacji (Oczywiście chodzi o dziedziczenie z &lt;strong&gt;klas&lt;/strong&gt;, nie z interfejsów). Jest to zalecany sposób projektowania aplikacji.&lt;/li&gt;
-  &lt;li&gt;Stosuj dziedziczenie tylko gdy &lt;a href=&quot;#l---liskov-substitution-principle&quot;&gt;LSP&lt;/a&gt; nie jest złamana i naprawdę tego potrzebujesz.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Zmniejsza to zależności między klasami&lt;/li&gt;
-  &lt;li&gt;Używając dziedziczenia łatwiej też o złamanie &lt;a href=&quot;#l---liskov-substitution-principle&quot;&gt;Liskov substitution principle&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;encapsulate-what-changes&quot;&gt;Encapsulate What Changes&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Miejsca, które są najbardziej prawdopodobne do zmiany powinny być schowane (zhermetyzowane) pod API.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;projektowanie-pakietów&quot;&gt;Projektowanie pakietów&lt;/h1&gt;
-
-&lt;h2 id=&quot;cpp---common-closure-principle&quot;&gt;CPP - Common Closure Principle&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Klasy zmieniające się razem powinny być pakietowane razem&lt;/li&gt;
-  &lt;li&gt;Izolacja zmian do zakresu pakietu&lt;/li&gt;
-  &lt;li&gt;Ściśle powiązana z &lt;a href=&quot;#o---open/closed-principle&quot;&gt;OCP&lt;/a&gt; na poziomie klas&lt;/li&gt;
-  &lt;li&gt;Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Minimalizuje to liczbę pakietów do zmiany w przypadku zmiany wymagań.&lt;/li&gt;
-  &lt;li&gt;Nie trzeba przeszukiwać kilku różnych pakietów w celu wprowadzenia zmiany&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;rep---reuse-release-equivalence-principle&quot;&gt;REP - Reuse-release equivalence principle&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Ponownie użycie kodu to nie kopiowanie klasy z jednego projektu do drugiego. Jeżeli chcemy użyć ponownie kod to należy go wydzielić do biblioteki czy modułu, który później możemy użyć ponownie.&lt;/li&gt;
-  &lt;li&gt;Klasy, które są przeznaczone do ponownego wykorzystania, powinien być w jednej paczce, która może stać się reużywalną biblioteką. Nie powinny się tam znaleźć te, które nie są przeznaczone do ponownego wykorzystania. W skrócie - albo wszystkie są reużywalne, albo żadne.&lt;/li&gt;
-  &lt;li&gt;Powinny to być również klasy, które są z jednej “rodziny”. Klasy niezwiązane z przeznaczeniem pakietu nie powinny się tam znaleźć.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Gdy autor oryginalnego kodu wprowadzi zmianę – w szczególności poprawi jakiś błąd – wówczas każdy może w łatwy sposób skorzystać ze zmian pobierając nową wersję biblioteki, zamiast zmieniać coś samodzielnie - a w przypadku, gdy my jesteśmy autorami, dokonywać zmian w co najmniej dwóch miejscach za każdym razem.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;crp---common-reuse-principle&quot;&gt;CRP - Common-reuse principle&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Klasy wspólnie używane powinny być wspólnie pakietowane&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Lepsza spójność i czytelność systemu&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;zależności-miedzy-pakietami--klasami&quot;&gt;Zależności miedzy pakietami / klasami&lt;/h1&gt;
-
-&lt;h2 id=&quot;minimise-coupling&quot;&gt;Minimise Coupling&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Minimalizuj powiązania między pakietami/klasami. Mniejsza ilość zależności jest lepsza.&lt;/li&gt;
-  &lt;li&gt;Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie &lt;a href=&quot;#LoD---Law-of-Demeter&quot;&gt;Law of Demeter&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;adp---acyclic-dependencies-principle&quot;&gt;ADP - Acyclic dependencies principle&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Zasada ta mówi, że w strukturze zależności nie powinno być zapętleń/cykli.&lt;/li&gt;
-  &lt;li&gt;Przykładowa struktura łamiąca tą zasadę będzie gdy: pakiet A ma zależność w pakiecie B, który ma zależność w pakiecie C, który z kolei ma zależność w pakiecie A.&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&quot;text-diagram&quot;&gt;
-A &amp;larr;-------- C
-|           &amp;uarr;
-'---&amp;rarr; B ----&lt;sup&gt;|&lt;/sup&gt;
-&lt;/pre&gt;
-&lt;ul&gt;
-  &lt;li&gt;Możemy temu zapobiec stosując &lt;a href=&quot;#D---Dependency-inversion-principle&quot;&gt;Dependency inversion principle&lt;/a&gt;, wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;łatwiej zrozumieć i utrzymać system&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;sdp---stable-dependencies-principle&quot;&gt;SDP - Stable-dependencies principle&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Pakiet, który jest zmienny nie powinien zależeć od pakietu, który jest trudny do zmiany.&lt;/li&gt;
-  &lt;li&gt;Zależności tego pakietu powinny być bardziej stabilne niż on sam.&lt;/li&gt;
-  &lt;li&gt;Taką samą zasadę możemy stosować w przypadku klas.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Zmniejsza efekt łancuchowej reakcji, która wymusza modyfikację kodu w kilku innych miejscach po wprowadzeniu jednej zmiany&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;sap---stable-abstractions-principle&quot;&gt;SAP - Stable-abstractions principle&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Stabilny pakiet (trudny do zmiany) powinien być maksymalnie abstrakcyjny (czyli np. w większości operować na interfejsach), aby jego stabilność nie uniemożliwiała jego rozszerzania.&lt;/li&gt;
-  &lt;li&gt;Niestabilny pakiet (łatwy do zmiany) powinien byc maksymalnie konkretny (czyli w większości operować na implementacjach) jako że jego niestabilność pozwala w łatwy sposób zmienić jego konkretną implementację.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Codeboy</name></author><category term="Notatnik-Juniora" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><summary type="html">Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami ;) Ogólne DRY - Don’t Repeat Yourself Jedna z podstawowych zasad programowania - nie powtarzaj się. Wielokrotne użycie tego samego kodu to podstawa programowania. Nie ma miejsca na kopiuj/wklej. Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać. Plusy Lepsza czytelność kodu oraz łatwość w utrzymaniu. Zmiana implementacji tylko w jednym miejscu. KISS - Keep it simple, stupid! Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc łatwy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku. Większość systemów działa najlepiej, gdy polegają na prostocie, a nie na złożoności. Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia. Gdy po jakimś czasie wracasz do swojego kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;) Można to rozszerzyć o zasadę: Code for the Maintainer Czyli, programuj tak jakbyś to robił dla osoby, która będzie później utrzymywać ten kod. “Rób to tak jakby to był brutalny psychopata, który wie gdzie mieszkasz”. Dlaczego? Utrzymywanie kodu to (przeważnie) najbardziej wymagająca i większa część pracy programistów. Nie powinniśmy utrudniać sobie tego zadania. Zadbaj o to, aby nie trzeba było się zbytnio głowić nad kawałkiem Twojego kodu. Boy scout rule Zawsze pozostaw po sobie kod czystszy niż go zastałeś. Plusy Szybciej i łatwiej zrozumieć kod. Mniejsza ilość potencjalnych bugów. łatwość w utrzymaniu i modyfikowaniu kodu. SOLID S - Single responsibility principle Klasa powinna być odpowiedzialna za pojedynczy obszar. Nie powinno być więcej powodów niż jeden, aby klasa się zmieniła. Odpowiedzialność może być zdefiniowana jako powód do zmiany, zatem klasa powinna mieć tylko jeden taki powód, a więc jedną odpowiedzialność. Klasa realizuję pojedyncze zadanie. Gdy wymagana jest zmiana, powinna ona objąć tylko jedną klasę lub pakiet. Plusy Lepsza czytelność kodu. Łatwość w utrzymaniu i modyfikowaniu kodu. Nie musimy skakać po kilku pakietach/klasach, aby wprowadzić pojedyńczą zmianę. O - Open/closed principle Powinieneś być w stanie rozszerzać swoje klasy bez jej modyfikacji. Klasy powinny być otwarte na rozszerzanie, a zamknięte na modyfikację. Polegaj na abstrakcji i polimorfizmie Łatwo złamać tą zasadę, gdy mamy przypadki kontrolowane przez ify czy konstrukcję switch. Plusy Łatwiejsze i bardziej stabline rozbudowywanie systemu. Minimalizujemy potrzebę modyfikowania instniejącego kodu w wielu miejscach, gdy dodajemy np. kolejny przypadek czegoś. L - Liskov substitution principle Klasy w programie powinny być podmienialne przez swoje podklasy bez naruszania poprawności programu, czyli klasa dziedzicząca musi być dobrym odpowiednikiem klasy bazowej. Podklasa nie powinna robić mniej niż klasa bazowa. Czyli zawsze powinna robić więcej. Zobacz popularny przykład złego zastosowania dziedziczenia “Square extends Rectangle” Plusy Przewidywalne zachowania obiektów I - Interface segregation principle Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu. Powinno się projektować małe i zwarte interfejsy. Klasa nie powinna implementować interfejsu, przez który naruszy Single responsibility principle Klasa która implementuje interfejs nie może być zmuszana do implementowania metod, których nie potrzebuje, a tak jest często w przypadku dużych iterfejsów. Plusy Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z “dużego” interfejsu. Nie naruszanie Single responsibility principle D - Dependency inversion principle Niskopoziomowe klasy powinny zależeć od klas wysoko poziomowych, a obie od swoich abstrakcji. Abstrakcję nie powinny polegać na szczegółach implementacyjnych. Szczegóły implementacyjne powinny polegać na abstrakcji. czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna). Plusy minimalizowanie zależności (loose coupling) elastyczność - łatwiej wprowadzać zmiany LoD - Law of Demeter Nie rozmawiaj z obcymi. Rozmawiaj tylko z przyjaciółmi. Co to znaczy? Metoda obiektu powinna wywoływać metody tylko od: Swojego obiektu. Argumentu przekazanego do metody. Obiektu stworzonego wewnątrz tej metody. Bezpośredniego pola obiektu. Np. nie powinno się stosować wywołań typu A.getB().getC().getD.getName(). Plusy Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali SLAP - Single Level of Abstraction Principle Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali. Plusy Czytelność i łatwiejsze utrzymanie kodu Composition Over Inheritance Kompozycja ponad dziedziczenie, czyli preferuj relacje B “zawiera/używa A” zamiast “jest A”. W większości wypadów możemy całkowicie zrezygnować z dziedziczenia w naszej aplikacji (Oczywiście chodzi o dziedziczenie z klas, nie z interfejsów). Jest to zalecany sposób projektowania aplikacji. Stosuj dziedziczenie tylko gdy LSP nie jest złamana i naprawdę tego potrzebujesz. Plusy Zmniejsza to zależności między klasami Używając dziedziczenia łatwiej też o złamanie Liskov substitution principle Encapsulate What Changes Miejsca, które są najbardziej prawdopodobne do zmiany powinny być schowane (zhermetyzowane) pod API. Plusy Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę Projektowanie pakietów CPP - Common Closure Principle Klasy zmieniające się razem powinny być pakietowane razem Izolacja zmian do zakresu pakietu Ściśle powiązana z OCP na poziomie klas Oznacza to tyle, że klasy, które zmieniają się wspólnie po zmianie wymagań, powinny być umieszczane w tym samym pakiecie. Plusy Minimalizuje to liczbę pakietów do zmiany w przypadku zmiany wymagań. Nie trzeba przeszukiwać kilku różnych pakietów w celu wprowadzenia zmiany REP - Reuse-release equivalence principle Ponownie użycie kodu to nie kopiowanie klasy z jednego projektu do drugiego. Jeżeli chcemy użyć ponownie kod to należy go wydzielić do biblioteki czy modułu, który później możemy użyć ponownie. Klasy, które są przeznaczone do ponownego wykorzystania, powinien być w jednej paczce, która może stać się reużywalną biblioteką. Nie powinny się tam znaleźć te, które nie są przeznaczone do ponownego wykorzystania. W skrócie - albo wszystkie są reużywalne, albo żadne. Powinny to być również klasy, które są z jednej “rodziny”. Klasy niezwiązane z przeznaczeniem pakietu nie powinny się tam znaleźć. Plusy Gdy autor oryginalnego kodu wprowadzi zmianę – w szczególności poprawi jakiś błąd – wówczas każdy może w łatwy sposób skorzystać ze zmian pobierając nową wersję biblioteki, zamiast zmieniać coś samodzielnie - a w przypadku, gdy my jesteśmy autorami, dokonywać zmian w co najmniej dwóch miejscach za każdym razem. CRP - Common-reuse principle Klasy wspólnie używane powinny być wspólnie pakietowane Plusy Lepsza spójność i czytelność systemu Zależności miedzy pakietami / klasami Minimise Coupling Minimalizuj powiązania między pakietami/klasami. Mniejsza ilość zależności jest lepsza. Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie Law of Demeter Plusy Zmniejsza to szansę na to, że zmiana kodu w zależności A nie popsuje kawałka kodu B. ADP - Acyclic dependencies principle Zasada ta mówi, że w strukturze zależności nie powinno być zapętleń/cykli. Przykładowa struktura łamiąca tą zasadę będzie gdy: pakiet A ma zależność w pakiecie B, który ma zależność w pakiecie C, który z kolei ma zależność w pakiecie A. A &amp;larr;-------- C | &amp;uarr; '---&amp;rarr; B ----| Możemy temu zapobiec stosując Dependency inversion principle, wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności. Plusy łatwiej zrozumieć i utrzymać system SDP - Stable-dependencies principle Pakiet, który jest zmienny nie powinien zależeć od pakietu, który jest trudny do zmiany. Zależności tego pakietu powinny być bardziej stabilne niż on sam. Taką samą zasadę możemy stosować w przypadku klas. Plusy Zmniejsza efekt łancuchowej reakcji, która wymusza modyfikację kodu w kilku innych miejscach po wprowadzeniu jednej zmiany SAP - Stable-abstractions principle Stabilny pakiet (trudny do zmiany) powinien być maksymalnie abstrakcyjny (czyli np. w większości operować na interfejsach), aby jego stabilność nie uniemożliwiała jego rozszerzania. Niestabilny pakiet (łatwy do zmiany) powinien byc maksymalnie konkretny (czyli w większości operować na implementacjach) jako że jego niestabilność pozwala w łatwy sposób zmienić jego konkretną implementację.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Codeboy</name></author><category term="Top-listy" /><category term="Top-listy" /><category term="Java" /><summary type="html">YouTube Derek Banas - Świetny kanał, z tutorialami z wielu technologii. W przypadku Javy, warto zwrócić uwagę na playlisty Java Video Tutorial, Java Algorithms, Design Patterns Video Tutorial czy Object Oriented Design. Na kanale można też znaleźć podstawy do Androida. Java User Group (JUG) – to społeczność pasjonatów Javy. Wiele większych miast ma swoją grupę, która organizuje spotkania i konferencje. Na YouTube możemy znaleźć dwa JUG-i: Warsaw JUG - warszawski JUG Toruń JUG - toruński JUG Oprócz JUG-ów mamy jeszcze: confiturapl - Confitura to jedna z największych konferencji Java w Polsce. Na tych kanałach znajdziemy wiele świetnych nagrań z konferencji. Jest w czym przebierać. DevTalk - inicjatywa Macieja Aniserowicza. Prowadzi on rozmowy na różne tematy. Nie jest to związane z Javą, ale można tam znaleźć wiele przydatnych treści. Idealne do słuchania podczas przemieszczania się komunikacją miejską czy podczas innych czynności, podczas których mamy “wolne” uszy. Strony/Blogi baeldung.com - chyba obecnie najpopularniejszy blog o Javie i jej technologiach. Gdy szukam jakiegoś przykładu konkretnego zadania w Google, to zawsze pojawia się na pierwszej stronie wyników. Znajdziemy tam masę rzeczy. Od Javy, przez Springa, REST, JSON na HTTP kończąc. java-design-patterns.com - znajdziemy tu opis niemal wszystkich wzorców projektowych wraz z praktycznymi przykładami w Javie na Githubie. Najlepsze pytania na Stack OverFlow - polecam przejrzeć. Masa ważnych pytań na które warto znać odpowiedź. kobietydokodu.pl - masa przydatnych wpisów dla początkujących, szczególnie seria Niezbędnik Juniora czy Kurs Javy. programmer-competency-matrix - ciekawa tabelka, która pokazuje umiejętności programisty podzielone na kategorie i poziomy. Jeśli chcesz poćwiczyć swoje umiejętności programistycze (czasem matematyczno-algorytmiczne) to polecam strony z zadaniami: codewars.com - Platforma z zadaniami, rankingami i własnym edytorem. Do wyboru mamy wiele języków, a odpowiedzi podajemy w postaci napisanego przez nas kodu. Zadania są tworzone przez społeczność i w odróżnieniu od SPOJ-a czy Project Euler, nie wszystkie są skupione na matematyce i algorytmice. /r/dailyprogrammer/ - Wyzwania na Reddicie. Jeśli nie masz pomysłu co pisać w celach nauki, to możesz tam znaleźć coś dla siebie. Jeśli chodzi o rozmowy kwalifikacyjne to polecam: top-100-java-interview-questions - 100 pytań, z którymi powinieneś się oswoić przed szukaniem pracy. github.com/kdn251/interviews - Projekt na GitHubie, który w bardziej dogłębny sposób przygotowuje do rozmów kwalifikacyjnych. Wraz z przykładami. Znajdziemy też tam nieco zadań jakie występują w rekrutacji do firm takich jak Airbnb, Amazon, Facebook, Google, LinkedIn, Twitter, Uber.</summary></entry></feed>

@@ -81,7 +81,7 @@
 <lastmod>2017-05-30T02:12:00+02:00</lastmod>
 </url>
 <url>
-<loc>https://devcave.pl/moje-do%C5%9Bwiadczenia/moja-droga-do-pierwszej-pracy</loc>
+<loc>https://devcave.pl/moje-doswiadczenia/moja-droga-do-pierwszej-pracy</loc>
 <lastmod>2017-10-29T13:00:00+01:00</lastmod>
 </url>
 <url>
@@ -101,7 +101,7 @@
 <lastmod>2017-11-15T13:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>https://devcave.pl/moje-do%C5%9Bwiadczenia/praktyki-zawodowe-w-technikum-informatycznym</loc>
+<loc>https://devcave.pl/moje-doswiadczenia/praktyki-zawodowe-w-technikum-informatycznym</loc>
 <lastmod>2017-11-20T13:00:00+01:00</lastmod>
 </url>
 <url>
@@ -137,7 +137,7 @@
 <lastmod>2018-01-22T13:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>https://devcave.pl/moje-do%C5%9Bwiadczenia/pierwsza-praca-jako-programista</loc>
+<loc>https://devcave.pl/moje-doswiadczenia/pierwsza-praca-jako-programista</loc>
 <lastmod>2018-04-07T11:00:00+02:00</lastmod>
 </url>
 <url>
@@ -147,6 +147,14 @@
 <url>
 <loc>https://devcave.pl/effective-java/wzorzec-projektowy-builder</loc>
 <lastmod>2018-04-21T12:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>https://devcave.pl/notatnik-juniora/idiotoodporne-api-klasy</loc>
+<lastmod>2018-04-21T15:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>https://devcave.pl/effective-java/wzorzec-projektowy-singleton</loc>
+<lastmod>2018-04-28T14:00:00+02:00</lastmod>
 </url>
 <url>
 <loc>https://devcave.pl/o-mnie/</loc>

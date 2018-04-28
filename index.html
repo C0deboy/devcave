@@ -30,6 +30,12 @@ description: "{ Blog programistyczny }"
       <h1>Ostatnie wpisy:</h1>
       {% for post in paginator.posts %}
       <div class="post-preview box-effect">
+        {% if post.for %}
+        <div class="post-partner">
+          <p class="m0">Post dla:</p>
+          <a href="https://{{ post.for }}.pl"><img src="/img/{{ post.for }}.png" alt="{{ post.for }} logo"/></a>
+        </div>
+        {% endif %}
         <a href="{{ post.url | prepend: site.baseurl }}">
           <h1 class="post-title">{{ post.title }}</h1>
           {% if post.subtitle %}
@@ -84,14 +90,13 @@ description: "{ Blog programistyczny }"
         <h1>Najpopularniejsze wpisy:</h1>
         <span class="text-muted">Top {{ site.data.top_posts | size }}</span>
         <ul>
-          {% for post in site.data.top_posts %}
+          {% for postUrl in site.data.top_posts %}
+          {% assign post = site.posts | where:"url", postUrl | first %}
           <li class="box-effect row">
-            <div class="top-position">{{forloop.index}}</div>
-            <div class="top-entry">
-              <a href="{{ post.url }}">
-                <h4>{{ post.title }}</h4>
-              </a>
-            </div>
+            <div class="top-position">{{ forloop.index }}</div>
+            <a class="top-entry" href="{{ post.url }}">
+              {{ post.title }}
+            </a>
           </li>
           {% endfor %}
         </ul>

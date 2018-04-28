@@ -15,7 +15,7 @@
   padding: 40px 25px 0 25px;
   text-align: center;
   box-shadow: 0 0 0px 100vw rgba(0, 0, 0, 0.55), 0 0 13px 1px black;
-  font-size: calc(12px + (25 - 20) * ((100vw - 320px)/ (1920 - 320)));
+  font-size: calc(12px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
   z-index: 999;
 }
 
@@ -140,10 +140,10 @@
 }
 
 @media (max-width: 375px) {
-  .recaptcha-label{
-    margin-left: calc((100% - 306px)/2)!important;
-    transform:scale(0.9);
-    -webkit-transform:scale(0.9);
+  .recaptcha-label {
+    margin-left: calc((100% - 306px) / 2) !important;
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
     transform-origin: center center;
     -webkit-transform-origin: center center;
   }

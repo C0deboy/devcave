@@ -27,18 +27,17 @@ class jekyllSearch {
 
   async displayResults() {
     const results = await this.findResults();
-    const html = results.map(item => `
-        <li class="result">
-            <article class="result__article  article">
-                <div class="post-preview">
-                  <a href="${item.url}">
-                    <h2 class="post-title">${item.title}</h2>
-                    <h3 class="post-subtitle">${item.subtitle}</h3>
-                  </a>
-          
-                  <p class="post-meta">${item.date}</p>
-                </div>
-            </article>
+    let delay = 0;
+    const html = results.map((item) =>
+      `<li class="result">
+            <div class="post-preview">
+              <a href="${item.url}">
+                <h2 class="post-title">${item.title}</h2>
+                <h3 class="post-subtitle">${item.subtitle}</h3>
+              </a>
+      
+              <p class="post-meta">${item.date}</p>
+            </div>
             
             <hr>
         </li>`).join('');
@@ -62,7 +61,6 @@ class jekyllSearch {
     const searchQuery = getQueryVariable('szukaj');
 
     if (getQueryVariable('nowadomena') !== undefined) {
-
       const newDomainMessage = document.createElement('p');
       newDomainMessage.innerText = 'Blog został przeniesiony na nową domenę. Czy szukałeś: ?';
       newDomainMessage.classList.add('new-domain-msg');

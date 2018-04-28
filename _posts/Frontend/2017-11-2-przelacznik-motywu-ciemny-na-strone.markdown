@@ -6,7 +6,7 @@ subtitle:   "Tryb ciemny/jasny w łatwy sposób, tylko JS."
 date:       2017-11-2 12:00:00
 author:     "Codeboy"
 category:   Frontend
-tags:	    Frontend Jak-zrobić Javascript
+tags:	    Frontend Javascript
 comments:   true
 toc:        true
 ---

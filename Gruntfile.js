@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'js/',
-          src: ['*.js'],
+          src: ['**/*.js', '!search/*.js'],
           dest: 'dist/js',
           ext: '.min.js',
         }],

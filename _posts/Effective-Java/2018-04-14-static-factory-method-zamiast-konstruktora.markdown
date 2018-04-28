@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Static factory method zamiast konstruktora"
+titleSEO:	  "Static factory method zamiast konstruktora"
 title:      "Static factory method zamiast konstruktora"
 subtitle:   "Zalety oraz wady tego rozwiązania"
 date:       2018-04-14 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 ---
@@ -137,9 +137,9 @@ Widać też, że nazwy jasno określają intencję, czego nie możemy osiągną�
 Nie jest wymuszone tworzenie nowego obiektu z każdym wywołaniem
 
 
-W przeciwieństiwe do konstruktorów, statyczą fabryką możemy zwracać cały czas ten sam obiekt. Dzięki temu klasy niemutowalne moga używać wcześniej stworzonych istancji lub cachować istancję podczas jej tworzenia i później ją zwracać z każdem wywołaniem tej metody, co eliminuje tworzenie niepotrzebnych duplikatów danego obiektu.
+W przeciwieństwie do konstruktorów, statyczną fabryką możemy zwracać cały czas ten sam obiekt. Dzięki temu klasy niemutowalne mogą używać wcześniej stworzonych instancji lub cachować instancję podczas jej tworzenia i później ją zwracać z każdym wywołaniem tej metody, co eliminuje tworzenie niepotrzebnych duplikatów danego obiektu.
 
-Przykładem tu jest wcześniej pokazywana metoda {% code java %}Boolean.valueOf(boolean){% endcode %}, która nigdy nie tworzy nowego obiektu lub {% code java %}Integer.valueOf(int i){% endcode %}, która zwraca "scacheowaną" istancję `Integer`, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedzialew występują znacznie częściej, więc taka optymalizacja ma sens.
+Przykładem tu jest wcześniej pokazywana metoda {% code java %}Boolean.valueOf(boolean){% endcode %}, która nigdy nie tworzy nowego obiektu lub {% code java %}Integer.valueOf(int i){% endcode %}, która zwraca "scacheowaną" istancję `Integer`, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedziale występują znacznie częściej, więc taka optymalizacja ma sens.
 
 {: .pros}
 Może zwracać każdy podtyp zwracanego obiektu
@@ -149,12 +149,12 @@ Mamy możliwość zwrócenia dowolnego podtypu, co ważne - bez konieczności de
 Dzięki temu możemy zdefiniować metodę na interfejsie, która zwróci nam konkretną implementację tego interfejsu.
 
 {: .note}
-Przed Java 8 nie było możliwe definowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu `Type` lądowały w nieinstancjonowalnej klasie `Types`. Dosyć popularnym przykładem jest `java.util.Collections`. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.
+Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu `Type` lądowały w nieinstancjonowanej klasie `Types`. Dosyć popularnym przykładem jest `java.util.Collections`. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.
 
 {: .pros}
 Z każdym wywołaniem może być zwrócona inna implementacja
 
-A to dzięki przekazywanemu parametrowi na podstawie którego może zostać wybrana implementacja. Pozwala to np. na zwrócenie wydajniejszej implemetnacji dla konkretnego przypadku. Jest to niewidoczne dla klienta i może być rozszerzalne.
+A to dzięki przekazywanemu parametrowi na podstawie którego może zostać wybrana implementacja. Pozwala to np. na zwrócenie wydajniejszej implementacji dla konkretnego przypadku. Jest to niewidoczne dla klienta i może być rozszerzalne.
 
 Przykładem może być `EnumSet` z standardowej biblioteki. Nie posiada publicznego konstruktora, tylko statyczne fabryki, które zwracają różne implementację w zależności od wielkości Enuma. Jeśli ma mniej niż 64 elementy zwracany jest `RegularEnumSet`, w przeciwnym wypadku `JumboEnumSet`.
 
@@ -186,7 +186,7 @@ Wszystko po to żeby zadbać o wydajność.
 *Static factory method* nie ma żadnych poważnych wad. Jeśli można by się do czegoś przyczepić to:
 
 {: .cons}
-Klasa bez konstrukora nie może być rozszerzana
+Klasa bez konstruktora nie może być rozszerzana
 
 
 Jednak może to wyjść też na korzyść, bo zachęca to do używania [kompozycji zamiast dziedziczenia]({% post_url /Notatnik-juniora/2017-11-30-zasady-projektowania-kodu %}#composition-over-inheritance) oraz jest wymagane przez klasy *immutable*.
@@ -198,52 +198,52 @@ Jest wymieszana razem z innymi metodami
 
 Mały minusem jest też to, że statyczne fabryki nie są traktowane inaczej niż zwykłe metody, a więc są z nimi wymieszane. Trzeba więc przelecieć całą listę dostępnych metod w obiekcie w poszukiwaniu takiej, która zwraca ten obiekt. Przy szukaniu/tworzeniu takich metod warto zaznajomić się z konwencją nazewniczą takich metod, a najczęściej wyglądają tak:
 
-from - konwersja np.:
+`from` - konwersja np.:
 
 ```java
 Date d = Date.from(instant);
 ```
 
-of - agregacja np.:
+`of` - agregacja np.:
 
 ```java
 Set<Rank> faceCards = EnumSet.of(JACK, QUEEN, KING);
 ```
 
-valueOf - bardziej rozwlekła wersja from lub of np.:
+`valueOf` - bardziej rozwlekła wersja `from` lub `of` np.:
 
 ```java
 BigInteger prime = BigInteger.valueOf(Integer.MAX_VALUE);
 ```
 
-instance lub getInstance - może zwracać obiekt opisany przez parametr np.:
+`instance` lub `getInstance` - może zwracać obiekt opisany przez parametr np.:
 
 ```java
 StackWalker luke = StackWalker.getInstance(options);
 ```
 
-create lub newInstance - podobnie jak instance lub getInstance, tyle, że tu za każdym razem powinien być to nowy obiekt np.:
+`create` lub `newInstance` - podobnie jak `instance` lub `getInstance`, tyle, że tu za każdym razem powinien być to nowy obiekt np.:
 
 ```java
 Object newArray = Array.newInstance(classObject, arrayLen);
 ```
 
-getType - podobnie jak getInstance, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:
+`getType` - podobnie jak `getInstance`, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:
 
 ```java
 FileStore fs = Files.getFileStore(path);
 ```
 
-newType - podobnie jak newInstance, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:
+`newType` - podobnie jak `newInstance`, tyle, że używamy wtedy kiedy metoda-fabryka jest w innej klasie np.:
 
 ```java
 BufferedReader br = Files.newBufferedReader(path);
 ```
 
-type - zwięzła alternatywa dla getType i newType np.:
+`type` - zwięzła alternatywa dla `getType` i `newType` np.:
 
 ```java
 List<Complaint> litany = Collections.list(legacyLitany);
 ```
-Jak widać statyczne fabryki mają dużo zalet, dlatego warto rozważyć ich implementowanie. Z kolei kiedy używamy jakiegoś API i są dostępne zarówno konstruktory jak i statyczne fabryki, w większości przypadków powinniśmy użyć tych drugich. Często wewnątrz uruchamiane są funkcje inicjujące, które są niezbędne do stworzenia danego obiektu lub mają znaczenie wydajnościowe.
 
+Jak widać statyczne fabryki mają dużo zalet, dlatego warto rozważyć ich implementowanie. Z kolei kiedy używamy jakiegoś API i są dostępne zarówno konstruktory jak i statyczne fabryki, w większości przypadków powinniśmy użyć tych drugich. Często wewnątrz uruchamiane są funkcje inicjujące, które są niezbędne do stworzenia danego obiektu lub mają znaczenie wydajnościowe.

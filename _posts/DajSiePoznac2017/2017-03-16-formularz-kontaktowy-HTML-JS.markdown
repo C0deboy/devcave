@@ -24,11 +24,11 @@ Dane będziemy wysyłać AJAX-em do pliku PHP, aby dostawać komunikaty bez prze
 <u>W tym poście pokazuję jak stworzyć strukturę HTML formularza kontaktowego oraz dodaję obsługę jego otwierania i zamykania.</u>
 
 Wpisy w tej serii:
-1. [HTML + otwieranie / zamykanie JQuery]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %})
-2. [Walidacja HTML5/JS + AJAX]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-23-formularz-kontaktowy-walidacja-ajax %})
-3. [Walidacja PHP + Swiftmailer]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-26-formularz-kontaktowy-php-swiftmailer %})
-4. [Dostępność formularza]({{ site.url }}{% post_url DajSiePoznac2017/2017-03-30-formularz-kontaktowy-dostepnosc %})
-5. [Zrefaktoryzowana wersja + Github]({{ site.url }}{% post_url DajSiePoznac2017/2017-05-18-formularz-kontaktowy-refaktoryzacja %})
+1. [HTML + otwieranie / zamykanie JQuery]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %})
+2. [Walidacja HTML5/JS + AJAX]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-23-formularz-kontaktowy-walidacja-ajax %})
+3. [Walidacja PHP + Swiftmailer]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-26-formularz-kontaktowy-php-swiftmailer %})
+4. [Dostępność formularza]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-30-formularz-kontaktowy-dostepnosc %})
+5. [Zrefaktoryzowana wersja + Github]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-05-18-formularz-kontaktowy-refaktoryzacja %})
 
 # HTML
 

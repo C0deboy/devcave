@@ -260,7 +260,7 @@ Podobnie można by zrobić z *checklistą*. Wszystko ku lepszej czytelności.
 
 ## Fluent Builder
 
-Ten rózni sięod pierwszego tym, że *Builder* implementujemy jako osobną klasę:
+Ten różni się od pierwszego tym, że *Builder* implementujemy jako osobną klasę:
 
 ```java
 public final class GoalBuilder {
@@ -294,7 +294,7 @@ Musimy udostępnić settery dla prywatnych pól budowanego obiektu.
 Musimy udostępnić publiczny konstruktor.
 
 
-Często takie rozwiązanie się nie sprawdza np. ze wzglęu na to, że obiekt powinien być niemutowalny, dlatego preferowana jest implementacja jako wewnętrzna statyczna klasa.
+Często takie rozwiązanie się nie sprawdza np. ze względu na to, że obiekt powinien być niemutowalny, dlatego preferowana jest implementacja jako wewnętrzna statyczna klasa.
 
 Użycie wygląda podobnie:
 
@@ -340,7 +340,7 @@ public interface DataScraper {
 
 ```
 
-Jest to "scraper", ale zasada podobna. Po prostu zamiast metod z przedrostkiem `build`, są `get`. Buildery mają zazwyczaj więcej takich metod, ponieważ stosuje je się do tworzenia skoplikowanych obiektów.
+Jest to "scraper", ale zasada podobna. Po prostu zamiast metod z przedrostkiem `build`, są `get`. Buildery mają zazwyczaj więcej takich metod, ponieważ stosuje je się do tworzenia skomplikowanych obiektów.
 
 *ConcreteBuilders*:
 
@@ -506,14 +506,13 @@ Koszt tworzenia buildera
 Kod buildera jest dosyć rozwlekły. Koszt napisania buildera nie jest może zbyt duży (szczególnie jeśli zostanie wygenerowany), jednak może mieć znaczenie wydajnościowe. Dlatego ten wzorzec powinniśmy stosować tylko wtedy kiedy klasa będzie mieć przynajmniej 4 wymagane pola (lub wiemy, że ta liczba urośnie) i nie jest to aplikacja *performance-critical*. Przy mniejszej ilości parametrów jest to *overengineering*.
 
 {: .note}
-Gdyby w Javie występowały parametry nazwane (tak jak np. w Kotlinie), to ten wzorzec byłby zbędny. Możnaby powiedzięć, ze jest to bardziej obejście dla brakującej funkcjonalnośći języka niż wzorzec projektowy. Gdyby Java miała taki *feature* to wystarczyłoby użyć konstruktora:
+Gdyby w Javie występowały parametry nazwane (tak jak np. w Kotlinie), to ten wzorzec byłby zbędny. Można by powiedzieć, ze jest to bardziej obejście dla brakującej funkcjonalności języka niż wzorzec projektowy. Gdyby Java miała taki *feature* to wystarczyłoby użyć konstruktora:
 
-{% highlight java %}Goal goal = new Goal(
+{% highlight java %}
+Goal goal = new Goal(
     name="Run the marathon", 
     description="My goal",
     levels=levels,
     checList=checklist
     achieved=false);
 {% endhighlight %}
-
-

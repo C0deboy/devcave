@@ -1,12 +1,12 @@
 ---
 layout:     post
 titleSEO:	"Jak zrobić formularz kontaktowy na stronie bez PHP - bez backendu?"
-title:      "Formularz kontaktowy bez backendu/bez PHP"
+title:      "Formularz kontaktowy bez backendu"
 subtitle:   "Tylko HTML, Javascript i jQuery(opcjonalnie)."
 date:       2017-11-15 12:00:00
 author:     "Codeboy"
 category:   Frontend
-tags:	    Frontend Jak-zrobić
+tags:	    Frontend
 comments:   true
 toc:        true
 ---

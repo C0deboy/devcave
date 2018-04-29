@@ -54,3 +54,5 @@ target
 node_modules
 
 _drafts
+_site
+dist

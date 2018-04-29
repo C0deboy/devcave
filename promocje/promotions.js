@@ -1,10 +1,11 @@
 const promotion = {
   start: new Date('2018-04-23'),
-  end: new Date('2018-04-25'),
+  end: new Date('2018-05-15'),
   number: '4812',
   discount: '2 książki w cenie 1',
   host: 'helion.pl',
   img: true,
+  popup: false,
 };
 
 const customMessage = '';
@@ -15,7 +16,7 @@ let promotionAdText = `Na ${promotionURL.hostname} trwa <a href="${promotionURL}
 if (isPromotionActive()) {
   showPromotionAd();
 
-  if (customMessage !== '') {
+  if (promotion.popup && customMessage !== '') {
     promotionAdText = customMessage;
   } else if (location.pathname !== '/' && localStorage.getItem('ad-closed') !== '1') {
     createPromotionMessagePopup();

@@ -16,9 +16,9 @@ let promotionAdText = `Na ${promotionURL.hostname} trwa <a href="${promotionURL}
 if (isPromotionActive()) {
   showPromotionAd();
 
-  if (promotion.popup && customMessage !== '') {
+  if (customMessage !== '') {
     promotionAdText = customMessage;
-  } else if (location.pathname !== '/' && localStorage.getItem('ad-closed') !== '1') {
+  } else if (promotion.popup && location.pathname !== '/' && localStorage.getItem('ad-closed') !== '1') {
     createPromotionMessagePopup();
   }
 }

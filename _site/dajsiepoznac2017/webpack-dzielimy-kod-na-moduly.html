@@ -40,9 +40,10 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
 
-            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
-                Menu
-                <i class="fa fa-bars" aria-hidden="true"></i>
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu<i class="fa fa-bars" aria-hidden="true"></i>
             </button>
         </div>
 
@@ -66,7 +67,8 @@
                     <a class="nav-el" href="/moje-projekty">Moje projekty</a>
                 </li>
                 <li>
-                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom" title="Zmień motyw">
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
                         <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
                     </button>
                 </li>
@@ -381,11 +383,12 @@ Jeśli w twoich plikach, które łączysz, wystepują importy czcionek (np. w Bo
       </ul>
 
       <div class="text-center">
-  <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
 
-  <div class="fb-page inline box-effect">
-    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
-  </div>
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
 </div>
 
       <hr>
@@ -394,20 +397,20 @@ Jeśli w twoich plikach, które łączysz, wystepują importy czcionek (np. w Bo
 
 <div id="disqus_thread"></div>
 <script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly";
+    this.page.identifier = "/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly";
+  };
 
-var disqus_config = function () {
-this.page.url = "https://devcave.pl/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly";
-this.page.identifier = "/dajsiepoznac2017/webpack-dzielimy-kod-na-moduly";
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
 </script>
-<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
 
 
 

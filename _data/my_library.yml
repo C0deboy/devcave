@@ -1,0 +1,69 @@
+
+### Do przeczytania ###
+- section: Do przeczytania
+  subtitle: Książki w trakcie przerabiania, ale już godne polecenia
+  books:
+
+  - title: Effective Java (3rd Edition)
+    author: Joshua Bloch
+    img: /img/effective-java.jpg
+    link: https://www.amazon.co.uk/Effective-Java-Joshua-Bloch/dp/0134685997
+
+  - title: TDD. Programowanie w Javie sterowane testami
+    author: Viktor Farcic, Alex Garcia
+    helionID: tddpro
+
+  - title: Zrozumieć programowanie
+    author: Gynvael Coldwind
+    helionID: e_1ott
+
+  - title: Angular 2. Programowanie z użyciem języka TypeScript
+    author: Yakov Fain, Anton Moiseev
+    helionID: ang2ty
+
+  - title: Wzorce projektowe. Elementy oprogramowania obiektowego wielokrotnego użytku
+    author: Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides
+    helionID: wzoelv
+
+  - title: Getting Things Done, czyli sztuka bezstresowej efektywności. Wydanie II
+    author: David Allen
+    helionID: getti2
+
+### Przeczytane ###
+- section: Przeczytane
+  subtitle: Książki, które już przeczytałem i dały mi jakąś wartość
+  books:
+
+  - title: Java. Podstawy. Wydanie X
+    author: Cay S. Horstmann
+    helionID: javp10
+
+  - title: Software Craftsman. Profesjonalizm, czysty kod i techniczna perfekcja
+    author: Sandro Mancuso
+    helionID: prorze
+
+  - title: Mistrz czystego kodu. Kodeks postępowania profesjonalnych programistów
+    author: Robert C. Martin
+    helionID: mckkod
+
+  - title: Pragmatyczny programista. Od czeladnika do mistrza
+    author: Sandro Mancuso
+    helionID: pragpv
+
+  - title: Czysty kod. Podręcznik dobrego programisty
+    author: Robert C. Martin
+    helionID: czykov
+
+  - title: JavaScript. Programowanie zaawansowane
+    author: Tomasz "Comandeer" Jakut
+    helionID: jascpz
+
+  - title: Junior Developer
+    author: Mateusz Kupilas
+    img: /img/junior-developer.png
+    link: http://javadevmatt.shoplo.com/
+
+  - title: 'Zawód: Programista'
+    author: Maciej Aniserowicz
+    img: /img/zawod-programista.jpg
+    link: https://zawodprogramista.pl/

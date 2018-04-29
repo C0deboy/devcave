@@ -312,7 +312,6 @@ hr.small {
 
 .post-preview > .post-meta, .post-meta {
   color: #808080;
-  font-size: 18px;
   margin: 0 0 5px 0;
 }
 
@@ -611,7 +610,7 @@ pre {
 }
 
 .project-btn {
-  background: #404040;
+  background: #313030eb;
   color: white;
   text-decoration: none;
   padding: 10px 0 10px 20px;
@@ -621,12 +620,12 @@ pre {
 
 .project-btn:hover,
 .project-btn:focus {
-  background: #3c3c3c;
+  background: #353434;
   transform: scale(1.35);
 }
 
 .project-btn .fa-circle {
-  color: #404040;
+  color: #313030eb;
 }
 
 .project,
@@ -771,7 +770,7 @@ pre {
   margin: 10px auto;
 }
 
-.book a {
+.book .img-link {
   background: #222222;
   border-radius: 5px;
   color: #ffffff;
@@ -780,6 +779,10 @@ pre {
   text-align: center;
   border: 0;
   padding: 5px 5px;
+}
+
+.book a {
+  color: inherit;
 }
 
 .book p {

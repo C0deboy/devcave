@@ -1,0 +1,87 @@
+
+- section: Rok 2017
+  subtitle: Tu się wszystko zaczęło
+  projects:
+
+
+  - title: You Shall Not Pass
+    technologies: JavaScript, HTML, CSS
+    description: Mini gierka, którą robiłem na potrzeby konkursu <a href="http://gynvael.coldwind.pl/?id=668">Gynvael's Winter GameDev Challenge 2017</a>. Największym wyzwaniem było umieszczenie gry w pojedynczym pliku html (włącznie z grafikami w base64 - wszystko musiało być zapisane tekstowo w tym pliku) oraz zmieszczeniu się w 20KB - bo takie były zasady. Wygrałem dzięki niej 50$. Gra nie jest jakoś super grywalna, ale jestem zadowolony, że udało mi się coś takiego sklecić w 20KB. Przed zagraniem polecam przeczytać readme na GitHubie.
+    img: /img/GWGC2017/game.PNG
+    github: https://github.com/C0deboy/You-Shall-Not-Pass
+    play: https://c0deboy.github.io/You-Shall-Not-Pass
+
+
+  - title: Scraper statystyk języków programowania
+    technologies: Java, Jsoup, Json smart, Apache Commons, Logback
+    description: Narzędzie konsolowe, które zbiera statystyki na potrzeby mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Obecnie zbiera dane z Github, Meetup.com, StackOverflow, Tiobe INDEX, Spectrum ranking oraz z Wikipedii (najnowsze wersje języków). Wszystko ląduje do pliku JSON, z które poźniej czytane są dane przez moją stronę.
+    img: /img/my-projects/jjp-stats-scraper.png
+    github: https://github.com/C0deboy/jjp-stats-scraper
+
+
+  - title: Aplikacja do zarządzania "todo" listami
+    technologies: Java, Servlet, JSP, JSTL, Spring, Hibernate, Maven, JUnit, Mockito, Tomcat
+    description: Aplikacja która rozwijałem w celu nauki Javy i jej technologii. Obecnie oferuję system logowania/rejestracji oraz podstawowe funkcjonalności CRUD na "todo" listach. Całość jest zabezpieczona przy użyciu Spring Security.
+    img: /img/my-projects/todo-list-app.JPG
+    github: https://github.com/C0deboy/todo-list-app
+
+
+  - title: Remake retro gry Tank1990/Battle City
+    technologies: Phaser, Javascript(ES6)
+    description: Gra tworzona jako odskocznia od typowych projektów. Remake znanej gry, pewnie każdy grał w dzieciństwie. Nie jest dokończony, zatrzymałem się na podstawowych elementach mechaniki gry (bez leveli, różnych czołgów i zbierania ulepszeń). Było to ciekawe doświadczenie, może kiedyś do tego wrócę :).
+    img: /img/my-projects/tank1990.png
+    github: https://github.com/C0deboy/tank-1990
+    play: https://c0deboy.github.io/tank-1990/
+
+
+  - title: Jaki-jezyk-programowania.pl
+    technologies: HTML, CSS, Javascript (ES6), Boostrap, JQuery, Webpack, Npm
+    description: Strona internetowa skierowana dla początkujących programistów, która ma na celu pomoc w wyborze technologii do danego zastosowania. Poza tym, można tam znaleźć opisy technologii, statystyki i<a href="https://jaki-jezyk-programowania.pl/ksiazki/">polecane książki</a> programistyczne.
+    img: /img/my-projects/jaki-jezyk-programowania.png
+    github: https://github.com/C0deboy/jaki-jezyk-programowania
+    see: https://jaki-jezyk-programowania.pl
+
+
+  - title: Blog devcave.pl
+    technologies: Jekyll, HTML, CSS, Javascript, Boostrap, JQuery, Npm
+    description: Czyli ten blog, który powstał dzięki inicjatywie DajSiePoznac2017. Blog działa na Jekyllu. Przepisałem niemal od zera jeden z początkowych motywów, więc 90% wyglądu i funkcjonalności stworzyłem sam.
+    img: /img/my-projects/devcave.png
+    github: https://github.com/C0deboy/devcave
+
+
+
+- section: Początki
+  subtitle: Na tych projektach stawiałem pierwsze kroki
+  projects:
+
+
+  - title: Animacja - ASCII art
+    technologies: HTML, CSS, Javascript
+    description: Animacja dzięki której wygrałem konkurs świąteczny (100zł na książkę :D) zorganizowany przez <a href="https://forum.pasja-informatyki.pl">Forum Pasja Informatyki</a>. Zajęła 1 miejsce z 72 głosami (drugie miało 35). Celem konkursu było wykonanie animacji znaków ASCII o tematyce świątecznej w dowolnej technologii.
+    img: /img/my-projects/swieta-asci-art.gif
+    github: https://github.com/C0deboy/christmas-asci-art/
+    see: https://c0deboy.github.io/christmas-asci-art/
+
+
+  - title: Zwierciadła i soczewki
+    technologies: HTML, CSS, Javascript
+    description: Aplikacja symulującą rysowanie odbić w zwierciadłach i soczewkach. Projekt szkolny na fizykę wykonany z kolegą. Wymagało trochę myślenia ;) Bardzo podobał mi się proces tworzenia tej aplikacji. Było to ciekawe doświadczenie na początku przygody z programowaniem.
+    img: /img/my-projects/mirrors-and-lens.png
+    github: https://github.com/C0deboy/Mirrors-and-Lens/
+    see: https://c0deboy.github.io/Mirrors-and-Lens/ConvergingLens.html
+
+
+  - title: Game of Life Johna Conwaya
+    technologies: HTML, CSS, Javascript
+    description: Mój drugi projekt. Robiłem go razem z kolegą. Jest to implementacja "Gry w życie" Johna Conwaya w JavaScriptcie. Ciężko nazwać to grą, ale było to ciekawe doświadczenie jak dla początkujących programistów ;).
+    img: /img/my-projects/game-of-life.png
+    github: https://github.com/C0deboy/Game-of-life/
+    play: https://c0deboy.github.io/Game-of-life/
+
+
+  - title: Gra kółko i krzyżyk
+    technologies: HTML, CSS, Javascript
+    description: Jest to mój pierwszy projekt poza mało poważnymi stronkami wykonanymi na potrzeby szkolne. Zaczynałem wtedy zabawę z Javascript.
+    img: /img/my-projects/kolko-krzyzyk.png
+    github: https://github.com/C0deboy/Kolko-i-krzyzyk
+    play: https://c0deboy.github.io/Kolko-i-krzyzyk/

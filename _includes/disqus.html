@@ -2,19 +2,19 @@
 {% if jekyll.environment == "production" %}
 <div id="disqus_thread"></div>
 <script>
+  const disqus_config = function () {
+    this.page.url = "{{ site.url }}{{ page.url }}";
+    this.page.identifier = "{{ page.id }}";
+  };
 
-var disqus_config = function () {
-this.page.url = "{{ site.url }}{{ page.url }}";
-this.page.identifier = "{{ page.id }}";
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
 </script>
-<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by Disqus.</a></noscript>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
 {% endif %}
 {% endif %}

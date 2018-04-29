@@ -9,14 +9,14 @@ permalink: "/archiwum/"
 <div class="archive">
     <div>
         <h1>Wszytkie wpisy:</h1>
-        <h2 class="page-header">{{ site.posts | size }}
-            <small> - Ilość wszystkich postów</small>
+        <h2 class="page-header">
+            {{ site.posts | size }}<small> - Ilość wszystkich postów</small>
         </h2>
     </div>
 
     <div class="search-engine">
         <label>
-            <h3>Wyszukaj po tytule/podtytule:</h3>
+            Wyszukaj po tytule/podtytule:
             <input class="search-value" placeholder="Wpisz szukaną frazę"/>
         </label>
 
@@ -27,21 +27,22 @@ permalink: "/archiwum/"
 
         <script>
 
-            const search = new jekyllSearch(
-                '/dist/js/search/search.json',
-                '.search-value',
-                '.search-results',
-            );
+          const search = new jekyllSearch(
+            '/dist/js/search/search.json',
+            '.search-value',
+            '.search-results',
+          );
 
-            search.init();
+          search.init();
 
-            search.getUrlSearchQuery();
+          search.getUrlSearchQuery();
 
         </script>
     </div>
 
     <div>
-        <h3>Wyszukaj według tagów:</h3>
+        <label>Wyszukaj według tagów:</label> <br>
+
         {% assign tags = site.tags | sort %}
         {% for tag in tags %}
         <div class="site-tag">
@@ -61,7 +62,9 @@ permalink: "/archiwum/"
                 {% if post.for %}
                 <div class="post-partner">
                     <p class="m0">Post dla:</p>
-                    <a href="https://{{ post.for }}.pl"><img src="/img/{{ post.for }}.png" alt="{{ post.for }} logo"/></a>
+                    <a href="https://{{ post.for }}.pl">
+                        <img src="/img/{{ post.for }}.png" alt="{{ post.for }} logo"/>
+                    </a>
                 </div>
                 {% endif %}
                 <div class="post-preview">
@@ -95,7 +98,6 @@ permalink: "/archiwum/"
         </ul>
     </div>
     {% endfor %}
-</div>
 </div>
 
 <script src="/dist/js/archive.min.js"></script>

@@ -1,0 +1,116 @@
+.navbar-custom {
+  background: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.navbar-custom .navbar-brand {
+  font-weight: 800;
+  padding: 5px 0 5px 5px;
+  height: 60px;
+  line-height: 50px;
+  color: inherit;
+}
+
+.navbar-custom .navbar-brand img {
+  height: 45px;
+  display: inline;
+  margin-top: -4px;
+}
+
+.navbar-custom .nav li .nav-el {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+@media only screen and (min-width: 768px) {
+  .navbar-custom {
+    border-bottom: 1px solid #0e74bb;
+  }
+
+  .navbar-custom .navbar-brand:hover,
+  .navbar-custom .navbar-brand:focus {
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .navbar-custom .nav li .nav-el {
+    color: inherit;
+    padding: 20px 12px;
+  }
+
+  .navbar-custom .nav li .nav-el:hover,
+  .navbar-custom .nav li .nav-el:focus {
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media only screen and (min-width: 855px) {
+  .navbar-custom .nav li .nav-el {
+    color: inherit;
+    padding: 20px;
+  }
+}
+
+
+
+.navbar-custom.is-visible:hover {
+  opacity: 1;
+}
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+  background: rgba(172, 172, 172, 0.20);;
+}
+
+.navbar-toggle {
+  font-size: inherit;
+}
+
+.navbar-custom.is-fixed {
+  /* when the user scrolls down, we hide the header right above the viewport */
+  position: fixed;
+  top: -60px;
+  opacity: 0.6;
+  -webkit-transition: -webkit-transform 0.3s;
+  -moz-transition: -moz-transform 0.3s;
+  transition: transform 0.3s;
+  border-bottom: 1px solid rgba(238, 238, 238, 0.44);
+}
+
+@media (max-width: 768px) {
+  .navbar-custom.is-fixed {
+    opacity: 1;
+  }
+}
+
+.navbar-custom.is-fixed .navbar-brand:hover,
+.navbar-custom.is-fixed .navbar-brand:focus,
+.navbar-custom.is-fixed .nav li .nav-el:hover,
+.navbar-custom.is-fixed .nav li .nav-el:focus {
+  color: inherit;
+}
+
+.navbar-custom.is-visible {
+  /* if the user changes the scrolling direction, we show the header */
+  -webkit-transform: translate3d(0, 60px, 0);
+  -moz-transform: translate3d(0, 60px, 0);
+  -ms-transform: translate3d(0, 60px, 0);
+  -o-transform: translate3d(0, 60px, 0);
+  transform: translate3d(0, 60px, 0);
+}

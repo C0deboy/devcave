@@ -80,6 +80,11 @@ code.highlight,
   box-shadow: 0 0 2px 0 #040404;
 }
 
+pre {
+  background-color: inherit;
+  color: inherit;
+}
+
 code.highlight,
 code.highlighter-rouge {
   margin: 30px 4px;

@@ -19,7 +19,7 @@ markdown: kramdown
 highlighter: rouge
 permalink: /:categories/:title
 paginate: 5
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md", "npm-debug.log", "Gemfile", "Gemfile.lock", "package-lock.json","js", "css", ".idea"]
+exclude: ["node_modules","webpack.config.js","package.json","README.md", "npm-debug.log", "Gemfile", "Gemfile.lock", "package-lock.json", ".idea"]
 include: ["_pages"]
-keep_files: [.git]
+keep_files: [.git, .gitignore]
 plugins: [jekyll-paginate, jekyll-feed, rouge, jekyll-sitemap, jekyll-toc]

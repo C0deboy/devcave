@@ -1,4 +1,4 @@
-class jekyllSearch {
+class JekyllSearch {
   constructor(dataSource, searchField, resultsList) {
     this.dataSource = dataSource;
     this.searchField = document.querySelector(searchField);
@@ -27,8 +27,7 @@ class jekyllSearch {
 
   async displayResults() {
     const results = await this.findResults();
-    let delay = 0;
-    const html = results.map((item) =>
+    const html = results.map(item =>
       `<li class="result">
             <div class="post-preview">
               <a href="${item.url}">
@@ -51,7 +50,7 @@ class jekyllSearch {
   init() {
     this.searchField.addEventListener('keyup', this.displayResults);
     this.searchField.addEventListener('keypress', (event) => {
-      if (event.keyCode == 13) {
+      if (event.keyCode === 13) {
         event.preventDefault();
       }
     });
@@ -88,3 +87,13 @@ function getQueryVariable(variable) {
     }
   }
 }
+
+const search = new JekyllSearch(
+  '/dist/js/search/search.json',
+  '.search-value',
+  '.search-results',
+);
+
+search.init();
+
+search.getUrlSearchQuery();

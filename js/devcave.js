@@ -1,4 +1,3 @@
-
 if (JSON.parse(localStorage.getItem('dark-mode'))) {
   document.body.classList.add('dark-mode');
 }
@@ -12,7 +11,6 @@ document.querySelector('.dark-mode-btn').addEventListener('click', (e) => {
   localStorage.setItem('dark-mode', darkMode);
 });
 
-// Tooltip Init
 $(() => {
   $("[data-toggle='tooltip']").tooltip();
 });

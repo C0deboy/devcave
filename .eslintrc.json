@@ -9,6 +9,8 @@
   ],
   "rules": {
     "prefer-template": 0,
-    "no-plusplus": 0
+    "no-plusplus": 0,
+    "linebreak-style": ["error", "windows"],
+    "no-use-before-define": 0
   }
 }

@@ -21,23 +21,6 @@ permalink: "/archiwum/"
         </label>
 
         <ul class="search-results"></ul>
-
-        <script src="/dist/js/search/fetch.min.js"></script>
-        <script src="/dist/js/search/search.min.js"></script>
-
-        <script>
-
-          const search = new jekyllSearch(
-            '/dist/js/search/search.json',
-            '.search-value',
-            '.search-results',
-          );
-
-          search.init();
-
-          search.getUrlSearchQuery();
-
-        </script>
     </div>
 
     <div>
@@ -100,4 +83,6 @@ permalink: "/archiwum/"
     {% endfor %}
 </div>
 
+
+<script src="/dist/js/search/search.min.js"></script>
 <script src="/dist/js/archive.min.js"></script>

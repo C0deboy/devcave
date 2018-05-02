@@ -1,0 +1,200 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('../font/fontello.eot?30242348');
+  src: url('../font/fontello.eot?30242348#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff2?30242348') format('woff2'),
+       url('../font/fontello.woff?30242348') format('woff'),
+       url('../font/fontello.ttf?30242348') format('truetype'),
+       url('../font/fontello.svg?30242348#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?30242348#fontello') format('svg');
+  }
+}
+*/
+
+ /*[class^="fa-"]:before, [class*=" fa-"]:before {*/
+  /*font-family: "fontello";*/
+  /*font-style: normal;*/
+  /*font-weight: normal;*/
+  /*speak: none;*/
+
+  /*display: inline-block;*/
+  /*text-decoration: inherit;*/
+  /*width: 1em;*/
+  /*margin-right: .2em;*/
+  /*text-align: center;*/
+  /*!* opacity: .8; *!*/
+
+  /*!* For safety - reset parent styles, that can break glyph codes*!*/
+  /*font-variant: normal;*/
+  /*text-transform: none;*/
+
+  /*!* fix buttons height, for twitter bootstrap *!*/
+  /*line-height: 1em;*/
+
+  /*!* Animation center compensation - margins should be symmetric *!*/
+  /*!* remove if not needed *!*/
+  /*margin-left: .2em;*/
+
+  /*!* you can be more comfortable with increased icons size *!*/
+  /*!* font-size: 120%; *!*/
+
+  /*!* Font smoothing. That was taken from TWBS *!*/
+  /*-webkit-font-smoothing: antialiased;*/
+  /*-moz-osx-font-smoothing: grayscale;*/
+
+  /*!* Uncomment for 3D effect *!*/
+  /*!* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); *!*/
+/*}*/
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 fontello;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.fa-envelope:before { content: '\e800'; } /* '' */
+.fa-arrow-left:before { content: '\e801'; } /* '' */
+.fa-arrow-right:before { content: '\e802'; } /* '' */
+.fa-comment:before { content: '\e803'; } /* '' */
+.fa-eye:before { content: '\e804'; } /* '' */
+.fa-circle:before { content: '\f111'; } /* '' */
+.fa-times:before { content: '\e805'; } /* '' */
+.fa-github:before { content: '\f09b'; } /* '' */
+.fa-rss:before { content: '\f09e'; } /* '' */
+.fa-bars:before { content: '\f0c9'; } /* '' */
+.fa-spinner:before { content: '\f110'; } /* '' */
+.fa-lightbulb:before { content: '\f0eb'; } /* '' */
+.fa-quote-right:before { content: '\f10e'; } /* '' */
+.fa-folder-open-empty:before { content: '\f115'; } /* '' */
+.fa-gamepad:before { content: '\f11b'; } /* '' */
+.fa-sun-o:before { content: '\f185'; } /* '' */
+.fa-moon-o:before { content: '\f186'; } /* '' */
+.fa-copyright:before { content: '\f1f9'; } /* '' */
+.fa-linkedin-square:before { content: '\f30c'; } /* '' */
+.fa-plus:before { content: '\e806'; } /* '' */
+.fa-minus:before { content: '\e807'; } /* '' */
+.fa-attention:before { content: '\e808'; } /* '' */
+.fa-file-code:before { content: '\f1c9'; } /* '' */
+.fa-sticky-note-o:before { content: '\f24a'; } /* '' */
+
+.fa-lg {
+    font-size: 1.33333333em;
+    line-height: .75em;
+    vertical-align: -15%
+}
+
+.fa-2x {
+    font-size: 2em
+}
+
+.fa-3x {
+    font-size: 3em
+}
+
+.fa-4x {
+    font-size: 4em
+}
+
+.fa-5x {
+    font-size: 5em
+}
+
+.fa-fw {
+    width: 1.28571429em;
+    text-align: center
+}
+
+.fa-ul {
+    padding-left: 0;
+    margin-left: 2.14285714em;
+    list-style-type: none
+}
+
+.fa-ul > li {
+    position: relative
+}
+
+.fa-li {
+    position: absolute;
+    left: -2.14285714em;
+    width: 2.14285714em;
+    top: .14285714em;
+    text-align: center
+}
+
+.fa-li.fa-lg {
+    left: -1.85714286em
+}
+
+.fa-stack {
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle
+}
+
+.fa-stack-1x, .fa-stack-2x {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.fa-stack-1x {
+    line-height: inherit
+}
+
+.fa-stack-2x {
+    font-size: 2em
+}
+
+.fa-inverse {
+    color: #fff
+}
+
+.fa-spin {
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear
+}
+
+.fa-pulse {
+    -webkit-animation: fa-spin 1s infinite steps(8);
+    animation: fa-spin 1s infinite steps(8)
+}
+
+@-webkit-keyframes fa-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg)
+    }
+}
+
+@keyframes fa-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg)
+    }
+}
+

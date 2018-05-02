@@ -1,4 +1,8 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "libs/bootstrap-xlgrid.css";
+@import "libs/fontello.css";
 @import "navbar";
+@import "syntax";
 
 $secondary-color: #0079cc;
 $secondary-color-hover: #0089e8;
@@ -51,6 +55,7 @@ a:hover,
 a:focus {
     color: $secondary-color-hover;
     transition: color 0.3s;
+    text-decoration: none;
 }
 
 a.disabled {
@@ -86,11 +91,11 @@ hr.small {
 
 .box-effect {
     padding: 5px 10px;
-    box-shadow: 0 1px 3px 0 #747474;
+    box-shadow: 0 1px 2px 0 #747474;
 }
 
 .dark-mode .box-effect {
-    box-shadow: 0 0 5px 0 #000;
+    box-shadow: 0 1px 2px 0 #000;
 }
 
 
@@ -114,6 +119,22 @@ hr.small {
     background-color: $secondary-color-hover;
     border: 1px solid $secondary-color-hover;
     color: white;
+}
+
+.tooltip-inner {
+    background: #383838;
+    border: 1px solid #46464600;
+
+    .dark-mode & {
+        box-shadow: 0 .5px 0.5px 0 #000000b3;
+    }
+}
+
+.top .tooltip-arrow {
+    border-top-color: #383838!important;
+}
+.bottom .tooltip-arrow {
+    border-bottom-color: #383838!important;
 }
 
 .inline {
@@ -389,13 +410,21 @@ img::-moz-selection {
     filter: brightness(95%);
     height: 35px;
     color: white;
+    background: inherit;
 }
 
 .skillbar-progress {
     float: left;
     height: 35px;
-    width: 0;
-    transition: 2s;
+    background: inherit;
+
+    &.transition {
+        -webkit-transition: width 2s;
+        -moz-transition: width 2s;
+        -ms-transition: width 2s;
+        -o-transition: width 2s;
+        transition: width 2s;
+    }
 }
 
 .archive {
@@ -486,7 +515,7 @@ img::-moz-selection {
 }
 
 .project-btn {
-    background: #313030eb;
+    background: #313030;
     color: white;
     text-decoration: none;
     padding: 10px 0 10px 20px;
@@ -494,7 +523,7 @@ img::-moz-selection {
     transition: background .2s linear, transform .2s linear;
 
     .fa-circle {
-        color: #313030eb;
+        color: #313030;
     }
 }
 
@@ -502,7 +531,7 @@ img::-moz-selection {
 .books {
     margin: 30px 0;
     background: rgba(222, 222, 222, 0.12);
-    box-shadow: 0 0 4px 0 #000000;
+    box-shadow: 0 1px 4px 0 #000000b5;
 }
 
 .books {
@@ -584,6 +613,10 @@ img::-moz-selection {
 
     h3 {
         margin: 0;
+    }
+
+    &.inline {
+        margin: 0 15px;
     }
 }
 
@@ -755,4 +788,19 @@ img::-moz-selection {
 .close-ad {
     background: 0;
     border: 0;
+}
+
+.zoom {
+    opacity: 0;
+    transform: scale(1);
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.zoom.in {
+    opacity: 1;
+    transform: scale(1.2) translateY(-5px);
 }

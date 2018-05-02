@@ -25,7 +25,7 @@ permalink: "/kontakt/"
                 </a>
             </li>
             <li>
-                <button class="main-btn" type="button" id="open-contact-btn">
+                <button class="main-btn" type="button" id="open-contact-btn" data-toggle="modal" data-target="#formularz-kontaktowy">
                     Formularz kontaktowy
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </button>
@@ -69,7 +69,7 @@ permalink: "/kontakt/"
                 </a>
             </li>
             <li>
-                <a class="contact-link" href="https://www.messenger.com/t/marcin.lasota.35">
+                <a class="contact-link" href="https://www.messenger.com/t/devcavepl">
                     Messenger
                     <i class="fa fa-comment" aria-hidden="true"></i>
                 </a>
@@ -78,34 +78,53 @@ permalink: "/kontakt/"
     </div>
 </div>
 
-<div id="formularz-kontaktowy" class="contact" role="dialog" aria-label="Formularz kontaktowy" aria-hidden="true">
-    <form class="emailForm" method="POST" action="https://formspree.io/lasota.marcinm@gmail.com">
-        <label class="half" aria-live="polite">
-            Twój email
-            <input class="form-data" name="email" type="email" placeholder="Wpisz tu twój email" required>
-        </label>
-        <label class="half" aria-live="polite">
-            Temat
-            <input class="form-data" name="_subject" placeholder="Wpisz tu temat wiadomości" minlength="4"
-                   maxlength="78"
-                   required>
-        </label>
-        <label aria-live="polite">
-            Wiadomość
-            <textarea class="form-data" name="message" placeholder="Wpisz tu twoją wiadomość" minlength="4"
-                      maxlength="6000" required></textarea>
-        </label>
-        <label class="recaptcha-label" aria-live="polite">
-            <div class="g-recaptcha" tabindex="-1" data-sitekey="6LcyTjYUAAAAAAzWkuwU9AEYynQaZWAHRM5nVTNj"
-                 data-callback="recaptchaClearErr"></div>
-        </label>
-        <button class="emailFormSubmit main-btn" name="submit" type="submit">Wyślij</button>
+<div id="formularz-kontaktowy" class="modal fade" role="dialog" aria-label="Formularz kontaktowy" aria-hidden="true">
+    <form class="modal-dialog modal-lg emailForm" method="POST" action="https://formspree.io/lasota.marcinm@gmail.com">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="close-contact-btn" data-dismiss="modal" aria-label="Zamknij formularz kontaktowy"
+                        title="Zamknij formularz kontaktowy">
+                    <i class="fa fa-times close-form"></i>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Formularz kontaktowy</h4>
+            </div>
 
-        <div class="emailFormAlert" aria-live="polite"></div>
+            <div class="modal-body">
+                <div class="row">
+                    <label class="form-group col-md-6 col-xs-12" aria-live="polite">
+                        Twój email
+                        <input class="form-data form-control" name="email" type="email" placeholder="Wpisz tu twój email" required>
+                    </label>
+                    <label class="form-group col-md-6 col-xs-12" aria-live="polite">
+                        Temat
+                        <input class="form-data form-control" name="_subject" placeholder="Wpisz tu temat wiadomości" minlength="4"
+                               maxlength="78"
+                               required>
+                    </label>
+                </div>
+                <div class="row">
+                    <label class="form-group col-xs-12" aria-live="polite">
+                        Wiadomość
+                        <textarea class="form-data form-control" rows="8" name="message" placeholder="Wpisz tu twoją wiadomość" minlength="4"
+                                  maxlength="6000" required></textarea>
+                    </label>
+                    <div>
+
+                    <div class="form-group col-xs-12 text-center">
+                        <label class="recaptcha-label" aria-live="polite">
+                            <div class="g-recaptcha" tabindex="-1" data-sitekey="6LcyTjYUAAAAAAzWkuwU9AEYynQaZWAHRM5nVTNj"
+                                 data-callback="recaptchaClearErr"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="emailFormSubmit main-btn" name="submit" type="button">Wyślij</button>
+                <div class="emailFormAlert" aria-live="polite"></div>
+            </div>
+        </div>
     </form>
 
-    <button type="button" id="close-contact-btn" class="close-btn" aria-label="Zamknij formularz kontaktowy"
-            title="Zamknij formularz kontaktowy">
-        <i class="fa fa-times close-form"></i>
-    </button>
+
 </div>

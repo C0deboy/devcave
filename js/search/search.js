@@ -37,8 +37,6 @@ class JekyllSearch {
       
               <p class="post-meta">${item.date}</p>
             </div>
-            
-            <hr>
         </li>`).join('');
     if ((results.length === 0) || (this.searchField.value === '')) {
       this.resultsList.innerHTML = '<p>Nic nie znaleziono</p>';

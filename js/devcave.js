@@ -1,3 +1,5 @@
+import 'bootstrap.native';
+
 if (JSON.parse(localStorage.getItem('dark-mode'))) {
   document.body.classList.add('dark-mode');
 }
@@ -11,37 +13,39 @@ document.querySelector('.dark-mode-btn').addEventListener('click', (e) => {
   localStorage.setItem('dark-mode', darkMode);
 });
 
-$(() => {
-  $("[data-toggle='tooltip']").tooltip();
+document.querySelectorAll('.post img').forEach((img) => {
+  img.classList.add('img-responsive');
 });
 
-$(() => {
-  $('.post img').addClass('img-responsive');
-});
+let previousTop = 0;
+
+const navbarCustom = document.querySelector('.navbar-custom');
+const toggleBtn = document.getElementById('navbar-toggle-btn');
+const siteNav = document.getElementById('site-nav');
 
 function dynamicNavbar() {
-  const navbarCustom = $('.navbar-custom');
-  const headerHeight = navbarCustom.height();
-  const currentTop = $(window).scrollTop();
-  if (currentTop < this.previousTop) {
-    if (currentTop > 0 && navbarCustom.hasClass('is-fixed')) {
-      navbarCustom.addClass('is-visible');
+  const headerHeight = navbarCustom.offsetHeight;
+  const currentTop = window.scrollY;
+  if (currentTop < previousTop) {
+    if (currentTop > 0 && navbarCustom.classList.contains('is-fixed')) {
+      navbarCustom.classList.add('is-visible');
     } else {
-      navbarCustom.removeClass('is-visible is-fixed');
+      navbarCustom.classList.remove('is-visible', 'is-fixed');
     }
   } else {
-    navbarCustom.removeClass('is-visible');
-    $('.navbar-collapse').removeClass('in');
-    if (currentTop > headerHeight && !navbarCustom.hasClass('is-fixed')) navbarCustom.addClass('is-fixed');
-  }
-  this.previousTop = currentTop;
-}
+    navbarCustom.classList.remove('is-visible');
 
-$(document).ready(($) => {
-  $(window).on('scroll', {
-    previousTop: 0,
-  }, dynamicNavbar);
-});
+    if (siteNav.classList.contains('in')) {
+      toggleBtn.Collapse.hide();
+    }
+
+    if (currentTop > headerHeight && !navbarCustom.classList.contains('is-fixed')) {
+      navbarCustom.classList.add('is-fixed');
+    }
+  }
+  previousTop = currentTop;
+}
+window.addEventListener('scroll', dynamicNavbar);
 
 document.querySelectorAll('.helion-ksiazkasm4 a:first-of-type').forEach((link) => {
   link.innerText = 'Kup na helion.pl';

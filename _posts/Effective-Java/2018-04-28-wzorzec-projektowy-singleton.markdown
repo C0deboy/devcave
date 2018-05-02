@@ -6,7 +6,7 @@ subtitle:   "Różne warianty. Wady i zalety. Antywzorzec?"
 date:       2018-04-28 12:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe 
+tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe
 comments:   true
 toc:        true
 ---
@@ -22,15 +22,15 @@ Wtedy warto zastosować wzorzec projektowy *Singleton*.
 # Singleton
 *Singleton* jest to po prostu klasa, która jest instancjowana w systemie tylko jeden raz. Każde użycie takiej klasy odnosi się do tej samej instancji.
 
-Jest kilka sposobów implementacji *Singletona*. 
+Jest kilka sposobów implementacji *Singletona*.
 
 ## Public final field Singleton
 Dwa pierwsze polegają na deklarowaniu konstruktora jako prywatny i udostępnianiu statycznego dostępu do obiektu:
 
-```java 
+```java
 public class Singleton {
   public static final Singleton INSTANCE = new Singleton();
-  
+
   private Singleton() {
   }
 }
@@ -38,7 +38,7 @@ public class Singleton {
 
 Prywatny konstruktor jest wywołany tylko raz, aby zainicjalizować {% code java %}Singleton.INSTANCE{% endcode %}. Brak publicznego konstruktora zapewnia, że w systemie będzie istnieć tylko jedna instancja tego obiektu. No chyba, że użyjemy refleksji i metody `setAccessible()`. Możemy wykluczyć taką opcję rzucając wyjątek w konstruktorze - jeśli instancja już istnieje:
 
-```java 
+```java
   private Singleton() {
     if (INSTANCE != null) {
       throw new IllegalStateException("Singleton already constructed");
@@ -49,15 +49,15 @@ Prywatny konstruktor jest wywołany tylko raz, aby zainicjalizować {% code java
 ## Static factory method Singleton
 Drugi sposób różni się od pierwszego tym , że udostępniania [static factory method]({% post_url /Effective-Java/2018-04-14-static-factory-method-zamiast-konstruktora %}) w celu zwracania `INSTANCE`, tym samym zadeklarowania tego pola jako prywatne:
 
-```java 
+```java
 public class Singleton {
   private static final Singleton INSTANCE = new Singleton();
-  
+
   private Singleton() {
   }
-  
-  public static Singleton getInstance() { 
-    return INSTANCE; 
+
+  public static Singleton getInstance() {
+    return INSTANCE;
   }
 }
 ```
@@ -67,7 +67,7 @@ public class Singleton {
 {: .pros}
 Bardziej elastyczny sposób.
 
-Pozwala nam w każdym momencie zmienić zdanie np. możemy sprawić, że ta klasa nie będzie już *Singletonem* bez zmieniania API. 
+Pozwala nam w każdym momencie zmienić zdanie np. możemy sprawić, że ta klasa nie będzie już *Singletonem* bez zmieniania API.
 
 {: .pros}
 Możliwość napisania generycznej fabryki Singletonów.
@@ -107,7 +107,7 @@ O serializacji będą osobne wpisy, ale dopiero w *Chapter 12. Serialization*. J
 
 Dodanie {% code java %}implements Serializable{% endcode %} do klasy nie jest wystarczające, aby singleton był rzeczywiście singletonem. Aby zagwarantować, że w systemie będzie tylko jedna klasa, musimy zadeklarować wszystkie pola jako `transient` oraz zdefiniować metodę:
 
-```java 
+```java
 private Object readResolve() {
     return getInstance();
 }
@@ -124,6 +124,9 @@ W przeciwnym wypadku, za każdym razem kiedy serializowana klasa zostanie deseri
 Aby zabezpieczyć nasz naszą klasę singletona przed wielowątkowością, musimy nieco zmodyfikować metodę `getInstance()`:
 
 ```java
+public class Singleton {
+  private static volatile Singleton INSTANCE;
+
   public static Singleton getInstance() {
     if(INSTANCE == null) {
       synchronized (Singleton.class) {
@@ -134,21 +137,15 @@ Aby zabezpieczyć nasz naszą klasę singletona przed wielowątkowością, musim
     }
     return INSTANCE;
   }
+}
 ```
+
 Jest to tak zwany *double-check-locking pattern*.
 
 Jeśli dwa wątki jednocześnie przejdą pierwszego ifa i będą chciały pobrać instancję to zakolejkują się przed `synchronized()`. Dodatkowy zagnieżdżony `if` wyeliminuję próbę stworzenia duplikatu.
 
-Może dojść do sytuacji, w której jeden wątek ustawi poprawnie wartość zmiennej, ale drugi podejmie próbę jej odczytania, zanim zostanie ona jeszcze zsynchronizowana.
+Zwróc uwagę, że zmienna `INSTANCE` jest oznaczona jako `volatile`. Jest to niezbędne. W przeciwnym wypadku *double-check-locking* nie działa. Jeśli interesuje Cię dlaczego tak musi być to na razie odsyłam do tematu [*Double-Checked Locking is Broken*](http://www.cs.umd.edu/~pugh/j[...]del/DoubleCheckedLocking.html). W rozdzale 11 (*Concurrency*) serii będzię poświecony temu osobny wpis.
 
-Dzięki oznaczeniu zmiennej jako `volatile` niezależnie od tego, który wątek próbuje ją odczytać, jej wartość będzie zawsze spójna.
-
-```java
-public class Singleton {
-    private static volatile Singleton INSTANCE;
-    //...
-}
-```
 ## Static holder Singleton
 
 Jest to bezpieczne rozwiązanie, które działa zgodnie z oczekiwaniami w wielowątkowym środowisku. Dzięki niemu mamy również zapewnione leniwe tworzenie instancji.

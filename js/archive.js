@@ -1,15 +1,16 @@
-Array.from(document.querySelectorAll('.tag-posts')).forEach((tagPosts) => {
+document.querySelectorAll('.tag-posts').forEach((tagPosts) => {
   tagPosts.classList.toggle('hidden');
-  Array.from(tagPosts.getElementsByTagName('li')).forEach((li) => {
+
+  tagPosts.querySelectorAll('li').forEach((li) => {
     li.classList.toggle('invisible');
   });
 });
 
-Array.from(document.querySelectorAll('.site-tag a')).forEach((tag) => {
+document.querySelectorAll('.site-tag a').forEach((tag) => {
   tag.addEventListener('click', (e) => {
     e.preventDefault();
     const scrollPos = window.scrollY;
-    location.hash = tag.hash;
+    window.location.hash = tag.hash;
     window.scrollTo(0, scrollPos);
     toggleElementVisibility(document.getElementById(tag.hash.substr(1)));
   });
@@ -21,9 +22,7 @@ function toggleElementVisibility(tagPosts) {
   if (lastTagPosts) {
     lastTagPosts.classList.toggle('hidden');
 
-    Array.from(lastTagPosts.getElementsByTagName('li')).forEach((li) => {
-      li.style.transitionDelay = 0;
-      li.style.transaction = 'none';
+    lastTagPosts.querySelectorAll('li').forEach((li) => {
       li.classList.toggle('invisible');
       li.classList.toggle('enter');
     });
@@ -32,9 +31,9 @@ function toggleElementVisibility(tagPosts) {
   if (tagPosts) {
     tagPosts.classList.toggle('hidden');
 
-    Array.from(tagPosts.getElementsByTagName('li')).forEach((li, i) => {
+    tagPosts.querySelectorAll('li').forEach((li, i) => {
       li.classList.toggle('invisible');
-      li.style.animationDelay = i * 0.1 + 's';
+      li.style.animationDelay = (i * 0.1) + 's';
       li.classList.toggle('enter');
     });
 

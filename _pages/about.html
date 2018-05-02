@@ -40,108 +40,21 @@ permalink: "/o-mnie/"
 
 <div class="row about">
     <div class="col-md-12">
-        <p><b>Języki programowania</b></p>
+        {% for section in site.data.my_skills %}
 
-        <div class="skillbar" data-pct="80%">
-            <div class="skillbar-title" style="background: #ffe915;">JavaScript, ES6</div>
-        </div>
+            <p><b>{{ section.section }}</b></p>
 
-        <div class="skillbar" data-pct="80%">
-            <div class="skillbar-title" style="background:  #ff5123;">Java</div>
-        </div>
+            {% for skill in section.skills %}
+                <div class="skillbar">
+                    <div class="skillbar-title" style="background: {{ skill.color }};">{{ skill.skill }}</div>
+                    <div class="skillbar-progress" style="width: calc({{ skill.grade }} - 130px); background: {{ skill.color }};"></div>
+                    <span>{{ skill.grade }}</span>
+                </div>
+            {% endfor %}
 
-        <p><b>Technologie Javowe</b></p>
-
-        <div class="skillbar" data-pct="60%">
-            <div class="skillbar-title" style="background: #6db33f;">Spring</div>
-        </div>
-
-        <div class="skillbar" data-pct="50%">
-            <div class="skillbar-title" style="background: #bcae79;">Hibernate</div>
-        </div>
-
-        <div class="skillbar" data-pct="70%">
-            <div class="skillbar-title" style="background: #20b4ff;">JSP</div>
-        </div>
-
-        <div class="skillbar" data-pct="40%">
-            <div class="skillbar-title" style="background: #ff425d;">Servlets</div>
-        </div>
-
-        <div class="skillbar" data-pct="40%">
-            <div class="skillbar-title" style="background:#dc524a;">JUnit</div>
-        </div>
-
-        <div class="skillbar" data-pct="40%">
-            <div class="skillbar-title" style="background:#1ca571;">Mockito</div>
-        </div>
-
-
-        <p><b>Technologie webowe</b></p>
-
-        <div class="skillbar" data-pct="90%">
-            <div class="skillbar-title" style="background: #ff5418;">HTML5</div>
-        </div>
-
-        <div class="skillbar" data-pct="90%">
-            <div class="skillbar-title" style="background: #1c92ff;">CSS3</div>
-        </div>
-
-        <div class="skillbar" data-pct="60%">
-            <div class="skillbar-title" style="background: #ff4059;">jQuery</div>
-        </div>
-
-        <div class="skillbar" data-pct="80%">
-            <div class="skillbar-title" style="background: #ff3300;">Bootstrap</div>
-        </div>
-
-        <div class="skillbar" data-pct="50%">
-            <div class="skillbar-title" style="background:#de0b32;">Angular</div>
-        </div>
-
-        <p><b>Inne</b></p>
-        <div class="skillbar" data-pct="80%">
-            <div class="skillbar-title" style="background: #1b9612;">Git</div>
-        </div>
-        <div class="skillbar" data-pct="50%">
-            <div class="skillbar-title" style="background: #e48e00;">SQL</div>
-        </div>
-        <div class="skillbar" data-pct="80%">
-            <div class="skillbar-title" style="background: #ae4239;">Webpack</div>
-        </div>
-        <div class="skillbar" data-pct="90%">
-            <div class="skillbar-title" style="background: #5bae5e;">npm</div>
-        </div>
-        <div class="skillbar" data-pct="90%">
-            <div class="skillbar-title" style="background: #357bae;">ESLint</div>
-        </div>
-        <div class="skillbar" data-pct="80%">
-            <div class="skillbar-title" style="background: #002f63;">Maven</div>
-        </div>
-        <div class="skillbar" data-pct="40%">
-            <div class="skillbar-title" style="background: #002f63;">Ant</div>
-        </div>
-        <div class="skillbar" data-pct="80%">
-            <div class="skillbar-title" style="background:#2acb70;">Jekyll</div>
-        </div>
-
-        <p><b>IDE i edytory</b></p>
-        <div class="skillbar" data-pct="60%">
-            <div class="skillbar-title" style="background: #593a94;">Eclipse</div>
-        </div>
-        <div class="skillbar" data-pct="80%">
-            <div class="skillbar-title" style="background: #fa4273;">Intelij</div>
-        </div>
-        <div class="skillbar" data-pct="80%">
-            <div class="skillbar-title" style="background: #00d0d9;">WebStorm</div>
-        </div>
-        <div class="skillbar" data-pct="70%">
-            <div class="skillbar-title" style="background: #e96c18;">SublimeText</div>
-        </div>
+        {% endfor %}
 
     </div>
 </div>
-
-<script src="/dist/js/libs/noframework.waypoints.min.js"></script>
 
 <script src="/dist/js/skillbar.min.js"></script>

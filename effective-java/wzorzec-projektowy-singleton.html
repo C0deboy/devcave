@@ -12,11 +12,7 @@
 <link rel="canonical" href="https://devcave.pl/effective-java/wzorzec-projektowy-singleton">
 <link rel="shortcut icon" href="/img/logo.ico">
 
-<link rel="stylesheet" href="/dist/css/libs/bootstrap.min.css">
-<link rel="stylesheet" href="/dist/css/libs/bootstrap-xlgrid.min.css">
 <link rel="stylesheet" href="/dist/css/devcave.min.css">
-<link rel="stylesheet" href="/dist/css/syntax.min.css">
-<link rel="stylesheet" href="/dist/css/libs/font-awesome.min.css">
 
 <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
@@ -187,7 +183,7 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
-  
+
   <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -207,12 +203,12 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
   <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
-  
+
   <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
   <span class="o">}</span>
-  
-  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span> 
-    <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span> 
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -272,7 +268,10 @@
 
 <p>Aby zabezpieczyć nasz naszą klasę singletona przed wielowątkowością, musimy nieco zmodyfikować metodę <code class="highlighter-rouge">getInstance()</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">volatile</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">if</span><span class="o">(</span><span class="n">INSTANCE</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
       <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Singleton</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
@@ -282,20 +281,15 @@
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
   <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></div>
+
 <p>Jest to tak zwany <em>double-check-locking pattern</em>.</p>
 
 <p>Jeśli dwa wątki jednocześnie przejdą pierwszego ifa i będą chciały pobrać instancję to zakolejkują się przed <code class="highlighter-rouge">synchronized()</code>. Dodatkowy zagnieżdżony <code class="highlighter-rouge">if</code> wyeliminuję próbę stworzenia duplikatu.</p>
 
-<p>Może dojść do sytuacji, w której jeden wątek ustawi poprawnie wartość zmiennej, ale drugi podejmie próbę jej odczytania, zanim zostanie ona jeszcze zsynchronizowana.</p>
+<p>Zwróc uwagę, że zmienna <code class="highlighter-rouge">INSTANCE</code> jest oznaczona jako <code class="highlighter-rouge">volatile</code>. Jest to niezbędne. W przeciwnym wypadku <em>double-check-locking</em> nie działa. Jeśli interesuje Cię dlaczego tak musi być to na razie odsyłam do tematu <a href="http://www.cs.umd.edu/~pugh/j[...]del/DoubleCheckedLocking.html"><em>Double-Checked Locking is Broken</em></a>. W rozdzale 11 (<em>Concurrency</em>) serii będzię poświecony temu osobny wpis.</p>
 
-<p>Dzięki oznaczeniu zmiennej jako <code class="highlighter-rouge">volatile</code> niezależnie od tego, który wątek próbuje ją odczytać, jej wartość będzie zawsze spójna.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">volatile</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span><span class="o">;</span>
-    <span class="c1">//...</span>
-<span class="o">}</span>
-</code></pre></div></div>
 <h2 id="static-holder-singleton">Static holder Singleton</h2>
 
 <p>Jest to bezpieczne rozwiązanie, które działa zgodnie z oczekiwaniami w wielowątkowym środowisku. Dzięki niemu mamy również zapewnione leniwe tworzenie instancji.</p>
@@ -424,7 +418,7 @@ Może też być problem w zmockowaniu <em>Singletona</em>, chyba, że implementu
         
         <li class="previous">
           <a class="box-effect" href="/notatnik-juniora/idiotoodporne-api-klasy"
-             data-toggle="tooltip" data-placement="top" title="Idiotoodporne API klasy"><i class="fa fa-arrow-left"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Idiotoodporne API klasy"><i class="fa fa-arrow-left"
                                                                                            aria-hidden="true"></i>
             Poprzedni post</a>
         </li>
@@ -480,38 +474,34 @@ Może też być problem w zmockowaniu <em>Singletona</em>, chyba, że implementu
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center social-buttons">
                     <li>
-                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-placement="top" title="RSS">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
                             <i class="fa fa-rss fa-lg"></i>
                         </a>
                     </li>
                     <li>
-                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-placement="top" title="LinkedIn">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
                             <i class="fa fa-linkedin-square" aria-hidden="true"></i>
                         </a>
                     </li>
                     <li>
-                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-placement="top" title="Github">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
                             <i class="fa fa-github fa-lg"></i>
                         </a>
                     </li>
                     <li>
-                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-placement="top" title="lasota.marcinm@gmail.com">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
                             <i class="fa fa-envelope fa-lg"></i>
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; devcave 2017 - 2018</p>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
             </div>
         </div>
     </div>
 </footer>
 
-
-<script src="/dist/js/libs/jquery.min.js"></script>
-
-<script src="/dist/js/libs/bootstrap.min.js"></script>
-
 <script src="/dist/js/devcave.min.js"></script>
+
 
 
 

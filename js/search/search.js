@@ -14,15 +14,30 @@ class JekyllSearch {
 
   async findResults() {
     this.resultsList.innerHTML = '<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>';
+    const inputValue = this.searchField.value.trim();
+    const allWordsRegex = new RegExp('.*(' + inputValue.replace(/\s/g, ').*(') + ').*', 'i');
+    const anyWordRegex = new RegExp('(^|\\s)' + inputValue.replace(/\s\w{1,2}\s/g, ' ').replace(/\s/g, ' | ') + '(\\s|$)', 'i');
+
     const data = await this.fetchedData();
-    return data.filter((item) => {
-      const inputValue = this.searchField.value.trim().replace(/\s/g, ' | ');
-      const regex = new RegExp(inputValue, 'gi');
-      if (item.titleSEO) {
-        return item.title.match(regex) || item.subtitle.match(regex) || item.titleSEO.match(regex);
-      }
-      return item.title.match(regex) || item.subtitle.match(regex);
+
+    const results = data.filter((item) => {
+      const searchIn = escapePolishLetters(item.title + ' ' + item.subtitle);
+      return searchIn.match(allWordsRegex);
     });
+
+    if (results.length > 0) {
+      return results;
+    }
+    else {
+      return data.filter((item) => {
+        const searchIn = escapePolishLetters(item.title + ' ' + item.subtitle);
+        if(searchIn.match(anyWordRegex)){
+          console.log(searchIn);
+          return true;
+        }
+        return searchIn.match(anyWordRegex);
+      });
+    }
   }
 
   async displayResults() {
@@ -37,7 +52,8 @@ class JekyllSearch {
       
               <p class="post-meta">${item.date}</p>
             </div>
-        </li>`).join('');
+        </li>`)
+      .join('');
     if ((results.length === 0) || (this.searchField.value === '')) {
       this.resultsList.innerHTML = '<p>Nic nie znaleziono</p>';
     } else {
@@ -55,20 +71,33 @@ class JekyllSearch {
   }
 
   getUrlSearchQuery() {
-    const searchQuery = getQueryVariable('szukaj');
+    let searchQuery = getQueryVariable('szukaj');
 
     if (getQueryVariable('nowadomena') !== undefined) {
       const newDomainMessage = document.createElement('p');
-      newDomainMessage.innerText = 'Blog został przeniesiony na nową domenę. Czy szukałeś: ?';
-      newDomainMessage.classList.add('new-domain-msg');
+      newDomainMessage.innerText = 'Blog został przeniesiony na nową domenę. Czy szukałeś tego?:';
+      newDomainMessage.classList.add('not-found-msg');
       this.resultsList.parentElement.insertBefore(newDomainMessage, this.resultsList);
 
-      searchQuery.replace(/\d/g, '');
+      searchQuery = searchQuery.replace(/\d/g, '')
+        .substr(searchQuery.lastIndexOf('/') + 1);
     }
 
     if (searchQuery !== undefined) {
-      this.searchField.value = searchQuery.split(/[/\-_]/).filter(str => str.match(/\w{3,}/)).join(' ');
+      this.searchField.value = searchQuery.replace(/[/\-_]/g, ' ');
       this.displayResults();
+    } else if (window.location.pathname !== '/archiwum/') {
+      const href = window.location.href;
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', href, true);
+      xhr.onload = (e) => {
+        if (xhr.status === 404) {
+          const searchedPost = href.substr(href.lastIndexOf('/') + 1);
+          this.searchField.value = searchedPost.replace(/-/g, ' ');
+          this.displayResults();
+        }
+      };
+      xhr.send();
     }
   }
 }
@@ -84,6 +113,23 @@ function getQueryVariable(variable) {
       return decodeURIComponent(pair[1].replace(/\+/g, '%20'));
     }
   }
+}
+
+function escapePolishLetters(word) {
+  const polishChars = 'ąćęłńóśźż';
+  const normalizedChars = 'acelnoszz';
+  const charsRegExmp = new RegExp('[' + polishChars + ']', 'g');
+  const transl = {};
+
+  const lookup = (m) => {
+    return transl[m] || m;
+  };
+
+  for (let i = 0; i < polishChars.length; i++) {
+    transl[polishChars[i]] = normalizedChars[i];
+  }
+
+  return word.replace(charsRegExmp, lookup);
 }
 
 const search = new JekyllSearch(

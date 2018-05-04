@@ -78,8 +78,8 @@ hr.small {
     border-top: 4px solid #dfdfdf;
 }
 
-.header-hr {
-    border-top: 1px solid #0e74bb;
+.page-header {
+    border-bottom: 1px solid #a3a1a130;
 }
 
 .dark-mode-btn {
@@ -555,9 +555,9 @@ img::-moz-selection {
     background: #1e1e1e;
 }
 
-.new-domain-msg {
+.not-found-msg {
     color: tomato;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 .top-posts {

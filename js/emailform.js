@@ -67,16 +67,22 @@ submitBtn.addEventListener('click', (event) => {
 
     xhr.open('POST', document.querySelector('.emailForm').getAttribute('action'));
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('Accept', 'application/json, text/javascript, /; q=0.01');
+
     xhr.onerror = () => {
       console.log(xhr);
       formAlert.innerHTML = customErrors.cannotSend;
-      grecaptcha.reset();
     };
 
     xhr.onload = () => {
-      console.log(xhr);
-      formAlert.innerHTML = 'Wysłano! Dzięki za wiadomość!';
-      grecaptcha.reset();
+      if(xhr.status === 200) {
+        formAlert.innerHTML = 'Wysłano! Dzięki za wiadomość!';
+        grecaptcha.reset();
+      }
+      else {
+        console.log(xhr);
+        formAlert.innerHTML = customErrors.cannotSend;
+      }
     };
 
     xhr.send(transformObjectToUrlEncoded(formData));

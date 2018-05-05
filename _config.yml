@@ -11,9 +11,6 @@ email_username: lasota.marcinm@gmail.com
 # To enable google analytics, uncomment below line with a valid Google Tracking ID
 google_tracking_id: UA-90973428-2
 
-collections:
-- top_posts
-
 # Build settings
 markdown: kramdown
 highlighter: rouge

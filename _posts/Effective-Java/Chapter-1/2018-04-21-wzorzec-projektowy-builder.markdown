@@ -6,7 +6,7 @@ subtitle:   "3 warianty. Kiedy jaki stosować? Wady i zalety."
 date:       2018-04-21 10:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe 
+tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe
 comments:   true
 toc:        true
 ---
@@ -30,7 +30,7 @@ public class Goal {
 
 Posiada 6 pól do zainicjowania, nie wszystkie są wymagane, ale część jest kluczowa. Jak w takim przypadku będzie wyglądał konstruktor, jeśli chcemy użyć tego podejścia?
 
-```java 
+```java
 public Goal(String name, ArrayList<Level> levels, Checklist checklist, boolean achieved) {
     this.name = name;
     this.levels = levels;
@@ -58,7 +58,7 @@ Goal goal = new Goal("Run the marathon", "My goal", levels, checklist, false);
 ```
 Opcjonalnymi i wymaganymi polami można łatwo zarządzać używając konstruktorów. Możemy przypisać im wartości domyślne, wymusić utworzenie obiektu z określonymi parametrami itd.. Jednak to co zaczyna być mało praktyczne to konstruktor:
 
-```java 
+```java
 Goal goal = new Goal("Run the marathon", "My goal", levels, checklist, false);
 ```
 
@@ -66,7 +66,7 @@ Ma 5 argumentów i zaczyna to być już mało czytelne. Szczególnie dla osoby, 
 
 Użycie podejścia z bezargumentowym konstruktorem i setterami poprawia czytelność kodu:
 
-```java 
+```java
 Goal goal = new Goal();
 goal.setName("Run the marathon");
 goal.setDescription("My goal");
@@ -75,7 +75,7 @@ goal.setChecklist(checklist);
 goal.setAchievied(false);
 ```
 
-Jednak nie gwarantuje ono spójności klasy. Nie ma tutaj opcji, aby zmusić klienta, żeby ustawił wszystkie wymagane pola. Uniemożliwia to też stworzenie klasy niezmiennej, co wymaga dodatkowego wysiłku, aby zapewnić *thread safety*. I tu z pomocą przychodzi *Builder*. 
+Jednak nie gwarantuje ono spójności klasy. Nie ma tutaj opcji, aby zmusić klienta, żeby ustawił wszystkie wymagane pola. Uniemożliwia to też stworzenie klasy niezmiennej, co wymaga dodatkowego wysiłku, aby zapewnić *thread safety*. I tu z pomocą przychodzi *Builder*.
 
 # Budowniczy (Builder) - wzorzec projektowy
 
@@ -83,7 +83,7 @@ Ten wzorzec projektowy ma kilka wariantów. W książce *Effective Java* porusza
 
 ## Inner Static Fluent Builder
 
-```java 
+```java
 public class Goal {
   private String name;
   private String description;
@@ -150,13 +150,13 @@ public class Goal {
   }
 }
 ```
-Kolejne metody służą do konfigurowania pól w klasie `Goal` (możemy przeprowadzić też w nich walidację), które zwracają obiekt buildera, aby umożliwić ciągłe wywoływanie kolejnych metod (Fluent API). Ostatnia z nich - {% code java %}public Goal build(){% endcode %} służy do zbudowania obiektu i najczęściej przed tym do zweryfikowania czy wszystkie wymagane pola zostały zainicjowane. 
+Kolejne metody służą do konfigurowania pól w klasie `Goal` (możemy przeprowadzić też w nich walidację), które zwracają obiekt buildera, aby umożliwić ciągłe wywoływanie kolejnych metod (Fluent API). Ostatnia z nich - {% code java %}public Goal build(){% endcode %} służy do zbudowania obiektu i najczęściej przed tym do zweryfikowania czy wszystkie wymagane pola zostały zainicjowane.
 
 **Istnieje też inny fajny sposób, aby wymusić ustawienie wszystkich pól w builderze** - napisałem o tym osobny post [idiotoodporne-api-klasy](https://bulldogjob.pl/news/348-idiotoodporne-api-klasy-czyli-jakie) dla [bulldogjob.pl](https://bulldogjob.pl/).
 
 Stosując wzorzec *builder* możemy zagwarantować, że stworzona zostanie poprawna i kompletna klasa, zachowując czysty i łatwy w użyciu kod. Instancjowanie klasy wygląda wtedy tak:
 
-```java 
+```java
 Goal goal = new Goal.Builder()
     .name("Run the marathon")
     .description("My goal")
@@ -165,11 +165,11 @@ Goal goal = new Goal.Builder()
     .achieved()
     .build();
 ```
-Jak widać jest to dużo łatwiejsze do czytania jak i używania. Kolejne pola możemy podać w dowolnej kolejności, ze względu na wspomniane wcześniej *fluent API*. 
+Jak widać jest to dużo łatwiejsze do czytania jak i używania. Kolejne pola możemy podać w dowolnej kolejności, ze względu na wspomniane wcześniej *fluent API*.
 
-Osobiście dla mnie składnia {% code java %}new Goal.Builder(){% endcode %} wygląda paskudnie, dlatego preferuję użyć tutaj [*static factory method*]({% post_url /Effective-Java/2018-04-14-static-factory-method-zamiast-konstruktora %}), żeby uzyskać dostęp do buildera w statyczny sposób, bez użycia *new* :
+Osobiście dla mnie składnia {% code java %}new Goal.Builder(){% endcode %} wygląda paskudnie, dlatego preferuję użyć tutaj [*static factory method*]({% post_url /Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}), żeby uzyskać dostęp do buildera w statyczny sposób, bez użycia *new* :
 
-```java 
+```java
 public static Builder builder() {
     return new Builder();
 }
@@ -178,7 +178,7 @@ public static Builder builder() {
 
 I wtedy *buildera* możemy używać tak:
 
-```java 
+```java
 Goal goal = Goal.builder()
     .name("Run the marathon")
     .description("My goal")
@@ -191,7 +191,7 @@ Goal goal = Goal.builder()
 
 Możemy też uniemożliwić instancjonowanie klasy zwykłym konstruktorem dodając go jako prywatny:
 
-```java 
+```java
 private Goal() {
 }
 ```
@@ -226,7 +226,7 @@ Dodatkowym plusem jest to, że możemy dodawać elementy np. do list w dynamiczn
     //...
 ```
 i wtedy zamiast takiego podawania poziomów:
-```java 
+```java
 List<Level> levels = new ArrayList<>();
 levels.add(new Level("5km", "Cookie"));
 levels.add(new Level("10km", "Wine"));
@@ -243,7 +243,7 @@ Goal goal = Goal.builder()
 
 Można podać tak:
 
-```java 
+```java
 Goal goal = Goal.builder()
     .name("Run the marathon")
     .description("My goal")
@@ -298,7 +298,7 @@ Często takie rozwiązanie się nie sprawdza np. ze względu na to, że obiekt p
 
 Użycie wygląda podobnie:
 
-```java 
+```java
 Goal goal = new GoalBuilder()
         .name("Run the marathon")
         .description("My goal")
@@ -327,7 +327,7 @@ Ten wzorzec nie ma zastosowania w przykładzie z tworzeniem klasy *Goal*, poniew
 
 *Builder*:
 
-```java 
+```java
 public interface DataScraper {
 
   void scrapDataFor(String[] languages);
@@ -344,16 +344,16 @@ Jest to "scraper", ale zasada podobna. Po prostu zamiast metod z przedrostkiem `
 
 *ConcreteBuilders*:
 
-```java 
+```java
 public class GithubDataScraper implements DataScraper {
   private static final String NAME = "Github";
   private Map<String, JSONObject> githubData = new HashMap<>();
-  
+
   @Override
   public void scrapDataFor(String[] languages) {
     //scraping implementation for Github
   }
-  
+
   @Override
   public String getName() {
     return NAME;
@@ -366,7 +366,7 @@ public class GithubDataScraper implements DataScraper {
 }
 ```
 
-```java 
+```java
 public class StackOverflowDataScraper implements DataScraper {
  private static final String NAME = "StackOverflow";
  private Map<String, JSONObject> stackOverflowData = new HashMap<>();
@@ -388,16 +388,16 @@ public class StackOverflowDataScraper implements DataScraper {
 }
 ```
 
-```java 
+```java
 public class MeetupDataScraper implements DataScraper {
   private static final String NAME = "Meetup";
   private Map<String, JSONObject> meetupData = new HashMap<>();
-  
+
   @Override
   public void scrapDataFor(String[] languages) {
     //scraping implementation for Meetup
   }
-  
+
   @Override
   public String getName() {
     return NAME;
@@ -433,7 +433,7 @@ public class Statistics {
 ```
 Tu jest nieco zmodyfikowana wersja. W książkowym przykładzie *Director* dostaje *Builder* w konstruktorze, jednak nie do końca rozumiem dlaczego tak jest. Wymusza to instancjonowanie nowego *Directora* za każdym razem, gdy tworzymy nowy obiekt. Ja zaimplementowałem to tak, że używamy cały czas tego samego *Directora* do budowania różnych obiektów. A tak wygląda użycie przez klienta:
 
-```java 
+```java
 public class App {
     String[] languages = {"C", "C++", "Java", "JavaScript", "Python", "Swift", "R", "Csharp", "Ruby", "PHP"};
 
@@ -451,7 +451,7 @@ public class App {
 
 Jeśli chciałbym to zrobić jak w książkowym przykładzie to wyglądałoby to tak:
 
-```java 
+```java
 JSONObject tiobeIndexStats = new Statistics(new TiobeIndexDataScraper()).build();
 JSONObject meetupStats = new Statistics(new MeetupDataScraper()).build();
 JSONObject stackOverFlowStats = new Statistics(new StackOverflowDataScraper()).build();
@@ -469,7 +469,7 @@ JSONObject stackOverFlowStats = new Statistics(new StackOverflowDataScraper(), l
 JSONObject spectrumStats = new Statistics(new SpectrumDataScraper(), languages).build();
 ```
 
-lub 
+lub
 
 ```java
 String[] languages = {"C", "C++", "Java", "JavaScript", "Python", "Swift", "R", "Csharp", "Ruby", "PHP"};
@@ -483,13 +483,13 @@ JSONObject spectrumStats = new Statistics(new SpectrumDataScraper(languages)).bu
 Co jest nieco nadmiarowe i przynajmniej w tym wypadku robienie nowej instancji *Directora* za każdym razem jest zbędne.
 
 Widziałem też przykłady gdzie wszystko było instancjonowane w osobnej linijce... Według mnie to *overkill* bo zamiast jednej linijki:
- 
+
 ```java
 JSONObject tiobeIndexStats = statistics.build(new TiobeIndexDataScraper());
 ```
  byłoby coś takiego:
 
-```java 
+```java
 TiobeIndexDataScraper tiobeIndexDataScraper = new TiobeIndexDataScraper();
 Statistics tiobeIndexDirector = new Statistics(new TiobeIndexDataScraper());
 tiobeIndexDirector.collectFor(languages):
@@ -510,7 +510,7 @@ Gdyby w Javie występowały parametry nazwane (tak jak np. w Kotlinie), to ten w
 
 {% highlight java %}
 Goal goal = new Goal(
-    name="Run the marathon", 
+    name="Run the marathon",
     description="My goal",
     levels=levels,
     checList=checklist

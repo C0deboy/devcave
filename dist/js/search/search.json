@@ -354,6 +354,15 @@
         "subtitle": "Różne warianty. Wady i zalety. Antywzorzec?",
         "date": "28 kwietnia 2018",
         "url": "/effective-java/wzorzec-projektowy-singleton"
+      },
+    
+      
+      {
+        "title": "Klasy typu utility / helper",
+        "titleSEO": "Klasy typu utility / helper. Lepiej ich unikać?",
+        "subtitle": "Czyli klasy nieinstancjowalne. Lepiej ich unikać?",
+        "date": "5 maja 2018",
+        "url": "/effective-java/klasy-nieinstancjowalne"
       }
     
   

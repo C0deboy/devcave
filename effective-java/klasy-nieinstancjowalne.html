@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Klasy typu utility / helper. Lepiej ich unikać?</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/klasy-nieinstancjowalne">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Klasy typu utility / helper</h1>
+            
+            <h2 class="post-subtitle">Czyli klasy nieinstancjowalne. Lepiej ich unikać?</h2>
+            
+            <p class="post-meta">
+              
+              5
+              maja
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <em>Item-4</em> z rozdziału:</p>
+
+<p class="m0">Creating and Destroying Objects</p>
+
+<ul>
+  <li><a href="/effective-java/static-factory-method-zamiast-konstruktora" id="Item-1">Item 1: Consider static factory methods instead of constructors</a></li>
+  <li><a href="/effective-java/wzorzec-projektowy-builder" id="Item-2">Item 2: Consider a builder when faced with many constructor parameters</a></li>
+  <li><a href="/effective-java/wzorzec-projektowy-singleton" id="Item-3">Item 3: Enforce the singleton property with a private constructor or an enum type</a></li>
+  <li><a href="/effective-java/klasy-nieinstancjowalne" id="Item-4">Item 4: Enforce noninstantiability with a private constructor</a></li>
+  <li><a href="" class="disabled" id="Item-5">Item 5: Prefer dependency injection to hardwiring resources</a></li>
+  <li><a href="" class="disabled" id="Item-6">Item 6: Avoid creating unnecessary objects</a></li>
+  <li><a href="" class="disabled" id="Item-7">Item 7: Eliminate obsolete object references</a></li>
+  <li><a href="" class="disabled" id="Item-8">Item 8: Avoid finalizers and cleaners</a></li>
+  <li><a href="" class="disabled" id="Item-9">Item 9: Prefer try-with-resources to try-finally</a></li>
+</ul>
+
+<script>
+    const link = document.getElementById('Item-4');
+    link.parentElement.parentElement.classList.add('fa-ul', 'custom');
+    link.parentElement.style.listStyleType = 'none';
+    const i = document.createElement('i');
+    i.classList.add('fa-li', 'fa', 'fa-arrow-right');
+    link.insertBefore(i, link.firstChild);
+</script>
+
+<hr />
+
+<h1 id="klasy-nieinstancjowalne">Klasy nieinstancjowalne</h1>
+
+<p>Klasy nieinstancjowalne to takie, dla których nie możemy utworzyć instancji - czyli używamy ich w sposób statyczny (nie mam tu na myśli klas abstrakcyjnych, które też są nieinstancjowalne). Takie klasy mają dosyć złą reputację, bo często są nadużywane i stosowane tam, gdzie nie powinny. Szczególnie widoczne jest to u początkujących programistów, którzy unikają myślenia obiektowego i mają “proceduralne” nawyki. Jednak takie klasy mają też i swoje akceptowalne zastosowania.</p>
+
+<p>Klasy nieinstancjowalne to zazwyczaj klasy typu <em>utility</em>/<em>helper</em>, które są zbiorem statycznych metod i pól (często operujące na prymitywach). Przykładem takich klas są np. <code class="highlighter-rouge">java.lang.Math</code> i <code class="highlighter-rouge">java.util.Arrays</code>. Innym przykładem są klasy, które zawierają <a href="/effective-java/klasy-nieinstancjowalne"><em>static method factories</em></a> dla obiektów o wspólnym interfejsie np. <code class="highlighter-rouge">java.util.Collections</code>. (Od Javy 8 można je umieszczać na interfejsie, nie ma potrzeby tworzenia do tego specjalnej klasy). Klasy nieinstancjowalne znajdziemy również w wielu bibliotekach.</p>
+
+<p>Są to klasy, które z założenia nie powinny być instancjowalne - bo po prostu instancja takiej klasy nie ma sensu. Nie przechowują żadnego stanu - są tylko zbiorem często wykorzystywanych metod, które z reguły powinny być ze sobą powiązane (nie ładujemy wszyskiego do jednej klasy, np. metody operujące na stringach nie powinny się mieszać z metodami operującymi na plikach…)</p>
+
+<p>Jedynym słusznym sposobem na to, by klasa była nieinstancjowalna jest zadeklarowanie dla niej prywatnego konstruktora:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Noninstantiable utility classChapter-1</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UtilityClass</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nf">UtilityClass</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Deklaracja klasy jako abstrakcyjnej nie jest odpowiednim sposobem, aby to osiągnąć (ani do końca nie działa).</strong> Można ją rozszerzyć i wtedy podklasa może być instancjowalna. Po drugie zachęca to do myślenia, że klasa została stworzona do rozszerzania, a tak nie jest.</p>
+
+<p>Kiedy konstruktor jest prywatny, nie ma możliwości stworzenia instancji klasy poza jej wnętrzem.</p>
+
+<p><code class="highlight language-java" data-lang="java"><span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="o">();</span></code> jest tutaj opcjonalnie - zapewnia, aby konstruktor nie zostanie wywołany omyłkowo wewnątrz tej klasy lub poprzez refleksję.</p>
+
+<p>Kiedy implementujemy takie klasy trzeba rozważyć następujące problemy:</p>
+
+<p class="cons">Nie ma możliwości rozszerzania klasy z prywatnym konstruktorem.</p>
+
+<p class="cons">Tight coupling</p>
+
+<p>Klasa która używa statycznej klasy utility jest z nią ściśle powiązana, a dobre praktyki mówią, żeby starać się minimalizować powiązania (loose coupling). Tracimy na elastyczności naszego rozwiązania i nie mamy możliwości zmienienia zachowania tej zależności.</p>
+
+<p class="cons">Trudność w testowaniu jednostkowym.</p>
+
+<p>Podczas gdy klasę <em>utility</em> można łatwo przetestować, to klasy, które ją używają już nie. Dzieje się tak ponieważ nie ma możliwości* zmockowania statycznej klasy. Testując klasę, która korzysta ze statycznego <em>utility</em> automatycznie testujemy to <em>utility</em>, co jest złą praktyką.</p>
+
+<p>*W Javie istnieje narzędzie do testowania o nazwie <a href="https://github.com/powermock/powermock">Powermock</a>, które to potrafi, ale uznawane jest, że jeśli twoja aplikacja potrzebuję tego narzędzia, aby coś mogło zostać przetestowane, to najprawdopodobniej twoja aplikacja jest źle zaprojektowana i na tym powinieneś się skupić.</p>
+
+<p>Szczególne znaczenie ma to podczas korzystania z frameworków <em>Dependency Injection</em> jak np. Spring. Wtedy takie klasy powinniśmy być w stanie wstrzyknąć jako zależność, żeby później można było łatwo je zmockować. W takich przypadkach powinny to być instancjowalne klasy bez statycznych metod, które można wstrzyknąć jako Singletony.</p>
+
+<p class="note">W Springu <em>beany</em> są Singletonami domyślnie.</p>
+
+<p>Podsumowując, klasy “statyczne” nie są czystym złem, jednak powinny być używane raczej sporadycznie. Zanim zdecydujesz się na ich użycie, upewnij się czy kolejna metoda, którą będziesz chciał dorzucić do klasy typu “helper”, nie powinna się znaleźć w bardziej odpowiedniej i konkretnej klasie.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/wzorzec-projektowy-singleton"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Wzorzec projektowy Singleton"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/klasy-nieinstancjowalne";
+    this.page.identifier = "/effective-java/klasy-nieinstancjowalne";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promocje/promotions.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

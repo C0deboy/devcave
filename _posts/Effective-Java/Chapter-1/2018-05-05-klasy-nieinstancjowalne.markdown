@@ -44,14 +44,9 @@ Kiedy implementujemy takie klasy trzeba rozważyć następujące problemy:
 Nie ma możliwości rozszerzania klasy z prywatnym konstruktorem.
 
 {: .cons}
-Tight coupling
-
-Klasa która używa statycznej klasy utility jest z nią ściśle powiązana, a dobre praktyki mówią, żeby starać się minimalizować powiązania (loose coupling). Tracimy na elastyczności naszego rozwiązania i nie mamy możliwości zmienienia zachowania tej zależności.
-
-{: .cons}
 Trudność w testowaniu jednostkowym.
 
-Podczas gdy klasę *utility* można łatwo przetestować, to klasy, które ją używają już nie. Dzieje się tak ponieważ nie ma możliwości* zmockowania statycznej klasy. Testując klasę, która korzysta ze statycznego *utility* automatycznie testujemy to *utility*, co jest złą praktyką.
+Podczas gdy klasę utility można łatwo przetestować w izolacji, to klasy, które ją używają już nie. Klasy utility najczęściej wykorzystywane są bezpośrednio ({% code java %}UtilityClass.DoStuff(){% endcode %}) co w konsekwencji utrudnia ich mockowanie. Ma to tym większe znaczenie im klasa utility wykonuje cięższe operacje (najczęsciej na , które chcielibyśmy zmockować, aby zwiększyć wydajność testu.
 
 *W Javie istnieje narzędzie do testowania o nazwie [Powermock](https://github.com/powermock/powermock), które to potrafi, ale uznawane jest, że jeśli twoja aplikacja potrzebuję tego narzędzia, aby coś mogło zostać przetestowane, to najprawdopodobniej twoja aplikacja jest źle zaprojektowana i na tym powinieneś się skupić.
 

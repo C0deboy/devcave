@@ -1,17 +1,19 @@
 ---
 layout:     post
-titleSEO:	  "Wzorzec projektowy Singleton - kiedy warto używać?"
+titleSEO:	"Wzorzec projektowy Singleton - kiedy warto używać?"
 title:      "Wzorzec projektowy Singleton"
 subtitle:   "Różne warianty. Wady i zalety. Antywzorzec?"
 date:       2018-04-28 12:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe
+tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe
 comments:   true
 toc:        true
+chapter:    2
+item:       3
 ---
 
-{% include effective-java/series-info.md chapter="Chapter 2" item='Item-3' %}
+{% include effective-java/series-info.html %}
 
 Czasem może się zdarzyć, że:
  - klasa ma być unikatowa w systemie

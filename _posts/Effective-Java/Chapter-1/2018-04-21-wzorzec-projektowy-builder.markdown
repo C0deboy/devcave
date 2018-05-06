@@ -1,17 +1,19 @@
 ---
 layout:     post
-titleSEO:	  "Wzorzec projektowy Builder - kiedy warto używać?"
+titleSEO:	"Wzorzec projektowy Builder - kiedy warto używać?"
 title:      "Wzorzec projektowy Builder"
 subtitle:   "3 warianty. Kiedy jaki stosować? Wady i zalety."
 date:       2018-04-21 10:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe
+tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe
 comments:   true
 toc:        true
+chapter:    2
+item:       2
 ---
 
-{% include effective-java/series-info.md chapter="Chapter 2" item='Item-2' %}
+{% include effective-java/series-info.html %}
 
 Zazwyczaj tworzymy klasy i inicjujemy jej pola za pomocą konstruktora z argumentami lub bezargumentowym konstruktorem i setterami. Nic złego w tym nie ma dopóki ilość argumentów nie przekracza 4-5 i mamy pola, które muszą zostać dostarczone. W takich wypadkach warto zastanowić się nad lepszym rozwiązaniem.
 

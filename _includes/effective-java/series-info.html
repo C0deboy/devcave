@@ -1,0 +1,29 @@
+{% include effective-java/disclaimer.html %}
+
+{% assign chapterIndex = page.chapter | minus: 2 %}
+{% assign chapter = site.data.effective_java_chapters[chapterIndex] %}
+{% assign posts = site.categories.["Effective-Java"] | where: 'chapter': page.chapter | sort: 'date' %}
+
+<p>Ten wpis nawiązuje do tematu z <i>Item {{ page.item }}</i> z rozdziału:</p>
+
+<p class="m0">{{ chapter.chapter }}</p>
+
+<ul class="fa-ul custom">
+    {% for item in chapter.items %}
+    {% assign post = posts[forloop.index0] %}
+    {%- if post.url == page.url -%}
+    <li style="list-style-type: none;">
+        <a href="{{ post.url }}">
+            <i class="fa-li fa fa-arrow-right"></i>{{ item }}
+        </a>
+    </li>
+    {%- else -%}
+    <li>
+        <a href="{% if post %}{{ post.url }}{% else %}" class="disabled{% endif %}">
+            {{ item }}
+        </a>
+    </li>
+    {%- endif -%}
+    {% endfor %}
+</ul>
+<hr>

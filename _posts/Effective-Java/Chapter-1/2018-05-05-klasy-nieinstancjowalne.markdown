@@ -1,17 +1,19 @@
 ---
 layout:     post
-titleSEO:	  "Klasy typu utility / helper. Lepiej ich unikać?"
+titleSEO:	"Klasy typu utility / helper. Lepiej ich unikać?"
 title:      "Klasy typu utility / helper"
 subtitle:   "Czyli klasy nieinstancjowalne. Lepiej ich unikać?"
 date:       2018-05-05 10:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        false
+chapter:    2
+item:       4
 ---
 
-{% include effective-java/series-info.md chapter="Chapter 2" item='Item-4' %}
+{% include effective-java/series-info.html %}
 
 # Klasy nieinstancjowalne
 

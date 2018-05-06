@@ -1,20 +1,22 @@
 ---
 layout:     post
-titleSEO:	  "Static factory method zamiast konstruktora"
+titleSEO:	"Static factory method zamiast konstruktora"
 title:      "Static factory method zamiast konstruktora"
 subtitle:   "Zalety oraz wady tego rozwiązania"
 date:       2018-04-14 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
+chapter:    2
+item:       1
 ---
 
-{% include effective-java/series-info.md chapter="Chapter 2" item='Item-1' %}
+{% include effective-java/series-info.html %}
 
 Tradycyjny sposób na tworzenie instancji klasy to użycie publicznego konstruktora. W tym wpisie przyjrzymy się innemu sposobowi, który również powinien być znany każdemu programiście.
-    
+
 # Static Factory Method
 
 Jest to po prostu statyczna metoda, która zwraca instancję danej klasy:
@@ -30,7 +32,7 @@ Na pewno już to kiedyś spotkałeś, choćby w standardowej bibliotece.
 {: .note}
 To nie jest to samo co wzorzec projektowy *Factory Method* znana z wzorców GOF.
 
- 
+
 Jeden z najpopularniejszych przykładów to:
 
 ```java

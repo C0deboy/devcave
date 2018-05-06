@@ -130,31 +130,58 @@
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 </p>
 
-<p>Ten wpis nawiązuje do tematu z <em>Item-2</em> z rozdziału:</p>
+<p>Ten wpis nawiązuje do tematu z <i>Item 2</i> z rozdziału:</p>
 
 <p class="m0">Creating and Destroying Objects</p>
 
-<ul>
-  <li><a href="/effective-java/static-factory-method-zamiast-konstruktora" id="Item-1">Item 1: Consider static factory methods instead of constructors</a></li>
-  <li><a href="/effective-java/wzorzec-projektowy-builder" id="Item-2">Item 2: Consider a builder when faced with many constructor parameters</a></li>
-  <li><a href="/effective-java/wzorzec-projektowy-singleton" id="Item-3">Item 3: Enforce the singleton property with a private constructor or an enum type</a></li>
-  <li><a href="/effective-java/klasy-nieinstancjowalne" id="Item-4">Item 4: Enforce noninstantiability with a private constructor</a></li>
-  <li><a href="" class="disabled" id="Item-5">Item 5: Prefer dependency injection to hardwiring resources</a></li>
-  <li><a href="" class="disabled" id="Item-6">Item 6: Avoid creating unnecessary objects</a></li>
-  <li><a href="" class="disabled" id="Item-7">Item 7: Eliminate obsolete object references</a></li>
-  <li><a href="" class="disabled" id="Item-8">Item 8: Avoid finalizers and cleaners</a></li>
-  <li><a href="" class="disabled" id="Item-9">Item 9: Prefer try-with-resources to try-finally</a></li>
+<ul class="fa-ul custom">
+    
+    <li>
+        <a href="/effective-java/static-factory-method-zamiast-konstruktora">
+            Item 1: Consider static factory methods instead of constructors
+        </a>
+    </li>
+    <li style="list-style-type: none;">
+        <a href="/effective-java/wzorzec-projektowy-builder">
+            <i class="fa-li fa fa-arrow-right"></i>Item 2: Consider a builder when faced with many constructor parameters
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wzorzec-projektowy-singleton">
+            Item 3: Enforce the singleton property with a private constructor or an enum type
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/klasy-nieinstancjowalne">
+            Item 4: Enforce noninstantiability with a private constructor
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 5: Prefer dependency injection to hardwiring resources
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 6: Avoid creating unnecessary objects
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 7: Eliminate obsolete object references
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 8: Avoid finalizers and cleaners
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 9: Prefer try-with-resources to try-finally
+        </a>
+    </li>
 </ul>
-
-<script>
-    const link = document.getElementById('Item-2');
-    link.parentElement.parentElement.classList.add('fa-ul', 'custom');
-    link.parentElement.style.listStyleType = 'none';
-    const i = document.createElement('i');
-    i.classList.add('fa-li', 'fa', 'fa-arrow-right');
-    link.insertBefore(i, link.firstChild);
-</script>
-
 <hr />
 
 <p>Zazwyczaj tworzymy klasy i inicjujemy jej pola za pomocą konstruktora z argumentami lub bezargumentowym konstruktorem i setterami. Nic złego w tym nie ma dopóki ilość argumentów nie przekracza 4-5 i mamy pola, które muszą zostać dostarczone. W takich wypadkach warto zastanowić się nad lepszym rozwiązaniem.</p>

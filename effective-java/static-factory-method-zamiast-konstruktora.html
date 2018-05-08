@@ -235,19 +235,19 @@
 <p>Weźmy na przykład taką implementację klasy Coordinate, którą chcemy tworzyć na dwa sposoby:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Coordinate</span> <span class="o">{</span>
-  <span class="kd">private</span> <span class="kt">double</span> <span class="n">x</span><span class="o">;</span>
-  <span class="kd">private</span> <span class="kt">double</span> <span class="n">y</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">y</span><span class="o">;</span>
 
-  <span class="kd">public</span> <span class="nf">Coordinate</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
-  <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">Coordinate</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+    <span class="o">}</span>
 
-  <span class="kd">public</span> <span class="nf">Coordinate</span><span class="o">(</span><span class="kt">double</span> <span class="n">dist</span><span class="o">,</span> <span class="kt">double</span> <span class="n">angle</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">angle</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">toRadians</span><span class="o">(</span><span class="n">angle</span><span class="o">);</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dist</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">cos</span><span class="o">(</span><span class="n">angle</span><span class="o">));</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dist</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">sin</span><span class="o">(</span><span class="n">angle</span><span class="o">)));</span>
-  <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">Coordinate</span><span class="o">(</span><span class="kt">double</span> <span class="n">dist</span><span class="o">,</span> <span class="kt">double</span> <span class="n">angle</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">toRadians</span><span class="o">(</span><span class="n">angle</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dist</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">cos</span><span class="o">(</span><span class="n">angle</span><span class="o">));</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dist</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">sin</span><span class="o">(</span><span class="n">angle</span><span class="o">)));</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>Nie mamy takiej możliwości, bo nie da się zadeklarować dwóch konstruktorów z taką samą sygnaturą. Tu z pomocą przychodzi nam nasza statyczna fabryka:</p>
@@ -257,17 +257,17 @@
   <span class="kd">private</span> <span class="kt">double</span> <span class="n">y</span><span class="o">;</span>
 
   <span class="kd">private</span> <span class="nf">Coordinate</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
   <span class="o">}</span>
 
   <span class="kd">public</span> <span class="kd">static</span> <span class="n">Coordinate</span> <span class="nf">fromXY</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nf">Coordinate</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">Coordinate</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
   <span class="o">}</span>
 
   <span class="kd">public</span> <span class="kd">static</span> <span class="n">Coordinate</span> <span class="nf">fromPolar</span><span class="o">(</span><span class="kt">double</span> <span class="n">dist</span><span class="o">,</span> <span class="kt">double</span> <span class="n">angle</span><span class="o">){</span>
-    <span class="n">angle</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">toRadians</span><span class="o">(</span><span class="n">angle</span><span class="o">);</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nf">Coordinate</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dist</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">cos</span><span class="o">(</span><span class="n">angle</span><span class="o">)),</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dist</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">sin</span><span class="o">(</span><span class="n">angle</span><span class="o">)));</span>
+      <span class="n">angle</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">toRadians</span><span class="o">(</span><span class="n">angle</span><span class="o">);</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">Coordinate</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dist</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">cos</span><span class="o">(</span><span class="n">angle</span><span class="o">)),</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dist</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">sin</span><span class="o">(</span><span class="n">angle</span><span class="o">)));</span>
   <span class="o">}</span>
   <span class="c1">//Override equals</span>
 <span class="o">}</span>
@@ -288,7 +288,7 @@
 
 <p>W przeciwieństwie do konstruktorów, statyczną fabryką możemy zwracać cały czas ten sam obiekt. Dzięki temu klasy niemutowalne mogą używać wcześniej stworzonych instancji lub cachować instancję podczas jej tworzenia i później ją zwracać z każdym wywołaniem tej metody, co eliminuje tworzenie niepotrzebnych duplikatów danego obiektu.</p>
 
-<p>Przykładem tu jest wcześniej pokazywana metoda <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="kt">boolean</span><span class="o">)</span></code>, która nigdy nie tworzy nowego obiektu lub <code class="highlight language-java" data-lang="java"><span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span></code>, która zwraca “scacheowaną” istancję <code class="highlighter-rouge">Integer</code>, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedziale występują znacznie częściej, więc taka optymalizacja ma sens.</p>
+<p>Przykładem tu jest wcześniej pokazywana metoda <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="kt">boolean</span><span class="o">)</span></code>, która nigdy nie tworzy nowego obiektu lub <code class="highlight language-java" data-lang="java"><span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span></code>, która zwraca “scacheowaną” instancję <code class="highlighter-rouge">Integer</code>, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedziale występują znacznie częściej, więc taka optymalizacja ma sens.</p>
 
 <p class="pros">Może zwracać każdy podtyp zwracanego obiektu</p>
 
@@ -296,7 +296,7 @@
 
 <p>Dzięki temu możemy zdefiniować metodę na interfejsie, która zwróci nam konkretną implementację tego interfejsu.</p>
 
-<p class="note">Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu <code class="highlighter-rouge">Type</code> lądowały w nieinstancjonowanej klasie <code class="highlighter-rouge">Types</code>. Dosyć popularnym przykładem jest <code class="highlighter-rouge">java.util.Collections</code>. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.</p>
+<p class="note">Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu <code class="highlighter-rouge">Type</code> lądowały w nieinstancjowalnej klasie <code class="highlighter-rouge">Types</code>. Dosyć popularnym przykładem jest <code class="highlighter-rouge">java.util.Collections</code>. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.</p>
 
 <p class="pros">Z każdym wywołaniem może być zwrócona inna implementacja</p>
 

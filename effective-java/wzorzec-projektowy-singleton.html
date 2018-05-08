@@ -209,34 +209,34 @@
 <p>Dwa pierwsze polegają na deklarowaniu konstruktora jako prywatny i udostępnianiu statycznego dostępu do obiektu:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
 
-  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
-  <span class="o">}</span>
+    <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Prywatny konstruktor jest wywołany tylko raz, aby zainicjalizować <code class="highlight language-java" data-lang="java"><span class="n">Singleton</span><span class="o">.</span><span class="na">INSTANCE</span></code>. Brak publicznego konstruktora zapewnia, że w systemie będzie istnieć tylko jedna instancja tego obiektu. No chyba, że użyjemy refleksji i metody <code class="highlighter-rouge">setAccessible()</code>. Możemy wykluczyć taką opcję rzucając wyjątek w konstruktorze - jeśli instancja już istnieje:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">INSTANCE</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Singleton already constructed"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">INSTANCE</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Singleton already constructed"</span><span class="o">);</span>
+        <span class="o">}</span>
     <span class="o">}</span>
-  <span class="o">}</span>
 </code></pre></div></div>
 
 <h2 id="static-factory-method-singleton">Static factory method Singleton</h2>
 <p>Drugi sposób różni się od pierwszego tym , że udostępniania <a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a> w celu zwracania <code class="highlighter-rouge">INSTANCE</code>, tym samym zadeklarowania tego pola jako prywatne:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
-  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
 
-  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
-  <span class="o">}</span>
+    <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
 
-  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
-  <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -259,17 +259,17 @@
 <p>Dzięki implementacji leniwego tworzenia obiektu można odwlec w czasie moment budowania instancji oraz potencjalnie oszczędzić zasoby, jeżeli nie będzie wcale potrzeby jego utworzenia. Można to zrobić w prosty sposób:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
-  <span class="kd">private</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span><span class="o">;</span>
 
-  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
-  <span class="o">}</span>
-
-  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">INSTANCE</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+    <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">}</span>
-    <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
-  <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">INSTANCE</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>Dzięki temu możemy też używać jej statycznych metod bez tworzenia instancji tej klasy.</p>
@@ -296,18 +296,18 @@
 <p>Aby zabezpieczyć nasz naszą klasę singletona przed wielowątkowością, musimy nieco zmodyfikować metodę <code class="highlighter-rouge">getInstance()</code>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
-  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">volatile</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">volatile</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span><span class="o">;</span>
 
-  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">INSTANCE</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-      <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Singleton</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">INSTANCE</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Singleton</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
         <span class="o">}</span>
-      <span class="o">}</span>
+        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
-  <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -315,7 +315,7 @@
 
 <p>Jeśli dwa wątki jednocześnie przejdą pierwszego ifa i będą chciały pobrać instancję to zakolejkują się przed <code class="highlighter-rouge">synchronized()</code>. Dodatkowy zagnieżdżony <code class="highlighter-rouge">if</code> wyeliminuję próbę stworzenia duplikatu.</p>
 
-<p>Zwróc uwagę, że zmienna <code class="highlighter-rouge">INSTANCE</code> jest oznaczona jako <code class="highlighter-rouge">volatile</code>. Jest to niezbędne. W przeciwnym wypadku <em>double-check-locking</em> nie działa. Jeśli interesuje Cię dlaczego tak musi być to na razie odsyłam do tematu <a href="http://www.cs.umd.edu/~pugh/j[...]del/DoubleCheckedLocking.html"><em>Double-Checked Locking is Broken</em></a>. W rozdzale 11 (<em>Concurrency</em>) serii będzię poświecony temu osobny wpis.</p>
+<p>Zwróć uwagę, że zmienna <code class="highlighter-rouge">INSTANCE</code> jest oznaczona jako <code class="highlighter-rouge">volatile</code>. Jest to niezbędne. W przeciwnym wypadku <em>double-check-locking</em> nie działa. Jeśli interesuje Cię dlaczego tak musi być to na razie odsyłam do tematu <a href="http://www.cs.umd.edu/~pugh/j[...]del/DoubleCheckedLocking.html"><em>Double-Checked Locking is Broken</em></a>. W rozdziale 11 (<em>Concurrency</em>) serii będzie poświęcony temu osobny wpis.</p>
 
 <h2 id="static-holder-singleton">Static holder Singleton</h2>
 
@@ -323,19 +323,19 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
 
-  <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">Holder</span><span class="o">.</span><span class="na">INSTANCE</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Singleton already constructed"</span><span class="o">);</span>
+    <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">Holder</span><span class="o">.</span><span class="na">INSTANCE</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Singleton already constructed"</span><span class="o">);</span>
+        <span class="o">}</span>
     <span class="o">}</span>
-  <span class="o">}</span>
 
-  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">Holder</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
-  <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Holder</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
+    <span class="o">}</span>
 
-  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Holder</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
-  <span class="o">}</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Holder</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">();</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -352,8 +352,8 @@
 <h2 id="enum-singleton">Enum Singleton</h2>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Singleton</span> <span class="o">{</span>
-  <span class="n">INSTANCE</span><span class="o">;</span>
-  <span class="c1">//...</span>
+    <span class="n">INSTANCE</span><span class="o">;</span>
+    <span class="c1">//...</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>Korzystając z tego rozwiązania, osiągniemy wynik bardzo podobny do klasy <a href="#public-final-field-singleton">Public final field Singleton</a>.</p>
@@ -406,17 +406,17 @@ Może też być problem w zmockowaniu <em>Singletona</em>, chyba, że implementu
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonFactory</span> <span class="o">{</span>
 
-  <span class="kd">private</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="n">instance</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="n">instance</span><span class="o">;</span>
 
-  <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">()</span> <span class="o">{</span>
-        <span class="c1">// singleton implementation</span>
-      <span class="o">};</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">()</span> <span class="o">{</span>
+                <span class="c1">// singleton implementation</span>
+            <span class="o">};</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
     <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
-  <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 

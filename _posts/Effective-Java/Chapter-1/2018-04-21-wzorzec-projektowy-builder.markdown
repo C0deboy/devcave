@@ -21,12 +21,12 @@ Weźmy na przykład taką oto klasę:
 
 ```java
 public class Goal {
-  private String name;
-  private String description;
-  private List<Level> levels;
-  private Checklist checklist;
-  private LocalDate deadline;
-  private boolean achieved;
+    private String name;
+    private String description;
+    private List<Level> levels;
+    private Checklist checklist;
+    private LocalDate deadline;
+    private boolean achieved;
 }
 ```
 
@@ -40,7 +40,7 @@ public Goal(String name, ArrayList<Level> levels, Checklist checklist, boolean a
     this.achieved = achieved;
 }
 ```
-Nie jest źle, ilość wymaganych argumentów nie jest jeszcze przytłaczająca. Jak wygląda instancjonowanie takiej klasy przez klienta?
+Nie jest źle, ilość wymaganych argumentów nie jest jeszcze przytłaczająca. Jak wygląda tworzenie instancji takiej klasy przez klienta?
 
 ```java
 List<Level> levels = new ArrayList<>();
@@ -87,69 +87,69 @@ Ten wzorzec projektowy ma kilka wariantów. W książce *Effective Java* porusza
 
 ```java
 public class Goal {
-  private String name;
-  private String description;
-  private List<Level> levels;
-  private Checklist checklist;
-  private LocalDate deadline;
-  private boolean achieved;
-
-  public static final class Builder {
     private String name;
     private String description;
     private List<Level> levels;
     private Checklist checklist;
     private LocalDate deadline;
-    private boolean achieved = false;
+    private boolean achieved;
 
-    public Builder name(String name) {
-      this.name = name;
-      return this;
+    public static final class Builder {
+        private String name;
+        private String description;
+        private List<Level> levels;
+        private Checklist checklist;
+        private LocalDate deadline;
+        private boolean achieved = false;
+
+        public Builder name(String name) {
+           this.name = name;
+           return this;
+        }
+
+        public Builder description(String description) {
+           this.description = description;
+           return this;
+        }
+
+        public Builder levels(List<Level> levels) {
+            this.levels = levels;
+            return this;
+        }
+
+        public Builder checklist(Checklist checklist) {
+            this.checklist = checklist;
+            return this;
+        }
+
+        public Builder deadline(LocalDate deadline) {
+            this.deadline = deadline;
+            return this;
+        }
+
+        public Builder achieved() {
+            this.achieved = true;
+            return this;
+        }
+
+        public Goal build() {
+            if(name.isEmpty()){
+               throw new IllegalStateException("Name cannot be empty");
+            }
+            if(levels.isEmpty()){
+                throw new IllegalStateException("Levels cannot be empty");
+            }
+
+            Goal goal = new Goal();
+            goal.deadline = this.deadline;
+            goal.name = this.name;
+            goal.checklist = this.checklist;
+            goal.levels = this.levels;
+            goal.description = this.description;
+            goal.achieved = this.achieved;
+            return goal;
+        }
     }
-
-    public Builder description(String description) {
-      this.description = description;
-      return this;
-    }
-
-    public Builder levels(List<Level> levels) {
-      this.levels = levels;
-      return this;
-    }
-
-    public Builder checklist(Checklist checklist) {
-      this.checklist = checklist;
-      return this;
-    }
-
-    public Builder deadline(LocalDate deadline) {
-      this.deadline = deadline;
-      return this;
-    }
-
-    public Builder achieved() {
-      this.achieved = true;
-      return this;
-    }
-
-    public Goal build() {
-      if(name.isEmpty()){
-        throw new IllegalStateException("Name cannot be empty");
-      }
-      if(levels.isEmpty()){
-        throw new IllegalStateException("Levels cannot be empty");
-      }
-
-      Goal goal = new Goal();
-      goal.deadline = this.deadline;
-      goal.name = this.name;
-      goal.checklist = this.checklist;
-      goal.levels = this.levels;
-      goal.description = this.description;
-      goal.achieved = this.achieved;
-      return goal;
-    }
-  }
 }
 ```
 Kolejne metody służą do konfigurowania pól w klasie `Goal` (możemy przeprowadzić też w nich walidację), które zwracają obiekt buildera, aby umożliwić ciągłe wywoływanie kolejnych metod (Fluent API). Ostatnia z nich - {% code java %}public Goal build(){% endcode %} służy do zbudowania obiektu i najczęściej przed tym do zweryfikowania czy wszystkie wymagane pola zostały zainicjowane.
@@ -191,7 +191,7 @@ Goal goal = Goal.builder()
 
 ```
 
-Możemy też uniemożliwić instancjonowanie klasy zwykłym konstruktorem dodając go jako prywatny:
+Możemy też uniemożliwić instancjowanie klasy zwykłym konstruktorem dodając go jako prywatny:
 
 ```java
 private Goal() {
@@ -203,7 +203,7 @@ Zalety takiego rozwiązania:
 {: .pros}
 *Pozwala zachować niezmienność klasy*
 
-W tym wariancie buildera nie musimy udostępniać publiczego konstruktora ani setterów dla budowanego obiektu.
+W tym wariancie buildera nie musimy udostępniać publicznego konstruktora ani setterów dla budowanego obiektu.
 
 {: .pros}
 Wymuszone użycia buildera, aby utworzyć instancję klasy
@@ -222,8 +222,8 @@ Dodatkowym plusem jest to, że możemy dodawać elementy np. do list w dynamiczn
 ```java
     //...
     public Builder addLevel(Level level) {
-      this.levels.add(level);
-      return this;
+        this.levels.add(level);
+        return this;
     }
     //...
 ```
@@ -266,23 +266,23 @@ Ten różni się od pierwszego tym, że *Builder* implementujemy jako osobną kl
 
 ```java
 public final class GoalBuilder {
-  private String name;
-  private String description;
-  private List<Level> levels;
-  private Checklist checklist;
-  private LocalDate deadline;
-  private boolean achieved = false;
+    private String name;
+    private String description;
+    private List<Level> levels;
+    private Checklist checklist;
+    private LocalDate deadline;
+    private boolean achieved = false;
 
-  public GoalBuilder name(String name) {
-    this.name = name;
-    return this;
-  }
+    public GoalBuilder name(String name) {
+        this.name = name;
+        return this;
+    }
 
-  //other methods..
+    //other methods..
 
-  public Goal build() {
-    //...
-  }
+    public Goal build() {
+        //...
+    }
 }
 ```
 
@@ -348,67 +348,67 @@ Jest to "scraper", ale zasada podobna. Po prostu zamiast metod z przedrostkiem `
 
 ```java
 public class GithubDataScraper implements DataScraper {
-  private static final String NAME = "Github";
-  private Map<String, JSONObject> githubData = new HashMap<>();
+    private static final String NAME = "Github";
+    private Map<String, JSONObject> githubData = new HashMap<>();
 
-  @Override
-  public void scrapDataFor(String[] languages) {
-    //scraping implementation for Github
-  }
+    @Override
+    public void scrapDataFor(String[] languages) {
+       //scraping implementation for Github
+    }
 
-  @Override
-  public String getName() {
-    return NAME;
-  }
+    @Override
+    public String getName() {
+       return NAME;
+    }
 
-  @Override
-  public JSONObject getData() {
-    return new JSONObject(githubData);
-  }
+    @Override
+    public JSONObject getData() {
+        return new JSONObject(githubData);
+    }
 }
 ```
 
 ```java
 public class StackOverflowDataScraper implements DataScraper {
- private static final String NAME = "StackOverflow";
- private Map<String, JSONObject> stackOverflowData = new HashMap<>();
+   private static final String NAME = "StackOverflow";
+   private Map<String, JSONObject> stackOverflowData = new HashMap<>();
 
- @Override
- public void scrapDataFor(String[] languages) {
-   //scraping implementation for StackOverflow
- }
+   @Override
+   public void scrapDataFor(String[] languages) {
+      //scraping implementation for StackOverflow
+   }
 
- @Override
- public String getName() {
-   return NAME;
- }
+   @Override
+   public String getName() {
+       return NAME;
+   }
 
- @Override
- public JSONObject getData() {
-   return new JSONObject(stackOverflowData);
- }
+   @Override
+   public JSONObject getData() {
+       return new JSONObject(stackOverflowData);
+   }
 }
 ```
 
 ```java
 public class MeetupDataScraper implements DataScraper {
-  private static final String NAME = "Meetup";
-  private Map<String, JSONObject> meetupData = new HashMap<>();
+    private static final String NAME = "Meetup";
+    private Map<String, JSONObject> meetupData = new HashMap<>();
 
-  @Override
-  public void scrapDataFor(String[] languages) {
-    //scraping implementation for Meetup
-  }
+    @Override
+    public void scrapDataFor(String[] languages) {
+        //scraping implementation for Meetup
+    }
 
-  @Override
-  public String getName() {
-    return NAME;
-  }
+    @Override
+    public String getName() {
+        return NAME;
+    }
 
-  @Override
-  public JSONObject getData() {
-    return new JSONObject(meetupData);
-  }
+    @Override
+    public JSONObject getData() {
+        return new JSONObject(meetupData);
+    }
 }
 ```
 i tak dalej jeszcze dla SpectrumDataScraper, TiobeIndexDataScraper i LanguageVersionsDataScraper.
@@ -417,23 +417,22 @@ i tak dalej jeszcze dla SpectrumDataScraper, TiobeIndexDataScraper i LanguageVer
 
 ```java
 public class Statistics {
-  private String[] languages;
+    private String[] languages;
 
-  public void collectFor(String[] languages) {
-    this.languages = languages;
-  }
+    public void collectFor(String[] languages) {
+        this.languages = languages;
+    }
 
-  public JSONObject build(DataScraper dataScraper) {
-    JSONObject statistics = new JSONObject();
-    dataScraper.scrapDataFor(languages);
-    statistics.put("name", dataScraper.getName());
-    statistics.put("data", dataScraper.getData());
-    return statistics;
-  }
-
+    public JSONObject build(DataScraper dataScraper) {
+        JSONObject statistics = new JSONObject();
+        dataScraper.scrapDataFor(languages);
+        statistics.put("name", dataScraper.getName());
+        statistics.put("data", dataScraper.getData());
+        return statistics;
+    }
 }
 ```
-Tu jest nieco zmodyfikowana wersja. W książkowym przykładzie *Director* dostaje *Builder* w konstruktorze, jednak nie do końca rozumiem dlaczego tak jest. Wymusza to instancjonowanie nowego *Directora* za każdym razem, gdy tworzymy nowy obiekt. Ja zaimplementowałem to tak, że używamy cały czas tego samego *Directora* do budowania różnych obiektów. A tak wygląda użycie przez klienta:
+Tu jest nieco zmodyfikowana wersja. W książkowym przykładzie *Director* dostaje *Builder* w konstruktorze, jednak nie do końca rozumiem dlaczego tak jest. Wymusza to tworzenie nowej instancji *Directora* za każdym razem, gdy tworzymy nowy obiekt. Ja zaimplementowałem to tak, że używamy cały czas tego samego *Directora* do budowania różnych obiektów. A tak wygląda użycie przez klienta:
 
 ```java
 public class App {

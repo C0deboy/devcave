@@ -84,19 +84,19 @@ Weźmy na przykład taką implementację klasy Coordinate, którą chcemy tworzy
 
 ```java
 public class Coordinate {
-  private double x;
-  private double y;
+    private double x;
+    private double y;
 
-  public Coordinate(double x, double y){
-    this.x = x;
-    this.y = y;
-  }
+    public Coordinate(double x, double y){
+        this.x = x;
+        this.y = y;
+    }
 
-  public Coordinate(double dist, double angle) {
-    angle = Math.toRadians(angle);
-    this.x = Math.round(dist * Math.cos(angle));
-    this.y = Math.round(dist * Math.sin(angle)));
-  }
+    public Coordinate(double dist, double angle) {
+        angle = Math.toRadians(angle);
+        this.x = Math.round(dist * Math.cos(angle));
+        this.y = Math.round(dist * Math.sin(angle)));
+    }
 }
 ```
 Nie mamy takiej możliwości, bo nie da się zadeklarować dwóch konstruktorów z taką samą sygnaturą. Tu z pomocą przychodzi nam nasza statyczna fabryka:
@@ -107,17 +107,17 @@ public class Coordinate {
   private double y;
 
   private Coordinate(double x, double y){
-    this.x = x;
-    this.y = y;
+      this.x = x;
+      this.y = y;
   }
 
   public static Coordinate fromXY(double x, double y){
-    return new Coordinate(x, y);
+      return new Coordinate(x, y);
   }
 
   public static Coordinate fromPolar(double dist, double angle){
-    angle = Math.toRadians(angle);
-    return new Coordinate(Math.round(dist * Math.cos(angle)), Math.round(dist * Math.sin(angle)));
+      angle = Math.toRadians(angle);
+      return new Coordinate(Math.round(dist * Math.cos(angle)), Math.round(dist * Math.sin(angle)));
   }
   //Override equals
 }
@@ -141,7 +141,7 @@ Nie jest wymuszone tworzenie nowego obiektu z każdym wywołaniem
 
 W przeciwieństwie do konstruktorów, statyczną fabryką możemy zwracać cały czas ten sam obiekt. Dzięki temu klasy niemutowalne mogą używać wcześniej stworzonych instancji lub cachować instancję podczas jej tworzenia i później ją zwracać z każdym wywołaniem tej metody, co eliminuje tworzenie niepotrzebnych duplikatów danego obiektu.
 
-Przykładem tu jest wcześniej pokazywana metoda {% code java %}Boolean.valueOf(boolean){% endcode %}, która nigdy nie tworzy nowego obiektu lub {% code java %}Integer.valueOf(int i){% endcode %}, która zwraca "scacheowaną" istancję `Integer`, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedziale występują znacznie częściej, więc taka optymalizacja ma sens.
+Przykładem tu jest wcześniej pokazywana metoda {% code java %}Boolean.valueOf(boolean){% endcode %}, która nigdy nie tworzy nowego obiektu lub {% code java %}Integer.valueOf(int i){% endcode %}, która zwraca "scacheowaną" instancję `Integer`, jeśli jest w zakresie od -128 do 127, a w inny przypadku tworzy nową. Liczby w tym przedziale występują znacznie częściej, więc taka optymalizacja ma sens.
 
 {: .pros}
 Może zwracać każdy podtyp zwracanego obiektu
@@ -151,7 +151,7 @@ Mamy możliwość zwrócenia dowolnego podtypu, co ważne - bez konieczności de
 Dzięki temu możemy zdefiniować metodę na interfejsie, która zwróci nam konkretną implementację tego interfejsu.
 
 {: .note}
-Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu `Type` lądowały w nieinstancjonowanej klasie `Types`. Dosyć popularnym przykładem jest `java.util.Collections`. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.
+Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu `Type` lądowały w nieinstancjowalnej klasie `Types`. Dosyć popularnym przykładem jest `java.util.Collections`. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.
 
 {: .pros}
 Z każdym wywołaniem może być zwrócona inna implementacja

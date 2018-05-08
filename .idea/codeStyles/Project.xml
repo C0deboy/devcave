@@ -11,6 +11,13 @@
     </JSCodeStyleSettings>
     <MarkdownNavigatorCodeStyleSettings>
       <option name="INDENT_SIZE" value="2" />
+      <option name="SMART_EDIT_UNDERSCORES" value="true" />
+      <option name="SMART_EDIT_ASTERISKS" value="true" />
+      <option name="SMART_EDIT_TILDES" value="true" />
+      <option name="KEEP_BLANK_LINES" value="1" />
+      <option name="CODE_KEEP_TRAILING_SPACES" value="2" />
+      <option name="VERBATIM_MINIMIZE_INDENT" value="true" />
+      <option name="CODE_FENCE_MINIMIZE_INDENT" value="true" />
       <option name="RIGHT_MARGIN" value="72" />
     </MarkdownNavigatorCodeStyleSettings>
     <codeStyleSettings language="JavaScript">

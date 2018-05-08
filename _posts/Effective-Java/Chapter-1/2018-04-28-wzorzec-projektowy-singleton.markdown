@@ -31,21 +31,21 @@ Dwa pierwsze polegają na deklarowaniu konstruktora jako prywatny i udostępnian
 
 ```java
 public class Singleton {
-  public static final Singleton INSTANCE = new Singleton();
+    public static final Singleton INSTANCE = new Singleton();
 
-  private Singleton() {
-  }
+    private Singleton() {
+    }
 }
 ```
 
 Prywatny konstruktor jest wywołany tylko raz, aby zainicjalizować {% code java %}Singleton.INSTANCE{% endcode %}. Brak publicznego konstruktora zapewnia, że w systemie będzie istnieć tylko jedna instancja tego obiektu. No chyba, że użyjemy refleksji i metody `setAccessible()`. Możemy wykluczyć taką opcję rzucając wyjątek w konstruktorze - jeśli instancja już istnieje:
 
 ```java
-  private Singleton() {
-    if (INSTANCE != null) {
-      throw new IllegalStateException("Singleton already constructed");
+    private Singleton() {
+        if (INSTANCE != null) {
+            throw new IllegalStateException("Singleton already constructed");
+        }
     }
-  }
 ```
 
 ## Static factory method Singleton
@@ -53,14 +53,14 @@ Drugi sposób różni się od pierwszego tym , że udostępniania [static factor
 
 ```java
 public class Singleton {
-  private static final Singleton INSTANCE = new Singleton();
+    private static final Singleton INSTANCE = new Singleton();
 
-  private Singleton() {
-  }
+    private Singleton() {
+    }
 
-  public static Singleton getInstance() {
-    return INSTANCE;
-  }
+    public static Singleton getInstance() {
+        return INSTANCE;
+    }
 }
 ```
 
@@ -87,17 +87,17 @@ Dzięki implementacji leniwego tworzenia obiektu można odwlec w czasie moment b
 
 ```java
 public class Singleton {
-  private static Singleton INSTANCE;
+    private static Singleton INSTANCE;
 
-  private Singleton() {
-  }
-
-  public static Singleton getInstance() {
-    if(INSTANCE == null) {
-      INSTANCE = new Singleton();
+    private Singleton() {
     }
-    return INSTANCE;
-  }
+
+    public static Singleton getInstance() {
+        if(INSTANCE == null) {
+            INSTANCE = new Singleton();
+        }
+        return INSTANCE;
+    }
 }
 ```
 Dzięki temu możemy też używać jej statycznych metod bez tworzenia instancji tej klasy.
@@ -127,18 +127,18 @@ Aby zabezpieczyć nasz naszą klasę singletona przed wielowątkowością, musim
 
 ```java
 public class Singleton {
-  private static volatile Singleton INSTANCE;
+    private static volatile Singleton INSTANCE;
 
-  public static Singleton getInstance() {
-    if(INSTANCE == null) {
-      synchronized (Singleton.class) {
-        if (instance == null) {
-          INSTANCE = new Singleton();
+    public static Singleton getInstance() {
+        if(INSTANCE == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    INSTANCE = new Singleton();
+                }
+            }
         }
-      }
+        return INSTANCE;
     }
-    return INSTANCE;
-  }
 }
 ```
 
@@ -146,7 +146,7 @@ Jest to tak zwany *double-check-locking pattern*.
 
 Jeśli dwa wątki jednocześnie przejdą pierwszego ifa i będą chciały pobrać instancję to zakolejkują się przed `synchronized()`. Dodatkowy zagnieżdżony `if` wyeliminuję próbę stworzenia duplikatu.
 
-Zwróc uwagę, że zmienna `INSTANCE` jest oznaczona jako `volatile`. Jest to niezbędne. W przeciwnym wypadku *double-check-locking* nie działa. Jeśli interesuje Cię dlaczego tak musi być to na razie odsyłam do tematu [*Double-Checked Locking is Broken*](http://www.cs.umd.edu/~pugh/j[...]del/DoubleCheckedLocking.html). W rozdzale 11 (*Concurrency*) serii będzię poświecony temu osobny wpis.
+Zwróć uwagę, że zmienna `INSTANCE` jest oznaczona jako `volatile`. Jest to niezbędne. W przeciwnym wypadku *double-check-locking* nie działa. Jeśli interesuje Cię dlaczego tak musi być to na razie odsyłam do tematu [*Double-Checked Locking is Broken*](http://www.cs.umd.edu/~pugh/j[...]del/DoubleCheckedLocking.html). W rozdziale 11 (*Concurrency*) serii będzie poświęcony temu osobny wpis.
 
 ## Static holder Singleton
 
@@ -155,19 +155,19 @@ Jest to bezpieczne rozwiązanie, które działa zgodnie z oczekiwaniami w wielow
 ```java
 public class Singleton {
 
-  private Singleton() {
-    if(Holder.INSTANCE != null) {
-      throw new IllegalStateException("Singleton already constructed");
+    private Singleton() {
+        if (Holder.INSTANCE != null) {
+            throw new IllegalStateException("Singleton already constructed");
+        }
     }
-  }
 
-  public static Singleton getInstance() {
-    return Holder.INSTANCE;
-  }
+    public static Singleton getInstance() {
+        return Holder.INSTANCE;
+    }
 
-  private static class Holder {
-    private static final Singleton INSTANCE = new Singleton();
-  }
+    private static class Holder {
+        private static final Singleton INSTANCE = new Singleton();
+    }
 }
 ```
 
@@ -189,8 +189,8 @@ Dobry zamiennik za *double-check-locking pattern*, który jest uważany za antyw
 
 ```java
 public enum Singleton {
-  INSTANCE;
-  //...
+    INSTANCE;
+    //...
 }
 ```
 Korzystając z tego rozwiązania, osiągniemy wynik bardzo podobny do klasy [Public final field Singleton](#public-final-field-singleton).
@@ -256,17 +256,17 @@ interface Singleton {
 
 public class SingletonFactory {
 
-  private static Singleton instance;
+    private static Singleton instance;
 
-  public static Singleton getInstance() {
-    if (instance == null) {
-      instance = new Singleton() {
-        // singleton implementation
-      };
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton() {
+                // singleton implementation
+            };
+        }
+
+        return instance;
     }
-
-    return instance;
-  }
 }
 ```
 

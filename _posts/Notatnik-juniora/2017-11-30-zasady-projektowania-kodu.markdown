@@ -16,7 +16,7 @@ Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowani
 # Ogólne
 
 ## DRY - Don’t Repeat Yourself
-- Jedna z podstawowych zasad programowania - **nie powtarzaj się**. Wielokrotne użycie tego samego kodu to podstawa programowania. Nie ma miejsca na kopiuj/wklej.
+- Jedna z podstawowych zasad programowania - **nie powtarzaj się**. Wielokrotne użycie tego samego kodu to podstawa programowania.
 - Jeśli jesteś blisko powtórzenia (np. chcesz zastosować kopiuj/wklej, seria ifów lub w kodzie występują podobne zachowania) pomyśl nad stworzeniem abstrakcji (pętla, wspólny interfejs, funkcja, klasa, jakiś wzorzec projektowy np. Strategia itp.), którą będziesz mógł wielokrotnie wykorzystać.
 
 <p class="pros">Plusy</p>
@@ -90,11 +90,11 @@ Można to rozszerzyć o zasadę:
 - Niskopoziomowe klasy powinny zależeć od klas wysoko poziomowych, a obie od swoich abstrakcji.
 - Abstrakcję nie powinny polegać na szczegółach implementacyjnych. 
 - Szczegóły implementacyjne powinny polegać na abstrakcji.
-- czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).
+- Czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).
 
 <p class="pros">Plusy</p>
-- minimalizowanie zależności (loose coupling)
-- elastyczność - łatwiej wprowadzać zmiany 
+- Minimalizowanie zależności (loose coupling)
+- Elastyczność - łatwiej wprowadzać zmiany
 
 <hr>
 
@@ -111,7 +111,7 @@ Można to rozszerzyć o zasadę:
 - Zmniejsza to powiązania między modułami oraz ilość ujawnianych detali
 
 ## SLAP - Single Level of Abstraction Principle
-- Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko- i niskopoziomowych detali.
+- Zasada ta mówi, że każda linia kodu w metodzie powinna mieć ten sam poziom abstrakcji, czyli aby unikać mieszania ze sobą wysoko i niskopoziomowych detali.
 
 <p class="pros">Plusy</p>
 - Czytelność i łatwiejsze utrzymanie kodu

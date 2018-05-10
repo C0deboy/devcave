@@ -175,7 +175,6 @@ Osobiście dla mnie składnia {% code java %}new Goal.Builder(){% endcode %} wyg
 public static Builder builder() {
     return new Builder();
 }
-
 ```
 
 I wtedy *buildera* możemy używać tak:
@@ -188,7 +187,6 @@ Goal goal = Goal.builder()
     .checklist(checklist)
     .achieved()
     .build();
-
 ```
 
 Możemy też uniemożliwić instancjowanie klasy zwykłym konstruktorem dodając go jako prywatny:
@@ -339,7 +337,6 @@ public interface DataScraper {
   JSONObject getData();
 
 }
-
 ```
 
 Jest to "scraper", ale zasada podobna. Po prostu zamiast metod z przedrostkiem `build`, są `get`. Buildery mają zazwyczaj więcej takich metod, ponieważ stosuje je się do tworzenia skomplikowanych obiektów.

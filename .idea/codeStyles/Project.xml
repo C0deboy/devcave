@@ -10,7 +10,6 @@
       <option name="SPACES_WITHIN_IMPORTS" value="true" />
     </JSCodeStyleSettings>
     <MarkdownNavigatorCodeStyleSettings>
-      <option name="INDENT_SIZE" value="2" />
       <option name="SMART_EDIT_UNDERSCORES" value="true" />
       <option name="SMART_EDIT_ASTERISKS" value="true" />
       <option name="SMART_EDIT_TILDES" value="true" />
@@ -18,7 +17,7 @@
       <option name="CODE_KEEP_TRAILING_SPACES" value="2" />
       <option name="VERBATIM_MINIMIZE_INDENT" value="true" />
       <option name="CODE_FENCE_MINIMIZE_INDENT" value="true" />
-      <option name="RIGHT_MARGIN" value="72" />
+      <option name="RIGHT_MARGIN" value="-1" />
     </MarkdownNavigatorCodeStyleSettings>
     <codeStyleSettings language="JavaScript">
       <option name="RIGHT_MARGIN" value="100" />
@@ -31,11 +30,6 @@
         <option name="INDENT_SIZE" value="2" />
         <option name="CONTINUATION_INDENT_SIZE" value="2" />
         <option name="TAB_SIZE" value="2" />
-      </indentOptions>
-    </codeStyleSettings>
-    <codeStyleSettings language="Markdown">
-      <indentOptions>
-        <option name="INDENT_SIZE" value="2" />
       </indentOptions>
     </codeStyleSettings>
     <codeStyleSettings language="SCSS">

@@ -3,7 +3,7 @@ layout:     post
 titleSEO:	"Wycieki pamięci, zarządzanie pamięcią i garbage collector w Javie"
 title:      "Wycieki pamięci w Javie"
 subtitle:   "Zarządzanie pamięcią - czy garbage collector zawsze to zrobi za nas?"
-date:       2018-05-26 12:00:00
+date:       2018-05-26 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java

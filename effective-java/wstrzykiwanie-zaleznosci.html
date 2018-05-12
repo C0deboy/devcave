@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Wstrzykiwanie zależności - elastyczność i łatwiejsze testowanie</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Preferuj wstrzykiwanie zależności</h1>
+            
+            <h2 class="post-subtitle">Elastyczność i łatwiejsze testowanie</h2>
+            
+            <p class="post-meta">
+              
+              12
+              maja
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#wstrzykiwanie-zależności-dependency-injection">Wstrzykiwanie zależności (Dependency Injection)</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#constructor-injection">Constructor injection</a></li>
+<li class="toc-entry toc-h2"><a href="#setter-injection">Setter injection</a></li>
+<li class="toc-entry toc-h2"><a href="#wstrzykiwanie-zależności-w-springu">Wstrzykiwanie zależności w Springu</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#wstrzykiwanie-bezpośrednio-w-pole">Wstrzykiwanie bezpośrednio w pole</a></li>
+<li class="toc-entry toc-h3"><a href="#wstrzykiwanie-poprzez-konstruktor">Wstrzykiwanie poprzez konstruktor</a></li>
+<li class="toc-entry toc-h3"><a href="#wstrzykiwanie-poprzez-setter">Wstrzykiwanie poprzez setter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#dlaczego-wstrzykiwać-zależności">Dlaczego wstrzykiwać zależności</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 5</i> z rozdziału:</p>
+
+<p class="m0">Creating and Destroying Objects</p>
+
+<ul class="fa-ul custom">
+    
+    <li>
+        <a href="/effective-java/static-factory-method-zamiast-konstruktora">
+            Item 1: Consider static factory methods instead of constructors
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wzorzec-projektowy-builder">
+            Item 2: Consider a builder when faced with many constructor parameters
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wzorzec-projektowy-singleton">
+            Item 3: Enforce the singleton property with a private constructor or an enum type
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/klasy-nieinstancjowalne">
+            Item 4: Enforce noninstantiability with a private constructor
+        </a>
+    </li>
+    <li style="list-style-type: none;">
+        <a href="/effective-java/wstrzykiwanie-zaleznosci">
+            <i class="fa-li fa fa-arrow-right"></i>Item 5: Prefer dependency injection to hardwiring resources
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 6: Avoid creating unnecessary objects
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 7: Eliminate obsolete object references
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 8: Avoid finalizers and cleaners
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 9: Prefer try-with-resources to try-finally
+        </a>
+    </li>
+</ul>
+<hr />
+
+<p>Statyczne klasy <em>utility</em> i singletony nie powinny być stosowane tam, gdzie zachowanie klasy jest sparametryzowane przez wewnętrzne zależności. W książce pokazane jest to na przykładzie <em>spellcheckera</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Inappropriate use of static utility - inflexible &amp; untestable!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpellChecker</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Lexicon</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="o">...;</span>
+
+    <span class="kd">private</span> <span class="nf">SpellChecker</span><span class="o">()</span> <span class="o">{}</span> <span class="c1">// Noninstantiable</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isValid</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">suggestions</span><span class="o">(</span><span class="n">String</span> <span class="n">typo</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Inappropriate use of singleton - inflexible &amp; untestable!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpellChecker</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Lexicon</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="o">...;</span>
+
+    <span class="kd">private</span> <span class="nf">SpellChecker</span><span class="o">(...)</span> <span class="o">{}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpellChecker</span><span class="o">(...);</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isValid</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">suggestions</span><span class="o">(</span><span class="n">String</span> <span class="n">typo</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Oba rozwiązania są niepoprawne, bo zakładają, że istnieje tylko jeden słownik, który jest warty używania. W praktyce każdy język ma swój własny, a tu nie mamy możliwości reużycia tego kodu z innym. Również podczas testowania moglibyśmy chcieć użyć jakiegoś specjalnego słownika.</p>
+
+<p>Takie klasy powinny wspierać różne typy tych zależności. To klient powinien je dostarczać. W takich sytuacjach <strong>powinniśmy preferować wstrzykiwanie zależności zamiast definiować je na sztywno.</strong></p>
+
+<h1 id="wstrzykiwanie-zależności-dependency-injection">Wstrzykiwanie zależności (Dependency Injection)</h1>
+
+<p>Jest kilka sposobów wstrzykiwania zależności. Dwa najbardziej popularne to:</p>
+
+<h2 id="constructor-injection">Constructor injection</h2>
+
+<p>Najprostszy i zarazem najczęściej wykorzystywany sposób na wstrzykiwanie zależności polega na podaniu ich poprzez konstruktor:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Client</span><span class="o">(</span><span class="n">Service</span> <span class="n">service</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">service</span> <span class="o">=</span> <span class="n">service</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Jest to preferowany sposób.</strong></p>
+
+<p class="pros">Zapewnia, że obiekt zawsze jest spójny, bo zależności są wymuszone</p>
+
+<p class="cons">Zależności nie mogą zostać zmienione</p>
+
+<p>Co wcale nie musi być minusem, bo jest to pierwszy krok, aby klasa była <em>immutable</em> i <em>thread safe</em>.</p>
+
+<p>Innym wariantem tego wzorca jest podanie fabryki zależności (wzorzec <em>Factory Method</em>) do konstruktora.
+Interfejs <code class="highlight language-java" data-lang="java"><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span></code> nadaję się do tego idealnie.</p>
+
+<h2 id="setter-injection">Setter injection</h2>
+
+<p>Tu zależności ustawiamy <em>setterem</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setService</span><span class="o">(</span><span class="n">Service</span> <span class="n">service</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">service</span> <span class="o">=</span> <span class="n">service</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="pros">Elastyczność</p>
+
+<p>Dzięki temu możemy zmieniać zależności w dowolnym czasie, jednak może się to przerodzić w coś niepożądanego, szczególnie w wielowątkowym środowisku.</p>
+
+<p class="cons">Brak przymusu podania tej zależności</p>
+
+<p>Może to prowadzić do niespójnej klasy, bo nic nie wymusza żeby tą zależność podać. Aby to osiągnąć trzeba by utworzyć metodę, która sprawdzałaby przed każdym użyciem zależnej funkcji czy ta zależność została ustawiona.</p>
+
+<p class="note">Wstrzykiwanie zależności w dużych projektach z mnóstwem zależności może stać się problematyczne, dlatego w takich przypadkach warto korzystać z przeznaczonych do tego frameworków, takich jak Spring, Guice czy Dagger, które automatyzują i upraszczają ten proces.</p>
+
+<h2 id="wstrzykiwanie-zależności-w-springu">Wstrzykiwanie zależności w Springu</h2>
+
+<p>Różne frameworki mogą dostarczać zautomatyzowany sposób wstrzykiwania zależności. Np. w Springu wykorzystując adnotację <code class="highlight language-java" data-lang="java"><span class="nd">@Autowired</span></code>, możemy wstrzyknąć zależność będące beanami (np.:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooFormatter</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">format</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"foo"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>) na 3 sposoby. Dzięki adnotacji <code class="highlight language-java" data-lang="java"><span class="nd">@Autowired</span></code> obiekt <code class="highlighter-rouge">fooFormatter</code> będzie automatycznie wstrzykiwany przez Springa i od razu dostępny do użycia. Nie ma potrzeby ręcznego podawania zależności.</p>
+
+<h3 id="wstrzykiwanie-bezpośrednio-w-pole">Wstrzykiwanie bezpośrednio w pole</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooService</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">fooFormatter</span><span class="o">.</span><span class="na">format</span><span class="o">();</span>
+        <span class="c1">//...</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Jest to najczęściej nadużywana opcja, szczególnie przez początkujących i nie jest zalecaną praktyką.</p>
+
+<p class="cons">Minusy:</p>
+<ul>
+  <li>Uniemożliwia ręczne wstrzyknięcie zależności bez automagii framworka (refleksja) np. podczas testowania.</li>
+  <li>Używając tego rozwiązania nie jesteśmy też w stanie zadeklarować zmiennej jako <code class="highlighter-rouge">final</code>.</li>
+  <li>Ukrywany jest fakt, że klasa ma zależność. Nic nie stoi na przeszkodzie, żeby zrobić coś takiego:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FooService</span> <span class="n">fooService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FooService</span><span class="o">();</span>
+<span class="n">fooService</span><span class="o">.</span><span class="na">doSomething</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Co oczywiście skutkuje <code class="highlighter-rouge">NullPointerException</code>.</p>
+
+<p>Jest to najłatwiejszy sposób dodawania zależności, bo wystarczy dodać kolejne pole <code class="highlight language-java" data-lang="java"><span class="nd">@Autowired</span></code>, jednak nie koniecznie jest to zaleta. Przez to jesteśmy kuszeni, aby dodawać bezboleśnie kolejne zależności, aż w końcu nasz klasa będzie <em>God</em> klasą z 10+ zależnościami. Używając wstrzykiwania przez konstruktor od razu widać, kiedy przesadzamy z liczbą zależności. Generalnie jeśli klasa ma więcej niż 4-5 zależności trzeba się zastanowić czy przypadkiem nie robi za dużo i nie narusza <a href="/notatnik-juniora/zasady-projektowania-kodu#s---single-responsibility-principle">SRP</a>.</p>
+
+<h3 id="wstrzykiwanie-poprzez-konstruktor">Wstrzykiwanie poprzez konstruktor</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFooFormatter</span><span class="o">(</span><span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">fooFormatter</span> <span class="o">=</span> <span class="n">fooFormatter</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jest to najbardziej preferowana opcja. W niektórych framworkach (patrz Angular) jest to tak faworyzowany sposób, że jest on jedynym sposobem wstrzykiwania zależności.</p>
+
+<p class="pros">Plusy:</p>
+<ul>
+  <li>Nie utrudnia testowania</li>
+  <li>Nie jesteśmy uzależnieniu od adnotacji <code class="highlight language-java" data-lang="java"><span class="nd">@Autowired</span></code></li>
+  <li>Można łatwo zobaczyć kiedy przesadzamy z zależnościami</li>
+  <li>Zależności mogą być <em>immutable</em> - możemy zadeklarować zależności jako <code class="highlighter-rouge">final</code>.</li>
+  <li>Zalecany przez twórców springa - <a href="https://spring.io/blog/2007/07/11/setter-injection-versus-constructor-injection-and-the-use-of-required">link</a></li>
+</ul>
+
+<h3 id="wstrzykiwanie-poprzez-setter">Wstrzykiwanie poprzez setter</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">FooService</span><span class="o">(</span><span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">fooFormatter</span> <span class="o">=</span> <span class="n">fooFormatter</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Ten wariant ma podobne minusy co wstrzykiwanie bezpośrednio w pole, ale przynajmniej nie ukrywa, że klasa zależy od <code class="highlighter-rouge">FooFormatter</code> i umożliwia podanie jej w łatwy sposób. To rozwiązanie może być stosowane do podawania opcjonalnych zależności (bo nie jest to wymuszone jak w przypadku konstruktora), <strong>jednak w większości wypadków preferowane jest wstrzykiwanie zależności przez konstruktor.</strong></p>
+
+<h1 id="dlaczego-wstrzykiwać-zależności">Dlaczego wstrzykiwać zależności</h1>
+
+<p>Wstrzykiwanie zależności niesie ze sobą wiele korzyści i sprawia, że klasy:</p>
+
+<p class="pros">Są bardziej elastyczne (<em>decoupling</em>)</p>
+
+<p>Klasa jest uniezależniona od konkretnej implementacji. Dzięki temu jest konfigurowalna przez klienta, co sprzyja reużywalności i łatwości w utrzymaniu.</p>
+
+<p class="pros">Są łatwiejsze do przetestowania</p>
+
+<p>Można w łatwy sposób mockować takie zależności i testować je w izolacji.</p>
+
+<p>Podsumowując, świadome korzystanie z wstrzykiwania zależności ma niemal same zalety, a preferowanym sposobem wstrzykiwania zależności jest ten z wykorzystaniem konstruktora.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/klasy-nieinstancjowalne"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Klasy typu utility / helper"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci";
+    this.page.identifier = "/effective-java/wstrzykiwanie-zaleznosci";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promocje/promotions.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

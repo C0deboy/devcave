@@ -161,6 +161,10 @@
 <lastmod>2018-05-05T12:00:00+02:00</lastmod>
 </url>
 <url>
+<loc>https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci</loc>
+<lastmod>2018-05-12T10:00:00+02:00</lastmod>
+</url>
+<url>
 <loc>https://devcave.pl/o-mnie/</loc>
 </url>
 <url>
@@ -198,5 +202,8 @@
 </url>
 <url>
 <loc>https://devcave.pl/page8/</loc>
+</url>
+<url>
+<loc>https://devcave.pl/page9/</loc>
 </url>
 </urlset>

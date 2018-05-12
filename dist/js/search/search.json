@@ -363,6 +363,15 @@
         "subtitle": "Czyli klasy nieinstancjowalne. Lepiej ich unikać?",
         "date": "5 maja 2018",
         "url": "/effective-java/klasy-nieinstancjowalne"
+      },
+    
+      
+      {
+        "title": "Preferuj wstrzykiwanie zależności",
+        "titleSEO": "Wstrzykiwanie zależności - elastyczność i łatwiejsze testowanie",
+        "subtitle": "Elastyczność i łatwiejsze testowanie",
+        "date": "12 maja 2018",
+        "url": "/effective-java/wstrzykiwanie-zaleznosci"
       }
     
   

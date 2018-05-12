@@ -1,4 +1,230 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-05-10T17:16:17+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Klasy typu utility / helper</title><link href="https://devcave.pl/effective-java/klasy-nieinstancjowalne" rel="alternate" type="text/html" title="Klasy typu utility / helper" /><published>2018-05-05T12:00:00+02:00</published><updated>2018-05-05T12:00:00+02:00</updated><id>https://devcave.pl/effective-java/klasy-nieinstancjowalne</id><content type="html" xml:base="https://devcave.pl/effective-java/klasy-nieinstancjowalne">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-05-12T10:31:35+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Preferuj wstrzykiwanie zależności</title><link href="https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci" rel="alternate" type="text/html" title="Preferuj wstrzykiwanie zależności" /><published>2018-05-12T10:00:00+02:00</published><updated>2018-05-12T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci</id><content type="html" xml:base="https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 5&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Creating and Destroying Objects&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;
+    
+    &lt;li&gt;
+        &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;
+            Item 1: Consider static factory methods instead of constructors
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;/effective-java/wzorzec-projektowy-builder&quot;&gt;
+            Item 2: Consider a builder when faced with many constructor parameters
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;/effective-java/wzorzec-projektowy-singleton&quot;&gt;
+            Item 3: Enforce the singleton property with a private constructor or an enum type
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;/effective-java/klasy-nieinstancjowalne&quot;&gt;
+            Item 4: Enforce noninstantiability with a private constructor
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li style=&quot;list-style-type: none;&quot;&gt;
+        &lt;a href=&quot;/effective-java/wstrzykiwanie-zaleznosci&quot;&gt;
+            &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 5: Prefer dependency injection to hardwiring resources
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+            Item 6: Avoid creating unnecessary objects
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+            Item 7: Eliminate obsolete object references
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+            Item 8: Avoid finalizers and cleaners
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+            Item 9: Prefer try-with-resources to try-finally
+        &lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Statyczne klasy &lt;em&gt;utility&lt;/em&gt; i singletony nie powinny być stosowane tam, gdzie zachowanie klasy jest sparametryzowane przez wewnętrzne zależności. W książce pokazane jest to na przykładzie &lt;em&gt;spellcheckera&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Inappropriate use of static utility - inflexible &amp;amp; untestable!&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpellChecker&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Lexicon&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SpellChecker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Noninstantiable&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isValid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;suggestions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Inappropriate use of singleton - inflexible &amp;amp; untestable!&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpellChecker&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Lexicon&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SpellChecker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(...)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SpellChecker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(...);&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isValid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;suggestions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Oba rozwiązania są niepoprawne, bo zakładają, że istnieje tylko jeden słownik, który jest warty używania. W praktyce każdy język ma swój własny, a tu nie mamy możliwości reużycia tego kodu z innym. Również podczas testowania moglibyśmy chcieć użyć jakiegoś specjalnego słownika.&lt;/p&gt;
+
+&lt;p&gt;Takie klasy powinny wspierać różne typy tych zależności. To klient powinien je dostarczać. W takich sytuacjach &lt;strong&gt;powinniśmy preferować wstrzykiwanie zależności zamiast definiować je na sztywno.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;wstrzykiwanie-zależności-dependency-injection&quot;&gt;Wstrzykiwanie zależności (Dependency Injection)&lt;/h1&gt;
+
+&lt;p&gt;Jest kilka sposobów wstrzykiwania zależności. Dwa najbardziej popularne to:&lt;/p&gt;
+
+&lt;h2 id=&quot;constructor-injection&quot;&gt;Constructor injection&lt;/h2&gt;
+
+&lt;p&gt;Najprostszy i zarazem najczęściej wykorzystywany sposób na wstrzykiwanie zależności polega na podaniu ich poprzez konstruktor:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Service&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Jest to preferowany sposób.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Zapewnia, że obiekt zawsze jest spójny, bo zależności są wymuszone&lt;/p&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Zależności nie mogą zostać zmienione&lt;/p&gt;
+
+&lt;p&gt;Co wcale nie musi być minusem, bo jest to pierwszy krok, aby klasa była &lt;em&gt;immutable&lt;/em&gt; i &lt;em&gt;thread safe&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Innym wariantem tego wzorca jest podanie fabryki zależności (wzorzec &lt;em&gt;Factory Method&lt;/em&gt;) do konstruktora.
+Interfejs &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Supplier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt; nadaję się do tego idealnie.&lt;/p&gt;
+
+&lt;h2 id=&quot;setter-injection&quot;&gt;Setter injection&lt;/h2&gt;
+
+&lt;p&gt;Tu zależności ustawiamy &lt;em&gt;setterem&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Service&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Elastyczność&lt;/p&gt;
+
+&lt;p&gt;Dzięki temu możemy zmieniać zależności w dowolnym czasie, jednak może się to przerodzić w coś niepożądanego, szczególnie w wielowątkowym środowisku.&lt;/p&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Brak przymusu podania tej zależności&lt;/p&gt;
+
+&lt;p&gt;Może to prowadzić do niespójnej klasy, bo nic nie wymusza żeby tą zależność podać. Aby to osiągnąć trzeba by utworzyć metodę, która sprawdzałaby przed każdym użyciem zależnej funkcji czy ta zależność została ustawiona.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Wstrzykiwanie zależności w dużych projektach z mnóstwem zależności może stać się problematyczne, dlatego w takich przypadkach warto korzystać z przeznaczonych do tego frameworków, takich jak Spring, Guice czy Dagger, które automatyzują i upraszczają ten proces.&lt;/p&gt;
+
+&lt;h2 id=&quot;wstrzykiwanie-zależności-w-springu&quot;&gt;Wstrzykiwanie zależności w Springu&lt;/h2&gt;
+
+&lt;p&gt;Różne frameworki mogą dostarczać zautomatyzowany sposób wstrzykiwania zależności. Np. w Springu wykorzystując adnotację &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;&lt;/code&gt;, możemy wstrzyknąć zależność będące beanami (np.:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;) na 3 sposoby. Dzięki adnotacji &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;&lt;/code&gt; obiekt &lt;code class=&quot;highlighter-rouge&quot;&gt;fooFormatter&lt;/code&gt; będzie automatycznie wstrzykiwany przez Springa i od razu dostępny do użycia. Nie ma potrzeby ręcznego podawania zależności.&lt;/p&gt;
+
+&lt;h3 id=&quot;wstrzykiwanie-bezpośrednio-w-pole&quot;&gt;Wstrzykiwanie bezpośrednio w pole&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FooService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Jest to najczęściej nadużywana opcja, szczególnie przez początkujących i nie jest zalecaną praktyką.&lt;/p&gt;
+
+&lt;p class=&quot;cons&quot;&gt;Minusy:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Uniemożliwia ręczne wstrzyknięcie zależności bez automagii framworka (refleksja) np. podczas testowania.&lt;/li&gt;
+  &lt;li&gt;Używając tego rozwiązania nie jesteśmy też w stanie zadeklarować zmiennej jako &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Ukrywany jest fakt, że klasa ma zależność. Nic nie stoi na przeszkodzie, żeby zrobić coś takiego:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;FooService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FooService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fooService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Co oczywiście skutkuje &lt;code class=&quot;highlighter-rouge&quot;&gt;NullPointerException&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Jest to najłatwiejszy sposób dodawania zależności, bo wystarczy dodać kolejne pole &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;&lt;/code&gt;, jednak nie koniecznie jest to zaleta. Przez to jesteśmy kuszeni, aby dodawać bezboleśnie kolejne zależności, aż w końcu nasz klasa będzie &lt;em&gt;God&lt;/em&gt; klasą z 10+ zależnościami. Używając wstrzykiwania przez konstruktor od razu widać, kiedy przesadzamy z liczbą zależności. Generalnie jeśli klasa ma więcej niż 4-5 zależności trzeba się zastanowić czy przypadkiem nie robi za dużo i nie narusza &lt;a href=&quot;/notatnik-juniora/zasady-projektowania-kodu#s---single-responsibility-principle&quot;&gt;SRP&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;wstrzykiwanie-poprzez-konstruktor&quot;&gt;Wstrzykiwanie poprzez konstruktor&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FooService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setFooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fooFormatter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Jest to najbardziej preferowana opcja. W niektórych framworkach (patrz Angular) jest to tak faworyzowany sposób, że jest on jedynym sposobem wstrzykiwania zależności.&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Plusy:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Nie utrudnia testowania&lt;/li&gt;
+  &lt;li&gt;Nie jesteśmy uzależnieniu od adnotacji &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Można łatwo zobaczyć kiedy przesadzamy z zależnościami&lt;/li&gt;
+  &lt;li&gt;Zależności mogą być &lt;em&gt;immutable&lt;/em&gt; - możemy zadeklarować zależności jako &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Zalecany przez twórców springa - &lt;a href=&quot;https://spring.io/blog/2007/07/11/setter-injection-versus-constructor-injection-and-the-use-of-required&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;wstrzykiwanie-poprzez-setter&quot;&gt;Wstrzykiwanie poprzez setter&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FooService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;FooService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fooFormatter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ten wariant ma podobne minusy co wstrzykiwanie bezpośrednio w pole, ale przynajmniej nie ukrywa, że klasa zależy od &lt;code class=&quot;highlighter-rouge&quot;&gt;FooFormatter&lt;/code&gt; i umożliwia podanie jej w łatwy sposób. To rozwiązanie może być stosowane do podawania opcjonalnych zależności (bo nie jest to wymuszone jak w przypadku konstruktora), &lt;strong&gt;jednak w większości wypadków preferowane jest wstrzykiwanie zależności przez konstruktor.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;dlaczego-wstrzykiwać-zależności&quot;&gt;Dlaczego wstrzykiwać zależności&lt;/h1&gt;
+
+&lt;p&gt;Wstrzykiwanie zależności niesie ze sobą wiele korzyści i sprawia, że klasy:&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Są bardziej elastyczne (&lt;em&gt;decoupling&lt;/em&gt;)&lt;/p&gt;
+
+&lt;p&gt;Klasa jest uniezależniona od konkretnej implementacji. Dzięki temu jest konfigurowalna przez klienta, co sprzyja reużywalności i łatwości w utrzymaniu.&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Są łatwiejsze do przetestowania&lt;/p&gt;
+
+&lt;p&gt;Można w łatwy sposób mockować takie zależności i testować je w izolacji.&lt;/p&gt;
+
+&lt;p&gt;Podsumowując, świadome korzystanie z wstrzykiwania zależności ma niemal same zalety, a preferowanym sposobem wstrzykiwania zależności jest ten z wykorzystaniem konstruktora.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 5 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry><entry><title type="html">Klasy typu utility / helper</title><link href="https://devcave.pl/effective-java/klasy-nieinstancjowalne" rel="alternate" type="text/html" title="Klasy typu utility / helper" /><published>2018-05-05T12:00:00+02:00</published><updated>2018-05-05T12:00:00+02:00</updated><id>https://devcave.pl/effective-java/klasy-nieinstancjowalne</id><content type="html" xml:base="https://devcave.pl/effective-java/klasy-nieinstancjowalne">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -29,7 +255,7 @@
         &lt;/a&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+        &lt;a href=&quot;/effective-java/wstrzykiwanie-zaleznosci&quot;&gt;
             Item 5: Prefer dependency injection to hardwiring resources
         &lt;/a&gt;
     &lt;/li&gt;
@@ -125,7 +351,7 @@
         &lt;/a&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+        &lt;a href=&quot;/effective-java/wstrzykiwanie-zaleznosci&quot;&gt;
             Item 5: Prefer dependency injection to hardwiring resources
         &lt;/a&gt;
     &lt;/li&gt;
@@ -425,7 +651,7 @@ Może też być problem w zmockowaniu &lt;em&gt;Singletona&lt;/em&gt;, chyba, ż
         &lt;/a&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+        &lt;a href=&quot;/effective-java/wstrzykiwanie-zaleznosci&quot;&gt;
             Item 5: Prefer dependency injection to hardwiring resources
         &lt;/a&gt;
     &lt;/li&gt;
@@ -941,7 +1167,7 @@ Może też być problem w zmockowaniu &lt;em&gt;Singletona&lt;/em&gt;, chyba, ż
         &lt;/a&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+        &lt;a href=&quot;/effective-java/wstrzykiwanie-zaleznosci&quot;&gt;
             Item 5: Prefer dependency injection to hardwiring resources
         &lt;/a&gt;
     &lt;/li&gt;
@@ -1469,76 +1695,4 @@ Top 3: 25 USD (or equivalent…)&lt;/p&gt;
 
 &lt;p&gt;Jak na pierwszy projekt to według mnie jest dobrze. Nie można nazwać tego porażką czy coś. Projekt będzie pewnie dalej rozwijany i aktualizowany, ale już raczej z mniejszą częstotliwością. Tym bardziej, że zaczynam swoją pierwszą pracę jako Java Junior Developer. Właśnie, tak btw: oprócz matury, podczas rozwijania projektu rozwijałem się w kierunku Javy, bo z tą technologią chciałem pracować. Brałem również udział w DSP2017, gdzie trzeba było blogować z częstotliwością 2 posty na tydzień (&lt;a href=&quot;/archiwum/#dajsiepoznac2017&quot;&gt;lista postów&lt;/a&gt;). Ponadto, 2 miesiące spędziłem dorabiając/na wakacjach za granicą, gdzie mało dotykałem komputera. Więc był to naprawdę intensywny rok i sporo udało się zrobić :)&lt;/p&gt;
 
-&lt;p&gt;Z projektu jestem jak najbardziej zadowolony i cieszę się, że nie wyszła z tego porażka - jak wiele osób spekulowało na forach.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Podsumowania" /><category term="Podsumowania" /><category term="Jaki-jezyk-programowania" /><summary type="html">Podczas inicjatywy DSP2017 powstały 3 wpisy, które opisują powstanie i założenia projektu jaki-jezyk-programowania.pl, trudności na początku i plany związane z projektem, które miałem w tamtym okresie: Wprowadzenie Początki projektu Co dalej z projektem jaki-jezyk-programowania.pl W tym wpisie opowiem jak to wygląda obecnie + dorzucę kilka liczb ;) Początki Dokładnie rok i pięć dni temu, poszedł pierwszy commit projektu jaki-jezyk-programowania.pl. Pomysł zrodził się kilka dni wcześniej. Zwerbowałem dwóch kolegów do projektu i od razu wykupiliśmy domenę. Cena nie była wielka, bo 12 zł, więc mała inwestycja, a mieliśmy pewność, że nikt nas nie uprzedzi. Dziś mija równo rok od jej wykupienia, właśnie ją odnowiłem za cenę 72 zł. (Domena wykupiona jest na firehost.pl, ale planuję migrować ją na OVH, tam gdzie mam domenę tego bloga. Cena odnowienia jest tam o ok. 20zł niższa.) Był to czas gdy mniej więcej zaczynałem z programowaniem webowym. Był to więc projekt, na którym uczyłem się większości technologii webowych. Można pomyśleć, że dziwne, że jako początkujący programista zabrałem się za tworzenie strony, która ma pomagać w wyborze języka programowania do danego zastosowania. I słusznie. Było to dosyć mało przemyślane i wiedza, którą posiadałem, najzwyczajniej nie umożliwiała stworzenia takiej strony o dobrej jakości. Krótko mówiąc, przyznaję, że porwałem się z motyką na słońce. No cóż, stało się. Ale pociągnąłem projekt dalej - w pojedynkę, a spowodowane to było przez kilka czynników. Gdy strona miała już funkcjonalny prototyp postanowiliśmy pokazać pomysł na forach i zebrać jakiś feedback. I zebraliśmy. Nie był zbyt pozytywny. Oczywiście znalazły się osoby, które pochwaliły pomysł, ale też i takie, które uznały go za “czerstwy”, bo widzieli podobną stronę po angielsku lub przez inny powód. Sporo osób też krytykowało wartość merytoryczną strony. I słusznie, bo wtedy była tragedia, co przyznaję. No ale w końcu to był tylko prototyp. Osoby z którymi robiłem projekt po tym zrezygnowały. Był to też okres maturalny, więc dodatkowym argumentem był czas. Wydaję mi się też, że po feedbacku tylko ja dalej wierzyłem, że coś z tego projektu będzie. Chciałem mimo wszystko dociągnąć projekt do końca. Szkoda mi było poświęconego na niego czasu. Dziś mogę powiedzieć, że nie żałuję, mimo, że poświeciłem na niego jeszcze 3-4 razy więcej czasu. Ale nie uważam tego za czas stracony. Rozwój Od tamtego momentu stale starałem się poprawiać i rozbudowywać stronę. Rozwijałem i uczyłem się wraz z projektem, który pochłaniał bardzo dużo czasu, bo w końcu sam musiałem, niemalże od postaw, mniej więcej ogarnąć każdą technologię przedstawianą na stronie. Ale dzięki temu bardzo dużo się nauczyłem. Próbowałem też znaleźć kogoś do pomocy, ale nie było odzewu, więc w 90% zrobiłem go sam. Obecnie uważam, że projekt jest na akceptowalnym poziomie, wiadomo nic nie jest idealne, ale jestem dosyć zadowolony. Strona przeszła wiele zmian, obecnie jest na GitHubie 261 commitów, nie wszystkie są jakieś znaczące, ale widać, że trochę tego było. W ostatnim czasie, gdy już miałem więcej wiedzy, postarałem się tak zrefaktoryzować kod, żeby był łatwy w modyfikacji i dodawaniu nowych technologii wraz z opisami. Obecnie jest to bardzo proste, więc projekt łatwo się rozwija. Tak wygląda wykres aktywności commitów na GitHubie: Czasem nie widać tu tego dobrze, bo na przykład dużo pracy poszło w redagowanie tekstów, a nie jest to zauważalne na wykresie. To są bardziej te “spokojniejsze” okresy. Od dwóch miesięcy wprowadziłem też sposób na monetyzację strony - podjąłem się partnerstwa z Helion i dodałem polecane książki, dzięki czemu jak ktoś kupi książkę przechodząc z mojej strony to dostaję od tego 5% prowizji. Nie jest to dużo, ale na opłacenie domeny spokojnie wystarcza. W okresie promocji nawet wychodzi trochę na plus, z czego też jestem zadowolony. Nie chciałem zaśmiecać strony reklamami, więc myślę, że jest to dobra alternatywa. Do tego nawet przydatna dla użytkowników. Statystyki Strona nie ma jakiegoś ogromnego ruchu, co nie jest dziwne, bo w końcu jest skierowana dla wąskiej grupy osób. Jest to na poziomie 100-200 wejść dziennie. W ostatnich miesiącach było nieco więcej, dzięki temu, że strona jest już jest na lepszym poziomie i ma lepszą pozycję w Google. Poza tym, przyczynił się do tego też okres promocyjny na książki. Rekord to 8063 wejść z 28 października. Wpisując fraze, “jaki język programowania”, jest na pierwszej pozycji. Jest to pewnie w dużym stopniu zasługa domeny. Z kolei dla “jaki język programowania wybrać” jest na 3 pozycji. To jest chyba najbardziej popularna opcja. Gdy pomieszamy różne frazy, jakie ludzie mogą wpisać, to też jest zazwyczaj na pierwszej stronie, więc jest dobrze. Wykres z Google Analitics od początku istnienia strony, czyli od lutego, wygląda tak: Po wystrzale 8k odsłon, ruch na stronie jest już zadowalający. Przez cały okres było: Wszystkich odsłon - 51 294 Unikalnych użytkowników - 6 318 Najczęściej były to wejścia z: facebook.com forum.pasja-informatyki.pl m.facebook.com 4programmers.net l.facebook.com devcave.pl Jeśli chodzi o zachowanie na stronie to, jak można się spodziewać, najczęściej klikana była strona “start”, czyli wizard wyboru języka. Pomijając to, najczęstsze wybory padały na: Python Java JavaScript To takie znaczące top 3. Później: C# C++ I reszta na podobnym poziomie nieco dalej. Wygląda to podobnie do obecnych trendów, jakie podają rożnego rodzaju rankingi. Podsumowując Jak na pierwszy projekt to według mnie jest dobrze. Nie można nazwać tego porażką czy coś. Projekt będzie pewnie dalej rozwijany i aktualizowany, ale już raczej z mniejszą częstotliwością. Tym bardziej, że zaczynam swoją pierwszą pracę jako Java Junior Developer. Właśnie, tak btw: oprócz matury, podczas rozwijania projektu rozwijałem się w kierunku Javy, bo z tą technologią chciałem pracować. Brałem również udział w DSP2017, gdzie trzeba było blogować z częstotliwością 2 posty na tydzień (lista postów). Ponadto, 2 miesiące spędziłem dorabiając/na wakacjach za granicą, gdzie mało dotykałem komputera. Więc był to naprawdę intensywny rok i sporo udało się zrobić :) Z projektu jestem jak najbardziej zadowolony i cieszę się, że nie wyszła z tego porażka - jak wiele osób spekulowało na forach.</summary></entry><entry><title type="html">Recenzja książki Junior Developer</title><link href="https://devcave.pl/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas" rel="alternate" type="text/html" title="Recenzja książki Junior Developer" /><published>2017-12-15T08:00:00+01:00</published><updated>2017-12-15T08:00:00+01:00</updated><id>https://devcave.pl/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas</id><content type="html" xml:base="https://devcave.pl/recenzje/recenzja-ksiazki-junior-developer-mateusz-kupilas">&lt;p&gt;&lt;img src=&quot;/img/reviews/junior-dev/book.png&quot; alt=&quot;Książka Junior Developer&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;W recenzji będę się odnosił i porównywał z książka Macieja Aniserowicza - Zawód: Programista, którą też &lt;a href=&quot;/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz&quot;&gt;recenzowałem&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;o-autorze&quot;&gt;O autorze&lt;/h1&gt;
-
-&lt;p&gt;Mateusz Kupilas, jeśli ktoś go nie zna, to programista Javy. Prowadzi bloga &lt;a href=&quot;http://www.javadevmatt.pl/&quot;&gt;javadevmatt.pl&lt;/a&gt; oraz kanał na YouTube - &lt;a href=&quot;https://www.youtube.com/user/JavaDevMatt/&quot;&gt;JavaDevMatt&lt;/a&gt;. Tworzył serię &lt;em&gt;“Programista na emigracji”&lt;/em&gt;, która cieszyła się popularnością, a aktualnie powrócił z emigracji i przeszedł na swoje. M.in. dzięki temu wydał swoją książkę, o której tu mowa, a w kolejce czekają już nowe produkty i pomysły do zrealizowania.&lt;/p&gt;
-
-&lt;h1 id=&quot;kontekst&quot;&gt;Kontekst&lt;/h1&gt;
-
-&lt;p&gt;Podobnie jak książka Zawód: Programista, jest to pozycja wypuszczona w &lt;em&gt;self publishingu&lt;/em&gt;. W przypadku tej książki najpierw był e-book, a za wersję papierową autor zabrał się rok później. Całość wystartowała dzięki akcji crowdfundingowej, która miała ustawiony cel na 3000zł. Cel ten udało się osiągnąć w niecałe 24h, a ostatecznie akcja zebrała w miesiąc trochę ponad 17 000zł. W nieco ponad rok (od pierwszego wydania e-booka) autor sprzedał 2000 egzemplarzy (w tym 600 książek z pierwszego nakładu), a przychód określił na około 75 000zł. Na dzień dzisiejszy sprzedał około 3000 egzemplarzy (co dziwne, w większości są to ebooki, bo około 2000). Łączny przychód szacuje na około 115 000 zł. Ze starego nakładu pozostało około 40 książek, a dodruk już czeka w kolejce.&lt;/p&gt;
-
-&lt;p&gt;Cena książki to 49 zł + przesyłka. Co ciekawe, autor zdaje sobie sprawę, że dla kogoś nawet taka kwota może być sporym wydatkiem i jeśli ktoś znajduje się w trudnej sytuacji, to może napisać do niego maila, a dostanie pdf-a e-booka za darmo. Autor również nie walczy zbytnio z piractwem, o czym dowiemy się z pierwszych stron.&lt;/p&gt;
-
-&lt;p&gt;O czym jest więc ta książka? To zbiorowa odpowiedź na pytania, które najczęściej zadawali czytelnicy bloga i widzowie na YT - głównie początkujący. W efekcie mamy zbiór wiedzy dla początkujących programistów.&lt;/p&gt;
-
-&lt;p&gt;Przeglądając sam spis treści dostaniemy dobry obraz tego co znajduje się w książce. Większość rzeczy wydawała mi się znajoma. Wynika to z tego, że śledzę autora na bieżąco i wiedzą na te tematy dzielił się na swoim blogu i YouTube.&lt;/p&gt;
-
-&lt;p&gt;Muszę się przyznać, że pierwszy kontakt z książką miałem niecałe pół roku temu w postaci udostępnianego pirata e-booka na chomikuj. Przeleciałem ją wtedy mniej więcej na szybko podczas podróży autokarem. Niewiele wtedy z niej wyniosłem i średnio pamiętałem co czytałem.&lt;/p&gt;
-
-&lt;p&gt;Jakiś tydzień temu książkę mimo to kupiłem, głównie jako forma podziękowania za lata działalności  i wsparcia autora (podobnie jak książkę Zawód: Programista). Chciałem też przeczytać ją na spokojnie od początku do końca i podzielić się swoją opinią.&lt;/p&gt;
-
-&lt;p&gt;Dla mnie, jako już świeżo upieczonego Junior Java Developera, było już na tą książkę za późno, zresztą podobnie jak z książką Zawód: Programista. Wiele nowych rzeczy się nie dowiedziałem, bo albo już czytałem/oglądałem źródła autora, albo interesowałem się w tym zakresie na własną rękę.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Żałuję, że te książki nie powstały trochę wcześniej, kiedy dopiero zaczynałem z programowaniem.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;o-książce&quot;&gt;O książce&lt;/h1&gt;
-
-&lt;p&gt;Książka jest skierowana do osób chcących podjąć pierwszą pracę, ale trochę są zagubieni w tym co, jak i czy powinni coś robić. Jeśli jesteś już Junior Developerem, to prawdopodobnie na książce mniej skorzystasz.&lt;/p&gt;
-
-&lt;p&gt;Jeśli wpasowujesz się w ten target to książka jest jak najbardziej warta zakupu.&lt;/p&gt;
-
-&lt;p&gt;Znajdziesz w niej większość odpowiedzi na pytania, które sobie zadajesz, albo nawet nie wiesz, że powinieneś je zadać. Dzięki niej ukierunkujesz swoje przyszłe działania oraz pozbędziesz się wszelkich wątpliwości związanych z drogą do pierwszej pracy. Dla jasności - z książki nie nauczysz się konkretnych rzeczy, które są wymagane do zostania Junior Developerem, tylko zostaniesz nakierowany na dobrą drogę, gdzie sam powinieneś podjąć działania. I taki jest cel tej książki.&lt;/p&gt;
-
-&lt;p&gt;Dowiesz się “gdzie jesteś”, “co już umiesz” i “nad czym jeszcze musisz popracować”.&lt;/p&gt;
-
-&lt;p&gt;Zgadzam się z większością rad i poglądów autora. Opisywane ścieżki rozwoju i gotowość do pierwszej pracy również mogę potwierdzić. Sam podążałem podobnymi drogami i pracę udało się dostać. I to po pierwszej rozmowie ;)&lt;/p&gt;
-
-&lt;p&gt;Książka napisana jest lekkim językiem - czyta ją się szybko i przyjemnie.&lt;/p&gt;
-
-&lt;p&gt;Porównując wielkości książek, ta jest prawie połowę mniejsza od książki Zawód: Programista (za tą samą cenę):&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/reviews/junior-dev/size.jpg&quot; alt=&quot;Porównanie wielkości&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Trochę osób na ten temat narzekało. Książkę można przeczytać w około 3h. Czuli niedosyt i chcieliby więcej.&lt;/p&gt;
-
-&lt;p&gt;Jednak czy tu jest naprawdę mało treści? Wydaję mi się, że nie. Autor chciał, żeby było krótko i konkretnie. Jak sam pisał:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Zdecydowanie jestem zdania, że lepiej zostawić lekki niedosyt, niż przynudzać.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;No i tu nie można się nie zgodzić. Książka jest na temat, bez przedłużania i sztucznych zapełniaczy treści. Nie znajdziemy coachingowych rad motywacyjnych, ani nic podobnego - same konkrety.&lt;/p&gt;
-
-&lt;p&gt;Nie można też powiedzieć, że książki się pokrywają. Owszem - trafia się kilka podobnych tematów - ale są to takie tematy, o których warto zebrać kilka różnych opinii z różnych punktów widzenia. Ta pozycja skupia się na tym, co konkretnie robić i jak przygotować się do pierwszej pracy, podczas gdy Zawód: Programista skupia większą uwagę na błędach i pułapkach, na które możesz wpaść w karierze programisty oraz daje sporo refleksji o zawodzie programisty jako takim, często obalając mity jakie panują w mediach.&lt;/p&gt;
-
-&lt;h2 id=&quot;jakość-wykonania&quot;&gt;Jakość wykonania&lt;/h2&gt;
-
-&lt;p&gt;Okładka nie powala wizualnie, ale najważniejsze jest to, że jest twarda tak jak powinna być i nie odkształca się po przeczytaniu książki - tak jak w książce Zawód: Programista. Jakość papieru jest również lepsza. Tekst nie przebija się na drugą stronę i czcionka jest bardziej wyraźna:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/reviews/junior-dev/quality.jpg&quot; alt=&quot;Jakość książki Zawód: Programista&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Jedna rzecz do której można się przyczepić to to, że tytuł na boku książki jest odwrotnie niż powinien być, przez co, gdy książki leżą w kolekcji jedna na drugiej, to wygląda to słabo:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/reviews/junior-dev/size2.jpg&quot; alt=&quot;Porównanie wielkości&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;W dodruku wersji papierowej, ten błąd jest już naprawiony. Nowa wersja będzie dostępna mniej więcej od stycznia 2017.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;podsumowując&quot;&gt;Podsumowując&lt;/h1&gt;
-
-&lt;p&gt;Książka Junior Developer jest całkiem dobrą i przyjemną pozycją. Jeśli jesteś początkującym programistą, masz wiele pytań i wątpliwości, szczególnie przed próbą podjęcia pierwszej pracy, to ta książka będzie dobrym przewodnikiem. Niesie wiele niezbędnych dla początkującego informacji. Jeśli autora mało kojarzysz i nie śledzisz jego działalności to prawdopodobnie z książki wyciągniesz najwięcej.&lt;/p&gt;
-
-&lt;p&gt;Jeśli nie chcesz wydawać pieniędzy, to możesz przeszukać bloga/kanał na YouTube autora, w celu znalezienia odpowiedzi na konkretne pytania. Trochę pewnie Ci to zajmie. W książce dostajesz wszystko uporządkowane i zebrane w jednym miejscu.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Recenzje" /><category term="Recenzje" /><category term="Książki" /><summary type="html">W recenzji będę się odnosił i porównywał z książka Macieja Aniserowicza - Zawód: Programista, którą też recenzowałem. O autorze Mateusz Kupilas, jeśli ktoś go nie zna, to programista Javy. Prowadzi bloga javadevmatt.pl oraz kanał na YouTube - JavaDevMatt. Tworzył serię “Programista na emigracji”, która cieszyła się popularnością, a aktualnie powrócił z emigracji i przeszedł na swoje. M.in. dzięki temu wydał swoją książkę, o której tu mowa, a w kolejce czekają już nowe produkty i pomysły do zrealizowania. Kontekst Podobnie jak książka Zawód: Programista, jest to pozycja wypuszczona w self publishingu. W przypadku tej książki najpierw był e-book, a za wersję papierową autor zabrał się rok później. Całość wystartowała dzięki akcji crowdfundingowej, która miała ustawiony cel na 3000zł. Cel ten udało się osiągnąć w niecałe 24h, a ostatecznie akcja zebrała w miesiąc trochę ponad 17 000zł. W nieco ponad rok (od pierwszego wydania e-booka) autor sprzedał 2000 egzemplarzy (w tym 600 książek z pierwszego nakładu), a przychód określił na około 75 000zł. Na dzień dzisiejszy sprzedał około 3000 egzemplarzy (co dziwne, w większości są to ebooki, bo około 2000). Łączny przychód szacuje na około 115 000 zł. Ze starego nakładu pozostało około 40 książek, a dodruk już czeka w kolejce. Cena książki to 49 zł + przesyłka. Co ciekawe, autor zdaje sobie sprawę, że dla kogoś nawet taka kwota może być sporym wydatkiem i jeśli ktoś znajduje się w trudnej sytuacji, to może napisać do niego maila, a dostanie pdf-a e-booka za darmo. Autor również nie walczy zbytnio z piractwem, o czym dowiemy się z pierwszych stron. O czym jest więc ta książka? To zbiorowa odpowiedź na pytania, które najczęściej zadawali czytelnicy bloga i widzowie na YT - głównie początkujący. W efekcie mamy zbiór wiedzy dla początkujących programistów. Przeglądając sam spis treści dostaniemy dobry obraz tego co znajduje się w książce. Większość rzeczy wydawała mi się znajoma. Wynika to z tego, że śledzę autora na bieżąco i wiedzą na te tematy dzielił się na swoim blogu i YouTube. Muszę się przyznać, że pierwszy kontakt z książką miałem niecałe pół roku temu w postaci udostępnianego pirata e-booka na chomikuj. Przeleciałem ją wtedy mniej więcej na szybko podczas podróży autokarem. Niewiele wtedy z niej wyniosłem i średnio pamiętałem co czytałem. Jakiś tydzień temu książkę mimo to kupiłem, głównie jako forma podziękowania za lata działalności i wsparcia autora (podobnie jak książkę Zawód: Programista). Chciałem też przeczytać ją na spokojnie od początku do końca i podzielić się swoją opinią. Dla mnie, jako już świeżo upieczonego Junior Java Developera, było już na tą książkę za późno, zresztą podobnie jak z książką Zawód: Programista. Wiele nowych rzeczy się nie dowiedziałem, bo albo już czytałem/oglądałem źródła autora, albo interesowałem się w tym zakresie na własną rękę. Żałuję, że te książki nie powstały trochę wcześniej, kiedy dopiero zaczynałem z programowaniem. O książce Książka jest skierowana do osób chcących podjąć pierwszą pracę, ale trochę są zagubieni w tym co, jak i czy powinni coś robić. Jeśli jesteś już Junior Developerem, to prawdopodobnie na książce mniej skorzystasz. Jeśli wpasowujesz się w ten target to książka jest jak najbardziej warta zakupu. Znajdziesz w niej większość odpowiedzi na pytania, które sobie zadajesz, albo nawet nie wiesz, że powinieneś je zadać. Dzięki niej ukierunkujesz swoje przyszłe działania oraz pozbędziesz się wszelkich wątpliwości związanych z drogą do pierwszej pracy. Dla jasności - z książki nie nauczysz się konkretnych rzeczy, które są wymagane do zostania Junior Developerem, tylko zostaniesz nakierowany na dobrą drogę, gdzie sam powinieneś podjąć działania. I taki jest cel tej książki. Dowiesz się “gdzie jesteś”, “co już umiesz” i “nad czym jeszcze musisz popracować”. Zgadzam się z większością rad i poglądów autora. Opisywane ścieżki rozwoju i gotowość do pierwszej pracy również mogę potwierdzić. Sam podążałem podobnymi drogami i pracę udało się dostać. I to po pierwszej rozmowie ;) Książka napisana jest lekkim językiem - czyta ją się szybko i przyjemnie. Porównując wielkości książek, ta jest prawie połowę mniejsza od książki Zawód: Programista (za tą samą cenę): Trochę osób na ten temat narzekało. Książkę można przeczytać w około 3h. Czuli niedosyt i chcieliby więcej. Jednak czy tu jest naprawdę mało treści? Wydaję mi się, że nie. Autor chciał, żeby było krótko i konkretnie. Jak sam pisał: Zdecydowanie jestem zdania, że lepiej zostawić lekki niedosyt, niż przynudzać. No i tu nie można się nie zgodzić. Książka jest na temat, bez przedłużania i sztucznych zapełniaczy treści. Nie znajdziemy coachingowych rad motywacyjnych, ani nic podobnego - same konkrety. Nie można też powiedzieć, że książki się pokrywają. Owszem - trafia się kilka podobnych tematów - ale są to takie tematy, o których warto zebrać kilka różnych opinii z różnych punktów widzenia. Ta pozycja skupia się na tym, co konkretnie robić i jak przygotować się do pierwszej pracy, podczas gdy Zawód: Programista skupia większą uwagę na błędach i pułapkach, na które możesz wpaść w karierze programisty oraz daje sporo refleksji o zawodzie programisty jako takim, często obalając mity jakie panują w mediach. Jakość wykonania Okładka nie powala wizualnie, ale najważniejsze jest to, że jest twarda tak jak powinna być i nie odkształca się po przeczytaniu książki - tak jak w książce Zawód: Programista. Jakość papieru jest również lepsza. Tekst nie przebija się na drugą stronę i czcionka jest bardziej wyraźna: Jedna rzecz do której można się przyczepić to to, że tytuł na boku książki jest odwrotnie niż powinien być, przez co, gdy książki leżą w kolekcji jedna na drugiej, to wygląda to słabo: W dodruku wersji papierowej, ten błąd jest już naprawiony. Nowa wersja będzie dostępna mniej więcej od stycznia 2017. Podsumowując Książka Junior Developer jest całkiem dobrą i przyjemną pozycją. Jeśli jesteś początkującym programistą, masz wiele pytań i wątpliwości, szczególnie przed próbą podjęcia pierwszej pracy, to ta książka będzie dobrym przewodnikiem. Niesie wiele niezbędnych dla początkującego informacji. Jeśli autora mało kojarzysz i nie śledzisz jego działalności to prawdopodobnie z książki wyciągniesz najwięcej. Jeśli nie chcesz wydawać pieniędzy, to możesz przeszukać bloga/kanał na YouTube autora, w celu znalezienia odpowiedzi na konkretne pytania. Trochę pewnie Ci to zajmie. W książce dostajesz wszystko uporządkowane i zebrane w jednym miejscu.</summary></entry></feed>
+&lt;p&gt;Z projektu jestem jak najbardziej zadowolony i cieszę się, że nie wyszła z tego porażka - jak wiele osób spekulowało na forach.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Podsumowania" /><category term="Podsumowania" /><category term="Jaki-jezyk-programowania" /><summary type="html">Podczas inicjatywy DSP2017 powstały 3 wpisy, które opisują powstanie i założenia projektu jaki-jezyk-programowania.pl, trudności na początku i plany związane z projektem, które miałem w tamtym okresie: Wprowadzenie Początki projektu Co dalej z projektem jaki-jezyk-programowania.pl W tym wpisie opowiem jak to wygląda obecnie + dorzucę kilka liczb ;) Początki Dokładnie rok i pięć dni temu, poszedł pierwszy commit projektu jaki-jezyk-programowania.pl. Pomysł zrodził się kilka dni wcześniej. Zwerbowałem dwóch kolegów do projektu i od razu wykupiliśmy domenę. Cena nie była wielka, bo 12 zł, więc mała inwestycja, a mieliśmy pewność, że nikt nas nie uprzedzi. Dziś mija równo rok od jej wykupienia, właśnie ją odnowiłem za cenę 72 zł. (Domena wykupiona jest na firehost.pl, ale planuję migrować ją na OVH, tam gdzie mam domenę tego bloga. Cena odnowienia jest tam o ok. 20zł niższa.) Był to czas gdy mniej więcej zaczynałem z programowaniem webowym. Był to więc projekt, na którym uczyłem się większości technologii webowych. Można pomyśleć, że dziwne, że jako początkujący programista zabrałem się za tworzenie strony, która ma pomagać w wyborze języka programowania do danego zastosowania. I słusznie. Było to dosyć mało przemyślane i wiedza, którą posiadałem, najzwyczajniej nie umożliwiała stworzenia takiej strony o dobrej jakości. Krótko mówiąc, przyznaję, że porwałem się z motyką na słońce. No cóż, stało się. Ale pociągnąłem projekt dalej - w pojedynkę, a spowodowane to było przez kilka czynników. Gdy strona miała już funkcjonalny prototyp postanowiliśmy pokazać pomysł na forach i zebrać jakiś feedback. I zebraliśmy. Nie był zbyt pozytywny. Oczywiście znalazły się osoby, które pochwaliły pomysł, ale też i takie, które uznały go za “czerstwy”, bo widzieli podobną stronę po angielsku lub przez inny powód. Sporo osób też krytykowało wartość merytoryczną strony. I słusznie, bo wtedy była tragedia, co przyznaję. No ale w końcu to był tylko prototyp. Osoby z którymi robiłem projekt po tym zrezygnowały. Był to też okres maturalny, więc dodatkowym argumentem był czas. Wydaję mi się też, że po feedbacku tylko ja dalej wierzyłem, że coś z tego projektu będzie. Chciałem mimo wszystko dociągnąć projekt do końca. Szkoda mi było poświęconego na niego czasu. Dziś mogę powiedzieć, że nie żałuję, mimo, że poświeciłem na niego jeszcze 3-4 razy więcej czasu. Ale nie uważam tego za czas stracony. Rozwój Od tamtego momentu stale starałem się poprawiać i rozbudowywać stronę. Rozwijałem i uczyłem się wraz z projektem, który pochłaniał bardzo dużo czasu, bo w końcu sam musiałem, niemalże od postaw, mniej więcej ogarnąć każdą technologię przedstawianą na stronie. Ale dzięki temu bardzo dużo się nauczyłem. Próbowałem też znaleźć kogoś do pomocy, ale nie było odzewu, więc w 90% zrobiłem go sam. Obecnie uważam, że projekt jest na akceptowalnym poziomie, wiadomo nic nie jest idealne, ale jestem dosyć zadowolony. Strona przeszła wiele zmian, obecnie jest na GitHubie 261 commitów, nie wszystkie są jakieś znaczące, ale widać, że trochę tego było. W ostatnim czasie, gdy już miałem więcej wiedzy, postarałem się tak zrefaktoryzować kod, żeby był łatwy w modyfikacji i dodawaniu nowych technologii wraz z opisami. Obecnie jest to bardzo proste, więc projekt łatwo się rozwija. Tak wygląda wykres aktywności commitów na GitHubie: Czasem nie widać tu tego dobrze, bo na przykład dużo pracy poszło w redagowanie tekstów, a nie jest to zauważalne na wykresie. To są bardziej te “spokojniejsze” okresy. Od dwóch miesięcy wprowadziłem też sposób na monetyzację strony - podjąłem się partnerstwa z Helion i dodałem polecane książki, dzięki czemu jak ktoś kupi książkę przechodząc z mojej strony to dostaję od tego 5% prowizji. Nie jest to dużo, ale na opłacenie domeny spokojnie wystarcza. W okresie promocji nawet wychodzi trochę na plus, z czego też jestem zadowolony. Nie chciałem zaśmiecać strony reklamami, więc myślę, że jest to dobra alternatywa. Do tego nawet przydatna dla użytkowników. Statystyki Strona nie ma jakiegoś ogromnego ruchu, co nie jest dziwne, bo w końcu jest skierowana dla wąskiej grupy osób. Jest to na poziomie 100-200 wejść dziennie. W ostatnich miesiącach było nieco więcej, dzięki temu, że strona jest już jest na lepszym poziomie i ma lepszą pozycję w Google. Poza tym, przyczynił się do tego też okres promocyjny na książki. Rekord to 8063 wejść z 28 października. Wpisując fraze, “jaki język programowania”, jest na pierwszej pozycji. Jest to pewnie w dużym stopniu zasługa domeny. Z kolei dla “jaki język programowania wybrać” jest na 3 pozycji. To jest chyba najbardziej popularna opcja. Gdy pomieszamy różne frazy, jakie ludzie mogą wpisać, to też jest zazwyczaj na pierwszej stronie, więc jest dobrze. Wykres z Google Analitics od początku istnienia strony, czyli od lutego, wygląda tak: Po wystrzale 8k odsłon, ruch na stronie jest już zadowalający. Przez cały okres było: Wszystkich odsłon - 51 294 Unikalnych użytkowników - 6 318 Najczęściej były to wejścia z: facebook.com forum.pasja-informatyki.pl m.facebook.com 4programmers.net l.facebook.com devcave.pl Jeśli chodzi o zachowanie na stronie to, jak można się spodziewać, najczęściej klikana była strona “start”, czyli wizard wyboru języka. Pomijając to, najczęstsze wybory padały na: Python Java JavaScript To takie znaczące top 3. Później: C# C++ I reszta na podobnym poziomie nieco dalej. Wygląda to podobnie do obecnych trendów, jakie podają rożnego rodzaju rankingi. Podsumowując Jak na pierwszy projekt to według mnie jest dobrze. Nie można nazwać tego porażką czy coś. Projekt będzie pewnie dalej rozwijany i aktualizowany, ale już raczej z mniejszą częstotliwością. Tym bardziej, że zaczynam swoją pierwszą pracę jako Java Junior Developer. Właśnie, tak btw: oprócz matury, podczas rozwijania projektu rozwijałem się w kierunku Javy, bo z tą technologią chciałem pracować. Brałem również udział w DSP2017, gdzie trzeba było blogować z częstotliwością 2 posty na tydzień (lista postów). Ponadto, 2 miesiące spędziłem dorabiając/na wakacjach za granicą, gdzie mało dotykałem komputera. Więc był to naprawdę intensywny rok i sporo udało się zrobić :) Z projektu jestem jak najbardziej zadowolony i cieszę się, że nie wyszła z tego porażka - jak wiele osób spekulowało na forach.</summary></entry></feed>

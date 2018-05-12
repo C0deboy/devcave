@@ -8,6 +8,7 @@
             <path value="file://$PROJECT_DIR$/img" />
             <path value="file://$PROJECT_DIR$/_drafts" />
             <path value="file://$PROJECT_DIR$/_posts" />
+            <path value="file://$PROJECT_DIR$/_includes" />
           </resourceRoots>
         </entryData>
       </entry>

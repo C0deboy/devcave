@@ -318,6 +318,8 @@ Interfejs <code class="highlight language-java" data-lang="java"><span class="n"
 <span class="o">}</span>
 </code></pre></div></div>
 
+<p class="note">Od Spring 4.3, jeśli klasa posiada tylko jeden konstruktor, to adnotacja <code class="highlight language-java" data-lang="java"><span class="nd">@Autowired</span></code>  nie jest wymagana. Z kolei jeśli klasa definiuje kilka konstruktorów, to musimy oznaczyć jeden z nich, aby pokazać kontenerowi DI, którego ma użyć.</p>
+
 <p>Jest to najbardziej preferowana opcja. W niektórych framworkach (patrz Angular) jest to tak faworyzowany sposób, że jest on jedynym sposobem wstrzykiwania zależności.</p>
 
 <p class="pros">Plusy:</p>

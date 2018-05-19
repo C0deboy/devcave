@@ -1,8 +1,12 @@
 
 ### Do przeczytania ###
 - section: Do przeczytania
-  subtitle: Książki w trakcie przerabiania, ale już godne polecenia
+  subtitle: Książki w trakcie przerabiania, ale z pewnością godne polecenia
   books:
+
+  - title: Czysta architektura. Struktura i design oprogramowania. Przewodnik dla profesjonalistów
+    author: Robert C. Martin
+    helionID: czarch
 
   - title: Effective Java (3rd Edition)
     author: Joshua Bloch

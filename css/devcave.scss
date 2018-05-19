@@ -748,8 +748,8 @@ img::-moz-selection {
     font-size: .8em;
     display: inline-block;
     top: 0;
-    color: black;
-    background: #f8f8f8;
+    background: #2d2d2d;
+    color: #fff;
     border-radius: 5px;
     padding: 4px;
     opacity: 1;
@@ -758,6 +758,11 @@ img::-moz-selection {
     z-index: 2;
     margin: 10px 25px;
 
+    .dark-mode & {
+        color: black;
+        background: #f8f8f8;
+    }
+
     &:before {
         content: '';
         display: block;
@@ -765,7 +770,7 @@ img::-moz-selection {
         z-index: -1;
         transform: skew(0deg, -38deg);
         width: 19px;
-        background: #f8f8f8;
+        background: inherit;
         position: absolute;
         right: 5px;
         top: 0;

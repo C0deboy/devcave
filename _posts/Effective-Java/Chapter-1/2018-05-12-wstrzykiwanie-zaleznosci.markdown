@@ -149,14 +149,17 @@ Jest to najłatwiejszy sposób dodawania zależności, bo wystarczy dodać kolej
 ```java
 public class FooService {
 
-    private final FooFormatter fooFormatter;
+    private FooFormatter fooFormatter;
 
     @Autowired
-    public void setFooFormatter(FooFormatter fooFormatter) {
+    public FooService(FooFormatter fooFormatter) {
         this.fooFormatter = fooFormatter;
     }
 }
 ```
+
+{: .note}
+Od Spring 4.3, jeśli klasa posiada tylko jeden konstruktor, to adnotacja {% code java %}@Autowired{% endcode %}  nie jest wymagana. Z kolei jeśli klasa definiuje kilka konstruktorów, to musimy oznaczyć jeden z nich, aby pokazać kontenerowi DI, którego ma użyć.
 
 Jest to najbardziej preferowana opcja. W niektórych framworkach (patrz Angular) jest to tak faworyzowany sposób, że jest on jedynym sposobem wstrzykiwania zależności.
 
@@ -173,10 +176,10 @@ Plusy:
 ```java
 public class FooService {
 
-    private FooFormatter fooFormatter;
+    private final FooFormatter fooFormatter;
 
     @Autowired
-    public FooService(FooFormatter fooFormatter) {
+    public void setFooFormatter(FooFormatter fooFormatter) {
         this.fooFormatter = fooFormatter;
     }
 }

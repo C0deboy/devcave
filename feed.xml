@@ -1,4 +1,165 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-05-18T11:53:36+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Preferuj wstrzykiwanie zależności</title><link href="https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci" rel="alternate" type="text/html" title="Preferuj wstrzykiwanie zależności" /><published>2018-05-12T10:00:00+02:00</published><updated>2018-05-12T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci</id><content type="html" xml:base="https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-05-19T16:28:26+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Unikaj nadmiarowego tworzenia obiektów</title><link href="https://devcave.pl/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow" rel="alternate" type="text/html" title="Unikaj nadmiarowego tworzenia obiektów" /><published>2018-05-19T10:00:00+02:00</published><updated>2018-05-19T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow</id><content type="html" xml:base="https://devcave.pl/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 6&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Creating and Destroying Objects&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;
+    
+    &lt;li&gt;
+        &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;
+            Item 1: Consider static factory methods instead of constructors
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;/effective-java/wzorzec-projektowy-builder&quot;&gt;
+            Item 2: Consider a builder when faced with many constructor parameters
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;/effective-java/wzorzec-projektowy-singleton&quot;&gt;
+            Item 3: Enforce the singleton property with a private constructor or an enum type
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;/effective-java/klasy-nieinstancjowalne&quot;&gt;
+            Item 4: Enforce noninstantiability with a private constructor
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;/effective-java/wstrzykiwanie-zaleznosci&quot;&gt;
+            Item 5: Prefer dependency injection to hardwiring resources
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li style=&quot;list-style-type: none;&quot;&gt;
+        &lt;a href=&quot;/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow&quot;&gt;
+            &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 6: Avoid creating unnecessary objects
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+            Item 7: Eliminate obsolete object references
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+            Item 8: Avoid finalizers and cleaners
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+            Item 9: Prefer try-with-resources to try-finally
+        &lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Jeśli jest taka możliwość, powinniśmy reużywać jeden obiekt za każdym razem kiedy jest potrzebny, zamiast tworzyć kolejny, który jest funkcjonalnie identyczny. Może mieć to sporo znaczenie wydajnościowe.&lt;/p&gt;
+
+&lt;p&gt;Jednym z sposobów, aby uniknąć tworzenia niepotrzebnych obiektów, jest &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;static factory method&lt;/a&gt; o której była mowa w pierwszym wpisie.&lt;/p&gt;
+
+&lt;p&gt;Np. &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; jest preferowanym sposobem tworzenia &lt;code class=&quot;highlighter-rouge&quot;&gt;Boolean&lt;/code&gt;, zamiast poprzez konstruktor &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; (który swoją drogą jest &lt;em&gt;deprecated&lt;/em&gt; od Javy 9). Tworzy on za każdym wywołaniem nowy obiekt, co w przypadku klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Boolean&lt;/code&gt;, która ma tylko dwa stany (&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;) jest całkowicie zbędne.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Szczególnie obiekty, które są często używane zasługują na naszą uwagę w tej kwestii.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Czasem jednak nie jest to takie oczywiste, że nasz kod niepotrzebnie tworzy nadmiarowe obiekty.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Dobrym przykładem tutaj jest &lt;em&gt;autoboxing&lt;/em&gt;&lt;/strong&gt;, który pozwala nam mieszać prymitywy (np. &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;boolean&lt;/code&gt;) z ich &lt;em&gt;wrapperami&lt;/em&gt; (np. &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Boolean&lt;/code&gt;). Jako przykład weźmy funkcję, która zlicza sumę wszystkich pozytywnych wartości &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;. W takiej sytuacji do przetrzymywania wyniku użyjemy &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt;, bo &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt; nie jest wystarczająco duży, aby pomieścić wynik:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MAX_VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Przez jeden mały szczegół w tym kodzie wydajność programu jest dużo słabsza niż powinna być. Mowa tu o deklaracji &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;/code&gt;. Zamiast &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt; jest użyty wrapper &lt;code class=&quot;highlighter-rouge&quot;&gt;Long&lt;/code&gt;, co skutkuje tym, że program tworzy 2&lt;sup&gt;31&lt;/sup&gt; niepotrzebnych instancji &lt;code class=&quot;highlighter-rouge&quot;&gt;Long&lt;/code&gt;. Dzieję się to w miejscu, kiedy do &lt;code class=&quot;highlighter-rouge&quot;&gt;Long sum&lt;/code&gt; jest dodawane &lt;code class=&quot;highlighter-rouge&quot;&gt;long i&lt;/code&gt;, a więc &lt;code class=&quot;highlighter-rouge&quot;&gt;long i&lt;/code&gt; jest &lt;em&gt;autoboxowane&lt;/em&gt; na &lt;code class=&quot;highlighter-rouge&quot;&gt;Long&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Przez tą jedną literkę wykonanie tej funkcji na moim całkiem dobrym laptopie trwało ~7 sekund zamiast ~1 sekundy. Joshua Blosh podał, że na jego sprzęcie było odpowiednio 6.3 sekundy i 0.59 sekundy. Polecam sprawdzić różnicę u siebie ;)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Wniosek: preferuj prymitywy i zwracaj uwagę na autoboxing&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Innym dobrym przykładem jest często wykorzystywana metoda &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;regexp&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;. Dajmy na to, że mamy taką oto metodę, która sprawdza, czy liczba jest poprawną liczbą rzymską:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RomanNumerals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isRomanNumeral&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;^(?=.)M*(C[MD]|D?C{0,3})&quot;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Użycie takiej funkcji w pętli jest mało wydajnym rozwiązaniem. Jest tak dlatego, że metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;matches&lt;/code&gt; wewnętrznie tworzy obiekt &lt;code class=&quot;highlighter-rouge&quot;&gt;Pattern&lt;/code&gt; z podanego przez nas w stringu &lt;em&gt;regexpa&lt;/em&gt;. Tworzenie obiektu &lt;code class=&quot;highlighter-rouge&quot;&gt;Pattern&lt;/code&gt; jest całkiem kosztowne, a tworzenie go w pętli za każdym razem takiego samego jest całkowicie zbędne. W takich przypadkach powinniśmy operować na jednej instancji &lt;code class=&quot;highlighter-rouge&quot;&gt;Pattern&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RomanNumerals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Pattern&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ROMAN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Pattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;&quot;^(?=.)M*(C[MD]|D?C{0,3})&quot;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isRomanNumeral&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ROMAN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matcher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Lepsza wydajność&lt;/p&gt;
+
+&lt;p class=&quot;pros&quot;&gt;Lepsza czytelność&lt;/p&gt;
+
+&lt;p&gt;Tutaj dodatkowym plusem jest zwiększona czytelność, bo &lt;code class=&quot;highlighter-rouge&quot;&gt;Pattern&lt;/code&gt; jest nazwany i jasno wyraża swoje intencje.&lt;/p&gt;
+
+&lt;p&gt;Nieco inny, trochę ekstremalny przypadek, który jest też podany w książce to:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bikini&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Jest to nadmiarowe tworzenie nowej instancji stringa za każdym razem kiedy ta linijka jest wykonywana. Argument konstruktora &lt;code class=&quot;s highlighter-rouge&quot;&gt;&quot;bikini&quot;&lt;/code&gt; jest już sam w sobie instancją klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;. Zauważ, że można normalnie na nim wykonywać metody, np.:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;&quot;bikini&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;naked&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Jeśli takie użycie ma miejsce w pętli czy często wykorzystywanej funkcji, w konsekwencji może zostać utworzonych tysiące niepotrzebnych obiektów.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Każda klasa ma swój &lt;a href=&quot;https://en.wikipedia.org/wiki/Java_class_file#The_constant_pool&quot;&gt;constant pool&lt;/a&gt; - listę stałych wartości, które mogą być reużywane, jeśli często występują w kodzie źródłowym. Zaliczamy do tego stringi, numery, nazwy metod, itd.&lt;/p&gt;
+
+&lt;p&gt;Jednak &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;abc&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; nie jest aż tak kosztowną operacją jaką mogłoby się wydawać, bo wewnętrzna reprezentacja tekstu jest reużywana. Co nie oznacza, że nie powinieneś unikać takiej konstrukcji.&lt;/p&gt;
+
+&lt;p&gt;Dlatego zawsze stosuj po prostu:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bikini&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Nie zawsze jednak tworzenie dodatkowych obiektów jest kosztowne i za wszelką cenę powinno być unikane. Jeśli takie dodatkowe obiekty zwiększają czytelność i prostotę kodu, to w większości wypadków jest to dobra rzecz.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Dobrym przykładem jest konkatenacja stringów. &lt;strong&gt;Jeśli stringi są znane podczas kompilacji&lt;/strong&gt;, to te dwie operacje niczym się nie różnią:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;abc&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ab&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Druga opcja wcale nie jest dodatkową operacją. Kompilator wykona konkatenację podczas czasu kompilacji i wygenerowany kod nie będzie się niczym różnił. Są one nawet referencjami do tych samych obiektów, o czym była mowa w notatce wcześniej:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Z kolei używając konstruktora:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;three&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;abc&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;co jest tym samym co:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;three&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;wartości będą te same, ale nie będą już to referencje do tych samych obiektów:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;three&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 6 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry><entry><title type="html">Preferuj wstrzykiwanie zależności</title><link href="https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci" rel="alternate" type="text/html" title="Preferuj wstrzykiwanie zależności" /><published>2018-05-12T10:00:00+02:00</published><updated>2018-05-12T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci</id><content type="html" xml:base="https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -34,7 +195,7 @@
         &lt;/a&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+        &lt;a href=&quot;/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow&quot;&gt;
             Item 6: Avoid creating unnecessary objects
         &lt;/a&gt;
     &lt;/li&gt;
@@ -262,7 +423,7 @@ Interfejs &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;jav
         &lt;/a&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+        &lt;a href=&quot;/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow&quot;&gt;
             Item 6: Avoid creating unnecessary objects
         &lt;/a&gt;
     &lt;/li&gt;
@@ -358,7 +519,7 @@ Interfejs &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;jav
         &lt;/a&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+        &lt;a href=&quot;/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow&quot;&gt;
             Item 6: Avoid creating unnecessary objects
         &lt;/a&gt;
     &lt;/li&gt;
@@ -658,7 +819,7 @@ Może też być problem w zmockowaniu &lt;em&gt;Singletona&lt;/em&gt;, chyba, ż
         &lt;/a&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+        &lt;a href=&quot;/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow&quot;&gt;
             Item 6: Avoid creating unnecessary objects
         &lt;/a&gt;
     &lt;/li&gt;
@@ -1174,7 +1335,7 @@ Może też być problem w zmockowaniu &lt;em&gt;Singletona&lt;/em&gt;, chyba, ż
         &lt;/a&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;disabled&quot;&gt;
+        &lt;a href=&quot;/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow&quot;&gt;
             Item 6: Avoid creating unnecessary objects
         &lt;/a&gt;
     &lt;/li&gt;
@@ -1607,94 +1768,4 @@ Top 3: 25 USD (or equivalent…)&lt;/p&gt;
 
 &lt;p&gt;Z tego roku jestem naprawdę zadowolony. Czuję satysfakcję z moich małych osiągnięć i mam dużo motywacji do dalszego działania. Oby kolejny rok był jeszcze lepszy ;)&lt;/p&gt;
 
-&lt;p&gt;Szczęśliwego nowego roku i wytrwałości w swoich postanowieniach!&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Podsumowania" /><category term="Podsumowania" /><summary type="html">Rok 2017 był dla mnie dosyć intensywnym rokiem. Sporo się działo, ale nie wydaję mi się, żeby w 2018 było inaczej. Wręcz przeciwnie. Na blogu dzieliłem się mniej więcej tym, co udało mi się zrobić lub nad czym pracowałem, ale przedstawię to wszystko w skrócie i zebrane w całość. Rok 2017 w skrócie Nauczyłem się podstaw JavaScript, szczególnie ES6 i narzędzi do pracy z JavaScriptem. Liznąłem też podstaw Angulara. Stworzyłem projekt jaki-język-programowania.pl, który jest moim pierwszym większym projektem Stworzyłem tego bloga i brałem udział w konkursie DSP2017, którego celem było publikować 2 posty tygodniowo przez 3 miesiące. Po przerwie wróciłem do blogowania i ogólnie w tym roku udało się napisać 33 posty. Nauczyłem się podstaw Javy i technologii z nią związanych (m.in. Spring i Hibernate). Podczas nauki programowania zrobiłem 7 mniejszych większych projektów/gier + do tego kilka pomocnych narzędzi, które nie są jako osobne repozytoria. W tym, zwycięska animacja w konkursie od forum Pasja Informatyki. Do wakacji udawało mi się dosyć regularnie ćwiczyć kalistenikę (czyli tylko z ciężarem własnego ciała), jednak później nieco się zapuściłem i moja aktywność fizyczna podupadła, ale wkrótce to się zmieni, o tym później w postanowieniach. Zdałem maturę z polskiego :D. Zdałem też rozszerzenia (mat-inf-ang), jednak na niewystarczająco dobrym poziomie, bo nie dostałem się na studia na PWR. Około 2 miesięcy pracowałem na budowie (głównie wykończenia) w Paryżu (w poprzednich latach też mi się zdarzało, więc nie jestem w tym zielony). Czasem coś w Polsce, ale to mniejsze robótki :D Tak sobie dorabiałem, a w międzyczasie cały czas rozwijałem się jako programista. Znalazłem pracę jako Junior Java Developer Pracę miałem zacząć od nowego roku, więc miałem jeszcze jakieś 2 miesiące wolnego. Poświęciłem ten czas w dużej mierze na rozwój własnych projektów oraz dalszy samorozwój. Przez cały rok pochłonąłem masę książek (zobacz moją bibliotekę, poza tym też kilka nietechnicznych), konferencji (głównie nagrania online, ale ostatnio powstał JUG (Java User Group) nawet w Kielcach i już zaliczyłem 2 spotkania), podcastów itp. Na koniec roku biorę udział w konkursie Gynvaela - Gynvael’s Winter GameDev Challenge 2017. Wyniki 7 stycznia. Gra do 20kb. Ten limit trochę mnie wykańcza :D Zobaczymy czy uda się coś sensownego sklecić i coś wygrać. Jakiś prototyp już jest, ale ten limit eh ;) Żeby nie było, że cały czas tylko pracuję, uczę się i jestem nie wiadomo jak produktywny, to trochę o wakacjach. Zanim wróciłem z Paryża, przyjechała do mnie moja dziewczyna, gdzie spędziliśmy razem tydzień. Ledwo wróciliśmy do Polski (Kielce, rano), a pod wieczór byliśmy już w drodze do Gdyni - na tegoroczny Opener. Głównie ze względu na koncert G-Eaziego. Minął niecały tydzień i razem ze znajomymi wybraliśmy się na pare dni nad jezioro. Pod koniec wakacji prawie z tą samą paczką pojechaliśmy na obóz do Chorwacji. Tegoroczny sylwester planujemy spędzić w Lublinie, gdzie studiuje kilka osób z naszej paczki. Z większych rzeczy to tyle, ale wydaję mi się, że na brak odpoczynku nie mogę narzekać. W końcu - wydaję mi się, że zasłużony ;) Postanowienia noworoczne i plany na kolejny rok Praca Jako, że 03.01.2017 jest mój pierwszy dzień w pracy jako programista, to z pewnością na niej najbardziej się skupię. Mam nadzieję, że nie będzie wymagała ode mnie zaangażowania 24/7, tylko moje zadania będą w miarę odpowiednie do moich możliwości, tym bardziej, że nie płacą mi JESZCZE 15k hyhy :D. Ale zdaję sobie sprawę, że pierwsze miesiące mogą być intensywne. Pewnie częstotliwość postów znacznie zmaleje, ale na pewno podzielę się wrażeniami z pierwszych dni pracy i kilka innych wpisów powinno wpaść. Dosyć dużym dylematem są dla mnie studia, bo nie wiem co z nimi, więc też pewnie o tym zrobię jakiś research i wrzucę wpis z moimi przemyśleniami. Od następnego roku chciałbym pracować już tylko w swoim zawodzie. Aktywność fizyczna Wspomniałem o tym, że wkrótce polepszy się moja aktywność fizyczna. I tak, zamierzam wrócić do ćwiczeń, żeby odzyskać formę sprzed wakacji. Początkowo myślałem, że to będzie siłownia. Po 1 wizycie wraz z kolegą byliśmy nie do końca przekonani (na pewno do tej konkretnej siłowni), ale wyskoczył inny pomysł - postanowiliśmy, że spróbujemy czegoś innego - Muay Thai. Po pierwszym treningu bardzo nam się to spodobało i prawdopodobnie to będzie moją aktywnością fizyczną w najbliższym czasie. W każdym razie, albo Muay Thai albo siłownia to plan na przyszły rok. Oczywiście będzie się z tym wiązał też nieco zdrowszy tryb życia. Książki Ostatnio dorzuciłem do swojej biblioteki kilka książek: TDD. Programowanie w Javie sterowane testami Viktor Farcic, Alex Garcia Zrozumieć programowanie Gynvael Coldwind Wzorce projektowe. Elementy oprogramowania obiektowego wielokrotnego użytku Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides Czysty kod. Podręcznik dobrego programisty Robert C. Martin Czysty kod będę czytał drugi raz, już jako bardziej świadomy programista. Teraz więcej z niej wyniosę. Planuję też zakupić w najbliższym czasie, jeszcze gorącą, od dawna wyczekiwaną przeze mnie 3 edycję Effective Java, której autorem jest Joshua Bloch. Jeszcze gorąca bo wyszła dokładnie 3 dni temu i kupuję w wersji anglojęzycznej z Amazonu. Zanim Helion się za nią weźnie to pewnie z 2 lata minie. 2 edycja była dosyć kultowa, ale wyszła w 2006 roku, zaraz po Javie w wersji 6, więc jest już nieco przestarzała. Dlatego nie chciałem jej kupować. 3 edycja pokrywa już Javę 7, 8, i 9. Niedługo w ebookpoint, od 01.01.2017 do 03.01.2017 będzie spora promocja na ebooki. Większość tytułów będzie maksymalnie za 19.90 i zamierzam kupić nową pozycję o Angularze 2: Angular 2. Programowanie z użyciem języka TypeScript Yakov Fain, Anton Moiseev Tak więc te książki są kolejnym planem na rok 2018. Więcej konkretnych planów nie mam. Reszta wyjdzie w praniu ;) Podsumowując Z tego roku jestem naprawdę zadowolony. Czuję satysfakcję z moich małych osiągnięć i mam dużo motywacji do dalszego działania. Oby kolejny rok był jeszcze lepszy ;) Szczęśliwego nowego roku i wytrwałości w swoich postanowieniach!</summary></entry><entry><title type="html">Podsumowanie po roku - jaki-jezyk-programowania.pl</title><link href="https://devcave.pl/podsumowania/podsumowanie-strony-jaki-jezyk-programowania-po-roku" rel="alternate" type="text/html" title="Podsumowanie po roku - jaki-jezyk-programowania.pl" /><published>2017-12-20T13:00:00+01:00</published><updated>2017-12-20T13:00:00+01:00</updated><id>https://devcave.pl/podsumowania/podsumowanie-strony-jaki-jezyk-programowania-po-roku</id><content type="html" xml:base="https://devcave.pl/podsumowania/podsumowanie-strony-jaki-jezyk-programowania-po-roku">&lt;p&gt;Podczas inicjatywy DSP2017 powstały 3 wpisy, które opisują powstanie i założenia projektu &lt;a href=&quot;https://jaki-jezyk-programowania.pl/&quot;&gt;jaki-jezyk-programowania.pl&lt;/a&gt;, trudności na początku i plany związane z projektem, które miałem w tamtym okresie:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/dajsiepoznac2017/wprowadzenie&quot;&gt;Wprowadzenie&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/dajsiepoznac2017/poczatki&quot;&gt;Początki projektu&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/dajsiepoznac2017/co-dalej-z-projektem-jaki-jezyk-programowania&quot;&gt;Co dalej z projektem jaki-jezyk-programowania.pl&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;W tym wpisie opowiem jak to wygląda obecnie + dorzucę kilka liczb ;)&lt;/p&gt;
-
-&lt;h1 id=&quot;początki&quot;&gt;Początki&lt;/h1&gt;
-
-&lt;p&gt;Dokładnie rok i pięć dni temu, poszedł pierwszy commit projektu &lt;a href=&quot;https://jaki-jezyk-programowania.pl/&quot;&gt;jaki-jezyk-programowania.pl&lt;/a&gt;. Pomysł zrodził się kilka dni wcześniej. Zwerbowałem dwóch kolegów do projektu i od razu wykupiliśmy domenę. Cena nie była wielka, bo 12 zł, więc mała inwestycja, a mieliśmy pewność, że nikt nas nie uprzedzi. Dziś mija równo rok od jej wykupienia, właśnie ją odnowiłem za cenę 72 zł.&lt;/p&gt;
-
-&lt;p&gt;(Domena wykupiona jest na &lt;a href=&quot;firehost.pl&quot;&gt;firehost.pl&lt;/a&gt;, ale planuję migrować ją na &lt;a href=&quot;https://www.ovh.pl/&quot;&gt;OVH&lt;/a&gt;, tam gdzie mam domenę tego bloga. Cena odnowienia jest tam o ok. 20zł niższa.)&lt;/p&gt;
-
-&lt;p&gt;Był to czas gdy mniej więcej zaczynałem z programowaniem webowym. Był to więc projekt, na którym uczyłem się większości technologii webowych. Można pomyśleć, że dziwne, że jako początkujący programista zabrałem się za tworzenie strony, która ma pomagać w wyborze języka programowania do danego zastosowania. I słusznie. Było to dosyć mało przemyślane i wiedza, którą posiadałem, najzwyczajniej nie umożliwiała stworzenia takiej strony o dobrej jakości. Krótko mówiąc, przyznaję, że porwałem się z motyką na słońce. No cóż, stało się. Ale pociągnąłem projekt dalej - w pojedynkę, a spowodowane to było przez kilka czynników.&lt;/p&gt;
-
-&lt;p&gt;Gdy strona miała już funkcjonalny prototyp postanowiliśmy pokazać pomysł na forach i zebrać jakiś feedback. I zebraliśmy. Nie był zbyt pozytywny. Oczywiście znalazły się osoby, które pochwaliły pomysł, ale też i takie, które uznały go za “czerstwy”, bo widzieli podobną stronę po angielsku lub przez inny powód. Sporo osób też krytykowało wartość merytoryczną strony. I słusznie, bo wtedy była tragedia, co przyznaję. No ale w końcu to był tylko prototyp.&lt;/p&gt;
-
-&lt;p&gt;Osoby z którymi robiłem projekt po tym zrezygnowały. Był to też okres maturalny, więc dodatkowym argumentem był czas. Wydaję mi się też, że po feedbacku tylko ja dalej wierzyłem, że coś z tego projektu będzie.&lt;/p&gt;
-
-&lt;p&gt;Chciałem mimo wszystko dociągnąć projekt do końca. Szkoda mi było poświęconego na niego czasu.  Dziś mogę powiedzieć, że nie żałuję, mimo, że poświeciłem na niego jeszcze 3-4 razy więcej czasu. Ale nie uważam tego za czas stracony.&lt;/p&gt;
-
-&lt;h1 id=&quot;rozwój&quot;&gt;Rozwój&lt;/h1&gt;
-
-&lt;p&gt;Od tamtego momentu stale starałem się poprawiać i rozbudowywać stronę. Rozwijałem i uczyłem się wraz z projektem, który pochłaniał bardzo dużo czasu, bo w końcu sam musiałem, niemalże od postaw, mniej więcej ogarnąć każdą technologię przedstawianą na stronie. Ale dzięki temu bardzo dużo się nauczyłem. Próbowałem też znaleźć kogoś do pomocy, ale nie było odzewu, więc w 90% zrobiłem go sam.&lt;/p&gt;
-
-&lt;p&gt;Obecnie uważam, że projekt jest na akceptowalnym poziomie, wiadomo nic nie jest idealne, ale jestem dosyć zadowolony. Strona przeszła wiele zmian, obecnie jest na GitHubie 261 commitów, nie wszystkie są jakieś znaczące, ale widać, że trochę tego było. W ostatnim czasie, gdy już miałem więcej wiedzy, postarałem się tak zrefaktoryzować kod, żeby był łatwy w modyfikacji i dodawaniu nowych technologii wraz z opisami. Obecnie jest to bardzo proste, więc projekt łatwo się rozwija.&lt;/p&gt;
-
-&lt;p&gt;Tak wygląda wykres aktywności commitów na GitHubie:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/summaries/jjpgithub.PNG&quot; alt=&quot;Wykres aktywności GitHub&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Czasem nie widać tu tego dobrze, bo na przykład dużo pracy poszło w redagowanie tekstów, a nie jest to zauważalne na wykresie. To są bardziej te “spokojniejsze” okresy.&lt;/p&gt;
-
-&lt;p&gt;Od dwóch miesięcy wprowadziłem też sposób na monetyzację strony - podjąłem się partnerstwa z Helion i dodałem polecane książki, dzięki czemu jak ktoś kupi książkę przechodząc z mojej strony to dostaję od tego 5% prowizji. Nie jest to dużo, ale na opłacenie domeny spokojnie wystarcza. W okresie promocji nawet wychodzi trochę na plus, z czego też jestem zadowolony.&lt;/p&gt;
-
-&lt;p&gt;Nie chciałem zaśmiecać strony reklamami, więc myślę, że jest to dobra alternatywa. Do tego nawet przydatna dla użytkowników.&lt;/p&gt;
-
-&lt;h1 id=&quot;statystyki&quot;&gt;Statystyki&lt;/h1&gt;
-
-&lt;p&gt;Strona nie ma jakiegoś ogromnego ruchu, co nie jest dziwne, bo w końcu jest skierowana dla wąskiej grupy osób. Jest to na poziomie 100-200 wejść dziennie. W ostatnich miesiącach było nieco więcej, dzięki temu, że strona jest już jest na lepszym poziomie i ma lepszą pozycję w Google. Poza tym, przyczynił się do tego też okres promocyjny na książki. Rekord to 8063 wejść z 28 października.&lt;/p&gt;
-
-&lt;p&gt;Wpisując fraze, “jaki język programowania”, jest na pierwszej pozycji. Jest to pewnie w dużym stopniu zasługa domeny. Z kolei dla “jaki język programowania wybrać” jest na 3 pozycji. To jest chyba najbardziej popularna opcja. Gdy pomieszamy różne frazy, jakie ludzie mogą wpisać, to też jest zazwyczaj na pierwszej stronie, więc jest dobrze.&lt;/p&gt;
-
-&lt;p&gt;Wykres z Google Analitics od początku istnienia strony, czyli od lutego, wygląda tak:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/summaries/jjpanalitics.PNG&quot; alt=&quot;Wykres aktywności GitHub&quot; class=&quot;center-block&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Po wystrzale 8k odsłon, ruch na stronie jest już zadowalający.&lt;/p&gt;
-
-&lt;p&gt;Przez cały okres było:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Wszystkich odsłon - 51 294&lt;/li&gt;
-  &lt;li&gt;Unikalnych użytkowników - 6 318&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Najczęściej były to wejścia z:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;facebook.com&lt;/li&gt;
-  &lt;li&gt;forum.pasja-informatyki.pl&lt;/li&gt;
-  &lt;li&gt;m.facebook.com&lt;/li&gt;
-  &lt;li&gt;4programmers.net&lt;/li&gt;
-  &lt;li&gt;l.facebook.com&lt;/li&gt;
-  &lt;li&gt;devcave.pl&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Jeśli chodzi o zachowanie na stronie to, jak można się spodziewać, najczęściej klikana była strona “start”, czyli wizard wyboru języka. Pomijając to, najczęstsze wybory padały na:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Python&lt;/li&gt;
-  &lt;li&gt;Java&lt;/li&gt;
-  &lt;li&gt;JavaScript&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;To takie znaczące top 3. Później:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;C#&lt;/li&gt;
-  &lt;li&gt;C++&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;I reszta na podobnym poziomie nieco dalej. Wygląda to podobnie do obecnych trendów, jakie podają rożnego rodzaju rankingi.&lt;/p&gt;
-
-&lt;h1 id=&quot;podsumowując&quot;&gt;Podsumowując&lt;/h1&gt;
-
-&lt;p&gt;Jak na pierwszy projekt to według mnie jest dobrze. Nie można nazwać tego porażką czy coś. Projekt będzie pewnie dalej rozwijany i aktualizowany, ale już raczej z mniejszą częstotliwością. Tym bardziej, że zaczynam swoją pierwszą pracę jako Java Junior Developer. Właśnie, tak btw: oprócz matury, podczas rozwijania projektu rozwijałem się w kierunku Javy, bo z tą technologią chciałem pracować. Brałem również udział w DSP2017, gdzie trzeba było blogować z częstotliwością 2 posty na tydzień (&lt;a href=&quot;/archiwum/#dajsiepoznac2017&quot;&gt;lista postów&lt;/a&gt;). Ponadto, 2 miesiące spędziłem dorabiając/na wakacjach za granicą, gdzie mało dotykałem komputera. Więc był to naprawdę intensywny rok i sporo udało się zrobić :)&lt;/p&gt;
-
-&lt;p&gt;Z projektu jestem jak najbardziej zadowolony i cieszę się, że nie wyszła z tego porażka - jak wiele osób spekulowało na forach.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Podsumowania" /><category term="Podsumowania" /><category term="Jaki-jezyk-programowania" /><summary type="html">Podczas inicjatywy DSP2017 powstały 3 wpisy, które opisują powstanie i założenia projektu jaki-jezyk-programowania.pl, trudności na początku i plany związane z projektem, które miałem w tamtym okresie: Wprowadzenie Początki projektu Co dalej z projektem jaki-jezyk-programowania.pl W tym wpisie opowiem jak to wygląda obecnie + dorzucę kilka liczb ;) Początki Dokładnie rok i pięć dni temu, poszedł pierwszy commit projektu jaki-jezyk-programowania.pl. Pomysł zrodził się kilka dni wcześniej. Zwerbowałem dwóch kolegów do projektu i od razu wykupiliśmy domenę. Cena nie była wielka, bo 12 zł, więc mała inwestycja, a mieliśmy pewność, że nikt nas nie uprzedzi. Dziś mija równo rok od jej wykupienia, właśnie ją odnowiłem za cenę 72 zł. (Domena wykupiona jest na firehost.pl, ale planuję migrować ją na OVH, tam gdzie mam domenę tego bloga. Cena odnowienia jest tam o ok. 20zł niższa.) Był to czas gdy mniej więcej zaczynałem z programowaniem webowym. Był to więc projekt, na którym uczyłem się większości technologii webowych. Można pomyśleć, że dziwne, że jako początkujący programista zabrałem się za tworzenie strony, która ma pomagać w wyborze języka programowania do danego zastosowania. I słusznie. Było to dosyć mało przemyślane i wiedza, którą posiadałem, najzwyczajniej nie umożliwiała stworzenia takiej strony o dobrej jakości. Krótko mówiąc, przyznaję, że porwałem się z motyką na słońce. No cóż, stało się. Ale pociągnąłem projekt dalej - w pojedynkę, a spowodowane to było przez kilka czynników. Gdy strona miała już funkcjonalny prototyp postanowiliśmy pokazać pomysł na forach i zebrać jakiś feedback. I zebraliśmy. Nie był zbyt pozytywny. Oczywiście znalazły się osoby, które pochwaliły pomysł, ale też i takie, które uznały go za “czerstwy”, bo widzieli podobną stronę po angielsku lub przez inny powód. Sporo osób też krytykowało wartość merytoryczną strony. I słusznie, bo wtedy była tragedia, co przyznaję. No ale w końcu to był tylko prototyp. Osoby z którymi robiłem projekt po tym zrezygnowały. Był to też okres maturalny, więc dodatkowym argumentem był czas. Wydaję mi się też, że po feedbacku tylko ja dalej wierzyłem, że coś z tego projektu będzie. Chciałem mimo wszystko dociągnąć projekt do końca. Szkoda mi było poświęconego na niego czasu. Dziś mogę powiedzieć, że nie żałuję, mimo, że poświeciłem na niego jeszcze 3-4 razy więcej czasu. Ale nie uważam tego za czas stracony. Rozwój Od tamtego momentu stale starałem się poprawiać i rozbudowywać stronę. Rozwijałem i uczyłem się wraz z projektem, który pochłaniał bardzo dużo czasu, bo w końcu sam musiałem, niemalże od postaw, mniej więcej ogarnąć każdą technologię przedstawianą na stronie. Ale dzięki temu bardzo dużo się nauczyłem. Próbowałem też znaleźć kogoś do pomocy, ale nie było odzewu, więc w 90% zrobiłem go sam. Obecnie uważam, że projekt jest na akceptowalnym poziomie, wiadomo nic nie jest idealne, ale jestem dosyć zadowolony. Strona przeszła wiele zmian, obecnie jest na GitHubie 261 commitów, nie wszystkie są jakieś znaczące, ale widać, że trochę tego było. W ostatnim czasie, gdy już miałem więcej wiedzy, postarałem się tak zrefaktoryzować kod, żeby był łatwy w modyfikacji i dodawaniu nowych technologii wraz z opisami. Obecnie jest to bardzo proste, więc projekt łatwo się rozwija. Tak wygląda wykres aktywności commitów na GitHubie: Czasem nie widać tu tego dobrze, bo na przykład dużo pracy poszło w redagowanie tekstów, a nie jest to zauważalne na wykresie. To są bardziej te “spokojniejsze” okresy. Od dwóch miesięcy wprowadziłem też sposób na monetyzację strony - podjąłem się partnerstwa z Helion i dodałem polecane książki, dzięki czemu jak ktoś kupi książkę przechodząc z mojej strony to dostaję od tego 5% prowizji. Nie jest to dużo, ale na opłacenie domeny spokojnie wystarcza. W okresie promocji nawet wychodzi trochę na plus, z czego też jestem zadowolony. Nie chciałem zaśmiecać strony reklamami, więc myślę, że jest to dobra alternatywa. Do tego nawet przydatna dla użytkowników. Statystyki Strona nie ma jakiegoś ogromnego ruchu, co nie jest dziwne, bo w końcu jest skierowana dla wąskiej grupy osób. Jest to na poziomie 100-200 wejść dziennie. W ostatnich miesiącach było nieco więcej, dzięki temu, że strona jest już jest na lepszym poziomie i ma lepszą pozycję w Google. Poza tym, przyczynił się do tego też okres promocyjny na książki. Rekord to 8063 wejść z 28 października. Wpisując fraze, “jaki język programowania”, jest na pierwszej pozycji. Jest to pewnie w dużym stopniu zasługa domeny. Z kolei dla “jaki język programowania wybrać” jest na 3 pozycji. To jest chyba najbardziej popularna opcja. Gdy pomieszamy różne frazy, jakie ludzie mogą wpisać, to też jest zazwyczaj na pierwszej stronie, więc jest dobrze. Wykres z Google Analitics od początku istnienia strony, czyli od lutego, wygląda tak: Po wystrzale 8k odsłon, ruch na stronie jest już zadowalający. Przez cały okres było: Wszystkich odsłon - 51 294 Unikalnych użytkowników - 6 318 Najczęściej były to wejścia z: facebook.com forum.pasja-informatyki.pl m.facebook.com 4programmers.net l.facebook.com devcave.pl Jeśli chodzi o zachowanie na stronie to, jak można się spodziewać, najczęściej klikana była strona “start”, czyli wizard wyboru języka. Pomijając to, najczęstsze wybory padały na: Python Java JavaScript To takie znaczące top 3. Później: C# C++ I reszta na podobnym poziomie nieco dalej. Wygląda to podobnie do obecnych trendów, jakie podają rożnego rodzaju rankingi. Podsumowując Jak na pierwszy projekt to według mnie jest dobrze. Nie można nazwać tego porażką czy coś. Projekt będzie pewnie dalej rozwijany i aktualizowany, ale już raczej z mniejszą częstotliwością. Tym bardziej, że zaczynam swoją pierwszą pracę jako Java Junior Developer. Właśnie, tak btw: oprócz matury, podczas rozwijania projektu rozwijałem się w kierunku Javy, bo z tą technologią chciałem pracować. Brałem również udział w DSP2017, gdzie trzeba było blogować z częstotliwością 2 posty na tydzień (lista postów). Ponadto, 2 miesiące spędziłem dorabiając/na wakacjach za granicą, gdzie mało dotykałem komputera. Więc był to naprawdę intensywny rok i sporo udało się zrobić :) Z projektu jestem jak najbardziej zadowolony i cieszę się, że nie wyszła z tego porażka - jak wiele osób spekulowało na forach.</summary></entry></feed>
+&lt;p&gt;Szczęśliwego nowego roku i wytrwałości w swoich postanowieniach!&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Podsumowania" /><category term="Podsumowania" /><summary type="html">Rok 2017 był dla mnie dosyć intensywnym rokiem. Sporo się działo, ale nie wydaję mi się, żeby w 2018 było inaczej. Wręcz przeciwnie. Na blogu dzieliłem się mniej więcej tym, co udało mi się zrobić lub nad czym pracowałem, ale przedstawię to wszystko w skrócie i zebrane w całość. Rok 2017 w skrócie Nauczyłem się podstaw JavaScript, szczególnie ES6 i narzędzi do pracy z JavaScriptem. Liznąłem też podstaw Angulara. Stworzyłem projekt jaki-język-programowania.pl, który jest moim pierwszym większym projektem Stworzyłem tego bloga i brałem udział w konkursie DSP2017, którego celem było publikować 2 posty tygodniowo przez 3 miesiące. Po przerwie wróciłem do blogowania i ogólnie w tym roku udało się napisać 33 posty. Nauczyłem się podstaw Javy i technologii z nią związanych (m.in. Spring i Hibernate). Podczas nauki programowania zrobiłem 7 mniejszych większych projektów/gier + do tego kilka pomocnych narzędzi, które nie są jako osobne repozytoria. W tym, zwycięska animacja w konkursie od forum Pasja Informatyki. Do wakacji udawało mi się dosyć regularnie ćwiczyć kalistenikę (czyli tylko z ciężarem własnego ciała), jednak później nieco się zapuściłem i moja aktywność fizyczna podupadła, ale wkrótce to się zmieni, o tym później w postanowieniach. Zdałem maturę z polskiego :D. Zdałem też rozszerzenia (mat-inf-ang), jednak na niewystarczająco dobrym poziomie, bo nie dostałem się na studia na PWR. Około 2 miesięcy pracowałem na budowie (głównie wykończenia) w Paryżu (w poprzednich latach też mi się zdarzało, więc nie jestem w tym zielony). Czasem coś w Polsce, ale to mniejsze robótki :D Tak sobie dorabiałem, a w międzyczasie cały czas rozwijałem się jako programista. Znalazłem pracę jako Junior Java Developer Pracę miałem zacząć od nowego roku, więc miałem jeszcze jakieś 2 miesiące wolnego. Poświęciłem ten czas w dużej mierze na rozwój własnych projektów oraz dalszy samorozwój. Przez cały rok pochłonąłem masę książek (zobacz moją bibliotekę, poza tym też kilka nietechnicznych), konferencji (głównie nagrania online, ale ostatnio powstał JUG (Java User Group) nawet w Kielcach i już zaliczyłem 2 spotkania), podcastów itp. Na koniec roku biorę udział w konkursie Gynvaela - Gynvael’s Winter GameDev Challenge 2017. Wyniki 7 stycznia. Gra do 20kb. Ten limit trochę mnie wykańcza :D Zobaczymy czy uda się coś sensownego sklecić i coś wygrać. Jakiś prototyp już jest, ale ten limit eh ;) Żeby nie było, że cały czas tylko pracuję, uczę się i jestem nie wiadomo jak produktywny, to trochę o wakacjach. Zanim wróciłem z Paryża, przyjechała do mnie moja dziewczyna, gdzie spędziliśmy razem tydzień. Ledwo wróciliśmy do Polski (Kielce, rano), a pod wieczór byliśmy już w drodze do Gdyni - na tegoroczny Opener. Głównie ze względu na koncert G-Eaziego. Minął niecały tydzień i razem ze znajomymi wybraliśmy się na pare dni nad jezioro. Pod koniec wakacji prawie z tą samą paczką pojechaliśmy na obóz do Chorwacji. Tegoroczny sylwester planujemy spędzić w Lublinie, gdzie studiuje kilka osób z naszej paczki. Z większych rzeczy to tyle, ale wydaję mi się, że na brak odpoczynku nie mogę narzekać. W końcu - wydaję mi się, że zasłużony ;) Postanowienia noworoczne i plany na kolejny rok Praca Jako, że 03.01.2017 jest mój pierwszy dzień w pracy jako programista, to z pewnością na niej najbardziej się skupię. Mam nadzieję, że nie będzie wymagała ode mnie zaangażowania 24/7, tylko moje zadania będą w miarę odpowiednie do moich możliwości, tym bardziej, że nie płacą mi JESZCZE 15k hyhy :D. Ale zdaję sobie sprawę, że pierwsze miesiące mogą być intensywne. Pewnie częstotliwość postów znacznie zmaleje, ale na pewno podzielę się wrażeniami z pierwszych dni pracy i kilka innych wpisów powinno wpaść. Dosyć dużym dylematem są dla mnie studia, bo nie wiem co z nimi, więc też pewnie o tym zrobię jakiś research i wrzucę wpis z moimi przemyśleniami. Od następnego roku chciałbym pracować już tylko w swoim zawodzie. Aktywność fizyczna Wspomniałem o tym, że wkrótce polepszy się moja aktywność fizyczna. I tak, zamierzam wrócić do ćwiczeń, żeby odzyskać formę sprzed wakacji. Początkowo myślałem, że to będzie siłownia. Po 1 wizycie wraz z kolegą byliśmy nie do końca przekonani (na pewno do tej konkretnej siłowni), ale wyskoczył inny pomysł - postanowiliśmy, że spróbujemy czegoś innego - Muay Thai. Po pierwszym treningu bardzo nam się to spodobało i prawdopodobnie to będzie moją aktywnością fizyczną w najbliższym czasie. W każdym razie, albo Muay Thai albo siłownia to plan na przyszły rok. Oczywiście będzie się z tym wiązał też nieco zdrowszy tryb życia. Książki Ostatnio dorzuciłem do swojej biblioteki kilka książek: TDD. Programowanie w Javie sterowane testami Viktor Farcic, Alex Garcia Zrozumieć programowanie Gynvael Coldwind Wzorce projektowe. Elementy oprogramowania obiektowego wielokrotnego użytku Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides Czysty kod. Podręcznik dobrego programisty Robert C. Martin Czysty kod będę czytał drugi raz, już jako bardziej świadomy programista. Teraz więcej z niej wyniosę. Planuję też zakupić w najbliższym czasie, jeszcze gorącą, od dawna wyczekiwaną przeze mnie 3 edycję Effective Java, której autorem jest Joshua Bloch. Jeszcze gorąca bo wyszła dokładnie 3 dni temu i kupuję w wersji anglojęzycznej z Amazonu. Zanim Helion się za nią weźnie to pewnie z 2 lata minie. 2 edycja była dosyć kultowa, ale wyszła w 2006 roku, zaraz po Javie w wersji 6, więc jest już nieco przestarzała. Dlatego nie chciałem jej kupować. 3 edycja pokrywa już Javę 7, 8, i 9. Niedługo w ebookpoint, od 01.01.2017 do 03.01.2017 będzie spora promocja na ebooki. Większość tytułów będzie maksymalnie za 19.90 i zamierzam kupić nową pozycję o Angularze 2: Angular 2. Programowanie z użyciem języka TypeScript Yakov Fain, Anton Moiseev Tak więc te książki są kolejnym planem na rok 2018. Więcej konkretnych planów nie mam. Reszta wyjdzie w praniu ;) Podsumowując Z tego roku jestem naprawdę zadowolony. Czuję satysfakcję z moich małych osiągnięć i mam dużo motywacji do dalszego działania. Oby kolejny rok był jeszcze lepszy ;) Szczęśliwego nowego roku i wytrwałości w swoich postanowieniach!</summary></entry></feed>

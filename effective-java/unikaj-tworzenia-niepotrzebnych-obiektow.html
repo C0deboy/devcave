@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Unikaj nadmiarowego tworzenia obiektów</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Unikaj nadmiarowego tworzenia obiektów</h1>
+            
+            <h2 class="post-subtitle">Tworzenie zbędnych obiektów może być kosztowne</h2>
+            
+            <p class="post-meta">
+              
+              19
+              maja
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 6</i> z rozdziału:</p>
+
+<p class="m0">Creating and Destroying Objects</p>
+
+<ul class="fa-ul custom">
+    
+    <li>
+        <a href="/effective-java/static-factory-method-zamiast-konstruktora">
+            Item 1: Consider static factory methods instead of constructors
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wzorzec-projektowy-builder">
+            Item 2: Consider a builder when faced with many constructor parameters
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wzorzec-projektowy-singleton">
+            Item 3: Enforce the singleton property with a private constructor or an enum type
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/klasy-nieinstancjowalne">
+            Item 4: Enforce noninstantiability with a private constructor
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wstrzykiwanie-zaleznosci">
+            Item 5: Prefer dependency injection to hardwiring resources
+        </a>
+    </li>
+    <li style="list-style-type: none;">
+        <a href="/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow">
+            <i class="fa-li fa fa-arrow-right"></i>Item 6: Avoid creating unnecessary objects
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 7: Eliminate obsolete object references
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 8: Avoid finalizers and cleaners
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 9: Prefer try-with-resources to try-finally
+        </a>
+    </li>
+</ul>
+<hr />
+
+<p>Jeśli jest taka możliwość, powinniśmy reużywać jeden obiekt za każdym razem kiedy jest potrzebny, zamiast tworzyć kolejny, który jest funkcjonalnie identyczny. Może mieć to sporo znaczenie wydajnościowe.</p>
+
+<p>Jednym z sposobów, aby uniknąć tworzenia niepotrzebnych obiektów, jest <a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a> o której była mowa w pierwszym wpisie.</p>
+
+<p>Np. <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span></code> jest preferowanym sposobem tworzenia <code class="highlighter-rouge">Boolean</code>, zamiast poprzez konstruktor <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span></code> (który swoją drogą jest <em>deprecated</em> od Javy 9). Tworzy on za każdym wywołaniem nowy obiekt, co w przypadku klasy <code class="highlighter-rouge">Boolean</code>, która ma tylko dwa stany (<code class="highlighter-rouge">true</code> i <code class="highlighter-rouge">false</code>) jest całkowicie zbędne.</p>
+
+<p><strong>Szczególnie obiekty, które są często używane zasługują na naszą uwagę w tej kwestii.</strong></p>
+
+<p>Czasem jednak nie jest to takie oczywiste, że nasz kod niepotrzebnie tworzy nadmiarowe obiekty.</p>
+
+<p><strong>Dobrym przykładem tutaj jest <em>autoboxing</em></strong>, który pozwala nam mieszać prymitywy (np. <code class="highlighter-rouge">int</code>, <code class="highlighter-rouge">boolean</code>) z ich <em>wrapperami</em> (np. <code class="highlighter-rouge">Integer</code>, <code class="highlighter-rouge">Boolean</code>). Jako przykład weźmy funkcję, która zlicza sumę wszystkich pozytywnych wartości <code class="highlighter-rouge">int</code>. W takiej sytuacji do przetrzymywania wyniku użyjemy <code class="highlighter-rouge">long</code>, bo <code class="highlighter-rouge">int</code> nie jest wystarczająco duży, aby pomieścić wynik:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">sum</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">Long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+        <span class="n">sum</span> <span class="o">+=</span> <span class="n">i</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Przez jeden mały szczegół w tym kodzie wydajność programu jest dużo słabsza niż powinna być. Mowa tu o deklaracji <code class="highlight language-java" data-lang="java"><span class="n">Long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span></code>. Zamiast <code class="highlighter-rouge">long</code> jest użyty wrapper <code class="highlighter-rouge">Long</code>, co skutkuje tym, że program tworzy 2<sup>31</sup> niepotrzebnych instancji <code class="highlighter-rouge">Long</code>. Dzieję się to w miejscu, kiedy do <code class="highlighter-rouge">Long sum</code> jest dodawane <code class="highlighter-rouge">long i</code>, a więc <code class="highlighter-rouge">long i</code> jest <em>autoboxowane</em> na <code class="highlighter-rouge">Long</code>.</p>
+
+<p>Przez tą jedną literkę wykonanie tej funkcji na moim całkiem dobrym laptopie trwało ~7 sekund zamiast ~1 sekundy. Joshua Blosh podał, że na jego sprzęcie było odpowiednio 6.3 sekundy i 0.59 sekundy. Polecam sprawdzić różnicę u siebie ;)</p>
+
+<p><strong>Wniosek: preferuj prymitywy i zwracaj uwagę na autoboxing</strong></p>
+
+<p>Innym dobrym przykładem jest często wykorzystywana metoda <code class="highlight language-java" data-lang="java"><span class="n">String</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"regexp"</span><span class="o">)</span></code>. Dajmy na to, że mamy taką oto metodę, która sprawdza, czy liczba jest poprawną liczbą rzymską:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RomanNumerals</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isRomanNumeral</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"^(?=.)M*(C[MD]|D?C{0,3})"</span>
+                <span class="o">+</span> <span class="s">"(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Użycie takiej funkcji w pętli jest mało wydajnym rozwiązaniem. Jest tak dlatego, że metoda <code class="highlighter-rouge">matches</code> wewnętrznie tworzy obiekt <code class="highlighter-rouge">Pattern</code> z podanego przez nas w stringu <em>regexpa</em>. Tworzenie obiektu <code class="highlighter-rouge">Pattern</code> jest całkiem kosztowne, a tworzenie go w pętli za każdym razem takiego samego jest całkowicie zbędne. W takich przypadkach powinniśmy operować na jednej instancji <code class="highlighter-rouge">Pattern</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RomanNumerals</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Pattern</span> <span class="n">ROMAN</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span>
+            <span class="s">"^(?=.)M*(C[MD]|D?C{0,3})"</span>
+            <span class="o">+</span> <span class="s">"(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$"</span><span class="o">);</span>
+
+    <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isRomanNumeral</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">ROMAN</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">s</span><span class="o">).</span><span class="na">matches</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="pros">Lepsza wydajność</p>
+
+<p class="pros">Lepsza czytelność</p>
+
+<p>Tutaj dodatkowym plusem jest zwiększona czytelność, bo <code class="highlighter-rouge">Pattern</code> jest nazwany i jasno wyraża swoje intencje.</p>
+
+<p>Nieco inny, trochę ekstremalny przypadek, który jest też podany w książce to:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"bikini"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Jest to nadmiarowe tworzenie nowej instancji stringa za każdym razem kiedy ta linijka jest wykonywana. Argument konstruktora <code class="s highlighter-rouge">"bikini"</code> jest już sam w sobie instancją klasy <code class="highlighter-rouge">String</code>. Zauważ, że można normalnie na nim wykonywać metody, np.:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"bikini"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"naked"</span><span class="o">);</span> <span class="c1">//false</span>
+</code></pre></div></div>
+
+<p>Jeśli takie użycie ma miejsce w pętli czy często wykorzystywanej funkcji, w konsekwencji może zostać utworzonych tysiące niepotrzebnych obiektów.</p>
+
+<p class="note">Każda klasa ma swój <a href="https://en.wikipedia.org/wiki/Java_class_file#The_constant_pool">constant pool</a> - listę stałych wartości, które mogą być reużywane, jeśli często występują w kodzie źródłowym. Zaliczamy do tego stringi, numery, nazwy metod, itd.</p>
+
+<p>Jednak <code class="highlight language-java" data-lang="java"><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"abc"</span><span class="o">)</span></code> nie jest aż tak kosztowną operacją jaką mogłoby się wydawać, bo wewnętrzna reprezentacja tekstu jest reużywana. Co nie oznacza, że nie powinieneś unikać takiej konstrukcji.</p>
+
+<p>Dlatego zawsze stosuj po prostu:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"bikini"</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p><strong>Nie zawsze jednak tworzenie dodatkowych obiektów jest kosztowne i za wszelką cenę powinno być unikane. Jeśli takie dodatkowe obiekty zwiększają czytelność i prostotę kodu, to w większości wypadków jest to dobra rzecz.</strong></p>
+
+<p>Dobrym przykładem jest konkatenacja stringów. <strong>Jeśli stringi są znane podczas kompilacji</strong>, to te dwie operacje niczym się nie różnią:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">one</span> <span class="o">=</span> <span class="s">"abc"</span><span class="o">;</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">two</span> <span class="o">=</span> <span class="s">"ab"</span> <span class="o">+</span> <span class="s">"c"</span><span class="o">;</span>
+</code></pre></div></div>
+<p>Druga opcja wcale nie jest dodatkową operacją. Kompilator wykona konkatenację podczas czasu kompilacji i wygenerowany kod nie będzie się niczym różnił. Są one nawet referencjami do tych samych obiektów, o czym była mowa w notatce wcześniej:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">one</span> <span class="o">==</span> <span class="n">two</span><span class="o">;</span> <span class="c1">//true</span>
+</code></pre></div></div>
+
+<p>Z kolei używając konstruktora:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">three</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"abc"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>co jest tym samym co:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">three</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">one</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>wartości będą te same, ale nie będą już to referencje do tych samych obiektów:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">three</span> <span class="o">==</span> <span class="n">one</span><span class="o">;</span> <span class="c1">//false</span>
+</code></pre></div></div>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/wstrzykiwanie-zaleznosci"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Preferuj wstrzykiwanie zależności"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow";
+    this.page.identifier = "/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promocje/promotions.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

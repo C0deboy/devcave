@@ -372,6 +372,15 @@
         "subtitle": "Elastyczność i łatwiejsze testowanie",
         "date": "12 maja 2018",
         "url": "/effective-java/wstrzykiwanie-zaleznosci"
+      },
+    
+      
+      {
+        "title": "Unikaj nadmiarowego tworzenia obiektów",
+        "titleSEO": "Unikaj nadmiarowego tworzenia obiektów",
+        "subtitle": "Tworzenie zbędnych obiektów może być kosztowne",
+        "date": "19 maja 2018",
+        "url": "/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow"
       }
     
   

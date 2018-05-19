@@ -166,13 +166,15 @@
 </ul>
 <hr />
 
-<p>Jeśli jest taka możliwość, powinniśmy reużywać jeden obiekt za każdym razem kiedy jest potrzebny, zamiast tworzyć kolejny, który jest funkcjonalnie identyczny. Może mieć to sporo znaczenie wydajnościowe.</p>
+<p>Są sytuację, kiedy powinniśmy reużywać jeden obiekt za każdym razem kiedy jest potrzebny, zamiast tworzyć kolejny, który jest funkcjonalnie identyczny. <strong>Nie wnioskuj jednak z tego wpisu, że tworzenie obiektów jest kosztowne i powinno być unikane.</strong> Wręcz przeciwnie. Tworzenie i zwalnianie z pamięci małych obiektów, których konstruktory nie wykonują dużo pracy nie jest kosztowne. Ponadto tworzenie dodatkowych obiektów, żeby zwiększają klarowność i prostotę kodu to dobra rzecz. W idealnym świecie, obiekty powinny być niemutowalne i krótko żyjące.</p>
 
-<p>Jednym z sposobów, aby uniknąć tworzenia niepotrzebnych obiektów, jest <a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a> o której była mowa w pierwszym wpisie.</p>
+<p>Czasem jednak dobrze jest unikać tworzenia niepotrzebnych obiektów.</p>
+
+<p>Jednym z sposobów, na to jest <a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a> o której była mowa w pierwszym wpisie.</p>
 
 <p>Np. <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span></code> jest preferowanym sposobem tworzenia <code class="highlighter-rouge">Boolean</code>, zamiast poprzez konstruktor <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span></code> (który swoją drogą jest <em>deprecated</em> od Javy 9). Tworzy on za każdym wywołaniem nowy obiekt, co w przypadku klasy <code class="highlighter-rouge">Boolean</code>, która ma tylko dwa stany (<code class="highlighter-rouge">true</code> i <code class="highlighter-rouge">false</code>) jest całkowicie zbędne.</p>
 
-<p><strong>Szczególnie obiekty, które są często używane zasługują na naszą uwagę w tej kwestii.</strong></p>
+<p><strong>Szczególnie obiekty, które są bardzo często używane zasługują na naszą uwagę w tej kwestii.</strong></p>
 
 <p>Czasem jednak nie jest to takie oczywiste, że nasz kod niepotrzebnie tworzy nadmiarowe obiekty.</p>
 

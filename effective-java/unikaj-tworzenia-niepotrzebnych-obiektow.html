@@ -192,7 +192,7 @@
 </code></pre></div></div>
 <p>Przez jeden mały szczegół w tym kodzie wydajność programu jest dużo słabsza niż powinna być. Mowa tu o deklaracji <code class="highlight language-java" data-lang="java"><span class="n">Long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span></code>. Zamiast <code class="highlighter-rouge">long</code> jest użyty wrapper <code class="highlighter-rouge">Long</code>, co skutkuje tym, że program tworzy 2<sup>31</sup> niepotrzebnych instancji <code class="highlighter-rouge">Long</code>. Dzieję się to w miejscu, kiedy do <code class="highlighter-rouge">Long sum</code> jest dodawane <code class="highlighter-rouge">long i</code>, a więc <code class="highlighter-rouge">long i</code> jest <em>autoboxowane</em> na <code class="highlighter-rouge">Long</code>.</p>
 
-<p>Przez tą jedną literkę wykonanie tej funkcji na moim całkiem dobrym laptopie trwało ~7 sekund zamiast ~1 sekundy. Joshua Blosh podał, że na jego sprzęcie było odpowiednio 6.3 sekundy i 0.59 sekundy. Polecam sprawdzić różnicę u siebie ;)</p>
+<p>Przez tą jedną literkę wykonanie tej funkcji na moim całkiem dobrym laptopie trwało ~7 sekund zamiast ~1 sekundy. Joshua Bloch podał, że na jego sprzęcie było odpowiednio 6.3 sekundy i 0.59 sekundy. Polecam sprawdzić różnicę u siebie ;)</p>
 
 <p><strong>Wniosek: preferuj prymitywy i zwracaj uwagę na autoboxing</strong></p>
 
@@ -220,6 +220,10 @@
 </code></pre></div></div>
 
 <p class="pros">Lepsza wydajność</p>
+
+<p>Jednak trzeba mieć na uwadze, że jest sens się tym przejmować, tylko wtedy kiedy obiekt na prawdę jest non stop w użyciu, a jego konstruktor wykonuje sporo pracy. Testując wydajność tych rozwiązań na prostej pętli wyniki nie różniły się bardzo od siebie. Sprawdzałem to używając <a href="http://openjdk.java.net/projects/code-tools/jmh/">JMH</a>.</p>
+
+<p>U mnie, w pętli, która kręci się 200 000 razy jest to różnica rzędu ~200ms.</p>
 
 <p class="pros">Lepsza czytelność</p>
 

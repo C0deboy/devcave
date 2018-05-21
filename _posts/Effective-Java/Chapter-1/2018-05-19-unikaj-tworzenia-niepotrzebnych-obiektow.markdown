@@ -15,13 +15,17 @@ item:       6
 
 {% include /effective-java/series-info.html %}
 
-Jeśli jest taka możliwość, powinniśmy reużywać jeden obiekt za każdym razem kiedy jest potrzebny, zamiast tworzyć kolejny, który jest funkcjonalnie identyczny. Może mieć to sporo znaczenie wydajnościowe.
+Są sytuację, kiedy powinniśmy reużywać jeden obiekt za każdym razem kiedy jest potrzebny, zamiast tworzyć kolejny, który jest funkcjonalnie identyczny. **Nie wnioskuj jednak z tego wpisu, że tworzenie obiektów jest kosztowne i powinno być unikane.** Wręcz przeciwnie. Tworzenie i zwalnianie z pamięci małych obiektów, których konstruktory nie wykonują dużo pracy nie jest kosztowne. Ponadto, tworzenie dodatkowych obiektów, żeby zwiększyć klarowność i prostotę kodu to zazwyczaj dobra rzecz.
 
-Jednym z sposobów, aby uniknąć tworzenia niepotrzebnych obiektów, jest [static factory method]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}) o której była mowa w pierwszym wpisie.
+**W idealnym świecie, obiekty powinny być niemutowalne i krótko żyjące.**
+
+Czasem jednak dobrze jest unikać tworzenia niepotrzebnych obiektów.
+
+Jednym z sposobów, na to jest [static factory method]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}) o której była mowa w pierwszym wpisie.
 
 Np. {% code java %} Boolean.valueOf(String s){% endcode %} jest preferowanym sposobem tworzenia `Boolean`, zamiast poprzez konstruktor {% code java %}Boolean(String s){% endcode %} (który swoją drogą jest *deprecated* od Javy 9). Tworzy on za każdym wywołaniem nowy obiekt, co w przypadku klasy `Boolean`, która ma tylko dwa stany (`true` i `false`) jest całkowicie zbędne.
 
-**Szczególnie obiekty, które są często używane zasługują na naszą uwagę w tej kwestii.**
+**Szczególnie obiekty, które są bardzo często używane zasługują na naszą uwagę w tej kwestii.**
 
 Czasem jednak nie jest to takie oczywiste, że nasz kod niepotrzebnie tworzy nadmiarowe obiekty.
 
@@ -38,7 +42,7 @@ private static long sum() {
 ```
 Przez jeden mały szczegół w tym kodzie wydajność programu jest dużo słabsza niż powinna być. Mowa tu o deklaracji {% code java %}Long sum = 0L;{% endcode %}. Zamiast `long` jest użyty wrapper `Long`, co skutkuje tym, że program tworzy 2<sup>31</sup> niepotrzebnych instancji `Long`. Dzieję się to w miejscu, kiedy do `Long sum` jest dodawane `long i`, a więc `long i` jest *autoboxowane* na `Long`.
 
-Przez tą jedną literkę wykonanie tej funkcji na moim całkiem dobrym laptopie trwało ~7 sekund zamiast ~1 sekundy. Joshua Blosh podał, że na jego sprzęcie było odpowiednio 6.3 sekundy i 0.59 sekundy. Polecam sprawdzić różnicę u siebie ;)
+Przez tą jedną literkę wykonanie tej funkcji na moim laptopie trwało ~7 sekund zamiast ~1 sekundy. Joshua Bloch podał, że na jego sprzęcie było odpowiednio 6.3 sekundy i 0.59 sekundy. Polecam sprawdzić różnicę u siebie ;)
 
 **Wniosek: preferuj prymitywy i zwracaj uwagę na autoboxing**
 
@@ -70,6 +74,10 @@ public class RomanNumerals {
 {: .pros}
 Lepsza wydajność
 
+Jednak trzeba mieć na uwadze, że jest sens się tym przejmować, tylko wtedy kiedy obiekt na prawdę jest non stop w użyciu, a jego konstruktor wykonuje sporo pracy. Testując wydajność tych rozwiązań na prostej pętli wyniki nie różniły się bardzo od siebie. Sprawdzałem to używając [JMH](http://openjdk.java.net/projects/code-tools/jmh/).
+
+U mnie, w pętli, która kręci się 200 000 razy jest to różnica rzędu ~200ms.
+
 {: .pros}
 Lepsza czytelność
 
@@ -100,7 +108,7 @@ Dlatego zawsze stosuj po prostu:
 String s = "bikini";
 ```
 
-**Nie zawsze jednak tworzenie dodatkowych obiektów jest kosztowne i za wszelką cenę powinno być unikane. Jeśli takie dodatkowe obiekty zwiększają czytelność i prostotę kodu, to w większości wypadków jest to dobra rzecz.**
+**Jak wspomniałem wcześniej, nie zawsze tworzenie dodatkowych obiektów jest kosztowne. Czasem nawet kod, który wydaje się być osobną operacją wcale nią nie jest.**
 
 Dobrym przykładem jest konkatenacja stringów. **Jeśli stringi są znane podczas kompilacji**, to te dwie operacje niczym się nie różnią:
 

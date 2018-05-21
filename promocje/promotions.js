@@ -10,7 +10,11 @@ const promotion = {
 const customMessage = '';
 const promotionURL = new URL(`http://${promotion.host}/page/9102Q/promocja/${promotion.number}`);
 
-let promotionAdText = `W Helion trwa <a href="${promotionURL}" target="_blank">promocja</a> -60% na ebooki (papier -25%). Zobacz książki, które warto kupić.`;
+let promotionAdText = `W Helion trwa <a href="${promotionURL}" target="_blank">promocja</a> -60% na ebooki (papier -25%). Zobacz książki, które warto kupić</a>.`;
+
+const promotionAdHeader = `W Helion trwa <a href="${promotionURL}" target="_blank">promocja</a> na książki:`;
+
+const promotionAdDesc = `-60% na ebooki (papier -25%). <br>Zobacz książki, które warto kupić w <a href="/moja-biblioteka">mojej bibliotece</a>.`;
 
 if (isPromotionActive()) {
   showPromotionAd();
@@ -48,8 +52,8 @@ function createPromotionMessagePopup() {
     promotionSign.classList.add('promotion-sign', 'box-effect');
     promotionSign.appendChild(closeBtn);
     document.body.appendChild(promotionSign);
-    positionPromotionSign(booksBtn, promotionSign);
-    window.addEventListener('resize', () => positionPromotionSign(booksBtn, promotionSign));
+    positionPromotionPopup(booksBtn, promotionSign);
+    window.addEventListener('resize', () => positionPromotionPopup(booksBtn, promotionSign));
   }
 }
 
@@ -58,7 +62,7 @@ function closeAd(ad) {
   ad.style.display = 'none';
 }
 
-function positionPromotionSign(booksBtn, promotionSign) {
+function positionPromotionPopup(booksBtn, promotionSign) {
   const booksBtnRect = booksBtn.getBoundingClientRect();
   const left = (booksBtnRect.left - promotionSign.offsetWidth) + +(booksBtnRect.width / 4);
 
@@ -74,5 +78,19 @@ function showPromotionAd() {
   const promotionLink = document.querySelector('.promotion-link');
   if (promotionLink) {
     promotionLink.style.display = 'block';
+    const header = document.getElementById('promo-header');
+    header.innerHTML = promotionAdHeader;
+
+    const promoDesc = document.getElementById('promo-text');
+    promoDesc.innerHTML = promotionAdDesc;
+
+    const imageLink = document.createElement('a');
+    imageLink.href = promotionURL.toString();
+    const img = document.createElement('img');
+    img.src = '/promocje/promotion.png';
+
+    imageLink.appendChild(img);
+
+    promoDesc.appendChild(imageLink);
   }
 }

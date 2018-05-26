@@ -307,7 +307,7 @@
 <ul>
   <li>deklarowanie “ciężkiego” obiektu lub kolekcji jako <em>static</em> - cykl życia obiektu zadeklarowanego jako <em>static</em> jest równy cyklu życia JVM, czyli nigdy nie zostanie zebrany przez GC.</li>
   <li>Niezamknięte streamy i inne <code class="highlighter-rouge">Closeable</code></li>
-  <li>Dodawanie obiektów bez <code class="highlighter-rouge">hashCode()</code> i  <code class="highlighter-rouge">equals()</code> do <em>hash</em> kolekcji np. <code class="highlighter-rouge">HashSet</code> - nie będziemy mieli dostępu do dodanych obiektów ani nie będziemy mogli ich usunąć. Również próby dodania duplikatów zakończą się sukcesem, co nie powinno mieć miejsca w przypadku <code class="highlighter-rouge">HashSet</code>. Będzie o tym też mowa w kolejnych postach z rozdziału <em>Methods Common to All Objects</em></li>
+  <li>Dodawanie obiektów bez <code class="highlighter-rouge">hashCode()</code> i  <code class="highlighter-rouge">equals()</code> do <em>hash</em> kolekcji np. <code class="highlighter-rouge">HashSet</code> - metody takie jak <code class="highlighter-rouge">remove()</code>, <code class="highlighter-rouge">contains()</code> itd. nie będą działać poprawnie. Również próby dodania duplikatów zakończą się sukcesem, co nie powinno mieć miejsca w przypadku <code class="highlighter-rouge">HashSet</code>. Będzie o tym też mowa w kolejnych postach z rozdziału <em>Methods Common to All Objects</em></li>
   <li>Autoboxing, czyli mieszanie typów prostych i ich wraperów w pętlach - przykład był w <a href="/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow">poprzednim poście</a></li>
 </ul>
 

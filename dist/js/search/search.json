@@ -381,6 +381,15 @@
         "subtitle": "Tworzenie zbędnych obiektów może być kosztowne",
         "date": "19 maja 2018",
         "url": "/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow"
+      },
+    
+      
+      {
+        "title": "Wycieki pamięci w Javie",
+        "titleSEO": "Wycieki pamięci, zarządzanie pamięcią i garbage collector w Javie",
+        "subtitle": "Zarządzanie pamięcią - czy garbage collector zawsze to zrobi za nas?",
+        "date": "26 maja 2018",
+        "url": "/effective-java/wycieki-pamieci-w-javie"
       }
     
   

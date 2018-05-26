@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Wycieki pamięci, zarządzanie pamięcią i garbage collector w Javie</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/wycieki-pamieci-w-javie">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Wycieki pamięci w Javie</h1>
+            
+            <h2 class="post-subtitle">Zarządzanie pamięcią - czy garbage collector zawsze to zrobi za nas?</h2>
+            
+            <p class="post-meta">
+              
+              26
+              maja
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#wycieki-pamięci">Wycieki pamięci</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#nullowanie-nieużywanych-referencji">Nullowanie nieużywanych referencji</a></li>
+<li class="toc-entry toc-h2"><a href="#cachowanie">Cachowanie</a></li>
+<li class="toc-entry toc-h2"><a href="#listenery-i-inne-callback-i">Listenery i inne callback-i</a></li>
+<li class="toc-entry toc-h2"><a href="#inne-drogi-do-wycieków-pamięci">Inne drogi do wycieków pamięci</a></li>
+</ul>
+</li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 7</i> z rozdziału:</p>
+
+<p class="m0">Creating and Destroying Objects</p>
+
+<ul class="fa-ul custom">
+    
+    <li>
+        <a href="/effective-java/static-factory-method-zamiast-konstruktora">
+            Item 1: Consider static factory methods instead of constructors
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wzorzec-projektowy-builder">
+            Item 2: Consider a builder when faced with many constructor parameters
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wzorzec-projektowy-singleton">
+            Item 3: Enforce the singleton property with a private constructor or an enum type
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/klasy-nieinstancjowalne">
+            Item 4: Enforce noninstantiability with a private constructor
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wstrzykiwanie-zaleznosci">
+            Item 5: Prefer dependency injection to hardwiring resources
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow">
+            Item 6: Avoid creating unnecessary objects
+        </a>
+    </li>
+    <li style="list-style-type: none;">
+        <a href="/effective-java/wycieki-pamieci-w-javie">
+            <i class="fa-li fa fa-arrow-right"></i>Item 7: Eliminate obsolete object references
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 8: Avoid finalizers and cleaners
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 9: Prefer try-with-resources to try-finally
+        </a>
+    </li>
+</ul>
+<hr />
+
+<p>Java posiada <em>garbage collector</em>, który zajmuję się za nas zarządzaniem pamięcią. Można by pomyśleć, że możemy całkowicie zapomnieć o zarządzaniu pamięcią, jednak nie do końca.</p>
+
+<h1 id="wycieki-pamięci">Wycieki pamięci</h1>
+
+<p>Czym są wycieki pamięci? Wyciek pamięci następuje wtedy, kiedy dane obiekty nie są już używane przez aplikację, ale <em>garbage collector</em> nie jest w stanie ich usunąć, ponieważ w naszej aplikacji nadal są przechowywane do nich referencje. W rezultacie zużywane jest coraz więcej zasobów znacząco spowalniając naszą aplikację, aż do momentu, kiedy ich braknie i rzucony zostanie <code class="highlighter-rouge">OutOfMemoryError</code>.</p>
+
+<p>Jednak brak <code class="highlighter-rouge">OutOfMemoryError</code> nie jest jednoznaczne z tym, że nie mamy do czynienia z wyciekiem pamięci. Wyciek pamięci może mieć miejsce bez żadnych zgłoszonych errorów. Po prostu skończy się na tym, że gwałtownie spadnie wydajność naszej aplikacji ze względu nadmiernej pracy <em>garbage collectora</em>.</p>
+
+<p>Wycieki pamięci nie dają o sobie znać w oczywisty sposób.  Są zazwyczaj wykrywane podczas ostrożnego przeglądania kodu lub z pomocą narzędzi do debugowania znanych jako <em>heap profiler</em>. Dlatego warto jest poznać temat i zapobiegać takim sytuacją wcześniej.</p>
+
+<p>Tutaj jest przykładowa implementacja klasy <code class="highlighter-rouge">Stack</code>, która pozornie wygląda w porządku, jednak może prowadzić do wycieków pamięci:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">Object</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">ensureCapacity</span><span class="o">();</span>
+		<span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">Object</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
+		<span class="k">return</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+	* Ensure space for at least one more element, roughly
+	* doubling the capacity each time the array needs to grow.
+	*/</span>
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">elements</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span>
+			<span class="n">elements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Problem jest w metodzie <code class="highlighter-rouge">pop</code>. Obiekty, które zostały już pobrane ze stosu, nie są zbierane przez <em>garbage collector</em>, nawet jeśli stos już ich nie używa.  Dzieje się tak dlatego, że nieumyślnie zachowujemy referencje do nieużywanych już obiektów w tablicy <code class="highlighter-rouge">elements</code>. Po angielsku nazywamy je <em>obsolate references</em>.</p>
+
+<p>Ponadto wszystkie referencje do innych obiektów, które są w nich przetrzymywane również są wykluczone z <em>garbage collection</em>, co może powodować, że wiele obiektów może nie być zebranych przez <em>garbage collector</em>, powodując potencjalny spadek wydajności aplikacji.</p>
+
+<h3 id="nullowanie-nieużywanych-referencji">Nullowanie nieużywanych referencji</h3>
+
+<p>Problem można naprawić dosyć łatwo - nullować niepotrzebne już referencje do obiektów.</p>
+
+<p>Poprawna implementacja metody <code class="highlighter-rouge">pop()</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Object</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
+	<span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+	<span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// Eliminate obsolete reference</span>
+	<span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Dodatkowym plusem jest to, że jeśli potem przez pomyłkę znów program chciałby uzyskać do niej dostęp, to od razu wyrzuci <code class="highlighter-rouge">NullPointerException</code>, zamiast po cichu robić coś nieplanowanego.</p>
+
+<p><strong>Nie oznacza to jednak, że powinniśmy nullować każdą możliwą referencję do obiektu, jeśli program przestał jej już używać. Należy to robić tylko w wyjątkowych sytuacjach.</strong></p>
+
+<p class="note">Nieużywane referencje do obiektów są automatycznie zbierane przez <em>garbage collector</em>, gdy zmienna przechowująca referencję wypada z zasięgu. <br />  <br />
+<strong>Best practice:</strong> definiuj zmienne w najmniejszym możliwe <em>scope-ie</em>.</p>
+
+<p>Kiedy więc nullować referencje? Dlaczego w klasie <code class="highlighter-rouge">Stack</code> powinniśmy to robić?</p>
+
+<p>A no dlatego, że sama zarządza swoją pamięcią. W tym przykładzie <em>storage pool</em> składa się z elementów tablicy <code class="highlighter-rouge">elements</code>. Tylko te elementy, które są w aktywnej części tablicy (czyli te o indeksach mniejszych od wielkości stosu) są ważne, a pozostałe są wolne i nie będą już nigdy użyte. Ale nie ma opcji, żeby <em>garbage collector</em> o tym wiedział. Tylko programista o tym wie, dlatego powinien dać o tym znać <em>garbage collectorowi</em> poprzez nullowanie nieużywanych już obiektów w tablicy <code class="highlighter-rouge">elements</code>.</p>
+
+<p><strong>Zatem powinniśmy nullowac referencję tylko wtedy, kiedy klasa sama zarządzająca swoją pamięcią.</strong></p>
+
+<p>W innych przypadkach jest to zbędne i tylko zaśmieca kod.</p>
+
+<h2 id="cachowanie">Cachowanie</h2>
+
+<p>Innym źródłem wycieków pamięci jest cachowanie.  Najprostszym typem danych w którym możemy trzymać dane w cachu  jest <code class="highlighter-rouge">HashMap</code>. W wielowątkowych zastosowaniach będzie to <code class="highlighter-rouge">ConcurrentHashMap</code>.</p>
+
+<p>Kiedy dodamy obiekt do <em>cache</em> łatwo jest o nim zapomnieć i trzymać go w nim długo po tym jak jest potrzebny. Jest kilka rozwiązań tego problemu:</p>
+
+<p>Jeśli obiekt w <em>cache</em> jest ważny tylko przez czas kiedy na zewnątrz są referencje do klucza tego obiektu - użyj <code class="highlighter-rouge">WeakHashMap</code> , bo tak właśnie działa <code class="highlighter-rouge">WeakHashMap</code>.</p>
+
+<p class="warning">Referencje do samego obiektu nie są ważne, liczy się tylko referencja do klucza.</p>
+
+<p>Częściej jednak to, czy obiekt jest już bezużyteczny, nie jest tak łatwo zdefiniowane. Może np. tracić na wartości z czasem. W takich przypadkach <em>cache</em> powinien być zwalniany okazjonalnie z obiektów, które już od jakiegoś czasu wyszły z użycia. Możemy to zrobić używając wątku w tle (np. <code class="highlighter-rouge">ScheduledThreadPoolExecutor</code>) lub wtedy, kiedy dodajemy nowy obiekt do <em>cache</em>.</p>
+
+<p>Tego drugiego sposobu używa np. <code class="highlighter-rouge">LinkedHashMap</code> ze swoją metodą <code class="highlighter-rouge">removeEldestEntry</code>, którą możemy nadpisać z naszą logiką określającą, czy powinniśmy usunąć najstarszy obiekt w mapie:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">MAX_ENTRIES</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">lhm</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;(</span><span class="n">MAX_ENTRIES</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="o">.</span><span class="mi">75</span><span class="n">F</span><span class="o">,</span> <span class="kc">false</span><span class="o">)</span> <span class="o">{</span>
+
+  <span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">removeEldestEntry</span><span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">eldest</span><span class="o">)</span> <span class="o">{</span>
+	  <span class="k">return</span> <span class="nf">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">MAX_ENTRIES</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">};</span>
+
+<span class="n">lhm</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="s">"H"</span><span class="o">);</span>
+<span class="n">lhm</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"E"</span><span class="o">);</span>
+<span class="n">lhm</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"L"</span><span class="o">);</span>
+<span class="n">lhm</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">"L"</span><span class="o">);</span>
+<span class="n">lhm</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"O"</span><span class="o">);</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lhm</span><span class="o">);</span>
+<span class="c1">//{2=L, 3=L, 4=O}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>W tym przykładzie działa to tak, że jeśli mapa przekroczy określoną wielkość (w tym przypadku 3) to zostanie z niej usunięta najstarsza wartość. Jak widać z pięciu włożonych elementów <code class="highlighter-rouge">H, E, L, L, O</code> zostały 3 najnowsze <code class="highlighter-rouge">L, L, O</code>.</p>
+
+<p>W książce autor pisze, że dla bardziej złożonych <em>cache</em>-y można użyć klas z pakietu <code class="highlighter-rouge">java.lang.ref</code>, które reprezentują różne typy referencji do obiektów, jednak implementowanie swojego <em>cache</em> zazwyczaj jest złym pomysłem. Mamy do tego gotowe rozwiązania jak <a href="http://www.baeldung.com/guava-cache">Guava Cache</a>, <a href="http://www.baeldung.com/ehcache">Ehcache</a> czy mechanizm cachowania w Springu.</p>
+
+<p>Jako rozszerzenie tego tematu polecam prezentację <a href="https://www.youtube.com/watch?v=wfPl_aNj4Pc">On-heap cache vs Off-heap cache w Javie - Radek Grębski</a></p>
+
+<h2 id="listenery-i-inne-callback-i">Listenery i inne callback-i</h2>
+
+<p>Jest to kolejne popularne źródło wycieków pamięci. Jeśli implementujesz API, gdzie klient rejestruje <em>callback</em>, ale nie wyrejestrowuje ich bezpośrednio, to będą się gromadzić dopóki nie wykonasz jakiejś akcji. Jednym sposobem na zagwarantowanie, że zostaną one zebrane przez <em>garbage collector</em> jak nie będą już potrzebne, jest przechowywane tylko ich <em>weak references</em> np. przechowując je jako klucze w <code class="highlighter-rouge">WeakHashMap</code>.</p>
+
+<h2 id="inne-drogi-do-wycieków-pamięci">Inne drogi do wycieków pamięci</h2>
+
+<ul>
+  <li>deklarowanie “ciężkiego” obiektu lub kolekcji jako <em>static</em> - cykl życia obiektu zadeklarowanego jako <em>static</em> jest równy cyklu życia JVM, czyli nigdy nie zostanie zebrany przez GC.</li>
+  <li>Niezamknięte streamy i inne <code class="highlighter-rouge">Closeable</code></li>
+  <li>Dodawanie obiektów bez <code class="highlighter-rouge">hashCode()</code> i  <code class="highlighter-rouge">equals()</code> do <em>hash</em> kolekcji np. <code class="highlighter-rouge">HashSet</code> - nie będziemy mieli dostępu do dodanych obiektów ani nie będziemy mogli ich usunąć. Również próby dodania duplikatów zakończą się sukcesem, co nie powinno mieć miejsca w przypadku <code class="highlighter-rouge">HashSet</code>. Będzie o tym też mowa w kolejnych postach z rozdziału <em>Methods Common to All Objects</em></li>
+  <li>Autoboxing, czyli mieszanie typów prostych i ich wraperów w pętlach - przykład był w <a href="/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow">poprzednim poście</a></li>
+</ul>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Unikaj nadmiarowego tworzenia obiektów"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/wycieki-pamieci-w-javie";
+    this.page.identifier = "/effective-java/wycieki-pamieci-w-javie";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promocje/promotions.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

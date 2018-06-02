@@ -390,6 +390,15 @@
         "subtitle": "Zarządzanie pamięcią - czy garbage collector zawsze to zrobi za nas?",
         "date": "26 maja 2018",
         "url": "/effective-java/wycieki-pamieci-w-javie"
+      },
+    
+      
+      {
+        "title": "Finalizery i Cleanery",
+        "titleSEO": "Finalizery i Cleanery - dlaczego powinniśmy ich unikać?",
+        "subtitle": "Dlaczego powinniśmy ich unikać?",
+        "date": "2 czerwca 2018",
+        "url": "/effective-java/unikaj-finalizerow-i-cleanerow"
       }
     
   

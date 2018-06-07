@@ -1,20 +1,19 @@
 const promotion = {
-  start: new Date('2018-04-15'),
-  end: new Date('2018-05-20'),
-  number: '4900',
+  start: new Date('2018-05-15'),
+  end: new Date('2018-06-09'),
+  number: '3607',
   host: 'helion.pl',
   img: true,
-  popup: true,
 };
 
 const customMessage = '';
 const promotionURL = new URL(`http://${promotion.host}/page/9102Q/promocja/${promotion.number}`);
 
-let promotionAdText = `W Helion trwa <a href="${promotionURL}" target="_blank">promocja</a> -60% na ebooki (papier -25%). Zobacz książki, które warto kupić</a>.`;
+let promotionAdText = `W Helion trwa <a href="${promotionURL}" target="_blank">promocja</a> 2za1 na książki z top100. Zobacz książki, które warto kupić.`;
 
 const promotionAdHeader = `W Helion trwa <a href="${promotionURL}" target="_blank">promocja</a> na książki:`;
 
-const promotionAdDesc = `-60% na ebooki (papier -25%). <br>Zobacz książki, które warto kupić w <a href="/moja-biblioteka">mojej bibliotece</a>.`;
+const promotionAdDesc = ` 2za1 na książki z top100. <br>Zobacz książki, które warto kupić w <a href="/moja-biblioteka">mojej bibliotece</a>.`;
 
 if (isPromotionActive()) {
   showPromotionAd();

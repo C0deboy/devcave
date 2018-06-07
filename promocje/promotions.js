@@ -7,7 +7,7 @@ const promotion = {
 };
 
 const customMessage = '';
-const promotionURL = new URL(`http://${promotion.host}/page/9102Q/promocja/${promotion.number}`);
+const promotionURL = new URL(`http://${promotion.host}/page/9102Q/kategorie/promocja-2za1`);//  promocja/${promotion.number}`);
 
 let promotionAdText = `W Helion trwa <a href="${promotionURL}" target="_blank">promocja</a> 2za1 na książki z top100. Zobacz książki, które warto kupić.`;
 

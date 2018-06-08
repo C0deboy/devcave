@@ -41,7 +41,7 @@ W grę możesz zagrać [tutaj](https://c0deboy.github.io/You-Shall-Not-Pass/), j
 
 Nad grą dużo nie myślałem. Jeden wieczór i już miałem w miarę całą wizję na grę. Oczywiście nie wszystko udało się zrobić, część rzeczy została również okrojona ze względu na limit 20KB. Moje założenia były nieco optymistyczne i gra wyszła taka sobie. Mimo wszystko jestem zadowolony, że udało mi się to jakoś wcisnąć do 20KB. Bo jak to wyglądało? Kod Javascriptu starałem się pisać "obiektowo", czyli nie pisałem wszystkiego w jednym pliku. Uproszczona struktura plików wyglądała mniej więcej tak:
 
-![Strukura plików](/img/GWGC2017/file-structure.PNG){: .center-block }
+![Strukura plików](/img/GWGC2017/file-structure.PNG)
 
 Z użyciem webpacka połączyłem wszystko w całość, a dzięki uglify-js mogłem zminifikować kod do takiej postaci:
 

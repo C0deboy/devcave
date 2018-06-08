@@ -16,13 +16,13 @@ item:       8
 {% include /effective-java/series-info.html %}
 
 # Finalizery
-Metoda `finalize()`  jest zdefiniowana w `Object` i jest nazywana *finalizerem*. Możemy nadpisać jej zachowanie w dowolnym obiekcie. Została stworzona głównie do tego, aby można było zwolnić zasoby używane przez dany obiekt, kiedy ten zostanie usunięty z pamięci.
+Metoda `finalize()` jest zdefiniowana w `Object` i jest tzw. *finalizerem*. Możemy nadpisać jej zachowanie w dowolnym obiekcie. Została stworzona głównie do tego, aby wykonać jakąś akcję na danym obiekcie (np. zwolnić wykorzystywane przez niego zasoby), kiedy ten zostanie usunięty z pamięci .
 
 Metoda `finalize()` jest więc odpalana wtedy, kiedy *garbage collector* stwierdzi, że nie ma już referencji do danej klasy.
 
-**W praktyce może to nigdy nie nastąpić**, dlatego nasz program nigdy nie powinien polegać na metodzie `finalize()`. To kiedy *garbage collector* zostanie odpalony jest uzależnione od konkretnej implementacji JVM jak i systemu.  Dlatego  jej zachowanie jest nieprzewidywalne i źle wpływa na przenośność programu (różne zachowanie na różnych systemach). Ma też negatywny wpływ na wydajność, bo JVM musi wykonać dużo więcej operacji podczas tworzenia i usuwania obiektów, które mają nadpisaną metodę `finalize()`.
+**W praktyce może to nigdy nie nastąpić**, dlatego nasz program nigdy nie powinien polegać na metodzie `finalize()`. To kiedy *garbage collector* zostanie odpalony, jest uzależnione od konkretnej implementacji JVM, jak i systemu.  Dlatego jej zachowanie jest nieprzewidywalne i źle wpływa na przenośność programu (różne zachowanie na różnych systemach). Ma też negatywny wpływ na wydajność, bo JVM musi wykonać dużo więcej operacji podczas tworzenia i usuwania obiektów, które mają nadpisaną metodę `finalize()`.
 
-Kolejnym problemem jest to, że finalizery nie kontrolują wyjątków - jeśli finalizer rzuci wyjątek, to jego process zostaje przerwany, wyjątek zostaje zignorowany, a nasz obiekt pozostawiony w niepoprawnym stanie bez żadnej informacji.
+Kolejnym problemem jest to, że finalizery nie kontrolują wyjątków — jeśli finalizer rzuci wyjątek, to jego proces zostaje przerwany, wyjątek zostaje zignorowany, a nasz obiekt pozostawiony w niepoprawnym stanie bez żadnej informacji.
 
 Ponadto używanie finalizerów jest często zbędne.
 
@@ -34,7 +34,7 @@ Swoją drogą, od Javy 9 metoda `finalize()` jest *deprecated* - głównie z wym
 # Cleanery
 Cleanery są mniej niebezpieczne niż finalizery (np. rozwiązują problem finalizerów z kontrolowaniem wyjątków), jednak nadal są nieprzewidywalne, wolne i również często zbędne.
 
-Czy w takim razie cleanery i finalizery są do czegoś w ogóle potrzebne? Jednym z niewielu przypadków kiedy ich użycie może być uzasadnione, to gdy służą jako "siatka bezpieczeństwa" - czyli w przypadku, gdy metoda `close()` nie zostanie wywołana na zasobie przez jego właściciela. Nie jest zagwarantowane kiedy się to stanie, ale lepiej późno niż wcale.
+Czy w takim razie cleanery i finalizery są do czegoś w ogóle potrzebne? Jednym z niewielu przypadków, kiedy ich użycie może być uzasadnione, to gdy służą jako "siatka bezpieczeństwa" - czyli w przypadku, gdy metoda `close()` nie zostanie wywołana na zasobie przez jego właściciela. Nie jest zagwarantowane kiedy to się stanie, ale lepiej późno niż wcale.
 
 Jednak zanim się na to zdecydujemy, trzeba się dobrze zastanowić, czy jest to warte kosztu takiego rozwiązania.
 
@@ -82,7 +82,7 @@ public class Room implements AutoCloseable {
 
 Klasa implementuje interfejs `AutoCloseable`, a jako szczegół implementacyjny metody `close()` używany jest `Cleaner`. Jest to poniekąd zaleta cleanerów, że nie widnieją w publicznym API klasy, więc można w dowolnym momencie zmienić implementację.
 
-Klasa `State` odgrywa rolę zasobu, który wymaga czyszczenia. Implementuje ona `Runnable` i jest rejestrowana w cleanerze. Jej metoda `run()` jest wywoływana przez metodę `clean()`, którą klient może użyć bezpośrednio lub jeśli tego nie zrobi -  przez nasz `Cleaner` (miejmy nadzieję) - kiedy klasa `Room` stanie się dostępna dla *garbage collectora*.
+Klasa `State` odgrywa rolę zasobu, który wymaga czyszczenia. Implementuje ona `Runnable` i jest rejestrowana w cleanerze. Jej metoda `run()` jest wywoływana przez metodę `clean()`, którą klient może użyć bezpośrednio lub jeśli tego nie zrobi — przez nasz `Cleaner` (miejmy nadzieję) - kiedy klasa `Room` stanie się dostępna dla *garbage collectora*.
 
 "Miejmy nadzieję" to słowo klucz, bo nie jest to zagwarantowane.
 
@@ -99,7 +99,7 @@ Najpierw zobaczymy komunikat "Goodbye", a następnie "Cleaning". Jednak jeśli k
 Room myRoom2 = new Room(2);
 System.out.println("Peace out");
 ```
-Pojawi się komunikat "Peace out", ale w moim przypadku "Cleaning" nigdy się nie uruchomi. I to jest ta nieprzewidywalność o której była mowa.
+Pojawi się komunikat "Peace out", ale w moim przypadku "Cleaning" nigdy się nie uruchomi. I to jest ta nieprzewidywalność, o której była mowa.
 
 Dopiero dorzucenie:
 
@@ -118,4 +118,4 @@ Cleanerów i finalizerów nie można porównywać do destruktorów, np. znanych 
 
 Jak zwalniać zatem zasoby z obiektów, jeśli nie za pomocą finalizerów i cleanerów?
 
-Ano sprawić, żeby nasza klasa implementowała `AutoCloseable` i wywoływać metodę `close()` bezpośrednio, kiedy zasób nie jest już potrzebny, lub bardziej preferowany sposób - używać z *try-with-resources* (o tym w kolejnym wpisie).
+Ano sprawić, żeby nasza klasa implementowała `AutoCloseable` i wywoływać metodę `close()` bezpośrednio, kiedy zasób nie jest już potrzebny, lub **bardziej preferowany sposób** - używać z *try-with-resources*, o którym będzie kolejny wpis.

@@ -11,7 +11,7 @@ comments:   true
 toc:        true
 ---
 
-![Książka Zawód: Programista](/img/reviews/zawod-dev/book.png){:class="center-block"}
+![Książka Zawód: Programista](/img/reviews/zawod-dev/book.png)
 
 # O autorze
 
@@ -34,7 +34,7 @@ Swoją drogą tego typu książka jest relatywnie nowatorska na naszym rynku. Mo
 
 Wraz z książka dostajemy naklejkę na laptopa i fajną zakładkę do książek - kość ram ;)
 
-![Zakładka do książki Zawód: Programista](/img/reviews/zawod-dev/bonus.jpg){:class="center-block"}
+![Zakładka do książki Zawód: Programista](/img/reviews/zawod-dev/bonus.jpg)
 
 # O książce
 
@@ -65,15 +65,15 @@ Według mnie, książka jest skierowana (i pod tym względem jest bardzo dobra) 
 
  Okładka jest całkiem przyjemna wizualnie, niby twarda ale cienka i strasznie giętka. Po przeczytaniu książki zaczyna odstawać. Jakość papieru też nie jest zbyt dobra. Tekst przebija się nieco na drugą stronę, co może zmniejszyć przyjemność z czytania.
   
- ![Jakość książki Zawód: Programista](/img/reviews/zawod-dev/text.jpg){:class="center-block"}
+ ![Jakość książki Zawód: Programista](/img/reviews/zawod-dev/text.jpg)
  
  Lepiej to widać tu:
 
- ![Jakość książki Zawód: Programista](/img/reviews/zawod-dev/text2.jpg){:class="center-block"}
+ ![Jakość książki Zawód: Programista](/img/reviews/zawod-dev/text2.jpg)
  
  Mimo zainwestowania w redakcję i wielokrotnego przeczytania książki przez autora, nadal można było znaleźć kilka błędów np.
  
- ![Literówka w książce Zawód: Programista](/img/reviews/zawod-dev/typo.jpg){:class="center-block"}
+ ![Literówka w książce Zawód: Programista](/img/reviews/zawod-dev/typo.jpg)
  
  Ale było tego dosyć mało i nie wpływało to na jakość czytania. Styl jak styl, kwestia gustu i nie każdemu może się spodobać. Autor korzysta z swobodnego, czasem potocznego języka. Ja nie mam co do tego żadnego problemu.
  

@@ -80,7 +80,7 @@ bundle exec jekyll serve
 {% endhighlight %}
 
 Dostępna jest pod adresem [localhost:4000](http://localhost:4000). Domyślny szablon wygląda tak:
-![Domyślny szablon Jekyll](/img/default-theme-jekyll.jpg){:class="center-block"}
+![Domyślny szablon Jekyll](/img/default-theme-jekyll.jpg)
 
 Oczywiście możemy sobie pobrać inne gotowe szablony np. [stąd](http://jekyllthemes.org/) lub [stąd](http://jekyllthemes.io/). Jest tego cała masa, a instalacja prosta - ściągamy dany motyw z GitHuba i podmieniamy wszystkie pliki w naszym folderze projektu.
 

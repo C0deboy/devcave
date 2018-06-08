@@ -17,6 +17,7 @@
       <option name="CODE_KEEP_TRAILING_SPACES" value="2" />
       <option name="VERBATIM_MINIMIZE_INDENT" value="true" />
       <option name="CODE_FENCE_MINIMIZE_INDENT" value="true" />
+      <option name="SMART_EDIT_TABLES" value="true" />
       <option name="RIGHT_MARGIN" value="-1" />
     </MarkdownNavigatorCodeStyleSettings>
     <codeStyleSettings language="JavaScript">

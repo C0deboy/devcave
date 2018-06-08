@@ -11,7 +11,7 @@ comments:   true
 toc:        true
 ---
 
-![Książka Junior Developer](/img/reviews/junior-dev/book.png){:class="center-block"}
+![Książka Junior Developer](/img/reviews/junior-dev/book.png)
 
 W recenzji będę się odnosił i porównywał z książka Macieja Aniserowicza - Zawód: Programista, którą też [recenzowałem]({{ site.baseurl }}{% post_url Recenzje/2017-12-5-recenzja-ksiazki-zawod-programista-maciej-aniserowicz %}).
 
@@ -53,7 +53,7 @@ Książka napisana jest lekkim językiem - czyta ją się szybko i przyjemnie.
 
 Porównując wielkości książek, ta jest prawie połowę mniejsza od książki Zawód: Programista (za tą samą cenę):
 
-![Porównanie wielkości](/img/reviews/junior-dev/size.jpg){:class="center-block"}
+![Porównanie wielkości](/img/reviews/junior-dev/size.jpg)
 
 Trochę osób na ten temat narzekało. Książkę można przeczytać w około 3h. Czuli niedosyt i chcieliby więcej.
 
@@ -69,11 +69,11 @@ Nie można też powiedzieć, że książki się pokrywają. Owszem - trafia się
 
  Okładka nie powala wizualnie, ale najważniejsze jest to, że jest twarda tak jak powinna być i nie odkształca się po przeczytaniu książki - tak jak w książce Zawód: Programista. Jakość papieru jest również lepsza. Tekst nie przebija się na drugą stronę i czcionka jest bardziej wyraźna:
   
- ![Jakość książki Zawód: Programista](/img/reviews/junior-dev/quality.jpg){:class="center-block"}
+ ![Jakość książki Zawód: Programista](/img/reviews/junior-dev/quality.jpg)
  
  Jedna rzecz do której można się przyczepić to to, że tytuł na boku książki jest odwrotnie niż powinien być, przez co, gdy książki leżą w kolekcji jedna na drugiej, to wygląda to słabo:
  
- ![Porównanie wielkości](/img/reviews/junior-dev/size2.jpg){:class="center-block"}
+ ![Porównanie wielkości](/img/reviews/junior-dev/size2.jpg)
  
  **W dodruku wersji papierowej, ten błąd jest już naprawiony. Nowa wersja będzie dostępna mniej więcej od stycznia 2017.**
   

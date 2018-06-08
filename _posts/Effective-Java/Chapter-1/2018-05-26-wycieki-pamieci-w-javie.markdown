@@ -144,5 +144,5 @@ Jest to kolejne popularne źródło wycieków pamięci. Jeśli implementujesz AP
 
 - deklarowanie "ciężkiego" obiektu lub kolekcji jako *static* - cykl życia obiektu zadeklarowanego jako *static* jest równy cyklu życia JVM, czyli nigdy nie zostanie zebrany przez GC.
 - Niezamknięte streamy i inne `Closeable`
-- Dodawanie obiektów bez `hashCode()` i  `equals()` do *hash* kolekcji np. `HashSet` - nie będziemy mieli dostępu do dodanych obiektów ani nie będziemy mogli ich usunąć. Również próby dodania duplikatów zakończą się sukcesem, co nie powinno mieć miejsca w przypadku `HashSet`. Będzie o tym też mowa w kolejnych postach z rozdziału *Methods Common to All Objects*
+- Dodawanie obiektów bez `hashCode()` i  `equals()` do *hash* kolekcji np. `HashSet` - metody takie jak `remove()`, `contains()` itd. nie będą działać poprawnie. Również próby dodania duplikatów zakończą się sukcesem, co nie powinno mieć miejsca w przypadku `HashSet`. Będzie o tym też mowa w kolejnych postach z rozdziału *Methods Common to All Objects*
 - Autoboxing, czyli mieszanie typów prostych i ich wraperów w pętlach - przykład był w [poprzednim poście]({% post_url Effective-Java/Chapter-1/2018-05-19-unikaj-tworzenia-niepotrzebnych-obiektow %})

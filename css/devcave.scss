@@ -78,6 +78,17 @@ hr.small {
     border-top: 4px solid #dfdfdf;
 }
 
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table.table-bordered,
+table.table-bordered > thead > tr > th,
+table.table-bordered > tbody > tr > td {
+    border-color: #94949454;
+}
+
+
 .page-header {
     border-bottom: 1px solid #a3a1a130;
 }
@@ -234,6 +245,11 @@ hr.small {
 
 .post img {
     vertical-align: text-bottom;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .intro-header {

@@ -13,10 +13,6 @@ document.querySelector('.dark-mode-btn').addEventListener('click', (e) => {
   localStorage.setItem('dark-mode', darkMode);
 });
 
-document.querySelectorAll('.post img').forEach((img) => {
-  img.classList.add('img-responsive');
-});
-
 let previousTop = 0;
 
 const navbarCustom = document.querySelector('.navbar-custom');

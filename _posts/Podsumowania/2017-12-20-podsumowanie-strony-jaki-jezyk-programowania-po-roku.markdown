@@ -40,7 +40,7 @@ Obecnie uważam, że projekt jest na akceptowalnym poziomie, wiadomo nic nie jes
 
 Tak wygląda wykres aktywności commitów na GitHubie:
 
-![Wykres aktywności GitHub](/img/summaries/jjpgithub.PNG){: .center-block }
+![Wykres aktywności GitHub](/img/summaries/jjpgithub.PNG)
 
 Czasem nie widać tu tego dobrze, bo na przykład dużo pracy poszło w redagowanie tekstów, a nie jest to zauważalne na wykresie. To są bardziej te "spokojniejsze" okresy.
 
@@ -56,7 +56,7 @@ Strona nie ma jakiegoś ogromnego ruchu, co nie jest dziwne, bo w końcu jest sk
 
  Wykres z Google Analitics od początku istnienia strony, czyli od lutego, wygląda tak:
 
-![Wykres aktywności GitHub](/img/summaries/jjpanalitics.PNG){: .center-block }
+![Wykres aktywności GitHub](/img/summaries/jjpanalitics.PNG)
 
 Po wystrzale 8k odsłon, ruch na stronie jest już zadowalający. 
 

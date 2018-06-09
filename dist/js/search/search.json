@@ -399,6 +399,15 @@
         "subtitle": "Dlaczego powinniśmy ich unikać?",
         "date": "2 czerwca 2018",
         "url": "/effective-java/unikaj-finalizerow-i-cleanerow"
+      },
+    
+      
+      {
+        "title": "Preferuj try-with-resources",
+        "titleSEO": "Preferuj try-with-resources - najlepszy sposób na zamknięcie zasobów",
+        "subtitle": "Najlepszy sposób na zamknięcie zasobów",
+        "date": "9 czerwca 2018",
+        "url": "/effective-java/preferuj-try-with-resources"
       }
     
   

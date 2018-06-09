@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Preferuj try-with-resources - najlepszy sposób na zamknięcie zasobów</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/preferuj-try-with-resources">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Preferuj try-with-resources</h1>
+            
+            <h2 class="post-subtitle">Najlepszy sposób na zamknięcie zasobów</h2>
+            
+            <p class="post-meta">
+              
+              9
+              czerwca
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 9</i> z rozdziału:</p>
+
+<p class="m0">Creating and Destroying Objects</p>
+
+<ul class="fa-ul custom">
+    
+    <li>
+        <a href="/effective-java/static-factory-method-zamiast-konstruktora">
+            Item 1: Consider static factory methods instead of constructors
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wzorzec-projektowy-builder">
+            Item 2: Consider a builder when faced with many constructor parameters
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wzorzec-projektowy-singleton">
+            Item 3: Enforce the singleton property with a private constructor or an enum type
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/klasy-nieinstancjowalne">
+            Item 4: Enforce noninstantiability with a private constructor
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wstrzykiwanie-zaleznosci">
+            Item 5: Prefer dependency injection to hardwiring resources
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow">
+            Item 6: Avoid creating unnecessary objects
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/wycieki-pamieci-w-javie">
+            Item 7: Eliminate obsolete object references
+        </a>
+    </li>
+    <li>
+        <a href="/effective-java/unikaj-finalizerow-i-cleanerow">
+            Item 8: Avoid finalizers and cleaners
+        </a>
+    </li>
+    <li style="list-style-type: none;">
+        <a href="/effective-java/preferuj-try-with-resources">
+            <i class="fa-li fa fa-arrow-right"></i>Item 9: Prefer try-with-resources to try-finally
+        </a>
+    </li>
+</ul>
+<hr />
+
+<p>W Javie wiele klas wymaga zamknięcia używanych przez nie zasobów wywołując metodę <code class="highlighter-rouge">close()</code>. Są to np. <code class="highlighter-rouge">FileInputStream</code>, <code class="highlighter-rouge">FileOutputStream</code>, <code class="highlighter-rouge">ThreadPoolExectuor</code> czy <code class="highlighter-rouge">java.sql.Connection</code>. Zamknięcie zasobów jest często niedopilnowane, co może wpływać na wydajność aplikacji. Wiele z tych klas używa finalizerów jako “siatki bezpieczeństwa”, jednak jak wiemy z poprzedniego postu - nie działa to zbyt dobrze.</p>
+
+<p>Kiedyś (przed Java 7), najlepszym sposobem na poprawne zamknięcie zasobów było <em>try-finally</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// try-finally - No longer the best way to close resources!</span>
+<span class="kd">static</span> <span class="n">String</span> <span class="nf">firstLineOfFile</span><span class="o">(</span><span class="n">String</span> <span class="n">path</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">path</span><span class="o">));</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+        <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Blok <em>finally</em> jest odpalany nawet wtedy, kiedy w bloku <em>try</em> wystąpi wyjątek czy operacja <em>return</em>, dlatego był dobrym miejscem na zamknięcie zasobów.</p>
+
+<p>Nie wygląda to źle, ale z każdym kolejnym zasobem jest coraz gorzej:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// try-finally is ugly when used with more than one resource!</span>
+<span class="kd">static</span> <span class="kt">void</span> <span class="nf">copy</span><span class="o">(</span><span class="n">String</span> <span class="n">src</span><span class="o">,</span> <span class="n">String</span> <span class="n">dst</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">src</span><span class="o">);</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">dst</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">BUFFER_SIZE</span><span class="o">];</span>
+            <span class="kt">int</span> <span class="n">n</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buf</span><span class="o">))</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buf</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+        <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Czytelność spada drastycznie.</p>
+
+<p>Z <em>try-finally</em> jest też inny problem. Zarówno w bloku <em>try</em> jak i <em>finally</em> może wystąpić wyjątek. Np. jeśli w metodzie <code class="highlighter-rouge">firstLineOfFile</code>, przy wywołaniu metody <code class="highlighter-rouge">readLine</code> wystąpi wyjątek w związku z błędem na fizycznym urządzeniu, to również wywołanie metody <code class="highlighter-rouge">close</code> rzuci wyjątkiem z tego samego powodu. W takiej sytuacji drugi wyjątek przesłoni pierwszy i nie będziemy o tym wiedzieć. Nie zobaczymy go w <em>stack trace</em>, co może utrudnić debugowanie, bo zazwyczaj to pierwszy rzucony wyjątek chcemy ujrzeć. Jest możliwe, aby stłumić drugi wyjątek na rzecz pierwszego, ale w praktyce nikt tego nie robi, bo jest to rozwlekłe rozwiązanie.</p>
+
+<p>Wszystkie te problemy zostały rozwiązane wraz z przyjściem w Javie 7 <em>try-with-resources</em>.</p>
+
+<p>Aby nasz zasób mógł być używany z <em>try-with-resources</em> musi implementować interfejs <code class="highlighter-rouge">AutoCloseable</code>, czyli metodę <code class="highlighter-rouge">close()</code>. Teraz wiele klas i interfejsów z bibliotek Javy implementuje ten interfejs. Jest to poniekąd standard. Więc jeśli piszesz klasę, która reprezentuje zasób, który musi być zamknięty, to powinna implementować <code class="highlighter-rouge">AutoCloseable</code>.</p>
+
+<p>Drugi przykład (który wraz z kolejnym zasobem robił się coraz brzydszy), z <em>try-with-resources</em> wygląda tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// try-with-resources on multiple resources - short and sweet</span>
+<span class="kd">static</span> <span class="kt">void</span> <span class="nf">copy</span><span class="o">(</span><span class="n">String</span> <span class="n">src</span><span class="o">,</span> <span class="n">String</span> <span class="n">dst</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">(</span><span class="n">InputStream</span>   <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">src</span><span class="o">);</span>
+         <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">dst</span><span class="o">))</span> <span class="o">{</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">BUFFER_SIZE</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">n</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buf</span><span class="o">))</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buf</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jak widać, jest to dużo bardziej zwięzłe i czytelne rozwiązanie. Co więcej, jeśli wystąpią wyjątki tak jak wcześniej opisałem, to te następujące po pierwszym stają się <em>suppressed</em>, pozostawiając na wierzchu ten, który chcemy zobaczyć - czyli pierwszy jaki wystąpił.</p>
+
+<p>Wyjątki <em>suppressed</em> nie są pomijane - mamy informację o nich w <em>stack trace</em> i możemy się do nich dostać z kodu wywołując metodę <code class="highlighter-rouge">getSuppresed()</code>, dostępną od Javy 7 na każdym <code class="highlighter-rouge">Throwable</code>.</p>
+
+<p>Oczywiście do <em>try-with-resources</em> możemy dodać blok <em>catch</em> tak jak w normalnym <em>try</em>, co pozwala obsłużyć wszystkie wyjątki bez kolejnych zagnieżdżeń.</p>
+
+<p><em>Catch</em> może też służyć do innych celów. Np. w przypadku wystąpienia wyjątku w <em>try</em> - zwrócenie domyślnej wartości. Dla przykładu:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">static</span> <span class="n">String</span> <span class="nf">firstLineOfFile</span><span class="o">(</span><span class="n">String</span> <span class="n">path</span><span class="o">,</span> <span class="n">String</span> <span class="n">defaultVal</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">(</span><span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+           <span class="k">new</span> <span class="nf">FileReader</span><span class="o">(</span><span class="n">path</span><span class="o">)))</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">defaultVal</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Zatem używajmy tylko <em>try-with-resources</em>, aby kod był bardziej zwięzły, czytelniejszy, a rzucane wyjątki bardziej użyteczne. Jeśli tylko napotkasz w systemie kilka zagnieżdżeń <em>try-finally</em>, zamień je na <em>try-with-resources</em>, aby żyło nam się lepiej ;)</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/unikaj-finalizerow-i-cleanerow"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Finalizery i Cleanery"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/preferuj-try-with-resources";
+    this.page.identifier = "/effective-java/preferuj-try-with-resources";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promocje/promotions.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

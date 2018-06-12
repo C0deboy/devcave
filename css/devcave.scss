@@ -749,12 +749,11 @@ img::-moz-selection {
     margin: 0;
 }
 
-.promotion-link {
+.promotion {
     text-align: center;
-    margin-top: 30px;
     display: none;
 
-    #promo-header {
+    .promotion-header {
         font-size: 1.2em;
         margin: 28px 0;
         text-align: left;
@@ -766,7 +765,7 @@ img::-moz-selection {
     }
 }
 
-.promotion-sign {
+.promotion-popup {
     position: absolute;
     font-size: .8em;
     display: inline-block;

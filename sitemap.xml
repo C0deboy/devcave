@@ -181,6 +181,10 @@
 <lastmod>2018-06-09T10:00:00+02:00</lastmod>
 </url>
 <url>
+<loc>https://devcave.pl/effective-java/metoda-equals</loc>
+<lastmod>2018-06-16T10:00:00+02:00</lastmod>
+</url>
+<url>
 <loc>https://devcave.pl/o-mnie/</loc>
 </url>
 <url>
@@ -221,5 +225,8 @@
 </url>
 <url>
 <loc>https://devcave.pl/page9/</loc>
+</url>
+<url>
+<loc>https://devcave.pl/page10/</loc>
 </url>
 </urlset>

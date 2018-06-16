@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Metoda equals - czyli określanie równości obiektów</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/metoda-equals">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Metoda equals</h1>
+            
+            <h2 class="post-subtitle">Czyli określanie równości obiektów. Kiedy i jak ją nadpisywać?</h2>
+            
+            <p class="post-meta">
+              
+              16
+              czerwca
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#kiedy-nie-nadpisywać-metody-equals">Kiedy nie nadpisywać metody equals?</a></li>
+<li class="toc-entry toc-h1"><a href="#kiedy-nadpisywać-metodę-equals">Kiedy nadpisywać metodę equals?</a></li>
+<li class="toc-entry toc-h1"><a href="#co-equals-musi-spełniać">Co equals musi spełniać?</a></li>
+<li class="toc-entry toc-h1"><a href="#jak-poprawnie-zaimplementować-metodę-equals">Jak poprawnie zaimplementować metodę equals?</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 10</i> z rozdziału:</p>
+
+<p class="m0">Methods Common to All Objects</p>
+
+<ul class="fa-ul custom">
+    
+    <li style="list-style-type: none;">
+        <a href="/effective-java/metoda-equals">
+            <i class="fa-li fa fa-arrow-right"></i>Item 10: Obey the general contract when overriding equals
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 11: Always override hashCode when you override equals
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 12: Always override toString
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 13: Override clone judiciously
+        </a>
+    </li>
+    <li>
+        <a href="" class="disabled">
+            Item 14: Consider implementing Comparable
+        </a>
+    </li>
+</ul>
+<hr />
+
+<p>W tym rozdziale serii omawiane będą wszystkie metody <em>non-final</em> (<code class="highlighter-rouge">equals</code>, <code class="highlighter-rouge">hashCode</code>, <code class="highlighter-rouge">toString</code>, <code class="highlighter-rouge">clone</code>, oprócz <code class="highlighter-rouge">finalize</code> - o której była już mowa w poście <a href="/effective-java/unikaj-finalizerow-i-cleanerow">unikaj finalizerow i cleanerów</a>) z klasy <code class="highlighter-rouge">Object</code>, która jest klasą bazową każdej klasy (każda klasa domyślnie rozszerza tę klasę).</p>
+
+<p>Metody te mają swoje domyślne zachowania, ale najczęściej, jeśli ich potrzebujemy, to je nadpisujemy. <strong>Prawidłowa implementacja tych metod jest szczególnie ważna, bo wiele innych klas na nich polega, dlatego warto poświęcić im chwilę.</strong></p>
+
+<p>W tym wpisie zajmiemy się metodą <code class="highlight language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span></code>, która, jak sama nazwa wskazuje, służy do określania czy dany obiekt jest równy innemu, według określonych przez nas warunków.</p>
+
+<p>Domyślnie implementacja wygląda tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">obj</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Czyli zwracane jest <code class="highlighter-rouge">true</code> tylko wtedy, gdy <code class="highlighter-rouge">this</code> i <code class="highlighter-rouge">obj</code> odnoszą się do tego samego obiektu (wskazują na to samo miejsce w pamięci). Inaczej mówiąc — domyślnie (kiedy nie nadpiszemy zachowania metody <code class="highlighter-rouge">equals</code>) instancja klasy jest równa tylko sobie.</p>
+
+<h1 id="kiedy-nie-nadpisywać-metody-equals">Kiedy nie nadpisywać metody equals?</h1>
+
+<ul>
+  <li>Każda instancja klasy jest unikatowa w systemie (np. <code class="highlighter-rouge">Thread</code>).</li>
+  <li>Logiczne porównywanie klasy nie ma sensu i jest zbędne (np. <code class="highlighter-rouge">Pattern</code>).</li>
+  <li>Jeśli istnieje nadklasa, która nadpisuje już <code class="highlighter-rouge">equals</code> i to zachowanie jest poprawne dla naszej klasy (np. większość implementacji <code class="highlighter-rouge">Set</code>, <code class="highlighter-rouge">List</code> czy <code class="highlighter-rouge">Map</code> dziedziczy implementację metody <code class="highlighter-rouge">equals</code> odpowiednio z <code class="highlighter-rouge">AbstractSet</code>, <code class="highlighter-rouge">AbstractList</code> i <code class="highlighter-rouge">AbstractMap</code>.</li>
+  <li>Kiedy klasa sama zarządza swoimi instancjami i zapewnia, że istnieje co najwyżej jedna instancja tej klasy (np. <code class="highlighter-rouge">Enum</code> należy do tej kategorii).</li>
+  <li>Klasa jest <code class="highlighter-rouge">private</code> lub <code class="highlighter-rouge">package-private</code> i jesteśmy pewni, że <code class="highlighter-rouge">equals</code> nie zostanie nigdy wywołane.</li>
+</ul>
+
+<p>Jeśli chcemy być ekstremalnie ostrożni, to możemy się upewnić, że metoda <code class="highlighter-rouge">equals</code> nie zostanie nigdy wywołana (zgodnie z założeniami):</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">();</span> <span class="c1">// Method is never called</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Dzięki temu, jeśli gdzieś zostanie wywołana, to od razu zostaniemy poinformowani, że ktoś wcześniej założył, że nie powinno to mieć miejsca. Unikniemy przez to niespodziewanego zachowania klas zależnych od <code class="highlighter-rouge">equals</code>.</p>
+
+<p>Częściej jednak metoda <code class="highlighter-rouge">equals</code> jest kluczowa i będziemy nadpisywać jej zachowanie.</p>
+
+<h1 id="kiedy-nadpisywać-metodę-equals">Kiedy nadpisywać metodę equals?</h1>
+
+<ul>
+  <li>Kiedy klasa nadaje się do logicznego porównywania, które nie polega tylko na unikatowym identyfikatorze i nie istnieje nadklasa, która już to robi w poprawny sposób.</li>
+  <li>Kiedy klasa reprezentuje wartość (np. klasy takie jak <code class="highlighter-rouge">Integer</code> lub <code class="highlighter-rouge">String</code>).</li>
+</ul>
+
+<p>Również wiele klas zależy od metody <code class="highlighter-rouge">equals</code> i jej dobra implementacja jest wymagana do poprawnego funkcjonowania tych klas.</p>
+
+<p>Dla przykładu jest to niezbędne, aby używać obiekty jako klucze w mapach czy dodawać je do setów.</p>
+
+<h1 id="co-equals-musi-spełniać">Co equals musi spełniać?</h1>
+
+<p>Metoda <code class="highlighter-rouge">equals</code> dla każdej wartości <code class="highlighter-rouge">x</code>, <code class="highlighter-rouge">y</code>, <code class="highlighter-rouge">z</code> różnej od <code class="highlighter-rouge">null</code> powinna być:</p>
+
+<ul>
+  <li><strong>Reflexive</strong> - czyli dla <code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">x</span><span class="o">)</span></code> musi zwrócić <code class="highlighter-rouge">true</code>.</li>
+  <li><strong>Symmetric</strong> - czyli dla <code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">y</span><span class="o">)</span></code> musi zwrócić <code class="highlighter-rouge">true</code> wtedy i tylko wtedy gdy <code class="highlight language-java" data-lang="java"><span class="n">y</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">x</span><span class="o">)</span></code> zwraca <code class="highlighter-rouge">true</code>.</li>
+  <li><strong>Transitive</strong> - czyli jeśli <code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">y</span><span class="o">)</span></code> zwraca <code class="highlighter-rouge">true</code> i <code class="highlight language-java" data-lang="java"><span class="n">y</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">z</span><span class="o">)</span></code> zwraca <code class="highlighter-rouge">true</code> to <code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">z</span><span class="o">)</span></code> też musi zwracać <code class="highlighter-rouge">true</code>.</li>
+  <li><strong>Consistent</strong> - czyli wielokrotne wywołanie <code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">y</span><span class="o">)</span></code> bez zmiany parametrów używanych w <code class="highlighter-rouge">equals</code> zawsze konsekwentnie zwraca <code class="highlighter-rouge">true</code> lub <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>“Non-nullity”</strong> - czyli dla <code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span></code> musi zostać zwrócone <code class="highlighter-rouge">false</code>.</li>
+</ul>
+
+<p>Jest to <strong>kontrakt</strong>, który metoda <code class="highlighter-rouge">equals</code> musi spełniać.</p>
+
+<p><strong>Jeśli te warunki nie zostaną spełnione, to wszystkie klasy, które polegają na metodzie <code class="highlighter-rouge">equals</code> obiektów (np. klasy kolekcji), będą zachowywać się nieregularnie, niepoprawnie i powodować błędy, dla których może być ciężko znaleźć przyczynę.</strong></p>
+
+<p id="problem-z-dziedziczeniem">Trzeba się też zastanowić, czy klasy, które rozszerzają inną klasę (również, gdy dodają wartość, która ma znaczenie w metodzie <code class="highlighter-rouge">equals</code>), powinny móc być równe nadklasom?</p>
+
+<p>Joshua Bloch w swojej książce mówi, że tak — co jest zgodne z zasadą <a href="/notatnik-juniora/zasady-projektowania-kodu#l---liskov-substitution-principle">Liskov substitution</a>. Ponadto mówi, że nie ma sposobu, aby rozszerzyć instancjowalną klasę i dodać do niej wartość zachowując kontrakt <code class="highlighter-rouge">equals</code>, chyba że, chcemy zrezygnować z zalet obiektowych abstrakcji.</p>
+
+<p>Z drugiej strony, przeciwne głosy idą za tym, że możemy zachować kontrakt <code class="highlighter-rouge">equals</code> używając sprawdzenia z <code class="highlighter-rouge">getClass</code> zamiast <code class="highlighter-rouge">instanceof</code>. Dla przykładu, dla prostej klasy <code class="highlighter-rouge">Point</code> będzie to wyglądać tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Broken - violates Liskov substitution principle (page 43)</span>
+<span class="nd">@Override</span> 
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">o</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">getClass</span><span class="o">())</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="n">Point</span> <span class="n">p</span> <span class="o">=</span> <span class="o">(</span><span class="n">Point</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="na">x</span> <span class="o">==</span> <span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">.</span><span class="na">y</span> <span class="o">==</span> <span class="n">y</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Co skutkuje tym, że obiekty są równe tylko wtedy, gdy mają również taką samą klasę. Jednak Joshua Bloch twierdzi, że jest to nieakceptowalne, bo narusza to zasadę <a href="/notatnik-juniora/zasady-projektowania-kodu#l---liskov-substitution-principle">Liskov substitution</a>. Uzasadnia to tym, że podtyp danego obiektu jest nadal tym obiektem (Np. <code class="highlighter-rouge">ColorPoint</code> rozszerzając <code class="highlighter-rouge">Point</code> jest nadal <code class="highlighter-rouge">Point</code>-em ) i powinien funkcjonować jak ten obiekt, jednak nie jest to możliwe w tym podejściu. Wtedy nawet klasa, która rozszerza inną klasę i nie dodaje wartości, która ma znaczenie w <code class="highlighter-rouge">equals</code>, nie będzie jej równa.</p>
+
+<p>Joshua Bloch wypowiedział się na ten temat też dodatkowo poza książką <a href="https://www.artima.com/intv/bloch17.html">tutaj</a>, jako że jest to dosyć kontrowersyjny temat w jego książce.</p>
+
+<p>Jako obejście tego problemu można zastosować <a href="/notatnik-juniora/zasady-projektowania-kodu#composition-over-inheritance">Composition Over Inheritance</a> (będzie też osobny wpis na ten temat w rozdziale 3 serii). Zamiast rozszerzać <code class="highlighter-rouge">Point</code>, dać klasie <code class="highlighter-rouge">ColorPoint</code> pole prywatne <code class="highlighter-rouge">Point</code> oraz udostępniając metodę dostępową do tego pola:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Adds a value component without violating the equals contract</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColorPoint</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Point</span> <span class="n">point</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Color</span> <span class="n">color</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">ColorPoint</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="n">Color</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">color</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+    * Returns the point-view of this color point.
+    */</span>
+    <span class="kd">public</span> <span class="n">Point</span> <span class="nf">asPoint</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">point</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">ColorPoint</span><span class="o">))</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="n">ColorPoint</span> <span class="n">cp</span> <span class="o">=</span> <span class="o">(</span><span class="n">ColorPoint</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="na">point</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">point</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">cp</span><span class="o">.</span><span class="na">color</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">color</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="o">...</span> <span class="c1">// Remainder omitted</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Według mnie to, czy dany obiekt powinien być równy innemu, nawet jeśli jest jego podklasą to sprawa indywidualna. Na pewno znajdą się przypadki, kiedy <code class="highlighter-rouge">ColorPoint</code> powinien móc być równy <code class="highlighter-rouge">Point</code> jak i takie, kiedy nie powinno mieć to miejsca.</p>
+
+<h1 id="jak-poprawnie-zaimplementować-metodę-equals">Jak poprawnie zaimplementować metodę equals?</h1>
+
+<p>Kiedy nie mamy potrzeby definiowania jakiegoś specyficznego zachowania metody <code class="highlighter-rouge">equals</code> to najczęściej najlepiej zdać się na jej automatyczne wygenerowanie. Umożliwiają nam to IDE i bibloteki takie jak np. <a href="https://projectlombok.org/">Lombok</a>. Poprawność implementacji wtedy zrzucamy na IDE lub bibliotekę, przez co czasem możemy uniknąć naszych ludzkich błędów.</p>
+
+<p>Nawiązując jeszcze do poprzedniego problemu, np. w InteliJ mamy do wyboru, czy podtypy klasy powinny być akceptowane w metodzie <code class="highlighter-rouge">Equals</code> czy nie.</p>
+
+<p>W projekcie <a href="https://projectlombok.org/">Lombok</a> również jest dostępna adnotacja, dzięki której zostanie wygenerowana dla nas implementacja <code class="highlighter-rouge">equals</code> i <code class="highlighter-rouge">hashCode</code> - <code class="highlight language-java" data-lang="java"><span class="nd">@EqualsAndHashCode</span></code>. Obecnie Lombok łamie zasadę <a href="/notatnik-juniora/zasady-projektowania-kodu#l---liskov-substitution-principle">Liskov substitution</a> i jest to zrobione świadomie, a <a href="https://groups.google.com/forum/#!topic/project-lombok/jmhrTo0nAx8">tutaj</a> można przeczytać dyskusję na ten temat.</p>
+
+<p>Jeśli jednak zamierzmy samemu zadbać o implementację metody <code class="highlighter-rouge">equals</code> to można sugerować się tym przepisem:</p>
+
+<ol>
+  <li>Argument powinien być zawsze typu <code class="highlighter-rouge">Object</code>.</li>
+  <li>Użyj operatora <code class="highlighter-rouge">==</code> żeby sprawdzić, czy argument jest referencją do obiektu. Jeśli tak zwróć <code class="highlighter-rouge">true</code>.</li>
+  <li>Użyj operatora <code class="highlighter-rouge">instanceof</code> żeby sprawdzić, czy argument jest odpowiedniego typu. Jeśli nie jest, zwróć <code class="highlighter-rouge">false</code>.</li>
+  <li>Rzutuj argument na odpowiedni typ.</li>
+  <li>Dla każdego znaczącego pola w tym obiekcie sprawdź, czy to pole jest równe odpowiadającemu polu w argumencie. Jeśli wszystkie pola się zgadzają, zwróć <code class="highlighter-rouge">true</code>, w przeciwnym wypadku <code class="highlighter-rouge">false</code>.
+    <ul>
+      <li>Dla prymitywów z wyjątkiem <code class="highlighter-rouge">float</code> i <code class="highlighter-rouge">double</code> używaj operatora <code class="highlighter-rouge">==</code> do porównywania.</li>
+      <li>Dla pól przechowujących referencje do obiektów wywołuj ich <code class="highlighter-rouge">equals</code>.</li>
+      <li>Dla pól typu <code class="highlighter-rouge">float</code> używaj metody <code class="highlight language-java" data-lang="java"><span class="n">Float</span><span class="o">.</span><span class="na">compare</span></code>, a dla <code class="highlighter-rouge">double</code> używaj <code class="highlight language-java" data-lang="java"><span class="n">Double</span><span class="o">.</span><span class="na">compare</span></code>.</li>
+      <li>Dla tablic stosuj te wskazówki dla każdego elementu. Jeśli każdy element tablicy ma znaczenie, użyj metody <code class="highlight language-java" data-lang="java"><span class="n">Arrays</span><span class="o">.</span><span class="na">equals</span></code>.</li>
+      <li>Niektóre z pól mogą być <code class="highlighter-rouge">null</code>. Aby uniknąć <code class="highlighter-rouge">NullPointerException</code> użyj do porównywania <code class="highlight language-java" data-lang="java"><span class="n">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">Object</span><span class="o">,</span> <span class="n">Object</span><span class="o">)</span></code>.</li>
+      <li>Wydajność metody <code class="highlighter-rouge">equals</code> zależy od kolejności kolejnych sprawdzeń. Aby uzyskać najlepszą wydajność, najpierw sprawdzaj pola, które najczęściej będą się różnić i ich porównywanie jest mniej kosztowne.</li>
+      <li>Nie porównuj obiektów, które nie są częścią stanu logicznego obiektu.</li>
+      <li>Nie porównuj pól, które są pochodnymi innych (ich wynik zależy od innych pól, które już sprawdzasz).</li>
+    </ul>
+  </li>
+  <li>Sprawdź, czy twoja metoda <code class="highlighter-rouge">equals</code> spełnia wszystkie 5 warunków (kontrakt)</li>
+</ol>
+
+<p>Przykład poprawnej implementacji:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Class with a typical equals method</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">PhoneNumber</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">short</span> <span class="n">areaCode</span><span class="o">,</span> <span class="n">prefix</span><span class="o">,</span> <span class="n">lineNum</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">PhoneNumber</span><span class="o">(</span><span class="kt">int</span> <span class="n">areaCode</span><span class="o">,</span> <span class="kt">int</span> <span class="n">prefix</span><span class="o">,</span> <span class="kt">int</span> <span class="n">lineNum</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">areaCode</span> <span class="o">=</span> <span class="n">rangeCheck</span><span class="o">(</span><span class="n">areaCode</span><span class="o">,</span>  <span class="mi">999</span><span class="o">,</span> <span class="s">"area code"</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">prefix</span>   <span class="o">=</span> <span class="n">rangeCheck</span><span class="o">(</span><span class="n">prefix</span><span class="o">,</span>    <span class="mi">999</span><span class="o">,</span> <span class="s">"prefix"</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">lineNum</span>  <span class="o">=</span> <span class="n">rangeCheck</span><span class="o">(</span><span class="n">lineNum</span><span class="o">,</span>  <span class="mi">9999</span><span class="o">,</span> <span class="s">"line num"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">short</span> <span class="nf">rangeCheck</span><span class="o">(</span><span class="kt">int</span> <span class="n">val</span><span class="o">,</span> <span class="kt">int</span> <span class="n">max</span><span class="o">,</span> <span class="n">String</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span>
+           <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="n">arg</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">val</span><span class="o">);</span>
+        <span class="k">return</span> <span class="o">(</span><span class="kt">short</span><span class="o">)</span> <span class="n">val</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">PhoneNumber</span><span class="o">))</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="n">PhoneNumber</span> <span class="n">pn</span> <span class="o">=</span> <span class="o">(</span><span class="n">PhoneNumber</span><span class="o">)</span><span class="n">o</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNum</span> <span class="o">==</span> <span class="n">lineNum</span> <span class="o">&amp;&amp;</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span> <span class="o">==</span> <span class="n">prefix</span>
+                <span class="o">&amp;&amp;</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span> <span class="o">==</span> <span class="n">areaCode</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="o">...</span> <span class="c1">// Remainder omitted</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Nadpisując metodę <code class="highlighter-rouge">equals</code> musimy zawsze nadpisać również metodę <code class="highlighter-rouge">hashCode</code>, ale o niej w następnym wpisie.</strong></p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/preferuj-try-with-resources"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Preferuj try-with-resources"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/metoda-equals";
+    this.page.identifier = "/effective-java/metoda-equals";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

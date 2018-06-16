@@ -408,6 +408,15 @@
         "subtitle": "Najlepszy sposób na zamknięcie zasobów",
         "date": "9 czerwca 2018",
         "url": "/effective-java/preferuj-try-with-resources"
+      },
+    
+      
+      {
+        "title": "Metoda equals",
+        "titleSEO": "Metoda equals - czyli określanie równości obiektów",
+        "subtitle": "Czyli określanie równości obiektów. Kiedy i jak ją nadpisywać?",
+        "date": "16 czerwca 2018",
+        "url": "/effective-java/metoda-equals"
       }
     
   

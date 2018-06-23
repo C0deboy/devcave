@@ -417,6 +417,15 @@
         "subtitle": "Czyli określanie równości obiektów. Kiedy i jak ją nadpisywać?",
         "date": "16 czerwca 2018",
         "url": "/effective-java/metoda-equals"
+      },
+    
+      
+      {
+        "title": "Metoda hashCode",
+        "titleSEO": "Metoda hashCode - dlaczego zawsze nadpisywać ją razem z equals?",
+        "subtitle": "Do czego służy i dlaczego zawsze nadpisywać ją razem z equals?",
+        "date": "23 czerwca 2018",
+        "url": "/effective-java/metoda-hashcode"
       }
     
   

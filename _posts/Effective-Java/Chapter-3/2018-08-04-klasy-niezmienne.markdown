@@ -97,7 +97,7 @@ BigInteger j = i.add(BigInteger.valueOf(20));
 ```
 Wartość `i` nigdy się nie zmieni. Wszystkie działania na `BigInteger` zwracają nowy obiekt.
 
-Innym sposobem na to, by uniemożliwić rozszerzanie klasy jest zadeklarowanie wszystkich konstruktorów jako `private` lub `package-private` i dodać [public static factory method]({% post_url Effective-java/2018-04-14-static-factory-method-zamiast-konstruktora %}). Jest to bardziej elastyczny sposób niż deklarowanie klasy jako `final`. Pozwala nam to na używanie kilku implementacji z tego samego pakietu, a dla klientów spoza pakietu zachowuje się tak jakby była `final`, ponieważ nie ma możliwości rozszerzenia klasy, gdy nie mamy dostępu do konstruktora. Poza tym *static factory method* ma sama w sobie wiele zalet, które były już [omawiane]({% post_url Effective-java/2018-04-14-static-factory-method-zamiast-konstruktora %}).
+Innym sposobem na to, by uniemożliwić rozszerzanie klasy jest zadeklarowanie wszystkich konstruktorów jako `private` lub `package-private` i dodać [public static factory method]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}). Jest to bardziej elastyczny sposób niż deklarowanie klasy jako `final`. Pozwala nam to na używanie kilku implementacji z tego samego pakietu, a dla klientów spoza pakietu zachowuje się tak jakby była `final`, ponieważ nie ma możliwości rozszerzenia klasy, gdy nie mamy dostępu do konstruktora. Poza tym *static factory method* ma sama w sobie wiele zalet, które były już [omawiane]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}).
 
 Inne zalety klas niezmiennych:
 

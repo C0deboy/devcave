@@ -169,7 +169,7 @@ Goal goal = new Goal.Builder()
 ```
 Jak widać jest to dużo łatwiejsze do czytania jak i używania. Kolejne pola możemy podać w dowolnej kolejności, ze względu na wspomniane wcześniej *fluent API*.
 
-Osobiście dla mnie składnia {% code java %}new Goal.Builder(){% endcode %} wygląda paskudnie, dlatego preferuję użyć tutaj [*static factory method*]({% post_url /Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}), żeby uzyskać dostęp do buildera w statyczny sposób, bez użycia *new* :
+Osobiście dla mnie składnia {% code java %}new Goal.Builder(){% endcode %} wygląda paskudnie, dlatego preferuję użyć tutaj [*static factory method*]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}), żeby uzyskać dostęp do buildera w statyczny sposób, bez użycia *new* :
 
 ```java
 public static Builder builder() {

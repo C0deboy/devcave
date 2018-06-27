@@ -49,7 +49,7 @@ Prywatny konstruktor jest wywołany tylko raz, aby zainicjalizować {% code java
 ```
 
 ## Static factory method Singleton
-Drugi sposób różni się od pierwszego tym , że udostępniania [static factory method]({% post_url /Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}) w celu zwracania `INSTANCE`, tym samym zadeklarowania tego pola jako prywatne:
+Drugi sposób różni się od pierwszego tym , że udostępniania [static factory method]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}) w celu zwracania `INSTANCE`, tym samym zadeklarowania tego pola jako prywatne:
 
 ```java
 public class Singleton {

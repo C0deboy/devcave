@@ -23,13 +23,13 @@ item:       11
 
 W poprzednim [poście]({% post_url Effective-Java/Chapter-2/2018-06-16-metoda-equals %}) podkreśliłem, że **niezbędne jest nadpisywanie metody `hashCode` za każdym razem, gdy nadpisujesz `equals`.**
 
-Jest to spowodowane tym, że między nimi zawarty jest nienaruszalny kontrakt. Jeśli zostanie naruszony, to obiekty nie będą działać prawidłowo w kolekcjach takich jak `HashMap` i `HashSet` czy w każdej innej klasie, które polega na *hash* kodach obiektów. 
+Jest to spowodowane tym, że między nimi zawarty jest nienaruszalny kontrakt. Jeśli zostanie naruszony, to obiekty nie będą działać prawidłowo w kolekcjach takich jak `HashMap` i `HashSet` czy w każdej innej klasie, która polega na *hash* kodach obiektów. 
 
 Kontrakt dla samej metody `hashCode` jest następujący:
 
 - Jeśli informacje używane w `equals` nie są modyfikowane, to metoda `hashCode` musi zawsze konsekwentnie zwracać tę samą wartość.
-- Jeśli metoda `equals(Object)` stwierdzi, że dwa obiekty są równe, to wywoływanie `hashCode` na obu tych obiektach musi zwrócić tę samą wartość.
-- Jeśli dwa obiekty nie są równe według metody `equals(Object)`, to **nie** jest wymagane, aby `hashCode` na każdym z obiektów zwracał różne wyniki. Jednak jest to pożądane, bo ma to znaczenie wydajnościowe dla hash tablic (jeśli będą dwa takie same hashe, to będzie musiała wywołać metody `equals`, aby rozróżnić obiekty).
+- Jeśli metoda `equals` stwierdzi, że dwa obiekty są równe, to wywoływanie `hashCode` na obu tych obiektach musi zwrócić tę samą wartość.
+- Jeśli dwa obiekty nie są równe według metody `equals`, to **nie** jest wymagane, aby `hashCode` na każdym z obiektów zwracał różne wyniki. Jednak jest to pożądane, bo ma to znaczenie wydajnościowe dla hash tablic (jeśli będą dwa takie same hashe, to będzie musiała wywołać metody `equals`, aby rozróżnić obiekty).
 
 **Szczególnie ważny jest 2 punkt.** - jeśli nie nadpiszemy również metody `hashCode` wraz z `equals` to według metody `equals` dwa obiekty są sobie równe, a dla metody `hashCode` te same obiekty nie mają nic ze sobą wspólnego. Zwracane są dwa różne numery, zamiast dwóch identycznych.
 
@@ -45,6 +45,7 @@ Wydawałoby się, że wywołując:
 ```java
 map.get(new PhoneNumber(707, 867, 5309))
 ```
+
 Dostaniemy `"Jenny"`, ale tak się nie stanie, bo dostaniemy `null`. Zauważ, że są używane dwie instancje `PhoneNumber`. Są one identyczne, ale z punktu widzenia `hashCode`, na którym bazuje `HashMap`, nie są.
 
 Napisanie poprawnej implementacji `hashCode` dla `PhoneNumber` rozwiązuje problem.

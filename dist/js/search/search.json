@@ -426,6 +426,15 @@
         "subtitle": "Do czego służy i dlaczego zawsze nadpisywać ją razem z equals?",
         "date": "23 czerwca 2018",
         "url": "/effective-java/metoda-hashcode"
+      },
+    
+      
+      {
+        "title": "Metoda toString",
+        "titleSEO": "Metoda toString - kiedy i dlaczego warto ją nadpisywać",
+        "subtitle": "Kiedy i dlaczego warto ją nadpisywać",
+        "date": "30 czerwca 2018",
+        "url": "/effective-java/metoda-toString"
       }
     
   

@@ -4,26 +4,54 @@
 {% assign chapter = site.data.effective_java_chapters[chapterIndex] %}
 {% assign posts = site.categories.["Effective-Java"] | where: 'chapter': page.chapter | sort: 'date' %}
 
-<p>Ten wpis nawiązuje do tematu z <i>Item {{ page.item }}</i> z rozdziału:</p>
+<p>Ten wpis nawiązuje do {% if item.length > 1 %}tematów{% else %}tematu{% endif %} z <i>Item {{ page.item | join: ', '}}</i> z rozdziału:</p>
 
 <p class="m0">{{ chapter.chapter }}</p>
 
+{% assign done = "" | split: ',' %}
+
 <ul class="fa-ul custom">
-    {% for item in chapter.items %}
-    {% assign post = posts[forloop.index0] %}
-    {%- if post.url == page.url -%}
-    <li style="list-style-type: none;">
-        <a href="{{ post.url }}">
-            <i class="fa-li fa fa-arrow-right"></i>{{ item }}
-        </a>
-    </li>
-    {%- else -%}
-    <li>
-        <a href="{% if post %}{{ post.url }}{% else %}" class="disabled{% endif %}">
-            {{ item }}
-        </a>
-    </li>
-    {%- endif -%}
-    {% endfor %}
+    {%- for post in posts -%}
+        {% assign items = post.item | split: ', ' %}
+        {%- for item in items -%}
+            {% assign itemNumber = item | to_integer %}
+
+            {%- assign itemName = chapter.items[itemNumber] -%}
+
+            {%- assign postName = itemName -%}
+            {%- assign itemData = itemName | split: ' | ' -%}
+            {%- if itemData[1] -%}
+                {%- assign postName = itemData[0] -%}
+                {%- assign postAnchor = itemData[1] -%}
+            {%- else -%}
+            {%- assign postAnchor =  -%}
+            {%- endif -%}
+
+            {% assign pageItems = page.item | split: ', ' %}
+            {%- if pageItems contains item -%}
+                <li style="list-style-type: none;">
+                    <a href="{{ page.url }}{{postAnchor}}">
+                        <i class="fa-li fa fa-arrow-right"></i>{{ postName }}
+                    </a>
+                </li>
+            {%- else -%}
+            <li>
+                <a href="{{ post.url }}{{postAnchor}}">{{ postName }}
+                </a>
+            </li>
+            {%- endif -%}
+            {% assign done = done | push:itemNumber %}
+        {%- endfor -%}
+    {%- endfor -%}
+
+
+    {%- for item in chapter.items -%}
+        {%- unless done contains item[0] -%}
+            <li>
+                <a herf="" class="disabled">{{ item[1] }}
+                </a>
+            </li>
+        {%- endunless -%}
+    {%- endfor -%}
 </ul>
 <hr>

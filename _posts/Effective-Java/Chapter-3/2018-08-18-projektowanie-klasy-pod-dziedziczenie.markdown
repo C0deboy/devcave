@@ -8,17 +8,17 @@ author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
-toc:        true
+toc:        false
 chapter:    4
-item:       18
+item:       19
 ---
 
 
 {% include effective-java/series-info.html %}
 
-W poprzednim poście była mowa o wadach dziedziczenia i kompozycji, jako lepszego zamiennika. W tym wpisie omówię o czym nie zapomnieć projektując klasę pod dziedziczenie, jeśli uznamy, że jest ono stosowne.
+W poprzednim poście była mowa o wadach dziedziczenia i kompozycji jako lepszego zamiennika. W tym wpisie omówię, o czym nie zapomnieć projektując klasę pod dziedziczenie, jeśli uznamy, że jest ono stosowne.
 
-Jeśli projektujemy klasę do publicznego użytku, powinniśmy jasno udokumentować to, czy metody, które jesteśmy w stanie nadpisać, używają pod spodem innych metod, które też mogą zostać nadpisane. Jeśli ma to miejsce, to powinniśmy jasno opisać jak to się dzieje. Jest do tego specjalne miejsce w Javadocach -  "Implementation Requirements", które jest generowane za pomocą tagu `@implSpec` (dodany w Javie 8). 
+Jeśli projektujemy klasę do publicznego użytku, **powinniśmy jasno udokumentować to, czy metody, które jesteśmy w stanie nadpisać, używają pod spodem innych metod, które również mogą zostać nadpisane.** Jeśli ma to miejsce, to powinniśmy jasno opisać, jak to się dzieje. Jest do tego specjalne miejsce w Javadocach -  "Implementation Requirements", które jest generowane za pomocą tagu `@implSpec` (dodany w Javie 8).
 
 Dla przykładu, dla `java.util.AbstractCollection` wygląda to tak:
 
@@ -40,11 +40,11 @@ Dla przykładu, dla `java.util.AbstractCollection` wygląda to tak:
 
 Mamy tu jasno udokumentowane, że nadpisywanie metody `iterator` będzie miało wpływ na zachowanie `remove`. 
 
-Podając szczegóły implementacyjne naruszamy enkapsulację, ale jest to konsekwencja używania dziedziczenia. Jest to wymagane, aby można było bezpiecznie tworzyć podklasy danej klasy.
+**Podając szczegóły implementacyjne, naruszamy enkapsulację i zobowiązujemy się nigdy tego nie zmieniać, ale jest to konsekwencja używania dziedziczenia.** Jest to wymagane, aby można było bezpiecznie tworzyć podklasy danej klasy.
 
-Musimy również zadbać, aby wszystkie kluczowe pola były dostępne dla podklas. Jedyny sensowny sposób, aby przetestować naszą klasę, którą projektujemy pod dziedziczenie i przekonać się co jest niezbędne, to napisać podklasy (najlepiej żeby przynajmniej jedna nie była pisana przez nas). Wtedy jasno zobaczymy, co powinniśmy ukryć, a co udostępnić podklasom.
+**Musimy również zadbać, aby wszystkie kluczowe pola były dostępne dla podklas**. Jedyny sensowny sposób, aby przetestować naszą klasę, którą projektujemy pod dziedziczenie i przekonać się co jest niezbędne, to napisać podklasy (najlepiej, żeby przynajmniej jedna nie była pisana przez nas). Wtedy jasno zobaczymy, co powinniśmy ukryć, a co udostępnić podklasom.
 
-Kolejną ważną rzeczą jest to, aby **konstruktory nie wywoływały metod, które mogą zostać nadpisane**. Wtedy, jeśli ta metoda zależy od pola zainicjowanego przez konstruktor, nie będzie działać prawidłowo. Jeśli tak się stanie, to nasza klasa nie będzie działać prawidłowo. Konstruktor nadklasy wywoływany jest przed konstruktorem podklasy, więc nadpisana metoda podklasy będzie wywołana, zanim wywołany zostanie jej konstruktor. Przykład:
+Kolejną ważną rzeczą jest to, aby **konstruktory nie wywoływały metod, które mogą zostać nadpisane**. Jeśli ta metoda zależy od pola zainicjowanego przez konstruktor, to nie będzie wtedy działać prawidłowo. Konstruktor nadklasy wywoływany jest przed konstruktorem podklasy, więc nadpisana metoda podklasy będzie wywołana, zanim wywołany zostanie jej konstruktor. Przykład:
 
 ```java
 public class Super {
@@ -82,6 +82,3 @@ Spodziewalibyśmy się, że ten program pokaże nam `instant` dwa razy, a jak si
 Interfejsy `Cloneable` i `Serializable` stwarzają kolejne trudności, gdy projektujemy klasy pod dziedziczenie, więc musimy to wziąć pod uwagę lub po prostu zrezygnować z możliwości rozszerzania klasy, jeśli implementuje któryś z tych interfejsów.
 
 Podsumowując, jeśli wyeliminujemy z klasy użycia wewnętrznych metod, które mogą zostać nadpisane i udokumentujemy to w przejrzysty sposób, to klasę będzie można dużo łatwiej rozszerzać i tworzyć jej podklasy. Jeśli nie zapewnimy tego, to podklasy mogą być zależne od detalów implementacyjnych nadklasy i mogą przestać działać, jeśli implementacja nadklasy się zmieni.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMjQzNDUwMzYzXX0=
--->

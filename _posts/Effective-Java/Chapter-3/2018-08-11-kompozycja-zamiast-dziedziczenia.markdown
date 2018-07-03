@@ -23,6 +23,9 @@ Oczywiście w tym wpisie, mówiąc o dziedziczeniu, mam na myśli tylko dziedzic
 
 Gdy klasa nie jest odpowiednio zaprojektowana do dziedziczenia, możemy natrafić na następujące problemy:
 
+{: .note}
+Większość z tych problemów ma mniejsze znaczenie, gdy tworzymy aplikację i wiemy, że tylko my i ewentualnie znajomi z którymi tworzymi projekt, będą jedynymi osobami, które korzystają z naszej klasy. Wtedy możemy naprawić wszelkie problemy i wprowadzić zmiany w dowolnym czasie.
+
 - **Naruszona jest enkapsulacja** - poprawność działania podklasy zależy od detali implementacyjnych nadklasy. Implementacja nadklasy może się zmienić w następnej wersji i może to popsuć naszą podklasę, mimo że nie była nawet dotknięta.
 
 Dla przykładu załóżmy, że potrzebujemy `HashSet`, który będzie zliczał, ile było prób dodania elementu. `HashSet` zawiera dwie metody, które są w stanie dodawać elementy: `add` i `addAll`, więc możemy je obie nadpisać, używając dodatkowo licznika:
@@ -82,35 +85,35 @@ Nieco lepszym rozwiązaniem byłoby nadpisać metodę `addAll`, aby iterowała p
 Jest bardzo dobra alternatywa dla dziedziczenia, która pozwala uniknąć wszystkich tych problemów.
 
 # Kompozycja
-Zamiast rozszerzać klasę, możemy zadeklarować ją jako pole prywatne w naszej nowej klasie i wywoływać jej odpowiadające metody. Jest to znane jako delegacja (ang. *forwarding*). W rezultacie otrzymamy solidną klasę, która w ogóle nie zależy od detalów implementacyjnych istniejącej klasy. Również dodawanie do niej nowych metod nie będzie miało wpływu na naszą klasę. Jeśli chcielibyśmy w pełni funkcjonalną klasę (a nie używać tylko kilka jej metod), to możemy stworzyć klasę delegującą wszystkie metody:
+Zamiast rozszerzać klasę, możemy zadeklarować ją jako pole prywatne w naszej nowej klasie i wywoływać jej odpowiadające metody. Jest to znane jako delegacja (ang. *forwarding*). W rezultacie otrzymamy solidną klasę, która w ogóle nie zależy od detalów implementacyjnych istniejącej klasy. Również dodawanie do niej nowych metod nie będzie miało wpływu na naszą klasę.
+
+
+Z koleii jeśli chcielibyśmy w pełni funkcjonalną klasę (a nie używać tylko kilka jej metod), to możemy stworzyć klasę delegującą wszystkie metody:
 
 ```java
 // Reusable forwarding class
 public class ForwardingSet<E> implements Set<E> {
     private final Set<E> s;
     public ForwardingSet(Set<E> s) { this.s = s; }
-
-    public void clear()               { s.clear();            }
+    public void clear() { s.clear(); }
     public boolean contains(Object o) { return s.contains(o); }
-    public boolean isEmpty()          { return s.isEmpty();   }
-    public int size()                 { return s.size();      }
-    public Iterator<E> iterator()     { return s.iterator();  }
-    public boolean add(E e)           { return s.add(e);      }
-    public boolean remove(Object o)   { return s.remove(o);   }
-    public boolean containsAll(Collection<?> c)
-                                   { return s.containsAll(c); }
-    public boolean addAll(Collection<? extends E> c)
-                                   { return s.addAll(c);      }
-    public boolean removeAll(Collection<?> c)
-                                   { return s.removeAll(c);   }
-    public boolean retainAll(Collection<?> c)
-                                   { return s.retainAll(c);   }
-    public Object[] toArray()          { return s.toArray();  }
-    public <T> T[] toArray(T[] a)      { return s.toArray(a); }
-    @Override public boolean equals(Object o)
-                                       { return s.equals(o);  }
-    @Override public int hashCode()    { return s.hashCode(); }
-    @Override public String toString() { return s.toString(); }
+    public boolean isEmpty() { return s.isEmpty(); }
+    public int size() { return s.size(); }
+    public Iterator<E> iterator() { return s.iterator(); }
+    public boolean add(E e) { return s.add(e); }
+    public boolean remove(Object o) { return s.remove(o); }
+    public boolean containsAll(Collection<?> c) { return s.containsAll(c); }
+    public boolean addAll(Collection<? extends E> c) { return s.addAll(c); }
+    public boolean removeAll(Collection<?> c) { return s.removeAll(c); }
+    public boolean retainAll(Collection<?> c) { return s.retainAll(c); }
+    public Object[] toArray() { return s.toArray(); }
+    public <T> T[] toArray(T[] a) { return s.toArray(a); }
+    @Override
+    public boolean equals(Object o) { return s.equals(o); }
+    @Override
+    public int hashCode() { return s.hashCode(); }
+    @Override
+    public String toString() { return s.toString(); }
 }
 ```
 

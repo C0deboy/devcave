@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Klonowanie w Javie - interfejs Cloneable nie jest zawsze dobrym rozwiązaniem.</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/metoda-clone">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Klonowanie w Javie</h1>
+            
+            <h2 class="post-subtitle">Interfejs Cloneable nie jest zawsze najlepszym rozwiązaniem</h2>
+            
+            <p class="post-meta">
+              
+              7
+              lipca
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#interfejs-cloneable">Interfejs Cloneable</a></li>
+<li class="toc-entry toc-h1"><a href="#implementacja">Implementacja</a></li>
+<li class="toc-entry toc-h1"><a href="#copy-constructor">Copy constructor</a></li>
+<li class="toc-entry toc-h1"><a href="#copy-factory">Copy factory</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 13</i> z rozdziału:</p>
+
+<p class="m0">Methods Common to All Objects</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/metoda-equals">Item 10: Obey the general contract when overriding equals
+                </a>
+            </li><li>
+                <a href="/effective-java/metoda-hashcode">Item 11: Always override hashCode when you override equals
+                </a>
+            </li><li>
+                <a href="/effective-java/metoda-toString">Item 12: Always override toString
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/metoda-clone">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 13: Override clone judiciously
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 14: Consider implementing Comparable
+                </a>
+            </li></ul>
+<hr />
+
+<h1 id="interfejs-cloneable">Interfejs Cloneable</h1>
+
+<p>W Javie do klonowania został stworzony interfejs <code class="highlighter-rouge">Cloneable</code>, którym oznacza się klasę, dla której ma być dozwolone klonowanie. Jednak nie jest to idealne rozwiązanie. Interfejs ten nie zawiera żadnych metod, a metoda <code class="highlighter-rouge">clone</code> w klasie <code class="highlighter-rouge">Object</code> jest <code class="highlighter-rouge">protected</code>, więc nie możemy wywołać metody <code class="highlighter-rouge">clone</code>, tylko dlatego, że klasa implementuje <code class="highlighter-rouge">Cloneable</code>.</p>
+
+<p>Interfejs ten zmienia tylko zachowanie metody <code class="highlighter-rouge">clone</code> w <code class="highlighter-rouge">Object</code> - jeśli klasa implementuje <code class="highlighter-rouge">Cloneable</code> to zwracana jest kopia pole po polu obiektu, a w przeciwnym wypadku rzucany jest wyjątek <code class="highlighter-rouge">CloneNotSupportedException</code>. Jest to trochę nietypowe wykorzystanie interfejsu — zamiast mówić klientowi co klasa może zrobić, zmienia zachowanie metody nadklasy i do niczego więcej się nie przyda.</p>
+
+<p>Z interfejsu to nie wynika, ale klasa implementująca interfejs <code class="highlighter-rouge">Cloneable</code> powinna dostarczyć poprawnie funkcjonująca metodę <code class="highlighter-rouge">clone</code>.</p>
+
+<p>Kontrakt dla metody <code class="highlighter-rouge">clone</code> w specyfikacji jest następujący:</p>
+
+<blockquote>
+  <p>Creates and returns a copy of this object. The precise meaning of
+“copy” may depend on the class of the object. The general intent is
+that, for any object <code class="highlighter-rouge">x</code>, the expression</p>
+
+  <p><code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">clone</span><span class="o">()</span> <span class="o">!=</span> <span class="n">x</span></code></p>
+
+  <p>will be <code class="highlighter-rouge">true</code>, and the expression</p>
+
+  <p><code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">clone</span><span class="o">().</span><span class="na">getClass</span><span class="o">()</span> <span class="o">==</span> <span class="n">x</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span></code></p>
+
+  <p>will be <code class="highlighter-rouge">true</code>, but these are not absolute requirements. While it is
+typically the case that</p>
+
+  <p><code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">clone</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">x</span><span class="o">)</span></code></p>
+
+  <p>will be <code class="highlighter-rouge">true</code>, this is not an absolute requirement.</p>
+
+  <p>By convention, the object returned by this method should be obtained
+by calling <code class="highlighter-rouge">super.clone</code>. If a class and all of its superclasses
+(except <code class="highlighter-rouge">Object</code>) obey this convention, it will be the case that</p>
+
+  <p><code class="highlight language-java" data-lang="java"><span class="n">x</span><span class="o">.</span><span class="na">clone</span><span class="o">().</span><span class="na">getClass</span><span class="o">()</span> <span class="o">==</span> <span class="n">x</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span></code></p>
+
+  <p>By convention, the returned object should be independent of the object
+being cloned. To achieve this independence, it may be necessary to
+modify one or more fields of the object returned by <code class="highlighter-rouge">super.clone</code>
+before returning it.</p>
+
+  <p>This mechanism is vaguely similar to constructor chaining, except that
+it isn’t enforced: if a class’s <code class="highlighter-rouge">clone</code> method returns an instance
+that is <em>not</em> obtained by calling <code class="highlighter-rouge">super.clone</code> but by calling a
+constructor, the compiler won’t complain, but if a subclass of that
+class calls <code class="highlighter-rouge">super.clone</code>, the resulting object will have the wrong
+class, preventing the subclass from <code class="highlighter-rouge">clone</code> method from working
+properly. If a class that overrides <code class="highlighter-rouge">clone</code> is final, this
+convention may be safely ignored, as there are no subclasses to worry
+about. But if a final class has a <code class="highlighter-rouge">clone</code> method that does not
+invoke <code class="highlighter-rouge">super.clone</code>, there is no reason for the class to implement
+<code class="highlighter-rouge">Cloneable</code>, as it doesn’t rely on the behavior of <code class="highlighter-rouge">Object</code>’s clone
+implementation.</p>
+</blockquote>
+
+<p>Czyli z grubsza — nie mamy zdefiniowanej definicji kopii ani co możemy z nią robić — wszystko zależy od nas.</p>
+
+<p>W rezultacie mamy dosyć niestabilny i niebezpieczny mechanizm, który pod spodem tworzy obiekty bez wywoływania konstruktora.</p>
+
+<h1 id="implementacja">Implementacja</h1>
+
+<p>Najpierw musimy wywołać <code class="highlighter-rouge">super.clone</code>. Dostaniemy w pełni funkcjonalną kopię obiektu. Wszystkie wartości będą identyczne jak w oryginale i co ważne — będą to referencje do tych samych obiektów. Jeśli obiekt zawiera tylko prymitywy i referencje do niezmiennych obiektów, to w zasadzie dostaniemy to, co chcemy i nie musimy robić nic więcej niż:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Clone method for class with no references to mutable state</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="n">ClassWithNoMutableReferences</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">ClassWithNoMutableReferences</span><span class="o">)</span> <span class="kd">super</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">CloneNotSupportedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">();</span> <span class="c1">// Can't happen</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Z kolei, jeśli obiekt sam w sobie jest niezmienny, to po co nam by było klonowanie? Klasy niezmienne z pewnością nie powinny udostępniać metody <code class="highlighter-rouge">clone</code>, bo jedynie co by to robiło, to zachęcało do zbędnego klonowania.</p>
+
+<p class="note">Wywołanie metody <code class="highlighter-rouge">super.clone</code> jest opakowane w blok <code class="highlighter-rouge">try-catch</code>, ponieważ <code class="highlighter-rouge">Object</code> deklaruje, że jego metoda <code class="highlighter-rouge">clone</code> rzuca wyjątek <code class="highlighter-rouge">CloneNotSupportedException</code>, który jest wyjątkiem typu <em>checked</em>. Jeśli nasz obiekt implementuje interfejs <code class="highlighter-rouge">Cloneable</code> to wiemy, że wyjątek ten nigdy nie zostanie rzucony. Ten zbędny <em>boilerpalte</em> wskazuje na to, że <code class="highlighter-rouge">CloneNotSupportedException</code> powinno być wyjątkiem typu <em>unchecked</em>, no ale tak się nie stało.</p>
+
+<p>Jeśli jednak nasz obiekt ma referencje do zmiennych obiektów, to taka prosta implementacja metody <code class="highlighter-rouge">clone</code> jest zgubna. Weźmy na przykład implementację klasy <code class="highlighter-rouge">Stack</code> ze wcześniejszych wpisów:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">Object</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ensureCapacity</span><span class="o">();</span>
+        <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
+        <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+        <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// Eliminate obsolete reference</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Ensure space for at least one more element.</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">elements</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jeśli będziemy chcieli dać możliwość klonowania takiej klasie i w metodzie <code class="highlighter-rouge">clone</code> wywołamy tylko <code class="highlighter-rouge">super.clone()</code>, to sklonowana instancja <code class="highlighter-rouge">Stack</code> będzie miała odpowiednie pole <code class="highlighter-rouge">size</code> (bo jest to prymityw), ale tablica <code class="highlighter-rouge">elements</code> będzie referencją do tej samej tablicy co w oryginale. <strong>W rezultacie modyfikując kopię, będziemy modyfikować też oryginał.</strong></p>
+
+<p>W takiej sytuacji, aby dostać odizolowaną kopię od oryginału, musimy ręcznie wywołać metodę <code class="highlighter-rouge">clone</code> na tablicy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Clone method for class with references to mutable state</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="n">Stack</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">Stack</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="n">Stack</span><span class="o">)</span> <span class="kd">super</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+        <span class="n">result</span><span class="o">.</span><span class="na">elements</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">CloneNotSupportedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>I tak z każdym polem tego typu.</p>
+
+<p>Problemem w tym rozwiązaniu jest to, że wtedy pole (w tym przypadku <code class="highlighter-rouge">elements</code>) nie może być zadeklarowane jako <code class="highlighter-rouge">final</code>.</p>
+
+<p>Kolejny problem pojawia się wtedy, kiedy elementy w tablicy są zmienne. Jeśli zmienimy stan jednego z obiektu będącego w tablicy, to zawartość obu tablic zostanie zmodyfikowana. To dlatego, że obie zawierają referencje do tych samych obiektów, a metoda <code class="highlighter-rouge">clone</code> wykonuje płytkie kopiowanie (shallow copy).</p>
+
+<p>Żeby uzyskać w pełni odizolowane od siebie obiekty wraz ze wszystkimi obiektami wewnątrz, musimy wykonać głębokie kopiowanie (deep copy) - utworzyć nową tablicę i skopiować do niej wszystkie elementy listy.</p>
+
+<p class="warning">Metoda <code class="highlighter-rouge">clone</code> w <code class="highlighter-rouge">Object</code> nie jest zsynchronizowana, więc w środowisku wielowątkowym będzie trzeba napisać jej zsynchronizowany odpowiednik.</p>
+
+<p>Jednak czy ten mało zgrabny mechanizm klonowania jest niezbędny? Jeśli rozszerzasz klasę, która już implementuje <code class="highlighter-rouge">Cloneable</code> to tak, nie ma innego wyboru. W innym przypadku warto skorzystać z alternatywnych rozwiązań.</p>
+
+<h1 id="copy-constructor">Copy constructor</h1>
+<p>Jest to konstruktor, który przyjmuje jako argument klasę zawierającą ten konstruktor, np.:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Copy constructor</span>
+<span class="kd">public</span> <span class="nf">Stack</span><span class="o">(</span><span class="n">Stack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
+</code></pre></div></div>
+
+<h1 id="copy-factory">Copy factory</h1>
+
+<p>Jest to analogiczny odpowiednik konstruktora w postaci <a href="/effective-java/static-factory-method-zamiast-konstruktora">static method factory</a>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Copy factory</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">Stack</span> <span class="nf">copy</span><span class="o">(</span><span class="n">Stack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
+</code></pre></div></div>
+
+<p>Następnie ręcznie tworzymy nowy obiekt, kopiując wszystkie pola:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">Stack</span> <span class="nf">copy</span><span class="o">(</span><span class="n">Stack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Stack</span> <span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">();</span>
+    <span class="n">copy</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">;</span>
+    <span class="n">copy</span><span class="o">.</span><span class="na">elements</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">elements</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+    <span class="k">return</span> <span class="n">copy</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Oba te rozwiązania mają wiele korzyści w stosunku do <code class="highlighter-rouge">Cloneable</code>/<code class="highlighter-rouge">clone</code></p>
+
+<ul>
+  <li>nie polegamy na nieznanym mechanizmie tworzenia obiektów, który nie używa konstruktora i mamy pełną kontrolę nad tym procesem.</li>
+  <li>nie jesteśmy uzależnieni od żadnych słabo zdefiniowanych konwencji</li>
+  <li>nie ma konfliktu z polami <code class="highlighter-rouge">final</code></li>
+  <li>nie rzucają zbędnych wyjątków</li>
+  <li>nie wymagają castowania</li>
+  <li>nie skażamy klasy i wszystkich podklas interfejsem, który jest tylko <em>markerem</em></li>
+</ul>
+
+<p>Ponadto w tych rozwiązaniach argument może być interfejsem implementowanym przez tę klasę. Na przykład implementacje kolekcji w Javie udostępniają konstruktor, który ma argument typu <code class="highlighter-rouge">Collection</code> lub <code class="highlighter-rouge">Map</code>. Są to tak zwane <em>conversion constructors</em> i <em>conversion factories</em>, które pozwalają klientowi wybrać typ kopii, zamiast wymuszać oryginalny typ. Na przykład mamy <code class="highlighter-rouge">HashSet s</code> i możemy łatwo skopiować go jako <code class="highlighter-rouge">TreeSet</code> używając <code class="highlighter-rouge">new TreeSet&lt;&gt;(s)</code>.</p>
+
+<p>Podsumowując, te dwa rozwiązania są zdecydowanie lepsze od skażania klasy interfejsem <code class="highlighter-rouge">Cloneable</code>, więc powinny być preferowanym sposobem implementowania klonowania w Javie. Jedynym wyjątkiem od tej zasady są tablicę, gdzie powinniśmy używać metody <code class="highlighter-rouge">clone</code>, bo jest to najszybszy sposób klonowania tablic.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/metoda-toString"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Metoda toString"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/metoda-clone";
+    this.page.identifier = "/effective-java/metoda-clone";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

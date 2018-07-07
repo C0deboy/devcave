@@ -435,6 +435,15 @@
         "subtitle": "Kiedy i dlaczego warto ją nadpisywać",
         "date": "30 czerwca 2018",
         "url": "/effective-java/metoda-toString"
+      },
+    
+      
+      {
+        "title": "Klonowanie w Javie",
+        "titleSEO": "Klonowanie w Javie - interfejs Cloneable nie jest zawsze dobrym rozwiązaniem.",
+        "subtitle": "Interfejs Cloneable nie jest zawsze najlepszym rozwiązaniem",
+        "date": "7 lipca 2018",
+        "url": "/effective-java/metoda-clone"
       }
     
   

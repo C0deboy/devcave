@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Interfejs Comparable i Comparator - czyli porównywanie obiektów w Javie</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/interfejs-comparable">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Interfejs Comparable i Comparator</h1>
+            
+            <h2 class="post-subtitle">Czyli porównywanie obiektów w Javie</h2>
+            
+            <p class="post-meta">
+              
+              14
+              lipca
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#comparable">Comparable</a></li>
+<li class="toc-entry toc-h1"><a href="#comparator">Comparator</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 14</i> z rozdziału:</p>
+
+<p class="m0">Methods Common to All Objects</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/metoda-equals">Item 10: Obey the general contract when overriding equals
+                </a>
+            </li><li>
+                <a href="/effective-java/metoda-hashcode">Item 11: Always override hashCode when you override equals
+                </a>
+            </li><li>
+                <a href="/effective-java/metoda-toString">Item 12: Always override toString
+                </a>
+            </li><li>
+                <a href="/effective-java/metoda-clone">Item 13: Override clone judiciously
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/interfejs-comparable">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 14: Consider implementing Comparable
+                    </a>
+                </li></ul>
+<hr />
+
+<p>Do porównywania obiektów w Javie służy metoda <code class="highlighter-rouge">compareTo</code>. W przeciwieństwie do innych metod w tym rozdziale serii nie jest zadeklarowana w <code class="highlighter-rouge">Object</code>. Jest to osobna metoda zdefiniowana w interfejsie <code class="highlighter-rouge">Comparable</code>.</p>
+
+<h1 id="comparable">Comparable</h1>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Poza sprawdzaniem równości obiektów, tak jak w metodzie <code class="highlighter-rouge">equals</code>, oferuje jeszcze określanie, czy jest mniejszy lub większy niż inny obiekt. Implementując interfejs <code class="highlighter-rouge">Comparable</code> określamy domyślny porządek (ang. <strong>natural ordering</strong>) klasy, według którego m.in będzie układana w kolekcjach i na którym polega wiele algorytmów w Javie.</p>
+
+<p>Aby posortować tablicę obiektów, które implementują <code class="highlighter-rouge">Comparable</code>, wystarczy wywołać:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Podobnie łatwo można wykonać sortowanie kolekcji, wyciągnąć z nich skrajne wartości czy używać takich obiektów w automatycznie sortujących się kolekcjach.</p>
+
+<p>Dla przykładu, polegając na tym, że <code class="highlighter-rouge">String</code> implementuje interfejs <code class="highlighter-rouge">Comparable</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Foo"</span><span class="o">,</span> <span class="s">"Bar"</span><span class="o">,</span> <span class="s">"Andy"</span><span class="o">,</span> <span class="s">"Shop"</span><span class="o">);</span>
+
+<span class="n">Collections</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">strings</span><span class="o">);</span><span class="c1">//Shop</span>
+
+<span class="n">Collections</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">strings</span><span class="o">);</span><span class="c1">//Andy</span>
+
+<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">);</span><span class="c1">//Collection for binary search needs to be sorted</span>
+<span class="c1">//[Andy, Bar, Foo, Shop]</span>
+<span class="n">Collections</span><span class="o">.</span><span class="na">binarySearch</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="s">"Foo"</span><span class="o">);</span><span class="c1">//2</span>
+
+</code></pre></div></div>
+
+<p>Możemy też łatwo stworzyć zbiór posortowanych automatycznie wyrazów z wyeliminowanymi duplikatami, używając <code class="highlighter-rouge">TreeSet</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">alphabeticalWordList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeSet</span><span class="o">&lt;&gt;(</span><span class="n">strings</span><span class="o">);</span>
+<span class="c1">//[Andy, Bar, Foo, Shop]</span>
+</code></pre></div></div>
+
+<p>Dodając jakikolwiek string do tej kolekcji automatycznie zajmie swoje miejsce w alfabetycznym porządku.</p>
+
+<p>Jak widać dzięki zaimplementowaniu <code class="highlighter-rouge">Comparable</code>, pozwalamy naszej klasie współdziałać z wieloma generycznymi algorytmami i kolekcjami, które polegają na tym interfejsie. Dostajemy wiele możliwości z małym nakładem pracy.</p>
+
+<p>Wszystkie klasy reprezentujące wartości i enumy w Javie implementują ten interfejs.</p>
+
+<p>Specyfikacja metody <code class="highlighter-rouge">compareTo</code> jest następująca:</p>
+
+<blockquote>
+  <p>Compares this object with the specified object for order. Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object. Throws <code class="highlighter-rouge">ClassCastException</code> if the specified object’s type prevents it from being compared to this object.</p>
+
+  <p>In the following description, the notation <code class="highlighter-rouge">sgn</code>(<em>expression</em>) designates the mathematical  <em>signum</em>  function, which is defined to return <code class="highlighter-rouge">-</code>1, 0, or 1, according to whether the value of  <em>expression</em>  is negative, zero, or positive.</p>
+  <ul>
+    <li>The implementor must ensure that <code class="highlighter-rouge">sgn(x.compareTo(y)) == -sgn(y. compareTo(x))</code> for all <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code>. (This implies that <code class="highlighter-rouge">x.compareTo(y)</code> must throw an exception if and only if <code class="highlighter-rouge">y.compareTo(x)</code> throws an exception.)</li>
+    <li>The implementor must also ensure that the relation is transitive: <code class="highlighter-rouge">(x. compareTo(y) &gt; 0 &amp;&amp; y.compareTo(z) &gt; 0)</code> implies <code class="highlighter-rouge">x.compareTo(z) &gt; 0</code>.</li>
+    <li>Finally, the implementor must ensure that <code class="highlighter-rouge">x.compareTo(y) == 0</code> implies that <code class="highlighter-rouge">sgn(x.compareTo(z)) == sgn(y.compareTo(z))</code>, for all <code class="highlighter-rouge">z</code>.</li>
+    <li>It is strongly recommended, but not required, that <code class="highlighter-rouge">(x.compareTo(y) == 0) == (x.equals(y))</code>. Generally speaking, any class that implements the <code class="highlighter-rouge">Comparable</code> interface and violates this condition should clearly indicate this fact. The recommended language is “Note: This class has a natural ordering that is inconsistent with <code class="highlighter-rouge">equals</code>.”</li>
+  </ul>
+</blockquote>
+
+<p>Może się to wydawać skomplikowane, jednak wcale takie nie jest. W przeciwieństwie do metody <code class="highlighter-rouge">equals</code>, <code class="highlighter-rouge">compareTo</code> nie musi działać między różnymi typami. Jeśli jest taka sytuacja, to może spokojnie rzucić <code class="highlighter-rouge">ClassCastException</code>. I zazwyczaj tak jest. Jednak jest dozwolone porównywanie międzyklasowe, które zazwyczaj jest zdefiniowane w interfejsie, który implementują klasy porównywane.</p>
+
+<p>W skrócie specyfikacja mówi:</p>
+
+<ul>
+  <li>Jeśli pierwszy jest mniejszy od drugiego, to drugi musi być większy od pierwszego i na odwrót.</li>
+  <li>Jeśli pierwszy obiekt jest równy drugiemu, to drugi musi być równy pierwszemu.</li>
+  <li>Jeśli pierwszy obiekt jest większy niż drugi i drugi jest większy niż trzeci, to pierwszy musi być większy niż trzeci.</li>
+  <li>Wszystkie obiekty, które przy porównywaniu są równe, muszą zwrócić ten sam rezultat, kiedy są porównywane z jakimkolwiek innym obiektem.</li>
+</ul>
+
+<p>Ostatni warunek w specyfikacji <code class="highlighter-rouge">compareTo</code> jest raczej sugestią niż wymaganiem. Mówi, że test na równość obiektów powinien zwracać taki sam wynik jak metoda <code class="highlighter-rouge">equals</code>. Wtedy mówimy, że <code class="highlighter-rouge">compareTo</code> jest spójne z <code class="highlighter-rouge">equals</code>, a jeśli jest inaczej — niespójne.</p>
+
+<p>Dla przykładu metoda <code class="highlighter-rouge">compareTo</code> w klasie <code class="highlighter-rouge">BigDecimal</code> jest niespójna z <code class="highlighter-rouge">equals</code>. Jeśli stworzymy pusty <code class="highlighter-rouge">HashSet</code> i dodamy do niego <code class="highlighter-rouge">new BigDecimal("1.0")</code> i <code class="highlighter-rouge">new BigDecimal("1.00")</code>, to w secie znajdą się obydwa. Dzieje się tak, gdyż obie instancje <code class="highlighter-rouge">BigDecimal</code> nie są równe, jeśli sprawdzamy je za pomocą <code class="highlighter-rouge">equals</code>. Z kolei, jeśli powtórzymy to samo dla <code class="highlighter-rouge">TreeSet</code>, który polega na <code class="highlighter-rouge">compareTo</code>, to wtedy będziemy mieć tylko jedną wartość, bo według <code class="highlighter-rouge">compareTo</code> są równe. Dlatego <code class="highlighter-rouge">compareTo</code> jest niespójne z <code class="highlighter-rouge">equals</code> w tym przypadku.</p>
+
+<p>Sprawdzając równość obiektów, mamy ten sam problem, co w przypadku <code class="highlighter-rouge">equals</code>, który <a href="/effective-java/metoda-equals#problem-z-dziedziczeniem">omówiłem w poście</a> na temat tej metody. Tutaj możemy zastosować to samo obejście, stosując zasadę <a href="/notatnik-juniora/zasady-projektowania-kodu#composition-over-inheritance">composition over inheritance</a>.</p>
+
+<p>Tak samo jak zła implementacja <code class="highlighter-rouge">hashCode</code> lub jej brak może popsuć klasy, które zależą od hashowania, tak samo niepoprawna implementacja <code class="highlighter-rouge">compareTo</code> może spowodować nieprawidłowe działanie klas, które polegają na porównywaniu obiektów. Należą do tego m.in. kolekcje <code class="highlighter-rouge">TreeSet</code>, <code class="highlighter-rouge">TreeMap</code> i klasy <em>utillity</em> <code class="highlighter-rouge">Collections</code> i <code class="highlighter-rouge">Arrays</code>, które zawierają algorytmy sortowania i wyszukiwania.</p>
+
+<p>W przeciwieństwie do <code class="highlighter-rouge">equals</code> w metodzie <code class="highlighter-rouge">compareTo</code> nie musimy sprawdzać typów ani castować, a to dlatego, że interfejs <code class="highlighter-rouge">Comparable</code> jest parametryzowany.</p>
+
+<p>Porównując prymitywy, powinniśmy używać do tego metody <code class="highlighter-rouge">compare</code> z ich wrapperów, np. <code class="highlighter-rouge">Double.compare</code>, <code class="highlighter-rouge">Float.compare</code> czy <code class="highlighter-rouge">Integer.compare</code>.</p>
+
+<p>Jeśli porównujemy kilka znaczących pól, oczywiście powinniśmy zacząć od najbardziej znaczącego. Jeśli wynik jest różny od zera, wystarczy zwrócić wynik pierwszego porównania. Np. dla klasy <code class="highlighter-rouge">PhoneNumber</code> z poprzednich wpisów mogłaby wyglądać tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Multiple-field Comparable with primitive fields</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">Short</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">areaCode</span><span class="o">,</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Short</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">prefix</span><span class="o">,</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">Short</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">lineNum</span><span class="o">,</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNum</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Porównując pola z referencjami do obiektów, wywołujemy rekursywnie <code class="highlighter-rouge">compareTo</code> tych obiektów, a jeśli nie implementują <code class="highlighter-rouge">Comparable</code> lub chcemy użyć niestandardowego porównywania, to możemy użyć klasy <code class="highlighter-rouge">Comparator</code>.</p>
+
+<h1 id="comparator">Comparator</h1>
+
+<p>Możemy napisać swój własny lub wykorzystać już istniejące. Np. klasa <code class="highlighter-rouge">String</code> ma <code class="highlighter-rouge">Comparator</code>, który ignoruje wielkość liter:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span><span class="o">.</span><span class="na">CASE_INSENSITIVE_ORDER</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">,</span> <span class="n">s2</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Od Javy 8, interfejs <code class="highlighter-rouge">Comparator</code> dostał zestaw metod, które umożliwiają jego płynne tworzenie. Jest to dużo bardziej zwięzłe rozwiązanie. Używając do tego statycznych importów, dostajemy całkiem przejrzysty kod. Odpowiednik powyższej metody <code class="highlighter-rouge">compareTo</code> z wykorzystanie comparatora wygląda tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Comparable with comparator construction methods</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="n">COMPARATOR</span> <span class="o">=</span>
+    <span class="n">comparingInt</span><span class="o">((</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">thenComparingInt</span><span class="o">(</span><span class="n">pn</span> <span class="o">-&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">thenComparingInt</span><span class="o">(</span><span class="n">pn</span> <span class="o">-&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNum</span><span class="o">);</span>
+
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">COMPARATOR</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">pn</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Ta implementacja tworzy komparator w czasie inicjalizacji klasy. Pierwsza statyczna metoda <code class="highlighter-rouge">comparingInt</code> przyjmuje lambde, która wyciąga <code class="highlighter-rouge">areaCode</code> (klucz) i zwraca <code class="highlighter-rouge">Comparator&lt;PhoneNumber&gt;</code>, który porządkuje numery według ich <code class="highlighter-rouge">areaCode</code>.</p>
+
+<p>Oczywiście metoda <code class="highlighter-rouge">compareTo</code> zachowuje się identycznie jak w wariancie napisanym ręcznie. Jeśli dwa numery mają taki sam <code class="highlighter-rouge">areaCode</code>, to dopiero wtedy kolejne porównania z <code class="highlighter-rouge">thenComparingInt</code> zostaną wywołane.</p>
+
+<p>Warto zwrócić uwagę, że pierwsza lambda określa typ parametru (<code class="highlighter-rouge">PhoneNumber pn</code>), bo w takiej sytuacji inferencja typów w Javie nie jest na tyle inteligenta, żeby to wywnioskować, więc musimy jej z tym pomóc.</p>
+
+<p>Jeśli klasa udostępnia gettery do pól, to można użyć referencji do nich, co jest nieco bardziej czytelnym rozwiązaniem:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="n">COMPARATOR</span> <span class="o">=</span>
+        <span class="n">comparingInt</span><span class="o">(</span><span class="nl">PhoneNumber:</span><span class="o">:</span><span class="n">getAreaCode</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">thenComparingInt</span><span class="o">(</span><span class="nl">PhoneNumber:</span><span class="o">:</span><span class="n">getPrefix</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">thenComparingInt</span><span class="o">(</span><span class="nl">PhoneNumber:</span><span class="o">:</span><span class="n">getLineNum</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Analogiczne metody do <code class="highlighter-rouge">comparingInt</code> znajdziemy dla innych prymitywów jak <code class="highlighter-rouge">long</code> i <code class="highlighter-rouge">double</code>. Wersje dla <code class="highlighter-rouge">int</code> mogą zostać użyte dla mniejszych typów danych jak <code class="highlighter-rouge">short</code> - tak jak w przykładzie z <code class="highlighter-rouge">PhoneNumber</code>. I podobnie, wersja dla <code class="highlighter-rouge">double</code> może być użyta dla <code class="highlighter-rouge">float</code>.</p>
+
+<p>Dla obiektów mamy odpowiadającą statyczną metodę <code class="highlighter-rouge">comparing</code>, która ma dwa warianty:</p>
+<ul>
+  <li>Podajemy tylko klucz i używany jest jego domyślny porządek (ang. natural ordering).</li>
+  <li>Podajemy zarówno klucz, jak i komparator, który będzie używany na tym kluczu.</li>
+</ul>
+
+<p>I trzy warianty dla <code class="highlighter-rouge">thenComparing</code>:</p>
+<ul>
+  <li>Podajemy tylko komparator, który określa drugorzędną kolejność.</li>
+  <li>Podajemy kolejny klucz i używamy jego domyślnego porządek (ang. natural ordering).</li>
+  <li>Podajemy zarówno kolejny klucz, jak i komparator, który będzie używany na tym kluczu.</li>
+</ul>
+
+<p>Takie płynne budowanie komparatora często przydaję się przy streamach. Jeśli na przykład chcemy posortować elementy, to możemy to zrobić w całkiem dynamiczny sposób:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ranking</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="nl">RankingEntry:</span><span class="o">:</span><span class="n">getScore</span><span class="o">))</span>
+<span class="c1">//...</span>
+</code></pre></div></div>
+
+<p>Chcemy odwróconą kolejność? Wystarczy dodać <code class="highlighter-rouge">reversed()</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ranking</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="nl">RankingEntry:</span><span class="o">:</span><span class="n">getScore</span><span class="o">).</span><span class="na">reversed</span><span class="o">())</span>
+<span class="c1">//...</span>
+</code></pre></div></div>
+
+<p>W rezultacie dostaniemy posortowane elementy według pola <code class="highlighter-rouge">score</code> z klasy <code class="highlighter-rouge">RankingEntry</code>, które są w liście rankingowej <code class="highlighter-rouge">List&lt;RankingEntry&gt;</code>.</p>
+
+<p>Podsumowując, implementując interfejs <code class="highlighter-rouge">Comparable</code> uaktywnimy sporo użytecznych funkcji i kolekcji, z którymi nasza klasa może współpracować. Dzięki komparatorom możemy tworzyć różne niestandardowe porównywania obiektów, a od Javy 8, płynne API do dynamicznego tworzenia komparatorów z wykorzystaniem lambd znacznie ułatwia sprawę. Jeśli nasza klasa będzie miała jeden standard porównywania obiektów, to warto użyć interfejsu <code class="highlighter-rouge">Comparable</code>, który określa domyślny porządek (ang. <strong>natural ordering</strong>). Jeśli z kolei przewidujemy, że nasza klasa będzie porównywana na kilka sposobów lub chcemy użyć innego zamiast domyślnego, to przydadzą się komparatory.</p>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/metoda-clone"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Klonowanie w Javie"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/interfejs-comparable";
+    this.page.identifier = "/effective-java/interfejs-comparable";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

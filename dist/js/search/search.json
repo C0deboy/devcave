@@ -444,6 +444,15 @@
         "subtitle": "Interfejs Cloneable nie jest zawsze najlepszym rozwiązaniem",
         "date": "7 lipca 2018",
         "url": "/effective-java/metoda-clone"
+      },
+    
+      
+      {
+        "title": "Interfejs Comparable i Comparator",
+        "titleSEO": "Interfejs Comparable i Comparator - czyli porównywanie obiektów w Javie",
+        "subtitle": "Czyli porównywanie obiektów w Javie",
+        "date": "14 lipca 2018",
+        "url": "/effective-java/interfejs-comparable"
       }
     
   

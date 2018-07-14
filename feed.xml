@@ -1,4 +1,193 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-07-07T16:59:49+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Klonowanie w Javie</title><link href="https://devcave.pl/effective-java/metoda-clone" rel="alternate" type="text/html" title="Klonowanie w Javie" /><published>2018-07-07T10:00:00+02:00</published><updated>2018-07-07T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/metoda-clone</id><content type="html" xml:base="https://devcave.pl/effective-java/metoda-clone">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-07-14T19:00:05+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Interfejs Comparable i Comparator</title><link href="https://devcave.pl/effective-java/interfejs-comparable" rel="alternate" type="text/html" title="Interfejs Comparable i Comparator" /><published>2018-07-14T10:00:00+02:00</published><updated>2018-07-14T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/interfejs-comparable</id><content type="html" xml:base="https://devcave.pl/effective-java/interfejs-comparable">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 14&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Methods Common to All Objects&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/metoda-equals&quot;&gt;Item 10: Obey the general contract when overriding equals
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/metoda-hashcode&quot;&gt;Item 11: Always override hashCode when you override equals
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/metoda-toString&quot;&gt;Item 12: Always override toString
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/metoda-clone&quot;&gt;Item 13: Override clone judiciously
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 14: Consider implementing Comparable
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Do porównywania obiektów w Javie służy metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt;. W przeciwieństwie do innych metod w tym rozdziale serii nie jest zadeklarowana w &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt;. Jest to osobna metoda zdefiniowana w interfejsie &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;comparable&quot;&gt;Comparable&lt;/h1&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Poza sprawdzaniem równości obiektów, tak jak w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;, oferuje jeszcze określanie, czy jest mniejszy lub większy niż inny obiekt. Implementując interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; określamy domyślny porządek (ang. &lt;strong&gt;natural ordering&lt;/strong&gt;) klasy, według którego m.in będzie układana w kolekcjach i na którym polega wiele algorytmów w Javie.&lt;/p&gt;
+
+&lt;p&gt;Aby posortować tablicę obiektów, które implementują &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt;, wystarczy wywołać:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Podobnie łatwo można wykonać sortowanie kolekcji, wyciągnąć z nich skrajne wartości czy używać takich obiektów w automatycznie sortujących się kolekcjach.&lt;/p&gt;
+
+&lt;p&gt;Dla przykładu, polegając na tym, że &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt; implementuje interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Bar&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Andy&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Shop&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//Shop&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//Andy&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//Collection for binary search needs to be sorted&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//[Andy, Bar, Foo, Shop]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;binarySearch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//2&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Możemy też łatwo stworzyć zbiór posortowanych automatycznie wyrazów z wyeliminowanymi duplikatami, używając &lt;code class=&quot;highlighter-rouge&quot;&gt;TreeSet&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alphabeticalWordList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TreeSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//[Andy, Bar, Foo, Shop]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dodając jakikolwiek string do tej kolekcji automatycznie zajmie swoje miejsce w alfabetycznym porządku.&lt;/p&gt;
+
+&lt;p&gt;Jak widać dzięki zaimplementowaniu &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt;, pozwalamy naszej klasie współdziałać z wieloma generycznymi algorytmami i kolekcjami, które polegają na tym interfejsie. Dostajemy wiele możliwości z małym nakładem pracy.&lt;/p&gt;
+
+&lt;p&gt;Wszystkie klasy reprezentujące wartości i enumy w Javie implementują ten interfejs.&lt;/p&gt;
+
+&lt;p&gt;Specyfikacja metody &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; jest następująca:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Compares this object with the specified object for order. Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object. Throws &lt;code class=&quot;highlighter-rouge&quot;&gt;ClassCastException&lt;/code&gt; if the specified object’s type prevents it from being compared to this object.&lt;/p&gt;
+
+  &lt;p&gt;In the following description, the notation &lt;code class=&quot;highlighter-rouge&quot;&gt;sgn&lt;/code&gt;(&lt;em&gt;expression&lt;/em&gt;) designates the mathematical  &lt;em&gt;signum&lt;/em&gt;  function, which is defined to return &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt;1, 0, or 1, according to whether the value of  &lt;em&gt;expression&lt;/em&gt;  is negative, zero, or positive.&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;The implementor must ensure that &lt;code class=&quot;highlighter-rouge&quot;&gt;sgn(x.compareTo(y)) == -sgn(y. compareTo(x))&lt;/code&gt; for all &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;y&lt;/code&gt;. (This implies that &lt;code class=&quot;highlighter-rouge&quot;&gt;x.compareTo(y)&lt;/code&gt; must throw an exception if and only if &lt;code class=&quot;highlighter-rouge&quot;&gt;y.compareTo(x)&lt;/code&gt; throws an exception.)&lt;/li&gt;
+    &lt;li&gt;The implementor must also ensure that the relation is transitive: &lt;code class=&quot;highlighter-rouge&quot;&gt;(x. compareTo(y) &amp;gt; 0 &amp;amp;&amp;amp; y.compareTo(z) &amp;gt; 0)&lt;/code&gt; implies &lt;code class=&quot;highlighter-rouge&quot;&gt;x.compareTo(z) &amp;gt; 0&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Finally, the implementor must ensure that &lt;code class=&quot;highlighter-rouge&quot;&gt;x.compareTo(y) == 0&lt;/code&gt; implies that &lt;code class=&quot;highlighter-rouge&quot;&gt;sgn(x.compareTo(z)) == sgn(y.compareTo(z))&lt;/code&gt;, for all &lt;code class=&quot;highlighter-rouge&quot;&gt;z&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;It is strongly recommended, but not required, that &lt;code class=&quot;highlighter-rouge&quot;&gt;(x.compareTo(y) == 0) == (x.equals(y))&lt;/code&gt;. Generally speaking, any class that implements the &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; interface and violates this condition should clearly indicate this fact. The recommended language is “Note: This class has a natural ordering that is inconsistent with &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;.”&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Może się to wydawać skomplikowane, jednak wcale takie nie jest. W przeciwieństwie do metody &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; nie musi działać między różnymi typami. Jeśli jest taka sytuacja, to może spokojnie rzucić &lt;code class=&quot;highlighter-rouge&quot;&gt;ClassCastException&lt;/code&gt;. I zazwyczaj tak jest. Jednak jest dozwolone porównywanie międzyklasowe, które zazwyczaj jest zdefiniowane w interfejsie, który implementują klasy porównywane.&lt;/p&gt;
+
+&lt;p&gt;W skrócie specyfikacja mówi:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Jeśli pierwszy jest mniejszy od drugiego, to drugi musi być większy od pierwszego i na odwrót.&lt;/li&gt;
+  &lt;li&gt;Jeśli pierwszy obiekt jest równy drugiemu, to drugi musi być równy pierwszemu.&lt;/li&gt;
+  &lt;li&gt;Jeśli pierwszy obiekt jest większy niż drugi i drugi jest większy niż trzeci, to pierwszy musi być większy niż trzeci.&lt;/li&gt;
+  &lt;li&gt;Wszystkie obiekty, które przy porównywaniu są równe, muszą zwrócić ten sam rezultat, kiedy są porównywane z jakimkolwiek innym obiektem.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ostatni warunek w specyfikacji &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; jest raczej sugestią niż wymaganiem. Mówi, że test na równość obiektów powinien zwracać taki sam wynik jak metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;. Wtedy mówimy, że &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; jest spójne z &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;, a jeśli jest inaczej — niespójne.&lt;/p&gt;
+
+&lt;p&gt;Dla przykładu metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; w klasie &lt;code class=&quot;highlighter-rouge&quot;&gt;BigDecimal&lt;/code&gt; jest niespójna z &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;. Jeśli stworzymy pusty &lt;code class=&quot;highlighter-rouge&quot;&gt;HashSet&lt;/code&gt; i dodamy do niego &lt;code class=&quot;highlighter-rouge&quot;&gt;new BigDecimal(&quot;1.0&quot;)&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;new BigDecimal(&quot;1.00&quot;)&lt;/code&gt;, to w secie znajdą się obydwa. Dzieje się tak, gdyż obie instancje &lt;code class=&quot;highlighter-rouge&quot;&gt;BigDecimal&lt;/code&gt; nie są równe, jeśli sprawdzamy je za pomocą &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;. Z kolei, jeśli powtórzymy to samo dla &lt;code class=&quot;highlighter-rouge&quot;&gt;TreeSet&lt;/code&gt;, który polega na &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt;, to wtedy będziemy mieć tylko jedną wartość, bo według &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; są równe. Dlatego &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; jest niespójne z &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; w tym przypadku.&lt;/p&gt;
+
+&lt;p&gt;Sprawdzając równość obiektów, mamy ten sam problem, co w przypadku &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;, który &lt;a href=&quot;/effective-java/metoda-equals#problem-z-dziedziczeniem&quot;&gt;omówiłem w poście&lt;/a&gt; na temat tej metody. Tutaj możemy zastosować to samo obejście, stosując zasadę &lt;a href=&quot;/notatnik-juniora/zasady-projektowania-kodu#composition-over-inheritance&quot;&gt;composition over inheritance&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Tak samo jak zła implementacja &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt; lub jej brak może popsuć klasy, które zależą od hashowania, tak samo niepoprawna implementacja &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; może spowodować nieprawidłowe działanie klas, które polegają na porównywaniu obiektów. Należą do tego m.in. kolekcje &lt;code class=&quot;highlighter-rouge&quot;&gt;TreeSet&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;TreeMap&lt;/code&gt; i klasy &lt;em&gt;utillity&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;Collections&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;Arrays&lt;/code&gt;, które zawierają algorytmy sortowania i wyszukiwania.&lt;/p&gt;
+
+&lt;p&gt;W przeciwieństwie do &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; nie musimy sprawdzać typów ani castować, a to dlatego, że interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; jest parametryzowany.&lt;/p&gt;
+
+&lt;p&gt;Porównując prymitywy, powinniśmy używać do tego metody &lt;code class=&quot;highlighter-rouge&quot;&gt;compare&lt;/code&gt; z ich wrapperów, np. &lt;code class=&quot;highlighter-rouge&quot;&gt;Double.compare&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Float.compare&lt;/code&gt; czy &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer.compare&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Jeśli porównujemy kilka znaczących pól, oczywiście powinniśmy zacząć od najbardziej znaczącego. Jeśli wynik jest różny od zera, wystarczy zwrócić wynik pierwszego porównania. Np. dla klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;PhoneNumber&lt;/code&gt; z poprzednich wpisów mogłaby wyglądać tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Multiple-field Comparable with primitive fields&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PhoneNumber&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Short&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;areaCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;areaCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Short&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Short&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lineNum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lineNum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Porównując pola z referencjami do obiektów, wywołujemy rekursywnie &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; tych obiektów, a jeśli nie implementują &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; lub chcemy użyć niestandardowego porównywania, to możemy użyć klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparator&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;comparator&quot;&gt;Comparator&lt;/h1&gt;
+
+&lt;p&gt;Możemy napisać swój własny lub wykorzystać już istniejące. Np. klasa &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt; ma &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparator&lt;/code&gt;, który ignoruje wielkość liter:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;CASE_INSENSITIVE_ORDER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Od Javy 8, interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparator&lt;/code&gt; dostał zestaw metod, które umożliwiają jego płynne tworzenie. Jest to dużo bardziej zwięzłe rozwiązanie. Używając do tego statycznych importów, dostajemy całkiem przejrzysty kod. Odpowiednik powyższej metody &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; z wykorzystanie comparatora wygląda tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Comparable with comparator construction methods&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PhoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;COMPARATOR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;comparingInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PhoneNumber&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;areaCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenComparingInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenComparingInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lineNum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PhoneNumber&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;COMPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ta implementacja tworzy komparator w czasie inicjalizacji klasy. Pierwsza statyczna metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;comparingInt&lt;/code&gt; przyjmuje lambde, która wyciąga &lt;code class=&quot;highlighter-rouge&quot;&gt;areaCode&lt;/code&gt; (klucz) i zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparator&amp;lt;PhoneNumber&amp;gt;&lt;/code&gt;, który porządkuje numery według ich &lt;code class=&quot;highlighter-rouge&quot;&gt;areaCode&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Oczywiście metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; zachowuje się identycznie jak w wariancie napisanym ręcznie. Jeśli dwa numery mają taki sam &lt;code class=&quot;highlighter-rouge&quot;&gt;areaCode&lt;/code&gt;, to dopiero wtedy kolejne porównania z &lt;code class=&quot;highlighter-rouge&quot;&gt;thenComparingInt&lt;/code&gt; zostaną wywołane.&lt;/p&gt;
+
+&lt;p&gt;Warto zwrócić uwagę, że pierwsza lambda określa typ parametru (&lt;code class=&quot;highlighter-rouge&quot;&gt;PhoneNumber pn&lt;/code&gt;), bo w takiej sytuacji inferencja typów w Javie nie jest na tyle inteligenta, żeby to wywnioskować, więc musimy jej z tym pomóc.&lt;/p&gt;
+
+&lt;p&gt;Jeśli klasa udostępnia gettery do pól, to można użyć referencji do nich, co jest nieco bardziej czytelnym rozwiązaniem:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PhoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;COMPARATOR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;comparingInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;PhoneNumber:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getAreaCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenComparingInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;PhoneNumber:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getPrefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenComparingInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;PhoneNumber:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getLineNum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Analogiczne metody do &lt;code class=&quot;highlighter-rouge&quot;&gt;comparingInt&lt;/code&gt; znajdziemy dla innych prymitywów jak &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;double&lt;/code&gt;. Wersje dla &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt; mogą zostać użyte dla mniejszych typów danych jak &lt;code class=&quot;highlighter-rouge&quot;&gt;short&lt;/code&gt; - tak jak w przykładzie z &lt;code class=&quot;highlighter-rouge&quot;&gt;PhoneNumber&lt;/code&gt;. I podobnie, wersja dla &lt;code class=&quot;highlighter-rouge&quot;&gt;double&lt;/code&gt; może być użyta dla &lt;code class=&quot;highlighter-rouge&quot;&gt;float&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Dla obiektów mamy odpowiadającą statyczną metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;comparing&lt;/code&gt;, która ma dwa warianty:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Podajemy tylko klucz i używany jest jego domyślny porządek (ang. natural ordering).&lt;/li&gt;
+  &lt;li&gt;Podajemy zarówno klucz, jak i komparator, który będzie używany na tym kluczu.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I trzy warianty dla &lt;code class=&quot;highlighter-rouge&quot;&gt;thenComparing&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Podajemy tylko komparator, który określa drugorzędną kolejność.&lt;/li&gt;
+  &lt;li&gt;Podajemy kolejny klucz i używamy jego domyślnego porządek (ang. natural ordering).&lt;/li&gt;
+  &lt;li&gt;Podajemy zarówno kolejny klucz, jak i komparator, który będzie używany na tym kluczu.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Takie płynne budowanie komparatora często przydaję się przy streamach. Jeśli na przykład chcemy posortować elementy, to możemy to zrobić w całkiem dynamiczny sposób:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ranking&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;comparing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;RankingEntry:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getScore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Chcemy odwróconą kolejność? Wystarczy dodać &lt;code class=&quot;highlighter-rouge&quot;&gt;reversed()&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ranking&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;comparing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;RankingEntry:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getScore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;reversed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;W rezultacie dostaniemy posortowane elementy według pola &lt;code class=&quot;highlighter-rouge&quot;&gt;score&lt;/code&gt; z klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;RankingEntry&lt;/code&gt;, które są w liście rankingowej &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;RankingEntry&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Podsumowując, implementując interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; uaktywnimy sporo użytecznych funkcji i kolekcji, z którymi nasza klasa może współpracować. Dzięki komparatorom możemy tworzyć różne niestandardowe porównywania obiektów, a od Javy 8, płynne API do dynamicznego tworzenia komparatorów z wykorzystaniem lambd znacznie ułatwia sprawę. Jeśli nasza klasa będzie miała jeden standard porównywania obiektów, to warto użyć interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt;, który określa domyślny porządek (ang. &lt;strong&gt;natural ordering&lt;/strong&gt;). Jeśli z kolei przewidujemy, że nasza klasa będzie porównywana na kilka sposobów lub chcemy użyć innego zamiast domyślnego, to przydadzą się komparatory.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 14 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry><entry><title type="html">Klonowanie w Javie</title><link href="https://devcave.pl/effective-java/metoda-clone" rel="alternate" type="text/html" title="Klonowanie w Javie" /><published>2018-07-07T10:00:00+02:00</published><updated>2018-07-07T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/metoda-clone</id><content type="html" xml:base="https://devcave.pl/effective-java/metoda-clone">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -20,7 +209,7 @@
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 13: Override clone judiciously
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 14: Consider implementing Comparable
+                &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;Item 14: Consider implementing Comparable
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -220,7 +409,7 @@ implementation.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/metoda-clone&quot;&gt;Item 13: Override clone judiciously
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 14: Consider implementing Comparable
+                &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;Item 14: Consider implementing Comparable
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -301,7 +490,7 @@ implementation.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/metoda-clone&quot;&gt;Item 13: Override clone judiciously
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 14: Consider implementing Comparable
+                &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;Item 14: Consider implementing Comparable
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -417,7 +606,7 @@ implementation.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/metoda-clone&quot;&gt;Item 13: Override clone judiciously
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 14: Consider implementing Comparable
+                &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;Item 14: Consider implementing Comparable
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -1378,81 +1567,4 @@ Interfejs &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;jav
 
 &lt;p&gt;Można w łatwy sposób mockować takie zależności i testować je w izolacji.&lt;/p&gt;
 
-&lt;p&gt;Podsumowując, świadome korzystanie z wstrzykiwania zależności ma niemal same zalety, a preferowanym sposobem wstrzykiwania zależności jest ten z wykorzystaniem konstruktora.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 5 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry><entry><title type="html">Klasy typu utility / helper</title><link href="https://devcave.pl/effective-java/klasy-nieinstancjowalne" rel="alternate" type="text/html" title="Klasy typu utility / helper" /><published>2018-05-05T12:00:00+02:00</published><updated>2018-05-05T12:00:00+02:00</updated><id>https://devcave.pl/effective-java/klasy-nieinstancjowalne</id><content type="html" xml:base="https://devcave.pl/effective-java/klasy-nieinstancjowalne">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 4&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m0&quot;&gt;Creating and Destroying Objects&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;Item 1: Consider static factory methods instead of constructors
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wzorzec-projektowy-builder&quot;&gt;Item 2: Consider a builder when faced with many constructor parameters
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wzorzec-projektowy-singleton&quot;&gt;Item 3: Enforce the singleton property with a private constructor or an enum type
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/klasy-nieinstancjowalne&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 4: Enforce noninstantiability with a private constructor
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wstrzykiwanie-zaleznosci&quot;&gt;Item 5: Prefer dependency injection to hardwiring resources
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow&quot;&gt;Item 6: Avoid creating unnecessary objects
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wycieki-pamieci-w-javie&quot;&gt;Item 7: Eliminate obsolete object references
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/unikaj-finalizerow-i-cleanerow&quot;&gt;Item 8: Avoid finalizers and cleaners
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/preferuj-try-with-resources&quot;&gt;Item 9: Prefer try-with-resources to try-finally
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;klasy-nieinstancjowalne&quot;&gt;Klasy nieinstancjowalne&lt;/h1&gt;
-
-&lt;p&gt;Klasy nieinstancjowalne to takie, dla których nie możemy utworzyć instancji - czyli używamy ich w sposób statyczny (nie mam tu na myśli klas abstrakcyjnych, które też są nieinstancjowalne). Takie klasy mają dosyć złą reputację, bo często są nadużywane i stosowane tam, gdzie nie powinny. Szczególnie widoczne jest to u początkujących programistów, którzy unikają myślenia obiektowego i mają “proceduralne” nawyki. Jednak takie klasy mają też i swoje akceptowalne zastosowania.&lt;/p&gt;
-
-&lt;p&gt;Klasy nieinstancjowalne to zazwyczaj klasy typu &lt;em&gt;utility&lt;/em&gt;/&lt;em&gt;helper&lt;/em&gt;, które są zbiorem statycznych metod i pól (często operujące na prymitywach). Przykładem takich klas są np. &lt;code class=&quot;highlighter-rouge&quot;&gt;java.lang.Math&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.Arrays&lt;/code&gt;. Innym przykładem są klasy, które zawierają &lt;a href=&quot;/effective-java/klasy-nieinstancjowalne&quot;&gt;&lt;em&gt;static method factories&lt;/em&gt;&lt;/a&gt; dla obiektów o wspólnym interfejsie np. &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.Collections&lt;/code&gt;. (Od Javy 8 można je umieszczać na interfejsie, nie ma potrzeby tworzenia do tego specjalnej klasy). Klasy nieinstancjowalne znajdziemy również w wielu bibliotekach.&lt;/p&gt;
-
-&lt;p&gt;Są to klasy, które z założenia nie powinny być instancjowalne - bo po prostu instancja takiej klasy nie ma sensu. Nie przechowują żadnego stanu - są tylko zbiorem często wykorzystywanych metod, które z reguły powinny być ze sobą powiązane (nie ładujemy wszyskiego do jednej klasy, np. metody operujące na stringach nie powinny się mieszać z metodami operującymi na plikach…)&lt;/p&gt;
-
-&lt;p&gt;Jedynym słusznym sposobem na to, by klasa była nieinstancjowalna jest zadeklarowanie dla niej prywatnego konstruktora:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Noninstantiable utility classChapter-1&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UtilityClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UtilityClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AssertionError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Deklaracja klasy jako abstrakcyjnej nie jest odpowiednim sposobem, aby to osiągnąć (ani do końca nie działa).&lt;/strong&gt; Można ją rozszerzyć i wtedy podklasa może być instancjowalna. Po drugie zachęca to do myślenia, że klasa została stworzona do rozszerzania, a tak nie jest.&lt;/p&gt;
-
-&lt;p&gt;Kiedy konstruktor jest prywatny, nie ma możliwości stworzenia instancji klasy poza jej wnętrzem.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AssertionError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt; jest tutaj opcjonalnie - zapewnia, aby konstruktor nie zostanie wywołany omyłkowo wewnątrz tej klasy lub poprzez refleksję.&lt;/p&gt;
-
-&lt;p&gt;Kiedy implementujemy takie klasy trzeba rozważyć następujące problemy:&lt;/p&gt;
-
-&lt;p class=&quot;cons&quot;&gt;Nie ma możliwości rozszerzania klasy z prywatnym konstruktorem.&lt;/p&gt;
-
-&lt;p class=&quot;cons&quot;&gt;Trudność w testowaniu jednostkowym.&lt;/p&gt;
-
-&lt;p&gt;Podczas gdy klasę utility można łatwo przetestować w izolacji, to klasy, które ją używają już nie. Klasy utility najczęściej wykorzystywane są bezpośrednio (&lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;UtilityClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DoStuff&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;/code&gt;) co w konsekwencji utrudnia ich mockowanie. Ma to tym większe znaczenie im klasa utility wykonuje cięższe operacje (najczęsciej na , które chcielibyśmy zmockować, aby zwiększyć wydajność testu.&lt;/p&gt;
-
-&lt;p&gt;*W Javie istnieje narzędzie do testowania o nazwie &lt;a href=&quot;https://github.com/powermock/powermock&quot;&gt;Powermock&lt;/a&gt;, które to potrafi, ale uznawane jest, że jeśli twoja aplikacja potrzebuję tego narzędzia, aby coś mogło zostać przetestowane, to najprawdopodobniej twoja aplikacja jest źle zaprojektowana i na tym powinieneś się skupić.&lt;/p&gt;
-
-&lt;p&gt;Szczególne znaczenie ma to podczas korzystania z frameworków &lt;em&gt;Dependency Injection&lt;/em&gt; jak np. Spring. Wtedy takie klasy powinniśmy być w stanie wstrzyknąć jako zależność, żeby później można było łatwo je zmockować. W takich przypadkach powinny to być instancjowalne klasy bez statycznych metod, które można wstrzyknąć jako Singletony.&lt;/p&gt;
-
-&lt;p class=&quot;note&quot;&gt;W Springu &lt;em&gt;beany&lt;/em&gt; są Singletonami domyślnie.&lt;/p&gt;
-
-&lt;p&gt;Podsumowując, klasy “statyczne” nie są czystym złem, jednak powinny być używane raczej sporadycznie. Zanim zdecydujesz się na ich użycie, upewnij się czy kolejna metoda, którą będziesz chciał dorzucić do klasy typu “helper”, nie powinna się znaleźć w bardziej odpowiedniej i konkretnej klasie.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 4 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry></feed>
+&lt;p&gt;Podsumowując, świadome korzystanie z wstrzykiwania zależności ma niemal same zalety, a preferowanym sposobem wstrzykiwania zależności jest ten z wykorzystaniem konstruktora.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 5 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry></feed>

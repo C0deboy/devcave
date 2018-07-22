@@ -453,6 +453,15 @@
         "subtitle": "Czyli porównywanie obiektów w Javie",
         "date": "14 lipca 2018",
         "url": "/effective-java/interfejs-comparable"
+      },
+    
+      
+      {
+        "title": "Minimalizowanie dostępności",
+        "titleSEO": "Minimalizowanie dostępności - modyfikatory dostępu i enkapsulacja",
+        "subtitle": "Czyli modyfikatory dostępu i enkapsulacja",
+        "date": "21 lipca 2018",
+        "url": "/effective-java/minimalizuj-dostepnosc-enkapsulacja"
       }
     
   

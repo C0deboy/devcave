@@ -201,6 +201,10 @@
 <lastmod>2018-07-14T10:00:00+02:00</lastmod>
 </url>
 <url>
+<loc>https://devcave.pl/effective-java/minimalizuj-dostepnosc-enkapsulacja</loc>
+<lastmod>2018-07-21T10:00:00+02:00</lastmod>
+</url>
+<url>
 <loc>https://devcave.pl/o-mnie/</loc>
 </url>
 <url>
@@ -244,5 +248,8 @@
 </url>
 <url>
 <loc>https://devcave.pl/page10/</loc>
+</url>
+<url>
+<loc>https://devcave.pl/page11/</loc>
 </url>
 </urlset>

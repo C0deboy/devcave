@@ -1,4 +1,237 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-07-15T10:14:34+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Interfejs Comparable i Comparator</title><link href="https://devcave.pl/effective-java/interfejs-comparable" rel="alternate" type="text/html" title="Interfejs Comparable i Comparator" /><published>2018-07-14T10:00:00+02:00</published><updated>2018-07-14T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/interfejs-comparable</id><content type="html" xml:base="https://devcave.pl/effective-java/interfejs-comparable">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-07-22T22:05:20+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Minimalizowanie dostępności</title><link href="https://devcave.pl/effective-java/minimalizuj-dostepnosc-enkapsulacja" rel="alternate" type="text/html" title="Minimalizowanie dostępności" /><published>2018-07-21T10:00:00+02:00</published><updated>2018-07-21T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/minimalizuj-dostepnosc-enkapsulacja</id><content type="html" xml:base="https://devcave.pl/effective-java/minimalizuj-dostepnosc-enkapsulacja">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 15&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Classes and Interfaces&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 15: Minimize the accessibility of classes and members
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 16: In public classes, use accessor methods, not public fields
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 17: Minimize mutability
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 18: Favor composition over inheritance
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 21: Design interfaces for posterity | #domyślne-metody-w-interfejsach
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 22: Use interfaces only to define types | #interfejs-tylko-jako-definicja-typu
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 23: Prefer class hierarchies to tagged classes | #preferuj-hierarchię-klas-zamiast-otagowanych-klas
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 25: Limit source files to a single top-level class | #jedna-top-level-klasa-na-jeden-plik-źródłowy
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Enkapsulacja jest jednym z ważniejszych czynników określających dobry design i jego podstawą.&lt;/p&gt;
+
+&lt;h1 id=&quot;czym-jest-enkapsulacja&quot;&gt;Czym jest enkapsulacja?&lt;/h1&gt;
+
+&lt;p&gt;Enkapsulacja polega na ukrywaniu szczegółów implementacyjnych przed innymi komponentami. Dobrze zaprojektowane komponenty ukrywają je wszystkie, jasno rozdzielając jego API od jego implementacji. Wtedy, komponenty komunikują się przez swoje API i nie są świadome, co wykonywane jest pod spodem.&lt;/p&gt;
+
+&lt;p&gt;Enkapsulacja jest ważne z wielu powodów, jednak najważniejszym z nich jest fakt, że rozdziela komponenty, które tworzą system. Sprawia to że mogą być rozwijane, testowane, optymalizowane, analizowane i modyfikowane w izolacji.
+Dzięki temu możemy pracować na nich równolegle, bez ryzyka uszkodzenia innych komponentów, co znacznie przyspiesza proces rozwijania systemu.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Best practice: ograniczaj dostęp do klas, interfejsów i elementów klasy najbardziej jak jest to możliwe.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Cytując dokumentację:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Use the most restrictive access level that makes sense for a particular member. Use private unless you have a good reason not to.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Mowa tu o mechanizmie &lt;em&gt;access control&lt;/em&gt;, dzięki któremu określamy dostępność do klas, interfejsów i elementów klasy na podstawie modyfikatorów dostępu, którymi są oznaczane.&lt;/p&gt;
+
+&lt;h1 id=&quot;modyfikatory-dostępu&quot;&gt;Modyfikatory dostępu&lt;/h1&gt;
+
+&lt;p&gt;W Javie dostępne mamy cztery modyfikatory dostępu: &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;protected&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt;, który jest domyślny, tzn. wtedy kiedy nie podamy żadnego (&lt;strong&gt;z wyjątkiem elementów zadeklarowanych w interfejsie, które domyślnie są publiczne&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;h2 id=&quot;dla-klas-i-interfejsów&quot;&gt;Dla klas i interfejsów&lt;/h2&gt;
+
+&lt;p&gt;Dla top-level (niewewnętrznych) klas i interfejsów możliwe są tylko dwa - &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt; jest wtedy, gdy nie oznaczymy klasy modyfikatorem &lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt;, czyli domyślnie. Jeśli jest możliwość, żeby klasa lub interfejs był &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt; to powinno tak się stać. Dzięki temu nasza klasa lub interfejs nie widnieje w API, a jest częścią implementacji i możemy ją dowolnie modyfikować, zastąpić czy nawet usunąć, bez uszkadzania istniejących klientów. Z kolei, jeśli nasza klasa lub interfejs jest publiczny, to jesteśmy zobowiązani wspierać go do końca, by zachować kompatybilność wsteczną.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Obecnie większość IDE przy tworzeniu nowych klas domyślnie wstawia modyfikator dostępu &lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt;. Warto to zmienić na &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt; (czyli bez modyfikatora dostępu) i w miarę potrzeby deklarować &lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt; tylko wtedy kiedy jest to rzeczywiście potrzebne.&lt;/p&gt;
+
+&lt;p&gt;Jeśli klasa lub interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt; jest używany tylko przez jedną klasą, to możemy rozważyć przeniesienie jej do tej klasy jako wewnętrznej klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;private static&lt;/code&gt;. Redukuje to dostępność tej klasy w innych klasach w obrębie tego samego pakietu. Będzie o tym mowa w &lt;em&gt;Item 24&lt;/em&gt;. Jednak zdecydowanie ważniejsze jest redukowanie dostępu klas publicznych, jako że klasy &lt;em&gt;top-level&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt; i tak są już częścią implementacji, a nie publicznego API.&lt;/p&gt;
+
+&lt;h2 id=&quot;dla-elementów-klasy&quot;&gt;Dla elementów klasy&lt;/h2&gt;
+&lt;p&gt;Poprzez “elementy klasy” mam na myśli pola, metody, wewnętrzne klasy i interfejsy. Mamy dla nich dostępne wszystkie cztery modyfikatory dostępu:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;private&lt;/strong&gt; — element jest dostępny tylko w klasie, w której jest zadeklarowany.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;package-private&lt;/strong&gt; — element jest dostępny z każdej klasy w obrębie tego samego pakietu.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;protected&lt;/strong&gt; — element jest również dostępny w klasach w obrębie tego samego pakietu oraz dodatkowo w podklasach klasy, w której jest zadeklarowany.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;public&lt;/strong&gt; — element jest dostępny wszędzie.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Łatwiej to zobrazować na podstawie tabelki:&lt;/p&gt;
+
+&lt;div class=&quot;table-wrapper&quot;&gt;
+
+  &lt;table class=&quot;table table-condensed table-bordered&quot;&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Modyfikator&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Klasa&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Pakiet&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Podklasa&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Wszędzie&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;protected&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;brak&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Dla przykładu rozważmy, że mamy taką strukturę klas:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/effective-java/classes-access.png&quot; alt=&quot;modyfikatory przykład&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Wtedy pola klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Alpha&lt;/code&gt; oznaczone danym modyfikatorem będą miały taką widoczność w innych klasach:&lt;/p&gt;
+
+&lt;div class=&quot;table-wrapper&quot;&gt;
+
+  &lt;table class=&quot;table table-condensed table-bordered&quot;&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Modyfikator&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Alpha&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Beta&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;AlphaSub&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Gamma&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;protected&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;brak&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;TAK&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;NIE&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Duży przeskok w dostępności jest z &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt; na &lt;code class=&quot;highlighter-rouge&quot;&gt;protected&lt;/code&gt;. Element oznaczony jako &lt;code class=&quot;highlighter-rouge&quot;&gt;protected&lt;/code&gt; jest już częścią API i musi być wspierany wiecznie. Jednak potrzeba ich stosowania powinna być sporadyczna.&lt;/p&gt;
+
+&lt;p&gt;Czasem modyfikatory dostępu są z góry wymuszone, na przykład, kiedy nadpisujemy metodę z nadklasy, to nie może ona mieć bardziej restrykcyjnego dostępu niż w nadklasie. Również wtedy, gdy klasa implementuje interfejs, to implementowane metody będą zawsze &lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Pola klasy nie powinny być publiczne&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Jeśli pole nie jest zadeklarowane jako &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt; lub jest referencją do mutowalnego obiektu, to deklarując takie pole jako &lt;code class=&quot;highlighter-rouge&quot;&gt;public&lt;/code&gt; umożliwiamy jego modyfikację lub podmianę. Ponadto podczas takiej modyfikacji możemy wykonać na nim jakąkolwiek akcję, więc &lt;strong&gt;klasy z publicznymi modyfikowalnymi polami nie są &lt;em&gt;thread safe&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;To samo tyczy się statycznych pól, z wyjątkiem stałych, które są integralną częścią abstrakcji klasy. Takie pola zazwyczaj upubliczniamy za pomocą &lt;code class=&quot;highlighter-rouge&quot;&gt;public static final&lt;/code&gt; i przyjęło się je nazywać za pomocą drukowanych wyrazów rozdzielonymi podłogą, np.:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DAYS_IN_WEEK&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Ważne jest to, żeby takie pola zawierały tylko prymitywy lub referencje do obiektów &lt;em&gt;immutable&lt;/em&gt;. Referencje do obiektów &lt;em&gt;mutable&lt;/em&gt; mają wszystkie wady pola niezadeklarowanego jako &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;. Referencja nie może być zmieniona, ale sam obiekt już może.&lt;/p&gt;
+
+&lt;p class=&quot;warning&quot;&gt;Tablice niezerowej długości są zawsze &lt;em&gt;mutable&lt;/em&gt;, więc tablice nigdy nie powinny być deklarowane jako &lt;code class=&quot;highlighter-rouge&quot;&gt;public static final&lt;/code&gt; ani klasa nie powinna udostępniać do niej &lt;em&gt;gettera&lt;/em&gt; w przypadku kiedy jest &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;.  W przeciwnym wypadku klient będzie mógł zmodyfikować taką tablicę.&lt;/p&gt;
+
+&lt;p&gt;Możemy rozwiązać ten problem zwracając w getterze kopię tablicy.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PRIVATE_VALUES&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PRIVATE_VALUES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Jednak jeśli obiekt typu &lt;code class=&quot;highlighter-rouge&quot;&gt;Thing&lt;/code&gt; jest &lt;em&gt;mutable&lt;/em&gt; to będzie trzeba wykonać &lt;em&gt;deep copy&lt;/em&gt;. Temat klonowania omawiałem dwa wpisy wcześniej.&lt;/p&gt;
+
+&lt;p&gt;Podsumowując, powinniśmy redukować dostępność komponentów najbardziej jak to możliwe. Publiczne API nie powinno być zanieczyszczone klasami będącymi szczegółami implementacyjnymi innych klas. Publiczne klasy nie powinny mieć publicznych pól, z wyjątkiem stałych, które powinny być &lt;em&gt;immuatable&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;moduły-java-9&quot;&gt;Moduły Java 9&lt;/h1&gt;
+
+&lt;p&gt;Java 9 daje nam nową abstrakcję ponad pakietami — moduły. Analogicznie tak jak pakiet jest zbiorem powiązanych klas, tak moduły są zbiorem powiązanych pakietów.&lt;/p&gt;
+
+&lt;p&gt;System modułów daje nam to nowe możliwości określania dostępności danych komponentów. Domyślnie żaden pakiet w module nie jest publiczny (dostępność wewnątrz modułu się nie zmienia). Jeśli chcemy, aby dany pakiet był dostępny w innym module, to musimy o tym wyraźnie poinformować w &lt;em&gt;module descriptor&lt;/em&gt;. Jest to plik o nazwie &lt;span class=&quot;file&quot;&gt;module-info.java&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;Jego struktura wygląda mniej więcej tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;my&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dzięki temu możemy udostępniać klasy między pakietami wewnątrz modułów bez udostępniania ich całemu światu.&lt;/p&gt;
+
+&lt;p&gt;System modułów nie jest jeszcze szeroko używany w Javie i ciężko powiedzieć czy kiedykolwiek tak będzie.&lt;/p&gt;
+
+&lt;p&gt;Jeśli chciałbyś więcej się dowiedzieć o tym mechanizmie, to polecam &lt;a href=&quot;http://www.baeldung.com/java-9-modularity&quot;&gt;baeldung.com/java-9-modularity&lt;/a&gt;.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 15 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity | #domyślne-metody-w-interfejsach Item 22: Use interfaces only to define types | #interfejs-tylko-jako-definicja-typu Item 23: Prefer class hierarchies to tagged classes | #preferuj-hierarchię-klas-zamiast-otagowanych-klas Item 24: Favor static member classes over nonstatic Item 25: Limit source files to a single top-level class | #jedna-top-level-klasa-na-jeden-plik-źródłowy</summary></entry><entry><title type="html">Interfejs Comparable i Comparator</title><link href="https://devcave.pl/effective-java/interfejs-comparable" rel="alternate" type="text/html" title="Interfejs Comparable i Comparator" /><published>2018-07-14T10:00:00+02:00</published><updated>2018-07-14T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/interfejs-comparable</id><content type="html" xml:base="https://devcave.pl/effective-java/interfejs-comparable">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -1358,213 +1591,4 @@ Furthermore, the timing of finalization is unpredictable with no guarantee that 
 &lt;p&gt;wartości będą te same, ale nie będą już to referencje do tych samych obiektów:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;three&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 6 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry><entry><title type="html">Preferuj wstrzykiwanie zależności</title><link href="https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci" rel="alternate" type="text/html" title="Preferuj wstrzykiwanie zależności" /><published>2018-05-12T10:00:00+02:00</published><updated>2018-05-12T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci</id><content type="html" xml:base="https://devcave.pl/effective-java/wstrzykiwanie-zaleznosci">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 5&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m0&quot;&gt;Creating and Destroying Objects&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;Item 1: Consider static factory methods instead of constructors
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wzorzec-projektowy-builder&quot;&gt;Item 2: Consider a builder when faced with many constructor parameters
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wzorzec-projektowy-singleton&quot;&gt;Item 3: Enforce the singleton property with a private constructor or an enum type
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/klasy-nieinstancjowalne&quot;&gt;Item 4: Enforce noninstantiability with a private constructor
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/wstrzykiwanie-zaleznosci&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 5: Prefer dependency injection to hardwiring resources
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow&quot;&gt;Item 6: Avoid creating unnecessary objects
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wycieki-pamieci-w-javie&quot;&gt;Item 7: Eliminate obsolete object references
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/unikaj-finalizerow-i-cleanerow&quot;&gt;Item 8: Avoid finalizers and cleaners
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/preferuj-try-with-resources&quot;&gt;Item 9: Prefer try-with-resources to try-finally
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Statyczne klasy &lt;em&gt;utility&lt;/em&gt; i singletony nie powinny być stosowane tam, gdzie zachowanie klasy jest sparametryzowane przez wewnętrzne zależności. W książce pokazane jest to na przykładzie &lt;em&gt;spellcheckera&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Inappropriate use of static utility - inflexible &amp;amp; untestable!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpellChecker&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Lexicon&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SpellChecker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Noninstantiable&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isValid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;suggestions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Inappropriate use of singleton - inflexible &amp;amp; untestable!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpellChecker&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Lexicon&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SpellChecker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(...)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INSTANCE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SpellChecker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(...);&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isValid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;suggestions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Oba rozwiązania są niepoprawne, bo zakładają, że istnieje tylko jeden słownik, który jest warty używania. W praktyce każdy język ma swój własny, a tu nie mamy możliwości reużycia tego kodu z innym. Również podczas testowania moglibyśmy chcieć użyć jakiegoś specjalnego słownika.&lt;/p&gt;
-
-&lt;p&gt;Takie klasy powinny wspierać różne typy tych zależności. To klient powinien je dostarczać. W takich sytuacjach &lt;strong&gt;powinniśmy preferować wstrzykiwanie zależności zamiast definiować je na sztywno.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;wstrzykiwanie-zależności-dependency-injection&quot;&gt;Wstrzykiwanie zależności (Dependency Injection)&lt;/h1&gt;
-
-&lt;p&gt;Jest kilka sposobów wstrzykiwania zależności. Dwa najbardziej popularne to:&lt;/p&gt;
-
-&lt;h2 id=&quot;constructor-injection&quot;&gt;Constructor injection&lt;/h2&gt;
-
-&lt;p&gt;Najprostszy i zarazem najczęściej wykorzystywany sposób na wstrzykiwanie zależności polega na podaniu ich poprzez konstruktor:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Service&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Jest to preferowany sposób.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Zapewnia, że obiekt zawsze jest spójny, bo zależności są wymuszone&lt;/p&gt;
-
-&lt;p class=&quot;cons&quot;&gt;Zależności nie mogą zostać zmienione&lt;/p&gt;
-
-&lt;p&gt;Co wcale nie musi być minusem, bo jest to pierwszy krok, aby klasa była &lt;em&gt;immutable&lt;/em&gt; i &lt;em&gt;thread safe&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Innym wariantem tego wzorca jest podanie fabryki zależności (wzorzec &lt;em&gt;Factory Method&lt;/em&gt;) do konstruktora.
-Interfejs &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Supplier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt; nadaję się do tego idealnie.&lt;/p&gt;
-
-&lt;h2 id=&quot;setter-injection&quot;&gt;Setter injection&lt;/h2&gt;
-
-&lt;p&gt;Tu zależności ustawiamy &lt;em&gt;setterem&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Service&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Elastyczność&lt;/p&gt;
-
-&lt;p&gt;Dzięki temu możemy zmieniać zależności w dowolnym czasie, jednak może się to przerodzić w coś niepożądanego, szczególnie w wielowątkowym środowisku.&lt;/p&gt;
-
-&lt;p class=&quot;cons&quot;&gt;Brak przymusu podania tej zależności&lt;/p&gt;
-
-&lt;p&gt;Może to prowadzić do niespójnej klasy, bo nic nie wymusza żeby tą zależność podać. Aby to osiągnąć trzeba by utworzyć metodę, która sprawdzałaby przed każdym użyciem zależnej funkcji czy ta zależność została ustawiona.&lt;/p&gt;
-
-&lt;p class=&quot;note&quot;&gt;Wstrzykiwanie zależności w dużych projektach z mnóstwem zależności może stać się problematyczne, dlatego w takich przypadkach warto korzystać z przeznaczonych do tego frameworków, takich jak Spring, Guice czy Dagger, które automatyzują i upraszczają ten proces.&lt;/p&gt;
-
-&lt;h2 id=&quot;wstrzykiwanie-zależności-w-springu&quot;&gt;Wstrzykiwanie zależności w Springu&lt;/h2&gt;
-
-&lt;p&gt;Różne frameworki mogą dostarczać zautomatyzowany sposób wstrzykiwania zależności. Np. w Springu wykorzystując adnotację &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;&lt;/code&gt;, możemy wstrzyknąć zależność będące beanami (np.:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;) na 3 sposoby. Dzięki adnotacji &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;&lt;/code&gt; obiekt &lt;code class=&quot;highlighter-rouge&quot;&gt;fooFormatter&lt;/code&gt; będzie automatycznie wstrzykiwany przez Springa i od razu dostępny do użycia. Nie ma potrzeby ręcznego podawania zależności.&lt;/p&gt;
-
-&lt;h3 id=&quot;wstrzykiwanie-bezpośrednio-w-pole&quot;&gt;Wstrzykiwanie bezpośrednio w pole&lt;/h3&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FooService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Jest to najczęściej nadużywana opcja, szczególnie przez początkujących i nie jest zalecaną praktyką.&lt;/p&gt;
-
-&lt;p class=&quot;cons&quot;&gt;Minusy:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Uniemożliwia ręczne wstrzyknięcie zależności bez automagii framworka (refleksja) np. podczas testowania.&lt;/li&gt;
-  &lt;li&gt;Używając tego rozwiązania nie jesteśmy też w stanie zadeklarować zmiennej jako &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Ukrywany jest fakt, że klasa ma zależność. Nic nie stoi na przeszkodzie, żeby zrobić coś takiego:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;FooService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FooService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;fooService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Co oczywiście skutkuje &lt;code class=&quot;highlighter-rouge&quot;&gt;NullPointerException&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Jest to najłatwiejszy sposób dodawania zależności, bo wystarczy dodać kolejne pole &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;&lt;/code&gt;, jednak nie koniecznie jest to zaleta. Przez to jesteśmy kuszeni, aby dodawać bezboleśnie kolejne zależności, aż w końcu nasz klasa będzie &lt;em&gt;God&lt;/em&gt; klasą z 10+ zależnościami. Używając wstrzykiwania przez konstruktor od razu widać, kiedy przesadzamy z liczbą zależności. Generalnie jeśli klasa ma więcej niż 4-5 zależności trzeba się zastanowić czy przypadkiem nie robi za dużo i nie narusza &lt;a href=&quot;/notatnik-juniora/zasady-projektowania-kodu#s---single-responsibility-principle&quot;&gt;SRP&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;wstrzykiwanie-poprzez-konstruktor&quot;&gt;Wstrzykiwanie poprzez konstruktor&lt;/h3&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FooService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;FooService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fooFormatter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p class=&quot;note&quot;&gt;Od Spring 4.3, jeśli klasa posiada tylko jeden konstruktor, to adnotacja &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;&lt;/code&gt;  nie jest wymagana. Z kolei jeśli klasa definiuje kilka konstruktorów, to musimy oznaczyć jeden z nich, aby pokazać kontenerowi DI, którego ma użyć.&lt;/p&gt;
-
-&lt;p&gt;Jest to najbardziej preferowana opcja. W niektórych framworkach (patrz Angular) jest to tak faworyzowany sposób, że jest on jedynym sposobem wstrzykiwania zależności.&lt;/p&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Plusy:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Nie utrudnia testowania&lt;/li&gt;
-  &lt;li&gt;Nie jesteśmy uzależnieniu od adnotacji &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Można łatwo zobaczyć kiedy przesadzamy z zależnościami&lt;/li&gt;
-  &lt;li&gt;Zależności mogą być &lt;em&gt;immutable&lt;/em&gt; - możemy zadeklarować zależności jako &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Zalecany przez twórców springa - &lt;a href=&quot;https://spring.io/blog/2007/07/11/setter-injection-versus-constructor-injection-and-the-use-of-required&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;wstrzykiwanie-poprzez-setter&quot;&gt;Wstrzykiwanie poprzez setter&lt;/h3&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FooService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setFooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FooFormatter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fooFormatter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fooFormatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ten wariant ma podobne minusy co wstrzykiwanie bezpośrednio w pole, ale przynajmniej nie ukrywa, że klasa zależy od &lt;code class=&quot;highlighter-rouge&quot;&gt;FooFormatter&lt;/code&gt; i umożliwia podanie jej w łatwy sposób. To rozwiązanie może być stosowane do podawania opcjonalnych zależności (bo nie jest to wymuszone jak w przypadku konstruktora), &lt;strong&gt;jednak w większości wypadków preferowane jest wstrzykiwanie zależności przez konstruktor.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;dlaczego-wstrzykiwać-zależności&quot;&gt;Dlaczego wstrzykiwać zależności&lt;/h1&gt;
-
-&lt;p&gt;Wstrzykiwanie zależności niesie ze sobą wiele korzyści i sprawia, że klasy:&lt;/p&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Są bardziej elastyczne (&lt;em&gt;decoupling&lt;/em&gt;)&lt;/p&gt;
-
-&lt;p&gt;Klasa jest uniezależniona od konkretnej implementacji. Dzięki temu jest konfigurowalna przez klienta, co sprzyja reużywalności i łatwości w utrzymaniu.&lt;/p&gt;
-
-&lt;p class=&quot;pros&quot;&gt;Są łatwiejsze do przetestowania&lt;/p&gt;
-
-&lt;p&gt;Można w łatwy sposób mockować takie zależności i testować je w izolacji.&lt;/p&gt;
-
-&lt;p&gt;Podsumowując, świadome korzystanie z wstrzykiwania zależności ma niemal same zalety, a preferowanym sposobem wstrzykiwania zależności jest ten z wykorzystaniem konstruktora.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 5 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 6 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry></feed>

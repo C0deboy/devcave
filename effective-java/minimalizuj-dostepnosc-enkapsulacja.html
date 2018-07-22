@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Minimalizowanie dostępności - modyfikatory dostępu i enkapsulacja</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/minimalizuj-dostepnosc-enkapsulacja">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Minimalizowanie dostępności</h1>
+            
+            <h2 class="post-subtitle">Czyli modyfikatory dostępu i enkapsulacja</h2>
+            
+            <p class="post-meta">
+              
+              21
+              lipca
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#czym-jest-enkapsulacja">Czym jest enkapsulacja?</a></li>
+<li class="toc-entry toc-h1"><a href="#modyfikatory-dostępu">Modyfikatory dostępu</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#dla-klas-i-interfejsów">Dla klas i interfejsów</a></li>
+<li class="toc-entry toc-h2"><a href="#dla-elementów-klasy">Dla elementów klasy</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#moduły-java-9">Moduły Java 9</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 15</i> z rozdziału:</p>
+
+<p class="m0">Classes and Interfaces</p>
+
+<ul class="fa-ul custom"><li style="list-style-type: none;">
+                    <a href="/effective-java/minimalizuj-dostepnosc-enkapsulacja">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 15: Minimize the accessibility of classes and members
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 16: In public classes, use accessor methods, not public fields
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 17: Minimize mutability
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 18: Favor composition over inheritance
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 19: Design and document for inheritance or else prohibit it
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 20: Prefer interfaces to abstract classes
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 21: Design interfaces for posterity | #domyślne-metody-w-interfejsach
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 22: Use interfaces only to define types | #interfejs-tylko-jako-definicja-typu
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 23: Prefer class hierarchies to tagged classes | #preferuj-hierarchię-klas-zamiast-otagowanych-klas
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 24: Favor static member classes over nonstatic
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 25: Limit source files to a single top-level class | #jedna-top-level-klasa-na-jeden-plik-źródłowy
+                </a>
+            </li></ul>
+<hr />
+
+<p>Enkapsulacja jest jednym z ważniejszych czynników określających dobry design i jego podstawą.</p>
+
+<h1 id="czym-jest-enkapsulacja">Czym jest enkapsulacja?</h1>
+
+<p>Enkapsulacja polega na ukrywaniu szczegółów implementacyjnych przed innymi komponentami. Dobrze zaprojektowane komponenty ukrywają je wszystkie, jasno rozdzielając jego API od jego implementacji. Wtedy, komponenty komunikują się przez swoje API i nie są świadome, co wykonywane jest pod spodem.</p>
+
+<p>Enkapsulacja jest ważne z wielu powodów, jednak najważniejszym z nich jest fakt, że rozdziela komponenty, które tworzą system. Sprawia to że mogą być rozwijane, testowane, optymalizowane, analizowane i modyfikowane w izolacji.
+Dzięki temu możemy pracować na nich równolegle, bez ryzyka uszkodzenia innych komponentów, co znacznie przyspiesza proces rozwijania systemu.</p>
+
+<p><strong>Best practice: ograniczaj dostęp do klas, interfejsów i elementów klasy najbardziej jak jest to możliwe.</strong></p>
+
+<p>Cytując dokumentację:</p>
+
+<blockquote>
+  <p>Use the most restrictive access level that makes sense for a particular member. Use private unless you have a good reason not to.</p>
+</blockquote>
+
+<p>Mowa tu o mechanizmie <em>access control</em>, dzięki któremu określamy dostępność do klas, interfejsów i elementów klasy na podstawie modyfikatorów dostępu, którymi są oznaczane.</p>
+
+<h1 id="modyfikatory-dostępu">Modyfikatory dostępu</h1>
+
+<p>W Javie dostępne mamy cztery modyfikatory dostępu: <code class="highlighter-rouge">private</code>, <code class="highlighter-rouge">protected</code>, <code class="highlighter-rouge">public</code> i <code class="highlighter-rouge">package-private</code>, który jest domyślny, tzn. wtedy kiedy nie podamy żadnego (<strong>z wyjątkiem elementów zadeklarowanych w interfejsie, które domyślnie są publiczne</strong>).</p>
+
+<h2 id="dla-klas-i-interfejsów">Dla klas i interfejsów</h2>
+
+<p>Dla top-level (niewewnętrznych) klas i interfejsów możliwe są tylko dwa - <code class="highlighter-rouge">package-private</code> i <code class="highlighter-rouge">public</code>. <code class="highlighter-rouge">package-private</code> jest wtedy, gdy nie oznaczymy klasy modyfikatorem <code class="highlighter-rouge">public</code>, czyli domyślnie. Jeśli jest możliwość, żeby klasa lub interfejs był <code class="highlighter-rouge">package-private</code> to powinno tak się stać. Dzięki temu nasza klasa lub interfejs nie widnieje w API, a jest częścią implementacji i możemy ją dowolnie modyfikować, zastąpić czy nawet usunąć, bez uszkadzania istniejących klientów. Z kolei, jeśli nasza klasa lub interfejs jest publiczny, to jesteśmy zobowiązani wspierać go do końca, by zachować kompatybilność wsteczną.</p>
+
+<p class="note">Obecnie większość IDE przy tworzeniu nowych klas domyślnie wstawia modyfikator dostępu <code class="highlighter-rouge">public</code>. Warto to zmienić na <code class="highlighter-rouge">package-private</code> (czyli bez modyfikatora dostępu) i w miarę potrzeby deklarować <code class="highlighter-rouge">public</code> tylko wtedy kiedy jest to rzeczywiście potrzebne.</p>
+
+<p>Jeśli klasa lub interfejs <code class="highlighter-rouge">package-private</code> jest używany tylko przez jedną klasą, to możemy rozważyć przeniesienie jej do tej klasy jako wewnętrznej klasy <code class="highlighter-rouge">private static</code>. Redukuje to dostępność tej klasy w innych klasach w obrębie tego samego pakietu. Będzie o tym mowa w <em>Item 24</em>. Jednak zdecydowanie ważniejsze jest redukowanie dostępu klas publicznych, jako że klasy <em>top-level</em> <code class="highlighter-rouge">package-private</code> i tak są już częścią implementacji, a nie publicznego API.</p>
+
+<h2 id="dla-elementów-klasy">Dla elementów klasy</h2>
+<p>Poprzez “elementy klasy” mam na myśli pola, metody, wewnętrzne klasy i interfejsy. Mamy dla nich dostępne wszystkie cztery modyfikatory dostępu:</p>
+
+<ul>
+  <li><strong>private</strong> — element jest dostępny tylko w klasie, w której jest zadeklarowany.</li>
+  <li><strong>package-private</strong> — element jest dostępny z każdej klasy w obrębie tego samego pakietu.</li>
+  <li><strong>protected</strong> — element jest również dostępny w klasach w obrębie tego samego pakietu oraz dodatkowo w podklasach klasy, w której jest zadeklarowany.</li>
+  <li><strong>public</strong> — element jest dostępny wszędzie.</li>
+</ul>
+
+<p>Łatwiej to zobrazować na podstawie tabelki:</p>
+
+<div class="table-wrapper">
+
+  <table class="table table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th style="text-align: left">Modyfikator</th>
+        <th style="text-align: left">Klasa</th>
+        <th style="text-align: left">Pakiet</th>
+        <th style="text-align: left">Podklasa</th>
+        <th style="text-align: left">Wszędzie</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: left"><code class="highlighter-rouge">public</code></td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><code class="highlighter-rouge">protected</code></td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">NIE</td>
+      </tr>
+      <tr>
+        <td style="text-align: left">brak</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">NIE</td>
+        <td style="text-align: left">NIE</td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><code class="highlighter-rouge">private</code></td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">NIE</td>
+        <td style="text-align: left">NIE</td>
+        <td style="text-align: left">NIE</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>Dla przykładu rozważmy, że mamy taką strukturę klas:</p>
+
+<p><img src="/img/effective-java/classes-access.png" alt="modyfikatory przykład" /></p>
+
+<p>Wtedy pola klasy <code class="highlighter-rouge">Alpha</code> oznaczone danym modyfikatorem będą miały taką widoczność w innych klasach:</p>
+
+<div class="table-wrapper">
+
+  <table class="table table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th style="text-align: left">Modyfikator</th>
+        <th style="text-align: left">Alpha</th>
+        <th style="text-align: left">Beta</th>
+        <th style="text-align: left">AlphaSub</th>
+        <th style="text-align: left">Gamma</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: left"><code class="highlighter-rouge">public</code></td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><code class="highlighter-rouge">protected</code></td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">NIE</td>
+      </tr>
+      <tr>
+        <td style="text-align: left">brak</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">NIE</td>
+        <td style="text-align: left">NIE</td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><code class="highlighter-rouge">private</code></td>
+        <td style="text-align: left">TAK</td>
+        <td style="text-align: left">NIE</td>
+        <td style="text-align: left">NIE</td>
+        <td style="text-align: left">NIE</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>Duży przeskok w dostępności jest z <code class="highlighter-rouge">package-private</code> na <code class="highlighter-rouge">protected</code>. Element oznaczony jako <code class="highlighter-rouge">protected</code> jest już częścią API i musi być wspierany wiecznie. Jednak potrzeba ich stosowania powinna być sporadyczna.</p>
+
+<p>Czasem modyfikatory dostępu są z góry wymuszone, na przykład, kiedy nadpisujemy metodę z nadklasy, to nie może ona mieć bardziej restrykcyjnego dostępu niż w nadklasie. Również wtedy, gdy klasa implementuje interfejs, to implementowane metody będą zawsze <code class="highlighter-rouge">public</code>.</p>
+
+<p><strong>Pola klasy nie powinny być publiczne</strong>.</p>
+
+<p>Jeśli pole nie jest zadeklarowane jako <code class="highlighter-rouge">final</code> lub jest referencją do mutowalnego obiektu, to deklarując takie pole jako <code class="highlighter-rouge">public</code> umożliwiamy jego modyfikację lub podmianę. Ponadto podczas takiej modyfikacji możemy wykonać na nim jakąkolwiek akcję, więc <strong>klasy z publicznymi modyfikowalnymi polami nie są <em>thread safe</em></strong>.</p>
+
+<p>To samo tyczy się statycznych pól, z wyjątkiem stałych, które są integralną częścią abstrakcji klasy. Takie pola zazwyczaj upubliczniamy za pomocą <code class="highlighter-rouge">public static final</code> i przyjęło się je nazywać za pomocą drukowanych wyrazów rozdzielonymi podłogą, np.:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DAYS_IN_WEEK</span> <span class="o">=</span> <span class="mi">7</span><span class="o">;</span>
+</code></pre></div></div>
+<p>Ważne jest to, żeby takie pola zawierały tylko prymitywy lub referencje do obiektów <em>immutable</em>. Referencje do obiektów <em>mutable</em> mają wszystkie wady pola niezadeklarowanego jako <code class="highlighter-rouge">final</code>. Referencja nie może być zmieniona, ale sam obiekt już może.</p>
+
+<p class="warning">Tablice niezerowej długości są zawsze <em>mutable</em>, więc tablice nigdy nie powinny być deklarowane jako <code class="highlighter-rouge">public static final</code> ani klasa nie powinna udostępniać do niej <em>gettera</em> w przypadku kiedy jest <code class="highlighter-rouge">private</code>.  W przeciwnym wypadku klient będzie mógł zmodyfikować taką tablicę.</p>
+
+<p>Możemy rozwiązać ten problem zwracając w getterze kopię tablicy.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[]</span> <span class="n">PRIVATE_VALUES</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[]</span> <span class="nf">values</span><span class="o">()</span> <span class="o">{</span>
+	<span class="k">return</span> <span class="n">PRIVATE_VALUES</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jednak jeśli obiekt typu <code class="highlighter-rouge">Thing</code> jest <em>mutable</em> to będzie trzeba wykonać <em>deep copy</em>. Temat klonowania omawiałem dwa wpisy wcześniej.</p>
+
+<p>Podsumowując, powinniśmy redukować dostępność komponentów najbardziej jak to możliwe. Publiczne API nie powinno być zanieczyszczone klasami będącymi szczegółami implementacyjnymi innych klas. Publiczne klasy nie powinny mieć publicznych pól, z wyjątkiem stałych, które powinny być <em>immuatable</em>.</p>
+
+<h1 id="moduły-java-9">Moduły Java 9</h1>
+
+<p>Java 9 daje nam nową abstrakcję ponad pakietami — moduły. Analogicznie tak jak pakiet jest zbiorem powiązanych klas, tak moduły są zbiorem powiązanych pakietów.</p>
+
+<p>System modułów daje nam to nowe możliwości określania dostępności danych komponentów. Domyślnie żaden pakiet w module nie jest publiczny (dostępność wewnątrz modułu się nie zmienia). Jeśli chcemy, aby dany pakiet był dostępny w innym module, to musimy o tym wyraźnie poinformować w <em>module descriptor</em>. Jest to plik o nazwie <span class="file">module-info.java</span>.</p>
+
+<p>Jego struktura wygląda mniej więcej tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">module</span> <span class="n">my</span><span class="o">.</span><span class="na">module</span> <span class="o">{</span>
+    <span class="n">exports</span> <span class="n">com</span><span class="o">.</span><span class="na">my</span><span class="o">.</span><span class="na">package</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Dzięki temu możemy udostępniać klasy między pakietami wewnątrz modułów bez udostępniania ich całemu światu.</p>
+
+<p>System modułów nie jest jeszcze szeroko używany w Javie i ciężko powiedzieć czy kiedykolwiek tak będzie.</p>
+
+<p>Jeśli chciałbyś więcej się dowiedzieć o tym mechanizmie, to polecam <a href="http://www.baeldung.com/java-9-modularity">baeldung.com/java-9-modularity</a>.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/interfejs-comparable"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Interfejs Comparable i Comparator"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/minimalizuj-dostepnosc-enkapsulacja";
+    this.page.identifier = "/effective-java/minimalizuj-dostepnosc-enkapsulacja";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

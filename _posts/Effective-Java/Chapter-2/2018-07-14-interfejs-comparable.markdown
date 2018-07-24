@@ -57,7 +57,7 @@ Set<String> alphabeticalWordList = new TreeSet<>(strings);
 //[Andy, Bar, Foo, Shop]
 ```
 
-Dodając jakikolwiek string do tej kolekcji automatycznie zajmie swoje miejsce w alfabetycznym porządku.
+Jeśli dodamy jakikolwiek string do tej kolekcji, to automatycznie zajmie swoje miejsce w alfabetycznym porządku.
 
 Jak widać dzięki zaimplementowaniu `Comparable`, pozwalamy naszej klasie współdziałać z wieloma generycznymi algorytmami i kolekcjami, które polegają na tym interfejsie. Dostajemy wiele możliwości z małym nakładem pracy.
 

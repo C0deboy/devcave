@@ -176,7 +176,7 @@ Plusy:
 ```java
 public class FooService {
 
-    private final FooFormatter fooFormatter;
+    private FooFormatter fooFormatter;
 
     @Autowired
     public void setFooFormatter(FooFormatter fooFormatter) {

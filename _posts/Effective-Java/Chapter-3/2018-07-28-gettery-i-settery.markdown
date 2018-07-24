@@ -29,7 +29,7 @@ Przez to, że pola tej klasy są używane bezpośrednio ({% code java %}point.x{
 
 W takich klasach nie możemy zmienić reprezentacji bez zmieniania API, nie możemy wymusić jej poprawności ani wykonać żadnej innej akcji, podczas gdy pole jest pobierane.
 
-Niektórzy zatwardziali obiektowi programiści powiedzieliby, że takie klasy zawsze powinny być zamienione na klasy z prywatnymi polami i getterami/setterami:
+Niektórzy powiedzieliby, że takie klasy zawsze powinny być zamienione na klasy z prywatnymi polami i getterami/setterami:
 
 ```java
 // Encapsulation of data by accessor methods and mutators
@@ -93,6 +93,6 @@ ma dużo więcej sensu niż:
 ```java
 dog.setBall(new Ball());
 ```
-Z wyjątkiem, gdy klasa (w tym przypadku `Dog`) jest tylko rekordem w bazie danych.
+No może z wyjątkiem, gdy klasa (w tym przypadku `Dog`) jest tylko rekordem w bazie danych.
 
 Podsumowując, publiczne klasy nigdy nie powinny wystawiać **publicznych zmiennych** pól. Mniej szkodliwe jest wystawianie niezmiennych pól, jednak nadal problematyczne - w niektórych przypadkach. Jeśli rzeczywiście potrzebujemy taką klasę, to wtedy najlepiej ograniczyć taką klasę do pakietu lub jeśli jest możliwe - do jednej klasy.

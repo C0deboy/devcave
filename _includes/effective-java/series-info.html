@@ -47,8 +47,15 @@
 
     {%- for item in chapter.items -%}
         {%- unless done contains item[0] -%}
+
+        {%- assign postName = item[1] -%}
+        {%- assign itemData = item[1] | split: ' | ' -%}
+
+        {%- if itemData[1] -%}
+            {%- assign postName = itemData[0] -%}
+        {%- endif -%}
             <li>
-                <a herf="" class="disabled">{{ item[1] }}
+                <a herf="" class="disabled">{{ postName }}
                 </a>
             </li>
         {%- endunless -%}

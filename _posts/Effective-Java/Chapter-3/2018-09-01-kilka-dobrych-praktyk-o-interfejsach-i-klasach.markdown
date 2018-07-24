@@ -23,7 +23,7 @@ Przed Javą 8 nie było możliwości dodania do interfejsu nowej metody bez uszk
 
 W Javie 8 dodano domyślne metody do interfejsów, aby umożliwić dostarczenie domyślnej implementacji bezpośrednio w interfejsie. Dzięki temu, klasy, które implementują ten interfejs, nie spowodują błędu kompilacji, bo wszystkie odziedziczą domyślną implementację z interfejsu.
 
-**Dodawanie nowym metod w ten sposób nie jest jednak pozbawione ryzyka błędu.** 
+**Dodawanie nowych metod w ten sposób nie jest jednak pozbawione ryzyka błędu.**
 
 Przykładem może być metoda `removeIf`, która została dodana do interfejsu `Collection` w Javie 8 i usuwa wszystkie elementy, które spełnią warunek w funkcji podanej jako argument:
 
@@ -48,9 +48,9 @@ Jest to dobra, uniwersalna implementacja `removeIf`, jednak może nie działać 
 Jeśli jest używana razem z Java 8, to odziedziczy domyślną implementację `removeIf`, która nie spełnia fundamentalnego założenia klasy: synchronizowania każdego wywołania funkcji. Domyślna implementacja nie ma pojęcia o synchronizacji. 
 Jeśli wywołamy `removeIf` na `SynchronizedCollection` podczas równoczesnej modyfikacji przez inny wątek, to dostaniemy `ConcurrentModificationException` lub jakieś inne nieprzewidywalne zachowanie.
 
-Klasa `SynchronizedCollection` od Apache jest nadal aktywnie utrzymywana, ale na dzień dzisiejszy nadal nie nadpisuje zachowania `removeIf`. 
+Klasa `SynchronizedCollection` od Apache jest niby nadal aktywnie utrzymywana, ale na dzień dzisiejszy nadal nie nadpisuje zachowania `removeIf`.
 
-Podobna implementacja w standardowej bibliotece Javy zwracana przez `Collections.synchronizedCollection` musiała zostać dostosowana i metoda `removeIf` została nadpisana, aby wykonać synchronizację. Implementacje spoza biblioteki Javy nie mogły zrobić tego w tym samym czasie.
+Podobna implementacja w standardowej bibliotece Javy zwracana przez `Collections.synchronizedCollection` musiała zostać dostosowana i metoda `removeIf` została nadpisana, aby wykonać synchronizację. Implementacje spoza biblioteki Javy nie mogły zrobić tego w tym samym czasie - wraz z wydaniem nowej wersji Javy.
 
 {: .note}
 Gdy dodamy domyślne metody do interfejsu, istniejące implementacje skompilują się bez błędu, ale mogą wysypać się w trakcie wykonywania programu.
@@ -66,6 +66,7 @@ Jeśli jednak dopiero tworzymy interfejs, to domyślne metody są bardzo przydat
 
 Przykładowo, żeby nikomu nie przyszło do głowy używanie interfejsu do definiowania stałych, tylko po to, by klasy, które używają tych stałych, implementowały go, w celu uniknięcia deklarowania nazwy klasy razem z nazwą stałej. Przykładowo:
 
+```java
 // Constant interface antipattern - do not use! 
 public interface PhysicalConstants {
     // Avogadro's number (1/mol)  
@@ -77,6 +78,7 @@ public interface PhysicalConstants {
     // Mass of the electron (kg)  
     static final double ELECTRON_MASS = 9.109_383_56e-31;
 }
+```
 
 Używanie stałych jest detalem implementacyjnym. Gdy implementujemy taki interfejs, to wszystko wycieka do publicznego API. 
 
@@ -173,7 +175,7 @@ class Rectangle extends Figure {
 }
 ```
 
-I taki płynie też przekaz z tego itemu - preferuj hierarchie klas, zamiast tworów tego typu. Nie używaj "tagów" do określenia typu klasy - od tego są właśnie klasy.
+I taki płynie też przekaz z tego itemu - preferuj hierarchie klas, zamiast tworów typu pierwszego kawałka kodu. Nie używaj "tagów" do określenia typu klasy - od tego są właśnie klasy.
  
 *Tagged classes* nie mają żadnego uzasadnionego prawidłowego użycia ani zalet, nad którymi można by się zastanowić.
 
@@ -191,10 +193,10 @@ class Dessert { // top level class
     static final String NAME = "cake";
 }
 ```
-**ale nie powinniśmy nigdy z tej możliwości korzystać**. Deklarując klasy w tym samym pliku dużo łatwiej o kolizję i czytelność znacznie spada. 
+**ale nie powinniśmy nigdy z tej możliwości korzystać**. Deklarując klasy w tym samym pliku dużo łatwiej o kolizję i czytelność projektu znacznie spada.
 
 Poza tym nie widać żadnych zalet w takim rozwiązaniu.
 
 Kolejne dosyć naturalne (przynajmniej dla mnie) zachowanie. Nic dodać, nic ująć.
 
-Jeśli z kolei klasa rzeczywiście służy tylko innej w tym samym pliku, to można rozważyć zadeklarowanie jej jako *static member*. Jest to bardziej czytelne i możemy zredukować dostępność, deklarując ją jako `private`. O klasach wewnętrznych będzie następny wpis.
+Jeśli z kolei klasa rzeczywiście służy tylko jednej - tej w tym samym pliku, to można rozważyć zadeklarowanie jej jako statycznej klasy wewnętrznej. Jest to bardziej czytelne i możemy zredukować dostępność, deklarując ją jako `private`. O klasach wewnętrznych będzie następny wpis.

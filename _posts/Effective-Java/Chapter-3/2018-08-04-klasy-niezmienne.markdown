@@ -8,7 +8,7 @@ author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
-toc:        true
+toc:        false
 chapter:    4
 item:       17
 ---
@@ -33,17 +33,22 @@ Jeśli nasza klasa ma być niezmienna, to wszystkie operacje na naszym obiekcie 
 
 ```java
 // Immutable complex number class
-public final  class Complex {
-    private final  double re;
-    private final  double im;
+public final class Complex {
+    private final double re;
+    private final double im;
 
     public Complex(double re, double im) {
         this.re = re;
         this.im = im;
     }
 
-    public double realPart()      { return re; }
-    public double imaginaryPart() { return im; }
+    public double realPart() {
+        return re;
+    }
+
+    public double imaginaryPart() {
+        return im;
+    }
 
     public Complex plus(Complex c) {
         return new Complex(re + c.re, im + c.im);
@@ -55,31 +60,37 @@ public final  class Complex {
 
     public Complex times(Complex c) {
         return new Complex(re * c.re - im * c.im,
-                           re * c.im + im * c.re);
+            re * c.im + im * c.re);
     }
 
     public Complex dividedBy(Complex c) {
         double tmp = c.re * c.re + c.im * c.im;
         return new Complex((re * c.re + im * c.im) / tmp,
-                           (im * c.re - re * c.im) / tmp);
+            (im * c.re - re * c.im) / tmp);
     }
 
-    @Override public boolean equals(Object o) {
-       if (o == this)
-           return true;
-       if (!(o instanceof Complex))
-           return false;
-       Complex c = (Complex) o;
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Complex)) {
+            return false;
+        }
+        Complex c = (Complex) o;
 
-       // See page 47 to find out why we use compare instead of ==
-       return Double.compare(c.re, re) == 0
-           && Double.compare(c.im, im) == 0;
+        // See page 47 to find out why we use compare instead of ==
+        return Double.compare(c.re, re) == 0
+            && Double.compare(c.im, im) == 0;
     }
-    @Override public int hashCode() {
+
+    @Override
+    public int hashCode() {
         return 31 * Double.hashCode(re) + Double.hashCode(im);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "(" + re + " + " + im + "i)";
     }
 }
@@ -97,7 +108,7 @@ BigInteger j = i.add(BigInteger.valueOf(20));
 ```
 Wartość `i` nigdy się nie zmieni. Wszystkie działania na `BigInteger` zwracają nowy obiekt.
 
-Innym sposobem na to, by uniemożliwić rozszerzanie klasy jest zadeklarowanie wszystkich konstruktorów jako `private` lub `package-private` i dodać [public static factory method]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}). Jest to bardziej elastyczny sposób niż deklarowanie klasy jako `final`. Pozwala nam to na używanie kilku implementacji z tego samego pakietu, a dla klientów spoza pakietu zachowuje się tak jakby była `final`, ponieważ nie ma możliwości rozszerzenia klasy, gdy nie mamy dostępu do konstruktora. Poza tym *static factory method* ma sama w sobie wiele zalet, które były już [omawiane]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}).
+Innym sposobem na to, by uniemożliwić rozszerzanie klasy, jest zadeklarowanie wszystkich konstruktorów jako `private` lub `package-private` i dodać [public static factory method]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}). Jest to bardziej elastyczny sposób niż deklarowanie klasy jako `final`. Pozwala nam to na używanie kilku implementacji z tego samego pakietu, a dla klientów spoza pakietu zachowuje się tak jakby była `final`, ponieważ nie ma możliwości rozszerzenia klasy, gdy nie mamy dostępu do konstruktora. Poza tym *static factory method* ma sama w sobie wiele zalet, które były już [omawiane]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}).
 
 Inne zalety klas niezmiennych:
 
@@ -118,7 +129,7 @@ I to by była większość zalet klas niezmiennych. Całkiem tego sporo.
 Dlatego powstają tzw. *companion classes*, które są zmiennym odpowiednikiem danej klasy niezmiennej. Najlepszym tego przykładem w bibliotece Javy jest `StringBuilder`, który pozwala modyfikować stringa w wydajny sposób, po czym później zwrócić go jako niezmienną instancję `String`.
 
 {: .warning}
-Gdy tworzono klasy `BigInteger` i `BigDecimal` nie było jeszcze powszechnie wiadomo, że niezmienne klasy nie powinny być rozszerzane, dlatego jest to możliwe i wszystkie jej metody mogą zostać nadpisane. Ze względu na kompatybilność wsteczną nie mogło to być poprawione. Dlatego jeśli piszesz aplikację, która polega na niezmienności którejś z tych klas podanych jako argument od klienta, to powinieneś sprawdzić, czy jest to "prawdziwy" `BigInteger` lub `BigDecimal`, a nie jakaś niezaufana podklasa.<br>Można na przykład zwrócić *deffensive copy*, gdy mamy do czynienia z drugim przypadkiem:
+Gdy tworzono klasy `BigInteger` i `BigDecimal` nie było jeszcze powszechnie wiadomo, że niezmienne klasy nie powinny być rozszerzane, dlatego jest to możliwe i wszystkie jej metody mogą zostać nadpisane. Ze względu na kompatybilność wsteczną nie mogło to być poprawione. Dlatego, jeśli piszesz aplikację, która polega na niezmienności którejś z tych klas podanych jako argument od klienta, to powinieneś sprawdzić, czy jest to "prawdziwy" `BigInteger` lub `BigDecimal`, a nie jakaś niezaufana podklasa.<br>Można na przykład zwrócić *deffensive copy*, gdy mamy do czynienia z drugim przypadkiem:
 
 ```java
 public static BigInteger safeInstance(BigInteger val) {

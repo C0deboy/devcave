@@ -1,8 +1,8 @@
 ---
 layout:     post
-titleSEO:	"Kompozycja zamiast dziedziczenia"
-title:      "Kompozycja zamiast dziedziczenia"
-subtitle:   "Dlaczego dziedziczenie nie zawsze jest dobre"
+titleSEO:	"Projektowanie klasy pod dziedziczenie"
+title:      "Projektowanie klasy pod dziedziczenie"
+subtitle:   "Na co zwrócić uwagę, jeśli uznamy, że jest stosowne"
 date:       2018-08-18 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
@@ -42,7 +42,7 @@ Mamy tu jasno udokumentowane, że nadpisywanie metody `iterator` będzie miało 
 
 **Podając szczegóły implementacyjne, naruszamy enkapsulację i zobowiązujemy się nigdy tego nie zmieniać, ale jest to konsekwencja używania dziedziczenia.** Jest to wymagane, aby można było bezpiecznie tworzyć podklasy danej klasy.
 
-**Musimy również zadbać, aby wszystkie kluczowe pola były dostępne dla podklas**. Jedyny sensowny sposób, aby przetestować naszą klasę, którą projektujemy pod dziedziczenie i przekonać się co jest niezbędne, to napisać podklasy (najlepiej, żeby przynajmniej jedna nie była pisana przez nas). Wtedy jasno zobaczymy, co powinniśmy ukryć, a co udostępnić podklasom.
+**Musimy również zadbać, aby wszystkie kluczowe pola były dostępne dla podklas**. Jedyny sensowny sposób, aby przetestować naszą klasę, którą projektujemy pod dziedziczenie i przekonać się co jest niezbędne, to napisać kilka podklas (najlepiej, żeby przynajmniej jedna nie była pisana przez nas). Wtedy jasno zobaczymy, co powinniśmy ukryć, a co udostępnić podklasom.
 
 Kolejną ważną rzeczą jest to, aby **konstruktory nie wywoływały metod, które mogą zostać nadpisane**. Jeśli ta metoda zależy od pola zainicjowanego przez konstruktor, to nie będzie wtedy działać prawidłowo. Konstruktor nadklasy wywoływany jest przed konstruktorem podklasy, więc nadpisana metoda podklasy będzie wywołana, zanim wywołany zostanie jej konstruktor. Przykład:
 

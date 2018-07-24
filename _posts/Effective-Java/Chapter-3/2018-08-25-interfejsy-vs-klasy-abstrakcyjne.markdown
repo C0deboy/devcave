@@ -15,7 +15,7 @@ item:       20
 
 {% include effective-java/series-info.html %}
 
-W Javie mamy dwa mechanizmy do definiowania typu, który może mieć różne implementacje: interfejsy i klasy abstrakcyjne.
+W Javie mamy dwa mechanizmy do definiowania abstrakcyjnego typu, który może mieć różne implementacje: interfejsy i klasy abstrakcyjne.
 
 Od dodania metod domyślnych do interfejsów (Java 8), obydwa mechanizmy pozwalają na zdefiniowanie domyślnej implementacji dla niektórych metod. To, co je od siebie najbardziej odróżnia to to, że aby zaimplementować typ zdefiniowany przez klasę abstrakcyjną, trzeba ją rozszerzyć. **Ze względu na to, że w Javie klasa może być podklasą tylko jednej klasy (*single inheritance*), to jest to spore ograniczenie.** W przypadku interfejsów, takiego ograniczenia nie ma i klasa może implementować wiele interfejsów. To właśnie tu głównie wygrywają interfejsy.
 
@@ -137,6 +137,7 @@ Ta implementacja metod nie mogłaby być bezpośrednio w interfejsie, ponieważ 
 
  Przykłady znajdziemy też w standardowym *Collections Framework* - `AbstractCollection`, `AbstractSet`, `AbstractList`, i `AbstractMap`. Takie klasy mogą bardzo ułatwić pisanie implementacji interfejsu. Dla przykładu, podaję [static factory method]({% post_url Effective-Java/Chapter-1/2018-04-14-static-factory-method-zamiast-konstruktora %}), która tworzy w pełni funkcjonalną implementację `List`, zbudowaną na `AbstractList` (w formie klasy anonimowej) z tablicy intów:
 
+{: #intArrayAsList}
 ```java
 // Concrete implementation built atop skeletal implementation
 static List<Integer> intArrayAsList(int[] a) {
@@ -169,10 +170,10 @@ Jeśli zobaczymy ile `List` udostępnia funkcji, to zdamy sobie sprawę, że mas
 {: .note}
 Przykład jest też wzorcem projektowym  *Adapter* - pozwala używać tablicy `int` jako `List<Integer>`.
 
-Innym wariantem *skeletal implementation* jest  *simple implementation,* której przykładem jest  `AbstractMap.SimpleEntry` w standardowej bibliotece Javy. *Simple implementation* jest jak *skeletal implementation* ale nie jest to klasa abstrakcyjna. Jest to możliwe najprostsza, działająca implementacja. Można jej używać taka jaka jest lub rozszerzać, modyfikując zachowanie.
+Innym wariantem *skeletal implementation* jest  *simple implementation,* której przykładem jest  `AbstractMap.SimpleEntry` w standardowej bibliotece Javy. *Simple implementation* jest jak *skeletal implementation*, ale nie jest to klasa abstrakcyjna. Jest to możliwe najprostsza, działająca implementacja. Można jej używać taka jaka jest lub rozszerzać, modyfikując zachowanie.
 
 Jako ze obydwie implementację są zaprojektowane pod dziedziczenie, to warto korzystać ze wskazówek z poprzedniego postu na temat [projaktowania klasy pod dziedziczenie]({% post_url Effective-Java/Chapter-3/2018-08-18-projektowanie-klasy-pod-dziedziczenie %}).
 
-Klasy *skeletal implementation* dostarczają nam zaletę częściowej implementacji z klas abstrakcyjnych, bez narzucania ograniczeń jakie stwarzają, gdy są używane jako definicję typu. Mamy też dowolność czy chcemy skorzystać z klasy abstrakcyjnej czy zaimplementować interfejs bezpośrednio.
+Klasy *skeletal implementation* dostarczają nam zaletę częściowej implementacji z klas abstrakcyjnych, bez narzucania ograniczeń jakie stwarzają, gdy są używane jako definicje typu. Mamy też dowolność czy chcemy skorzystać z klasy abstrakcyjnej czy zaimplementować interfejs bezpośrednio.
 
 Podsumowując, interfejsy są najlepszym sposobem na zdefiniowanie typu, który pozwala na różne implementacje. Gdy mamy do czynienia z rozbudowanym interfejsem, którego metody mogą mięć domyślną implementację, można rozważyć napisanie *skeletal implementation class*. Jeśli mamy taką możliwość, to możemy się ograniczyć tylko do metod domyślnych w interfejsie.

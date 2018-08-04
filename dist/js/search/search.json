@@ -471,6 +471,15 @@
         "subtitle": "Dlaczego unikać publicznych pól",
         "date": "28 lipca 2018",
         "url": "/effective-java/gettery-i-settery"
+      },
+    
+      
+      {
+        "title": "Klasy niezmienne",
+        "titleSEO": "Klasy niezmienne - jak takie stworzyć i dlaczego są preferowane",
+        "subtitle": "Jak takie stworzyć i dlaczego są preferowane.",
+        "date": "4 sierpnia 2018",
+        "url": "/effective-java/klasy-niezmienne"
       }
     
   

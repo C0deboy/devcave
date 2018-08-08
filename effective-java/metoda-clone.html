@@ -222,7 +222,7 @@ implementation.</p>
 
 <p class="note">Wywołanie metody <code class="highlighter-rouge">super.clone</code> jest opakowane w blok <code class="highlighter-rouge">try-catch</code>, ponieważ <code class="highlighter-rouge">Object</code> deklaruje, że jego metoda <code class="highlighter-rouge">clone</code> rzuca wyjątek <code class="highlighter-rouge">CloneNotSupportedException</code>, który jest wyjątkiem typu <em>checked</em>. Jeśli nasz obiekt implementuje interfejs <code class="highlighter-rouge">Cloneable</code> to wiemy, że wyjątek ten nigdy nie zostanie rzucony. Ten zbędny <em>boilerpalte</em> wskazuje na to, że <code class="highlighter-rouge">CloneNotSupportedException</code> powinno być wyjątkiem typu <em>unchecked</em>, no ale tak się nie stało.</p>
 
-<p>Jeśli jednak nasz obiekt ma referencje do zmiennych obiektów, to taka prosta implementacja metody <code class="highlighter-rouge">clone</code> jest zgubna. Weźmy na przykład implementację klasy <code class="highlighter-rouge">Stack</code> ze wcześniejszych wpisów:</p>
+<p>Jeśli jednak nasz obiekt ma referencje do mutowalnych obiektów, to taka prosta implementacja metody <code class="highlighter-rouge">clone</code> jest zgubna. Weźmy na przykład implementację klasy <code class="highlighter-rouge">Stack</code> ze wcześniejszych wpisów:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
@@ -274,7 +274,7 @@ implementation.</p>
 
 <p>Problemem w tym rozwiązaniu jest to, że wtedy pole (w tym przypadku <code class="highlighter-rouge">elements</code>) nie może być zadeklarowane jako <code class="highlighter-rouge">final</code>.</p>
 
-<p>Kolejny problem pojawia się wtedy, kiedy elementy w tablicy są zmienne. Jeśli zmienimy stan jednego z obiektu będącego w tablicy, to zawartość obu tablic zostanie zmodyfikowana. To dlatego, że obie zawierają referencje do tych samych obiektów, a metoda <code class="highlighter-rouge">clone</code> wykonuje płytkie kopiowanie (shallow copy).</p>
+<p>Kolejny problem pojawia się wtedy, kiedy elementy w tablicy są mutowalne. Jeśli zmienimy stan jednego z obiektu będącego w tablicy, to zawartość obu tablic zostanie zmodyfikowana. To dlatego, że obie zawierają referencje do tych samych obiektów, a metoda <code class="highlighter-rouge">clone</code> wykonuje płytkie kopiowanie (shallow copy).</p>
 
 <p>Żeby uzyskać w pełni odizolowane od siebie obiekty wraz ze wszystkimi obiektami wewnątrz, musimy wykonać głębokie kopiowanie (deep copy) - utworzyć nową tablicę i skopiować do niej wszystkie elementy listy.</p>
 

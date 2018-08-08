@@ -159,7 +159,7 @@
 
 <ol>
   <li>
-    <p><strong>Nie udostępniać metod, które mogą zmodyfikować stan obiektu</strong> (m.in. gettery do klas zmiennych).</p>
+    <p><strong>Nie udostępniać metod, które mogą zmodyfikować stan obiektu</strong> (m.in. gettery do klas mutowalnych).</p>
   </li>
   <li>
     <p><strong>Zapewnić by klasa nie mogła być rozszerzana.</strong> Najczęściej można to zrobić oznaczając klasę jako <code class="highlighter-rouge">final</code>, ale jest też alternatywne rozwiązanie, o którym powiem za chwilę.</p>
@@ -168,10 +168,10 @@
     <p><strong>Zadeklarować wszystkie pola jako <code class="highlighter-rouge">final</code>.</strong> Dzięki temu nie będzie można przypisać do pola nowej referencji i będziemy mogli przekazywać ją między wątkami bez synchronizacji.</p>
   </li>
   <li>
-    <p><strong>Zadeklarować wszystkie pola z referencjami do zmiennych obiektów jako <code class="highlighter-rouge">private</code>.</strong> Dzięki temu klient klasy nie będzie miał bezpośredniego dostępu do zmiennego obiektu, który mógłby zmienić.</p>
+    <p><strong>Zadeklarować wszystkie pola z referencjami do mutowalnych obiektów jako <code class="highlighter-rouge">private</code>.</strong> Dzięki temu klient klasy nie będzie miał bezpośredniego dostępu do mutowalnego obiektu, który mógłby zmienić.</p>
   </li>
   <li>
-    <p><strong>Ograniczyć dostęp do zmiennych obiektów otrzymywanych od klienta.</strong> Jeśli klasa ma pole, które odnosi się do zmiennego obiektu, musimy zapewnić, że klient nie będzie miał dostępu do tej referencji. Dlatego nie możemy inicjować pola obiektem, który dostajemy od klienta, lub zwracać taki obiekt getterem. Możemy wykonać <em>deffensive copy</em> na takim obiekcie i dopiero wtedy go przypisać lub zwrócić w getterze.</p>
+    <p><strong>Ograniczyć dostęp do zmiennych obiektów otrzymywanych od klienta.</strong> Jeśli klasa ma pole, które odnosi się do mutowalnego obiektu, musimy zapewnić, że klient nie będzie miał dostępu do tej referencji. Dlatego nie możemy inicjować pola obiektem, który dostajemy od klienta, lub zwracać taki obiekt getterem. Możemy wykonać <em>deffensive copy</em> na takim obiekcie i dopiero wtedy go przypisać lub zwrócić w getterze.</p>
   </li>
 </ol>
 
@@ -262,7 +262,7 @@
 
 <p>Używając obiektów niemutowalnych <strong>nigdy nie będziemy musieli robić ich kopii</strong>. Nie jesteśmy narażeni na niechciane modyfikacje, więc żaden obiekt nie zostanie uszkodzony i nie ma potrzeby robienia kopii.</p>
 
-<p><strong>Niemutowalne obiekty są dobrym budulcem innych obiektów (zmiennych lub nie)</strong>. Dużo łatwiej zapewnić poprawność obiektu, gdy wiemy, że jego komponenty są niemutowalne. Doskonale nadają się jako klucze w mapach i jako elementy w setach - nie musimy się martwić, że ich wartości zmienią się po tym, jak zostaną dodane do kolekcji (co by powodowało ich niepoprawne działanie).</p>
+<p><strong>Niemutowalne obiekty są dobrym budulcem innych obiektów (mutowalnych lub nie)</strong>. Dużo łatwiej zapewnić poprawność obiektu, gdy wiemy, że jego komponenty są niemutowalne. Doskonale nadają się jako klucze w mapach i jako elementy w setach - nie musimy się martwić, że ich wartości zmienią się po tym, jak zostaną dodane do kolekcji (co by powodowało ich niepoprawne działanie).</p>
 
 <p><strong>Nie ma możliwości na niepoprawny stan obiektu, np. po rzuceniu wyjątku.</strong> Są zawsze spójne.</p>
 
@@ -270,7 +270,7 @@
 
 <p><strong>Główną wadą klas niemutowalnych jest to, że wymagają nowego obiektu dla każdej nowej wartości pola.</strong> Może to być kosztowne, gdy obiekty są duże i używane bardzo często.</p>
 
-<p>Dlatego powstają tzw. <em>companion classes</em>, które są zmiennym odpowiednikiem danej klasy niemutowalnej. Najlepszym tego przykładem w bibliotece Javy jest <code class="highlighter-rouge">StringBuilder</code>, który pozwala modyfikować stringa w wydajny sposób, po czym później zwrócić go jako niemutowalną instancję <code class="highlighter-rouge">String</code>.</p>
+<p>Dlatego powstają tzw. <em>companion classes</em>, które są mutowalnym odpowiednikiem danej klasy niemutowalnej. Najlepszym tego przykładem w bibliotece Javy jest <code class="highlighter-rouge">StringBuilder</code>, który pozwala modyfikować stringa w wydajny sposób, po czym później zwrócić go jako niemutowalną instancję <code class="highlighter-rouge">String</code>.</p>
 
 <p class="warning">Gdy tworzono klasy <code class="highlighter-rouge">BigInteger</code> i <code class="highlighter-rouge">BigDecimal</code> nie było jeszcze powszechnie wiadomo, że niemutowalne klasy nie powinny być rozszerzane, dlatego jest to możliwe i wszystkie jej metody mogą zostać nadpisane. Ze względu na kompatybilność wsteczną nie mogło to być poprawione. Dlatego, jeśli piszesz aplikację, która polega na niemutowalności którejś z tych klas podanych jako argument od klienta, to powinieneś sprawdzić, czy jest to “prawdziwy” <code class="highlighter-rouge">BigInteger</code> lub <code class="highlighter-rouge">BigDecimal</code>, a nie jakaś niezaufana podklasa.<br />Można na przykład zwrócić <em>deffensive copy</em>, gdy mamy do czynienia z drugim przypadkiem:</p>
 
@@ -280,9 +280,9 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>Podsumowując, nie generuj automatycznie <em>settera</em> do każdego <em>gettera</em>. <strong>Klasy powinny być niemutowalne, chyba że mamy dobry powód, aby było inaczej.</strong> Klasy niemutowalne mają dużo zalet, a jedyną ich wadą może być zmniejszona wydajność w specyficznych warunkach. Małe klasy zawsze powinny być niemutowalne. Warto rozważyć też niezmienność w przypadku większych obiektów jak <code class="highlighter-rouge">String</code> czy <code class="highlighter-rouge">BigInteger</code> i ewentualnie stworzyć <em>mutable companion class</em>, jeśli rzeczywiście wydajność nie jest zadowalająca w specyficznych przypadkach.</p>
+<p>Podsumowując, nie generuj automatycznie <em>settera</em> do każdego <em>gettera</em>. <strong>Klasy powinny być niemutowalne, chyba że mamy dobry powód, aby było inaczej.</strong> Klasy niemutowalne mają dużo zalet, a jedyną ich wadą może być zmniejszona wydajność w specyficznych warunkach. Małe klasy zawsze powinny być niemutowalne. Warto rozważyć też niemutowalność w przypadku większych obiektów jak <code class="highlighter-rouge">String</code> czy <code class="highlighter-rouge">BigInteger</code> i ewentualnie stworzyć <em>mutable companion class</em>, jeśli rzeczywiście wydajność nie jest zadowalająca w specyficznych przypadkach.</p>
 
-<p><strong>Oczywiście są przypadki klas, kiedy ich niemutowalność jest niepraktyczna.</strong> Wtedy warto tylko ograniczyć jej zmienność w miarę możliwości, co zmniejszy prawdopodobieństwo na błędy i ułatwi z nią pracę.</p>
+<p><strong>Oczywiście są przypadki klas, kiedy ich niemutowalność jest niepraktyczna.</strong> Wtedy warto tylko ograniczyć jej mutowalność w miarę możliwości, co zmniejszy prawdopodobieństwo na błędy i ułatwi z nią pracę.</p>
 
 <p>Łącząc rady z tego wpisu z tymi z poprzedniego, wychodzi na to, że <strong>powinniśmy deklarować wszystkie pola jako <code class="highlighter-rouge">private final</code>, chyba że mamy dobry powód, aby było inaczej.</strong></p>
 

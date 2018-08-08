@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
 <meta name="author" content="Codeboy">
-<title>Klasy niezmienne - jak takie stworzyć i dlaczego są preferowane</title>
+<title>Klasy niemutowalne - jak takie stworzyć i dlaczego są preferowane</title>
 
 <link rel="canonical" href="https://devcave.pl/effective-java/klasy-niezmienne">
 <link rel="shortcut icon" href="/img/logo.ico">
@@ -82,7 +82,7 @@
         <header class="post-header">
           <div class="post-heading">
 
-            <h1 class="post-title">Klasy niezmienne</h1>
+            <h1 class="post-title">Klasy niemutowalne</h1>
             
             <h2 class="post-subtitle">Jak takie stworzyć i dlaczego są preferowane.</h2>
             
@@ -153,9 +153,9 @@
             </li></ul>
 <hr />
 
-<p>Klasy niezmienne to po prostu klasy, które w żaden sposób nie mogą zostać zmodyfikowane. Wszystkie pola są stałe przez cały okres trwania obiektu. W bibliotece Javy mamy mnóstwo takich klas np. <code class="highlighter-rouge">String</code>, <code class="highlighter-rouge">BigInteger</code>, <code class="highlighter-rouge">BigDecimal</code> czy klasy opakowujące prymitywy. Jest ku temu kilka powodów: klasy niezmienne są łatwiejsze i bezpieczniejsze w użyciu oraz mają większą odporność na błędy - szczególnie w środowisku wielowątkowym.</p>
+<p>Klasy niemutowalne to po prostu klasy, które w żaden sposób nie mogą zostać zmodyfikowane. Wszystkie pola są stałe przez cały okres trwania obiektu. W bibliotece Javy mamy mnóstwo takich klas np. <code class="highlighter-rouge">String</code>, <code class="highlighter-rouge">BigInteger</code>, <code class="highlighter-rouge">BigDecimal</code> czy klasy opakowujące prymitywy. Jest ku temu kilka powodów: klasy niemutowalne są łatwiejsze i bezpieczniejsze w użyciu oraz mają większą odporność na błędy - szczególnie w środowisku wielowątkowym.</p>
 
-<p>Aby zaimplementować klasę niezmienną, musimy zapewnić 5 rzeczy:</p>
+<p>Aby zaimplementować klasę niemutowalną, musimy zapewnić 5 rzeczy:</p>
 
 <ol>
   <li>
@@ -175,7 +175,7 @@
   </li>
 </ol>
 
-<p>Jeśli nasza klasa ma być niezmienna, to wszystkie operacje na naszym obiekcie powinny zwracać nowy obiekt. Przykład takiej klasy niezmiennej:</p>
+<p>Jeśli nasza klasa ma być niemutowalna, to wszystkie operacje na naszym obiekcie powinny zwracać nowy obiekt. Przykład takiej klasy niemutowalnej:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Immutable complex number class</span>
 <span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Complex</span> <span class="o">{</span>
@@ -241,7 +241,7 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>Klasa jest zadeklarowana jako <code class="highlighter-rouge">final</code>. Są gettery do dwóch prywatnych pól, ale są to prymitywy zadeklarowane jako <code class="highlighter-rouge">final</code>. Ponadto mamy 4 różne działania, <strong>które nie modyfikują obiektu</strong>, a zwracają nowy. Jest to poprawna implementacja całkowicie niezmiennej klasy.</p>
+<p>Klasa jest zadeklarowana jako <code class="highlighter-rouge">final</code>. Są gettery do dwóch prywatnych pól, ale są to prymitywy zadeklarowane jako <code class="highlighter-rouge">final</code>. Ponadto mamy 4 różne działania, <strong>które nie modyfikują obiektu</strong>, a zwracają nowy. Jest to poprawna implementacja całkowicie niemutowalnej klasy.</p>
 
 <p>Podobnie jest w klasach <code class="highlighter-rouge">BigInteger</code>, <code class="highlighter-rouge">BigDecimal</code> czy <code class="highlighter-rouge">String</code>. Dla przykładu:</p>
 
@@ -254,25 +254,25 @@
 
 <p>Innym sposobem na to, by uniemożliwić rozszerzanie klasy, jest zadeklarowanie wszystkich konstruktorów jako <code class="highlighter-rouge">private</code> lub <code class="highlighter-rouge">package-private</code> i dodać <a href="/effective-java/static-factory-method-zamiast-konstruktora">public static factory method</a>. Jest to bardziej elastyczny sposób niż deklarowanie klasy jako <code class="highlighter-rouge">final</code>. Pozwala nam to na używanie kilku implementacji z tego samego pakietu, a dla klientów spoza pakietu zachowuje się tak jakby była <code class="highlighter-rouge">final</code>, ponieważ nie ma możliwości rozszerzenia klasy, gdy nie mamy dostępu do konstruktora. Poza tym <em>static factory method</em> ma sama w sobie wiele zalet, które były już <a href="/effective-java/static-factory-method-zamiast-konstruktora">omawiane</a>.</p>
 
-<p>Inne zalety klas niezmiennych:</p>
+<p>Inne zalety klas niemutowalnych:</p>
 
-<p><strong>Obiekty niezmienne są proste.</strong> Mogą być w dokładnie jednym stanie - w tym, w którym zostały utworzone. Jeśli dodatkowo w konstruktorze zadbamy o poprawność argumentów, to mamy pewność, że obiekt będzie zawsze w poprawnym stanie.</p>
+<p><strong>Obiekty niemutowalne są proste.</strong> Mogą być w dokładnie jednym stanie - w tym, w którym zostały utworzone. Jeśli dodatkowo w konstruktorze zadbamy o poprawność argumentów, to mamy pewność, że obiekt będzie zawsze w poprawnym stanie.</p>
 
-<p><strong>Obiekty niezmienne są <em>thread-safe</em>.</strong> Nie wymagają synchronizacji, ponieważ nie mogą być w niepoprawnym stanie, gdy są używane przez kilka wątków jednocześnie. Jest to najłatwiejsze podejście, aby uzyskać <em>thread safty</em>.</p>
+<p><strong>Obiekty niemutowalne są <em>thread-safe</em>.</strong> Nie wymagają synchronizacji, ponieważ nie mogą być w niepoprawnym stanie, gdy są używane przez kilka wątków jednocześnie. Jest to najłatwiejsze podejście, aby uzyskać <em>thread safty</em>.</p>
 
-<p>Używając obiektów niezmiennych <strong>nigdy nie będziemy musieli robić ich kopii</strong>. Nie jesteśmy narażeni na niechciane modyfikacje, więc żaden obiekt nie zostanie uszkodzony i nie ma potrzeby robienia kopii.</p>
+<p>Używając obiektów niemutowalnych <strong>nigdy nie będziemy musieli robić ich kopii</strong>. Nie jesteśmy narażeni na niechciane modyfikacje, więc żaden obiekt nie zostanie uszkodzony i nie ma potrzeby robienia kopii.</p>
 
-<p><strong>Niezmienne obiekty są dobrym budulcem innych obiektów (zmiennych lub nie)</strong>. Dużo łatwiej zapewnić poprawność obiektu, gdy wiemy, że jego komponenty są niezmienne. Doskonale nadają się jako klucze w mapach i jako elementy w setach - nie musimy się martwić, że ich wartości zmienią się po tym, jak zostaną dodane do kolekcji (co by powodowało ich niepoprawne działanie).</p>
+<p><strong>Niemutowalne obiekty są dobrym budulcem innych obiektów (zmiennych lub nie)</strong>. Dużo łatwiej zapewnić poprawność obiektu, gdy wiemy, że jego komponenty są niemutowalne. Doskonale nadają się jako klucze w mapach i jako elementy w setach - nie musimy się martwić, że ich wartości zmienią się po tym, jak zostaną dodane do kolekcji (co by powodowało ich niepoprawne działanie).</p>
 
 <p><strong>Nie ma możliwości na niepoprawny stan obiektu, np. po rzuceniu wyjątku.</strong> Są zawsze spójne.</p>
 
-<p>I to by była większość zalet klas niezmiennych. Całkiem tego sporo.</p>
+<p>I to by była większość zalet klas niemutowalnych. Całkiem tego sporo.</p>
 
-<p><strong>Główną wadą klas niezmiennych jest to, że wymagają nowego obiektu dla każdej nowej wartości pola.</strong> Może to być kosztowne, gdy obiekty są duże i używane bardzo często.</p>
+<p><strong>Główną wadą klas niemutowalnych jest to, że wymagają nowego obiektu dla każdej nowej wartości pola.</strong> Może to być kosztowne, gdy obiekty są duże i używane bardzo często.</p>
 
-<p>Dlatego powstają tzw. <em>companion classes</em>, które są zmiennym odpowiednikiem danej klasy niezmiennej. Najlepszym tego przykładem w bibliotece Javy jest <code class="highlighter-rouge">StringBuilder</code>, który pozwala modyfikować stringa w wydajny sposób, po czym później zwrócić go jako niezmienną instancję <code class="highlighter-rouge">String</code>.</p>
+<p>Dlatego powstają tzw. <em>companion classes</em>, które są zmiennym odpowiednikiem danej klasy niemutowalnej. Najlepszym tego przykładem w bibliotece Javy jest <code class="highlighter-rouge">StringBuilder</code>, który pozwala modyfikować stringa w wydajny sposób, po czym później zwrócić go jako niemutowalną instancję <code class="highlighter-rouge">String</code>.</p>
 
-<p class="warning">Gdy tworzono klasy <code class="highlighter-rouge">BigInteger</code> i <code class="highlighter-rouge">BigDecimal</code> nie było jeszcze powszechnie wiadomo, że niezmienne klasy nie powinny być rozszerzane, dlatego jest to możliwe i wszystkie jej metody mogą zostać nadpisane. Ze względu na kompatybilność wsteczną nie mogło to być poprawione. Dlatego, jeśli piszesz aplikację, która polega na niezmienności którejś z tych klas podanych jako argument od klienta, to powinieneś sprawdzić, czy jest to “prawdziwy” <code class="highlighter-rouge">BigInteger</code> lub <code class="highlighter-rouge">BigDecimal</code>, a nie jakaś niezaufana podklasa.<br />Można na przykład zwrócić <em>deffensive copy</em>, gdy mamy do czynienia z drugim przypadkiem:</p>
+<p class="warning">Gdy tworzono klasy <code class="highlighter-rouge">BigInteger</code> i <code class="highlighter-rouge">BigDecimal</code> nie było jeszcze powszechnie wiadomo, że niemutowalne klasy nie powinny być rozszerzane, dlatego jest to możliwe i wszystkie jej metody mogą zostać nadpisane. Ze względu na kompatybilność wsteczną nie mogło to być poprawione. Dlatego, jeśli piszesz aplikację, która polega na niemutowalności którejś z tych klas podanych jako argument od klienta, to powinieneś sprawdzić, czy jest to “prawdziwy” <code class="highlighter-rouge">BigInteger</code> lub <code class="highlighter-rouge">BigDecimal</code>, a nie jakaś niezaufana podklasa.<br />Można na przykład zwrócić <em>deffensive copy</em>, gdy mamy do czynienia z drugim przypadkiem:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">BigInteger</span> <span class="nf">safeInstance</span><span class="o">(</span><span class="n">BigInteger</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">val</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">==</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">class</span> <span class="o">?</span>
@@ -280,9 +280,9 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>Podsumowując, nie generuj automatycznie <em>settera</em> do każdego <em>gettera</em>. <strong>Klasy powinny być niezmienne, chyba że mamy dobry powód, aby było inaczej.</strong> Klasy niezmienne mają dużo zalet, a jedyną ich wadą może być zmniejszona wydajność w specyficznych warunkach. Małe klasy zawsze powinny być niezmienne. Warto rozważyć też niezmienność w przypadku większych obiektów jak <code class="highlighter-rouge">String</code> czy <code class="highlighter-rouge">BigInteger</code> i ewentualnie stworzyć <em>mutable companion class</em>, jeśli rzeczywiście wydajność nie jest zadowalająca w specyficznych przypadkach.</p>
+<p>Podsumowując, nie generuj automatycznie <em>settera</em> do każdego <em>gettera</em>. <strong>Klasy powinny być niemutowalne, chyba że mamy dobry powód, aby było inaczej.</strong> Klasy niemutowalne mają dużo zalet, a jedyną ich wadą może być zmniejszona wydajność w specyficznych warunkach. Małe klasy zawsze powinny być niemutowalne. Warto rozważyć też niezmienność w przypadku większych obiektów jak <code class="highlighter-rouge">String</code> czy <code class="highlighter-rouge">BigInteger</code> i ewentualnie stworzyć <em>mutable companion class</em>, jeśli rzeczywiście wydajność nie jest zadowalająca w specyficznych przypadkach.</p>
 
-<p><strong>Oczywiście są przypadki klas, kiedy ich niezmienność jest niepraktyczna.</strong> Wtedy warto tylko ograniczyć jej zmienność w miarę możliwości, co zmniejszy prawdopodobieństwo na błędy i ułatwi z nią pracę.</p>
+<p><strong>Oczywiście są przypadki klas, kiedy ich niemutowalność jest niepraktyczna.</strong> Wtedy warto tylko ograniczyć jej zmienność w miarę możliwości, co zmniejszy prawdopodobieństwo na błędy i ułatwi z nią pracę.</p>
 
 <p>Łącząc rady z tego wpisu z tymi z poprzedniego, wychodzi na to, że <strong>powinniśmy deklarować wszystkie pola jako <code class="highlighter-rouge">private final</code>, chyba że mamy dobry powód, aby było inaczej.</strong></p>
 

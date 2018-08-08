@@ -222,7 +222,7 @@
 <span class="n">goal</span><span class="o">.</span><span class="na">setAchievied</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>Jednak nie gwarantuje ono spójności klasy. Nie ma tutaj opcji, aby zmusić klienta, żeby ustawił wszystkie wymagane pola. Uniemożliwia to też stworzenie klasy niezmiennej, co wymaga dodatkowego wysiłku, aby zapewnić <em>thread safety</em>. I tu z pomocą przychodzi <em>Builder</em>.</p>
+<p>Jednak nie gwarantuje ono spójności klasy. Nie ma tutaj opcji, aby zmusić klienta, żeby ustawił wszystkie wymagane pola. Uniemożliwia to też stworzenie klasy niemutowalnej, co wymaga dodatkowego wysiłku, aby zapewnić <em>thread safety</em>. I tu z pomocą przychodzi <em>Builder</em>.</p>
 
 <h1 id="budowniczy-builder---wzorzec-projektowy">Budowniczy (Builder) - wzorzec projektowy</h1>
 
@@ -338,7 +338,7 @@
 
 <p>Zalety takiego rozwiązania:</p>
 
-<p class="pros"><em>Pozwala zachować niezmienność klasy</em></p>
+<p class="pros"><em>Pozwala zachować niemutowalność klasy</em></p>
 
 <p>W tym wariancie buildera nie musimy udostępniać publicznego konstruktora ani setterów dla budowanego obiektu.</p>
 

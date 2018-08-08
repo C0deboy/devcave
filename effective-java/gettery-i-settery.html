@@ -188,7 +188,7 @@
 
 <p>I rzeczywiście mają rację, jeśli mowa o publicznych klasach. Jeśli klasa jest dostępna poza pakietem, to warto zadeklarować jej pola jako prywatne i udostępnić <em>gettery</em>. Dzięki temu mamy elastyczność, która pozwala na zmianę wewnętrznej reprezentacji klasy bez zmieniania API. Kiedy pola używane są bezpośrednio, to zmiana taka jest niemożliwa, bo uszkodzi to wszystkie klasy, które jej używają.</p>
 
-<p><strong>Jednak trzeba dobrze rozważyć czy na pewno chcemy udostępniać <em>settery</em>. Minimalizowanie zmienności (ang. <em>mutability</em>) klasy jest preferowaną praktyką.</strong> O tym będzie następny wpis.</p>
+<p><strong>Jednak trzeba dobrze rozważyć czy na pewno chcemy udostępniać <em>settery</em>. Minimalizowanie mutowalności (ang. <em>mutability</em>) klasy jest preferowaną praktyką.</strong> O tym będzie następny wpis.</p>
 
 <p>Jednak jeśli klasa jest <code class="highlighter-rouge">package-private</code> lub wewnętrzną prywatną klasą, to właściwie nie jest to nic złego. Takie podejście nie generuje zbędnego wizualnego zaśmiecenia kodu metodami dostępowymi i dużo łatwiej i czytelniej używa się taką klasę.</p>
 
@@ -228,7 +228,7 @@
 </code></pre></div></div>
 <p>No może z wyjątkiem, gdy klasa (w tym przypadku <code class="highlighter-rouge">Dog</code>) jest tylko rekordem w bazie danych.</p>
 
-<p>Podsumowując, publiczne klasy nigdy nie powinny wystawiać <strong>publicznych zmiennych</strong> pól. Mniej szkodliwe jest wystawianie niezmiennych pól, jednak nadal problematyczne - w niektórych przypadkach. Jeśli rzeczywiście potrzebujemy taką klasę, to wtedy najlepiej ograniczyć taką klasę do pakietu lub jeśli jest możliwe - do jednej klasy.</p>
+<p>Podsumowując, publiczne klasy nigdy nie powinny wystawiać <strong>publicznych zmiennych</strong> pól. Mniej szkodliwe jest wystawianie niemutowalnych pól, jednak nadal problematyczne - w niektórych przypadkach. Jeśli rzeczywiście potrzebujemy taką klasę, to wtedy najlepiej ograniczyć taką klasę do pakietu lub jeśli jest możliwe - do jednej klasy.</p>
 
 
       </div>
@@ -254,7 +254,7 @@
         
         <li class="next">
           <a class="box-effect" href="/effective-java/klasy-niezmienne"
-             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Klasy niezmienne">Następny post <i
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Klasy niemutowalne">Następny post <i
               class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </li>
         

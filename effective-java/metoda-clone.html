@@ -206,7 +206,7 @@ implementation.</p>
 
 <h1 id="implementacja">Implementacja</h1>
 
-<p>Najpierw musimy wywołać <code class="highlighter-rouge">super.clone</code>. Dostaniemy w pełni funkcjonalną kopię obiektu. Wszystkie wartości będą identyczne jak w oryginale i co ważne — będą to referencje do tych samych obiektów. Jeśli obiekt zawiera tylko prymitywy i referencje do niezmiennych obiektów, to w zasadzie dostaniemy to, co chcemy i nie musimy robić nic więcej niż:</p>
+<p>Najpierw musimy wywołać <code class="highlighter-rouge">super.clone</code>. Dostaniemy w pełni funkcjonalną kopię obiektu. Wszystkie wartości będą identyczne jak w oryginale i co ważne — będą to referencje do tych samych obiektów. Jeśli obiekt zawiera tylko prymitywy i referencje do niemutowalnych obiektów, to w zasadzie dostaniemy to, co chcemy i nie musimy robić nic więcej niż:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Clone method for class with no references to mutable state</span>
 <span class="nd">@Override</span>
@@ -218,7 +218,7 @@ implementation.</p>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
-<p>Z kolei, jeśli obiekt sam w sobie jest niezmienny, to po co nam by było klonowanie? Klasy niezmienne z pewnością nie powinny udostępniać metody <code class="highlighter-rouge">clone</code>, bo jedynie co by to robiło, to zachęcało do zbędnego klonowania.</p>
+<p>Z kolei, jeśli obiekt sam w sobie jest niemutowalny, to po co nam by było klonowanie? Klasy niemutowalne z pewnością nie powinny udostępniać metody <code class="highlighter-rouge">clone</code>, bo jedynie co by to robiło, to zachęcało do zbędnego klonowania.</p>
 
 <p class="note">Wywołanie metody <code class="highlighter-rouge">super.clone</code> jest opakowane w blok <code class="highlighter-rouge">try-catch</code>, ponieważ <code class="highlighter-rouge">Object</code> deklaruje, że jego metoda <code class="highlighter-rouge">clone</code> rzuca wyjątek <code class="highlighter-rouge">CloneNotSupportedException</code>, który jest wyjątkiem typu <em>checked</em>. Jeśli nasz obiekt implementuje interfejs <code class="highlighter-rouge">Cloneable</code> to wiemy, że wyjątek ten nigdy nie zostanie rzucony. Ten zbędny <em>boilerpalte</em> wskazuje na to, że <code class="highlighter-rouge">CloneNotSupportedException</code> powinno być wyjątkiem typu <em>unchecked</em>, no ale tak się nie stało.</p>
 

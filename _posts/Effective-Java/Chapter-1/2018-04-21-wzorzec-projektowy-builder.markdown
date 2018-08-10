@@ -77,7 +77,7 @@ goal.setChecklist(checklist);
 goal.setAchievied(false);
 ```
 
-Jednak nie gwarantuje ono spójności klasy. Nie ma tutaj opcji, aby zmusić klienta, żeby ustawił wszystkie wymagane pola. Uniemożliwia to też stworzenie klasy niezmiennej, co wymaga dodatkowego wysiłku, aby zapewnić *thread safety*. I tu z pomocą przychodzi *Builder*.
+Jednak nie gwarantuje ono spójności klasy. Nie ma tutaj opcji, aby zmusić klienta, żeby ustawił wszystkie wymagane pola. Uniemożliwia to też stworzenie klasy niemutowalnej, co wymaga dodatkowego wysiłku, aby zapewnić *thread safety*. I tu z pomocą przychodzi *Builder*.
 
 # Budowniczy (Builder) - wzorzec projektowy
 
@@ -199,7 +199,7 @@ private Goal() {
 Zalety takiego rozwiązania:
 
 {: .pros}
-*Pozwala zachować niezmienność klasy*
+*Pozwala zachować niemutowalność klasy*
 
 W tym wariancie buildera nie musimy udostępniać publicznego konstruktora ani setterów dla budowanego obiektu.
 

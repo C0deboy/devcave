@@ -1,8 +1,8 @@
 ---
 layout:     post
-titleSEO:	"Gettery i settery - dlaczego ich używać zamiast publicznych pól"
+titleSEO:	"Gettery i settery - dlaczego unikać publicznych pól"
 title:      "Gettery i settery"
-subtitle:   "Dlaczego ich używać zamiast publicznych pól"
+subtitle:   "Dlaczego unikać publicznych pól"
 date:       2018-07-28 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
@@ -52,7 +52,7 @@ class Point {
 
 I rzeczywiście mają rację, jeśli mowa o publicznych klasach. Jeśli klasa jest dostępna poza pakietem, to warto zadeklarować jej pola jako prywatne i udostępnić *gettery*. Dzięki temu mamy elastyczność, która pozwala na zmianę wewnętrznej reprezentacji klasy bez zmieniania API. Kiedy pola używane są bezpośrednio, to zmiana taka jest niemożliwa, bo uszkodzi to wszystkie klasy, które jej używają.
 
-**Jednak trzeba dobrze rozważyć czy na pewno chcemy udostępniać *settery*. Minimalizowanie zmienności (ang. *mutability*) klasy jest preferowaną praktyką.** O tym będzie następny wpis.
+**Jednak trzeba dobrze rozważyć czy na pewno chcemy udostępniać *settery*. Minimalizowanie mutowalności (ang. *mutability*) klasy jest preferowaną praktyką.** O tym będzie następny wpis.
 
 Jednak jeśli klasa jest `package-private` lub wewnętrzną prywatną klasą, to właściwie nie jest to nic złego. Takie podejście nie generuje zbędnego wizualnego zaśmiecenia kodu metodami dostępowymi i dużo łatwiej i czytelniej używa się taką klasę.
 
@@ -95,4 +95,4 @@ dog.setBall(new Ball());
 ```
 No może z wyjątkiem, gdy klasa (w tym przypadku `Dog`) jest tylko rekordem w bazie danych.
 
-Podsumowując, publiczne klasy nigdy nie powinny wystawiać **publicznych zmiennych** pól. Mniej szkodliwe jest wystawianie niezmiennych pól, jednak nadal problematyczne - w niektórych przypadkach. Jeśli rzeczywiście potrzebujemy taką klasę, to wtedy najlepiej ograniczyć taką klasę do pakietu lub jeśli jest możliwe - do jednej klasy.
+Podsumowując, publiczne klasy nigdy nie powinny wystawiać **publicznych mutowalnych** pól. Mniej szkodliwe jest wystawianie niemutowalnych pól, jednak nadal problematyczne - w niektórych przypadkach. Jeśli rzeczywiście potrzebujemy taką klasę, to wtedy najlepiej ograniczyć taką klasę do pakietu lub jeśli jest możliwe - do jednej klasy.

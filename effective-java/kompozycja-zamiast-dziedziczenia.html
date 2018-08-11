@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Kompozycja zamiast dziedziczenia</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/kompozycja-zamiast-dziedziczenia">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Kompozycja zamiast dziedziczenia</h1>
+            
+            <h2 class="post-subtitle">Dlaczego dziedziczenie nie zawsze jest dobre</h2>
+            
+            <p class="post-meta">
+              
+              11
+              sierpnia
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#dziedziczenie">Dziedziczenie</a></li>
+<li class="toc-entry toc-h1"><a href="#kompozycja">Kompozycja</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 18</i> z rozdziału:</p>
+
+<p class="m0">Classes and Interfaces</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/minimalizuj-dostepnosc-enkapsulacja">Item 15: Minimize the accessibility of classes and members
+                </a>
+            </li><li>
+                <a href="/effective-java/gettery-i-settery">Item 16: In public classes, use accessor methods, not public fields
+                </a>
+            </li><li>
+                <a href="/effective-java/klasy-niezmienne">Item 17: Minimize mutability
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/kompozycja-zamiast-dziedziczenia">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 18: Favor composition over inheritance
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 19: Design and document for inheritance or else prohibit it
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 20: Prefer interfaces to abstract classes
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 21: Design interfaces for posterity
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 22: Use interfaces only to define types
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 23: Prefer class hierarchies to tagged classes
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 24: Favor static member classes over nonstatic
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 25: Limit source files to a single top-level class
+                </a>
+            </li></ul>
+<hr />
+
+<h1 id="dziedziczenie">Dziedziczenie</h1>
+<p>Może się wydawać, że dziedziczenie jest fajnym sposobem na reużycie kodu, jednak nie zawsze jest to dobre rozwiązanie. Używane nieodpowiednio skutkuje oprogramowaniem słabej jakości. Dziedziczenie jest bezpieczne, jeśli jest używane tylko w obrębie pakietu, gdzie nadklasa i wszystkie podklasy są pod kontrolą, lub gdy rozszerzana klasa jest specjalnie do tego zaprojektowana (o tym będzie w następnym wpisie).</p>
+
+<p>Oczywiście w tym wpisie, mówiąc o dziedziczeniu, mam na myśli tylko dziedziczenie klas (kiedy klasa rozszerza inną klasę). Omawiane tu problemy nie dotyczą dziedziczenia interfejsów (kiedy klasa implementuje interfejs lub gdy interfejs rozszerza inny interfejs).</p>
+
+<p>Gdy klasa nie jest odpowiednio zaprojektowana do dziedziczenia, możemy natrafić na następujące problemy:</p>
+
+<p class="note">Większość z tych problemów ma mniejsze znaczenie, gdy tworzymy aplikację i wiemy, że tylko my i ewentualnie znajomi z którymi tworzymi projekt, będą jedynymi osobami, które korzystają z naszej klasy. Wtedy możemy naprawić wszelkie problemy i wprowadzić zmiany w dowolnym czasie.</p>
+
+<ul>
+  <li><strong>Naruszona jest enkapsulacja</strong> - poprawność działania podklasy zależy od detali implementacyjnych nadklasy. Implementacja nadklasy może się zmienić w następnej wersji i może to popsuć naszą podklasę, mimo że nie była nawet dotknięta.</li>
+</ul>
+
+<p>Dla przykładu załóżmy, że potrzebujemy <code class="highlighter-rouge">HashSet</code>, który będzie zliczał, ile było prób dodania elementu. <code class="highlighter-rouge">HashSet</code> zawiera dwie metody, które są w stanie dodawać elementy: <code class="highlighter-rouge">add</code> i <code class="highlighter-rouge">addAll</code>, więc możemy je obie nadpisać, używając dodatkowo licznika:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Broken - Inappropriate use of inheritance!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstrumentedHashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="c1">// The number of attempted element insertions</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+
+    <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">(</span><span class="kt">int</span> <span class="n">initCap</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">initCap</span><span class="o">,</span> <span class="n">loadFactor</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">addCount</span><span class="o">++;</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">addCount</span> <span class="o">+=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">addCount</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Wygląda w porządku? Niby tak, ale nie działa. Spróbujmy dodać elementy za pomocą metody <code class="highlighter-rouge">addAll</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">InstrumentedHashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InstrumentedHashSet</span><span class="o">&lt;&gt;();</span>  
+<span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"Snap"</span><span class="o">,</span> <span class="s">"Crackle"</span><span class="o">,</span> <span class="s">"Pop"</span><span class="o">));</span><span class="c1">//Java 9</span>
+</code></pre></div></div>
+
+<p>Spodziewalibyśmy się, że <code class="highlighter-rouge">getAddCount</code> zwróci 3, ale zwraca 6. Dlaczego? Ano dlatego, że metoda <code class="highlighter-rouge">addAll</code> w <code class="highlighter-rouge">HashSet</code> pod spodem wykorzystuje metodę <code class="highlighter-rouge">add</code> dla każdego elementu.</p>
+
+<p>Moglibyśmy to “naprawić” nie nadpisując metody <code class="highlighter-rouge">addAll</code>, ale wtedy nasz klasa zależałaby od tego szczegółu implementacyjnego, który może się zmienić w kolejnej wersji i byłaby niestabilna.</p>
+
+<p>Nieco lepszym rozwiązaniem byłoby nadpisać metodę <code class="highlighter-rouge">addAll</code>, aby iterowała po każdym elemencie, wywołując <code class="highlighter-rouge">add</code>. Wtedy mielibyśmy zagwarantowany poprawny wynik, bez bycia uzależnionym od implementacji <code class="highlighter-rouge">HashSet</code>. Nie rozwiązuje to jednak wszystkich problemów. W ten sposób musielibyśmy nadpisywać wszystkie metody, które używają innych wewnętrznych metod, co może być trudne, nieodporne na błędy, czasochłonne, a czasem może to być w ogóle niemożliwe - jeśli metoda operuje na zmiennych prywatnych.</p>
+
+<ul>
+  <li>
+    <p><strong>Podklasy nie są stabilne i bezpieczne w użyciu</strong> - załóżmy, że bezpieczeństwo programu zależy od tego, że wszystkie elementy dodane do kolekcji spełniają określony warunek. Można by to zaimplementować, rozszerzając klasę kolekcji i nadpisać wszystkie metody, które umożliwiają dodawanie elementów, tak by sprawdzały ten warunek. To będzie działać tylko do momentu, gdy do klasy w kolejnej wersji nie zostanie dodana nowa metoda, pozwalająca dodawać elementy. Kiedy to się stanie, będzie można dodać nielegalne elementy do kolekcji, używając nowej metody (dopóki dziura ta nie zostanie załatana). I to nie jest tylko teoretyczny problem. Takie sytuacje miały miejsce, gdy <code class="highlighter-rouge">Hashtable</code> i <code class="highlighter-rouge">Vector</code> były modernizowane, aby były częścią <em>Collections Framework</em>.</p>
+  </li>
+  <li>
+    <p>Jeśli mamy wyjątkowego pecha, to gdy rozszerzamy klasę i będziemy mieć w niej metodę o sygnaturze, która pojawi się również w nowym wydaniu klasy, którą rozszerzamy, to nasz program przestanie się kompilować.</p>
+  </li>
+  <li>
+    <p>Rozbudowane hierarchie dziedziczenia utrudniają również analizę kodu i testowanie.</p>
+  </li>
+</ul>
+
+<p>Jest bardzo dobra alternatywa dla dziedziczenia, która pozwala uniknąć wszystkich tych problemów.</p>
+
+<h1 id="kompozycja">Kompozycja</h1>
+<p>Zamiast rozszerzać klasę, możemy zadeklarować ją jako pole prywatne w naszej nowej klasie i wywoływać jej odpowiadające metody. Jest to znane jako delegacja (ang. <em>forwarding</em>). W rezultacie otrzymamy solidną klasę, która w ogóle nie zależy od detalów implementacyjnych istniejącej klasy. Również dodawanie do niej nowych metod nie będzie miało wpływu na naszą klasę.</p>
+
+<p>Z koleii jeśli chcielibyśmy w pełni funkcjonalną klasę (a nie używać tylko kilka jej metod), to możemy stworzyć klasę delegującą wszystkie metody:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Reusable forwarding class</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForwardingSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">ForwardingSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">clear</span><span class="o">()</span> <span class="o">{</span> <span class="n">s</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o</span><span class="o">);</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">();</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">containsAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">removeAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">removeAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retainAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">retainAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">Object</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="n">a</span><span class="o">);</span> <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">);</span> <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span> <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="note">Pisanie takich klas jest dosyć żmudne, ale wystarczy to zrobić tylko raz dla konkretnego interfejsu i możemy to reużywać dla każdej implementacji. <a href="https://github.com/google/guava">Guava</a> dostarcza nam klasy delegujące do wszystkich interfejsów kolekcji.</p>
+
+<p>Następnie rozszerzamy ją w naszej klasie docelowej, nadpisując tylko dane metody:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Wrapper class - uses composition in place of inheritance</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstrumentedSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">ForwardingSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">InstrumentedSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">addCount</span><span class="o">++;</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+     <span class="o">}</span>
+     
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">addCount</span> <span class="o">+=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+         <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+     <span class="o">}</span>
+     
+     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">addCount</span><span class="o">;</span>
+     <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Dzięki temu mamy całkowicie niezależną klasę. Ten sposób jest również bardzo elastyczny. Będzie z nim działać dowolny set:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Instant</span><span class="o">&gt;</span> <span class="n">times</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InstrumentedSet</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="n">TreeSet</span><span class="o">&lt;&gt;(</span><span class="n">cmp</span><span class="o">));</span>  
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InstrumentedSet</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">INIT_CAPACITY</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Klasa <code class="highlighter-rouge">InstrumentedSet</code> jest tak zwanym <em>wrapperem</em> bo każda jej instancja zawiera (wrapuje) inną instancję <code class="highlighter-rouge">Set</code> i dodaje jej funkcję zliczania prób dodania elementów. Jest to znane także jako wzorzec projektowy - Dekorator.</p>
+
+<p>Dziedziczenie jest odpowiednie tylko wtedy, kiedy podklasa naprawdę jest podtypem danej klasy. Tzn. między nimi jest relacja “jest”. Jeśli zastanawiamy się, czy klasa B powinna rozszerzać A, powinniśmy sobie zadać pytanie, czy na pewno B jest też A. Jeśli mamy ku temu wątpliwości to powinniśmy zastosować kompozycję.</p>
+
+<p>Zasadę tą narusza wiele klas w standardowej bibliotece Javy. Np. <code class="highlighter-rouge">Stack</code> nie jest <code class="highlighter-rouge">Vector</code>-e, więc nie powinien go rozszerzać. Podobnie klasa <code class="highlighter-rouge">Properites</code> nie powinna rozszerzać <code class="highlighter-rouge">Hashtable</code>. W obu przypadkach powinna być zastosowana kompozycja.</p>
+
+<p>Inną sprawą jest czy potrzebujemy rzeczywiście wszystkich metod z nadklasy? Czy w metodach nadklas są jakiekolwiek wady? Używając kompozycji, możemy zaprojektować całkiem nowe API i pozbyć się wszelkich wad.</p>
+
+<p>Podsumowując, dziedziczenie jest problematyczne, szczególnie jeśli podklasy są w innych pakietach i klasa nie została odpowiednio zaprojektowana do dziedziczenia. Powinniśmy je stosować tylko w przypadku, gdy autentycznie mamy do czynienia z pełnoprawnym podtypem danej klasy. W każdej innej sytuacji warto użyć kompozycji i delegowania.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/klasy-niezmienne"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Klasy niemutowalne"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/kompozycja-zamiast-dziedziczenia";
+    this.page.identifier = "/effective-java/kompozycja-zamiast-dziedziczenia";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

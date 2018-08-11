@@ -480,6 +480,15 @@
         "subtitle": "Jak takie stworzyć i dlaczego są preferowane.",
         "date": "4 sierpnia 2018",
         "url": "/effective-java/klasy-niezmienne"
+      },
+    
+      
+      {
+        "title": "Kompozycja zamiast dziedziczenia",
+        "titleSEO": "Kompozycja zamiast dziedziczenia",
+        "subtitle": "Dlaczego dziedziczenie nie zawsze jest dobre",
+        "date": "11 sierpnia 2018",
+        "url": "/effective-java/kompozycja-zamiast-dziedziczenia"
       }
     
   

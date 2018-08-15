@@ -3,7 +3,7 @@ layout:     post
 titleSEO:	"Kompozycja zamiast dziedziczenia"
 title:      "Kompozycja zamiast dziedziczenia"
 subtitle:   "Dlaczego dziedziczenie nie zawsze jest dobre"
-date:       2018-08-11 8:00:00
+date:       2018-08-11 6:00:00
 author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java

@@ -8,9 +8,9 @@ author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
-toc:        false
+toc:        true
 chapter:    5
-item:       27
+item:       27, 32
 ---
 
 {% include effective-java/series-info.html %}
@@ -44,6 +44,8 @@ Problematyczne jest również używanie tablic wraz z generykami - ten temat zos
 
 Jednak niektórych ostrzeżeń nie da się zlikwidować. Jeśli jesteśmy w stanie udowodnić, że mimo ostrzeżenia nasz kod jest *typesafe*, to możemy wyciszyć to ostrzeżenie za pomocą adnotacji
 `@SuppressWarnings("unchecked")`. Do tego powinniśmy też dołączyć komentarz, wyjaśniający, dlaczego uważamy, że dana operacja jest *typesafe*.
+
+# @SuppressWarnings
 
 `@SuppressWarnings` może być użyte na każdej deklaracji, dlatego warto maksymalnie ograniczać *scope*, dla którego będzie działać, żeby nie wyciszyć też innych ostrzeżeń.
 
@@ -97,3 +99,42 @@ public <T> T[] toArray(T[] a) {
 ```
 
 W kolejnym wpisie będzie więcej przykładów prawidłowego wyciszania ostrzeżeń np. podczas mieszania generyków z tablicami.
+
+# @SafeVarargs
+
+*Vararg*-i zostały dodane razem z generykami w Javie 5, aby dodać możliwość przekazywania do funkcji zmiennej liczby argumentów, jednak nie współpracują ze sobą bez konfliktów. Rzucane są ostrzeżenia, jeśli kiedy varargi mają generyczne typy. Jest to spowodowane tym, że pod spodem tworzona jest tablica, która przetrzymuje te parametry, a mieszanie tablic z generykami jest problematyczne. O tym będzie w następnym wpisie.
+
+Pojawia się też pytanie: dlaczego można zadeklarować metodę z generycznym parametrem varargs, podczas gdy nie możemy utworzyć generycznej tablicy?
+Ano dlatego, że takie metody są bardzo użyteczne i projektanci Javy postanowili wprowadzić taką niespójność. W samej bibliotece Javy są nawet takie metody: `Arrays.asList(T... a)`, `ollections.addAll(Collection<? super T> c, T... elements)` czy `EnumSet.of(E first, E... rest)`, które są w pełni *typesafe*.
+
+Przed Java 7 nie było jednak sposobu, aby zrobić coś z ostrzeżeniami, więc używanie takich metod nie było zbyt przyjemne - aby się ich pozbyć, trzeba było używać `@SuppressWarnings("unchecked")` na każdym wywołaniu.
+
+I w końcu w Javie 7 została dodana adnotacja `@SafeVarargs`, dzięki której można wyciszyć automatycznie ostrzeżenia po stronie klienta, które generuje metoda z generycznym parametrem vararg. Oznaczając tą adnotacją metodę, składamy obietnicę, że nasza metoda jest całkowicie *typesafe*.
+
+Kiedy wiadomo, że jest bezpieczna?
+- Gdy nie modyfikujemy zawartości tablicy
+- Gdy nie przekazujemy referencji tej tablicy na zewnątrz, co by umożliwiło jej modyfikację, z wyjątkiem gdy:
+    - przekazujemy ją do innej metody z varargs z adnotacją `SafeVarargs`
+    - lub metody, która też odczytuje tylko wartości z tablicy
+
+Czyli używamy ją tylko do tego, do czego została stworzona - do przekazania zmiennej liczby argumentów od klienta do wnętrza metody.
+
+Tak wygląda typowe użycie metody ze zmienną ilością argumentów - funkcja przyjmuje dowolną ilość list, które łączy i zwraca jako jedną:
+
+```java
+// Safe method with a generic varargs parameter
+@SafeVarargs
+static <T> List<T> flatten(List<? extends T>... lists) {
+    List<T> result = new ArrayList<>();
+    for (List<? extends T> list : lists)
+        result.addAll(list);
+    return result;
+}
+```
+
+Ta metoda jest całkowicie *typesafe* i dzięki adnotacji `@SafeVarargs` klient nie musi przejmować się żadnymi ostrzeżeniami.
+
+{: .note}
+Adnotacje `@SafeVarargs` możemy zadeklarować tylko na metodach, które nie mogą być nadpisane, ponieważ nie ma możliwości, aby zagwarantować, że każda metoda nadpisująca będzie bezpieczna. Do Javy 8 można było ją używać tylko na statycznych metodach i finalnych instancyjnych. W Javie 9 umożliwiono też na metodach instancyjnych prywatnych.
+
+Innym sposobem na wyeliminowanie tych problemów mogłoby być użycie listy zamiast *varargs*.

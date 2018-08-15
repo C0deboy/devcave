@@ -1,8 +1,8 @@
 ---
 layout:     post
-titleSEO:	"Nie używaj surowych typów"
-title:      "Generyczne typy i metody"
-subtitle:   "Dlaczego tablice są problematyczne wraz z generykami"
+titleSEO:	"Używanie generycznych klas i metod"
+title:      "Używanie generycznych klas i metod"
+subtitle:   "Problematyczne tablice"
 date:       2018-09-29 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
@@ -44,7 +44,7 @@ Przez te różnice nie możemy na przykład utworzyć generycznej tablicy (`new 
 To ograniczenie może być denerwujące, bo na przykład nie ma możliwości zwrócenia tablicy o typie, który jest w generycznej kolekcji. Przez to też będziemy dostawać mylące ostrzeżenia, gdy będziemy używać *varargs* w metodach w połączeniu z generykami, a to dlatego, że varargi są przekonwertowywane na tablice podczas kompilacji.
 Adnotacja *SafeVarargs* adresuje ten problem i będzie omówiona w następnych wpisach.
 
-Kiedy dostajemy *generic array creation error* lub *unchecked cast warning* gdy castujemy na tablicę, najlepiej jest zmienić implementację na listę List<E> zamiast tablicy E[]. Nie będzię to miało dużego wpływu na wydajność czy zwięzłość, a uzyskamy lepsze *typesafty*.
+Kiedy dostajemy *generic array creation error* lub *unchecked cast warning* gdy castujemy na tablicę, najlepiej jest zmienić implementację na listę `List<E>` zamiast tablicy `E[]`. Nie będzię to miało dużego wpływu na wydajność czy zwięzłość, a uzyskamy lepsze *typesafty*.
 
 Przykładowo, prosta klaska, która będzie podawała losowe przedmioty z podanej kolekcji:
 
@@ -298,38 +298,5 @@ public static void main(String[] args) {
 ```
 
 Tym sposobem, wszystkie trzy sety (oba z argumentów i ten zwracany) muszą być tego samego typu. Możemy sprawić, aby było to bardziej elastyczne, używając *bounded wildcard type*. O tym w następnym wpisie.
-
-Możemy również ograniczyć typ parametru, używając kolejnego typu zawierajacego ten parametr typu. Jest to *recursive type bound*. Często jest to używane w połączeniu z interfejsem `Comparable` (który był już [omawiany]()):
-
-```java
-public interface Comparable<T> {
-    int compareTo(T o);
-}
-```
-
-`T` określa, do jakiego typu może być porównywany obiekt implementujący `Comparable<T>`. Najczęściej jest to on sam, np. `String` implementuje `Comparable<String>`, `Integer` implementuje `Comparable<Integer>` itd.
-
-Wiele metod przyjmuje kolekcje elementów implementujących Comparable, aby ją sortować, przeszukiwać i czy kalkulować max/min. Te obiekty muszą być wzajemnie porównywalne, aby było to możliwe. Można to wymusić w ten sposób:
-
-```java
-// Using a recursive type bound to express mutual comparability
-public static <E extends Comparable<E>> E max(Collection<E> c);
-```
-Cała metoda do wyciągania maxymalnej wartości mogłaby wyglądać tak:
-
-```java
-// Returns max value in a collection - uses recursive type bound
-public static <E extends Comparable<E>> E max(Collection<E> c) {
-    if (c.isEmpty())
-        throw new IllegalArgumentException("Empty collection");
-
-    E result = null;
-    for (E e : c)
-        if (result == null || e.compareTo(result) > 0)
-            result = Objects.requireNonNull(e);
-
-    return result;
-}
-```
 
 Podsumowując, generyki to użyteczne narzędzie - jest bezpieczniejsze i łatwiejsze w użyciu niż ciągłe castowanie i dbanie o *typesafty*. Uzywając generyków zrzucamy ten obowiązek na kompilator. Powinniśmy unikać sytuacji, gdzie klient musi castować otrzymywany obiekt i próbować stworzyć generyczną klasę lub metodę. Można to zrobić nawet na istniejących klasach i metodach bez uszkadzania obecnych klientów.

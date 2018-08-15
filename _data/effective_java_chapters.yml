@@ -41,4 +41,24 @@
     30: 'Item 30: Favor generic methods'
     31: 'Item 31: Use bounded wildcards to increase API flexibility'
     32: 'Item 32: Combine generics and varargs judiciously'
-    33: 'Item 33: Consider typesafe heterogeneous containers'
+
+- chapter: Enums and Annotations
+  items:
+    34: 'Use enums instead of int constants'
+    35: 'Use instance fields instead of ordinals'
+    36: 'Use EnumSet instead of bit fields'
+    37: 'Use EnumMap instead of ordinal indexing'
+    38: 'Emulate extensible enums with interfaces'
+    39: 'Prefer annotations to naming patterns'
+    40: 'Consistently use the Override annotation'
+    41: 'Use marker interfaces to define types'
+
+- chapter: Lambdas and Streams
+  items:
+    42: 'Prefer lambdas to anonymous classes'
+    43: 'Prefer method references to lambdas'
+    44: 'Favor the use of standard functional interfaces'
+    45: 'Use streams judiciously'
+    46: 'Prefer side-effect-free functions in streams'
+    47: 'Prefer Collection to Stream as a return type'
+    48: 'Use caution when making streams parallel'

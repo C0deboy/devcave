@@ -1,14 +1,14 @@
 ---
 layout:     post
-titleSEO:	"Rozszerzanie dozwolonych typów generycznych"
-title:      "Rozszerzanie dozwolonych typów generycznych"
-subtitle:   "Czyli użycie bounded wildcard types dla elastyczniejszego API"
+titleSEO:	"Ograniczanie dozwolonych typów w generykach"
+title:      "Ograniczanie dozwolonych typów w generykach"
+subtitle:   "Czyli użycie bounded parameter type i bounded wildcard type"
 date:       2018-10-06 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
-toc:        false
+toc:        true
 chapter:    5
 item:       31
 ---
@@ -20,9 +20,13 @@ Większość typów generycznych, tak jak nasza zabawkowa klasa `Stack`, nie ma 
 {: .note}
 Wyjątkiem są prymitywy. Nie możemy utworzyć np. `Stack<int>` lub `Stack<double>`. Możemy zamiast tego użyć ich wrpaperów `Integer`, `Double` itd.
 
-Z drugiej strony, deklarując `List<String>` jako typ argumentu narzucamy na klasę spore ograniczenie - może przyjować tylko instancje klasy `String`. Czasem jednak potrzebujemy większej elastyczności.
+Z drugiej strony, deklarując `List<String>` jako typ argumentu dla metody/klasy, narzucamy na nią spore ograniczenie - może przyjować tylko instancje klasy `String`. Czasem jednak potrzebujemy większej elastyczności, ale jednocześnie nie chcemy pozwalać na dowlony typ.
 
-Możemy rozszerzyć dozwolone typy generyczne używając *bounded type parameter*. Dla przykładu weźmy `java.util.concurrent.DelayQueue`. Jej deklaracja wygląda tak:
+Możemy to osiągnać używając *bounded type parameter*.
+
+# Bounded type parameter
+
+Dla przykładu weźmy `java.util.concurrent.DelayQueue`. Jej deklaracja wygląda tak:
 
 ```java
 class DelayQueue<E extends Delayed> implements BlockingQueue<E>
@@ -34,7 +38,51 @@ class DelayQueue<E extends Delayed> implements BlockingQueue<E>
 Wlicza się w to również typ `Delayed`. Każdy typ jest uznawany jak podtyp siebie, dlatego możliwe jest utworzenie `DelayQueue<Delayed>`.
 
 
-Możemy również to zastosować dla przekazywanego parametru typu.
+Podobnie można tego użyć w deklaracjach metod.
+
+```java
+public <E extends DelayQueue> void  someMethod(E e) {
+    //...
+}
+```
+
+Możemy również ograniczać typ rekursywnie, używając kolejnego typu zawierajacego ten parametr typu. Nazywa się to *recursive type bound*. Często jest to używane w połączeniu z interfejsem `Comparable` (który był już [omawiany]({% post_url Effective-Java/Chapter-2/2018-07-14-interfejs-comparable %})):
+
+```java
+public interface Comparable<T> {
+    int compareTo(T o);
+}
+```
+
+`T` określa, do jakiego typu może być porównywany obiekt implementujący `Comparable<T>`. Najczęściej jest to on sam, np. `String` implementuje `Comparable<String>`, `Integer` implementuje `Comparable<Integer>` itd.
+
+Wiele metod przyjmuje kolekcje elementów implementujących Comparable, aby ją sortować, przeszukiwać i czy kalkulować max/min. Te obiekty muszą być wzajemnie porównywalne, aby było to możliwe. Można to wymusić w ten sposób:
+
+```java
+// Using a recursive type bound to express mutual comparability
+public static <E extends Comparable<E>> E max(Collection<E> c);
+```
+
+Cała metoda do wyciągania maxymalnej wartości mogłaby wyglądać tak:
+
+```java
+// Returns max value in a collection - uses recursive type bound
+public static <E extends Comparable<E>> E max(Collection<E> c) {
+    if (c.isEmpty())
+        throw new IllegalArgumentException("Empty collection");
+
+    E result = null;
+    for (E e : c)
+        if (result == null || e.compareTo(result) > 0)
+            result = Objects.requireNonNull(e);
+
+    return result;
+}
+```
+
+Innym rozwiązaniem możę być też *bounded wildcard type*.
+
+# Bounded wildcard type
 
 Przywołajmy jako przykład jeszcze raz klasę `Stack`. Załóżmy, że chcemy dodać metodę, która dodaje do stosu wszystkie elementy z innej kolekcji. Pierwszą próbą mogłoby być coś takiego:
 
@@ -80,7 +128,6 @@ I można też w drugą stronę. Możemy rozszerzyć dozwolone typy o wszystkie n
 W ten sposób można by na przykład zaimplementować metodę, która wyciąga wszystkie wartości do innej kolekcji.
 
 ```java
-
 // Wildcard type for parameter that serves as an E consumer
 public void popAll(Collection<? super E> dst) {
     while (!isEmpty())
@@ -90,7 +137,7 @@ public void popAll(Collection<? super E> dst) {
 
 Dzięki `Collection<? super E>` możemy podać kolekcję o dowolnym typie parametru, ktory rozszerza `E`.
 
-Lekcja jest prosta - dla maksymalnej elastyczności warto używać *wildcard type* dla parametrów, które są *producerami* lub *consumerami*:
+Dlatego dla maksymalnej elastyczności warto używać *bounded wildcard type* dla parametrów, które są *producerami* lub *consumerami*:
 
 - Jeśli tylko wyciągamy obiekty, to jest, to *producer* i powinniśmy użyć `<? extends T>`.
 - Jeśli tylko wkładamy obiekty do środka, to jest to *consumer* i powinniśmy użyć `<? super T>`.
@@ -145,6 +192,20 @@ public static <T extends Comparable<? super T>> T max(List<? extends T> list)
 ```
 
 Dzięki temu wspieramy typy, które nie implementują `Comparable` bezpośrednio, ale rozszerzają typ, który to robi. Na pierwszy rzut oka jest to mało czytelne, ale nie spotkamy się z takimi deklaracjami zbyt często - najczęsciej tego typu złożoność występuje pod spodem bibliotek.
+
+# Porównanie
+
+*Bounded wildcard type* może mieć tylko jedno ograniczenie, a *bounded type parameter* wiele:
+
+```
+  type parameter bound     T extends Class & Interface1 & … & InterfaceN
+
+  wildcard bound
+      upper bound          ? extends SuperType
+      lower bound          ? super   SubType
+```
+
+*Wildcard* używa się wtedy, gdy nie obchodzi nas właściwy typ parametru, bo nie będziemy nic z niego używać.
 
 Uzupełniona tabelka z używanymi pojęciami w tym rozdziale:
 

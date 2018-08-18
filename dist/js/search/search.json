@@ -489,6 +489,15 @@
         "subtitle": "Dlaczego dziedziczenie nie zawsze jest dobre",
         "date": "11 sierpnia 2018",
         "url": "/effective-java/kompozycja-zamiast-dziedziczenia"
+      },
+    
+      
+      {
+        "title": "Projektowanie klasy pod dziedziczenie",
+        "titleSEO": "Projektowanie klasy pod dziedziczenie",
+        "subtitle": "Na co zwrócić uwagę, jeśli uznamy, że jest stosowne",
+        "date": "18 sierpnia 2018",
+        "url": "/effective-java/projektowanie-klasy-pod-dziedziczenie"
       }
     
   

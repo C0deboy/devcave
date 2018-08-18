@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Projektowanie klasy pod dziedziczenie</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Projektowanie klasy pod dziedziczenie</h1>
+            
+            <h2 class="post-subtitle">Na co zwrócić uwagę, jeśli uznamy, że jest stosowne</h2>
+            
+            <p class="post-meta">
+              
+              18
+              sierpnia
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 19</i> z rozdziału:</p>
+
+<p class="m0">Classes and Interfaces</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/minimalizuj-dostepnosc-enkapsulacja">Item 15: Minimize the accessibility of classes and members
+                </a>
+            </li><li>
+                <a href="/effective-java/gettery-i-settery">Item 16: In public classes, use accessor methods, not public fields
+                </a>
+            </li><li>
+                <a href="/effective-java/klasy-niezmienne">Item 17: Minimize mutability
+                </a>
+            </li><li>
+                <a href="/effective-java/kompozycja-zamiast-dziedziczenia">Item 18: Favor composition over inheritance
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/projektowanie-klasy-pod-dziedziczenie">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 19: Design and document for inheritance or else prohibit it
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 20: Prefer interfaces to abstract classes
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 21: Design interfaces for posterity
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 22: Use interfaces only to define types
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 23: Prefer class hierarchies to tagged classes
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 24: Favor static member classes over nonstatic
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 25: Limit source files to a single top-level class
+                </a>
+            </li></ul>
+<hr />
+
+<p>W poprzednim poście była mowa o wadach dziedziczenia i kompozycji jako lepszego zamiennika. W tym wpisie omówię, o czym nie zapomnieć projektując klasę pod dziedziczenie, jeśli uznamy, że jest ono stosowne.</p>
+
+<p>Jeśli projektujemy klasę do publicznego użytku, <strong>powinniśmy jasno udokumentować to, czy metody, które jesteśmy w stanie nadpisać, używają pod spodem innych metod, które również mogą zostać nadpisane.</strong> Jeśli ma to miejsce, to powinniśmy jasno opisać, jak to się dzieje. Jest do tego specjalne miejsce w Javadocach -  “Implementation Requirements”, które jest generowane za pomocą tagu <code class="highlighter-rouge">@implSpec</code> (dodany w Javie 8).</p>
+
+<p>Dla przykładu, dla <code class="highlighter-rouge">java.util.AbstractCollection</code> wygląda to tak:</p>
+
+<blockquote>
+  <p>public boolean remove(Object o)</p>
+
+  <p>Removes a single instance of the specified element from this
+collection, if it is present (optional operation). More formally,
+removes an element <code class="highlighter-rouge">e</code> such that <code class="highlighter-rouge">Objects.equals(o, e)</code>, if this
+collection contains one or more such elements. Returns <code class="highlighter-rouge">true</code> if this
+collection contained the specified element (or equivalently, if this
+collection changed as a result of the call).</p>
+
+  <p><strong>Implementation Requirements:</strong> This implementation iterates over the collection looking for the specified element. If it finds the element,
+it removes the element from the collection using the iterator’s
+<code class="highlighter-rouge">remove</code> method. Note that this implementation throws an
+<code class="highlighter-rouge">UnsupportedOperationException</code> if the iterator returned by this
+collection’s <code class="highlighter-rouge">iterator</code> method does not implement the <code class="highlighter-rouge">remove</code> method
+and this collection contains the specified object.</p>
+</blockquote>
+
+<p>Jest to tu jasno udokumentowane, że nadpisywanie metody <code class="highlighter-rouge">iterator</code> będzie miało wpływ na zachowanie <code class="highlighter-rouge">remove</code>.</p>
+
+<p><strong>Podając szczegóły implementacyjne, naruszamy enkapsulację i zobowiązujemy się nigdy tego nie zmieniać, ale jest to konsekwencja używania dziedziczenia.</strong> Jest to wymagane, aby można było bezpiecznie tworzyć podklasy danej klasy.</p>
+
+<p><strong>Musimy również zadbać, aby wszystkie kluczowe pola były dostępne dla podklas</strong>. Jedyny sensowny sposób, aby przetestować naszą klasę, którą projektujemy pod dziedziczenie i przekonać się co jest niezbędne, to napisać kilka podklas (najlepiej, żeby przynajmniej jedna nie była pisana przez nas). Wtedy jasno zobaczymy, co powinniśmy ukryć, a co udostępnić podklasom.</p>
+
+<p>Kolejną ważną rzeczą jest to, aby <strong>konstruktory nie wywoływały metod, które mogą zostać nadpisane</strong>. Jeśli ta metoda zależy od pola zainicjowanego przez konstruktor, to nie będzie wtedy działać prawidłowo. Konstruktor nadklasy wywoływany jest przed konstruktorem podklasy, więc nadpisana metoda podklasy będzie wywołana, zanim wywołany zostanie jej konstruktor. Przykład:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Super</span> <span class="o">{</span>
+    <span class="c1">// Broken - constructor invokes an overridable method</span>
+    <span class="kd">public</span> <span class="nf">Super</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">overrideMe</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">overrideMe</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Sub</span> <span class="kd">extends</span> <span class="n">Super</span> <span class="o">{</span>
+    <span class="c1">// Blank final, set by constructor</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Instant</span> <span class="n">instant</span><span class="o">;</span>
+
+    <span class="n">Sub</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="n">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Overriding method invoked by superclass constructor</span>
+    <span class="nd">@Override</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">overrideMe</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instant</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Sub</span> <span class="n">sub</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sub</span><span class="o">();</span>
+        <span class="n">sub</span><span class="o">.</span><span class="na">overrideMe</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Spodziewalibyśmy się, że ten program pokaże nam <code class="highlighter-rouge">instant</code> dwa razy, a jak się okazuje, za pierwszym razem będzie to <code class="highlighter-rouge">null</code>. Tak jak była mowa wcześniej, metoda <code class="highlighter-rouge">overrideMe</code> została wywołana przez konstruktor <code class="highlighter-rouge">Super</code> zanim konstruktor podklasy <code class="highlighter-rouge">Sub</code> miał okazję ją zainicjować - łatwy sposób na <code class="highlighter-rouge">NullPointerException</code>.</p>
+
+<p>Interfejsy <code class="highlighter-rouge">Cloneable</code> i <code class="highlighter-rouge">Serializable</code> stwarzają kolejne trudności, gdy projektujemy klasy pod dziedziczenie, więc musimy to wziąć pod uwagę lub po prostu zrezygnować z możliwości rozszerzania klasy, jeśli implementuje któryś z tych interfejsów.</p>
+
+<p>Podsumowując, jeśli wyeliminujemy z klasy użycia wewnętrznych metod, które mogą zostać nadpisane i udokumentujemy to w przejrzysty sposób, to klasę będzie można dużo łatwiej rozszerzać i tworzyć jej podklasy. Jeśli nie zapewnimy tego, to podklasy mogą być zależne od detalów implementacyjnych nadklasy i mogą przestać działać, jeśli implementacja nadklasy się zmieni.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/kompozycja-zamiast-dziedziczenia"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Kompozycja zamiast dziedziczenia"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie";
+    this.page.identifier = "/effective-java/projektowanie-klasy-pod-dziedziczenie";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

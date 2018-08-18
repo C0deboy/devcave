@@ -1,4 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-08-11T08:22:03+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Kompozycja zamiast dziedziczenia</title><link href="https://devcave.pl/effective-java/kompozycja-zamiast-dziedziczenia" rel="alternate" type="text/html" title="Kompozycja zamiast dziedziczenia" /><published>2018-08-11T08:00:00+02:00</published><updated>2018-08-11T08:00:00+02:00</updated><id>https://devcave.pl/effective-java/kompozycja-zamiast-dziedziczenia</id><content type="html" xml:base="https://devcave.pl/effective-java/kompozycja-zamiast-dziedziczenia">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-08-18T13:53:11+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Projektowanie klasy pod dziedziczenie</title><link href="https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie" rel="alternate" type="text/html" title="Projektowanie klasy pod dziedziczenie" /><published>2018-08-18T10:00:00+02:00</published><updated>2018-08-18T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie</id><content type="html" xml:base="https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 19&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Classes and Interfaces&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/gettery-i-settery&quot;&gt;Item 16: In public classes, use accessor methods, not public fields
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/klasy-niezmienne&quot;&gt;Item 17: Minimize mutability
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 19: Design and document for inheritance or else prohibit it
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 21: Design interfaces for posterity
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 22: Use interfaces only to define types
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 23: Prefer class hierarchies to tagged classes
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 25: Limit source files to a single top-level class
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;W poprzednim poście była mowa o wadach dziedziczenia i kompozycji jako lepszego zamiennika. W tym wpisie omówię, o czym nie zapomnieć projektując klasę pod dziedziczenie, jeśli uznamy, że jest ono stosowne.&lt;/p&gt;
+
+&lt;p&gt;Jeśli projektujemy klasę do publicznego użytku, &lt;strong&gt;powinniśmy jasno udokumentować to, czy metody, które jesteśmy w stanie nadpisać, używają pod spodem innych metod, które również mogą zostać nadpisane.&lt;/strong&gt; Jeśli ma to miejsce, to powinniśmy jasno opisać, jak to się dzieje. Jest do tego specjalne miejsce w Javadocach -  “Implementation Requirements”, które jest generowane za pomocą tagu &lt;code class=&quot;highlighter-rouge&quot;&gt;@implSpec&lt;/code&gt; (dodany w Javie 8).&lt;/p&gt;
+
+&lt;p&gt;Dla przykładu, dla &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.AbstractCollection&lt;/code&gt; wygląda to tak:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;public boolean remove(Object o)&lt;/p&gt;
+
+  &lt;p&gt;Removes a single instance of the specified element from this
+collection, if it is present (optional operation). More formally,
+removes an element &lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt; such that &lt;code class=&quot;highlighter-rouge&quot;&gt;Objects.equals(o, e)&lt;/code&gt;, if this
+collection contains one or more such elements. Returns &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; if this
+collection contained the specified element (or equivalently, if this
+collection changed as a result of the call).&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Implementation Requirements:&lt;/strong&gt; This implementation iterates over the collection looking for the specified element. If it finds the element,
+it removes the element from the collection using the iterator’s
+&lt;code class=&quot;highlighter-rouge&quot;&gt;remove&lt;/code&gt; method. Note that this implementation throws an
+&lt;code class=&quot;highlighter-rouge&quot;&gt;UnsupportedOperationException&lt;/code&gt; if the iterator returned by this
+collection’s &lt;code class=&quot;highlighter-rouge&quot;&gt;iterator&lt;/code&gt; method does not implement the &lt;code class=&quot;highlighter-rouge&quot;&gt;remove&lt;/code&gt; method
+and this collection contains the specified object.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Jest to tu jasno udokumentowane, że nadpisywanie metody &lt;code class=&quot;highlighter-rouge&quot;&gt;iterator&lt;/code&gt; będzie miało wpływ na zachowanie &lt;code class=&quot;highlighter-rouge&quot;&gt;remove&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Podając szczegóły implementacyjne, naruszamy enkapsulację i zobowiązujemy się nigdy tego nie zmieniać, ale jest to konsekwencja używania dziedziczenia.&lt;/strong&gt; Jest to wymagane, aby można było bezpiecznie tworzyć podklasy danej klasy.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Musimy również zadbać, aby wszystkie kluczowe pola były dostępne dla podklas&lt;/strong&gt;. Jedyny sensowny sposób, aby przetestować naszą klasę, którą projektujemy pod dziedziczenie i przekonać się co jest niezbędne, to napisać kilka podklas (najlepiej, żeby przynajmniej jedna nie była pisana przez nas). Wtedy jasno zobaczymy, co powinniśmy ukryć, a co udostępnić podklasom.&lt;/p&gt;
+
+&lt;p&gt;Kolejną ważną rzeczą jest to, aby &lt;strong&gt;konstruktory nie wywoływały metod, które mogą zostać nadpisane&lt;/strong&gt;. Jeśli ta metoda zależy od pola zainicjowanego przez konstruktor, to nie będzie wtedy działać prawidłowo. Konstruktor nadklasy wywoływany jest przed konstruktorem podklasy, więc nadpisana metoda podklasy będzie wywołana, zanim wywołany zostanie jej konstruktor. Przykład:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Super&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Broken - constructor invokes an overridable method&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;overrideMe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;overrideMe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Sub&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Super&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Blank final, set by constructor&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Instant&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;Sub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;instant&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Instant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Overriding method invoked by superclass constructor&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; 
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;overrideMe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;overrideMe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Spodziewalibyśmy się, że ten program pokaże nam &lt;code class=&quot;highlighter-rouge&quot;&gt;instant&lt;/code&gt; dwa razy, a jak się okazuje, za pierwszym razem będzie to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;. Tak jak była mowa wcześniej, metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;overrideMe&lt;/code&gt; została wywołana przez konstruktor &lt;code class=&quot;highlighter-rouge&quot;&gt;Super&lt;/code&gt; zanim konstruktor podklasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Sub&lt;/code&gt; miał okazję ją zainicjować - łatwy sposób na &lt;code class=&quot;highlighter-rouge&quot;&gt;NullPointerException&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Interfejsy &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;Serializable&lt;/code&gt; stwarzają kolejne trudności, gdy projektujemy klasy pod dziedziczenie, więc musimy to wziąć pod uwagę lub po prostu zrezygnować z możliwości rozszerzania klasy, jeśli implementuje któryś z tych interfejsów.&lt;/p&gt;
+
+&lt;p&gt;Podsumowując, jeśli wyeliminujemy z klasy użycia wewnętrznych metod, które mogą zostać nadpisane i udokumentujemy to w przejrzysty sposób, to klasę będzie można dużo łatwiej rozszerzać i tworzyć jej podklasy. Jeśli nie zapewnimy tego, to podklasy mogą być zależne od detalów implementacyjnych nadklasy i mogą przestać działać, jeśli implementacja nadklasy się zmieni.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 19 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 24: Favor static member classes over nonstatic Item 25: Limit source files to a single top-level class W poprzednim poście była mowa o wadach dziedziczenia i kompozycji jako lepszego zamiennika. W tym wpisie omówię, o czym nie zapomnieć projektując klasę pod dziedziczenie, jeśli uznamy, że jest ono stosowne. Jeśli projektujemy klasę do publicznego użytku, powinniśmy jasno udokumentować to, czy metody, które jesteśmy w stanie nadpisać, używają pod spodem innych metod, które również mogą zostać nadpisane. Jeśli ma to miejsce, to powinniśmy jasno opisać, jak to się dzieje. Jest do tego specjalne miejsce w Javadocach - “Implementation Requirements”, które jest generowane za pomocą tagu @implSpec (dodany w Javie 8). Dla przykładu, dla java.util.AbstractCollection wygląda to tak: public boolean remove(Object o) Removes a single instance of the specified element from this collection, if it is present (optional operation). More formally, removes an element e such that Objects.equals(o, e), if this collection contains one or more such elements. Returns true if this collection contained the specified element (or equivalently, if this collection changed as a result of the call). Implementation Requirements: This implementation iterates over the collection looking for the specified element. If it finds the element, it removes the element from the collection using the iterator’s remove method. Note that this implementation throws an UnsupportedOperationException if the iterator returned by this collection’s iterator method does not implement the remove method and this collection contains the specified object. Jest to tu jasno udokumentowane, że nadpisywanie metody iterator będzie miało wpływ na zachowanie remove. Podając szczegóły implementacyjne, naruszamy enkapsulację i zobowiązujemy się nigdy tego nie zmieniać, ale jest to konsekwencja używania dziedziczenia. Jest to wymagane, aby można było bezpiecznie tworzyć podklasy danej klasy. Musimy również zadbać, aby wszystkie kluczowe pola były dostępne dla podklas. Jedyny sensowny sposób, aby przetestować naszą klasę, którą projektujemy pod dziedziczenie i przekonać się co jest niezbędne, to napisać kilka podklas (najlepiej, żeby przynajmniej jedna nie była pisana przez nas). Wtedy jasno zobaczymy, co powinniśmy ukryć, a co udostępnić podklasom. Kolejną ważną rzeczą jest to, aby konstruktory nie wywoływały metod, które mogą zostać nadpisane. Jeśli ta metoda zależy od pola zainicjowanego przez konstruktor, to nie będzie wtedy działać prawidłowo. Konstruktor nadklasy wywoływany jest przed konstruktorem podklasy, więc nadpisana metoda podklasy będzie wywołana, zanim wywołany zostanie jej konstruktor. Przykład: public class Super { // Broken - constructor invokes an overridable method public Super() { overrideMe(); } public void overrideMe() { } } public final class Sub extends Super { // Blank final, set by constructor private final Instant instant; Sub() { instant = Instant.now(); } // Overriding method invoked by superclass constructor @Override public void overrideMe() { System.out.println(instant); } public static void main(String[] args) { Sub sub = new Sub(); sub.overrideMe(); } } Spodziewalibyśmy się, że ten program pokaże nam instant dwa razy, a jak się okazuje, za pierwszym razem będzie to null. Tak jak była mowa wcześniej, metoda overrideMe została wywołana przez konstruktor Super zanim konstruktor podklasy Sub miał okazję ją zainicjować - łatwy sposób na NullPointerException. Interfejsy Cloneable i Serializable stwarzają kolejne trudności, gdy projektujemy klasy pod dziedziczenie, więc musimy to wziąć pod uwagę lub po prostu zrezygnować z możliwości rozszerzania klasy, jeśli implementuje któryś z tych interfejsów. Podsumowując, jeśli wyeliminujemy z klasy użycia wewnętrznych metod, które mogą zostać nadpisane i udokumentujemy to w przejrzysty sposób, to klasę będzie można dużo łatwiej rozszerzać i tworzyć jej podklasy. Jeśli nie zapewnimy tego, to podklasy mogą być zależne od detalów implementacyjnych nadklasy i mogą przestać działać, jeśli implementacja nadklasy się zmieni.</summary></entry><entry><title type="html">Kompozycja zamiast dziedziczenia</title><link href="https://devcave.pl/effective-java/kompozycja-zamiast-dziedziczenia" rel="alternate" type="text/html" title="Kompozycja zamiast dziedziczenia" /><published>2018-08-11T08:00:00+02:00</published><updated>2018-08-11T08:00:00+02:00</updated><id>https://devcave.pl/effective-java/kompozycja-zamiast-dziedziczenia</id><content type="html" xml:base="https://devcave.pl/effective-java/kompozycja-zamiast-dziedziczenia">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -20,7 +131,7 @@
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 18: Favor composition over inheritance
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
+                &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
@@ -212,7 +323,7 @@
                 &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
+                &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
@@ -388,7 +499,7 @@
                 &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
+                &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
@@ -508,7 +619,7 @@
                 &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
+                &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
@@ -1507,121 +1618,4 @@ implementation.&lt;/p&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Nadpisując metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; musimy zawsze nadpisać również metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt;, ale o niej w następnym wpisie.&lt;/strong&gt;&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 10 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry><entry><title type="html">Preferuj try-with-resources</title><link href="https://devcave.pl/effective-java/preferuj-try-with-resources" rel="alternate" type="text/html" title="Preferuj try-with-resources" /><published>2018-06-09T10:00:00+02:00</published><updated>2018-06-09T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/preferuj-try-with-resources</id><content type="html" xml:base="https://devcave.pl/effective-java/preferuj-try-with-resources">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 9&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m0&quot;&gt;Creating and Destroying Objects&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;Item 1: Consider static factory methods instead of constructors
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wzorzec-projektowy-builder&quot;&gt;Item 2: Consider a builder when faced with many constructor parameters
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wzorzec-projektowy-singleton&quot;&gt;Item 3: Enforce the singleton property with a private constructor or an enum type
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/klasy-nieinstancjowalne&quot;&gt;Item 4: Enforce noninstantiability with a private constructor
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wstrzykiwanie-zaleznosci&quot;&gt;Item 5: Prefer dependency injection to hardwiring resources
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow&quot;&gt;Item 6: Avoid creating unnecessary objects
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/wycieki-pamieci-w-javie&quot;&gt;Item 7: Eliminate obsolete object references
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/unikaj-finalizerow-i-cleanerow&quot;&gt;Item 8: Avoid finalizers and cleaners
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/preferuj-try-with-resources&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 9: Prefer try-with-resources to try-finally
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;W Javie wiele klas wymaga zamknięcia używanych przez nie zasobów wywołując metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;close()&lt;/code&gt;. Są to np. &lt;code class=&quot;highlighter-rouge&quot;&gt;FileInputStream&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;FileOutputStream&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ThreadPoolExectuor&lt;/code&gt; czy &lt;code class=&quot;highlighter-rouge&quot;&gt;java.sql.Connection&lt;/code&gt;. Zamknięcie zasobów jest często niedopilnowane, co może wpływać na wydajność aplikacji. Wiele z tych klas używa finalizerów jako “siatki bezpieczeństwa”, jednak jak wiemy z poprzedniego postu - nie działa to zbyt dobrze.&lt;/p&gt;
-
-&lt;p&gt;Kiedyś (przed Java 7), najlepszym sposobem na poprawne zamknięcie zasobów było &lt;em&gt;try-finally&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// try-finally - No longer the best way to close resources!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;firstLineOfFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;BufferedReader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;br&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BufferedReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;br&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readLine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;br&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Blok &lt;em&gt;finally&lt;/em&gt; jest odpalany nawet wtedy, kiedy w bloku &lt;em&gt;try&lt;/em&gt; wystąpi wyjątek czy operacja &lt;em&gt;return&lt;/em&gt;, dlatego był dobrym miejscem na zamknięcie zasobów.&lt;/p&gt;
-
-&lt;p&gt;Nie wygląda to źle, ale z każdym kolejnym zasobem jest coraz gorzej:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// try-finally is ugly when used with more than one resource!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;InputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;OutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BUFFER_SIZE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Czytelność spada drastycznie.&lt;/p&gt;
-
-&lt;p&gt;Z &lt;em&gt;try-finally&lt;/em&gt; jest też inny problem. Zarówno w bloku &lt;em&gt;try&lt;/em&gt; jak i &lt;em&gt;finally&lt;/em&gt; może wystąpić wyjątek. Np. jeśli w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;firstLineOfFile&lt;/code&gt;, przy wywołaniu metody &lt;code class=&quot;highlighter-rouge&quot;&gt;readLine&lt;/code&gt; wystąpi wyjątek w związku z błędem na fizycznym urządzeniu, to również wywołanie metody &lt;code class=&quot;highlighter-rouge&quot;&gt;close&lt;/code&gt; rzuci wyjątkiem z tego samego powodu. W takiej sytuacji drugi wyjątek przesłoni pierwszy i nie będziemy o tym wiedzieć. Nie zobaczymy go w &lt;em&gt;stack trace&lt;/em&gt;, co może utrudnić debugowanie, bo zazwyczaj to pierwszy rzucony wyjątek chcemy ujrzeć. Jest możliwe, aby stłumić drugi wyjątek na rzecz pierwszego, ale w praktyce nikt tego nie robi, bo jest to rozwlekłe rozwiązanie.&lt;/p&gt;
-
-&lt;p&gt;Wszystkie te problemy zostały rozwiązane wraz z przyjściem w Javie 7 &lt;em&gt;try-with-resources&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Aby nasz zasób mógł być używany z &lt;em&gt;try-with-resources&lt;/em&gt; musi implementować interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;AutoCloseable&lt;/code&gt;, czyli metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;close()&lt;/code&gt;. Teraz wiele klas i interfejsów z bibliotek Javy implementuje ten interfejs. Jest to poniekąd standard. Więc jeśli piszesz klasę, która reprezentuje zasób, który musi być zamknięty, to powinna implementować &lt;code class=&quot;highlighter-rouge&quot;&gt;AutoCloseable&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Drugi przykład (który wraz z kolejnym zasobem robił się coraz brzydszy), z &lt;em&gt;try-with-resources&lt;/em&gt; wygląda tak:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// try-with-resources on multiple resources - short and sweet&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InputStream&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;OutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BUFFER_SIZE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Jak widać, jest to dużo bardziej zwięzłe i czytelne rozwiązanie. Co więcej, jeśli wystąpią wyjątki tak jak wcześniej opisałem, to te następujące po pierwszym stają się &lt;em&gt;suppressed&lt;/em&gt;, pozostawiając na wierzchu ten, który chcemy zobaczyć - czyli pierwszy jaki wystąpił.&lt;/p&gt;
-
-&lt;p&gt;Wyjątki &lt;em&gt;suppressed&lt;/em&gt; nie są pomijane - mamy informację o nich w &lt;em&gt;stack trace&lt;/em&gt; i możemy się do nich dostać z kodu wywołując metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;getSuppresed()&lt;/code&gt;, dostępną od Javy 7 na każdym &lt;code class=&quot;highlighter-rouge&quot;&gt;Throwable&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Oczywiście do &lt;em&gt;try-with-resources&lt;/em&gt; możemy dodać blok &lt;em&gt;catch&lt;/em&gt; tak jak w normalnym &lt;em&gt;try&lt;/em&gt;, co pozwala obsłużyć wszystkie wyjątki bez kolejnych zagnieżdżeń.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Catch&lt;/em&gt; może też służyć do innych celów. Np. w przypadku wystąpienia wyjątku w &lt;em&gt;try&lt;/em&gt; - zwrócenie domyślnej wartości. Dla przykładu:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;firstLineOfFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultVal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BufferedReader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;br&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BufferedReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-           &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;FileReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;br&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readLine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultVal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Zatem używajmy tylko &lt;em&gt;try-with-resources&lt;/em&gt;, aby kod był bardziej zwięzły, czytelniejszy, a rzucane wyjątki bardziej użyteczne. Jeśli tylko napotkasz w systemie kilka zagnieżdżeń &lt;em&gt;try-finally&lt;/em&gt;, zamień je na &lt;em&gt;try-with-resources&lt;/em&gt;, aby żyło nam się lepiej ;)&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 9 z rozdziału: Creating and Destroying Objects Item 1: Consider static factory methods instead of constructors Item 2: Consider a builder when faced with many constructor parameters Item 3: Enforce the singleton property with a private constructor or an enum type Item 4: Enforce noninstantiability with a private constructor Item 5: Prefer dependency injection to hardwiring resources Item 6: Avoid creating unnecessary objects Item 7: Eliminate obsolete object references Item 8: Avoid finalizers and cleaners Item 9: Prefer try-with-resources to try-finally</summary></entry></feed>
+&lt;p&gt;&lt;strong&gt;Nadpisując metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; musimy zawsze nadpisać również metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt;, ale o niej w następnym wpisie.&lt;/strong&gt;&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 10 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry></feed>

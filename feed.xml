@@ -1,4 +1,200 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-08-18T13:53:11+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Projektowanie klasy pod dziedziczenie</title><link href="https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie" rel="alternate" type="text/html" title="Projektowanie klasy pod dziedziczenie" /><published>2018-08-18T10:00:00+02:00</published><updated>2018-08-18T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie</id><content type="html" xml:base="https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-08-25T14:39:47+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Interfejsy vs klasy abstrakcyjne</title><link href="https://devcave.pl/effective-java/interfejsy-vs-klasy-abstrakcyjne" rel="alternate" type="text/html" title="Interfejsy vs klasy abstrakcyjne" /><published>2018-08-25T10:00:00+02:00</published><updated>2018-08-25T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/interfejsy-vs-klasy-abstrakcyjne</id><content type="html" xml:base="https://devcave.pl/effective-java/interfejsy-vs-klasy-abstrakcyjne">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 20&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Classes and Interfaces&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/gettery-i-settery&quot;&gt;Item 16: In public classes, use accessor methods, not public fields
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/klasy-niezmienne&quot;&gt;Item 17: Minimize mutability
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 20: Prefer interfaces to abstract classes
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 21: Design interfaces for posterity
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 22: Use interfaces only to define types
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 23: Prefer class hierarchies to tagged classes
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 25: Limit source files to a single top-level class
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;W Javie mamy dwa mechanizmy do definiowania abstrakcyjnego typu, który może mieć różne implementacje: interfejsy i klasy abstrakcyjne.&lt;/p&gt;
+
+&lt;p&gt;Od dodania metod domyślnych do interfejsów (Java 8), obydwa mechanizmy pozwalają na zdefiniowanie domyślnej implementacji dla niektórych metod. To, co je od siebie najbardziej odróżnia to to, że aby zaimplementować typ zdefiniowany przez klasę abstrakcyjną, trzeba ją rozszerzyć. &lt;strong&gt;Ze względu na to, że w Javie klasa może być podklasą tylko jednej klasy (&lt;em&gt;single inheritance&lt;/em&gt;), to jest to spore ograniczenie.&lt;/strong&gt; W przypadku interfejsów, takiego ograniczenia nie ma i klasa może implementować wiele interfejsów. To właśnie tu głównie wygrywają interfejsy.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Istniejące klasy mogą w łatwy sposób implementować nowy interfejs.&lt;/strong&gt; Wystarczy, że dodamy &lt;code class=&quot;highlighter-rouge&quot;&gt;implements NazwaInterfejsu&lt;/code&gt;, lub dodamy nowy po przecinku i dodamy wszystkie wymagane metody. Przykładowo, wiele istniejących klas w Javie zostało rozbudowanych, aby implementowały &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;Autocloseable&lt;/code&gt;, kiedy te zostały dodane do biblioteki. &lt;strong&gt;Istniejące klasy nie mogą być rozbudowane tak, aby rozszerzały kolejną nową klasę abstrakcyjną.&lt;/strong&gt; Aby zasymulować, że nasza klasa rozszerza obydwie klasy, musielibyśmy je obie dać wyżej w hierarchii:&lt;/p&gt;
+
+&lt;pre style=&quot;display: inline; border: none&quot;&gt;
+AbstractC
+    └── AbstractB
+            └── ConcrateA
+&lt;/pre&gt;
+
+&lt;p&gt;Niestety psuje to całą hierarchię typów, bo wszystkie klasy, które rozszerzały &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; są zmuszone od teraz implementować &lt;code class=&quot;highlighter-rouge&quot;&gt;C&lt;/code&gt;, bez względu czy tego chcemy, czy nie.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Interfejsy są idealnymi mixinami.&lt;/strong&gt; Upraszczając, &lt;em&gt;mixin&lt;/em&gt; jest typem, który klasa może (dodatkowo do swojego podstawowego typu) zaimplementować, dostarczając dodatkową, odseparowaną funkcjonalność. &lt;em&gt;Mixin&lt;/em&gt; sam w sobie nie może zostać zinstancjowany - jest tylko częścią funkcjonalności innych klas. Dla przykładu, &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; jest mixinem, który deklaruje i dodaje klasie funkcjonalność porównywania i tym samym porządkowania jej instancji.  Klasy abstrakcyjne nie mogą być &lt;em&gt;mixinami&lt;/em&gt; z tego samego powodu co wcześniej - klasa może rozszerzać tylko jedną klasę.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Interfejsy nie tworzą sztywnych hierarchii, dzięki czemu są bardzo elastyczne&lt;/strong&gt;.  Dla przykładu, mamy piosenkarza:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;AudioClip&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;i kompozytora:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Songwriter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chartPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dzięki temu, że użyliśmy interfejsów, konkretna klasa może implementować zarówno &lt;code class=&quot;highlighter-rouge&quot;&gt;Singer&lt;/code&gt; jak i &lt;code class=&quot;highlighter-rouge&quot;&gt;Songwriter&lt;/code&gt; - tak jak to jest w prawdziwym życiu - piosenkarz jest często kompozytorem. W przypadku klas abstrakcyjnych moglibyśmy być tylko jednym albo drugim.&lt;/p&gt;
+
+&lt;p&gt;Idąc dalej, mamy jeszcze dużo więcej elastyczności. Przykładowo możemy stworzyć dodatkowy typ, który łączy oba poprzednie i dodaje nowe funkcje, które są odpowiednie dla obu ról:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SingerSongwriter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Songwriter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;AudioClip&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actSensitive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I nie ma problemu, aby istniejąca klasa, która implementuje już &lt;code class=&quot;highlighter-rouge&quot;&gt;Singer&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Songwriter&lt;/code&gt; (i nie może zostać zmieniona), implementowała &lt;code class=&quot;highlighter-rouge&quot;&gt;SingerSongwriter&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Concret&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Songwriter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SingerSongwriter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AudioClip&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actSensitive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AudioClip&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chartPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Taka elastyczność nie jest często potrzebna, no ale gdyby tak się stało, to mamy taką możliwość.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Możemy też połączyć zalety interfejsów i klas abstrakcyjnych tworząc coś w rodzaju szkieletu klasy implementującej dany interfejs.&lt;/strong&gt; Interfejs będzie odpowiadał za typ, być może dostarczy też kilka domyślnych metod, podczas gdy klasa abstrakcyjna dostarczy domyślne implementacje metod z interfejsu, które nie mogły być w nim zadeklarowane jako &lt;code class=&quot;highlighter-rouge&quot;&gt;defualt&lt;/code&gt;. Anglojęzyczny termin takiego zabiegu to &lt;em&gt;skeletal implementation class&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Jeśli jesteśmy w stanie zdefiniować metody domyślne w interfejsie, to klasa abstrakcyjna nie będzie nam potrzebna. Zależne jest to od tego, czy metody te operują na stanie, czy nie. W interfejsie jest to niemożliwe.&lt;/p&gt;
+
+&lt;p&gt;Zazwyczaj takie klasy abstrakcyjne nazywa się &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractNazwaInterfejsu&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Przykładowa klasa:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Skeletal implementation class&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AbstractMapEntry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Entries in a modifiable map must override this method&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UnsupportedOperationException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Implements the general contract of Map.Entry.equals&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Implements the general contract of Map.Entry.hashCode&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;note&quot;&gt;Ta implementacja metod nie mogłaby być bezpośrednio w interfejsie, ponieważ domyślne metody interfejsu nie pozwalają na nadpisywanie metod jak &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt; czy &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Przykłady znajdziemy też w standardowym &lt;em&gt;Collections Framework&lt;/em&gt; - &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractCollection&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractSet&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractList&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractMap&lt;/code&gt;. Takie klasy mogą bardzo ułatwić pisanie implementacji interfejsu. Dla przykładu, podaję &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;static factory method&lt;/a&gt;, która tworzy w pełni funkcjonalną implementację &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;, zbudowaną na &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractList&lt;/code&gt; (w formie klasy anonimowej) z tablicy intów:&lt;/p&gt;
+
+&lt;div id=&quot;intArrayAsList&quot; class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Concrete implementation built atop skeletal implementation&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;intArrayAsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requireNonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// The diamond operator is only legal here in Java 9 and later&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// If you're using an earlier release, specify &amp;lt;Integer&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AbstractList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Autoboxing&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldVal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Auto-unboxing&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldVal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Autoboxing&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Jeśli zobaczymy ile &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; udostępnia funkcji, to zdamy sobie sprawę, że masa funkcjonalności została nam dostarczona za darmo.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Przykład jest też wzorcem projektowym  &lt;em&gt;Adapter&lt;/em&gt; - pozwala używać tablicy &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt; jako &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Innym wariantem &lt;em&gt;skeletal implementation&lt;/em&gt; jest  &lt;em&gt;simple implementation,&lt;/em&gt; której przykładem jest  &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractMap.SimpleEntry&lt;/code&gt; w standardowej bibliotece Javy. &lt;em&gt;Simple implementation&lt;/em&gt; jest jak &lt;em&gt;skeletal implementation&lt;/em&gt;, ale nie jest to klasa abstrakcyjna. Jest to możliwe najprostsza, działająca implementacja. Można jej używać taka jaka jest lub rozszerzać, modyfikując zachowanie.&lt;/p&gt;
+
+&lt;p&gt;Jako ze obydwie implementację są zaprojektowane pod dziedziczenie, to warto korzystać ze wskazówek z poprzedniego postu na temat &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;projaktowania klasy pod dziedziczenie&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Klasy &lt;em&gt;skeletal implementation&lt;/em&gt; dostarczają nam zaletę częściowej implementacji z klas abstrakcyjnych, bez narzucania ograniczeń jakie stwarzają, gdy są używane jako definicje typu. Mamy też dowolność czy chcemy skorzystać z klasy abstrakcyjnej czy zaimplementować interfejs bezpośrednio.&lt;/p&gt;
+
+&lt;p&gt;Podsumowując, interfejsy są najlepszym sposobem na zdefiniowanie typu, który pozwala na różne implementacje. Gdy mamy do czynienia z rozbudowanym interfejsem, którego metody mogą mięć domyślną implementację, można rozważyć napisanie &lt;em&gt;skeletal implementation class&lt;/em&gt;. Jeśli mamy taką możliwość, to możemy się ograniczyć tylko do metod domyślnych w interfejsie.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 20 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 24: Favor static member classes over nonstatic Item 25: Limit source files to a single top-level class</summary></entry><entry><title type="html">Projektowanie klasy pod dziedziczenie</title><link href="https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie" rel="alternate" type="text/html" title="Projektowanie klasy pod dziedziczenie" /><published>2018-08-18T10:00:00+02:00</published><updated>2018-08-18T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie</id><content type="html" xml:base="https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -23,7 +219,7 @@
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 19: Design and document for inheritance or else prohibit it
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
+                &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;Item 20: Prefer interfaces to abstract classes
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 21: Design interfaces for posterity
@@ -134,7 +330,7 @@ and this collection contains the specified object.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
+                &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;Item 20: Prefer interfaces to abstract classes
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 21: Design interfaces for posterity
@@ -326,7 +522,7 @@ and this collection contains the specified object.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
+                &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;Item 20: Prefer interfaces to abstract classes
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 21: Design interfaces for posterity
@@ -502,7 +698,7 @@ and this collection contains the specified object.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
+                &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;Item 20: Prefer interfaces to abstract classes
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 21: Design interfaces for posterity
@@ -622,7 +818,7 @@ and this collection contains the specified object.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 20: Prefer interfaces to abstract classes
+                &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;Item 20: Prefer interfaces to abstract classes
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 21: Design interfaces for posterity
@@ -1416,206 +1612,4 @@ implementation.&lt;/p&gt;
 
 &lt;p&gt;Ten przepis na &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt; daje nam całkiem dobre funkcje hashujące, odpowiednie dla większości użyć, jednak nie są one perfekcyjne. Jeśli będziesz mieć naprawdę dobry powód, żeby twoje hash code-y miały jeszcze mniejsze prawdopodobieństwo na kolizję, zobacz rozwiązanie od &lt;a href=&quot;https://memberservices.informit.com/my_account/webedition/9780134998060/html/epub/oebps/html/ref.xhtml#rGuava&quot;&gt;Guava&lt;/a&gt; -&lt;code class=&quot;highlighter-rouge&quot;&gt;com.google.common.hash.Hashing&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot;&gt;Jeśli klasa jest &lt;em&gt;immutable&lt;/em&gt;, można rozważyć cachowanie hash kodu w zmiennej, zamiast przeliczać go za każdym razem od nowa.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 11 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry><entry><title type="html">Metoda equals</title><link href="https://devcave.pl/effective-java/metoda-equals" rel="alternate" type="text/html" title="Metoda equals" /><published>2018-06-16T10:00:00+02:00</published><updated>2018-06-16T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/metoda-equals</id><content type="html" xml:base="https://devcave.pl/effective-java/metoda-equals">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 10&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m0&quot;&gt;Methods Common to All Objects&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/metoda-equals&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 10: Obey the general contract when overriding equals
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/metoda-hashcode&quot;&gt;Item 11: Always override hashCode when you override equals
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/metoda-toString&quot;&gt;Item 12: Always override toString
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/metoda-clone&quot;&gt;Item 13: Override clone judiciously
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;Item 14: Consider implementing Comparable
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;W tym rozdziale serii omawiane będą wszystkie metody &lt;em&gt;non-final&lt;/em&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt;, oprócz &lt;code class=&quot;highlighter-rouge&quot;&gt;finalize&lt;/code&gt; - o której była już mowa w poście &lt;a href=&quot;/effective-java/unikaj-finalizerow-i-cleanerow&quot;&gt;unikaj finalizerow i cleanerów&lt;/a&gt;) z klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt;, która jest klasą bazową każdej klasy (każda klasa domyślnie rozszerza tę klasę).&lt;/p&gt;
-
-&lt;p&gt;Metody te mają swoje domyślne zachowania, ale najczęściej, jeśli ich potrzebujemy, to je nadpisujemy. &lt;strong&gt;Prawidłowa implementacja tych metod jest szczególnie ważna, bo wiele innych klas na nich polega, dlatego warto poświęcić im chwilę.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;W tym wpisie zajmiemy się metodą &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;, która, jak sama nazwa wskazuje, służy do określania czy dany obiekt jest równy innemu, według określonych przez nas warunków.&lt;/p&gt;
-
-&lt;p&gt;Domyślnie implementacja wygląda tak:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Czyli zwracane jest &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; tylko wtedy, gdy &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;obj&lt;/code&gt; odnoszą się do tego samego obiektu (wskazują na to samo miejsce w pamięci). Inaczej mówiąc — domyślnie (kiedy nie nadpiszemy zachowania metody &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;) instancja klasy jest równa tylko sobie.&lt;/p&gt;
-
-&lt;h1 id=&quot;kiedy-nie-nadpisywać-metody-equals&quot;&gt;Kiedy nie nadpisywać metody equals?&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Każda instancja klasy jest unikatowa w systemie (np. &lt;code class=&quot;highlighter-rouge&quot;&gt;Thread&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;Logiczne porównywanie klasy nie ma sensu i jest zbędne (np. &lt;code class=&quot;highlighter-rouge&quot;&gt;Pattern&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;Jeśli istnieje nadklasa, która nadpisuje już &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; i to zachowanie jest poprawne dla naszej klasy (np. większość implementacji &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; czy &lt;code class=&quot;highlighter-rouge&quot;&gt;Map&lt;/code&gt; dziedziczy implementację metody &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; odpowiednio z &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractSet&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractList&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractMap&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Kiedy klasa sama zarządza swoimi instancjami i zapewnia, że istnieje co najwyżej jedna instancja tej klasy (np. &lt;code class=&quot;highlighter-rouge&quot;&gt;Enum&lt;/code&gt; należy do tej kategorii).&lt;/li&gt;
-  &lt;li&gt;Klasa jest &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt; i jesteśmy pewni, że &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; nie zostanie nigdy wywołane.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Jeśli chcemy być ekstremalnie ostrożni, to możemy się upewnić, że metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; nie zostanie nigdy wywołana (zgodnie z założeniami):&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AssertionError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Method is never called&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Dzięki temu, jeśli gdzieś zostanie wywołana, to od razu zostaniemy poinformowani, że ktoś wcześniej założył, że nie powinno to mieć miejsca. Unikniemy przez to niespodziewanego zachowania klas zależnych od &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Częściej jednak metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; jest kluczowa i będziemy nadpisywać jej zachowanie.&lt;/p&gt;
-
-&lt;h1 id=&quot;kiedy-nadpisywać-metodę-equals&quot;&gt;Kiedy nadpisywać metodę equals?&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Kiedy klasa nadaje się do logicznego porównywania, które nie polega tylko na unikatowym identyfikatorze i nie istnieje nadklasa, która już to robi w poprawny sposób.&lt;/li&gt;
-  &lt;li&gt;Kiedy klasa reprezentuje wartość (np. klasy takie jak &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Również wiele klas zależy od metody &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; i jej dobra implementacja jest wymagana do poprawnego funkcjonowania tych klas.&lt;/p&gt;
-
-&lt;p&gt;Dla przykładu jest to niezbędne, aby używać obiekty jako klucze w mapach czy dodawać je do setów.&lt;/p&gt;
-
-&lt;h1 id=&quot;co-equals-musi-spełniać&quot;&gt;Co equals musi spełniać?&lt;/h1&gt;
-
-&lt;p&gt;Metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; dla każdej wartości &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;y&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;z&lt;/code&gt; różnej od &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; powinna być:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Reflexive&lt;/strong&gt; - czyli dla &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; musi zwrócić &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Symmetric&lt;/strong&gt; - czyli dla &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; musi zwrócić &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; wtedy i tylko wtedy gdy &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Transitive&lt;/strong&gt; - czyli jeśli &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; i &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; to &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; też musi zwracać &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Consistent&lt;/strong&gt; - czyli wielokrotne wywołanie &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; bez zmiany parametrów używanych w &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; zawsze konsekwentnie zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;“Non-nullity”&lt;/strong&gt; - czyli dla &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt; musi zostać zwrócone &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Jest to &lt;strong&gt;kontrakt&lt;/strong&gt;, który metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; musi spełniać.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Jeśli te warunki nie zostaną spełnione, to wszystkie klasy, które polegają na metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; obiektów (np. klasy kolekcji), będą zachowywać się nieregularnie, niepoprawnie i powodować błędy, dla których może być ciężko znaleźć przyczynę.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p id=&quot;problem-z-dziedziczeniem&quot;&gt;Trzeba się też zastanowić, czy klasy, które rozszerzają inną klasę (również, gdy dodają wartość, która ma znaczenie w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;), powinny móc być równe nadklasom?&lt;/p&gt;
-
-&lt;p&gt;Joshua Bloch w swojej książce mówi, że tak — co jest zgodne z zasadą &lt;a href=&quot;/notatnik-juniora/zasady-projektowania-kodu#l---liskov-substitution-principle&quot;&gt;Liskov substitution&lt;/a&gt;. Ponadto mówi, że nie ma sposobu, aby rozszerzyć instancjowalną klasę i dodać do niej wartość zachowując kontrakt &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;, chyba że, chcemy zrezygnować z zalet obiektowych abstrakcji.&lt;/p&gt;
-
-&lt;p&gt;Z drugiej strony, przeciwne głosy idą za tym, że możemy zachować kontrakt &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; używając sprawdzenia z &lt;code class=&quot;highlighter-rouge&quot;&gt;getClass&lt;/code&gt; zamiast &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;. Dla przykładu, dla prostej klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Point&lt;/code&gt; będzie to wyglądać tak:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Broken - violates Liskov substitution principle (page 43)&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; 
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Point&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Co skutkuje tym, że obiekty są równe tylko wtedy, gdy mają również taką samą klasę. Jednak Joshua Bloch twierdzi, że jest to nieakceptowalne, bo narusza to zasadę &lt;a href=&quot;/notatnik-juniora/zasady-projektowania-kodu#l---liskov-substitution-principle&quot;&gt;Liskov substitution&lt;/a&gt;. Uzasadnia to tym, że podtyp danego obiektu jest nadal tym obiektem (Np. &lt;code class=&quot;highlighter-rouge&quot;&gt;ColorPoint&lt;/code&gt; rozszerzając &lt;code class=&quot;highlighter-rouge&quot;&gt;Point&lt;/code&gt; jest nadal &lt;code class=&quot;highlighter-rouge&quot;&gt;Point&lt;/code&gt;-em ) i powinien funkcjonować jak ten obiekt, jednak nie jest to możliwe w tym podejściu. Wtedy nawet klasa, która rozszerza inną klasę i nie dodaje wartości, która ma znaczenie w &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;, nie będzie jej równa.&lt;/p&gt;
-
-&lt;p&gt;Joshua Bloch wypowiedział się na ten temat też dodatkowo poza książką &lt;a href=&quot;https://www.artima.com/intv/bloch17.html&quot;&gt;tutaj&lt;/a&gt;, jako że jest to dosyć kontrowersyjny temat w jego książce.&lt;/p&gt;
-
-&lt;p&gt;Jako obejście tego problemu można zastosować &lt;a href=&quot;/notatnik-juniora/zasady-projektowania-kodu#composition-over-inheritance&quot;&gt;Composition Over Inheritance&lt;/a&gt; (będzie też osobny wpis na ten temat w rozdziale 3 serii). Zamiast rozszerzać &lt;code class=&quot;highlighter-rouge&quot;&gt;Point&lt;/code&gt;, dać klasie &lt;code class=&quot;highlighter-rouge&quot;&gt;ColorPoint&lt;/code&gt; pole prywatne &lt;code class=&quot;highlighter-rouge&quot;&gt;Point&lt;/code&gt; oraz udostępniając metodę dostępową do tego pola:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Adds a value component without violating the equals contract&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ColorPoint&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Point&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ColorPoint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;point&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requireNonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;cm&quot;&gt;/**
-    * Returns the point-view of this color point.
-    */&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Point&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asPoint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ColorPoint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ColorPoint&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ColorPoint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Remainder omitted&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Według mnie to, czy dany obiekt powinien być równy innemu, nawet jeśli jest jego podklasą to sprawa indywidualna. Na pewno znajdą się przypadki, kiedy &lt;code class=&quot;highlighter-rouge&quot;&gt;ColorPoint&lt;/code&gt; powinien móc być równy &lt;code class=&quot;highlighter-rouge&quot;&gt;Point&lt;/code&gt; jak i takie, kiedy nie powinno mieć to miejsca.&lt;/p&gt;
-
-&lt;h1 id=&quot;jak-poprawnie-zaimplementować-metodę-equals&quot;&gt;Jak poprawnie zaimplementować metodę equals?&lt;/h1&gt;
-
-&lt;p&gt;Kiedy nie mamy potrzeby definiowania jakiegoś specyficznego zachowania metody &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; to najczęściej najlepiej zdać się na jej automatyczne wygenerowanie. Umożliwiają nam to IDE i bibloteki takie jak np. &lt;a href=&quot;https://projectlombok.org/&quot;&gt;Lombok&lt;/a&gt;. Poprawność implementacji wtedy zrzucamy na IDE lub bibliotekę, przez co czasem możemy uniknąć naszych ludzkich błędów.&lt;/p&gt;
-
-&lt;p&gt;Nawiązując jeszcze do poprzedniego problemu, np. w InteliJ mamy do wyboru, czy podtypy klasy powinny być akceptowane w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;Equals&lt;/code&gt; czy nie.&lt;/p&gt;
-
-&lt;p&gt;W projekcie &lt;a href=&quot;https://projectlombok.org/&quot;&gt;Lombok&lt;/a&gt; również jest dostępna adnotacja, dzięki której zostanie wygenerowana dla nas implementacja &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt; - &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@EqualsAndHashCode&lt;/span&gt;&lt;/code&gt;. Obecnie Lombok łamie zasadę &lt;a href=&quot;/notatnik-juniora/zasady-projektowania-kodu#l---liskov-substitution-principle&quot;&gt;Liskov substitution&lt;/a&gt; i jest to zrobione świadomie, a &lt;a href=&quot;https://groups.google.com/forum/#!topic/project-lombok/jmhrTo0nAx8&quot;&gt;tutaj&lt;/a&gt; można przeczytać dyskusję na ten temat.&lt;/p&gt;
-
-&lt;p&gt;Jeśli jednak zamierzmy samemu zadbać o implementację metody &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; to można sugerować się tym przepisem:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Argument powinien być zawsze typu &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Użyj operatora &lt;code class=&quot;highlighter-rouge&quot;&gt;==&lt;/code&gt; żeby sprawdzić, czy argument jest referencją do obiektu. Jeśli tak zwróć &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Użyj operatora &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt; żeby sprawdzić, czy argument jest odpowiedniego typu. Jeśli nie jest, zwróć &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Rzutuj argument na odpowiedni typ.&lt;/li&gt;
-  &lt;li&gt;Dla każdego znaczącego pola w tym obiekcie sprawdź, czy to pole jest równe odpowiadającemu polu w argumencie. Jeśli wszystkie pola się zgadzają, zwróć &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;, w przeciwnym wypadku &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;.
-    &lt;ul&gt;
-      &lt;li&gt;Dla prymitywów z wyjątkiem &lt;code class=&quot;highlighter-rouge&quot;&gt;float&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;double&lt;/code&gt; używaj operatora &lt;code class=&quot;highlighter-rouge&quot;&gt;==&lt;/code&gt; do porównywania.&lt;/li&gt;
-      &lt;li&gt;Dla pól przechowujących referencje do obiektów wywołuj ich &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;.&lt;/li&gt;
-      &lt;li&gt;Dla pól typu &lt;code class=&quot;highlighter-rouge&quot;&gt;float&lt;/code&gt; używaj metody &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;/code&gt;, a dla &lt;code class=&quot;highlighter-rouge&quot;&gt;double&lt;/code&gt; używaj &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;/code&gt;.&lt;/li&gt;
-      &lt;li&gt;Dla tablic stosuj te wskazówki dla każdego elementu. Jeśli każdy element tablicy ma znaczenie, użyj metody &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;/code&gt;.&lt;/li&gt;
-      &lt;li&gt;Niektóre z pól mogą być &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;. Aby uniknąć &lt;code class=&quot;highlighter-rouge&quot;&gt;NullPointerException&lt;/code&gt; użyj do porównywania &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;.&lt;/li&gt;
-      &lt;li&gt;Wydajność metody &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; zależy od kolejności kolejnych sprawdzeń. Aby uzyskać najlepszą wydajność, najpierw sprawdzaj pola, które najczęściej będą się różnić i ich porównywanie jest mniej kosztowne.&lt;/li&gt;
-      &lt;li&gt;Nie porównuj obiektów, które nie są częścią stanu logicznego obiektu.&lt;/li&gt;
-      &lt;li&gt;Nie porównuj pól, które są pochodnymi innych (ich wynik zależy od innych pól, które już sprawdzasz).&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Sprawdź, czy twoja metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; spełnia wszystkie 5 warunków (kontrakt)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Przykład poprawnej implementacji:&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Class with a typical equals method&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PhoneNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;short&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;areaCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lineNum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PhoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;areaCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lineNum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;areaCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rangeCheck&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;areaCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;area code&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;prefix&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rangeCheck&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;prefix&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lineNum&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rangeCheck&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lineNum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;9999&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;line num&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;short&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rangeCheck&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-           &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;short&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PhoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;PhoneNumber&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PhoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lineNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lineNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;prefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;areaCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;areaCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Remainder omitted&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Nadpisując metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; musimy zawsze nadpisać również metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt;, ale o niej w następnym wpisie.&lt;/strong&gt;&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 10 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry></feed>
+&lt;p class=&quot;note&quot;&gt;Jeśli klasa jest &lt;em&gt;immutable&lt;/em&gt;, można rozważyć cachowanie hash kodu w zmiennej, zamiast przeliczać go za każdym razem od nowa.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 11 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry></feed>

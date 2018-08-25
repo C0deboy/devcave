@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Interfejsy vs klasy abstrakcyjne - dlaczego warto preferować interfejsy?</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/interfejsy-vs-klasy-abstrakcyjne">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Interfejsy vs klasy abstrakcyjne</h1>
+            
+            <h2 class="post-subtitle">Dlaczego warto preferować interfejsy?</h2>
+            
+            <p class="post-meta">
+              
+              25
+              sierpnia
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 20</i> z rozdziału:</p>
+
+<p class="m0">Classes and Interfaces</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/minimalizuj-dostepnosc-enkapsulacja">Item 15: Minimize the accessibility of classes and members
+                </a>
+            </li><li>
+                <a href="/effective-java/gettery-i-settery">Item 16: In public classes, use accessor methods, not public fields
+                </a>
+            </li><li>
+                <a href="/effective-java/klasy-niezmienne">Item 17: Minimize mutability
+                </a>
+            </li><li>
+                <a href="/effective-java/kompozycja-zamiast-dziedziczenia">Item 18: Favor composition over inheritance
+                </a>
+            </li><li>
+                <a href="/effective-java/projektowanie-klasy-pod-dziedziczenie">Item 19: Design and document for inheritance or else prohibit it
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/interfejsy-vs-klasy-abstrakcyjne">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 20: Prefer interfaces to abstract classes
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 21: Design interfaces for posterity
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 22: Use interfaces only to define types
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 23: Prefer class hierarchies to tagged classes
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 24: Favor static member classes over nonstatic
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 25: Limit source files to a single top-level class
+                </a>
+            </li></ul>
+<hr />
+
+<p>W Javie mamy dwa mechanizmy do definiowania abstrakcyjnego typu, który może mieć różne implementacje: interfejsy i klasy abstrakcyjne.</p>
+
+<p>Od dodania metod domyślnych do interfejsów (Java 8), obydwa mechanizmy pozwalają na zdefiniowanie domyślnej implementacji dla niektórych metod. To, co je od siebie najbardziej odróżnia to to, że aby zaimplementować typ zdefiniowany przez klasę abstrakcyjną, trzeba ją rozszerzyć. <strong>Ze względu na to, że w Javie klasa może być podklasą tylko jednej klasy (<em>single inheritance</em>), to jest to spore ograniczenie.</strong> W przypadku interfejsów, takiego ograniczenia nie ma i klasa może implementować wiele interfejsów. To właśnie tu głównie wygrywają interfejsy.</p>
+
+<p><strong>Istniejące klasy mogą w łatwy sposób implementować nowy interfejs.</strong> Wystarczy, że dodamy <code class="highlighter-rouge">implements NazwaInterfejsu</code>, lub dodamy nowy po przecinku i dodamy wszystkie wymagane metody. Przykładowo, wiele istniejących klas w Javie zostało rozbudowanych, aby implementowały <code class="highlighter-rouge">Comparable</code>, <code class="highlighter-rouge">Iterable</code> i <code class="highlighter-rouge">Autocloseable</code>, kiedy te zostały dodane do biblioteki. <strong>Istniejące klasy nie mogą być rozbudowane tak, aby rozszerzały kolejną nową klasę abstrakcyjną.</strong> Aby zasymulować, że nasza klasa rozszerza obydwie klasy, musielibyśmy je obie dać wyżej w hierarchii:</p>
+
+<pre style="display: inline; border: none">
+AbstractC
+    └── AbstractB
+            └── ConcrateA
+</pre>
+
+<p>Niestety psuje to całą hierarchię typów, bo wszystkie klasy, które rozszerzały <code class="highlighter-rouge">B</code> są zmuszone od teraz implementować <code class="highlighter-rouge">C</code>, bez względu czy tego chcemy, czy nie.</p>
+
+<p><strong>Interfejsy są idealnymi mixinami.</strong> Upraszczając, <em>mixin</em> jest typem, który klasa może (dodatkowo do swojego podstawowego typu) zaimplementować, dostarczając dodatkową, odseparowaną funkcjonalność. <em>Mixin</em> sam w sobie nie może zostać zinstancjowany - jest tylko częścią funkcjonalności innych klas. Dla przykładu, <code class="highlighter-rouge">Comparable</code> jest mixinem, który deklaruje i dodaje klasie funkcjonalność porównywania i tym samym porządkowania jej instancji.  Klasy abstrakcyjne nie mogą być <em>mixinami</em> z tego samego powodu co wcześniej - klasa może rozszerzać tylko jedną klasę.</p>
+
+<p><strong>Interfejsy nie tworzą sztywnych hierarchii, dzięki czemu są bardzo elastyczne</strong>.  Dla przykładu, mamy piosenkarza:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Singer</span> <span class="o">{</span>
+    <span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>i kompozytora:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Songwriter</span> <span class="o">{</span>
+    <span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">int</span> <span class="n">chartPosition</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Dzięki temu, że użyliśmy interfejsów, konkretna klasa może implementować zarówno <code class="highlighter-rouge">Singer</code> jak i <code class="highlighter-rouge">Songwriter</code> - tak jak to jest w prawdziwym życiu - piosenkarz jest często kompozytorem. W przypadku klas abstrakcyjnych moglibyśmy być tylko jednym albo drugim.</p>
+
+<p>Idąc dalej, mamy jeszcze dużo więcej elastyczności. Przykładowo możemy stworzyć dodatkowy typ, który łączy oba poprzednie i dodaje nowe funkcje, które są odpowiednie dla obu ról:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">SingerSongwriter</span> <span class="kd">extends</span> <span class="n">Singer</span><span class="o">,</span> <span class="n">Songwriter</span> <span class="o">{</span>
+    <span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">();</span>
+
+    <span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>I nie ma problemu, aby istniejąca klasa, która implementuje już <code class="highlighter-rouge">Singer</code>, <code class="highlighter-rouge">Songwriter</code> (i nie może zostać zmieniona), implementowała <code class="highlighter-rouge">SingerSongwriter</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Concret</span> <span class="kd">implements</span> <span class="n">Singer</span><span class="o">,</span> <span class="n">Songwriter</span><span class="o">,</span> <span class="n">SingerSongwriter</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">int</span> <span class="n">chartPosition</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Taka elastyczność nie jest często potrzebna, no ale gdyby tak się stało, to mamy taką możliwość.</p>
+
+<p><strong>Możemy też połączyć zalety interfejsów i klas abstrakcyjnych tworząc coś w rodzaju szkieletu klasy implementującej dany interfejs.</strong> Interfejs będzie odpowiadał za typ, być może dostarczy też kilka domyślnych metod, podczas gdy klasa abstrakcyjna dostarczy domyślne implementacje metod z interfejsu, które nie mogły być w nim zadeklarowane jako <code class="highlighter-rouge">defualt</code>. Anglojęzyczny termin takiego zabiegu to <em>skeletal implementation class</em>.</p>
+
+<p class="note">Jeśli jesteśmy w stanie zdefiniować metody domyślne w interfejsie, to klasa abstrakcyjna nie będzie nam potrzebna. Zależne jest to od tego, czy metody te operują na stanie, czy nie. W interfejsie jest to niemożliwe.</p>
+
+<p>Zazwyczaj takie klasy abstrakcyjne nazywa się <code class="highlighter-rouge">AbstractNazwaInterfejsu</code>.</p>
+
+<p>Przykładowa klasa:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Skeletal implementation class</span>
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractMapEntry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="c1">// Entries in a modifiable map must override this method</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">V</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">UnsupportedOperationException</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Implements the general contract of Map.Entry.equals</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;?,</span> <span class="o">?&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getKey</span><span class="o">(),</span> <span class="n">getKey</span><span class="o">())</span>
+            <span class="o">&amp;&amp;</span> <span class="n">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getValue</span><span class="o">(),</span> <span class="n">getValue</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Implements the general contract of Map.Entry.hashCode</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Objects</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">getKey</span><span class="o">())</span> <span class="o">^</span> <span class="n">Objects</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">getValue</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">getKey</span><span class="o">()</span> <span class="o">+</span> <span class="s">"="</span> <span class="o">+</span> <span class="n">getValue</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="note">Ta implementacja metod nie mogłaby być bezpośrednio w interfejsie, ponieważ domyślne metody interfejsu nie pozwalają na nadpisywanie metod jak <code class="highlighter-rouge">equals</code>, <code class="highlighter-rouge">hashCode</code> czy <code class="highlighter-rouge">toString</code>.</p>
+
+<p>Przykłady znajdziemy też w standardowym <em>Collections Framework</em> - <code class="highlighter-rouge">AbstractCollection</code>, <code class="highlighter-rouge">AbstractSet</code>, <code class="highlighter-rouge">AbstractList</code>, i <code class="highlighter-rouge">AbstractMap</code>. Takie klasy mogą bardzo ułatwić pisanie implementacji interfejsu. Dla przykładu, podaję <a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a>, która tworzy w pełni funkcjonalną implementację <code class="highlighter-rouge">List</code>, zbudowaną na <code class="highlighter-rouge">AbstractList</code> (w formie klasy anonimowej) z tablicy intów:</p>
+
+<div id="intArrayAsList" class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Concrete implementation built atop skeletal implementation</span>
+<span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">intArrayAsList</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+
+    <span class="c1">// The diamond operator is only legal here in Java 9 and later</span>
+    <span class="c1">// If you're using an earlier release, specify &lt;Integer&gt;</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">AbstractList</span><span class="o">&lt;&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="c1">// Autoboxing</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">set</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">oldVal</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span> <span class="c1">// Auto-unboxing</span>
+            <span class="k">return</span> <span class="n">oldVal</span><span class="o">;</span> <span class="c1">// Autoboxing</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Jeśli zobaczymy ile <code class="highlighter-rouge">List</code> udostępnia funkcji, to zdamy sobie sprawę, że masa funkcjonalności została nam dostarczona za darmo.</p>
+
+<p class="note">Przykład jest też wzorcem projektowym  <em>Adapter</em> - pozwala używać tablicy <code class="highlighter-rouge">int</code> jako <code class="highlighter-rouge">List&lt;Integer&gt;</code>.</p>
+
+<p>Innym wariantem <em>skeletal implementation</em> jest  <em>simple implementation,</em> której przykładem jest  <code class="highlighter-rouge">AbstractMap.SimpleEntry</code> w standardowej bibliotece Javy. <em>Simple implementation</em> jest jak <em>skeletal implementation</em>, ale nie jest to klasa abstrakcyjna. Jest to możliwe najprostsza, działająca implementacja. Można jej używać taka jaka jest lub rozszerzać, modyfikując zachowanie.</p>
+
+<p>Jako ze obydwie implementację są zaprojektowane pod dziedziczenie, to warto korzystać ze wskazówek z poprzedniego postu na temat <a href="/effective-java/projektowanie-klasy-pod-dziedziczenie">projaktowania klasy pod dziedziczenie</a>.</p>
+
+<p>Klasy <em>skeletal implementation</em> dostarczają nam zaletę częściowej implementacji z klas abstrakcyjnych, bez narzucania ograniczeń jakie stwarzają, gdy są używane jako definicje typu. Mamy też dowolność czy chcemy skorzystać z klasy abstrakcyjnej czy zaimplementować interfejs bezpośrednio.</p>
+
+<p>Podsumowując, interfejsy są najlepszym sposobem na zdefiniowanie typu, który pozwala na różne implementacje. Gdy mamy do czynienia z rozbudowanym interfejsem, którego metody mogą mięć domyślną implementację, można rozważyć napisanie <em>skeletal implementation class</em>. Jeśli mamy taką możliwość, to możemy się ograniczyć tylko do metod domyślnych w interfejsie.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/projektowanie-klasy-pod-dziedziczenie"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Projektowanie klasy pod dziedziczenie"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/interfejsy-vs-klasy-abstrakcyjne";
+    this.page.identifier = "/effective-java/interfejsy-vs-klasy-abstrakcyjne";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

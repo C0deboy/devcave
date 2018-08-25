@@ -498,6 +498,15 @@
         "subtitle": "Na co zwrócić uwagę, jeśli uznamy, że jest stosowne",
         "date": "18 sierpnia 2018",
         "url": "/effective-java/projektowanie-klasy-pod-dziedziczenie"
+      },
+    
+      
+      {
+        "title": "Interfejsy vs klasy abstrakcyjne",
+        "titleSEO": "Interfejsy vs klasy abstrakcyjne - dlaczego warto preferować interfejsy?",
+        "subtitle": "Dlaczego warto preferować interfejsy?",
+        "date": "25 sierpnia 2018",
+        "url": "/effective-java/interfejsy-vs-klasy-abstrakcyjne"
       }
     
   

@@ -507,6 +507,15 @@
         "subtitle": "Dlaczego warto preferować interfejsy?",
         "date": "25 sierpnia 2018",
         "url": "/effective-java/interfejsy-vs-klasy-abstrakcyjne"
+      },
+    
+      
+      {
+        "title": "Projektowanie interfejsów i klas",
+        "titleSEO": "Projektowanie interfejsów i klas - kilka dobrych praktyk",
+        "subtitle": "Kilka dobrych praktyk",
+        "date": "1 września 2018",
+        "url": "/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach"
       }
     
   

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+<title>Klasy wewnętrzne</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/klasy-wewnetrzne">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Klasy wewnętrzne</h1>
+            
+            <h2 class="post-subtitle">Zbiór dobrych praktyk</h2>
+            
+            <p class="post-meta">
+              
+              8
+              września
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#statyczne-klasy-wewnętrzne">Statyczne klasy wewnętrzne</a></li>
+<li class="toc-entry toc-h1"><a href="#niestatyczne-klasy-wewnętrzne">Niestatyczne klasy wewnętrzne</a></li>
+<li class="toc-entry toc-h1"><a href="#klasy-anonimowe">Klasy anonimowe</a></li>
+<li class="toc-entry toc-h1"><a href="#klasy-lokalne">Klasy lokalne</a></li>
+<li class="toc-entry toc-h1"><a href="#podsumowując">Podsumowując</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 24</i> z rozdziału:</p>
+
+<p class="m0">Classes and Interfaces</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/minimalizuj-dostepnosc-enkapsulacja">Item 15: Minimize the accessibility of classes and members
+                </a>
+            </li><li>
+                <a href="/effective-java/gettery-i-settery">Item 16: In public classes, use accessor methods, not public fields
+                </a>
+            </li><li>
+                <a href="/effective-java/klasy-niezmienne">Item 17: Minimize mutability
+                </a>
+            </li><li>
+                <a href="/effective-java/kompozycja-zamiast-dziedziczenia">Item 18: Favor composition over inheritance
+                </a>
+            </li><li>
+                <a href="/effective-java/projektowanie-klasy-pod-dziedziczenie">Item 19: Design and document for inheritance or else prohibit it
+                </a>
+            </li><li>
+                <a href="/effective-java/interfejsy-vs-klasy-abstrakcyjne">Item 20: Prefer interfaces to abstract classes
+                </a>
+            </li><li>
+                <a href="/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#domyślne-metody-w-interfejsach">Item 21: Design interfaces for posterity
+                </a>
+            </li><li>
+                <a href="/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#interfejs-tylko-jako-definicja-typu">Item 22: Use interfaces only to define types
+                </a>
+            </li><li>
+                <a href="/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#preferuj-hierarchię-klas-zamiast-otagowanych-klas">Item 23: Prefer class hierarchies to tagged classes
+                </a>
+            </li><li>
+                <a href="/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy">Item 25: Limit source files to a single top-level class
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/klasy-wewnetrzne">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 24: Favor static member classes over nonstatic
+                    </a>
+                </li></ul>
+<hr />
+
+<p>Klasa wewnętrzna (ang. <em>nested class</em>) to po prostu klasa zdefiniowana wewnątrz innej klasy i powinna służyć tylko w klasie, w której się znajduje. Jeśli klasa jest też użyteczna gdzieś indziej, to powinna być zwykłą klasą (ang. <em>top-level class</em>).</p>
+
+<p>Są cztery typy klas wewnętrznych:</p>
+<ul>
+  <li><em>static member class</em></li>
+  <li><em>nonstatic member class</em></li>
+  <li><em>anonymous class</em></li>
+  <li><em>local class</em></li>
+</ul>
+
+<p>Jeśli chodzi o nazewnictwo, to klasa wewnętrzna zadeklarowana jako <code class="highlighter-rouge">static</code> nazywana jest też <em>static nested class</em>, a wszystkie pozostałe <em>inner class</em>.</p>
+
+<h1 id="statyczne-klasy-wewnętrzne">Statyczne klasy wewnętrzne</h1>
+
+<p>Ang. <em>Static Nested Classes</em></p>
+
+<p>Statyczne klasy wewnętrzne są najczęściej wykorzystywanymi klasami z tej grupy i często są preferowane.</p>
+
+<ul>
+  <li>Mają dostęp do wszystkich <strong>statycznych</strong> elementów klasy, w której jest zadeklarowana, nawet tych zadeklarowanych jako <code class="highlighter-rouge">private</code>.</li>
+  <li>Jak to ze statycznymi elementami, należą do klasy, a nie do jej instancji</li>
+  <li>Nie potrzebują instnacji klasy, w której się znajdują</li>
+  <li>Mogą mieć wszystkie modyfikatory dostępu</li>
+  <li>Można w nich deklarować zarówno elementy statyczne i niestatyczne</li>
+</ul>
+
+<p>Najczęściej wykorzystuje się je jako publiczne helpery. Często w ten sposób implementuje się np. <a href="Effective-Java/Chapter-1/2018-04-21-wzorzec-projektowy-builder">wzorzec projektowy Builder</a>.</p>
+
+<p>Klasy <em>private static member</em> często wykorzystuje się do reprezentacji poszczególnych komponentów w klasie, w której się znajdują. Przykładowo wiele implementacji interfejsu <code class="highlighter-rouge">Map</code> ma wewnątrz obiekt <code class="highlighter-rouge">Entry</code>, dla każdej pary klucz-wartość. Każdy taki obiekt jest powiązany z mapą, ale metody z <code class="highlighter-rouge">Entry</code> (<code class="highlighter-rouge">getKey</code>,  <code class="highlighter-rouge">getValue</code>, i <code class="highlighter-rouge">setValue</code>) nie wymagają dostępu do niej. Dlatego użycie niestatycznej klasy w tym przypadku byłoby nieuzasadnione.</p>
+
+<h1 id="niestatyczne-klasy-wewnętrzne">Niestatyczne klasy wewnętrzne</h1>
+
+<p>Ang. <em>Non-Static Nested Classes</em></p>
+
+<p>Tak jak niestatyczne zmienne czy metody, każda instancja niestatycznej klasy wewnętrznej jest powiązana z instancją klasy, w której się znajduje.</p>
+
+<ul>
+  <li>Może mieć wszystkie modyfikatory dostępu</li>
+  <li>Ma dostęp do wszystkich elementów klasy bez względu na to, czy są statycznie, czy nie</li>
+  <li>Może deklarować tylko elementy niestatyczne</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Outer</span> <span class="o">{</span>
+     
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Inner</span> <span class="o">{</span>
+        <span class="c1">// ...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Niemożliwe jest utworzenie niestatycznej klasy wewnętrznej bez instancji klasy, w której się znajduje, więc najpierw trzeba ją stworzyć:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Outer</span> <span class="n">outer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Outer</span><span class="o">();</span>
+<span class="n">Outer</span><span class="o">.</span><span class="na">Inner</span> <span class="n">inner</span> <span class="o">=</span> <span class="n">outer</span><span class="o">.</span><span class="na">new</span> <span class="nf">Inner</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p class="note">Jeśli mielibyśmy takie same nazwy metod w obu klasach, to moglibyśmy uzyskać referencję do tej <em>top-level</em> używając tzw. <em>qualified this</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Enclosing</span> <span class="o">{</span>
+  <span class="kt">void</span> <span class="nf">x</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Inner</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">x</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">Enclosing</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">x</span><span class="o">();</span> <span class="c1">// Qualified this, prints "Hello"</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Takie klasy często używane są do implementacji Adaptera (Wzorzec projektowy), który pozwala na użycie klasy jako jakiejś innej niepowiązanej klasy. Dla przykładu, implementacje interfejsu <code class="highlighter-rouge">Map</code> używają niestatycznej klasy wewnętrznej, aby zaimplementować różne widoki kolekcji, które są zwracane przez metody <code class="highlighter-rouge">keySet</code>, <code class="highlighter-rouge">entrySet</code>, i <code class="highlighter-rouge">values</code>. Podobnie implementacje <code class="highlighter-rouge">Set</code> i <code class="highlighter-rouge">List</code> używają ich do implementacji iteratorów. Wygląda to mniej więcej tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MySet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="c1">// Bulk of the class omitted</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MyIterator</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">class</span> <span class="nc">MyIterator</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="c1">//...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Jeśli klasa wewnętrzna nie potrzebuję dostępu do instancji klasy, w której się znajduje, to powinna być <code class="highlighter-rouge">static</code></strong>. Jeśli tego nie zrobimy, to każda instancja wewnętrznej klasy będzie miała zbędną referencję do klasy w której się znajduje, co zajmuję zbędny czas i miejsce, a czasem może wstrzymać <em>garbage collection</em>.</p>
+
+<h1 id="klasy-anonimowe">Klasy anonimowe</h1>
+
+<p>Ang. <em>Anonymous Classes</em></p>
+
+<p>Anonimowe klasy są używane do zdefiniowania implementacji klasy “w locie”, bez potrzeby tworzenia osobnej, reużywalnej klasy. Często też używa się do stworzenia instancji klasy z nadpisanymi tylko kilkoma metodami. Daje nam to możliwość zmodyfikowania zachowania, bez tworzenia podklasy. Klasy anonimowe:</p>
+
+<ul>
+  <li>Nie mają nazwy</li>
+  <li>Nie mają modyfikatorów dostępu</li>
+  <li>Mają dostęp do statycznych i niestatycznych elementów klasy, którą implementują (z wyjątkiem elementów <code class="highlighter-rouge">private</code>)</li>
+  <li>Nie mają kontruktorów</li>
+  <li>Nie mogą rozszerzać/implementować innych klas i interfejsów</li>
+  <li>Nie mogą mieć żadnych statycznych elementów oprócz stałych, które są prymitywami lub stringami z modyfikatorem <code class="highlighter-rouge">final</code>.</li>
+  <li>Nie możemy użyć żadnych elementów, które zdefiniowaliśmy dodatkowo w klasie anonimowej. Można wywoływać tylko te, które są zdefiniowane w implementowanej klasie.</li>
+  <li>Nie użyjemy na nich <code class="highlighter-rouge">instanceof</code>  ani nic innego co wymaga nazwy klasy</li>
+</ul>
+
+<p>Definiujemy więc najpierw dowolną klasę/interfejs, niech to będzie klasa abstrakcyjna:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">SimpleAbstractClass</span> <span class="o">{</span>
+    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>I później w dowolnym miejscu, gdzie legalne jest wyrażenie, deklarujemy klasę i od razu po jej konstruktorze dostarczamy implementację:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnonymousInnerTest</span> <span class="o">{</span>
+     
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">SimpleAbstractClass</span> <span class="n">simpleAbstractClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleAbstractClass</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="c1">// method implementation</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+        <span class="n">simpleAbstractClass</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="note">Klasy anonimowe powinny być krótkie (do 10 linijek). W innym wypadku czytelność znacznie ucierpi.</p>
+
+<p>Klasy anonimowe często się używa w implementacji <a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a> (Przykład takiego użycia był w <a href="/effective-java/interfejsy-vs-klasy-abstrakcyjne#intArrayAsList">poście nr 20</a> w metodzie <code class="highlighter-rouge">intArrayAsList</code>).</p>
+
+<p>Przed dodaniem lambd w Javie 8, klasy anonimowe były używane do tworzenia małych obiektów funkcyjnych w locie, jednak lambdy całkowicie je wyparły.</p>
+
+<p>Przykład takiego użycia:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"New Thread started."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div></div>
+
+<p>I z to samo z wykorzystaniem lambdy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"New Thread started"</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Chyba nie trzeba tłumaczyć dlaczego lambdy są preferowane ;)</p>
+
+<p>Jednak jeśli potrzebujemy użyć <code class="highlighter-rouge">this</code> to lambdy się nie sprawdzą, bo do lambdy nie możemy się w żaden sposób odwołać. W takim przypadku musimy użyć klasy anonimowej.</p>
+
+<h1 id="klasy-lokalne">Klasy lokalne</h1>
+
+<p>Ang. <em>Local Classes</em></p>
+
+<p>Klasy lokalne to specjalny typ klas wewnętrznych - możemy zdefiniować je wewnątrz metody.</p>
+
+<p>Wygląda to tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewEnclosing</span> <span class="o">{</span>
+     
+    <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">class</span> <span class="nc">Local</span> <span class="o">{</span>
+ 
+            <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="c1">// method implementation</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">Local</span> <span class="n">local</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Local</span><span class="o">();</span>
+        <span class="n">local</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+    <span class="o">}</span>
+     
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">NewEnclosing</span> <span class="n">newEnclosing</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NewEnclosing</span><span class="o">();</span>
+        <span class="n">newEnclosing</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Nie mają modyfikatorów dostępu</li>
+  <li>Mają dostęp do statycznych i niestatycznych elementów klasy, w której się znajdują</li>
+  <li>Nie mogą definiować elementów jako <code class="highlighter-rouge">static</code></li>
+</ul>
+
+<p>Klasy lokalne są najrzadziej wykorzystywanym typem klas. Taka klasa może być zadeklorowana wszędzie tam, gdzie może być zadeklarowana zmienna i jej zasięg jest tak sam, jak w przypadku zmiennych.</p>
+
+<p>Jeśli mielibyśmy kiedyś skorzystać z takiej klasy, to warto zadbać o to, by była krótka, aby nie ucierpiała czytelność kodu.</p>
+
+<h1 id="podsumowując">Podsumowując</h1>
+
+<p>Mamy 4 klasy wewnętrzne i każda ma swoje miejsce/zastosowanie. Jeśli klasa musi być widoczna w więcej niż jednej metodzie lub jest zbyt duża, aby była w metodzie, użyj niestatyczną klasę wewnętrzną. Jeśli nie potrzebuje dostępu do instancji klasy, to zadeklaruj ją jako <code class="highlighter-rouge">static</code>. Jeśli potrzebujesz jednorazowego użycia klasy wewnątrz metody i istnieje już zdefiniowany typ tej klasy - użyj klasy anonimowej. W przeciwnym wypadku użyj klasy lokalnej.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Projektowanie interfejsów i klas"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach:</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/klasy-wewnetrzne";
+    this.page.identifier = "/effective-java/klasy-wewnetrzne";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

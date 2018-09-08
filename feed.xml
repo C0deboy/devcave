@@ -1,4 +1,243 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-09-01T17:15:18+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Projektowanie interfejsów i klas</title><link href="https://devcave.pl/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach" rel="alternate" type="text/html" title="Projektowanie interfejsów i klas" /><published>2018-09-01T10:00:00+02:00</published><updated>2018-09-01T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach</id><content type="html" xml:base="https://devcave.pl/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-09-08T14:22:56+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Klasy wewnętrzne</title><link href="https://devcave.pl/effective-java/klasy-wewnetrzne" rel="alternate" type="text/html" title="Klasy wewnętrzne" /><published>2018-09-08T10:00:00+02:00</published><updated>2018-09-08T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/klasy-wewnetrzne</id><content type="html" xml:base="https://devcave.pl/effective-java/klasy-wewnetrzne">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 24&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Classes and Interfaces&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/gettery-i-settery&quot;&gt;Item 16: In public classes, use accessor methods, not public fields
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/klasy-niezmienne&quot;&gt;Item 17: Minimize mutability
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;Item 20: Prefer interfaces to abstract classes
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#domyślne-metody-w-interfejsach&quot;&gt;Item 21: Design interfaces for posterity
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#interfejs-tylko-jako-definicja-typu&quot;&gt;Item 22: Use interfaces only to define types
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#preferuj-hierarchię-klas-zamiast-otagowanych-klas&quot;&gt;Item 23: Prefer class hierarchies to tagged classes
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 24: Favor static member classes over nonstatic
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Klasa wewnętrzna (ang. &lt;em&gt;nested class&lt;/em&gt;) to po prostu klasa zdefiniowana wewnątrz innej klasy i powinna służyć tylko w klasie, w której się znajduje. Jeśli klasa jest też użyteczna gdzieś indziej, to powinna być zwykłą klasą (ang. &lt;em&gt;top-level class&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Są cztery typy klas wewnętrznych:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;static member class&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;nonstatic member class&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;anonymous class&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;local class&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Jeśli chodzi o nazewnictwo, to klasa wewnętrzna zadeklarowana jako &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt; nazywana jest też &lt;em&gt;static nested class&lt;/em&gt;, a wszystkie pozostałe &lt;em&gt;inner class&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;statyczne-klasy-wewnętrzne&quot;&gt;Statyczne klasy wewnętrzne&lt;/h1&gt;
+
+&lt;p&gt;Ang. &lt;em&gt;Static Nested Classes&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Statyczne klasy wewnętrzne są najczęściej wykorzystywanymi klasami z tej grupy i często są preferowane.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mają dostęp do wszystkich &lt;strong&gt;statycznych&lt;/strong&gt; elementów klasy, w której jest zadeklarowana, nawet tych zadeklarowanych jako &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Jak to ze statycznymi elementami, należą do klasy, a nie do jej instancji&lt;/li&gt;
+  &lt;li&gt;Nie potrzebują instnacji klasy, w której się znajdują&lt;/li&gt;
+  &lt;li&gt;Mogą mieć wszystkie modyfikatory dostępu&lt;/li&gt;
+  &lt;li&gt;Można w nich deklarować zarówno elementy statyczne i niestatyczne&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Najczęściej wykorzystuje się je jako publiczne helpery. Często w ten sposób implementuje się np. &lt;a href=&quot;Effective-Java/Chapter-1/2018-04-21-wzorzec-projektowy-builder&quot;&gt;wzorzec projektowy Builder&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Klasy &lt;em&gt;private static member&lt;/em&gt; często wykorzystuje się do reprezentacji poszczególnych komponentów w klasie, w której się znajdują. Przykładowo wiele implementacji interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Map&lt;/code&gt; ma wewnątrz obiekt &lt;code class=&quot;highlighter-rouge&quot;&gt;Entry&lt;/code&gt;, dla każdej pary klucz-wartość. Każdy taki obiekt jest powiązany z mapą, ale metody z &lt;code class=&quot;highlighter-rouge&quot;&gt;Entry&lt;/code&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;getKey&lt;/code&gt;,  &lt;code class=&quot;highlighter-rouge&quot;&gt;getValue&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;setValue&lt;/code&gt;) nie wymagają dostępu do niej. Dlatego użycie niestatycznej klasy w tym przypadku byłoby nieuzasadnione.&lt;/p&gt;
+
+&lt;h1 id=&quot;niestatyczne-klasy-wewnętrzne&quot;&gt;Niestatyczne klasy wewnętrzne&lt;/h1&gt;
+
+&lt;p&gt;Ang. &lt;em&gt;Non-Static Nested Classes&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Tak jak niestatyczne zmienne czy metody, każda instancja niestatycznej klasy wewnętrznej jest powiązana z instancją klasy, w której się znajduje.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Może mieć wszystkie modyfikatory dostępu&lt;/li&gt;
+  &lt;li&gt;Ma dostęp do wszystkich elementów klasy bez względu na to, czy są statycznie, czy nie&lt;/li&gt;
+  &lt;li&gt;Może deklarować tylko elementy niestatyczne&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Outer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Inner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Niemożliwe jest utworzenie niestatycznej klasy wewnętrznej bez instancji klasy, w której się znajduje, więc najpierw trzeba ją stworzyć:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Outer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Outer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Outer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Inner&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Inner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;note&quot;&gt;Jeśli mielibyśmy takie same nazwy metod w obu klasach, to moglibyśmy uzyskać referencję do tej &lt;em&gt;top-level&lt;/em&gt; używając tzw. &lt;em&gt;qualified this&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Enclosing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Inner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;Enclosing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Qualified this, prints &quot;Hello&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Takie klasy często używane są do implementacji Adaptera (Wzorzec projektowy), który pozwala na użycie klasy jako jakiejś innej niepowiązanej klasy. Dla przykładu, implementacje interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Map&lt;/code&gt; używają niestatycznej klasy wewnętrznej, aby zaimplementować różne widoki kolekcji, które są zwracane przez metody &lt;code class=&quot;highlighter-rouge&quot;&gt;keySet&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;entrySet&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;values&lt;/code&gt;. Podobnie implementacje &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; używają ich do implementacji iteratorów. Wygląda to mniej więcej tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MySet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AbstractSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Bulk of the class omitted&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MyIterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyIterator&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Jeśli klasa wewnętrzna nie potrzebuję dostępu do instancji klasy, w której się znajduje, to powinna być &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt;&lt;/strong&gt;. Jeśli tego nie zrobimy, to każda instancja wewnętrznej klasy będzie miała zbędną referencję do klasy w której się znajduje, co zajmuję zbędny czas i miejsce, a czasem może wstrzymać &lt;em&gt;garbage collection&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;klasy-anonimowe&quot;&gt;Klasy anonimowe&lt;/h1&gt;
+
+&lt;p&gt;Ang. &lt;em&gt;Anonymous Classes&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Anonimowe klasy są używane do zdefiniowania implementacji klasy “w locie”, bez potrzeby tworzenia osobnej, reużywalnej klasy. Często też używa się do stworzenia instancji klasy z nadpisanymi tylko kilkoma metodami. Daje nam to możliwość zmodyfikowania zachowania, bez tworzenia podklasy. Klasy anonimowe:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Nie mają nazwy&lt;/li&gt;
+  &lt;li&gt;Nie mają modyfikatorów dostępu&lt;/li&gt;
+  &lt;li&gt;Mają dostęp do statycznych i niestatycznych elementów klasy, którą implementują (z wyjątkiem elementów &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;Nie mają kontruktorów&lt;/li&gt;
+  &lt;li&gt;Nie mogą rozszerzać/implementować innych klas i interfejsów&lt;/li&gt;
+  &lt;li&gt;Nie mogą mieć żadnych statycznych elementów oprócz stałych, które są prymitywami lub stringami z modyfikatorem &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Nie możemy użyć żadnych elementów, które zdefiniowaliśmy dodatkowo w klasie anonimowej. Można wywoływać tylko te, które są zdefiniowane w implementowanej klasie.&lt;/li&gt;
+  &lt;li&gt;Nie użyjemy na nich &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;  ani nic innego co wymaga nazwy klasy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Definiujemy więc najpierw dowolną klasę/interfejs, niech to będzie klasa abstrakcyjna:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleAbstractClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I później w dowolnym miejscu, gdzie legalne jest wyrażenie, deklarujemy klasę i od razu po jej konstruktorze dostarczamy implementację:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AnonymousInnerTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;SimpleAbstractClass&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simpleAbstractClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleAbstractClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// method implementation&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;simpleAbstractClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;note&quot;&gt;Klasy anonimowe powinny być krótkie (do 10 linijek). W innym wypadku czytelność znacznie ucierpi.&lt;/p&gt;
+
+&lt;p&gt;Klasy anonimowe często się używa w implementacji &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;static factory method&lt;/a&gt; (Przykład takiego użycia był w &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne#intArrayAsList&quot;&gt;poście nr 20&lt;/a&gt; w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;intArrayAsList&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Przed dodaniem lambd w Javie 8, klasy anonimowe były używane do tworzenia małych obiektów funkcyjnych w locie, jednak lambdy całkowicie je wyparły.&lt;/p&gt;
+
+&lt;p&gt;Przykład takiego użycia:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thread&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;New Thread started.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I z to samo z wykorzystaniem lambdy:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thread&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;New Thread started&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Chyba nie trzeba tłumaczyć dlaczego lambdy są preferowane ;)&lt;/p&gt;
+
+&lt;p&gt;Jednak jeśli potrzebujemy użyć &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; to lambdy się nie sprawdzą, bo do lambdy nie możemy się w żaden sposób odwołać. W takim przypadku musimy użyć klasy anonimowej.&lt;/p&gt;
+
+&lt;h1 id=&quot;klasy-lokalne&quot;&gt;Klasy lokalne&lt;/h1&gt;
+
+&lt;p&gt;Ang. &lt;em&gt;Local Classes&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Klasy lokalne to specjalny typ klas wewnętrznych - możemy zdefiniować je wewnątrz metody.&lt;/p&gt;
+
+&lt;p&gt;Wygląda to tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NewEnclosing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Local&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ 
+            &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// method implementation&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Local&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+     
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;NewEnclosing&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newEnclosing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NewEnclosing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;newEnclosing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Nie mają modyfikatorów dostępu&lt;/li&gt;
+  &lt;li&gt;Mają dostęp do statycznych i niestatycznych elementów klasy, w której się znajdują&lt;/li&gt;
+  &lt;li&gt;Nie mogą definiować elementów jako &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Klasy lokalne są najrzadziej wykorzystywanym typem klas. Taka klasa może być zadeklorowana wszędzie tam, gdzie może być zadeklarowana zmienna i jej zasięg jest tak sam, jak w przypadku zmiennych.&lt;/p&gt;
+
+&lt;p&gt;Jeśli mielibyśmy kiedyś skorzystać z takiej klasy, to warto zadbać o to, by była krótka, aby nie ucierpiała czytelność kodu.&lt;/p&gt;
+
+&lt;h1 id=&quot;podsumowując&quot;&gt;Podsumowując&lt;/h1&gt;
+
+&lt;p&gt;Mamy 4 klasy wewnętrzne i każda ma swoje miejsce/zastosowanie. Jeśli klasa musi być widoczna w więcej niż jednej metodzie lub jest zbyt duża, aby była w metodzie, użyj niestatyczną klasę wewnętrzną. Jeśli nie potrzebuje dostępu do instancji klasy, to zadeklaruj ją jako &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt;. Jeśli potrzebujesz jednorazowego użycia klasy wewnątrz metody i istnieje już zdefiniowany typ tej klasy - użyj klasy anonimowej. W przeciwnym wypadku użyj klasy lokalnej.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 24 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic</summary></entry><entry><title type="html">Projektowanie interfejsów i klas</title><link href="https://devcave.pl/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach" rel="alternate" type="text/html" title="Projektowanie interfejsów i klas" /><published>2018-09-01T10:00:00+02:00</published><updated>2018-09-01T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach</id><content type="html" xml:base="https://devcave.pl/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -41,7 +280,7 @@
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 25: Limit source files to a single top-level class
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -267,7 +506,7 @@ Jeśli wywołamy &lt;code class=&quot;highlighter-rouge&quot;&gt;removeIf&lt;/co
                 &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -463,7 +702,7 @@ AbstractC
                 &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -574,7 +813,7 @@ and this collection contains the specified object.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -766,7 +1005,7 @@ and this collection contains the specified object.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -942,7 +1181,7 @@ and this collection contains the specified object.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -1062,7 +1301,7 @@ and this collection contains the specified object.&lt;/p&gt;
                 &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 24: Favor static member classes over nonstatic
+                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -1644,85 +1883,4 @@ implementation.&lt;/p&gt;
 
 &lt;p&gt;Ponadto w tych rozwiązaniach argument może być interfejsem implementowanym przez tę klasę. Na przykład implementacje kolekcji w Javie udostępniają konstruktor, który ma argument typu &lt;code class=&quot;highlighter-rouge&quot;&gt;Collection&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;Map&lt;/code&gt;. Są to tak zwane &lt;em&gt;conversion constructors&lt;/em&gt; i &lt;em&gt;conversion factories&lt;/em&gt;, które pozwalają klientowi wybrać typ kopii, zamiast wymuszać oryginalny typ. Na przykład mamy &lt;code class=&quot;highlighter-rouge&quot;&gt;HashSet s&lt;/code&gt; i możemy łatwo skopiować go jako &lt;code class=&quot;highlighter-rouge&quot;&gt;TreeSet&lt;/code&gt; używając &lt;code class=&quot;highlighter-rouge&quot;&gt;new TreeSet&amp;lt;&amp;gt;(s)&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Podsumowując, te dwa rozwiązania są zdecydowanie lepsze od skażania klasy interfejsem &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt;, więc powinny być preferowanym sposobem implementowania klonowania w Javie. Jedynym wyjątkiem od tej zasady są tablicę, gdzie powinniśmy używać metody &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt;, bo jest to najszybszy sposób klonowania tablic.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 13 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry><entry><title type="html">Metoda toString</title><link href="https://devcave.pl/effective-java/metoda-toString" rel="alternate" type="text/html" title="Metoda toString" /><published>2018-06-30T10:00:00+02:00</published><updated>2018-06-30T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/metoda-toString</id><content type="html" xml:base="https://devcave.pl/effective-java/metoda-toString">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 12&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m0&quot;&gt;Methods Common to All Objects&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/metoda-equals&quot;&gt;Item 10: Obey the general contract when overriding equals
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/metoda-hashcode&quot;&gt;Item 11: Always override hashCode when you override equals
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/metoda-toString&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 12: Always override toString
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/metoda-clone&quot;&gt;Item 13: Override clone judiciously
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;Item 14: Consider implementing Comparable
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt; jest zdefiniowana w klasie &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt;, dzięki czemu wszystkie obiekty dostają jej domyślną implementację. Służy do zwracania tekstowej, czytelnej dla człowieka reprezentacji obiektu. Jednak domyślna implementacja nie jest zbyt użyteczna, bo wygląda tak:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'@'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toHexString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;czyli zwracana jest nazwa klasy + @ + heksadecymalna reprezentacja &lt;em&gt;hash code&lt;/em&gt;, np. &lt;code class=&quot;highlighter-rouge&quot;&gt;PhoneNumber@163b91&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Podobnie jak w przypadku metod &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt; jej zachowanie najczęściej powinniśmy nadpisać, aby zrobić z niej użytek.&lt;/p&gt;
-
-&lt;p&gt;Dla przykładu z klasy reprezentującej numer telefonu chcielibyśmy, żeby było zwracane coś typu &lt;code class=&quot;highlighter-rouge&quot;&gt;707-867-530&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Nie jest to tak ważna metoda, jak &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; czy &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt;, jednak &lt;strong&gt;dostarczanie dobrej implementacji metody &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt; sprawia, że klasy są przyjemniejsze w użyciu, a aplikacja łatwiejsza do debugowania&lt;/strong&gt;, nawet jeśli ty sam bezpośrednio z niej nie korzystasz.&lt;/p&gt;
-
-&lt;p&gt;Dzieje się tak dlatego, że metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt; jest automatycznie wywoływana w wielu miejscach:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;gdy podajemy obiekt do &lt;code class=&quot;highlighter-rouge&quot;&gt;println&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;printf&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;podczas konkatenacji stringów&lt;/li&gt;
-  &lt;li&gt;w komunikatach o asercjach podczas testowania&lt;/li&gt;
-  &lt;li&gt;podczas podglądania obiektu w debugerze.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Często przydaję się to do logowania informacji. Jeśli dostarczymy dobrą implementację &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt; dla przykładowej klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;PhoneNumber&lt;/code&gt;, to wystarczy podać obiekt:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Failed to connect to &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Nie trzeba za każdym razem ręcznie wyciągać i sklejać numeru z klasy.&lt;/p&gt;
-
-&lt;p&gt;Również podglądając kolekcje zobaczymy jej ładną reprezentację. Chyba jasne jest, że wolelibyśmy zobaczyć &lt;code class=&quot;highlighter-rouge&quot;&gt;{Jenny=707-867-5309}&lt;/code&gt; zamiast &lt;code class=&quot;highlighter-rouge&quot;&gt;{Jenny=PhoneNumber@163b91}&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Oczywiście są przypadki gdzie metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt; nie ma sensu. Na przykład w statycznej klasie typu &lt;em&gt;utility&lt;/em&gt;. Również nie ma potrzeby definiowania jej w klasach typu &lt;code class=&quot;highlighter-rouge&quot;&gt;Enum&lt;/code&gt;, bo dostarcza ją już standardowa implementacja.&lt;/p&gt;
-
-&lt;p&gt;W przypadku klas abstrakcyjnych może czasem się przydać, jeśli podklasy mają wspólną reprezentację. Na przykład, większość konkretnych klas kolekcji dziedziczy metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt; z odpowiednich klas abstrakcyjnych kolekcji.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt; powinna zawierać wszystkie kluczowe informacje zawarte w obiekcie&lt;/strong&gt;. Nie chcielibyśmy, żeby coś było pominięte i na przykład podczas testowania zobaczyć taki błąd:&lt;/p&gt;
-
-&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Assertion failure: expected {abc, 123}, but was {abc, 123}.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Ważnym aspektem metody &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt;, który trzeba rozważyć to to, czy będzie miała określony stały format i będzie on określony w dokumentacji.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;W przypadku klas, które reprezentują jakąś wartość, np. &lt;code class=&quot;highlighter-rouge&quot;&gt;PhoneNumber&lt;/code&gt;, warto to zrobić. Dzięki temu będziemy mieli jednoznaczną, czytelną dla człowieka reprezentację obiektu, która może posłużyć do odtworzenia obiektu ze stringa. Wtedy taką reprezentację możemy z łatwością używać jako &lt;em&gt;input/output&lt;/em&gt; w czytelnych dla człowieka plikach przechowujących dane (np. pliki CSV). Wtedy warto też udostępnić &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;static method factory&lt;/a&gt; lub konstruktor, który umożliwi na podstawie stringa stworzyć ten obiekt.&lt;/p&gt;
-
-&lt;p&gt;Takie podejście zastosowano w wielu klasach z podstawowej biblioteki Javy, np. &lt;code class=&quot;highlighter-rouge&quot;&gt;BigInteger&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BigDecimal&lt;/code&gt; i większość innych klas opakowujących prymitywy.&lt;/p&gt;
-
-&lt;p&gt;Dla przykładu klasa &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt; udostępnia konstruktor z argumentem typu &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;123&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Z drugiej strony, jeśli zdecydujemy się na stały format i nasza klasa będzie szeroko używana (np. jeśli jest częścią publicznej biblioteki), to jesteśmy z nim uwięzieni do końca życia i nie mamy opcji go zmienić. Jeśli w kolejnej aktualizacji zmienilibyśmy format, to popsulibyśmy każdą aplikację, która używała naszej klasy.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Dlatego warto jasno udokumentować nasze intencje wcześniej.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Ponadto &lt;strong&gt;do wszystkich informacji zawartych w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt; powinny być udostępnione gettery&lt;/strong&gt;, aby nie wymuszać parsowania stringa, które jest dodatkową, zbędną i mało wydajną operacją. Również takie rozwiązanie jest narażone na błędy, bo jeśli zmieni się format, to parsowanie przestanie działać. Jeśli dane są widoczne w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt;, to znaczy, że powinniśmy mieć do nich metody dostępowe.&lt;/p&gt;
-
-&lt;p&gt;Jak w pozostałych przypadkach, IDE oraz biblioteka Lombok również pozwalają na automatyczne wygenerowanie metody &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt;, jednak nie we wszystkich przypadkach jest ona odpowiednia. Np. przykładowy &lt;code class=&quot;highlighter-rouge&quot;&gt;PhoneNumber&lt;/code&gt; składa się z co najmniej 3 pól i automatycznie wygenerowana metoda w postaci pole=wartość, pole=wartość nie jest preferowana, bo numer ma swoją standardową reprezentację typu 707-867-530. Jednak wygenerowana metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt; i tak jest lepsza niż ta, którą dostajemy domyślnie.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 12 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry></feed>
+&lt;p&gt;Podsumowując, te dwa rozwiązania są zdecydowanie lepsze od skażania klasy interfejsem &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt;, więc powinny być preferowanym sposobem implementowania klonowania w Javie. Jedynym wyjątkiem od tej zasady są tablicę, gdzie powinniśmy używać metody &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt;, bo jest to najszybszy sposób klonowania tablic.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 13 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry></feed>

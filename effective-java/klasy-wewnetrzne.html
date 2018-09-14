@@ -192,7 +192,7 @@
   <li>Można w nich deklarować zarówno elementy statyczne i niestatyczne</li>
 </ul>
 
-<p>Najczęściej wykorzystuje się je jako publiczne helpery. Często w ten sposób implementuje się np. <a href="Effective-Java/Chapter-1/2018-04-21-wzorzec-projektowy-builder">wzorzec projektowy Builder</a>.</p>
+<p>Najczęściej wykorzystuje się je jako publiczne helpery. Często w ten sposób implementuje się np. <a href="/effective-java/wzorzec-projektowy-builder">wzorzec projektowy Builder</a>.</p>
 
 <p>Klasy <em>private static member</em> często wykorzystuje się do reprezentacji poszczególnych komponentów w klasie, w której się znajdują. Przykładowo wiele implementacji interfejsu <code class="highlighter-rouge">Map</code> ma wewnątrz obiekt <code class="highlighter-rouge">Entry</code>, dla każdej pary klucz-wartość. Każdy taki obiekt jest powiązany z mapą, ale metody z <code class="highlighter-rouge">Entry</code> (<code class="highlighter-rouge">getKey</code>,  <code class="highlighter-rouge">getValue</code>, i <code class="highlighter-rouge">setValue</code>) nie wymagają dostępu do niej. Dlatego użycie niestatycznej klasy w tym przypadku byłoby nieuzasadnione.</p>
 

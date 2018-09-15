@@ -3,7 +3,7 @@ layout:     post
 titleSEO:	"Ograniczanie dozwolonych typów w generykach"
 title:      "Ograniczanie dozwolonych typów w generykach"
 subtitle:   "Czyli użycie bounded parameter type i bounded wildcard type"
-date:       2018-10-06 8:00:00
+date:       2018-10-27 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java

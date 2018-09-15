@@ -2,7 +2,7 @@
 layout:     post
 titleSEO:	"Klasy wewnętrzne"
 title:      "Klasy wewnętrzne"
-subtitle:   "Zbiór dobrych praktyk"
+subtitle:   "Czym się różnią i kiedy z jakiej korzystać"
 date:       2018-09-08 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
@@ -29,17 +29,17 @@ Jeśli chodzi o nazewnictwo, to klasa wewnętrzna zadeklarowana jako `static` na
 
 Ang. *Static Nested Classes*
 
-Statyczne klasy wewnętrzne są najczęsciej wykorzystywanymi klasami z tej grupy i często są preferowane.
+Statyczne klasy wewnętrzne są najczęściej wykorzystywanymi klasami z tej grupy i często są preferowane.
 
-- Mają dostęp do wszystkich **statycznych** elementów klasy, w której jest zadeklarowana, nawet tych zadeklarowanyc jako `private`.
+- Mają dostęp do wszystkich **statycznych** elementów klasy, w której jest zadeklarowana, nawet tych zadeklarowanych jako `private`.
 - Jak to ze statycznymi elementami, należą do klasy, a nie do jej instancji
 - Nie potrzebują instnacji klasy, w której się znajdują
 - Mogą mieć wszystkie modyfikatory dostępu
 - Można w nich deklarować zarówno elementy statyczne i niestatyczne
 
-Najczęsciej wykorzystuje się je jako publiczne helpery. Często w ten sposób implementuje się np. [wzorzec projektowy Builder](Effective-Java/Chapter-1/2018-04-21-wzorzec-projektowy-builder).
+Najczęściej wykorzystuje się je jako publiczne helpery. Często w ten sposób implementuje się np. [wzorzec projektowy Builder]({% post_url Effective-Java/Chapter-1/2018-04-21-wzorzec-projektowy-builder %}).
 
-Klasy *private static member* często wykorzystuje się do reprezentacji poszczególnych komponentów w klasie, w której się znajdują. Przykładowo wiele implementacji interfejsu `Map` ma wewnątrz obiekt `Entry`, dla każdej pary klucz-wartość. Każdy taki obiekt jest powiązany z mapą, ale metody z `Entry` (`getKey`,  `getValue`, i `setValue`) nie wymagają dostępu do niej. Dlatego użycie niestatycznej klasy w tym przypadku było by nieuzasadnione.
+Klasy *private static member* często wykorzystuje się do reprezentacji poszczególnych komponentów w klasie, w której się znajdują. Przykładowo wiele implementacji interfejsu `Map` ma wewnątrz obiekt `Entry`, dla każdej pary klucz-wartość. Każdy taki obiekt jest powiązany z mapą, ale metody z `Entry` (`getKey`,  `getValue`, i `setValue`) nie wymagają dostępu do niej. Dlatego użycie niestatycznej klasy w tym przypadku byłoby nieuzasadnione.
 
 # Niestatyczne klasy wewnętrzne
 
@@ -107,7 +107,7 @@ public class MySet<E> extends AbstractSet<E> {
 
 Ang. *Anonymous Classes*
 
-Anonimowe klasy są używane do zdefiniowania implementacji klasy "w locie", bez potrzeby tworzenia osobnej, reużywalnej klasy. Często też używa się do stworzenie instnacji klasy z nadpisanymi tylko kilkoma metodami. Daje nam to możliwość zmodyfikowania zachowania, bez tworzenia podklasy. Klasy anonimowe: 
+Anonimowe klasy są używane do zdefiniowania implementacji klasy "w locie", bez potrzeby tworzenia osobnej, reużywalnej klasy. Często też używa się do stworzenia instancji klasy z nadpisanymi tylko kilkoma metodami. Daje nam to możliwość zmodyfikowania zachowania, bez tworzenia podklasy. Klasy anonimowe: 
 
 - Nie mają nazwy
 - Nie mają modyfikatorów dostępu
@@ -205,10 +205,10 @@ public class NewEnclosing {
 - Mają dostęp do statycznych i niestatycznych elementów klasy, w której się znajdują
 - Nie mogą definiować elementów jako `static`
 
-Klasy lokalne są najrzadziej wykorzystywanym typem klas. Taka klasa może być zadeklorowana wszędzie tam gdzie może być zadeklarowana zmienna i jej zasięg jest tak sam, jak w przypadku zmiennych. 
+Klasy lokalne są najrzadziej wykorzystywanym typem klas. Taka klasa może być zadeklorowana wszędzie tam, gdzie może być zadeklarowana zmienna i jej zasięg jest tak sam, jak w przypadku zmiennych. 
 
-Jeśli mielibyśmy kiedyś skorzystać z takiej klasy, to warto zadbać o to by była krótka, aby nie ucierpiała czytelność kodu.
+Jeśli mielibyśmy kiedyś skorzystać z takiej klasy, to warto zadbać o to, by była krótka, aby nie ucierpiała czytelność kodu.
 
 # Podsumowując
 
-Mamy 4 klasy wewnętrzne i każda ma swoje miejsce/zastosowanie. Jeśli klasa musi być widoczna w więcej niż jednej metodzie, lub jest zbyt duża, aby była w metodzie, użyj niestatyczną klasę wewnętrzną. Jeśli nie potrzebuje dostępu do instancji klasy, to zadeklaruj ją jako `static`. Jeśli potrzebujesz jednorazowego użycia klasy wewnątrz metody i istnieje już zdefiniowany typ tej klasy - użyj klasy anonimowej. W przeciwnym wypadku użyj klasy lokalnej.
+Mamy 4 klasy wewnętrzne i każda ma swoje miejsce/zastosowanie. Jeśli klasa musi być widoczna w więcej niż jednej metodzie lub jest zbyt duża, aby była w metodzie, użyj niestatyczną klasę wewnętrzną. Jeśli nie potrzebuje dostępu do instancji klasy, to zadeklaruj ją jako `static`. Jeśli potrzebujesz jednorazowego użycia klasy wewnątrz metody i istnieje już zdefiniowany typ tej klasy - użyj klasy anonimowej. W przeciwnym wypadku użyj klasy lokalnej.

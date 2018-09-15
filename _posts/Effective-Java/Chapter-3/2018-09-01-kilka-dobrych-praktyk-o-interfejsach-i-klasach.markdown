@@ -15,7 +15,7 @@ item:       21, 22, 23, 25
 
 {% include effective-java/series-info.html %}
 
-Postanowiłem zebrać dobre praktyki z tych 5 tematów w jeden spis, bo według mnie, są one jasne i nie ma się za bardzo co rozwodzić na temat każdej z nich w osobnym wpisie.
+Postanowiłem zebrać dobre praktyki z tych 5 tematów w jeden wpis, bo według mnie, są one jasne i nie ma się za bardzo co rozwodzić na temat każdej z nich w osobnym wpisie.
 
 # Domyślne metody w interfejsach
 
@@ -175,7 +175,7 @@ class Rectangle extends Figure {
 }
 ```
 
-I taki płynie też przekaz z tego itemu - preferuj hierarchie klas, zamiast tworów typu pierwszego kawałka kodu. Nie używaj "tagów" do określenia typu klasy - od tego są właśnie klasy.
+I taki płynie też przekaz z tego itemu - preferuj hierarchie klas, zamiast tworów jak z pierwszego kawałka kodu. Nie używaj "tagów" do określenia typu klasy - od tego są właśnie klasy.
  
 *Tagged classes* nie mają żadnego uzasadnionego prawidłowego użycia ani zalet, nad którymi można by się zastanowić.
 

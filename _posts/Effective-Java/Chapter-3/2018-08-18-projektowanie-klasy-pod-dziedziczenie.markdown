@@ -38,7 +38,7 @@ Dla przykładu, dla `java.util.AbstractCollection` wygląda to tak:
 > collection's `iterator` method does not implement the `remove` method
 > and this collection contains the specified object.
 
-Mamy tu jasno udokumentowane, że nadpisywanie metody `iterator` będzie miało wpływ na zachowanie `remove`. 
+Jest to tu jasno udokumentowane, że nadpisywanie metody `iterator` będzie miało wpływ na zachowanie `remove`.
 
 **Podając szczegóły implementacyjne, naruszamy enkapsulację i zobowiązujemy się nigdy tego nie zmieniać, ale jest to konsekwencja używania dziedziczenia.** Jest to wymagane, aby można było bezpiecznie tworzyć podklasy danej klasy.
 

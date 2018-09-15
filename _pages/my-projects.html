@@ -41,7 +41,7 @@ permalink: "/moje-projekty/"
             <p>{{ project.description }}</p>
 
             {% if project.play %}
-            <a class="project-btn" href="{{ project.play }}">Zagraj
+            <a class="project-btn" href="{{ project.play }}" target="_blank">Zagraj
                 <span class="fa-stack fa-2x">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-gamepad fa-stack-1x fa-inverse" aria-hidden="true"></i>
@@ -49,14 +49,14 @@ permalink: "/moje-projekty/"
             </a>
             {% endif %}
             {% if project.see %}
-            <a class="project-btn" href="{{ project.see }}">Zobacz
+            <a class="project-btn" href="{{ project.see }}" target="_blank">Zobacz
                 <span class="fa-stack fa-2x">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-eye fa-stack-1x fa-inverse" aria-hidden="true"></i>
             </span>
             </a>
             {% endif %}
-            <a class="project-btn" href="{{ project.github }}">Github
+            <a class="project-btn" href="{{ project.github }}" target="_blank">Github
                 <span class="fa-stack fa-2x">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>

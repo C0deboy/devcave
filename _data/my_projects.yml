@@ -1,3 +1,6 @@
+- section: Rok 2018
+  subtitle: Praca komercyjna ;)
+  projects:
 
 - section: Rok 2017
   subtitle: Tu się wszystko zaczęło
@@ -36,7 +39,7 @@
 
   - title: Jaki-jezyk-programowania.pl
     technologies: HTML, CSS, Javascript (ES6), Boostrap, JQuery, Webpack, Npm
-    description: Strona internetowa skierowana dla początkujących programistów, która ma na celu pomoc w wyborze technologii do danego zastosowania. Poza tym, można tam znaleźć opisy technologii, statystyki i<a href="https://jaki-jezyk-programowania.pl/ksiazki/">polecane książki</a> programistyczne.
+    description: Strona internetowa skierowana dla początkujących programistów, która ma na celu pomoc w wyborze technologii do danego zastosowania. Poza tym, można tam znaleźć opisy technologii, statystyki językówm, <a href="https://jaki-jezyk-programowania.pl/ksiazki/">polecane książki</a> i <a href="https://jaki-jezyk-programowania.pl/kursy/">videokursy</a> programistyczne.
     img: /img/my-projects/jaki-jezyk-programowania.png
     github: https://github.com/C0deboy/jaki-jezyk-programowania
     see: https://jaki-jezyk-programowania.pl

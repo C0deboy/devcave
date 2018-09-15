@@ -509,7 +509,7 @@ img::-moz-selection {
 .site-tag {
     background: $secondary-color;
     display: inline-block;
-    margin: 10px 7px 0;
+    margin: 10px 7px 0 0;
     box-shadow: 0 1px 2px 0 #000000;
     padding: 0 5px;
     border-radius: 3px;
@@ -634,6 +634,11 @@ img::-moz-selection {
     &.inline {
         margin: 0 15px;
     }
+}
+
+.recommended {
+    width: fit-content;
+    margin: auto;
 }
 
 .main-btn {

@@ -3,7 +3,7 @@ layout:     post
 titleSEO:	"Używanie generycznych klas i metod"
 title:      "Używanie generycznych klas i metod"
 subtitle:   "Problematyczne tablice"
-date:       2018-09-29 8:00:00
+date:       2018-10-20 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java

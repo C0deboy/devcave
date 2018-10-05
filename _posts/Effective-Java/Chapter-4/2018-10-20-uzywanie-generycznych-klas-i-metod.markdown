@@ -37,14 +37,17 @@ List<Object> objectList = new ArrayList<Long>(); // Incompatible types
 objectList.add("I don't fit in");
 ```
 
-Drugą różnicą jest to, że tablice mają swój typ na stałe i wymuszają go w *runtime*. Generyki z kolei są zaimplementowane tak, że ich typy są wymazywane - to znaczy, że wymuszają typy tylko podczas kompilacji, a w *runtime* już ich nie ma. Dzięki wymazywaniu typów generyki mogą bez problemu współpracować z *legacy code* z przed Javy 5.
+Drugą różnicą jest to, że tablice mają swój typ na stałe i wymuszają go w *runtime*. Generyki z kolei są zaimplementowane tak, że ich typy są wymazywane - to znaczy, że wymuszają typy tylko podczas kompilacji, a w *runtime* już ich nie ma.
+
+{: .note}
+Dzięki wymazywaniu typów generyki mogą bez problemu współpracować z *legacy code* sprzed Javy 5.
 
 Przez te różnice nie możemy na przykład utworzyć generycznej tablicy (`new List<E>[]`, new `List<String>[]`, `new E[]`. Takie operacje nie byłby *typesafe*.
 
 To ograniczenie może być denerwujące, bo na przykład nie ma możliwości zwrócenia tablicy o typie, który jest w generycznej kolekcji. Przez to też będziemy dostawać mylące ostrzeżenia, gdy będziemy używać *varargs* w metodach w połączeniu z generykami, a to dlatego, że varargi są przekonwertowywane na tablice podczas kompilacji.
-Adnotacja *SafeVarargs* adresuje ten problem i będzie omówiona w następnych wpisach.
+Adnotacja `@SafeVarargs`, która była omówiona w poprzednim wpisie, adresuje ten problem.
 
-Kiedy dostajemy *generic array creation error* lub *unchecked cast warning* gdy castujemy na tablicę, najlepiej jest zmienić implementację na listę `List<E>` zamiast tablicy `E[]`. Nie będzię to miało dużego wpływu na wydajność czy zwięzłość, a uzyskamy lepsze *typesafty*.
+Kiedy dostajemy *generic array creation error* lub *unchecked cast warning* gdy castujemy na tablicę, najlepiej jest zmienić implementację na listę `List<E>` zamiast tablicy `E[]`. Nie będzie to miało dużego wpływu na wydajność czy zwięzłość, a uzyskamy lepsze *typesafty*.
 
 Przykładowo, prosta klaska, która będzie podawała losowe przedmioty z podanej kolekcji:
 
@@ -274,7 +277,7 @@ addAll(Collection<? extends E>) as a member of raw type Set
                      ^
 ```
 
-Sparametryzujmy ją zatem. Parametr typu musi znajdować się między modyfikatorami, a typem zwrotnym funkcji. 
+Sparametryzujmy ją zatem. Parametr typu musi znajdować się między modyfikatorami a typem zwrotnym funkcji. 
 
 ```java
 // Generic method

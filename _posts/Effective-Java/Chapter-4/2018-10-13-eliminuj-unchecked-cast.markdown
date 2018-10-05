@@ -102,10 +102,10 @@ W kolejnym wpisie będzie więcej przykładów prawidłowego wyciszania ostrzeż
 
 # @SafeVarargs
 
-*Vararg*-i zostały dodane razem z generykami w Javie 5, aby dodać możliwość przekazywania do funkcji zmiennej liczby argumentów, jednak nie współpracują ze sobą bez konfliktów. Rzucane są ostrzeżenia, jeśli kiedy varargi mają generyczne typy. Jest to spowodowane tym, że pod spodem tworzona jest tablica, która przetrzymuje te parametry, a mieszanie tablic z generykami jest problematyczne. O tym będzie w następnym wpisie.
+*Vararg*-i zostały dodane razem z generykami w Javie 5, aby dodać możliwość przekazywania do funkcji zmiennej liczby argumentów, jednak nie współpracują ze sobą bez konfliktów. Rzucane są ostrzeżenia, jeśli varargi mają generyczne typy. Jest to spowodowane tym, że pod spodem tworzona jest tablica, która przetrzymuje te parametry, a mieszanie tablic z generykami jest problematyczne. O tym będzie w następnym wpisie.
 
 Pojawia się też pytanie: dlaczego można zadeklarować metodę z generycznym parametrem varargs, podczas gdy nie możemy utworzyć generycznej tablicy?
-Ano dlatego, że takie metody są bardzo użyteczne i projektanci Javy postanowili wprowadzić taką niespójność. W samej bibliotece Javy są nawet takie metody: `Arrays.asList(T... a)`, `ollections.addAll(Collection<? super T> c, T... elements)` czy `EnumSet.of(E first, E... rest)`, które są w pełni *typesafe*.
+Ano dlatego, że takie metody są bardzo użyteczne i projektanci Javy postanowili wprowadzić taką niespójność. Nawet w samej bibliotece Javy są takie metody: `Arrays.asList(T... a)`, `Collections.addAll(Collection<? super T> c, T... elements)` czy `EnumSet.of(E first, E... rest)`, które są w pełni *typesafe*.
 
 Przed Java 7 nie było jednak sposobu, aby zrobić coś z ostrzeżeniami, więc używanie takich metod nie było zbyt przyjemne - aby się ich pozbyć, trzeba było używać `@SuppressWarnings("unchecked")` na każdym wywołaniu.
 
@@ -135,6 +135,6 @@ static <T> List<T> flatten(List<? extends T>... lists) {
 Ta metoda jest całkowicie *typesafe* i dzięki adnotacji `@SafeVarargs` klient nie musi przejmować się żadnymi ostrzeżeniami.
 
 {: .note}
-Adnotacje `@SafeVarargs` możemy zadeklarować tylko na metodach, które nie mogą być nadpisane, ponieważ nie ma możliwości, aby zagwarantować, że każda metoda nadpisująca będzie bezpieczna. Do Javy 8 można było ją używać tylko na statycznych metodach i finalnych instancyjnych. W Javie 9 umożliwiono też na metodach instancyjnych prywatnych.
+Adnotacje `@SafeVarargs` możemy zadeklarować tylko na metodach, które nie mogą być nadpisane, ponieważ nie ma możliwości, aby zagwarantować, że każda nadpisująca metoda będzie bezpieczna. Do Javy 8 można było ją używać tylko na metodach statycznych i finalnych instancyjnych. W Javie 9 umożliwiono też na prywatnych metodach instancyjnych.
 
 Innym sposobem na wyeliminowanie tych problemów mogłoby być użycie listy zamiast *varargs*.

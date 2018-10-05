@@ -16,9 +16,9 @@ item:       26
 {% include effective-java/series-info.html %}
 
 
-Klasa lub interfejs, która ma jeden lub więcej typ parametru, jest generyczną klasą/interfejsem (inaczej typy generyczne, generyki). Np. interfejs `List` ma pojedynczy typ parametru - `E`, który odpowiada typom elementów w liście. Pełna deklaracja wygląda tak: `List<E>`. Jest to więc interfejs generyczny.
+Klasa lub interfejs, która ma jeden lub więcej typ parametru, jest generyczną klasą/interfejsem (inaczej typem generycznym, generykiem). Np. interfejs `List` ma pojedynczy typ parametru - `E`, który odpowiada typowi elementów w liście. Pełna deklaracja wygląda tak: `List<E>`. Jest to więc interfejs generyczny.
 
-Generyki są już od Javy 5 i znacznie ułatwiły życie - wcześniej trzeba było castować każdy obiekt zwracany z kolekcji, a błędy z tym związane pojawiały się dopiero w *runtime*. Mianowicie, jeśli znalazłby się tam jakiś nieprawidłowy obiekt, to dostalibyśmy `ClassCastException` podczas wykonywania programu. Używając generyków, mówimy kompilatorowi jakich typów używamy i takie błędy wykrywane są już podczas kompilacji. Dzięki temu mamy zwiększone *type safty* oraz czytelność (brak castowania). W tym rozdziale przyjrzymy się jak wyciągnąć z generyków jak najwięcej i jak ominąć komplikacje.
+Generyki są już od Javy 5 i znacznie ułatwiły życie - wcześniej na przykład trzeba było castować każdy obiekt zwracany z kolekcji, a błędy z tym związane pojawiały się dopiero w *runtime*. Mianowicie, jeśli znalazłby się tam jakiś nieprawidłowy obiekt, to dostalibyśmy `ClassCastException` podczas wykonywania programu. Używając generyków, mówimy kompilatorowi, jakich typów używamy i takie błędy wykrywane są już podczas kompilacji. Dzięki temu mamy zwiększone *type safty* oraz czytelność (brak castowania). W tym rozdziale przyjrzymy się jak wyciągnąć z generyków jak najwięcej i jak ominąć komplikacje.
 
 # Unikaj typów prostych
 

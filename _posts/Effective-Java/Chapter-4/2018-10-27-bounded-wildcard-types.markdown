@@ -20,7 +20,7 @@ Większość typów generycznych, tak jak nasza zabawkowa klasa `Stack`, nie ma 
 {: .note}
 Wyjątkiem są prymitywy. Nie możemy utworzyć np. `Stack<int>` lub `Stack<double>`. Możemy zamiast tego użyć ich wrpaperów `Integer`, `Double` itd.
 
-Z drugiej strony, deklarując `List<String>` jako typ argumentu dla metody/klasy, narzucamy na nią spore ograniczenie - może przyjować tylko instancje klasy `String`. Czasem jednak potrzebujemy większej elastyczności, ale jednocześnie nie chcemy pozwalać na dowlony typ.
+Z drugiej strony, deklarując `List<String>` jako typ argumentu dla metody/klasy, narzucamy na nią spore ograniczenie - może przyjmować tylko instancje klasy `String`. Czasem jednak potrzebujemy większej elastyczności, ale jednocześnie nie chcemy pozwalać na dowolny typ.
 
 Możemy to osiągnać używając *bounded type parameter*.
 
@@ -46,7 +46,7 @@ public <E extends DelayQueue> void  someMethod(E e) {
 }
 ```
 
-Możemy również ograniczać typ rekursywnie, używając kolejnego typu zawierajacego ten parametr typu. Nazywa się to *recursive type bound*. Często jest to używane w połączeniu z interfejsem `Comparable` (który był już [omawiany]({% post_url Effective-Java/Chapter-2/2018-07-14-interfejs-comparable %})):
+Możemy również ograniczać typ rekursywnie, używając kolejnego typu zawierającego ten parametr typu. Nazywa się to *recursive type bound*. Często jest to używane w połączeniu z interfejsem `Comparable` (który był już [omawiany]({% post_url Effective-Java/Chapter-2/2018-07-14-interfejs-comparable %})):
 
 ```java
 public interface Comparable<T> {
@@ -56,14 +56,14 @@ public interface Comparable<T> {
 
 `T` określa, do jakiego typu może być porównywany obiekt implementujący `Comparable<T>`. Najczęściej jest to on sam, np. `String` implementuje `Comparable<String>`, `Integer` implementuje `Comparable<Integer>` itd.
 
-Wiele metod przyjmuje kolekcje elementów implementujących Comparable, aby ją sortować, przeszukiwać i czy kalkulować max/min. Te obiekty muszą być wzajemnie porównywalne, aby było to możliwe. Można to wymusić w ten sposób:
+Wiele metod przyjmuje kolekcje elementów implementujących Comparable, aby ją sortować, przeszukiwać czy kalkulować max/min. Te obiekty muszą być wzajemnie porównywalne, aby było to możliwe. Można to wymusić w ten sposób:
 
 ```java
 // Using a recursive type bound to express mutual comparability
 public static <E extends Comparable<E>> E max(Collection<E> c);
 ```
 
-Cała metoda do wyciągania maxymalnej wartości mogłaby wyglądać tak:
+Cała metoda do wyciągania maksymalnej wartości mogłaby wyglądać tak:
 
 ```java
 // Returns max value in a collection - uses recursive type bound
@@ -121,7 +121,7 @@ public void pushAll(Iterable<? extends E> src) {
 }
 ```
 
-Dzięki takiej zmianie nasza metoda jest dużo bardziej elastyczna i powyża próba dorzucenia do `Stack<Number>` integerów z `Iterable<Integer>` powiedzie się.
+Dzięki takiej zmianie nasza metoda jest dużo bardziej elastyczna i powyższa próba dorzucenia do `Stack<Number>` integerów z `Iterable<Integer>` powiedzie się.
 
 I można też w drugą stronę. Możemy rozszerzyć dozwolone typy o wszystkie nadklasy danego typu. Deklaruje się to tak: `<? super E>`.
 
@@ -183,7 +183,7 @@ Set<Number> numbers = Union.<Number>union(integers, doubles);
 
 </div>
 
-`Comparable` zalicza się zawsze do *consumerów*, więc zazwyczaj powinno się używać `Comparable<? super T>`. Podobnie jest z `Comparable`.
+`Comparable` zalicza się zawsze do *consumerów*, więc zazwyczaj powinno się używać `Comparable<? super T>`.
 
 Aplikując *wildcard types* do naszej metody `max` z poprzednich rozdziałów, która wyciąga największą wartość z listy, dostaniemy takiego potworka:
 
@@ -191,7 +191,7 @@ Aplikując *wildcard types* do naszej metody `max` z poprzednich rozdziałów, k
 public static <T extends Comparable<? super T>> T max(List<? extends T> list)
 ```
 
-Dzięki temu wspieramy typy, które nie implementują `Comparable` bezpośrednio, ale rozszerzają typ, który to robi. Na pierwszy rzut oka jest to mało czytelne, ale nie spotkamy się z takimi deklaracjami zbyt często - najczęsciej tego typu złożoność występuje pod spodem bibliotek.
+Dzięki temu wspieramy typy, które nie implementują `Comparable` bezpośrednio, ale rozszerzają typ, który to robi. Na pierwszy rzut oka jest to mało czytelne, ale nie spotkamy się z takimi deklaracjami zbyt często - najczęściej tego typu złożoność występuje pod spodem bibliotek.
 
 # Porównanie
 

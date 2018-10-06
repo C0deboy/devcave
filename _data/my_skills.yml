@@ -2,11 +2,11 @@
 - section: Języki programowania
   skills:
     - skill: JavaScript, ES6
-      grade: '80%'
+      grade: '75%'
       color: '#ffe915'
 
     - skill: Java
-      grade: 80%
+      grade: 85%
       color: '#ff5123'
 - section: Technologie Javowe
   skills:
@@ -52,17 +52,13 @@
       color: '#ff3300'
 
     - skill: Angular
-      grade: 50%
+      grade: 70%
       color: '#de0b32'
 - section: Inne
   skills:
     - skill: Git
       grade: 80%
       color: '#1b9612'
-
-    - skill: SQL
-      grade: 50%
-      color: '#e48e00'
 
     - skill: Webpack
       grade: 80%
@@ -87,20 +83,16 @@
     - skill: Jekyll
       grade: 80%
       color: '#2acb70'
-- section: IDE i edytory
+- section: IDE
   skills:
     - skill: Eclipse
-      grade: 60%
+      grade: 50%
       color: '#593a94'
 
     - skill: Intelij
-      grade: 80%
+      grade: 90%
       color: '#fa4273'
 
     - skill: WebStorm
-      grade: 80%
+      grade: 90%
       color: '#00d0d9'
-
-    - skill: SublimeText
-      grade: 70%
-      color: '#e96c18'

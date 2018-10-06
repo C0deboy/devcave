@@ -1,4 +1,174 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-09-15T22:01:12+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Klasy wewnętrzne</title><link href="https://devcave.pl/effective-java/klasy-wewnetrzne" rel="alternate" type="text/html" title="Klasy wewnętrzne" /><published>2018-09-08T10:00:00+02:00</published><updated>2018-09-08T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/klasy-wewnetrzne</id><content type="html" xml:base="https://devcave.pl/effective-java/klasy-wewnetrzne">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-10-06T15:27:22+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Nie używaj surowych typów</title><link href="https://devcave.pl/effective-java/nie-uzywaj-surowych-typow" rel="alternate" type="text/html" title="Nie używaj surowych typów" /><published>2018-10-06T10:00:00+02:00</published><updated>2018-10-06T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/nie-uzywaj-surowych-typow</id><content type="html" xml:base="https://devcave.pl/effective-java/nie-uzywaj-surowych-typow">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 26&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Generics&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/nie-uzywaj-surowych-typow&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 26: Don’t use raw types
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 27: Eliminate unchecked warnings
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 28: Prefer lists to arrays
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 29: Favor generic types
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 30: Favor generic methods
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 31: Use bounded wildcards to increase API flexibility
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 32: Combine generics and varargs judiciously
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Klasa lub interfejs, która ma jeden lub więcej typ parametru, jest generyczną klasą/interfejsem (inaczej typem generycznym, generykiem). Np. interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; ma pojedynczy typ parametru - &lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;, który odpowiada typowi elementów w liście. Pełna deklaracja wygląda tak: &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;. Jest to więc interfejs generyczny.&lt;/p&gt;
+
+&lt;p&gt;Generyki są już od Javy 5 i znacznie ułatwiły życie - wcześniej na przykład trzeba było castować każdy obiekt zwracany z kolekcji, a błędy z tym związane pojawiały się dopiero w &lt;em&gt;runtime&lt;/em&gt;. Mianowicie, jeśli znalazłby się tam jakiś nieprawidłowy obiekt, to dostalibyśmy &lt;code class=&quot;highlighter-rouge&quot;&gt;ClassCastException&lt;/code&gt; podczas wykonywania programu. Używając generyków, mówimy kompilatorowi, jakich typów używamy i takie błędy wykrywane są już podczas kompilacji. Dzięki temu mamy zwiększone &lt;em&gt;type safty&lt;/em&gt; oraz czytelność (brak castowania). W tym rozdziale przyjrzymy się jak wyciągnąć z generyków jak najwięcej i jak ominąć komplikacje.&lt;/p&gt;
+
+&lt;h1 id=&quot;unikaj-typów-prostych&quot;&gt;Unikaj typów prostych&lt;/h1&gt;
+
+&lt;p&gt;Każdy generyk ma swój typ prosty (ang. raw type) - sama nazwa bez parametrów typu.  Czyli dla &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt; jest to &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;. Typy proste zachowują się tak, jakby wszystkie generyczne informacje zostały usunięte i istnieją ze względu na kompatybilność wsteczną. &lt;strong&gt;Nie powinno się ich używać.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Przykład:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Raw collection type - don't do this!&lt;/span&gt;
+  
+&lt;span class=&quot;c1&quot;&gt;// My stamp collection. Contains only Stamp instances.  &lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;stamps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Kolekcja służy do przechowywania instancji klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Stamp&lt;/code&gt;. Jeśli gdzieś po drodze wpadnie tam instancja klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Coin&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Erroneous insertion of coin into stamp collection&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;stamps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Coin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Emits &quot;unchecked call&quot; warning&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;to skompiluje się to bez żadnego błedu. Błąd pojawi się dopiero wtedy, gdy wystąpi próba wyciągnięcia instancji &lt;code class=&quot;highlighter-rouge&quot;&gt;Coin&lt;/code&gt; z kolekcji:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Raw iterator type - don't do this! &lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stamps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Stamp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stamp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stamp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Throws ClassCastException&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Kompilator nie może pomóc wcześniej, bo nie wie, że mogą tam lądować tylko obiekty typu &lt;code class=&quot;highlighter-rouge&quot;&gt;Stamp&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Używając parametryzowanego typu, jasno to precyzujemy i kompilator jest w stanie wykryć taki błąd:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Parameterized collection type - typesafe&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stamp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;stamps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ta klasa skompiluje się tylko wtedy, kiedy typy będą się zgadzać. W innym wypadku dostaniemy komunikat:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Test.java:9: error: incompatible types: Coin cannot be converted  
+to Stamp  
+c.add(new Coin());  
+^
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;note&quot;&gt;Kompilator zastępuje wszystkie typy parametryzowane podczas kompilacji i wstawia casty wszędzie tam, gdzie pobierane są elementy. Informacje generyczne nie istnieją w skompilowanych klasach. Gwarantuje to &lt;em&gt;type safty&lt;/em&gt; i kompatybilność wsteczną.&lt;/p&gt;
+
+&lt;p&gt;Jeśli chcemy używać &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; do przetrzymywania dowolnych obiektów, to zamiast gołego &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; powinniśmy użyć &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;Object&amp;gt;&lt;/code&gt;. Wtedy mamy &lt;em&gt;type safety&lt;/em&gt; i jeśli zrobimy coś źle, to program nam się nie skompiluje.&lt;/p&gt;
+
+&lt;p&gt;Z kolei, jeśli typ jest nieznany lub nie ma znaczenia, to powinniśmy użyć &lt;em&gt;unbounded wildcard type&lt;/em&gt;, czyli znaku zapytania zamiast typu.&lt;/p&gt;
+
+&lt;p&gt;Dla typu generycznego &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&amp;lt;E&amp;gt;&lt;/code&gt;, &lt;em&gt;unbounded wildcard type&lt;/em&gt; wygląda tak &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&amp;lt;?&amp;gt;&lt;/code&gt;. Oznacza to, że możemy przekazać jakikolwiek &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&lt;/code&gt; i nie potrzebujemy żadnej informacji o typie. Po prostu nie będziemy go używać - wystarczą nam metody, które nie wymagają konkretnych typów.&lt;/p&gt;
+
+&lt;p&gt;Złe użycie z gołymi typami:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Use of raw type for unknown element type - don't do this!&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;numElementsInCommon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dobre użycie z &lt;em&gt;unbounded wildcard type&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Uses unbounded wildcard type - typesafe and flexible &lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;numElementsInCommon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Różnica między &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&amp;lt;?&amp;gt;&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&lt;/code&gt; jest taka, że ten pierwszy jest &lt;em&gt;type safe&lt;/em&gt;. Jasno deklarujemy, że nie obchodzi nas typ i że będziemy używać tylko metod, które od niego nie zależą. W konsekwencji nie możemy wrzucać żadnych elementów do kolekcji - w przeciwieństwie do gołego typu, który pozwala na wrzucenie czegokolwiek.&lt;/p&gt;
+
+&lt;p&gt;Jeśli takie ograniczenie nam nie pasuje, to powinniśmy użyć metody generycznej lub &lt;em&gt;bounded wildcard type&lt;/em&gt; - o nich będzie w następnych wpisach.&lt;/p&gt;
+
+&lt;p&gt;Czasem jednak jesteśmy zmuszeni do używania gołych typów - m.in. gdy używamy:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;literałów klasy - parametryczne są niedozwolone przez specyfikację - &lt;code class=&quot;highlighter-rouge&quot;&gt;List.class&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;String[].class&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;int.class&lt;/code&gt; są cacy, ale &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;.class&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;.class&lt;/code&gt; są niecacy.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;operatora &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt; - wynika to z tego, że generyczne typy są usuwane w runtimie. Możemy użyć &lt;em&gt;unbounded wildcard&lt;/em&gt; (?), ale nie wpływa to w żaden sposób na &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;, więc to tylko zaśmieca kod.  Dlatego używając &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt; najlepiej podawać zawsze goły typ i później ewentualnie castować na &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&amp;lt;?&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Legitimate use of raw type - instanceof operator&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Raw type&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Wildcard type&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;note&quot;&gt;Ustaliliśmy, że &lt;code class=&quot;highlighter-rouge&quot;&gt;o&lt;/code&gt; ma typ &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&lt;/code&gt;, więc castujemy to na  &lt;em&gt;wildcard type&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&amp;lt;?&amp;gt;&lt;/code&gt;, a nie na surowy typ &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&lt;/code&gt;. To jest sprawdzone castowanie, więc kompilator nie będzie rzucał “unchecked cast” warningami.&lt;/p&gt;
+
+&lt;p&gt;Podsumowując, używanie gołych typów opóźnia wykrywanie błędów i nie wnosi żadnych korzyści, dlatego nie powinniśmy ich używać. W Javie są obecne tylko ze względu na kompatybilność wsteczną.&lt;/p&gt;
+
+&lt;p&gt;Tabelka z używanymi tu pojęciami:&lt;/p&gt;
+
+&lt;div class=&quot;table-wrapper&quot;&gt;
+
+  &lt;table class=&quot;table table-condensed table-bordered&quot;&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Pojęcie&lt;/th&gt;
+        &lt;th&gt;Przykład&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Raw type&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Parameterized type&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Generic type&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Formal type parameter&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Unbounded wildcard type&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Type token&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.class&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+&lt;/div&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 26 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility Item 32: Combine generics and varargs judiciously Klasa lub interfejs, która ma jeden lub więcej typ parametru, jest generyczną klasą/interfejsem (inaczej typem generycznym, generykiem). Np. interfejs List ma pojedynczy typ parametru - E, który odpowiada typowi elementów w liście. Pełna deklaracja wygląda tak: List&amp;lt;E&amp;gt;. Jest to więc interfejs generyczny. Generyki są już od Javy 5 i znacznie ułatwiły życie - wcześniej na przykład trzeba było castować każdy obiekt zwracany z kolekcji, a błędy z tym związane pojawiały się dopiero w runtime. Mianowicie, jeśli znalazłby się tam jakiś nieprawidłowy obiekt, to dostalibyśmy ClassCastException podczas wykonywania programu. Używając generyków, mówimy kompilatorowi, jakich typów używamy i takie błędy wykrywane są już podczas kompilacji. Dzięki temu mamy zwiększone type safty oraz czytelność (brak castowania). W tym rozdziale przyjrzymy się jak wyciągnąć z generyków jak najwięcej i jak ominąć komplikacje. Unikaj typów prostych Każdy generyk ma swój typ prosty (ang. raw type) - sama nazwa bez parametrów typu. Czyli dla List&amp;lt;E&amp;gt; jest to List. Typy proste zachowują się tak, jakby wszystkie generyczne informacje zostały usunięte i istnieją ze względu na kompatybilność wsteczną. Nie powinno się ich używać. Przykład: // Raw collection type - don't do this! // My stamp collection. Contains only Stamp instances. private final Collection stamps = ... ; Kolekcja służy do przechowywania instancji klasy Stamp. Jeśli gdzieś po drodze wpadnie tam instancja klasy Coin: // Erroneous insertion of coin into stamp collection stamps.add(new Coin( ... )); // Emits &quot;unchecked call&quot; warning to skompiluje się to bez żadnego błedu. Błąd pojawi się dopiero wtedy, gdy wystąpi próba wyciągnięcia instancji Coin z kolekcji: // Raw iterator type - don't do this! for (Iterator i = stamps.iterator(); i.hasNext(); ) { Stamp stamp = (Stamp) i.next(); // Throws ClassCastException } Kompilator nie może pomóc wcześniej, bo nie wie, że mogą tam lądować tylko obiekty typu Stamp. Używając parametryzowanego typu, jasno to precyzujemy i kompilator jest w stanie wykryć taki błąd: // Parameterized collection type - typesafe private final Collection&amp;lt;Stamp&amp;gt; stamps = ... ; Ta klasa skompiluje się tylko wtedy, kiedy typy będą się zgadzać. W innym wypadku dostaniemy komunikat: Test.java:9: error: incompatible types: Coin cannot be converted to Stamp c.add(new Coin()); ^ Kompilator zastępuje wszystkie typy parametryzowane podczas kompilacji i wstawia casty wszędzie tam, gdzie pobierane są elementy. Informacje generyczne nie istnieją w skompilowanych klasach. Gwarantuje to type safty i kompatybilność wsteczną. Jeśli chcemy używać List do przetrzymywania dowolnych obiektów, to zamiast gołego List powinniśmy użyć List&amp;lt;Object&amp;gt;. Wtedy mamy type safety i jeśli zrobimy coś źle, to program nam się nie skompiluje. Z kolei, jeśli typ jest nieznany lub nie ma znaczenia, to powinniśmy użyć unbounded wildcard type, czyli znaku zapytania zamiast typu. Dla typu generycznego Set&amp;lt;E&amp;gt;, unbounded wildcard type wygląda tak Set&amp;lt;?&amp;gt;. Oznacza to, że możemy przekazać jakikolwiek Set i nie potrzebujemy żadnej informacji o typie. Po prostu nie będziemy go używać - wystarczą nam metody, które nie wymagają konkretnych typów. Złe użycie z gołymi typami: // Use of raw type for unknown element type - don't do this! static int numElementsInCommon(Set s1, Set s2) { int result = 0; for (Object o1 : s1) if (s2.contains(o1)) result++; return result; } Dobre użycie z unbounded wildcard type: // Uses unbounded wildcard type - typesafe and flexible static int numElementsInCommon(Set&amp;lt;?&amp;gt; s1, Set&amp;lt;?&amp;gt; s2) { ... } Różnica między Set&amp;lt;?&amp;gt; i Set jest taka, że ten pierwszy jest type safe. Jasno deklarujemy, że nie obchodzi nas typ i że będziemy używać tylko metod, które od niego nie zależą. W konsekwencji nie możemy wrzucać żadnych elementów do kolekcji - w przeciwieństwie do gołego typu, który pozwala na wrzucenie czegokolwiek. Jeśli takie ograniczenie nam nie pasuje, to powinniśmy użyć metody generycznej lub bounded wildcard type - o nich będzie w następnych wpisach. Czasem jednak jesteśmy zmuszeni do używania gołych typów - m.in. gdy używamy: literałów klasy - parametryczne są niedozwolone przez specyfikację - List.class, String[].class i int.class są cacy, ale List&amp;lt;String&amp;gt;.class i List&amp;lt;?&amp;gt;.class są niecacy. operatora instanceof - wynika to z tego, że generyczne typy są usuwane w runtimie. Możemy użyć unbounded wildcard (?), ale nie wpływa to w żaden sposób na instanceof, więc to tylko zaśmieca kod. Dlatego używając instanceof najlepiej podawać zawsze goły typ i później ewentualnie castować na Set&amp;lt;?&amp;gt;: // Legitimate use of raw type - instanceof operator if (o instanceof Set) { // Raw type Set&amp;lt;?&amp;gt; s = (Set&amp;lt;?&amp;gt;) o; // Wildcard type //... } Ustaliliśmy, że o ma typ Set, więc castujemy to na wildcard type Set&amp;lt;?&amp;gt;, a nie na surowy typ Set. To jest sprawdzone castowanie, więc kompilator nie będzie rzucał “unchecked cast” warningami. Podsumowując, używanie gołych typów opóźnia wykrywanie błędów i nie wnosi żadnych korzyści, dlatego nie powinniśmy ich używać. W Javie są obecne tylko ze względu na kompatybilność wsteczną. Tabelka z używanymi tu pojęciami: Pojęcie Przykład Raw type List Parameterized type List&amp;lt;String&amp;gt; Generic type List&amp;lt;E&amp;gt; Formal type parameter E Unbounded wildcard type List&amp;lt;?&amp;gt; Type token String.class</summary></entry><entry><title type="html">Klasy wewnętrzne</title><link href="https://devcave.pl/effective-java/klasy-wewnetrzne" rel="alternate" type="text/html" title="Klasy wewnętrzne" /><published>2018-09-08T10:00:00+02:00</published><updated>2018-09-08T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/klasy-wewnetrzne</id><content type="html" xml:base="https://devcave.pl/effective-java/klasy-wewnetrzne">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -1683,204 +1853,4 @@ Dzięki temu możemy pracować na nich równolegle, bez ryzyka uszkodzenia innyc
 
 &lt;p&gt;W rezultacie dostaniemy posortowane elementy według pola &lt;code class=&quot;highlighter-rouge&quot;&gt;score&lt;/code&gt; z klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;RankingEntry&lt;/code&gt;, które są w liście rankingowej &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;RankingEntry&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Podsumowując, implementując interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; uaktywnimy sporo użytecznych funkcji i kolekcji, z którymi nasza klasa może współpracować. Dzięki komparatorom możemy tworzyć różne niestandardowe porównywania obiektów, a od Javy 8, płynne API do dynamicznego tworzenia komparatorów z wykorzystaniem lambd znacznie ułatwia sprawę. Jeśli nasza klasa będzie miała jeden standard porównywania obiektów, to warto użyć interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt;, który określa domyślny porządek (ang. &lt;strong&gt;natural ordering&lt;/strong&gt;). Jeśli z kolei przewidujemy, że nasza klasa będzie porównywana na kilka sposobów lub chcemy użyć innego zamiast domyślnego, to przydadzą się komparatory.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 14 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry><entry><title type="html">Klonowanie w Javie</title><link href="https://devcave.pl/effective-java/metoda-clone" rel="alternate" type="text/html" title="Klonowanie w Javie" /><published>2018-07-07T10:00:00+02:00</published><updated>2018-07-07T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/metoda-clone</id><content type="html" xml:base="https://devcave.pl/effective-java/metoda-clone">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 13&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m0&quot;&gt;Methods Common to All Objects&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/metoda-equals&quot;&gt;Item 10: Obey the general contract when overriding equals
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/metoda-hashcode&quot;&gt;Item 11: Always override hashCode when you override equals
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/metoda-toString&quot;&gt;Item 12: Always override toString
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/metoda-clone&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 13: Override clone judiciously
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;Item 14: Consider implementing Comparable
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;interfejs-cloneable&quot;&gt;Interfejs Cloneable&lt;/h1&gt;
-
-&lt;p&gt;W Javie do klonowania został stworzony interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt;, którym oznacza się klasę, dla której ma być dozwolone klonowanie. Jednak nie jest to idealne rozwiązanie. Interfejs ten nie zawiera żadnych metod, a metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; w klasie &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt; jest &lt;code class=&quot;highlighter-rouge&quot;&gt;protected&lt;/code&gt;, więc nie możemy wywołać metody &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt;, tylko dlatego, że klasa implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Interfejs ten zmienia tylko zachowanie metody &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; w &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt; - jeśli klasa implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt; to zwracana jest kopia pole po polu obiektu, a w przeciwnym wypadku rzucany jest wyjątek &lt;code class=&quot;highlighter-rouge&quot;&gt;CloneNotSupportedException&lt;/code&gt;. Jest to trochę nietypowe wykorzystanie interfejsu — zamiast mówić klientowi co klasa może zrobić, zmienia zachowanie metody nadklasy i do niczego więcej się nie przyda.&lt;/p&gt;
-
-&lt;p&gt;Z interfejsu to nie wynika, ale klasa implementująca interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt; powinna dostarczyć poprawnie funkcjonująca metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Kontrakt dla metody &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; w specyfikacji jest następujący:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Creates and returns a copy of this object. The precise meaning of
-“copy” may depend on the class of the object. The general intent is
-that, for any object &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;, the expression&lt;/p&gt;
-
-  &lt;p&gt;&lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
-
-  &lt;p&gt;will be &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;, and the expression&lt;/p&gt;
-
-  &lt;p&gt;&lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
-
-  &lt;p&gt;will be &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;, but these are not absolute requirements. While it is
-typically the case that&lt;/p&gt;
-
-  &lt;p&gt;&lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
-
-  &lt;p&gt;will be &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;, this is not an absolute requirement.&lt;/p&gt;
-
-  &lt;p&gt;By convention, the object returned by this method should be obtained
-by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;super.clone&lt;/code&gt;. If a class and all of its superclasses
-(except &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt;) obey this convention, it will be the case that&lt;/p&gt;
-
-  &lt;p&gt;&lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
-
-  &lt;p&gt;By convention, the returned object should be independent of the object
-being cloned. To achieve this independence, it may be necessary to
-modify one or more fields of the object returned by &lt;code class=&quot;highlighter-rouge&quot;&gt;super.clone&lt;/code&gt;
-before returning it.&lt;/p&gt;
-
-  &lt;p&gt;This mechanism is vaguely similar to constructor chaining, except that
-it isn’t enforced: if a class’s &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; method returns an instance
-that is &lt;em&gt;not&lt;/em&gt; obtained by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;super.clone&lt;/code&gt; but by calling a
-constructor, the compiler won’t complain, but if a subclass of that
-class calls &lt;code class=&quot;highlighter-rouge&quot;&gt;super.clone&lt;/code&gt;, the resulting object will have the wrong
-class, preventing the subclass from &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; method from working
-properly. If a class that overrides &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; is final, this
-convention may be safely ignored, as there are no subclasses to worry
-about. But if a final class has a &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; method that does not
-invoke &lt;code class=&quot;highlighter-rouge&quot;&gt;super.clone&lt;/code&gt;, there is no reason for the class to implement
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt;, as it doesn’t rely on the behavior of &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt;’s clone
-implementation.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Czyli z grubsza — nie mamy zdefiniowanej definicji kopii ani co możemy z nią robić — wszystko zależy od nas.&lt;/p&gt;
-
-&lt;p&gt;W rezultacie mamy dosyć niestabilny i niebezpieczny mechanizm, który pod spodem tworzy obiekty bez wywoływania konstruktora.&lt;/p&gt;
-
-&lt;h1 id=&quot;implementacja&quot;&gt;Implementacja&lt;/h1&gt;
-
-&lt;p&gt;Najpierw musimy wywołać &lt;code class=&quot;highlighter-rouge&quot;&gt;super.clone&lt;/code&gt;. Dostaniemy w pełni funkcjonalną kopię obiektu. Wszystkie wartości będą identyczne jak w oryginale i co ważne — będą to referencje do tych samych obiektów. Jeśli obiekt zawiera tylko prymitywy i referencje do niemutowalnych obiektów, to w zasadzie dostaniemy to, co chcemy i nie musimy robić nic więcej niż:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Clone method for class with no references to mutable state&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassWithNoMutableReferences&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ClassWithNoMutableReferences&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CloneNotSupportedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AssertionError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Can't happen&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Z kolei, jeśli obiekt sam w sobie jest niemutowalny, to po co nam by było klonowanie? Klasy niemutowalne z pewnością nie powinny udostępniać metody &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt;, bo jedynie co by to robiło, to zachęcało do zbędnego klonowania.&lt;/p&gt;
-
-&lt;p class=&quot;note&quot;&gt;Wywołanie metody &lt;code class=&quot;highlighter-rouge&quot;&gt;super.clone&lt;/code&gt; jest opakowane w blok &lt;code class=&quot;highlighter-rouge&quot;&gt;try-catch&lt;/code&gt;, ponieważ &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt; deklaruje, że jego metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; rzuca wyjątek &lt;code class=&quot;highlighter-rouge&quot;&gt;CloneNotSupportedException&lt;/code&gt;, który jest wyjątkiem typu &lt;em&gt;checked&lt;/em&gt;. Jeśli nasz obiekt implementuje interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt; to wiemy, że wyjątek ten nigdy nie zostanie rzucony. Ten zbędny &lt;em&gt;boilerpalte&lt;/em&gt; wskazuje na to, że &lt;code class=&quot;highlighter-rouge&quot;&gt;CloneNotSupportedException&lt;/code&gt; powinno być wyjątkiem typu &lt;em&gt;unchecked&lt;/em&gt;, no ale tak się nie stało.&lt;/p&gt;
-
-&lt;p&gt;Jeśli jednak nasz obiekt ma referencje do mutowalnych obiektów, to taka prosta implementacja metody &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; jest zgubna. Weźmy na przykład implementację klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&lt;/code&gt; ze wcześniejszych wpisów:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DEFAULT_INITIAL_CAPACITY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DEFAULT_INITIAL_CAPACITY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ensureCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;EmptyStackException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Eliminate obsolete reference&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Ensure space for at least one more element.&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ensureCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Jeśli będziemy chcieli dać możliwość klonowania takiej klasie i w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; wywołamy tylko &lt;code class=&quot;highlighter-rouge&quot;&gt;super.clone()&lt;/code&gt;, to sklonowana instancja &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&lt;/code&gt; będzie miała odpowiednie pole &lt;code class=&quot;highlighter-rouge&quot;&gt;size&lt;/code&gt; (bo jest to prymityw), ale tablica &lt;code class=&quot;highlighter-rouge&quot;&gt;elements&lt;/code&gt; będzie referencją do tej samej tablicy co w oryginale. &lt;strong&gt;W rezultacie modyfikując kopię, będziemy modyfikować też oryginał.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;W takiej sytuacji, aby dostać odizolowaną kopię od oryginału, musimy ręcznie wywołać metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; na tablicy:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Clone method for class with references to mutable state&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CloneNotSupportedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AssertionError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;I tak z każdym polem tego typu.&lt;/p&gt;
-
-&lt;p&gt;Problemem w tym rozwiązaniu jest to, że wtedy pole (w tym przypadku &lt;code class=&quot;highlighter-rouge&quot;&gt;elements&lt;/code&gt;) nie może być zadeklarowane jako &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Kolejny problem pojawia się wtedy, kiedy elementy w tablicy są mutowalne. Jeśli zmienimy stan jednego z obiektu będącego w tablicy, to zawartość obu tablic zostanie zmodyfikowana. To dlatego, że obie zawierają referencje do tych samych obiektów, a metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; wykonuje płytkie kopiowanie (shallow copy).&lt;/p&gt;
-
-&lt;p&gt;Żeby uzyskać w pełni odizolowane od siebie obiekty wraz ze wszystkimi obiektami wewnątrz, musimy wykonać głębokie kopiowanie (deep copy) - utworzyć nową tablicę i skopiować do niej wszystkie elementy listy.&lt;/p&gt;
-
-&lt;p class=&quot;warning&quot;&gt;Metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt; w &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt; nie jest zsynchronizowana, więc w środowisku wielowątkowym będzie trzeba napisać jej zsynchronizowany odpowiednik.&lt;/p&gt;
-
-&lt;p&gt;Jednak czy ten mało zgrabny mechanizm klonowania jest niezbędny? Jeśli rozszerzasz klasę, która już implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt; to tak, nie ma innego wyboru. W innym przypadku warto skorzystać z alternatywnych rozwiązań.&lt;/p&gt;
-
-&lt;h1 id=&quot;copy-constructor&quot;&gt;Copy constructor&lt;/h1&gt;
-&lt;p&gt;Jest to konstruktor, który przyjmuje jako argument klasę zawierającą ten konstruktor, np.:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Copy constructor&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;copy-factory&quot;&gt;Copy factory&lt;/h1&gt;
-
-&lt;p&gt;Jest to analogiczny odpowiednik konstruktora w postaci &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;static method factory&lt;/a&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Copy factory&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Następnie ręcznie tworzymy nowy obiekt, kopiując wszystkie pola:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Oba te rozwiązania mają wiele korzyści w stosunku do &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;nie polegamy na nieznanym mechanizmie tworzenia obiektów, który nie używa konstruktora i mamy pełną kontrolę nad tym procesem.&lt;/li&gt;
-  &lt;li&gt;nie jesteśmy uzależnieni od żadnych słabo zdefiniowanych konwencji&lt;/li&gt;
-  &lt;li&gt;nie ma konfliktu z polami &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;nie rzucają zbędnych wyjątków&lt;/li&gt;
-  &lt;li&gt;nie wymagają castowania&lt;/li&gt;
-  &lt;li&gt;nie skażamy klasy i wszystkich podklas interfejsem, który jest tylko &lt;em&gt;markerem&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Ponadto w tych rozwiązaniach argument może być interfejsem implementowanym przez tę klasę. Na przykład implementacje kolekcji w Javie udostępniają konstruktor, który ma argument typu &lt;code class=&quot;highlighter-rouge&quot;&gt;Collection&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;Map&lt;/code&gt;. Są to tak zwane &lt;em&gt;conversion constructors&lt;/em&gt; i &lt;em&gt;conversion factories&lt;/em&gt;, które pozwalają klientowi wybrać typ kopii, zamiast wymuszać oryginalny typ. Na przykład mamy &lt;code class=&quot;highlighter-rouge&quot;&gt;HashSet s&lt;/code&gt; i możemy łatwo skopiować go jako &lt;code class=&quot;highlighter-rouge&quot;&gt;TreeSet&lt;/code&gt; używając &lt;code class=&quot;highlighter-rouge&quot;&gt;new TreeSet&amp;lt;&amp;gt;(s)&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Podsumowując, te dwa rozwiązania są zdecydowanie lepsze od skażania klasy interfejsem &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt;, więc powinny być preferowanym sposobem implementowania klonowania w Javie. Jedynym wyjątkiem od tej zasady są tablicę, gdzie powinniśmy używać metody &lt;code class=&quot;highlighter-rouge&quot;&gt;clone&lt;/code&gt;, bo jest to najszybszy sposób klonowania tablic.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 13 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry></feed>
+&lt;p&gt;Podsumowując, implementując interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; uaktywnimy sporo użytecznych funkcji i kolekcji, z którymi nasza klasa może współpracować. Dzięki komparatorom możemy tworzyć różne niestandardowe porównywania obiektów, a od Javy 8, płynne API do dynamicznego tworzenia komparatorów z wykorzystaniem lambd znacznie ułatwia sprawę. Jeśli nasza klasa będzie miała jeden standard porównywania obiektów, to warto użyć interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt;, który określa domyślny porządek (ang. &lt;strong&gt;natural ordering&lt;/strong&gt;). Jeśli z kolei przewidujemy, że nasza klasa będzie porównywana na kilka sposobów lub chcemy użyć innego zamiast domyślnego, to przydadzą się komparatory.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 14 z rozdziału: Methods Common to All Objects Item 10: Obey the general contract when overriding equals Item 11: Always override hashCode when you override equals Item 12: Always override toString Item 13: Override clone judiciously Item 14: Consider implementing Comparable</summary></entry></feed>

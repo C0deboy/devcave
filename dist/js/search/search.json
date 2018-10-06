@@ -525,6 +525,15 @@
         "subtitle": "Czym się różnią i kiedy z jakiej korzystać",
         "date": "8 września 2018",
         "url": "/effective-java/klasy-wewnetrzne"
+      },
+    
+      
+      {
+        "title": "Nie używaj surowych typów",
+        "titleSEO": "Nie używaj surowych typów",
+        "subtitle": "Preferuj typy generyczne/parametryzowane",
+        "date": "6 października 2018",
+        "url": "/effective-java/nie-uzywaj-surowych-typow"
       }
     
   

@@ -19,7 +19,7 @@ Ten rozdział zawiera rady dotyczące używania enumów i adnotacji.
 
 Na początku myślałem, że pominę ten rozdział jako że nie wnosi zbyt dużo, ale część porad jest przydatna, dlatego uznałem, że wyciągnę najważniejsze informacje z każdego itemu i podzielę to na 2 posty - o enumach i adnotacjach. Zacznijmy więc enumów:
 
-# Item 34: Use enums instead of int constants
+# Enumy zamiast stałych typu int
 
 Typ enum reprezentuje stały zbiór wartości, który jest nam znany przed uruchomieniem programu, np. pory roku, planety, czy kolory kart. Zanim enumy były dodane do Javy, często deklarowano grupę podobnie nazwanych stałych typu int:
 
@@ -131,7 +131,7 @@ Robiąc to w ten sposób, za każdym razem, gdy dodajemy nowe pole, jesteśmy zm
 
 Podsumowując, enumy są bardziej czytelne, bezpieczniejsze i mają dużo więcej możliwości niż zwykłe stałe, dlatego warto je stosować za każdym razem, gdy mamy zbiór stałych wartości ze wspólnej grupy, które znamy przed uruchomieniem programu.
 
-# Item 35: Use instance fields instead of ordinals
+# Pola instancji enuma zamiast polegania na kolejności zadeklarowania stałych
 
 Tutaj omawiany jest dosyć specyficzny przypadek użycia metody `ordinal`, która zwraca liczbę będącą pozycją stałej, na której nie powinniśmy polegać:
 
@@ -165,7 +165,7 @@ public enum Ensemble {
 }
 ```
 
-# Item 36: Use EnumSet instead of bit fields
+# EnumSet zamiast pól bitowych
 
 Bardzo prosty przekaz - używajmy klasy EnumSet, gdy chcemy przekazywać kilka stałych z jednej grupy. Kiedyś to można było robić ręcznie, używając operacji bitowych:
 
@@ -208,7 +208,7 @@ text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC));
 
 Cały ciężar implementacji i poprawności operacji bitowych zrzucamy na `EnumSet` dodatkowo zyskując przejrzystość i *type safty*.
 
-# Item 37: Use EnumMap instead of ordinal indexing
+# EnumMap zamiast indexowania metodą ordinal
 
 Podobnie jak wyżej, używajmy `EnumMap` zamiast ręcznego indexowania tablicy za pomocą metody `ordinal`.
 
@@ -266,7 +266,7 @@ System.out.println(plantsByLifeCycle);
 
 Program jest krótszy, czystszy, bezpieczniejszy i porównywalny w wydajności. Nie ma ostrzeżenia `unsafe cast`, wartości od razu przechowują swoją reprezentację tekstową i nie ma możliwości na błąd podczas przeliczania indexów.
 
-# Item 38: Emulate extensible enums with interfaces
+# Emuluowanie rozszerzalnych enumów za pomocą interfejsów
 
 Enumy mają jedno duże ograniczenie - nie mogą być rozszerzane i tak jest "by design". Nie ma też dużo przypadków kiedy byłoby to niezbędne.
 

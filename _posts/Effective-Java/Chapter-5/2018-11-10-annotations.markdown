@@ -15,7 +15,7 @@ item:       39, 40, 41
 
 {% include effective-java/series-info.html %}
 
-# Item 39: Prefer annotations to naming patterns
+# Adnotacje zamiast specyficznego nazewnictwa
 
 Dawniej, kiedy w Javie nie było adnotacji, używało się specjalnego nazewnictwa (np. prefixy), aby zaznaczyć, że dany element potrzebuje specjalnego traktowania (np. przez framework).
 
@@ -231,7 +231,7 @@ public static void doublyBad() { ... }
 
 Przekaz tego itemu jest prosty - używajmy adnotacji, zamiast wymuszania konwencji nazewniczych.
 
-# Item 40: Consistently use the Override annotation
+# Adnotacja @Overrride
 
 Jedna z najważniejszych i najpopularniejszych adnotacji w standardowej bibliotece Javy to `@Override`. Używana jest na metodach i deklaruje, że dana metoda nadpisuje metodę w nadklasie. Warto ją używać na każdej metodzie, która według naszych intencji powinna nadpisywać inną. Jest ważna, ze względu na to, że dzięki niej kompilator pomoże nam uniknąć pomyłek dotyczących deklaracji klasy. Dla przykładu:
 
@@ -270,7 +270,7 @@ from a supertype
 
 Przekaz z tego itemu jest prosty - używajmy adnotacji `@Override` na każdej metodzie, która nadpisuje metodę z nadklasy. Wyjątkiem od tej zasady **mogą** być klasy abstrakcyjne - tak czy siak, jeśli nie zaimplementujemy metody abstrakcyjnej nasz program się nie skompiluje.
 
-# Item 41: Use marker interfaces to define types
+# Marker interfejs jako definicja typu
 
 W tym itemie mowa o tzw. *marker interface*. Jest to interfejs, które nie ma żadnych metod i tylko "zaznacza", że klasa jest do czegoś przeznaczona. Przykładem jest interfejs `Serializable`, który wskazuje, że jego instancje mogą być serializowane.
 

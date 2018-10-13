@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+
+<title>Eliminowanie ostrzeżeń unchecked cast</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/eliminuj-unchecked-cast">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Eliminowanie ostrzeżeń unchecked cast</h1>
+            
+            <h2 class="post-subtitle">Skąd się biorą i jak się nimi zająć</h2>
+            
+            <p class="post-meta">
+              
+              13
+              października
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#suppresswarnings">@SuppressWarnings</a></li>
+<li class="toc-entry toc-h1"><a href="#safevarargs">@SafeVarargs</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 27, 32</i> z rozdziału:</p>
+
+<p class="m0">Generics</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/nie-uzywaj-surowych-typow">Item 26: Don’t use raw types
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/eliminuj-unchecked-cast">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 27: Eliminate unchecked warnings
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/eliminuj-unchecked-cast">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 32: Combine generics and varargs judiciously
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 28: Prefer lists to arrays
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 29: Favor generic types
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 30: Favor generic methods
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 31: Use bounded wildcards to increase API flexibility
+                </a>
+            </li></ul>
+<hr />
+
+<p>Pracując z generykami, często natrafimy na wiele ostrzeżeń od kompilatora: unchecked cast, unchecked method invocation, unchecked parameterized vararg type i unchecked conversion. Przekaz z tego wpisu jest prosty - powinno się je eliminować. Dzięki temu zapewnimy, że program jest <em>type safe</em> i nigdy nie wyskoczy <code class="highlighter-rouge">ClassCastException</code> czy coś podobnego.</p>
+
+<p>Wiele z nich jest naprawdę prosta do poprawy. Najprostszy przypadek, kiedy dostaniemy <em>unchecked conversion</em>, to:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Lark</span><span class="o">&gt;</span> <span class="n">exaltation</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>I treść błędu:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Venery.java:4: warning: [unchecked] unchecked conversion
+        Set&lt;Lark&gt; exaltation = new HashSet();
+                               ^
+  required: Set&lt;Lark&gt;
+  found:    HashSet
+</code></pre></div></div>
+
+<p>Wystarczy dodać <em>diamond operator</em> (&lt;&gt;) (od Javy 7), który poinformuje kompilator, że używamy tego samego typu, który jest zdefiniowany dla zmiennej i po prostu go z niej wywnioskuje.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Lark</span><span class="o">&gt;</span> <span class="n">exaltation</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+</code></pre></div></div>
+
+<p>I ostrzeżenie znika. Generalnie unikanie surowych typów minimalizuje liczbę takich ostrzeżeń.</p>
+
+<p>Problematyczne jest również używanie tablic wraz z generykami - ten temat zostanie poruszony w następnym wpisie.</p>
+
+<p>Jednak niektórych ostrzeżeń nie da się zlikwidować. Jeśli jesteśmy w stanie udowodnić, że mimo ostrzeżenia nasz kod jest <em>typesafe</em>, to możemy wyciszyć to ostrzeżenie za pomocą adnotacji
+<code class="highlighter-rouge">@SuppressWarnings("unchecked")</code>. Do tego powinniśmy też dołączyć komentarz, wyjaśniający, dlaczego uważamy, że dana operacja jest <em>typesafe</em>.</p>
+
+<h1 id="suppresswarnings">@SuppressWarnings</h1>
+
+<p><code class="highlighter-rouge">@SuppressWarnings</code> może być użyte na każdej deklaracji, dlatego warto maksymalnie ograniczać <em>scope</em>, dla którego będzie działać, żeby nie wyciszyć też innych ostrzeżeń.</p>
+
+<p>Czasem nawet warto utworzyć do tego nową zmienną. Dla przykładu, gdy skompilujemy taką metodę:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">length</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">)</span>
+       <span class="k">return</span> <span class="o">(</span><span class="n">T</span><span class="o">[])</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">a</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="n">size</span><span class="o">)</span>
+       <span class="n">a</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>To dostaniemy takie ostrzeżenie:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ArrayList.java:305: warning: [unchecked] unchecked cast
+       return (T[]) Arrays.copyOf(elements, size, a.getClass());
+                                 ^
+  required: T[]
+  found:    Object[]
+</code></pre></div></div>
+
+<p>Nie możemy dać adnotacji na <code class="highlighter-rouge">return</code>, bo to nie jest deklaracja. Nie powinniśmy też w takim przypadku dać adnotacji na całą metodę. Warto utworzyć do tego dodatkową zmienną, aby ograniczyć zasięg wyciszenia:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// Adding local variable to reduce scope of @SuppressWarnings</span>
+<span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">length</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// This cast is correct because the array we're creating</span>
+        <span class="c1">// is of the same type as the one passed in, which is T[].</span>
+        <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+        <span class="n">T</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">[])</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">a</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="n">size</span><span class="o">)</span>
+        <span class="n">a</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>W kolejnym wpisie będzie więcej przykładów prawidłowego wyciszania ostrzeżeń np. podczas mieszania generyków z tablicami.</p>
+
+<h1 id="safevarargs">@SafeVarargs</h1>
+
+<p><em>Vararg</em>-i zostały dodane razem z generykami w Javie 5, aby dodać możliwość przekazywania do funkcji zmiennej liczby argumentów, jednak nie współpracują ze sobą bez konfliktów. Rzucane są ostrzeżenia, jeśli varargi mają generyczne typy. Jest to spowodowane tym, że pod spodem tworzona jest tablica, która przetrzymuje te parametry, a mieszanie tablic z generykami jest problematyczne. O tym będzie w następnym wpisie.</p>
+
+<p>Pojawia się też pytanie: dlaczego można zadeklarować metodę z generycznym parametrem varargs, podczas gdy nie możemy utworzyć generycznej tablicy?
+Ano dlatego, że takie metody są bardzo użyteczne i projektanci Javy postanowili wprowadzić taką niespójność. Nawet w samej bibliotece Javy są takie metody: <code class="highlighter-rouge">Arrays.asList(T... a)</code>, <code class="highlighter-rouge">Collections.addAll(Collection&lt;? super T&gt; c, T... elements)</code> czy <code class="highlighter-rouge">EnumSet.of(E first, E... rest)</code>, które są w pełni <em>typesafe</em>.</p>
+
+<p>Przed Java 7 nie było jednak sposobu, aby zrobić coś z ostrzeżeniami, więc używanie takich metod nie było zbyt przyjemne - aby się ich pozbyć, trzeba było używać <code class="highlighter-rouge">@SuppressWarnings("unchecked")</code> na każdym wywołaniu.</p>
+
+<p>I w końcu w Javie 7 została dodana adnotacja <code class="highlighter-rouge">@SafeVarargs</code>, dzięki której można wyciszyć automatycznie ostrzeżenia po stronie klienta, które generuje metoda z generycznym parametrem vararg. Oznaczając tą adnotacją metodę, składamy obietnicę, że nasza metoda jest całkowicie <em>typesafe</em>.</p>
+
+<p>Kiedy wiadomo, że jest bezpieczna?</p>
+<ul>
+  <li>Gdy nie modyfikujemy zawartości tablicy</li>
+  <li>Gdy nie przekazujemy referencji tej tablicy na zewnątrz, co by umożliwiło jej modyfikację, z wyjątkiem gdy:
+    <ul>
+      <li>przekazujemy ją do innej metody z varargs z adnotacją <code class="highlighter-rouge">SafeVarargs</code></li>
+      <li>lub metody, która też odczytuje tylko wartości z tablicy</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Czyli używamy ją tylko do tego, do czego została stworzona - do przekazania zmiennej liczby argumentów od klienta do wnętrza metody.</p>
+
+<p>Tak wygląda typowe użycie metody ze zmienną ilością argumentów - funkcja przyjmuje dowolną ilość list, które łączy i zwraca jako jedną:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Safe method with a generic varargs parameter</span>
+<span class="nd">@SafeVarargs</span>
+<span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">flatten</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;...</span> <span class="n">lists</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">:</span> <span class="n">lists</span><span class="o">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Ta metoda jest całkowicie <em>typesafe</em> i dzięki adnotacji <code class="highlighter-rouge">@SafeVarargs</code> klient nie musi przejmować się żadnymi ostrzeżeniami.</p>
+
+<p class="note">Adnotacje <code class="highlighter-rouge">@SafeVarargs</code> możemy zadeklarować tylko na metodach, które nie mogą być nadpisane, ponieważ nie ma możliwości, aby zagwarantować, że każda nadpisująca metoda będzie bezpieczna. Do Javy 8 można było ją używać tylko na metodach statycznych i finalnych instancyjnych. W Javie 9 umożliwiono też na prywatnych metodach instancyjnych.</p>
+
+<p>Innym sposobem na wyeliminowanie tych problemów mogłoby być użycie listy zamiast <em>varargs</em>.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/nie-uzywaj-surowych-typow"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Nie używaj surowych typów"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/eliminuj-unchecked-cast";
+    this.page.identifier = "/effective-java/eliminuj-unchecked-cast";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

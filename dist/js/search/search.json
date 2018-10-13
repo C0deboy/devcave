@@ -534,6 +534,15 @@
         "subtitle": "Preferuj typy generyczne/parametryzowane",
         "date": "6 października 2018",
         "url": "/effective-java/nie-uzywaj-surowych-typow"
+      },
+    
+      
+      {
+        "title": "Eliminowanie ostrzeżeń unchecked cast",
+        "titleSEO": "Eliminowanie ostrzeżeń unchecked cast",
+        "subtitle": "Skąd się biorą i jak się nimi zająć",
+        "date": "13 października 2018",
+        "url": "/effective-java/eliminuj-unchecked-cast"
       }
     
   

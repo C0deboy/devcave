@@ -6,6 +6,8 @@
 <meta name="author" content="Codeboy">
 
 <meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta property="og:description" content="{% if page.subtitle %}{{ page.subtitle }}{% else %}{{ site.description }}{% endif %}">
 
 <title>{% if page.titleSEO %}{{ page.titleSEO }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
 

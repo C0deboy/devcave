@@ -19,7 +19,7 @@ W tym rozdziale będzie mowa o elementach, które zostały dodane w Javie 8 - in
 
 # Preferuj lambdy zamiast klas anonimowych
 
-Typy funkcyjne to interfejsy (rzadziej klasy abstrakcyjne), które mają tylko jedną abstrakcyjną metodę. Ich instancję nazywane są obiektami funkcyjnymi i reprezentują jedną konkretną funkcję. Przed Java 8, aby stworzyć obiekt funkcyjny, musieliśmy użyć klasy abstrakcyjnej. Dla przykładu kawałek kodu, który sortuje słowa na podstawie ich długości, definiując to w klasie anonimowej:
+Typy funkcyjne to interfejsy (rzadziej klasy abstrakcyjne), które mają tylko jedną abstrakcyjną metodę. Ich instancje nazywane są obiektami funkcyjnymi i reprezentują jedną konkretną funkcję. Przed Java 8, aby stworzyć obiekt funkcyjny, musieliśmy użyć klasy abstrakcyjnej. Dla przykładu kawałek kodu, który sortuje słowa na podstawie ich długości, definiując to w klasie anonimowej:
 
 ```java
 // Anonymous class instance as a function object - obsolete!
@@ -30,7 +30,7 @@ Collections.sort(words, new Comparator<String>() {
 });
 ```
 
-Programowanie funkcyjne w Javie przy użyciu anonimowych klas wymaga dużo boilerplatu i nie jest zbyt przyjemne, dlatego w Javie 8 dodano lambdy. Są podobne do anonimowych klas, ale dużo bardziej zwięzłe. To samo z pomocą lambdy wygląda tak:
+Programowanie funkcyjne w Javie przy użyciu anonimowych klas wymaga dużo boilerplatu i nie jest zbyt przyjemne, dlatego w Javie 8 dodano lambdy. Są **podobne** funkcjonalnie do klas anonimowych, jednak  dużo bardziej zwięzłe. To samo za pomocą lambdy wygląda tak
 
 ```java
 // Lambda expression as function object (replaces anonymous class)
@@ -38,16 +38,18 @@ Collections.sort(words, (s1, s2) -> Integer.compare(s1.length(), s2.length()));
 ```
 
 {: .note}
-Typ lambdy `Comparator<String>`, typu parametrów (s1 i s2, oba `String`) i typ zwracany `int` nie jest widoczny w kodzie. Kompilator dedukuje te typy dzięki procesowi inferencji typów. W niektórych specyficznych przypadkach kompilator nie będzie tego potrafił zrobić i będzie trzeba je podać ręcznie. Szczególnie w lambdach nie powinniśmy używać surowych typów, bo to z generyków kompilator może najwięcej zebrać informacji.
+Typ lambdy `Comparator<String>`, typy parametrów (s1 i s2, oba `String`) i typ zwracany `int` nie jest widoczny w kodzie. Kompilator dedukuje te typy dzięki procesowi zwanemu inferencją typów. W niektórych specyficznych przypadkach kompilator nie będzie tego potrafił zrobić i będzie trzeba je podać ręcznie. Szczególnie w lambdach nie powinniśmy używać surowych typów, bo to z generyków kompilator może najwięcej zebrać informacji.
 
 Możemy to jeszcze nawet bardziej skrócić używając metody do budowania comparatora:
 
+```java
 Collections.sort(words, Comparator.comparing(s -> s.length()));
+```
 
-I to jeszcze nie koniec. Od Javy 8 dodano metodę `sort` do interfejsu `List` z której możemy skorzystać oraz użyć referencji do metody, zamiast lambdy:
+Od Javy 8 dodano metodę `sort` do interfejsu `List` z której możemy skorzystać, aby jeszcze nieco skrócić zapis:
 
 ```java
-words.sort(Comparator.comparing(String::length));
+words.sort(Comparator.comparing(s -> s.length()));
 ```
 
 Lambdy znacznie zwiększają przejrzystość kodu i mogą być zastosowane w wielu miejscach. Weźmy na przykład enuma `Operation` z [postu o enumach]({% post_url Effective-Java/Chapter-5/2018-11-03-enums %}):
@@ -90,7 +92,7 @@ public enum Operation {
 }
 ```
 
-Zamiast definiować osobne ciało dla każdej instancji, możemy przekazać lambdę do konstruktora, która implementuje dane zachowanie. To zachowanie zostanie przechowane w polu `DoubleBinaryOperator op`, które potem wywołuje je w metodzie `apply`:
+Zamiast definiować osobne ciało dla każdej instancji, możemy przekazać lambdę do konstruktora, która implementuje dane zachowanie. To zachowanie zostanie przechowane w polu `DoubleBinaryOperator op`, które potem będzie wywoływane w metodzie `apply`:
 
 ```java
 // Enum with function object fields & constant-specific behavior
@@ -122,14 +124,14 @@ public enum Operation {
 Widać znaczną redukcję boilerplatu i kod jest dużo bardziej czytelny.
 
 {: .note}
-Interfejs `DoubleBinaryOperator` jest jednym z wielu predefiniowanych interfejsów w bibliotece Javy, który reprezentuje funkcję, które pobiera dwa argumenty i zwraca wartość typu `double`.
-Wszystkie pozostałe interfejsy z tej kategorii będą omówione w następnych postach.
+Interfejs `DoubleBinaryOperator` jest jednym z wielu predefiniowanych interfejsów w bibliotece Javy, który reprezentuje funkcję, która pobiera dwa argumenty i zwraca wartość typu `double`.
+Wszystkie pozostałe interfejsy z tej kategorii będą omówione w następnym poście.
 
 **Nie jest jednak tak, że lambdy są niezastąpione.** W przeciwieństwie do metod i klas, lambdy nie mają nazwy ani dokumentacji. Jeśli operacje w niej wykonywane nie są zwięzłe i oczywiste lub są większe niż kilka linijek, to nie powinny się znaleźć w lambdzie, bo czytelność i łatwość zrozumienia znacznie ucierpi. Idealnie lambda powinna być jednolinijkowa, ale trzy linijki to sensowne maximum.
 
-W przypadku naszego enuma również lambda podana do konstruktora nie ma dostępu do pól czy metod instancji, więc jest to spore ograniczenie możliwości.
+Innym ograniczeniem w przypadku naszego enuma jest to, że lambda podana do konstruktora, nie ma dostępu do pól czy metod instancji.
 
-A czy z kolei lambdy wypierają całkiem klasy anonimowe? Też nie do końca. W przeciwieństwie do klas anonimowych nie możemy utworzyć instancji interfejsu, co za tym idzie - nie możemy również uzyskać referencji do lambdy. W lambdzie słowo kluczowe `this` odnosi się do obiektu, w którym jest wykonywana, a w klasie anonimowej odnosi się do niej samej.
+A czy z kolei lambdy wypierają całkiem klasy anonimowe? Też nie do końca. W przeciwieństwie do klas anonimowych nie możemy utworzyć instancji lambdy, co za tym idzie - nie możemy również uzyskać do niej referencji i przekazać jej gdzieś indziej. Ponadto w lambdzie słowo kluczowe `this` odnosi się do obiektu, w którym jest wykonywana, a w klasie anonimowej odnosi się do niej samej.
 
 Java dostarcza nawet lepszy sposób, aby stworzyć obiekty funkcyjne, które są jeszcze bardziej zwięzłe niż lambdy - referencje do metod.
 
@@ -141,7 +143,7 @@ Poprzednie sortowanie z użyciem referencji do metody wyglądałoby tak:
 words.sort(Comparator.comparing(String::length));
 ```
 
-Nie zmienia to wiele, dlatego lepszym przykładem może być funkcja `merge` w interfejsie `Map`, która przypisuje podaną wartość do danego keya, jeśli ten nie istnieje, lub sumuje ich wartości, jeśli już jest w mapie:
+Nie zmienia to wiele, dlatego lepszym przykładem może być funkcja `merge` w interfejsie `Map`, która przypisuje podaną wartość do danego klucza jeśli ten nie istnieje lub sumuje ich wartości, jeśli już jest w mapie:
 
 ```java
 map.merge(key, 1, (count, incr) -> count + incr);
@@ -159,12 +161,18 @@ Jeśli lambda zaczyna nam się robić zbyt długa i skompilowana, można wycią�
 
 Zatem wybierajmy po prostu to, co jest krótsze, czytelniejsze i łatwiejsze do zrozumienia.
 
-Wiele najczęsciej uzywaneym typ referencji to referencja do metody statycznej, ale są też cztery inne typy - *bound*, *unbound* i konstruktory klas i tablic:
+Najczęściej używany typ referencji to referencja do metody statycznej, ale są też cztery inne - *bound*, *unbound* oraz konstruktory klas i tablic:
 
-| Method Ref Type   | Example                | Lambda Equivalent                                  |
-|-------------------|------------------------|----------------------------------------------------|
-| Static            | Integer::parseInt      | str -> Integer.parseInt(str)                       |
-| Bound             | Instant.now()::isAfter | t -> Instant.now().isAfter(t)                      |
-| Unbound           | String::toLowerCase    | str -> str.toLowerCase()                           |
-| Class Constructor | TreeMap<K,V>::new      | () -> new TreeMap<K,V>                             |
-| Array Constructor | int[]::new             | len -> new int[len]                                |
+<div class="table-wrapper" markdown="1">
+
+{: .table .table-condensed .table-bordered}
+
+| Method Ref Type   | Example                  | Lambda Equivalent                                  |
+|-------------------|--------------------------|----------------------------------------------------|
+| Static            | `Integer::parseInt`      | `str -> Integer.parseInt(str)`                     |
+| Bound             | `Instant.now()::isAfter` | `t -> Instant.now().isAfter(t)`                    |
+| Unbound           | `String::toLowerCase`    | `str -> str.toLowerCase()`                         |
+| Class Constructor | `TreeMap<K,V>::new`      | `() -> new TreeMap<K,V>`                           |
+| Array Constructor | `int[]::new`             | `len -> new int[len]`                              |
+
+</div>

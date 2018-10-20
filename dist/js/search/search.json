@@ -543,6 +543,15 @@
         "subtitle": "Skąd się biorą i jak się nimi zająć",
         "date": "13 października 2018",
         "url": "/effective-java/eliminuj-unchecked-cast"
+      },
+    
+      
+      {
+        "title": "Używanie generycznych klas i metod",
+        "titleSEO": "Używanie generycznych klas i metod",
+        "subtitle": "Problematyczne tablice",
+        "date": "20 października 2018",
+        "url": "/effective-java/uzywanie-generycznych-klas-i-metod"
       }
     
   

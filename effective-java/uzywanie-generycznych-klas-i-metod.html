@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Używanie generycznych klas i metod">
+<meta property="og:description" content="Problematyczne tablice">
+
+<title>Używanie generycznych klas i metod</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Używanie generycznych klas i metod</h1>
+            
+            <h2 class="post-subtitle">Problematyczne tablice</h2>
+            
+            <p class="post-meta">
+              
+              20
+              października
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#tablice-a-generyki">Tablice, a generyki</a></li>
+<li class="toc-entry toc-h1"><a href="#metody-generyczne">Metody generyczne</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 28, 29, 30</i> z rozdziału:</p>
+
+<p class="m0">Generics</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/nie-uzywaj-surowych-typow">Item 26: Don’t use raw types
+                </a>
+            </li><li>
+                <a href="/effective-java/eliminuj-unchecked-cast">Item 27: Eliminate unchecked warnings
+                </a>
+            </li><li>
+                <a href="/effective-java/eliminuj-unchecked-cast">Item 32: Combine generics and varargs judiciously
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/uzywanie-generycznych-klas-i-metod">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 28: Prefer lists to arrays
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/uzywanie-generycznych-klas-i-metod">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 29: Favor generic types
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/uzywanie-generycznych-klas-i-metod">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 30: Favor generic methods
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 31: Use bounded wildcards to increase API flexibility
+                </a>
+            </li></ul>
+<hr />
+
+<h1 id="tablice-a-generyki">Tablice, a generyki</h1>
+
+<p>Podczas pracy z generycznymi klasami i metodami lepiej jest używać list zamiast tablic. Dlaczego?</p>
+
+<p>Tablice mają dwie ważne różnice. Pierwsza, są zamienne. To znaczy, jeśli <code class="highlighter-rouge">Sub</code> jest podtypem <code class="highlighter-rouge">Super</code>, to tablica o typie <code class="highlighter-rouge">Sub[]</code> jest podtypem tablicy <code class="highlighter-rouge">Super[]</code>. Generyki przeciwnie - dla dwóch różnych typów <code class="highlighter-rouge">Type1</code> i <code class="highlighter-rouge">Type2</code>, <code class="highlighter-rouge">List&lt;Type1&gt;</code> nie jest pod ani nad-typem <code class="highlighter-rouge">List&lt;Type2&gt;</code>.</p>
+
+<p>Używając tablic, takie coś przejdzie przez kompilator i wysypie się w dopiero w <em>runtime</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Fails at runtime!</span>
+<span class="n">Object</span><span class="o">[]</span> <span class="n">objectArray</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+<span class="n">objectArray</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s">"I don't fit in"</span><span class="o">;</span> <span class="c1">// Throws ArrayStoreException</span>
+</code></pre></div></div>
+
+<p>Używając odpowiadającej generycznej listy, taki kod nie przejdzie kompilacji:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Won't compile!</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">objectList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;();</span> <span class="c1">// Incompatible types</span>
+<span class="n">objectList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"I don't fit in"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Drugą różnicą jest to, że tablice mają swój typ na stałe i wymuszają go w <em>runtime</em>. Generyki z kolei są zaimplementowane tak, że ich typy są wymazywane - to znaczy, że wymuszają typy tylko podczas kompilacji, a w <em>runtime</em> już ich nie ma.</p>
+
+<p class="note">Dzięki wymazywaniu typów generyki mogą bez problemu współpracować z <em>legacy code</em> sprzed Javy 5.</p>
+
+<p>Przez te różnice nie możemy na przykład utworzyć generycznej tablicy (<code class="highlighter-rouge">new List&lt;E&gt;[]</code>, new <code class="highlighter-rouge">List&lt;String&gt;[]</code>, <code class="highlighter-rouge">new E[]</code>. Takie operacje nie byłby <em>typesafe</em>.</p>
+
+<p>To ograniczenie może być denerwujące, bo na przykład nie ma możliwości zwrócenia tablicy o typie, który jest w generycznej kolekcji. Przez to też będziemy dostawać mylące ostrzeżenia, gdy będziemy używać <em>varargs</em> w metodach w połączeniu z generykami, a to dlatego, że varargi są przekonwertowywane na tablice podczas kompilacji.
+Adnotacja <code class="highlighter-rouge">@SafeVarargs</code>, która była omówiona w poprzednim wpisie, adresuje ten problem.</p>
+
+<p>Kiedy dostajemy <em>generic array creation error</em> lub <em>unchecked cast warning</em> gdy castujemy na tablicę, najlepiej jest zmienić implementację na listę <code class="highlighter-rouge">List&lt;E&gt;</code> zamiast tablicy <code class="highlighter-rouge">E[]</code>. Nie będzie to miało dużego wpływu na wydajność czy zwięzłość, a uzyskamy lepsze <em>typesafty</em>.</p>
+
+<p>Przykładowo, prosta klaska, która będzie podawała losowe przedmioty z podanej kolekcji:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Chooser - a class badly in need of generics!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Chooser</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">choiceArray</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Chooser</span><span class="o">(</span><span class="n">Collection</span> <span class="n">choices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">choiceArray</span> <span class="o">=</span> <span class="n">choices</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">choose</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Random</span> <span class="n">rnd</span> <span class="o">=</span> <span class="n">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">choiceArray</span><span class="o">[</span><span class="n">rnd</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">choiceArray</span><span class="o">.</span><span class="na">length</span><span class="o">)];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Ta implementacja aż się prosi o generyki. Teraz za każdym razem, gdy pobieramy wartość, musimy ją sami castować i zadbać o zgodność typów.</p>
+
+<p>Próbując użyć generyków i generycznej tablicy w ten sposób:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// A first cut at making Chooser generic - won't compile</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Chooser</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">T</span><span class="o">[]</span> <span class="n">choiceArray</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Chooser</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">choices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">choiceArray</span> <span class="o">=</span> <span class="n">choices</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="c1">// choose method unchanged</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jest nie możliwe, tak jak było to powiedziane wcześniej. Dostaniemy taki błąd kompilacji:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Chooser.java:9: error: incompatible types: Object[] cannot be
+converted to T[]
+        choiceArray = choices.toArray();
+                                     ^
+  where T is a type-variable:
+    T extends Object declared in class Chooser
+</code></pre></div></div>
+
+<p>Jeśli scastujemy tablicę <code class="highlighter-rouge">Object</code> na <code class="highlighter-rouge">T</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">choiceArray</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">[])</span> <span class="n">choices</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>To dostaniemy warning:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Chooser.java:9: warning: [unchecked] unchecked cast
+        choiceArray = (T[]) choices.toArray();
+                                           ^
+  required: T[], found: Object[]
+  where T is a type-variable:
+T extends Object declared in class Chooser
+</code></pre></div></div>
+<p>Kompilator mówi tu, że nie da sobie ręki uciąć, że ta operacja jest <em>typesafe</em>, ponieważ nie będzie wiedział jakim typem będzie <code class="highlighter-rouge">T</code> (typy są wymazywane). Program będzie działał prawidłowo, no ale kompilator nie może być tego pewny - stąd ostrzeżenie.
+Można by dodać adnotację <code class="highlighter-rouge">@SuppressWarning</code> tak jak to było omawiane w poprzednim wpisie, ale tutaj lepszym rozwiązaniem byłoby wyeliminować przyczynę - użyć <code class="highlighter-rouge">List</code> zamiast tablicy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// List-based Chooser - typesafe</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Chooser</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">choiceList</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Chooser</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">choices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">choiceList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">choices</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">T</span> <span class="nf">choose</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Random</span> <span class="n">rnd</span> <span class="o">=</span> <span class="n">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">choiceList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">rnd</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">choiceList</span><span class="o">.</span><span class="na">size</span><span class="o">()));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Podsumowując, tablice zapewniają <em>runtime typesafty</em>, a generyki <em>compile time typesafty</em>. Podczas używania generycznych klas i metod, lepiej używać list zamiast tablic.</p>
+
+<p>Jednak nie zawsze jest to możliwe lub pożądane. Java nie wspiera list natywnie, więc klasy jak <code class="highlighter-rouge">ArrayList</code> muszą być zbudowane na tablicach. Inne generyki jak np. <code class="highlighter-rouge">HashMap</code> są zbudowane na tablicach ze względu na wydajność.</p>
+
+<p>Są dwa sposoby na używanie tablic z generykami.</p>
+
+<p>Weźmy na przykład zabawkową klasę <code class="highlighter-rouge">Stack</code> z wcześniejszych wpisów:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Object-based collection - a prime candidate for generics</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">Object</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ensureCapacity</span><span class="o">();</span>
+        <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
+        <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+        <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// Eliminate obsolete reference</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">elements</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Ta klasa aż się prosi, aby była generyczną. Próbując napisać coś takiego:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Initial attempt to generify Stack - won't compile!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">E</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">E</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ensureCapacity</span><span class="o">();</span>
+        <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">E</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
+        <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+        <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// Eliminate obsolete reference</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="o">...</span> <span class="c1">// no changes in isEmpty or ensureCapacity</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Dostaniemy <em>generic array creation error</em>. Możemy rozwiązać ten problem na 2 sposoby:</p>
+
+<p>Pierwszy, stworzyć tablicę typu <code class="highlighter-rouge">Object</code>, scastować to na generyczną tablicę i wyciszyć ostrzeżenie z komentarzem:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//...</span>
+
+<span class="kd">private</span> <span class="n">E</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+
+<span class="c1">// The elements array will contain only E instances from push(E).</span>
+<span class="c1">// This is sufficient to ensure type safety, but the runtime</span>
+<span class="c1">// type of the array won't be E[]; it will always be Object[]!</span>
+<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="o">(</span><span class="n">E</span><span class="o">[])</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+<span class="o">}</span>
+
+<span class="c1">//...</span>
+</code></pre></div></div>
+
+<p>Ten sposób wymaga castowania tylko raz.</p>
+
+<p>Drugim sposobem jest zmiana typu tablicy z <code class="highlighter-rouge">E[]</code> na <code class="highlighter-rouge">Object[]</code>, jednak to zmusi nas do castowania każdego pobranego elementu z tablicy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+
+<span class="c1">//...</span>
+
+<span class="c1">// Appropriate suppression of unchecked warning</span>
+<span class="kd">public</span> <span class="n">E</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
+
+    <span class="c1">// push requires elements to be of type E, so cast is correct</span>
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span> <span class="n">E</span> <span class="n">result</span> <span class="o">=</span>
+        <span class="o">(</span><span class="n">E</span><span class="o">)</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+
+    <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// Eliminate obsolete reference</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="c1">//...</span>
+</code></pre></div></div>
+
+<p>Dlatego preferowany jest sposób pierwszy i to z nim częściej się spotkamy.</p>
+
+<h1 id="metody-generyczne">Metody generyczne</h1>
+
+<p>Generyczne mogą być również same metody. Często się takie przydają w statycznych klasach <em>utility</em>.
+Wszystkie algorytmiczne metody z <code class="highlighter-rouge">Collections</code> takie jak <code class="highlighter-rouge">binarySearch</code>, <code class="highlighter-rouge">sort</code> itd. są generyczne.</p>
+
+<p>Przykładowo metoda używająca gołych typów z poprzedniego wpisu:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Uses raw types - unacceptable! (Item 26)</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">Set</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Set</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">(</span><span class="n">s1</span><span class="o">);</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">s2</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Mamy w niej dwa ostrzeżenia i aż się prosi, aby była generyczną metodą:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Union.java:5: warning: [unchecked] unchecked call to
+HashSet(Collection&lt;? extends E&gt;) as a member of raw type HashSet
+        Set result = new HashSet(s1);
+                     ^
+Union.java:6: warning: [unchecked] unchecked call to
+addAll(Collection&lt;? extends E&gt;) as a member of raw type Set
+        result.addAll(s2);
+                     ^
+</code></pre></div></div>
+
+<p>Sparametryzujmy ją zatem. Parametr typu musi znajdować się między modyfikatorami a typem zwrotnym funkcji.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic method</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">s1</span><span class="o">);</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">s2</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Taka metoda nie wymaga żadnego castowania po stronie klienta i kompiluje się bez żadnych ostrzeżeń:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simple program to exercise generic method</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">guys</span> <span class="o">=</span> <span class="n">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"Tom"</span><span class="o">,</span> <span class="s">"Dick"</span><span class="o">,</span> <span class="s">"Harry"</span><span class="o">);</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stooges</span> <span class="o">=</span> <span class="n">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"Larry"</span><span class="o">,</span> <span class="s">"Moe"</span><span class="o">,</span> <span class="s">"Curly"</span><span class="o">);</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">aflCio</span> <span class="o">=</span> <span class="n">union</span><span class="o">(</span><span class="n">guys</span><span class="o">,</span> <span class="n">stooges</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">aflCio</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Tym sposobem, wszystkie trzy sety (oba z argumentów i ten zwracany) muszą być tego samego typu. Możemy sprawić, aby było to bardziej elastyczne, używając <em>bounded wildcard type</em>. O tym w następnym wpisie.</p>
+
+<p>Podsumowując, generyki to użyteczne narzędzie - jest bezpieczniejsze i łatwiejsze w użyciu niż ciągłe castowanie i dbanie o <em>typesafty</em>. Uzywając generyków zrzucamy ten obowiązek na kompilator. Powinniśmy unikać sytuacji, gdzie klient musi castować otrzymywany obiekt i próbować stworzyć generyczną klasę lub metodę. Można to zrobić nawet na istniejących klasach i metodach bez uszkadzania obecnych klientów.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/eliminuj-unchecked-cast"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Eliminowanie ostrzeżeń unchecked cast"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod";
+    this.page.identifier = "/effective-java/uzywanie-generycznych-klas-i-metod";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

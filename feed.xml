@@ -1,4 +1,266 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-10-20T22:29:28+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Używanie generycznych klas i metod</title><link href="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod" rel="alternate" type="text/html" title="Używanie generycznych klas i metod" /><published>2018-10-20T10:00:00+02:00</published><updated>2018-10-20T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod</id><content type="html" xml:base="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-10-27T18:15:46+02:00</updated><id>https://devcave.pl/</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Ograniczanie dozwolonych typów w generykach</title><link href="https://devcave.pl/effective-java/bounded-wildcard-types" rel="alternate" type="text/html" title="Ograniczanie dozwolonych typów w generykach" /><published>2018-10-27T10:00:00+02:00</published><updated>2018-10-27T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/bounded-wildcard-types</id><content type="html" xml:base="https://devcave.pl/effective-java/bounded-wildcard-types">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 31&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m0&quot;&gt;Generics&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/nie-uzywaj-surowych-typow&quot;&gt;Item 26: Don’t use raw types
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/eliminuj-unchecked-cast&quot;&gt;Item 27: Eliminate unchecked warnings
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/eliminuj-unchecked-cast&quot;&gt;Item 32: Combine generics and varargs judiciously
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;Item 28: Prefer lists to arrays
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;Item 29: Favor generic types
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;Item 30: Favor generic methods
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/bounded-wildcard-types&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 31: Use bounded wildcards to increase API flexibility
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Większość typów generycznych, tak jak nasza zabawkowa klasa &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&lt;/code&gt;, nie ma ograniczeń przekazywanego typu. Możemy podać dowolny typ parametru: &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;Object&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;int[]&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;List&amp;lt;String&amp;gt;&amp;gt;&lt;/code&gt; itd.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Wyjątkiem są prymitywy. Nie możemy utworzyć np. &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;int&amp;gt;&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;double&amp;gt;&lt;/code&gt;. Możemy zamiast tego użyć ich wrpaperów &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Double&lt;/code&gt; itd.&lt;/p&gt;
+
+&lt;p&gt;Z drugiej strony, deklarując &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt; jako typ argumentu dla metody/klasy, narzucamy na nią spore ograniczenie - może przyjmować tylko instancje klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;. Czasem jednak potrzebujemy większej elastyczności, ale jednocześnie nie chcemy pozwalać na dowolny typ.&lt;/p&gt;
+
+&lt;p&gt;Możemy to osiągnać używając &lt;em&gt;bounded type parameter&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;bounded-type-parameter&quot;&gt;Bounded type parameter&lt;/h1&gt;
+
+&lt;p&gt;Dla przykładu weźmy &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.concurrent.DelayQueue&lt;/code&gt;. Jej deklaracja wygląda tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DelayQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Delayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BlockingQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;E extends Delayed&amp;gt;&lt;/code&gt; oznacza, że przekazywana klasa musi być podtypem &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.concurrent.Delayed&lt;/code&gt;. Dzięki temu możemy używać metod zdefiniowanych w tej klasie bez potrzeby castowania.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Wlicza się w to również typ &lt;code class=&quot;highlighter-rouge&quot;&gt;Delayed&lt;/code&gt;. Każdy typ jest uznawany jak podtyp siebie, dlatego możliwe jest utworzenie &lt;code class=&quot;highlighter-rouge&quot;&gt;DelayQueue&amp;lt;Delayed&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Podobnie można tego użyć w deklaracjach metod.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DelayQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;  &lt;span class=&quot;nf&quot;&gt;someMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Możemy również ograniczać typ rekursywnie, używając kolejnego typu zawierającego ten parametr typu. Nazywa się to &lt;em&gt;recursive type bound&lt;/em&gt;. Często jest to używane w połączeniu z interfejsem &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; (który był już &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;omawiany&lt;/a&gt;):&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; określa, do jakiego typu może być porównywany obiekt implementujący &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&amp;lt;T&amp;gt;&lt;/code&gt;. Najczęściej jest to on sam, np. &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt; implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&amp;lt;String&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt; implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&amp;lt;Integer&amp;gt;&lt;/code&gt; itd.&lt;/p&gt;
+
+&lt;p&gt;Wiele metod przyjmuje kolekcje elementów implementujących Comparable, aby ją sortować, przeszukiwać czy kalkulować max/min. Te obiekty muszą być wzajemnie porównywalne, aby było to możliwe. Można to wymusić w ten sposób:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Using a recursive type bound to express mutual comparability&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Cała metoda do wyciągania maksymalnej wartości mogłaby wyglądać tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Returns max value in a collection - uses recursive type bound&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Empty collection&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requireNonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Innym rozwiązaniem możę być też &lt;em&gt;bounded wildcard type&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;bounded-wildcard-type&quot;&gt;Bounded wildcard type&lt;/h1&gt;
+
+&lt;p&gt;Przywołajmy jako przykład jeszcze raz klasę &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&lt;/code&gt;. Załóżmy, że chcemy dodać metodę, która dodaje do stosu wszystkie elementy z innej kolekcji. Pierwszą próbą mogłoby być coś takiego:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// pushAll method without wildcard type - deficient!&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pushAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Jednak nie jest to do końca elastyczne rozwiązanie. Jeśli typ elementu z &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&lt;/code&gt; jest identyczny tym z &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&lt;/code&gt; to wszystko jest ok. Jeśli jednak będziemy mięć np. &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;Number&amp;gt;&lt;/code&gt;, to nie będziemy mogli dodać kolekcji integerów, mimo że &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt; jest podtypem &lt;code class=&quot;highlighter-rouge&quot;&gt;Number&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numberStack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;numberStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pushAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Błąd:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;StackTest.java:7: error: incompatible types: Iterable&amp;lt;Integer&amp;gt;
+cannot be converted to Iterable&amp;lt;Number&amp;gt;
+        numberStack.pushAll(integers);
+                            ^
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I tu z pomocą przychodzi &lt;em&gt;bounded wildcard type&lt;/em&gt;. Typ przyjmowanego argumentu nie powinien być “Iterable typu E” tylko “Iterable jakiegoś podtypu E” - zapisuje się to w ten sposób: ` Iterable&amp;lt;? extends E&amp;gt;`:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Wildcard type for a parameter that serves as an E producer&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pushAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dzięki takiej zmianie nasza metoda jest dużo bardziej elastyczna i powyższa próba dorzucenia do &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;Number&amp;gt;&lt;/code&gt; integerów z &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&amp;lt;Integer&amp;gt;&lt;/code&gt; powiedzie się.&lt;/p&gt;
+
+&lt;p&gt;I można też w drugą stronę. Możemy rozszerzyć dozwolone typy o wszystkie nadklasy danego typu. Deklaruje się to tak: &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;? super E&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;W ten sposób można by na przykład zaimplementować metodę, która wyciąga wszystkie wartości do innej kolekcji.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Wildcard type for parameter that serves as an E consumer&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;popAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dzięki &lt;code class=&quot;highlighter-rouge&quot;&gt;Collection&amp;lt;? super E&amp;gt;&lt;/code&gt; możemy podać kolekcję o dowolnym typie parametru, ktory rozszerza &lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Dlatego dla maksymalnej elastyczności warto używać &lt;em&gt;bounded wildcard type&lt;/em&gt; dla parametrów, które są &lt;em&gt;producerami&lt;/em&gt; lub &lt;em&gt;consumerami&lt;/em&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Jeśli tylko wyciągamy obiekty, to jest, to &lt;em&gt;producer&lt;/em&gt; i powinniśmy użyć &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;? extends T&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Jeśli tylko wkładamy obiekty do środka, to jest to &lt;em&gt;consumer&lt;/em&gt; i powinniśmy użyć &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;? super T&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Jeśli robimy obie operacje, to nie powinniśmy używać &lt;em&gt;wildcard type&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Podobnie moglibyśmy ulepszyć funkcję &lt;code class=&quot;highlighter-rouge&quot;&gt;union&lt;/code&gt; z poprzedniego wpisu:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Co umożliwia nam wtedy takie użycie:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doubles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;4.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;6.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doubles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;note&quot;&gt;
+
+  &lt;p&gt;Używając Javy starszej niż 8 (również zamieniając &lt;code class=&quot;highlighter-rouge&quot;&gt;Set.of&lt;/code&gt; na starszy odpowiednik), dostaniemy błąd kompilacji:&lt;/p&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Union.java:14: error: incompatible types
+        Set&amp;lt;Number&amp;gt; numbers = union(integers, doubles);
+                                   ^
+  required: Set&amp;lt;Number&amp;gt;
+  found:    Set&amp;lt;INT#1&amp;gt;
+  where INT#1,INT#2 are intersection types:
+    INT#1 extends Number,Comparable&amp;lt;? extends INT#2&amp;gt;
+    INT#2 extends Number,Comparable&amp;lt;?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;Jest to spowodowane tym, że przed Javą 8 wnioskowanie typów nie było na tyle inteligentne, aby wywnioskować, że zwracany typ &lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&amp;lt;Number&amp;gt;&lt;/code&gt;. W takiej sytuacji trzeba podać typ argumentu bezpośrednio, co nie jest zbyt ładne:&lt;/p&gt;
+
+  &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Explicit type parameter - required prior to Java 8&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doubles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; zalicza się zawsze do &lt;em&gt;consumerów&lt;/em&gt;, więc zazwyczaj powinno się używać &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&amp;lt;? super T&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Aplikując &lt;em&gt;wildcard types&lt;/em&gt; do naszej metody &lt;code class=&quot;highlighter-rouge&quot;&gt;max&lt;/code&gt; z poprzednich rozdziałów, która wyciąga największą wartość z listy, dostaniemy takiego potworka:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dzięki temu wspieramy typy, które nie implementują &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; bezpośrednio, ale rozszerzają typ, który to robi. Na pierwszy rzut oka jest to mało czytelne, ale nie spotkamy się z takimi deklaracjami zbyt często - najczęściej tego typu złożoność występuje pod spodem bibliotek.&lt;/p&gt;
+
+&lt;h1 id=&quot;porównanie&quot;&gt;Porównanie&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;Bounded wildcard type&lt;/em&gt; może mieć tylko jedno ograniczenie, a &lt;em&gt;bounded type parameter&lt;/em&gt; wiele:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  type parameter bound     T extends Class &amp;amp; Interface1 &amp;amp; … &amp;amp; InterfaceN
+
+  wildcard bound
+      upper bound          ? extends SuperType
+      lower bound          ? super   SubType
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Wildcard&lt;/em&gt; używa się wtedy, gdy nie obchodzi nas właściwy typ parametru, bo nie będziemy nic z niego używać.&lt;/p&gt;
+
+&lt;p&gt;Uzupełniona tabelka z używanymi pojęciami w tym rozdziale:&lt;/p&gt;
+
+&lt;div class=&quot;table-wrapper&quot;&gt;
+
+  &lt;table class=&quot;table table-condensed table-bordered&quot;&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Pojęcie&lt;/th&gt;
+        &lt;th&gt;Przykład&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Raw type&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Parameterized type&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Generic type&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Formal type parameter&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Unbounded wildcard type&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Bounded type parameter&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;E extends Number&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Recursive type bound&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;T extends Comparable&amp;lt;T&amp;gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Bounded wildcard type&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Generic method&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; asList(E[] a)&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Type token&lt;/td&gt;
+        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.class&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+&lt;/div&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 31 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility</summary></entry><entry><title type="html">Używanie generycznych klas i metod</title><link href="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod" rel="alternate" type="text/html" title="Używanie generycznych klas i metod" /><published>2018-10-20T10:00:00+02:00</published><updated>2018-10-20T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod</id><content type="html" xml:base="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -28,7 +290,7 @@
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 30: Favor generic methods
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 31: Use bounded wildcards to increase API flexibility
+                &lt;a href=&quot;/effective-java/bounded-wildcard-types&quot;&gt;Item 31: Use bounded wildcards to increase API flexibility
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -332,7 +594,7 @@ addAll(Collection&amp;lt;? extends E&amp;gt;) as a member of raw type Set
                 &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;Item 30: Favor generic methods
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 31: Use bounded wildcards to increase API flexibility
+                &lt;a href=&quot;/effective-java/bounded-wildcard-types&quot;&gt;Item 31: Use bounded wildcards to increase API flexibility
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -484,7 +746,7 @@ Ano dlatego, że takie metody są bardzo użyteczne i projektanci Javy postanowi
                 &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;Item 30: Favor generic methods
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 31: Use bounded wildcards to increase API flexibility
+                &lt;a href=&quot;/effective-java/bounded-wildcard-types&quot;&gt;Item 31: Use bounded wildcards to increase API flexibility
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -1769,124 +2031,4 @@ and this collection contains the specified object.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Oczywiście są przypadki klas, kiedy ich niemutowalność jest niepraktyczna.&lt;/strong&gt; Wtedy warto tylko ograniczyć jej mutowalność w miarę możliwości, co zmniejszy prawdopodobieństwo na błędy i ułatwi z nią pracę.&lt;/p&gt;
 
-&lt;p&gt;Łącząc rady z tego wpisu z tymi z poprzedniego, wychodzi na to, że &lt;strong&gt;powinniśmy deklarować wszystkie pola jako &lt;code class=&quot;highlighter-rouge&quot;&gt;private final&lt;/code&gt;, chyba że mamy dobry powód, aby było inaczej.&lt;/strong&gt;&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 17 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic Klasy niemutowalne to po prostu klasy, które w żaden sposób nie mogą zostać zmodyfikowane. Wszystkie pola są stałe przez cały okres trwania obiektu. W bibliotece Javy mamy mnóstwo takich klas np. String, BigInteger, BigDecimal czy klasy opakowujące prymitywy. Jest ku temu kilka powodów: klasy niemutowalne są łatwiejsze i bezpieczniejsze w użyciu oraz mają większą odporność na błędy - szczególnie w środowisku wielowątkowym. Aby zaimplementować klasę niemutowalną, musimy zapewnić 5 rzeczy: Nie udostępniać metod, które mogą zmodyfikować stan obiektu (m.in. gettery do klas mutowalnych). Zapewnić by klasa nie mogła być rozszerzana. Najczęściej można to zrobić oznaczając klasę jako final, ale jest też alternatywne rozwiązanie, o którym powiem za chwilę. Zadeklarować wszystkie pola jako final. Dzięki temu nie będzie można przypisać do pola nowej referencji i będziemy mogli przekazywać ją między wątkami bez synchronizacji. Zadeklarować wszystkie pola z referencjami do mutowalnych obiektów jako private. Dzięki temu klient klasy nie będzie miał bezpośredniego dostępu do mutowalnego obiektu, który mógłby zmienić. Ograniczyć dostęp do zmiennych obiektów otrzymywanych od klienta. Jeśli klasa ma pole, które odnosi się do mutowalnego obiektu, musimy zapewnić, że klient nie będzie miał dostępu do tej referencji. Dlatego nie możemy inicjować pola obiektem, który dostajemy od klienta, lub zwracać taki obiekt getterem. Możemy wykonać deffensive copy na takim obiekcie i dopiero wtedy go przypisać lub zwrócić w getterze. Jeśli nasza klasa ma być niemutowalna, to wszystkie operacje na naszym obiekcie powinny zwracać nowy obiekt. Przykład takiej klasy niemutowalnej: // Immutable complex number class public final class Complex { private final double re; private final double im; public Complex(double re, double im) { this.re = re; this.im = im; } public double realPart() { return re; } public double imaginaryPart() { return im; } public Complex plus(Complex c) { return new Complex(re + c.re, im + c.im); } public Complex minus(Complex c) { return new Complex(re - c.re, im - c.im); } public Complex times(Complex c) { return new Complex(re * c.re - im * c.im, re * c.im + im * c.re); } public Complex dividedBy(Complex c) { double tmp = c.re * c.re + c.im * c.im; return new Complex((re * c.re + im * c.im) / tmp, (im * c.re - re * c.im) / tmp); } @Override public boolean equals(Object o) { if (o == this) { return true; } if (!(o instanceof Complex)) { return false; } Complex c = (Complex) o; // See page 47 to find out why we use compare instead of == return Double.compare(c.re, re) == 0 &amp;amp;&amp;amp; Double.compare(c.im, im) == 0; } @Override public int hashCode() { return 31 * Double.hashCode(re) + Double.hashCode(im); } @Override public String toString() { return &quot;(&quot; + re + &quot; + &quot; + im + &quot;i)&quot;; } } Klasa jest zadeklarowana jako final. Są gettery do dwóch prywatnych pól, ale są to prymitywy zadeklarowane jako final. Ponadto mamy 4 różne działania, które nie modyfikują obiektu, a zwracają nowy. Jest to poprawna implementacja całkowicie niemutowalnej klasy. Podobnie jest w klasach BigInteger, BigDecimal czy String. Dla przykładu: BigInteger i = BigInteger.valueOf(20); BigInteger j = i.add(BigInteger.valueOf(20)); // i = 20 // j = 40 Wartość i nigdy się nie zmieni. Wszystkie działania na BigInteger zwracają nowy obiekt. Innym sposobem na to, by uniemożliwić rozszerzanie klasy, jest zadeklarowanie wszystkich konstruktorów jako private lub package-private i dodać public static factory method. Jest to bardziej elastyczny sposób niż deklarowanie klasy jako final. Pozwala nam to na używanie kilku implementacji z tego samego pakietu, a dla klientów spoza pakietu zachowuje się tak jakby była final, ponieważ nie ma możliwości rozszerzenia klasy, gdy nie mamy dostępu do konstruktora. Poza tym static factory method ma sama w sobie wiele zalet, które były już omawiane. Inne zalety klas niemutowalnych: Obiekty niemutowalne są proste. Mogą być w dokładnie jednym stanie - w tym, w którym zostały utworzone. Jeśli dodatkowo w konstruktorze zadbamy o poprawność argumentów, to mamy pewność, że obiekt będzie zawsze w poprawnym stanie. Obiekty niemutowalne są thread-safe. Nie wymagają synchronizacji, ponieważ nie mogą być w niepoprawnym stanie, gdy są używane przez kilka wątków jednocześnie. Jest to najłatwiejsze podejście, aby uzyskać thread safty. Używając obiektów niemutowalnych nigdy nie będziemy musieli robić ich kopii. Nie jesteśmy narażeni na niechciane modyfikacje, więc żaden obiekt nie zostanie uszkodzony i nie ma potrzeby robienia kopii. Niemutowalne obiekty są dobrym budulcem innych obiektów (mutowalnych lub nie). Dużo łatwiej zapewnić poprawność obiektu, gdy wiemy, że jego komponenty są niemutowalne. Doskonale nadają się jako klucze w mapach i jako elementy w setach - nie musimy się martwić, że ich wartości zmienią się po tym, jak zostaną dodane do kolekcji (co by powodowało ich niepoprawne działanie). Nie ma możliwości na niepoprawny stan obiektu, np. po rzuceniu wyjątku. Są zawsze spójne. I to by była większość zalet klas niemutowalnych. Całkiem tego sporo. Główną wadą klas niemutowalnych jest to, że wymagają nowego obiektu dla każdej nowej wartości pola. Może to być kosztowne, gdy obiekty są duże i używane bardzo często. Dlatego powstają tzw. companion classes, które są mutowalnym odpowiednikiem danej klasy niemutowalnej. Najlepszym tego przykładem w bibliotece Javy jest StringBuilder, który pozwala modyfikować stringa w wydajny sposób, po czym później zwrócić go jako niemutowalną instancję String. Gdy tworzono klasy BigInteger i BigDecimal nie było jeszcze powszechnie wiadomo, że niemutowalne klasy nie powinny być rozszerzane, dlatego jest to możliwe i wszystkie jej metody mogą zostać nadpisane. Ze względu na kompatybilność wsteczną nie mogło to być poprawione. Dlatego, jeśli piszesz aplikację, która polega na niemutowalności którejś z tych klas podanych jako argument od klienta, to powinieneś sprawdzić, czy jest to “prawdziwy” BigInteger lub BigDecimal, a nie jakaś niezaufana podklasa.Można na przykład zwrócić deffensive copy, gdy mamy do czynienia z drugim przypadkiem: public static BigInteger safeInstance(BigInteger val) { return val.getClass() == BigInteger.class ? val : new BigInteger(val.toByteArray()); } Podsumowując, nie generuj automatycznie settera do każdego gettera. Klasy powinny być niemutowalne, chyba że mamy dobry powód, aby było inaczej. Klasy niemutowalne mają dużo zalet, a jedyną ich wadą może być zmniejszona wydajność w specyficznych warunkach. Małe klasy zawsze powinny być niemutowalne. Warto rozważyć też niemutowalność w przypadku większych obiektów jak String czy BigInteger i ewentualnie stworzyć mutable companion class, jeśli rzeczywiście wydajność nie jest zadowalająca w specyficznych przypadkach. Oczywiście są przypadki klas, kiedy ich niemutowalność jest niepraktyczna. Wtedy warto tylko ograniczyć jej mutowalność w miarę możliwości, co zmniejszy prawdopodobieństwo na błędy i ułatwi z nią pracę. Łącząc rady z tego wpisu z tymi z poprzedniego, wychodzi na to, że powinniśmy deklarować wszystkie pola jako private final, chyba że mamy dobry powód, aby było inaczej.</summary></entry><entry><title type="html">Gettery i settery</title><link href="https://devcave.pl/effective-java/gettery-i-settery" rel="alternate" type="text/html" title="Gettery i settery" /><published>2018-07-28T10:00:00+02:00</published><updated>2018-07-28T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/gettery-i-settery</id><content type="html" xml:base="https://devcave.pl/effective-java/gettery-i-settery">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 16&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m0&quot;&gt;Classes and Interfaces&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/gettery-i-settery&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 16: In public classes, use accessor methods, not public fields
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/klasy-niezmienne&quot;&gt;Item 17: Minimize mutability
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;Item 20: Prefer interfaces to abstract classes
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#domyślne-metody-w-interfejsach&quot;&gt;Item 21: Design interfaces for posterity
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#interfejs-tylko-jako-definicja-typu&quot;&gt;Item 22: Use interfaces only to define types
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#preferuj-hierarchię-klas-zamiast-otagowanych-klas&quot;&gt;Item 23: Prefer class hierarchies to tagged classes
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Czasem możemy potrzebować klasy, która jest niczym więcej niż zbiorem powiązanych pól. Na przykład:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Degenerate classes like this should not be public!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Point&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Przez to, że pola tej klasy są używane bezpośrednio (&lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt;&lt;/code&gt;, &lt;code class=&quot;highlight language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;y&lt;/span&gt;&lt;/code&gt; to porzucamy wszystkie zalety płynące z enkapsulacji, o której była mowa w poprzednim wpisie.&lt;/p&gt;
-
-&lt;p&gt;W takich klasach nie możemy zmienić reprezentacji bez zmieniania API, nie możemy wymusić jej poprawności ani wykonać żadnej innej akcji, podczas gdy pole jest pobierane.&lt;/p&gt;
-
-&lt;p&gt;Niektórzy powiedzieliby, że takie klasy zawsze powinny być zamienione na klasy z prywatnymi polami i getterami/setterami:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Encapsulation of data by accessor methods and mutators&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Point&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I rzeczywiście mają rację, jeśli mowa o publicznych klasach. Jeśli klasa jest dostępna poza pakietem, to warto zadeklarować jej pola jako prywatne i udostępnić &lt;em&gt;gettery&lt;/em&gt;. Dzięki temu mamy elastyczność, która pozwala na zmianę wewnętrznej reprezentacji klasy bez zmieniania API. Kiedy pola używane są bezpośrednio, to zmiana taka jest niemożliwa, bo uszkodzi to wszystkie klasy, które jej używają.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Jednak trzeba dobrze rozważyć czy na pewno chcemy udostępniać &lt;em&gt;settery&lt;/em&gt;. Minimalizowanie mutowalności (ang. &lt;em&gt;mutability&lt;/em&gt;) klasy jest preferowaną praktyką.&lt;/strong&gt; O tym będzie następny wpis.&lt;/p&gt;
-
-&lt;p&gt;Jednak jeśli klasa jest &lt;code class=&quot;highlighter-rouge&quot;&gt;package-private&lt;/code&gt; lub wewnętrzną prywatną klasą, to właściwie nie jest to nic złego. Takie podejście nie generuje zbędnego wizualnego zaśmiecenia kodu metodami dostępowymi i dużo łatwiej i czytelniej używa się taką klasę.&lt;/p&gt;
-
-&lt;p&gt;Jeśli zajdzie potrzeba zmiany reprezentacji klasy to zmiany są ograniczone tylko do pakietu, w którym jest używana lub w przypadku wewnętrznej klasy - do klasy, która ją zawiera.&lt;/p&gt;
-
-&lt;p&gt;W większości wypadków wystawianie publicznie pól klasy nie jest dobrym pomysłem, ale jest to mniej szkodliwe, jeśli są to pola &lt;em&gt;immutable&lt;/em&gt;. Nadal nie możemy zmienić reprezentacji bez zmieniania API, nadal nie możemy wykonać żadnej dodatkowej akcji, ale możemy wymusić tworzenie prawidłowych klas. Na przykład ta klasa zapewnia, że każda instancja będzie poprawną reprezentacją czasu:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Public class with exposed immutable fields - questionable&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HOURS_PER_DAY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MINUTES_PER_HOUR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hour&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;minute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hour&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;minute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hour&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hour&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HOURS_PER_DAY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hour: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hour&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minute&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;minute&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MINUTES_PER_HOUR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Min: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;minute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hour&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hour&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;minute&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;minute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Remainder omitted&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Nie znaczy to jednak, że od tej pory powinniśmy wszystko deklarować jako &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt; i wybierać w naszym IDE &lt;em&gt;“Genarate Getters and Setters”&lt;/em&gt; dla każdego pola. Nie, absolutnie nie. Gettery i settery są lepsze niż bezpośredni dostęp do pól, ale jeśli jest taka możliwość, to nie powinniśmy używać ani jednego, ani drugiego. Tzn. nie powinniśmy wystawiać na świat pola, które jest szczegółem implementacyjnym. Na tym polega enkapsulacja.&lt;/p&gt;
-
-&lt;p&gt;Jeśli chodzi o kwestię nazewniczą getterów i setterów, to nie zawsze powinny to być nazwy zaczynające się od &lt;em&gt;set&lt;/em&gt; lub &lt;em&gt;get&lt;/em&gt;. Jeśli istnieje inne słowo, które lepiej pasuje do wykonywanej czynności, to powinniśmy je użyć. Jest to bardziej zgodne z OOP. Dla przykładu:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;dog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;take&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ball&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;ma dużo więcej sensu niż:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;dog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setBall&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ball&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;No może z wyjątkiem, gdy klasa (w tym przypadku &lt;code class=&quot;highlighter-rouge&quot;&gt;Dog&lt;/code&gt;) jest tylko rekordem w bazie danych.&lt;/p&gt;
-
-&lt;p&gt;Podsumowując, publiczne klasy nigdy nie powinny wystawiać &lt;strong&gt;publicznych mutowalnych&lt;/strong&gt; pól. Mniej szkodliwe jest wystawianie niemutowalnych pól, jednak nadal problematyczne - w niektórych przypadkach. Jeśli rzeczywiście potrzebujemy taką klasę, to wtedy najlepiej ograniczyć taką klasę do pakietu lub jeśli jest możliwe - do jednej klasy.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 16 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic</summary></entry></feed>
+&lt;p&gt;Łącząc rady z tego wpisu z tymi z poprzedniego, wychodzi na to, że &lt;strong&gt;powinniśmy deklarować wszystkie pola jako &lt;code class=&quot;highlighter-rouge&quot;&gt;private final&lt;/code&gt;, chyba że mamy dobry powód, aby było inaczej.&lt;/strong&gt;&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 17 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic Klasy niemutowalne to po prostu klasy, które w żaden sposób nie mogą zostać zmodyfikowane. Wszystkie pola są stałe przez cały okres trwania obiektu. W bibliotece Javy mamy mnóstwo takich klas np. String, BigInteger, BigDecimal czy klasy opakowujące prymitywy. Jest ku temu kilka powodów: klasy niemutowalne są łatwiejsze i bezpieczniejsze w użyciu oraz mają większą odporność na błędy - szczególnie w środowisku wielowątkowym. Aby zaimplementować klasę niemutowalną, musimy zapewnić 5 rzeczy: Nie udostępniać metod, które mogą zmodyfikować stan obiektu (m.in. gettery do klas mutowalnych). Zapewnić by klasa nie mogła być rozszerzana. Najczęściej można to zrobić oznaczając klasę jako final, ale jest też alternatywne rozwiązanie, o którym powiem za chwilę. Zadeklarować wszystkie pola jako final. Dzięki temu nie będzie można przypisać do pola nowej referencji i będziemy mogli przekazywać ją między wątkami bez synchronizacji. Zadeklarować wszystkie pola z referencjami do mutowalnych obiektów jako private. Dzięki temu klient klasy nie będzie miał bezpośredniego dostępu do mutowalnego obiektu, który mógłby zmienić. Ograniczyć dostęp do zmiennych obiektów otrzymywanych od klienta. Jeśli klasa ma pole, które odnosi się do mutowalnego obiektu, musimy zapewnić, że klient nie będzie miał dostępu do tej referencji. Dlatego nie możemy inicjować pola obiektem, który dostajemy od klienta, lub zwracać taki obiekt getterem. Możemy wykonać deffensive copy na takim obiekcie i dopiero wtedy go przypisać lub zwrócić w getterze. Jeśli nasza klasa ma być niemutowalna, to wszystkie operacje na naszym obiekcie powinny zwracać nowy obiekt. Przykład takiej klasy niemutowalnej: // Immutable complex number class public final class Complex { private final double re; private final double im; public Complex(double re, double im) { this.re = re; this.im = im; } public double realPart() { return re; } public double imaginaryPart() { return im; } public Complex plus(Complex c) { return new Complex(re + c.re, im + c.im); } public Complex minus(Complex c) { return new Complex(re - c.re, im - c.im); } public Complex times(Complex c) { return new Complex(re * c.re - im * c.im, re * c.im + im * c.re); } public Complex dividedBy(Complex c) { double tmp = c.re * c.re + c.im * c.im; return new Complex((re * c.re + im * c.im) / tmp, (im * c.re - re * c.im) / tmp); } @Override public boolean equals(Object o) { if (o == this) { return true; } if (!(o instanceof Complex)) { return false; } Complex c = (Complex) o; // See page 47 to find out why we use compare instead of == return Double.compare(c.re, re) == 0 &amp;amp;&amp;amp; Double.compare(c.im, im) == 0; } @Override public int hashCode() { return 31 * Double.hashCode(re) + Double.hashCode(im); } @Override public String toString() { return &quot;(&quot; + re + &quot; + &quot; + im + &quot;i)&quot;; } } Klasa jest zadeklarowana jako final. Są gettery do dwóch prywatnych pól, ale są to prymitywy zadeklarowane jako final. Ponadto mamy 4 różne działania, które nie modyfikują obiektu, a zwracają nowy. Jest to poprawna implementacja całkowicie niemutowalnej klasy. Podobnie jest w klasach BigInteger, BigDecimal czy String. Dla przykładu: BigInteger i = BigInteger.valueOf(20); BigInteger j = i.add(BigInteger.valueOf(20)); // i = 20 // j = 40 Wartość i nigdy się nie zmieni. Wszystkie działania na BigInteger zwracają nowy obiekt. Innym sposobem na to, by uniemożliwić rozszerzanie klasy, jest zadeklarowanie wszystkich konstruktorów jako private lub package-private i dodać public static factory method. Jest to bardziej elastyczny sposób niż deklarowanie klasy jako final. Pozwala nam to na używanie kilku implementacji z tego samego pakietu, a dla klientów spoza pakietu zachowuje się tak jakby była final, ponieważ nie ma możliwości rozszerzenia klasy, gdy nie mamy dostępu do konstruktora. Poza tym static factory method ma sama w sobie wiele zalet, które były już omawiane. Inne zalety klas niemutowalnych: Obiekty niemutowalne są proste. Mogą być w dokładnie jednym stanie - w tym, w którym zostały utworzone. Jeśli dodatkowo w konstruktorze zadbamy o poprawność argumentów, to mamy pewność, że obiekt będzie zawsze w poprawnym stanie. Obiekty niemutowalne są thread-safe. Nie wymagają synchronizacji, ponieważ nie mogą być w niepoprawnym stanie, gdy są używane przez kilka wątków jednocześnie. Jest to najłatwiejsze podejście, aby uzyskać thread safty. Używając obiektów niemutowalnych nigdy nie będziemy musieli robić ich kopii. Nie jesteśmy narażeni na niechciane modyfikacje, więc żaden obiekt nie zostanie uszkodzony i nie ma potrzeby robienia kopii. Niemutowalne obiekty są dobrym budulcem innych obiektów (mutowalnych lub nie). Dużo łatwiej zapewnić poprawność obiektu, gdy wiemy, że jego komponenty są niemutowalne. Doskonale nadają się jako klucze w mapach i jako elementy w setach - nie musimy się martwić, że ich wartości zmienią się po tym, jak zostaną dodane do kolekcji (co by powodowało ich niepoprawne działanie). Nie ma możliwości na niepoprawny stan obiektu, np. po rzuceniu wyjątku. Są zawsze spójne. I to by była większość zalet klas niemutowalnych. Całkiem tego sporo. Główną wadą klas niemutowalnych jest to, że wymagają nowego obiektu dla każdej nowej wartości pola. Może to być kosztowne, gdy obiekty są duże i używane bardzo często. Dlatego powstają tzw. companion classes, które są mutowalnym odpowiednikiem danej klasy niemutowalnej. Najlepszym tego przykładem w bibliotece Javy jest StringBuilder, który pozwala modyfikować stringa w wydajny sposób, po czym później zwrócić go jako niemutowalną instancję String. Gdy tworzono klasy BigInteger i BigDecimal nie było jeszcze powszechnie wiadomo, że niemutowalne klasy nie powinny być rozszerzane, dlatego jest to możliwe i wszystkie jej metody mogą zostać nadpisane. Ze względu na kompatybilność wsteczną nie mogło to być poprawione. Dlatego, jeśli piszesz aplikację, która polega na niemutowalności którejś z tych klas podanych jako argument od klienta, to powinieneś sprawdzić, czy jest to “prawdziwy” BigInteger lub BigDecimal, a nie jakaś niezaufana podklasa.Można na przykład zwrócić deffensive copy, gdy mamy do czynienia z drugim przypadkiem: public static BigInteger safeInstance(BigInteger val) { return val.getClass() == BigInteger.class ? val : new BigInteger(val.toByteArray()); } Podsumowując, nie generuj automatycznie settera do każdego gettera. Klasy powinny być niemutowalne, chyba że mamy dobry powód, aby było inaczej. Klasy niemutowalne mają dużo zalet, a jedyną ich wadą może być zmniejszona wydajność w specyficznych warunkach. Małe klasy zawsze powinny być niemutowalne. Warto rozważyć też niemutowalność w przypadku większych obiektów jak String czy BigInteger i ewentualnie stworzyć mutable companion class, jeśli rzeczywiście wydajność nie jest zadowalająca w specyficznych przypadkach. Oczywiście są przypadki klas, kiedy ich niemutowalność jest niepraktyczna. Wtedy warto tylko ograniczyć jej mutowalność w miarę możliwości, co zmniejszy prawdopodobieństwo na błędy i ułatwi z nią pracę. Łącząc rady z tego wpisu z tymi z poprzedniego, wychodzi na to, że powinniśmy deklarować wszystkie pola jako private final, chyba że mamy dobry powód, aby było inaczej.</summary></entry></feed>

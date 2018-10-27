@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Ograniczanie dozwolonych typów w generykach">
+<meta property="og:description" content="Czyli użycie bounded parameter type i bounded wildcard type">
+
+<title>Ograniczanie dozwolonych typów w generykach</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/bounded-wildcard-types">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Ograniczanie dozwolonych typów w generykach</h1>
+            
+            <h2 class="post-subtitle">Czyli użycie bounded parameter type i bounded wildcard type</h2>
+            
+            <p class="post-meta">
+              
+              27
+              października
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#bounded-type-parameter">Bounded type parameter</a></li>
+<li class="toc-entry toc-h1"><a href="#bounded-wildcard-type">Bounded wildcard type</a></li>
+<li class="toc-entry toc-h1"><a href="#porównanie">Porównanie</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 31</i> z rozdziału:</p>
+
+<p class="m0">Generics</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/nie-uzywaj-surowych-typow">Item 26: Don’t use raw types
+                </a>
+            </li><li>
+                <a href="/effective-java/eliminuj-unchecked-cast">Item 27: Eliminate unchecked warnings
+                </a>
+            </li><li>
+                <a href="/effective-java/eliminuj-unchecked-cast">Item 32: Combine generics and varargs judiciously
+                </a>
+            </li><li>
+                <a href="/effective-java/uzywanie-generycznych-klas-i-metod">Item 28: Prefer lists to arrays
+                </a>
+            </li><li>
+                <a href="/effective-java/uzywanie-generycznych-klas-i-metod">Item 29: Favor generic types
+                </a>
+            </li><li>
+                <a href="/effective-java/uzywanie-generycznych-klas-i-metod">Item 30: Favor generic methods
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/bounded-wildcard-types">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 31: Use bounded wildcards to increase API flexibility
+                    </a>
+                </li></ul>
+<hr />
+
+<p>Większość typów generycznych, tak jak nasza zabawkowa klasa <code class="highlighter-rouge">Stack</code>, nie ma ograniczeń przekazywanego typu. Możemy podać dowolny typ parametru: <code class="highlighter-rouge">Stack&lt;Object&gt;</code>, <code class="highlighter-rouge">Stack&lt;int[]&gt;</code>, <code class="highlighter-rouge">Stack&lt;List&lt;String&gt;&gt;</code> itd.</p>
+
+<p class="note">Wyjątkiem są prymitywy. Nie możemy utworzyć np. <code class="highlighter-rouge">Stack&lt;int&gt;</code> lub <code class="highlighter-rouge">Stack&lt;double&gt;</code>. Możemy zamiast tego użyć ich wrpaperów <code class="highlighter-rouge">Integer</code>, <code class="highlighter-rouge">Double</code> itd.</p>
+
+<p>Z drugiej strony, deklarując <code class="highlighter-rouge">List&lt;String&gt;</code> jako typ argumentu dla metody/klasy, narzucamy na nią spore ograniczenie - może przyjmować tylko instancje klasy <code class="highlighter-rouge">String</code>. Czasem jednak potrzebujemy większej elastyczności, ale jednocześnie nie chcemy pozwalać na dowolny typ.</p>
+
+<p>Możemy to osiągnać używając <em>bounded type parameter</em>.</p>
+
+<h1 id="bounded-type-parameter">Bounded type parameter</h1>
+
+<p>Dla przykładu weźmy <code class="highlighter-rouge">java.util.concurrent.DelayQueue</code>. Jej deklaracja wygląda tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">DelayQueue</span><span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Delayed</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">&lt;E extends Delayed&gt;</code> oznacza, że przekazywana klasa musi być podtypem <code class="highlighter-rouge">java.util.concurrent.Delayed</code>. Dzięki temu możemy używać metod zdefiniowanych w tej klasie bez potrzeby castowania.</p>
+
+<p class="note">Wlicza się w to również typ <code class="highlighter-rouge">Delayed</code>. Każdy typ jest uznawany jak podtyp siebie, dlatego możliwe jest utworzenie <code class="highlighter-rouge">DelayQueue&lt;Delayed&gt;</code>.</p>
+
+<p>Podobnie można tego użyć w deklaracjach metod.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">DelayQueue</span><span class="o">&gt;</span> <span class="kt">void</span>  <span class="nf">someMethod</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Możemy również ograniczać typ rekursywnie, używając kolejnego typu zawierającego ten parametr typu. Nazywa się to <em>recursive type bound</em>. Często jest to używane w połączeniu z interfejsem <code class="highlighter-rouge">Comparable</code> (który był już <a href="/effective-java/interfejs-comparable">omawiany</a>):</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">T</span> <span class="n">o</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">T</code> określa, do jakiego typu może być porównywany obiekt implementujący <code class="highlighter-rouge">Comparable&lt;T&gt;</code>. Najczęściej jest to on sam, np. <code class="highlighter-rouge">String</code> implementuje <code class="highlighter-rouge">Comparable&lt;String&gt;</code>, <code class="highlighter-rouge">Integer</code> implementuje <code class="highlighter-rouge">Comparable&lt;Integer&gt;</code> itd.</p>
+
+<p>Wiele metod przyjmuje kolekcje elementów implementujących Comparable, aby ją sortować, przeszukiwać czy kalkulować max/min. Te obiekty muszą być wzajemnie porównywalne, aby było to możliwe. Można to wymusić w ten sposób:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using a recursive type bound to express mutual comparability</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="n">E</span> <span class="nf">max</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Cała metoda do wyciągania maksymalnej wartości mogłaby wyglądać tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Returns max value in a collection - uses recursive type bound</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="n">E</span> <span class="nf">max</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">"Empty collection"</span><span class="o">);</span>
+
+    <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">e</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">result</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Innym rozwiązaniem możę być też <em>bounded wildcard type</em>.</p>
+
+<h1 id="bounded-wildcard-type">Bounded wildcard type</h1>
+
+<p>Przywołajmy jako przykład jeszcze raz klasę <code class="highlighter-rouge">Stack</code>. Załóżmy, że chcemy dodać metodę, która dodaje do stosu wszystkie elementy z innej kolekcji. Pierwszą próbą mogłoby być coś takiego:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// pushAll method without wildcard type - deficient!</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">pushAll</span><span class="o">(</span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">src</span><span class="o">)</span>
+        <span class="n">push</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jednak nie jest to do końca elastyczne rozwiązanie. Jeśli typ elementu z <code class="highlighter-rouge">Iterable</code> jest identyczny tym z <code class="highlighter-rouge">Stack</code> to wszystko jest ok. Jeśli jednak będziemy mięć np. <code class="highlighter-rouge">Stack&lt;Number&gt;</code>, to nie będziemy mogli dodać kolekcji integerów, mimo że <code class="highlighter-rouge">Integer</code> jest podtypem <code class="highlighter-rouge">Number</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">numberStack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;();</span>
+<span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">integers</span> <span class="o">=</span> <span class="o">...</span> <span class="o">;</span>
+<span class="n">numberStack</span><span class="o">.</span><span class="na">pushAll</span><span class="o">(</span><span class="n">integers</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Błąd:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StackTest.java:7: error: incompatible types: Iterable&lt;Integer&gt;
+cannot be converted to Iterable&lt;Number&gt;
+        numberStack.pushAll(integers);
+                            ^
+</code></pre></div></div>
+
+<p>I tu z pomocą przychodzi <em>bounded wildcard type</em>. Typ przyjmowanego argumentu nie powinien być “Iterable typu E” tylko “Iterable jakiegoś podtypu E” - zapisuje się to w ten sposób: ` Iterable&lt;? extends E&gt;`:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Wildcard type for a parameter that serves as an E producer</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">pushAll</span><span class="o">(</span><span class="n">Iterable</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">src</span><span class="o">)</span>
+        <span class="n">push</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Dzięki takiej zmianie nasza metoda jest dużo bardziej elastyczna i powyższa próba dorzucenia do <code class="highlighter-rouge">Stack&lt;Number&gt;</code> integerów z <code class="highlighter-rouge">Iterable&lt;Integer&gt;</code> powiedzie się.</p>
+
+<p>I można też w drugą stronę. Możemy rozszerzyć dozwolone typy o wszystkie nadklasy danego typu. Deklaruje się to tak: <code class="highlighter-rouge">&lt;? super E&gt;</code>.</p>
+
+<p>W ten sposób można by na przykład zaimplementować metodę, która wyciąga wszystkie wartości do innej kolekcji.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Wildcard type for parameter that serves as an E consumer</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">popAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">dst</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">while</span> <span class="o">(!</span><span class="n">isEmpty</span><span class="o">())</span>
+        <span class="n">dst</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pop</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Dzięki <code class="highlighter-rouge">Collection&lt;? super E&gt;</code> możemy podać kolekcję o dowolnym typie parametru, ktory rozszerza <code class="highlighter-rouge">E</code>.</p>
+
+<p>Dlatego dla maksymalnej elastyczności warto używać <em>bounded wildcard type</em> dla parametrów, które są <em>producerami</em> lub <em>consumerami</em>:</p>
+
+<ul>
+  <li>Jeśli tylko wyciągamy obiekty, to jest, to <em>producer</em> i powinniśmy użyć <code class="highlighter-rouge">&lt;? extends T&gt;</code>.</li>
+  <li>Jeśli tylko wkładamy obiekty do środka, to jest to <em>consumer</em> i powinniśmy użyć <code class="highlighter-rouge">&lt;? super T&gt;</code>.</li>
+</ul>
+
+<p>Jeśli robimy obie operacje, to nie powinniśmy używać <em>wildcard type</em>.</p>
+
+<p>Podobnie moglibyśmy ulepszyć funkcję <code class="highlighter-rouge">union</code> z poprzedniego wpisu:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Co umożliwia nam wtedy takie użycie:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">integers</span> <span class="o">=</span> <span class="n">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">doubles</span> <span class="o">=</span> <span class="n">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mf">2.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">,</span> <span class="mf">6.0</span><span class="o">);</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">union</span><span class="o">(</span><span class="n">integers</span><span class="o">,</span> <span class="n">doubles</span><span class="o">);</span>
+</code></pre></div></div>
+
+<div class="note">
+
+  <p>Używając Javy starszej niż 8 (również zamieniając <code class="highlighter-rouge">Set.of</code> na starszy odpowiednik), dostaniemy błąd kompilacji:</p>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Union.java:14: error: incompatible types
+        Set&lt;Number&gt; numbers = union(integers, doubles);
+                                   ^
+  required: Set&lt;Number&gt;
+  found:    Set&lt;INT#1&gt;
+  where INT#1,INT#2 are intersection types:
+    INT#1 extends Number,Comparable&lt;? extends INT#2&gt;
+    INT#2 extends Number,Comparable&lt;?&gt;
+</code></pre></div>  </div>
+
+  <p>Jest to spowodowane tym, że przed Javą 8 wnioskowanie typów nie było na tyle inteligentne, aby wywnioskować, że zwracany typ <code class="highlighter-rouge">E</code> to <code class="highlighter-rouge">Set&lt;Number&gt;</code>. W takiej sytuacji trzeba podać typ argumentu bezpośrednio, co nie jest zbyt ładne:</p>
+
+  <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Explicit type parameter - required prior to Java 8</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">Union</span><span class="o">.&lt;</span><span class="n">Number</span><span class="o">&gt;</span><span class="n">union</span><span class="o">(</span><span class="n">integers</span><span class="o">,</span> <span class="n">doubles</span><span class="o">);</span>
+</code></pre></div>  </div>
+
+</div>
+
+<p><code class="highlighter-rouge">Comparable</code> zalicza się zawsze do <em>consumerów</em>, więc zazwyczaj powinno się używać <code class="highlighter-rouge">Comparable&lt;? super T&gt;</code>.</p>
+
+<p>Aplikując <em>wildcard types</em> do naszej metody <code class="highlighter-rouge">max</code> z poprzednich rozdziałów, która wyciąga największą wartość z listy, dostaniemy takiego potworka:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">T</span> <span class="nf">max</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Dzięki temu wspieramy typy, które nie implementują <code class="highlighter-rouge">Comparable</code> bezpośrednio, ale rozszerzają typ, który to robi. Na pierwszy rzut oka jest to mało czytelne, ale nie spotkamy się z takimi deklaracjami zbyt często - najczęściej tego typu złożoność występuje pod spodem bibliotek.</p>
+
+<h1 id="porównanie">Porównanie</h1>
+
+<p><em>Bounded wildcard type</em> może mieć tylko jedno ograniczenie, a <em>bounded type parameter</em> wiele:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  type parameter bound     T extends Class &amp; Interface1 &amp; … &amp; InterfaceN
+
+  wildcard bound
+      upper bound          ? extends SuperType
+      lower bound          ? super   SubType
+</code></pre></div></div>
+
+<p><em>Wildcard</em> używa się wtedy, gdy nie obchodzi nas właściwy typ parametru, bo nie będziemy nic z niego używać.</p>
+
+<p>Uzupełniona tabelka z używanymi pojęciami w tym rozdziale:</p>
+
+<div class="table-wrapper">
+
+  <table class="table table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th>Pojęcie</th>
+        <th>Przykład</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Raw type</td>
+        <td><code class="highlighter-rouge">List</code></td>
+      </tr>
+      <tr>
+        <td>Parameterized type</td>
+        <td><code class="highlighter-rouge">List&lt;String&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Generic type</td>
+        <td><code class="highlighter-rouge">List&lt;E&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Formal type parameter</td>
+        <td><code class="highlighter-rouge">E</code></td>
+      </tr>
+      <tr>
+        <td>Unbounded wildcard type</td>
+        <td><code class="highlighter-rouge">List&lt;?&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Bounded type parameter</td>
+        <td><code class="highlighter-rouge">&lt;E extends Number&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Recursive type bound</td>
+        <td><code class="highlighter-rouge">&lt;T extends Comparable&lt;T&gt;&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Bounded wildcard type</td>
+        <td><code class="highlighter-rouge">List&lt;? extends Number&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Generic method</td>
+        <td><code class="highlighter-rouge">static &lt;E&gt; List&lt;E&gt; asList(E[] a)</code></td>
+      </tr>
+      <tr>
+        <td>Type token</td>
+        <td><code class="highlighter-rouge">String.class</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/uzywanie-generycznych-klas-i-metod"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Używanie generycznych klas i metod"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/bounded-wildcard-types";
+    this.page.identifier = "/effective-java/bounded-wildcard-types";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

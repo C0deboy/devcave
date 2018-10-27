@@ -552,6 +552,15 @@
         "subtitle": "Problematyczne tablice",
         "date": "20 października 2018",
         "url": "/effective-java/uzywanie-generycznych-klas-i-metod"
+      },
+    
+      
+      {
+        "title": "Ograniczanie dozwolonych typów w generykach",
+        "titleSEO": "Ograniczanie dozwolonych typów w generykach",
+        "subtitle": "Czyli użycie bounded parameter type i bounded wildcard type",
+        "date": "27 października 2018",
+        "url": "/effective-java/bounded-wildcard-types"
       }
     
   

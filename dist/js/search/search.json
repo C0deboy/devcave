@@ -561,6 +561,15 @@
         "subtitle": "Czyli użycie bounded parameter type i bounded wildcard type",
         "date": "27 października 2018",
         "url": "/effective-java/bounded-wildcard-types"
+      },
+    
+      
+      {
+        "title": "Enumy",
+        "titleSEO": "Enumy - kilka dobrych praktyk",
+        "subtitle": "Kilka dobrych praktyk",
+        "date": "3 listopada 2018",
+        "url": "/effective-java/enums"
       }
     
   

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Adnotacje">
+<meta property="og:description" content="Kilka dobrych praktyk">
+
+<title>Adnotacje - kilka dobrych praktyk</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/annotations">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+                Menu <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-el" href="/o-mnie/">O mnie</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/archiwum/">Archiwum</a>
+                </li>
+
+                <li>
+                    <a class="nav-el" href="/kontakt/">Kontakt</a>
+                </li>
+                <li>
+                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+                </li>
+                <li>
+                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
+                </li>
+                <li>
+                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
+                            title="Zmień motyw">
+                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Adnotacje</h1>
+            
+            <h2 class="post-subtitle">Kilka dobrych praktyk</h2>
+            
+            <p class="post-meta">
+              
+              10
+              listopada
+              
+              2018</p>
+            
+            <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+            
+            <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+            
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#adnotacje-zamiast-specyficznego-nazewnictwa">Adnotacje zamiast specyficznego nazewnictwa</a></li>
+<li class="toc-entry toc-h1"><a href="#adnotacja-overrride">Adnotacja @Overrride</a></li>
+<li class="toc-entry toc-h1"><a href="#marker-interfejs-jako-definicja-typu">Marker interfejs jako definicja typu</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 39, 40, 41</i> z rozdziału:</p>
+
+<p class="m0">Enums and Annotations</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/enums">Item 34: Use enums instead of int constants
+                </a>
+            </li><li>
+                <a href="/effective-java/enums">Item 35: Use instance fields instead of ordinals
+                </a>
+            </li><li>
+                <a href="/effective-java/enums">Item 36: Use EnumSet instead of bit fields
+                </a>
+            </li><li>
+                <a href="/effective-java/enums">Item 37: Use EnumMap instead of ordinal indexing
+                </a>
+            </li><li>
+                <a href="/effective-java/enums">Item 38: Emulate extensible enums with interfaces
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/annotations">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 39: Prefer annotations to naming patterns
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/annotations">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 40: Consistently use the Override annotation
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/annotations">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 41: Use marker interfaces to define types
+                    </a>
+                </li></ul>
+<hr />
+
+<h1 id="adnotacje-zamiast-specyficznego-nazewnictwa">Adnotacje zamiast specyficznego nazewnictwa</h1>
+
+<p>Dawniej, kiedy w Javie nie było adnotacji, używało się specjalnego nazewnictwa (np. prefixy), aby zaznaczyć, że dany element potrzebuje specjalnego traktowania (np. przez framework).</p>
+
+<p>Dla przykładu miało to miejsce w frameworku do testowania - JUnit (do wersji 4). Aby metoda będąca testem była odpalona przez framework, musiała zaczynać się od słowa “test”. Ta technika działa, ale ma wiele niedoskonałości, a od momentu wprowadzenia adnotacji, w ogóle nie powinna być stosowana.</p>
+
+<p>Do wad można zaliczyć:</p>
+<ul>
+  <li>nie ma mechanizmu wymuszenia pisowni</li>
+  <li>ani wymuszenia elementu dla którego może być aplikowany</li>
+  <li>Nie ma dobrego sposobu, aby przekazać dodatkowy parametr</li>
+</ul>
+
+<p>Chcąc zdefiniować np. test, który przechodzi pomyślnie tylko wtedy, gdy zostanie rzucony podany wyjątek, musielibyśmy hardcodować nazwę wyjątku w nazwie metody, wymuszając dany format, co by było brzydkie, mało funkcjonalne i nie miałoby wsparcia kompilatora.</p>
+
+<p>Adnotacje rozwiązują wszystkie te problemy i to je właśnie powinniśmy używać (tak też zrobił JUnit wraz z wersją 4).</p>
+
+<p>Aby zobaczyć z czego składają się adnotację, zobaczmy zabawkowy framework do odpalania testów.</p>
+
+<p>Więc najpierw adnotacja, którą będziemy oznaczać metody, które są testami:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Marker annotation type declaration</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.*</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Indicates that the annotated method is a test method.
+ * Use only on parameterless static methods.
+ */</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">Test</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>W deklaracji widzimy dwie dodatkowe adnotacje:</p>
+<ul>
+  <li><code class="highlighter-rouge">@Retention(RetentionPolicy.RUNTIME)</code> - oznacza, że ta adnotacja powinna być obecna w <em>runtime</em>. Bez tego po kompilacji nie byłaby widoczna dla naszego frameworka.</li>
+  <li><code class="highlighter-rouge">@Target(ElementType.METHOD)</code> - definiuje elementy, na jakich może zostać użyta - w tym przypadku tylko metody</li>
+</ul>
+
+<p>Jest też mały komentarz na adnotacji - <code class="highlighter-rouge">Use only on parameterless static methods.</code> Jest to w JavaDoc-u, ponieważ kompilator nie może tego wymusić, chyba że napiszemy <em>annotation processor</em> (implementując <code class="highlighter-rouge">javax.annotation.processing.AbstractProcessor</code>), który to zrobi (javax.annotation.processing). Bez niego, jeśli damy adnotację na niepoprawną metodę, to program skompiluje się bez błędu, a problem będzie musiał zostać obsłużony przez framework w <em>runtime</em>.</p>
+
+<p class="note">Adnotacje bez parametrów nazywa się <em>markerami</em>, jako że tylko oznaczają dany element i nie robiąc nic więcej.</p>
+
+<p>Przykładowa klasa zawierająca testy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Program containing marker annotations</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sample</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m1</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>  <span class="c1">// Test should pass</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m2</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m3</span><span class="o">()</span> <span class="o">{</span>     <span class="c1">// Test should fail</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"Boom"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m4</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">m5</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span> <span class="c1">// INVALID USE: nonstatic method</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m6</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m7</span><span class="o">()</span> <span class="o">{</span>    <span class="c1">// Test should fail</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"Crash"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m8</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jeden test powinien przejść, dwa powinny się wysypać i jeden jest niepoprawny. Metody bez adnotacji <code class="highlighter-rouge">@Test</code> powinny być pominięte.</p>
+
+<p>Brakuje nam jeszcze <em>runnera</em>, który odpali testy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Program to process marker annotations</span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RunTests</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">tests</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">passed</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">testClass</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Method</span> <span class="n">m</span> <span class="o">:</span> <span class="n">testClass</span><span class="o">.</span><span class="na">getDeclaredMethods</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">isAnnotationPresent</span><span class="o">(</span><span class="n">Test</span><span class="o">.</span><span class="na">class</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">tests</span><span class="o">++;</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">m</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+                    <span class="n">passed</span><span class="o">++;</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InvocationTargetException</span> <span class="n">wrappedExc</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">Throwable</span> <span class="n">exc</span> <span class="o">=</span> <span class="n">wrappedExc</span><span class="o">.</span><span class="na">getCause</span><span class="o">();</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m</span> <span class="o">+</span> <span class="s">" failed: "</span> <span class="o">+</span> <span class="n">exc</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Invalid @Test: "</span> <span class="o">+</span> <span class="n">m</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Passed: %d, Failed: %d%n"</span><span class="o">,</span>
+                          <span class="n">passed</span><span class="o">,</span> <span class="n">tests</span> <span class="o">-</span> <span class="n">passed</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><em>Runner</em> działa tak, że pobiera pełną ścieżkę klasy i wywołuje wszystkie metody będące testami (używając refleksji).</p>
+
+<p>Odpalając naszą klasę, dostajemy taki wynik:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static void Sample.m3() failed: RuntimeException: Boom
+Invalid @Test: public void Sample.m5()
+public static void Sample.m7() failed: RuntimeException: Crash
+Passed: 1, Failed: 3
+</code></pre></div></div>
+
+<p>Wspominałem wcześniej o typie testu, który przechodzi wtedy, kiedy rzucony jest dany wyjątek. Adnotacja spełniająca taką funkcję może wyglądać tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Annotation type with a parameter</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.*</span><span class="o">;</span>
+<span class="cm">/**
+ * Indicates that the annotated method is a test method that
+ * must throw the designated exception to succeed.
+ */</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">ExceptionTest</span> <span class="o">{</span>
+    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Throwable</span><span class="o">&gt;</span> <span class="nf">value</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>A używa się ją w ten sposób:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Program containing annotations with a parameter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sample2</span> <span class="o">{</span>
+    <span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">ArithmeticException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m1</span><span class="o">()</span> <span class="o">{</span>  <span class="c1">// Test should pass</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">i</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">ArithmeticException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m2</span><span class="o">()</span> <span class="o">{</span>  <span class="c1">// Should fail (wrong exception)</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+    <span class="o">}</span>
+    <span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">ArithmeticException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m3</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>  <span class="c1">// Should fail (no exception)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Trzeba też obsłużyć nową adnotację w <em>runnerze</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">isAnnotationPresent</span><span class="o">(</span><span class="n">ExceptionTest</span><span class="o">.</span><span class="na">class</span><span class="o">))</span> <span class="o">{</span>
+    <span class="n">tests</span><span class="o">++;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">m</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Test %s failed: no exception%n"</span><span class="o">,</span> <span class="n">m</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InvocationTargetException</span> <span class="n">wrappedEx</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Throwable</span> <span class="n">exc</span> <span class="o">=</span> <span class="n">wrappedEx</span><span class="o">.</span><span class="na">getCause</span><span class="o">();</span>
+        <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Throwable</span><span class="o">&gt;</span> <span class="n">excType</span> <span class="o">=</span>
+            <span class="n">m</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="n">ExceptionTest</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">value</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">excType</span><span class="o">.</span><span class="na">isInstance</span><span class="o">(</span><span class="n">exc</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">passed</span><span class="o">++;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span>
+                <span class="s">"Test %s failed: expected %s, got %s%n"</span><span class="o">,</span>
+                <span class="n">m</span><span class="o">,</span> <span class="n">excType</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">exc</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Invalid @Test: "</span> <span class="o">+</span> <span class="n">m</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Widać jak łatwo z pomocą adnotacji możemy przekazać dodatkowy parametr (w tym przypadku typ wyjątku).</p>
+
+<p>Adnotacje wspierają również dostarczenie na raz kilku elementów. Wystarczy zamienić zwracany typ przez metodę <code class="highlighter-rouge">value</code> na tablice:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Annotation type with an array parameter</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">ExceptionTest</span> <span class="o">{</span>
+    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Exception</span><span class="o">&gt;[]</span> <span class="nf">value</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Co więcej wszystkie poprzednie definicje adnotacji (z jednym parametrem) dalej będą poprawne, bo składnia jest elastyczna - po prostu będą potraktowane jako jednoelementowa tablica.</p>
+
+<p>Chcąc podać kilka, używamy dodatkowych nawiasów i wypisujemy je po przecinku:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Code containing an annotation with an array parameter</span>
+<span class="nd">@ExceptionTest</span><span class="o">({</span> <span class="n">IndexOutOfBoundsException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">NullPointerException</span><span class="o">.</span><span class="na">class</span> <span class="o">})</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">doublyBad</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="c1">// The spec permits this method to throw either</span>
+    <span class="c1">// IndexOutOfBoundsException or NullPointerException</span>
+    <span class="n">list</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="note">Od Javy 8 jest też inny sposób, aby podać kilka argumentów. Możemy oznaczyć naszą adnotację za pomocą <code class="highlighter-rouge">@Repeatable</code>, która oznacza, że adnotacja może być wielokrotnie użyta na jednym elemencie, jednak wymaga to dodatkowej uwagi przy obsłudze. Można jej wtedy używać w ten sposób:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">IndexOutOfBoundsException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">NullPointerException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">doublyBad</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Przekaz tego itemu jest prosty - używajmy adnotacji, zamiast wymuszania konwencji nazewniczych.</p>
+
+<h1 id="adnotacja-overrride">Adnotacja @Overrride</h1>
+
+<p>Jedna z najważniejszych i najpopularniejszych adnotacji w standardowej bibliotece Javy to <code class="highlighter-rouge">@Override</code>. Używana jest na metodach i deklaruje, że dana metoda nadpisuje metodę w nadklasie. Warto ją używać na każdej metodzie, która według naszych intencji powinna nadpisywać inną. Jest ważna, ze względu na to, że dzięki niej kompilator pomoże nam uniknąć pomyłek dotyczących deklaracji klasy. Dla przykładu:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Can you spot the bug?</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">char</span> <span class="n">first</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">char</span> <span class="n">second</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Bigram</span><span class="o">(</span><span class="kt">char</span> <span class="n">first</span><span class="o">,</span> <span class="kt">char</span> <span class="n">second</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">first</span>  <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">second</span> <span class="o">=</span> <span class="n">second</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Bigram</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="na">first</span> <span class="o">==</span> <span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">.</span><span class="na">second</span> <span class="o">==</span> <span class="n">second</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">first</span> <span class="o">+</span> <span class="n">second</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Widzisz jakiś problem z tą klasą? Na pierwszy rzut oka może to być nie widoczne, ale ta klasa przeciąża metodę <code class="highlighter-rouge">equals</code> zamiast ją nadpisywać. Typ argumentu powinien być <code class="highlighter-rouge">Object</code>. Przez to na przykład kolekcje takie jak <code class="highlighter-rouge">Set</code> nie będą działać poprawnie z tą klasą, ponieważ polegają na dobrej implementacji <code class="highlighter-rouge">equals</code>.</p>
+
+<p>Jeśli byśmy dodali adnotację <code class="highlighter-rouge">@Override</code> do tej metody to kompilator poinformowałby nas o błędzie:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Bigram.java:10: method does not override or implement a method
+from a supertype
+    @Override public boolean equals(Bigram b) {
+    ^
+</code></pre></div></div>
+
+<p>Przekaz z tego itemu jest prosty - używajmy adnotacji <code class="highlighter-rouge">@Override</code> na każdej metodzie, która nadpisuje metodę z nadklasy. Wyjątkiem od tej zasady <strong>mogą</strong> być klasy abstrakcyjne - tak czy siak, jeśli nie zaimplementujemy metody abstrakcyjnej nasz program się nie skompiluje.</p>
+
+<h1 id="marker-interfejs-jako-definicja-typu">Marker interfejs jako definicja typu</h1>
+
+<p>W tym itemie mowa o tzw. <em>marker interface</em>. Jest to interfejs, które nie ma żadnych metod i tylko “zaznacza”, że klasa jest do czegoś przeznaczona. Przykładem jest interfejs <code class="highlighter-rouge">Serializable</code>, który wskazuje, że jego instancje mogą być serializowane.</p>
+
+<p>W poprzednim poście była mowa o <em>marker annotation</em>, które też tylko oznaczają dany element, więc jaka jest między nimi różnica?</p>
+
+<p>Po pierwsze, interfejsy definiują typ, a adnotacje tego nie robią. Typ możemy używać w naszym API i wszelkie błędy z tym związane (np. próba podania innego typu niż nasz <em>marker interface</em>) zostaną wykryte przez kompilator, a nie w <em>runtime</em> tak jak w przypadku adnotacji.</p>
+
+<p class="note">Co ciekawe, metoda <code class="highlighter-rouge">ObjectOutputStream.write</code> nie korzysta z tej zalety i jej argument zadeklarowany jest jako <code class="highlighter-rouge">Object</code>, więc próba serializowania obiektu, który nie implementuje <code class="highlighter-rouge">Serializable</code> wysypie się dopiero w <em>runtime</em>.</p>
+
+<p>Dodatkową zaletą marker interfejsów jest to, że mogą bardziej ograniczyć target, dla którego mogą być użyte. Załóżmy, że chcemy mieć marker, który może być stosowany tylko dla implementacji konkretnego interfejsu. Jeśli zadeklarujemy target adnotacji na <code class="highlighter-rouge">Element.Type</code> to będziemy mogli jej użyć na jakimkolwiek interfejsie lub klasie i nie możemy tego ograniczyć. Używając <em>marker interface</em> możemy sprawić, by rozszerzał interfejs, którego implementacje mogą być “oznaczane” przez ten interfejs. Dzięki temu mamy zagwarantowane, że wszystkie “zaznaczone” klasy, będą jednocześnie implementacją interfejsu, dla której są aplikowalne.</p>
+
+<p>Przekaz z tego itemu jest prosty - jeśli chcemy używać “oznaczonych” klas w naszym API, skorzystajmy z <em>marker interface</em> zamiast <em>marker annotation</em>, jeśli możemy skorzystać z którejś z wymienionych zalet.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container no-print">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pager">
+        
+        <li class="previous">
+          <a class="box-effect" href="/effective-java/enums"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Enumy"><i class="fa fa-arrow-left"
+                                                                                           aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/annotations";
+    this.page.identifier = "/effective-java/annotations";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li>
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2018</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

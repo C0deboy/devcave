@@ -570,6 +570,15 @@
         "subtitle": "Kilka dobrych praktyk",
         "date": "3 listopada 2018",
         "url": "/effective-java/enums"
+      },
+    
+      
+      {
+        "title": "Adnotacje",
+        "titleSEO": "Adnotacje - kilka dobrych praktyk",
+        "subtitle": "Kilka dobrych praktyk",
+        "date": "10 listopada 2018",
+        "url": "/effective-java/annotations"
       }
     
   

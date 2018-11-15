@@ -34,9 +34,13 @@ layout: default
               {% when '12' %}grudnia
               {% endcase %}
               {{ page.date | date: "%Y" }}</p>
-            {% assign tags = page.tags | sort %}{% for tag in tags %}
-            <div class="site-tag"><a href='/archiwum#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div>
-            {% endfor %}
+            <div class="tags">
+              {%- assign tags = page.tags | sort -%}
+              {% for tag in tags %}
+              <div class="site-tag"><a href='/archiwum#{{ tag | downcase | replace: ' ', '-' }}'>{{ tag }}</a></div>
+              {% endfor %}
+            </div>
+
           </div>
 
           <hr>

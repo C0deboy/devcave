@@ -60,10 +60,15 @@ description: "{ Blog programistyczny }"
           {% when '11' %}listopada
           {% when '12' %}grudnia
           {% endcase %}
-          {{ post.date | date: "%Y" }}</p>
-        {% assign tags = post.tags | sort %}{% for tag in tags %}
-        <div class="site-tag"><a href="/archiwum#{{ tag | downcase | replace: ' ', '-' }}">{{ tag }}</a></div>
-        {% endfor %}
+          {{ post.date | date: "%Y" }}
+        </p>
+        <div class="tags">
+          {% assign tags = post.tags | sort %}
+          {% for tag in tags %}
+          <div class="site-tag"><a href="/archiwum#{{ tag | downcase | replace: ' ', '-' }}">{{ tag }}</a></div>
+          {% endfor %}
+        </div>
+
       </div>
       {% endfor %}
 

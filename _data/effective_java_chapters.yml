@@ -62,3 +62,14 @@
     46: 'Item 46: Prefer side-effect-free functions in streams'
     47: 'Item 47: Prefer Collection to Stream as a return type'
     48: 'Item 48: Use caution when making streams parallel'
+
+- chapter: Methods
+  items:
+    49: 'Item 49: Check parameters for validity'
+    50: 'Item 50: Make defensive copies when needed'
+    51: 'Item 51: Design method signatures carefully'
+    52: 'Item 52: Use overloading judiciously'
+    53: 'Item 53: Use varargs judiciously'
+    54: 'Item 54: Return empty collections or arrays, not nulls'
+    55: 'Item 55: Return optionals judiciously'
+    56: 'Item 56: Write doc comments for all exposed API elements'

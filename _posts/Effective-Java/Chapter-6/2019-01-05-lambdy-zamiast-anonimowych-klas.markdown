@@ -3,7 +3,7 @@ layout:     post
 titleSEO:	 "Lambdy i referencje do metod"
 title:      "Lambdy i referencje do metod"
 subtitle:   "Czyli zamiennik dla klas anonimowych i nie tylko"
-date:       2018-11-17 8:00:00
+date:       2019-01-05 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
 tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java

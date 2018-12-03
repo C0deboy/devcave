@@ -1,3 +1,5 @@
+require('../css/emailform.scss');
+
 const customErrors = {
   tooShort: (fieldName, min) => 'Pole ' + fieldName + ' musi zawierać co najmniej ' + min + ' znaki.',
   tooLong: (fieldName, max) => 'Pole ' + fieldName + ' może zawierać co najwyżej ' + max + ' znaków.',

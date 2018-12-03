@@ -1,5 +1,7 @@
 import 'bootstrap.native';
 
+require('../css/devcave.scss');
+
 if (JSON.parse(localStorage.getItem('dark-mode'))) {
   document.body.classList.add('dark-mode');
 }

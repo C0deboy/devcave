@@ -209,9 +209,7 @@ Dzięki temu wspieramy typy, które nie implementują `Comparable` bezpośrednio
 
 Uzupełniona tabelka z używanymi pojęciami w tym rozdziale:
 
-<div class="table-wrapper" markdown="1">
-
-{: .table .table-condensed .table-bordered}
+{: .table .table-sm .table-bordered}
 
 | Pojęcie                 |  Przykład                          |
 |-------------------------|------------------------------------|
@@ -225,5 +223,3 @@ Uzupełniona tabelka z używanymi pojęciami w tym rozdziale:
 | Bounded wildcard type   | `List<? extends Number>`           |
 | Generic method          | `static <E> List<E> asList(E[] a)` |
 | Type token              | `String.class`                     |
-
-</div>

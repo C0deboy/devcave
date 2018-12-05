@@ -27,9 +27,7 @@ Mamy więc:
 
 Tabelka z przykładami:
 
-<div class="table-wrapper" markdown="1">
-
-{: .table .table-condensed .table-bordered}
+{: .table .table-sm .table-bordered}
 
 | Interface           | Function Signature    | Example               |
 |---------------------|-----------------------|-----------------------|
@@ -39,8 +37,6 @@ Tabelka z przykładami:
 | `Function<T,R>`     | `R apply(T t)`        | `Arrays::asList`      |
 | `Supplier<T>`       | `T get()`             | `Instant::now`        |
 | `Consumer<T>`       | `void accept(T t)`    | `System.out::println` |
-
-</div>
 
 `UnaryOperator<T>` różni się od `BinaryOperator<T>` tym, że ten drugi przyjmuje dwa argumenty.
 

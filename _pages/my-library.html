@@ -23,7 +23,7 @@ permalink: "/moja-biblioteka/"
     </div>
 </div>
 
-<div class="books row">
+<div class="books box-effect row justify-content-center">
     {% for book in section.books %}
     <div class="book">
         {% if book.helionID %}
@@ -40,7 +40,7 @@ permalink: "/moja-biblioteka/"
         {% endif %}
 
         <a href="{{ link }}">
-            <img class="img-link" src="{{ img }}"/>
+            <img class="img-link" src="{{ img }}" alt="{{ book.title }} - {{ book.author }}"/>
             <b>{{ book.title }}</b>
             {{ book.author }}
         </a>
@@ -52,8 +52,6 @@ permalink: "/moja-biblioteka/"
     <p class="text-center">Jeśli szukasz książek lub kursów w innych technologiach to: </p>
 
     {% include recommended.html inline=true %}
-
-    <br><br>
     {% endif %}
 
 </div>

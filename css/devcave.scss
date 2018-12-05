@@ -1,5 +1,4 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import "libs/bootstrap-xlgrid.css";
 @import "libs/fontello.css";
 @import "navbar";
 @import "syntax";
@@ -35,6 +34,11 @@ h6 {
     font-weight: 800;
 }
 
+h1, h2, h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
 h1 {
     font-size: 1.6em;
 }
@@ -66,6 +70,8 @@ a.disabled {
 blockquote {
     color: #808080;
     font-style: italic;
+    border-left: 5px solid #eee;
+    padding: 10px 20px;
 }
 
 hr {
@@ -78,10 +84,6 @@ hr.small {
     border-top: 4px solid #dfdfdf;
 }
 
-.table-wrapper {
-    overflow-x: auto;
-}
-
 table.table-bordered,
 table.table-bordered > thead > tr > th,
 table.table-bordered > tbody > tr > td {
@@ -91,18 +93,14 @@ table.table-bordered > tbody > tr > td {
 
 .page-header {
     border-bottom: 1px solid #a3a1a130;
-}
-
-.dark-mode-btn {
-    font-size: 1.2em;
-    background: 0;
-    border: 0;
-    padding: 10px 15px;
+    margin: 40px 0 20px;
+    padding-bottom: 9px;
 }
 
 .box-effect {
     padding: 5px 10px;
     box-shadow: 0 1px 2px 0 #747474;
+    border-radius: 0.25em;
 }
 
 .dark-mode .box-effect {
@@ -132,31 +130,31 @@ table.table-bordered > tbody > tr > td {
     color: white;
 }
 
-.tooltip-inner {
-    background: #383838;
-    border: 1px solid #46464600;
+.tooltip {
 
-    .dark-mode & {
-        box-shadow: 0 .5px 0.5px 0 #000000b3;
+    font-size: .7em;
+
+    .tooltip-inner {
+        background: #383838;
+        border: 1px solid #46464600;
+
+        .dark-mode & {
+            box-shadow: 0 .5px 0.5px 0 #000000b3;
+        }
+    }
+
+    &.bs-tooltip-top .arrow:before {
+        border-top-color: #383838!important;
+    }
+    &.bs-tooltip-bottom .arrow:before {
+        border-bottom-color: #383838!important;
     }
 }
 
-.top .tooltip-arrow {
-    border-top-color: #383838!important;
-}
-.bottom .tooltip-arrow {
-    border-bottom-color: #383838!important;
-}
 
 .inline {
     display: inline-block;
     vertical-align: top;
-}
-
-@media print {
-    .no-print {
-        display: none;
-    }
 }
 
 .post-header {
@@ -332,11 +330,11 @@ footer {
     }
 }
 
-.pager {
+.pagination {
     margin: 20px 0 0;
+    list-style-type: none;
 
-    li > a,
-    li > span {
+    li > a {
         font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         text-transform: uppercase;
         font-size: 14px;
@@ -347,12 +345,11 @@ footer {
         margin-top: 0;
         background-color: inherit;
         border-radius: 0;
-        box-shadow: 0 1px 3px 0 #747474;
+        color: $secondary-color;
     }
 
     @media only screen and (min-width: 768px) {
-        li > a,
-        li > span {
+        li > a {
             font-size: 14px;
             padding: 15px 25px;
         }
@@ -366,8 +363,7 @@ footer {
 
     .disabled > a,
     .disabled > a:hover,
-    .disabled > a:focus,
-    .disabled > span {
+    .disabled > a:focus {
         color: #808080;
         background-color: #404040;
         cursor: not-allowed;
@@ -502,10 +498,6 @@ img::-moz-selection {
     }
 }
 
-.navbar-right {
-    text-align: right;
-}
-
 .site-tag {
     background: $secondary-color;
     display: inline-block;
@@ -547,11 +539,11 @@ img::-moz-selection {
 .books {
     margin: 30px 0;
     background: rgba(222, 222, 222, 0.12);
-    box-shadow: 0 1px 4px 0 #000000b5;
 }
 
 .books {
     text-align: center;
+    padding-bottom: 35px;
 }
 
 .project img {
@@ -589,10 +581,10 @@ img::-moz-selection {
     .top-position {
         font-size: 1.5em;
         display: inline-block;
-        width: 41px;
+        width: 50px;
         text-align: center;
         flex-shrink: 0;
-        margin: 0 7px 0 0;
+        margin: 0 10px 0 0;
         border-right: solid 1px #a5a5a554;
     }
 
@@ -637,7 +629,6 @@ img::-moz-selection {
 }
 
 .recommended {
-    width: fit-content;
     margin: auto;
 }
 
@@ -750,10 +741,6 @@ img::-moz-selection {
     }
 }
 
-.m0 {
-    margin: 0;
-}
-
 .promotion {
     text-align: center;
     display: none;
@@ -832,7 +819,7 @@ img::-moz-selection {
     transition: all .3s;
 }
 
-.zoom.in {
+.zoom.show {
     opacity: 1;
     transform: scale(1.2) translateY(-5px);
 }

@@ -163,9 +163,7 @@ Zatem wybierajmy po prostu to, co jest krótsze, czytelniejsze i łatwiejsze do 
 
 Najczęściej używany typ referencji to referencja do metody statycznej, ale są też cztery inne - *bound*, *unbound* oraz konstruktory klas i tablic:
 
-<div class="table-wrapper" markdown="1">
-
-{: .table .table-condensed .table-bordered}
+{: .table .table-sm .table-bordered}
 
 | Method Ref Type   | Example                  | Lambda Equivalent                                  |
 |-------------------|--------------------------|----------------------------------------------------|
@@ -174,5 +172,3 @@ Najczęściej używany typ referencji to referencja do metody statycznej, ale s�
 | Unbound           | `String::toLowerCase`    | `str -> str.toLowerCase()`                         |
 | Class Constructor | `TreeMap<K,V>::new`      | `() -> new TreeMap<K,V>`                           |
 | Array Constructor | `int[]::new`             | `len -> new int[len]`                              |
-
-</div>

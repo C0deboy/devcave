@@ -6,7 +6,7 @@ layout: default
 <article>
 
   <div class="container post">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
         <header class="post-header">
@@ -48,7 +48,7 @@ layout: default
 
         {% if page.toc == true %}
         <nav class="table-of-contents">
-          <p class="m0">Spis treści:</p>
+          <p class="m-0">Spis treści:</p>
           {{ content | toc_only }}
 
           <hr>
@@ -63,25 +63,25 @@ layout: default
 
 </article>
 
-<div class="container no-print">
-  <div class="row">
+<div class="container d-print-none">
+  <div class="row justify-content-center">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <hr>
 
-      <ul class="pager">
+      <ul class="pagination">
         {% if page.previous.url %}
-        <li class="previous">
-          <a class="box-effect" href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}"
+        <li class="page-item">
+          <a class="page-link box-effect" href="{{ page.previous.url }}"
              data-toggle="tooltip" data-animation="zoom" data-delay="50" title="{{page.previous.title}}"><i class="fa fa-arrow-left"
-                                                                                           aria-hidden="true"></i>
+                                                                                                            aria-hidden="true"></i>
             Poprzedni post</a>
         </li>
         {% endif %}
         {% if page.next.url %}
-        <li class="next">
-          <a class="box-effect" href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}"
+        <li class="page-item ml-auto">
+          <a class="page-link box-effect" href="{{ page.next.url }}"
              data-toggle="tooltip" data-animation="zoom" data-delay="50" title="{{page.next.title}}">Następny post <i
-              class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                  class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </li>
         {% endif %}
       </ul>
@@ -99,5 +99,5 @@ layout: default
 
 <hr>
 
-<script src="{{ "/promotion/promotion.js" | prepend: site.baseurl }}"></script>
+<script src="/promotion/promotion.js"></script>
 

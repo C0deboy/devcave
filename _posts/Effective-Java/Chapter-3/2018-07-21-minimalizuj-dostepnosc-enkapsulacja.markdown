@@ -56,9 +56,7 @@ Poprzez "elementy klasy" mam na myśli pola, metody, wewnętrzne klasy i interfe
 
 Łatwiej to zobrazować na podstawie tabelki:
 
-<div class="table-wrapper" markdown="1">
-
-{: .table .table-condensed .table-bordered}
+{: .table .table-sm .table-bordered}
 
 | Modyfikator | Klasa | Pakiet | Podklasa | Wszędzie |
 |:------------|:------|:-------|:---------|:---------|
@@ -67,17 +65,13 @@ Poprzez "elementy klasy" mam na myśli pola, metody, wewnętrzne klasy i interfe
 | brak        | TAK   | TAK    | NIE      | NIE      |
 | `private`   | TAK   | NIE    | NIE      | NIE      |
 
-</div>
-
 Dla przykładu rozważmy, że mamy taką strukturę klas:
 
 ![modyfikatory przykład](/img/effective-java/classes-access.png)
 
 Wtedy pola klasy `Alpha` oznaczone danym modyfikatorem będą miały taką widoczność w innych klasach:
 
-<div class="table-wrapper" markdown="1">
-
-{: .table .table-condensed .table-bordered}
+{: .table .table-sm .table-bordered}
 
 | Modyfikator | Alpha | Beta | AlphaSub | Gamma |
 |:------------|:------|:-----|:---------|:------|
@@ -85,8 +79,6 @@ Wtedy pola klasy `Alpha` oznaczone danym modyfikatorem będą miały taką widoc
 | `protected` | TAK   | TAK  | TAK      | NIE   |
 | brak        | TAK   | TAK  | NIE      | NIE   |
 | `private`   | TAK   | NIE  | NIE      | NIE   |
-
-</div>
 
 Duży przeskok w dostępności jest z `package-private` na `protected`. Element oznaczony jako `protected` jest już częścią API i musi być wspierany wiecznie. Jednak potrzeba ich stosowania powinna być sporadyczna.
 

@@ -1,4 +1,4 @@
-import 'bootstrap.native';
+import 'bootstrap.native/dist/bootstrap-native-v4';
 
 require('../css/devcave.scss');
 
@@ -33,7 +33,7 @@ function dynamicNavbar() {
   } else {
     navbarCustom.classList.remove('is-visible');
 
-    if (siteNav.classList.contains('in')) {
+    if (siteNav.classList.contains('show')) {
       toggleBtn.Collapse.hide();
     }
 

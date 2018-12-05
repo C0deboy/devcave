@@ -1,5 +1,5 @@
 document.querySelectorAll('.tag-posts').forEach((tagPosts) => {
-  tagPosts.classList.toggle('hidden');
+  tagPosts.classList.toggle('d-none');
 
   tagPosts.querySelectorAll('li').forEach((li) => {
     li.classList.toggle('invisible');
@@ -20,7 +20,7 @@ let lastTagPosts;
 
 function toggleElementVisibility(tagPosts) {
   if (lastTagPosts) {
-    lastTagPosts.classList.toggle('hidden');
+    lastTagPosts.classList.toggle('d-none');
 
     lastTagPosts.querySelectorAll('li').forEach((li) => {
       li.classList.toggle('invisible');
@@ -29,7 +29,7 @@ function toggleElementVisibility(tagPosts) {
   }
 
   if (tagPosts) {
-    tagPosts.classList.toggle('hidden');
+    tagPosts.classList.toggle('d-none');
 
     tagPosts.querySelectorAll('li').forEach((li, i) => {
       li.classList.toggle('invisible');

@@ -1,24 +1,24 @@
-<footer class="no-print">
+<footer class="d-print-none">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center social-buttons">
-                    <li>
-                        <a class="main-btn" href="{{ "/feed.xml" | prepend: site.baseurl }}" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml " data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
                             <i class="fa fa-rss fa-lg"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
                             <i class="fa fa-linkedin-square" aria-hidden="true"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="https://github.com/{{ site.github_username }}" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
                             <i class="fa fa-github fa-lg"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="mailto:{{ site.email_username }}" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="{{ site.email_username }}">
                             <i class="fa fa-envelope fa-lg"></i>
                         </a>
@@ -30,4 +30,4 @@
     </div>
 </footer>
 
-<script src="{{ "/dist/js/devcave.min.js" | prepend: site.baseurl }}"></script>
+<script src="/dist/js/devcave.min.js "></script>

@@ -121,9 +121,7 @@ Podsumowując, używanie gołych typów opóźnia wykrywanie błędów i nie wno
 
 Tabelka z używanymi tu pojęciami:
 
-<div class="table-wrapper" markdown="1">
-
-{: .table .table-condensed .table-bordered}
+{: .table .table-sm .table-bordered}
 
 | Pojęcie                 |  Przykład                          |
 |-------------------------|------------------------------------|
@@ -133,5 +131,3 @@ Tabelka z używanymi tu pojęciami:
 | Formal type parameter   | `E`                                |
 | Unbounded wildcard type | `List<?>`                          |
 | Type token              | `String.class`                     |
-
-</div>

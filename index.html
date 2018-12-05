@@ -6,7 +6,7 @@ description: "{ Blog programistyczny }"
 <!-- Page Header -->
 <header class="intro-header">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="site-heading">
           <div class="inline">
@@ -25,18 +25,18 @@ description: "{ Blog programistyczny }"
 
 <!-- Main Content -->
 <div class="container-fluid">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-xl-5 col-lg-6 col-xl-offset-2 col-lg-offset-1 col-md-8">
       <h1>Ostatnie wpisy:</h1>
       {% for post in paginator.posts %}
       <div class="post-preview box-effect">
         {% if post.for %}
         <div class="post-partner">
-          <p class="m0">Post dla:</p>
+          <p class="m-0">Post dla:</p>
           <a href="https://{{ post.for }}.pl"><img src="/img/{{ post.for }}.png" alt="{{ post.for }} logo"/></a>
         </div>
         {% endif %}
-        <a href="{{ post.url | prepend: site.baseurl }}">
+        <a href="{{ post.url }}">
           <h1 class="post-title">{{ post.title }}</h1>
           {% if post.subtitle %}
           <h2 class="post-subtitle">{{ post.subtitle }}</h2>
@@ -72,22 +72,20 @@ description: "{ Blog programistyczny }"
       </div>
       {% endfor %}
 
-      <!-- Pager -->
-      {% if paginator.total_pages > 1 %}
-      <ul class="pager">
+      <ul class="pagination">
         {% if paginator.previous_page %}
-        <li class="previous">
-          <a class="box-effect" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Nowsze
+        <li class="page-item">
+          <a class="page-link box-effect" href="{{ paginator.previous_page_path }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Nowsze
             posty</a>
         </li>
         {% endif %}
         {% if paginator.next_page %}
-        <li class="next">
-          <a class="box-effect" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Starsze posty <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        <li class="page-item ml-auto">
+          <a class="page-link box-effect" href="{{ paginator.next_page_path }}">Starsze posty <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </li>
         {% endif %}
       </ul>
-      {% endif %}
+
     </div>
 
     <div class="col-xl-3 col-lg-4 col-md-4">
@@ -107,7 +105,7 @@ description: "{ Blog programistyczny }"
         <ul>
           {% for postUrl in site.data.top_posts %}
           {% assign post = site.posts | where:"url", postUrl | first %}
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">{{ forloop.index }}</div>
             <a class="top-entry" href="{{ post.url }}">
               {{ post.title }}
@@ -127,7 +125,7 @@ description: "{ Blog programistyczny }"
 
 <hr>
 
-<script src="{{ "/promotion/promotion.js" | prepend: site.baseurl }}"></script>
+<script src="/promotion/promotion.js"></script>
 
 
 

@@ -30,9 +30,9 @@ permalink: "/moje-projekty/"
         </div>
     </div>
     {% for project in section.projects %}
-    <div class="project row" id="{{ project.title | slugify: 'latin'}}">
+    <div class="project box-effect row" id="{{ project.title | slugify: 'latin'}}">
         <div class="col-md-7">
-            <img class="img-responsive" src="{{ project.img }}" alt="{{ project.title }} demo">
+            <img class="img-fluid" src="{{ project.img }}" alt="{{ project.title }} demo">
         </div>
         <div class="col-md-5 project-description">
             <h3>{{ project.title }}</h3>

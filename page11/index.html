@@ -35,53 +35,50 @@
 
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top navbar-custom">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
 
-            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
 
-                Menu <i class="fa fa-bars" aria-hidden="true"></i>
-            </button>
-        </div>
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
 
-        <nav id="site-nav" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a class="nav-el" href="/o-mnie/">O mnie</a>
-                </li>
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
 
-                <li>
-                    <a class="nav-el" href="/archiwum/">Archiwum</a>
-                </li>
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
 
-                <li>
-                    <a class="nav-el" href="/kontakt/">Kontakt</a>
-                </li>
-                <li>
-                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
-                </li>
-                <li>
-                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
-                </li>
-                <li>
-                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
-                            title="Zmień motyw">
-                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 
 <!-- Page Header -->
 <header class="intro-header">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="site-heading">
           <div class="inline">
@@ -100,7 +97,7 @@
 
 <!-- Main Content -->
 <div class="container-fluid">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-xl-5 col-lg-6 col-xl-offset-2 col-lg-offset-1 col-md-8">
       <h1>Ostatnie wpisy:</h1>
       
@@ -234,22 +231,20 @@
       </div>
       
 
-      <!-- Pager -->
-      
-      <ul class="pager">
+      <ul class="pagination">
         
-        <li class="previous">
-          <a class="box-effect" href="/page10"><i class="fa fa-arrow-left" aria-hidden="true"></i> Nowsze
+        <li class="page-item">
+          <a class="page-link box-effect" href="/page10"><i class="fa fa-arrow-left" aria-hidden="true"></i> Nowsze
             posty</a>
         </li>
         
         
-        <li class="next">
-          <a class="box-effect" href="/page12">Starsze posty <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        <li class="page-item ml-auto">
+          <a class="page-link box-effect" href="/page12">Starsze posty <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </li>
         
       </ul>
-      
+
     </div>
 
     <div class="col-xl-3 col-lg-4 col-md-4">
@@ -269,7 +264,7 @@
         <ul>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">1</div>
             <a class="top-entry" href="/moje-doswiadczenia/moja-droga-do-pierwszej-pracy">
               Moja droga do pierwszej pracy
@@ -277,7 +272,7 @@
           </li>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">2</div>
             <a class="top-entry" href="/notatnik-juniora/zasady-projektowania-kodu">
               Zasady projektowania obiektowego
@@ -285,7 +280,7 @@
           </li>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">3</div>
             <a class="top-entry" href="/wybory-programisty/liceum-vs-technikum-co-wybrac">
               Liceum vs technikum - co wybrać jako programista?
@@ -293,7 +288,7 @@
           </li>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">4</div>
             <a class="top-entry" href="/effective-java/static-factory-method-zamiast-konstruktora">
               Static factory method zamiast konstruktora
@@ -301,7 +296,7 @@
           </li>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">5</div>
             <a class="top-entry" href="/effective-java/minimalizuj-dostepnosc-enkapsulacja">
               Minimalizowanie dostępności
@@ -309,7 +304,7 @@
           </li>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">6</div>
             <a class="top-entry" href="/effective-java/wycieki-pamieci-w-javie">
               Wycieki pamięci w Javie
@@ -317,7 +312,7 @@
           </li>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">7</div>
             <a class="top-entry" href="/effective-java/klasy-niezmienne">
               Klasy niemutowalne
@@ -325,7 +320,7 @@
           </li>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">8</div>
             <a class="top-entry" href="/effective-java/wzorzec-projektowy-builder">
               Wzorzec projektowy Builder
@@ -333,7 +328,7 @@
           </li>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">9</div>
             <a class="top-entry" href="/effective-java/wzorzec-projektowy-singleton">
               Wzorzec projektowy Singleton
@@ -341,7 +336,7 @@
           </li>
           
           
-          <li class="box-effect row">
+          <li class="box-effect">
             <div class="top-position">10</div>
             <a class="top-entry" href="/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz">
               Recenzja książki Zawód: Programista
@@ -388,27 +383,27 @@
 
 
 
-<footer class="no-print">
+<footer class="d-print-none">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center social-buttons">
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
                             <i class="fa fa-rss fa-lg"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
                             <i class="fa fa-linkedin-square" aria-hidden="true"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
                             <i class="fa fa-github fa-lg"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
                             <i class="fa fa-envelope fa-lg"></i>
                         </a>

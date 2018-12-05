@@ -35,53 +35,50 @@
 
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top navbar-custom">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
 
-            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
 
-                Menu <i class="fa fa-bars" aria-hidden="true"></i>
-            </button>
-        </div>
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
 
-        <nav id="site-nav" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a class="nav-el" href="/o-mnie/">O mnie</a>
-                </li>
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
 
-                <li>
-                    <a class="nav-el" href="/archiwum/">Archiwum</a>
-                </li>
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
 
-                <li>
-                    <a class="nav-el" href="/kontakt/">Kontakt</a>
-                </li>
-                <li>
-                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
-                </li>
-                <li>
-                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
-                </li>
-                <li>
-                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
-                            title="Zmień motyw">
-                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 
 <article>
 
   <div class="container post">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
         <header class="post-header">
@@ -115,7 +112,7 @@
 
         
         <nav class="table-of-contents">
-          <p class="m0">Spis treści:</p>
+          <p class="m-0">Spis treści:</p>
           <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#bounded-type-parameter">Bounded type parameter</a></li>
 <li class="toc-entry toc-h1"><a href="#bounded-wildcard-type">Bounded wildcard type</a></li>
@@ -132,7 +129,7 @@
 
 <p>Ten wpis nawiązuje do tematu z <i>Item 31</i> z rozdziału:</p>
 
-<p class="m0">Generics</p>
+<p class="m-0">Generics</p>
 
 <ul class="fa-ul custom"><li>
                 <a href="/effective-java/nie-uzywaj-surowych-typow">Item 26: Don’t use raw types
@@ -335,60 +332,56 @@ cannot be converted to Iterable&lt;Number&gt;
 
 <p>Uzupełniona tabelka z używanymi pojęciami w tym rozdziale:</p>
 
-<div class="table-wrapper">
-
-  <table class="table table-condensed table-bordered">
-    <thead>
-      <tr>
-        <th>Pojęcie</th>
-        <th>Przykład</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Raw type</td>
-        <td><code class="highlighter-rouge">List</code></td>
-      </tr>
-      <tr>
-        <td>Parameterized type</td>
-        <td><code class="highlighter-rouge">List&lt;String&gt;</code></td>
-      </tr>
-      <tr>
-        <td>Generic type</td>
-        <td><code class="highlighter-rouge">List&lt;E&gt;</code></td>
-      </tr>
-      <tr>
-        <td>Formal type parameter</td>
-        <td><code class="highlighter-rouge">E</code></td>
-      </tr>
-      <tr>
-        <td>Unbounded wildcard type</td>
-        <td><code class="highlighter-rouge">List&lt;?&gt;</code></td>
-      </tr>
-      <tr>
-        <td>Bounded type parameter</td>
-        <td><code class="highlighter-rouge">&lt;E extends Number&gt;</code></td>
-      </tr>
-      <tr>
-        <td>Recursive type bound</td>
-        <td><code class="highlighter-rouge">&lt;T extends Comparable&lt;T&gt;&gt;</code></td>
-      </tr>
-      <tr>
-        <td>Bounded wildcard type</td>
-        <td><code class="highlighter-rouge">List&lt;? extends Number&gt;</code></td>
-      </tr>
-      <tr>
-        <td>Generic method</td>
-        <td><code class="highlighter-rouge">static &lt;E&gt; List&lt;E&gt; asList(E[] a)</code></td>
-      </tr>
-      <tr>
-        <td>Type token</td>
-        <td><code class="highlighter-rouge">String.class</code></td>
-      </tr>
-    </tbody>
-  </table>
-
-</div>
+<table class="table table-sm table-bordered">
+  <thead>
+    <tr>
+      <th>Pojęcie</th>
+      <th>Przykład</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Raw type</td>
+      <td><code class="highlighter-rouge">List</code></td>
+    </tr>
+    <tr>
+      <td>Parameterized type</td>
+      <td><code class="highlighter-rouge">List&lt;String&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Generic type</td>
+      <td><code class="highlighter-rouge">List&lt;E&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Formal type parameter</td>
+      <td><code class="highlighter-rouge">E</code></td>
+    </tr>
+    <tr>
+      <td>Unbounded wildcard type</td>
+      <td><code class="highlighter-rouge">List&lt;?&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Bounded type parameter</td>
+      <td><code class="highlighter-rouge">&lt;E extends Number&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Recursive type bound</td>
+      <td><code class="highlighter-rouge">&lt;T extends Comparable&lt;T&gt;&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Bounded wildcard type</td>
+      <td><code class="highlighter-rouge">List&lt;? extends Number&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Generic method</td>
+      <td><code class="highlighter-rouge">static &lt;E&gt; List&lt;E&gt; asList(E[] a)</code></td>
+    </tr>
+    <tr>
+      <td>Type token</td>
+      <td><code class="highlighter-rouge">String.class</code></td>
+    </tr>
+  </tbody>
+</table>
 
 
       </div>
@@ -397,25 +390,25 @@ cannot be converted to Iterable&lt;Number&gt;
 
 </article>
 
-<div class="container no-print">
-  <div class="row">
+<div class="container d-print-none">
+  <div class="row justify-content-center">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <hr>
 
-      <ul class="pager">
+      <ul class="pagination">
         
-        <li class="previous">
-          <a class="box-effect" href="/effective-java/uzywanie-generycznych-klas-i-metod"
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/uzywanie-generycznych-klas-i-metod"
              data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Używanie generycznych klas i metod"><i class="fa fa-arrow-left"
-                                                                                           aria-hidden="true"></i>
+                                                                                                            aria-hidden="true"></i>
             Poprzedni post</a>
         </li>
         
         
-        <li class="next">
-          <a class="box-effect" href="/effective-java/enums"
+        <li class="page-item ml-auto">
+          <a class="page-link box-effect" href="/effective-java/enums"
              data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Enumy">Następny post <i
-              class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                  class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </li>
         
       </ul>
@@ -478,27 +471,27 @@ cannot be converted to Iterable&lt;Number&gt;
 
 
 
-<footer class="no-print">
+<footer class="d-print-none">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center social-buttons">
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
                             <i class="fa fa-rss fa-lg"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
                             <i class="fa fa-linkedin-square" aria-hidden="true"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
                             <i class="fa fa-github fa-lg"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
                             <i class="fa fa-envelope fa-lg"></i>
                         </a>

@@ -35,52 +35,49 @@
 
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top navbar-custom">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
 
-            <button type="button" id="navbar-toggle-btn" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
 
-                Menu <i class="fa fa-bars" aria-hidden="true"></i>
-            </button>
-        </div>
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
 
-        <nav id="site-nav" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a class="nav-el" href="/o-mnie/">O mnie</a>
-                </li>
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
 
-                <li>
-                    <a class="nav-el" href="/archiwum/">Archiwum</a>
-                </li>
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
 
-                <li>
-                    <a class="nav-el" href="/kontakt/">Kontakt</a>
-                </li>
-                <li>
-                    <a class="nav-el books-btn" href="/moja-biblioteka">Moja biblioteka</a>
-                </li>
-                <li>
-                    <a class="nav-el" href="/moje-projekty">Moje projekty</a>
-                </li>
-                <li>
-                    <button class="dark-mode-btn nav-el" data-toggle="tooltip" data-placement="bottom"
-                            title="Zmień motyw">
-                        <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 
 <header class="intro-header">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-xl-6 col-xl-offset-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
                     <h1>Moja biblioteka</h1>
@@ -93,7 +90,7 @@
 </header>
 
 <div class="container-fluid">
-	<div class="row">
+	<div class="row justify-content-center">
 		<div class="col-xl-6 col-xl-offset-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 			
 
@@ -111,13 +108,13 @@
     </div>
 </div>
 
-<div class="books row">
+<div class="books box-effect row justify-content-center">
     
     <div class="book">
         
 
         <a href="https://helion.pl/view/9102Q/czarch.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/czarch.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/czarch.jpg" alt="Czysta architektura. Struktura i design oprogramowania. Przewodnik dla profesjonalistów - Robert C. Martin"/>
             <b>Czysta architektura. Struktura i design oprogramowania. Przewodnik dla profesjonalistów</b>
             Robert C. Martin
         </a>
@@ -128,7 +125,7 @@
         
 
         <a href="https://www.amazon.co.uk/Effective-Java-Joshua-Bloch/dp/0134685997">
-            <img class="img-link" src="/img/effective-java.jpg"/>
+            <img class="img-link" src="/img/effective-java.jpg" alt="Effective Java (3rd Edition) - Joshua Bloch"/>
             <b>Effective Java (3rd Edition)</b>
             Joshua Bloch
         </a>
@@ -139,7 +136,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/tddpro.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/tddpro.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/tddpro.jpg" alt="TDD. Programowanie w Javie sterowane testami - Viktor Farcic, Alex Garcia"/>
             <b>TDD. Programowanie w Javie sterowane testami</b>
             Viktor Farcic, Alex Garcia
         </a>
@@ -150,7 +147,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/e_1ott.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/e_1ott.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/e_1ott.jpg" alt="Zrozumieć programowanie - Gynvael Coldwind"/>
             <b>Zrozumieć programowanie</b>
             Gynvael Coldwind
         </a>
@@ -161,7 +158,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/ang2ty.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/ang2ty.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/ang2ty.jpg" alt="Angular 2. Programowanie z użyciem języka TypeScript - Yakov Fain, Anton Moiseev"/>
             <b>Angular 2. Programowanie z użyciem języka TypeScript</b>
             Yakov Fain, Anton Moiseev
         </a>
@@ -172,7 +169,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/wzoelv.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/wzoelv.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/wzoelv.jpg" alt="Wzorce projektowe. Elementy oprogramowania obiektowego wielokrotnego użytku - Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides"/>
             <b>Wzorce projektowe. Elementy oprogramowania obiektowego wielokrotnego użytku</b>
             Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides
         </a>
@@ -183,7 +180,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/getti2.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/getti2.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/getti2.jpg" alt="Getting Things Done, czyli sztuka bezstresowej efektywności. Wydanie II - David Allen"/>
             <b>Getting Things Done, czyli sztuka bezstresowej efektywności. Wydanie II</b>
             David Allen
         </a>
@@ -204,13 +201,13 @@
     </div>
 </div>
 
-<div class="books row">
+<div class="books box-effect row justify-content-center">
     
     <div class="book">
         
 
         <a href="https://helion.pl/view/9102Q/javp10.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/javp10.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/javp10.jpg" alt="Java. Podstawy. Wydanie X - Cay S. Horstmann"/>
             <b>Java. Podstawy. Wydanie X</b>
             Cay S. Horstmann
         </a>
@@ -221,7 +218,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/prorze.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/prorze.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/prorze.jpg" alt="Software Craftsman. Profesjonalizm, czysty kod i techniczna perfekcja - Sandro Mancuso"/>
             <b>Software Craftsman. Profesjonalizm, czysty kod i techniczna perfekcja</b>
             Sandro Mancuso
         </a>
@@ -232,7 +229,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/mckkod.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/mckkod.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/mckkod.jpg" alt="Mistrz czystego kodu. Kodeks postępowania profesjonalnych programistów - Robert C. Martin"/>
             <b>Mistrz czystego kodu. Kodeks postępowania profesjonalnych programistów</b>
             Robert C. Martin
         </a>
@@ -243,7 +240,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/pragpv.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/pragpv.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/pragpv.jpg" alt="Pragmatyczny programista. Od czeladnika do mistrza - Sandro Mancuso"/>
             <b>Pragmatyczny programista. Od czeladnika do mistrza</b>
             Sandro Mancuso
         </a>
@@ -254,7 +251,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/czykov.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/czykov.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/czykov.jpg" alt="Czysty kod. Podręcznik dobrego programisty - Robert C. Martin"/>
             <b>Czysty kod. Podręcznik dobrego programisty</b>
             Robert C. Martin
         </a>
@@ -265,7 +262,7 @@
         
 
         <a href="https://helion.pl/view/9102Q/jascpz.htm">
-            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/jascpz.jpg"/>
+            <img class="img-link" src="https://static01.helion.com.pl/global/okladki/181x236/jascpz.jpg" alt="JavaScript. Programowanie zaawansowane - Tomasz "Comandeer" Jakut"/>
             <b>JavaScript. Programowanie zaawansowane</b>
             Tomasz "Comandeer" Jakut
         </a>
@@ -276,7 +273,7 @@
         
 
         <a href="http://javadevmatt.shoplo.com/">
-            <img class="img-link" src="/img/junior-developer.png"/>
+            <img class="img-link" src="/img/junior-developer.png" alt="Junior Developer - Mateusz Kupilas"/>
             <b>Junior Developer</b>
             Mateusz Kupilas
         </a>
@@ -287,7 +284,7 @@
         
 
         <a href="https://zawodprogramista.pl/">
-            <img class="img-link" src="/img/zawod-programista.jpg"/>
+            <img class="img-link" src="/img/zawod-programista.jpg" alt="Zawód: Programista - Maciej Aniserowicz"/>
             <b>Zawód: Programista</b>
             Maciej Aniserowicz
         </a>
@@ -313,8 +310,6 @@
         </a>
     </div>
 </div>
-
-    <br><br>
     
 
 </div>
@@ -332,27 +327,27 @@
 <hr>
 
 
-<footer class="no-print">
+<footer class="d-print-none">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center social-buttons">
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
                             <i class="fa fa-rss fa-lg"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
                             <i class="fa fa-linkedin-square" aria-hidden="true"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
                             <i class="fa fa-github fa-lg"></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="list-inline-item">
                         <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
                             <i class="fa fa-envelope fa-lg"></i>
                         </a>

@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-12-03T18:45:19+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Adnotacje</title><link href="https://devcave.pl/effective-java/annotations" rel="alternate" type="text/html" title="Adnotacje" /><published>2018-11-10T09:00:00+01:00</published><updated>2018-11-10T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/annotations</id><content type="html" xml:base="https://devcave.pl/effective-java/annotations">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-12-05T22:53:46+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Adnotacje</title><link href="https://devcave.pl/effective-java/annotations" rel="alternate" type="text/html" title="Adnotacje" /><published>2018-11-10T09:00:00+01:00</published><updated>2018-11-10T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/annotations</id><content type="html" xml:base="https://devcave.pl/effective-java/annotations">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 39, 40, 41&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Enums and Annotations&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Enums and Annotations&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
                 &lt;a href=&quot;/effective-java/enums&quot;&gt;Item 34: Use enums instead of int constants
@@ -298,7 +298,7 @@ from a supertype
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 34, 35, 36, 37, 38&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Enums and Annotations&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Enums and Annotations&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
                     &lt;a href=&quot;/effective-java/enums&quot;&gt;
@@ -674,7 +674,7 @@ Weight on NEPTUNE is 79.53844
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 31&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Generics&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Generics&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
                 &lt;a href=&quot;/effective-java/nie-uzywaj-surowych-typow&quot;&gt;Item 26: Don’t use raw types
@@ -877,66 +877,62 @@ cannot be converted to Iterable&amp;lt;Number&amp;gt;
 
 &lt;p&gt;Uzupełniona tabelka z używanymi pojęciami w tym rozdziale:&lt;/p&gt;
 
-&lt;div class=&quot;table-wrapper&quot;&gt;
-
-  &lt;table class=&quot;table table-condensed table-bordered&quot;&gt;
-    &lt;thead&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Pojęcie&lt;/th&gt;
-        &lt;th&gt;Przykład&lt;/th&gt;
-      &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Raw type&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Parameterized type&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Generic type&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Formal type parameter&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Unbounded wildcard type&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Bounded type parameter&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;E extends Number&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Recursive type bound&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;T extends Comparable&amp;lt;T&amp;gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Bounded wildcard type&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Generic method&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; asList(E[] a)&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Type token&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.class&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-
-&lt;/div&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 31 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility</summary></entry><entry><title type="html">Używanie generycznych klas i metod</title><link href="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod" rel="alternate" type="text/html" title="Używanie generycznych klas i metod" /><published>2018-10-20T10:00:00+02:00</published><updated>2018-10-20T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod</id><content type="html" xml:base="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod">&lt;p class=&quot;note&quot;&gt;
+&lt;table class=&quot;table table-sm table-bordered&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Pojęcie&lt;/th&gt;
+      &lt;th&gt;Przykład&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Raw type&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Parameterized type&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Generic type&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Formal type parameter&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Unbounded wildcard type&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bounded type parameter&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;E extends Number&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Recursive type bound&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;T extends Comparable&amp;lt;T&amp;gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bounded wildcard type&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Generic method&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; asList(E[] a)&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Type token&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.class&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 31 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility</summary></entry><entry><title type="html">Używanie generycznych klas i metod</title><link href="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod" rel="alternate" type="text/html" title="Używanie generycznych klas i metod" /><published>2018-10-20T10:00:00+02:00</published><updated>2018-10-20T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod</id><content type="html" xml:base="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 28, 29, 30&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Generics&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Generics&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
                 &lt;a href=&quot;/effective-java/nie-uzywaj-surowych-typow&quot;&gt;Item 26: Don’t use raw types
@@ -1241,7 +1237,7 @@ addAll(Collection&amp;lt;? extends E&amp;gt;) as a member of raw type Set
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 27, 32&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Generics&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Generics&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
                 &lt;a href=&quot;/effective-java/nie-uzywaj-surowych-typow&quot;&gt;Item 26: Don’t use raw types
@@ -1394,7 +1390,7 @@ Ano dlatego, że takie metody są bardzo użyteczne i projektanci Javy postanowi
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 26&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Generics&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Generics&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
                     &lt;a href=&quot;/effective-java/nie-uzywaj-surowych-typow&quot;&gt;
@@ -1521,50 +1517,46 @@ c.add(new Coin());
 
 &lt;p&gt;Tabelka z używanymi tu pojęciami:&lt;/p&gt;
 
-&lt;div class=&quot;table-wrapper&quot;&gt;
-
-  &lt;table class=&quot;table table-condensed table-bordered&quot;&gt;
-    &lt;thead&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Pojęcie&lt;/th&gt;
-        &lt;th&gt;Przykład&lt;/th&gt;
-      &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Raw type&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Parameterized type&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Generic type&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Formal type parameter&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Unbounded wildcard type&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Type token&lt;/td&gt;
-        &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.class&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-
-&lt;/div&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 26 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility Klasa lub interfejs, która ma jeden lub więcej typ parametru, jest generyczną klasą/interfejsem (inaczej typem generycznym, generykiem). Np. interfejs List ma pojedynczy typ parametru - E, który odpowiada typowi elementów w liście. Pełna deklaracja wygląda tak: List&amp;lt;E&amp;gt;. Jest to więc interfejs generyczny. Generyki są już od Javy 5 i znacznie ułatwiły życie - wcześniej na przykład trzeba było castować każdy obiekt zwracany z kolekcji, a błędy z tym związane pojawiały się dopiero w runtime. Mianowicie, jeśli znalazłby się tam jakiś nieprawidłowy obiekt, to dostalibyśmy ClassCastException podczas wykonywania programu. Używając generyków, mówimy kompilatorowi, jakich typów używamy i takie błędy wykrywane są już podczas kompilacji. Dzięki temu mamy zwiększone type safty oraz czytelność (brak castowania). W tym rozdziale przyjrzymy się jak wyciągnąć z generyków jak najwięcej i jak ominąć komplikacje. Unikaj typów prostych Każdy generyk ma swój typ prosty (ang. raw type) - sama nazwa bez parametrów typu. Czyli dla List&amp;lt;E&amp;gt; jest to List. Typy proste zachowują się tak, jakby wszystkie generyczne informacje zostały usunięte i istnieją ze względu na kompatybilność wsteczną. Nie powinno się ich używać. Przykład: // Raw collection type - don't do this! // My stamp collection. Contains only Stamp instances. private final Collection stamps = ... ; Kolekcja służy do przechowywania instancji klasy Stamp. Jeśli gdzieś po drodze wpadnie tam instancja klasy Coin: // Erroneous insertion of coin into stamp collection stamps.add(new Coin( ... )); // Emits &quot;unchecked call&quot; warning to skompiluje się to bez żadnego błedu. Błąd pojawi się dopiero wtedy, gdy wystąpi próba wyciągnięcia instancji Coin z kolekcji: // Raw iterator type - don't do this! for (Iterator i = stamps.iterator(); i.hasNext(); ) { Stamp stamp = (Stamp) i.next(); // Throws ClassCastException } Kompilator nie może pomóc wcześniej, bo nie wie, że mogą tam lądować tylko obiekty typu Stamp. Używając parametryzowanego typu, jasno to precyzujemy i kompilator jest w stanie wykryć taki błąd: // Parameterized collection type - typesafe private final Collection&amp;lt;Stamp&amp;gt; stamps = ... ; Ta klasa skompiluje się tylko wtedy, kiedy typy będą się zgadzać. W innym wypadku dostaniemy komunikat: Test.java:9: error: incompatible types: Coin cannot be converted to Stamp c.add(new Coin()); ^ Kompilator zastępuje wszystkie typy parametryzowane podczas kompilacji i wstawia casty wszędzie tam, gdzie pobierane są elementy. Informacje generyczne nie istnieją w skompilowanych klasach. Gwarantuje to type safty i kompatybilność wsteczną. Jeśli chcemy używać List do przetrzymywania dowolnych obiektów, to zamiast gołego List powinniśmy użyć List&amp;lt;Object&amp;gt;. Wtedy mamy type safety i jeśli zrobimy coś źle, to program nam się nie skompiluje. Z kolei, jeśli typ jest nieznany lub nie ma znaczenia, to powinniśmy użyć unbounded wildcard type, czyli znaku zapytania zamiast typu. Dla typu generycznego Set&amp;lt;E&amp;gt;, unbounded wildcard type wygląda tak Set&amp;lt;?&amp;gt;. Oznacza to, że możemy przekazać jakikolwiek Set i nie potrzebujemy żadnej informacji o typie. Po prostu nie będziemy go używać - wystarczą nam metody, które nie wymagają konkretnych typów. Złe użycie z gołymi typami: // Use of raw type for unknown element type - don't do this! static int numElementsInCommon(Set s1, Set s2) { int result = 0; for (Object o1 : s1) if (s2.contains(o1)) result++; return result; } Dobre użycie z unbounded wildcard type: // Uses unbounded wildcard type - typesafe and flexible static int numElementsInCommon(Set&amp;lt;?&amp;gt; s1, Set&amp;lt;?&amp;gt; s2) { ... } Różnica między Set&amp;lt;?&amp;gt; i Set jest taka, że ten pierwszy jest type safe. Jasno deklarujemy, że nie obchodzi nas typ i że będziemy używać tylko metod, które od niego nie zależą. W konsekwencji nie możemy wrzucać żadnych elementów do kolekcji - w przeciwieństwie do gołego typu, który pozwala na wrzucenie czegokolwiek. Jeśli takie ograniczenie nam nie pasuje, to powinniśmy użyć metody generycznej lub bounded wildcard type - o nich będzie w następnych wpisach. Czasem jednak jesteśmy zmuszeni do używania gołych typów - m.in. gdy używamy: literałów klasy - parametryczne są niedozwolone przez specyfikację - List.class, String[].class i int.class są cacy, ale List&amp;lt;String&amp;gt;.class i List&amp;lt;?&amp;gt;.class są niecacy. operatora instanceof - wynika to z tego, że generyczne typy są usuwane w runtimie. Możemy użyć unbounded wildcard (?), ale nie wpływa to w żaden sposób na instanceof, więc to tylko zaśmieca kod. Dlatego używając instanceof najlepiej podawać zawsze goły typ i później ewentualnie castować na Set&amp;lt;?&amp;gt;: // Legitimate use of raw type - instanceof operator if (o instanceof Set) { // Raw type Set&amp;lt;?&amp;gt; s = (Set&amp;lt;?&amp;gt;) o; // Wildcard type //... } Ustaliliśmy, że o ma typ Set, więc castujemy to na wildcard type Set&amp;lt;?&amp;gt;, a nie na surowy typ Set. To jest sprawdzone castowanie, więc kompilator nie będzie rzucał “unchecked cast” warningami. Podsumowując, używanie gołych typów opóźnia wykrywanie błędów i nie wnosi żadnych korzyści, dlatego nie powinniśmy ich używać. W Javie są obecne tylko ze względu na kompatybilność wsteczną. Tabelka z używanymi tu pojęciami: Pojęcie Przykład Raw type List Parameterized type List&amp;lt;String&amp;gt; Generic type List&amp;lt;E&amp;gt; Formal type parameter E Unbounded wildcard type List&amp;lt;?&amp;gt; Type token String.class</summary></entry><entry><title type="html">Klasy wewnętrzne</title><link href="https://devcave.pl/effective-java/klasy-wewnetrzne" rel="alternate" type="text/html" title="Klasy wewnętrzne" /><published>2018-09-08T10:00:00+02:00</published><updated>2018-09-08T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/klasy-wewnetrzne</id><content type="html" xml:base="https://devcave.pl/effective-java/klasy-wewnetrzne">&lt;p class=&quot;note&quot;&gt;
+&lt;table class=&quot;table table-sm table-bordered&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Pojęcie&lt;/th&gt;
+      &lt;th&gt;Przykład&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Raw type&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Parameterized type&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Generic type&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Formal type parameter&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Unbounded wildcard type&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Type token&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.class&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 26 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility Klasa lub interfejs, która ma jeden lub więcej typ parametru, jest generyczną klasą/interfejsem (inaczej typem generycznym, generykiem). Np. interfejs List ma pojedynczy typ parametru - E, który odpowiada typowi elementów w liście. Pełna deklaracja wygląda tak: List&amp;lt;E&amp;gt;. Jest to więc interfejs generyczny. Generyki są już od Javy 5 i znacznie ułatwiły życie - wcześniej na przykład trzeba było castować każdy obiekt zwracany z kolekcji, a błędy z tym związane pojawiały się dopiero w runtime. Mianowicie, jeśli znalazłby się tam jakiś nieprawidłowy obiekt, to dostalibyśmy ClassCastException podczas wykonywania programu. Używając generyków, mówimy kompilatorowi, jakich typów używamy i takie błędy wykrywane są już podczas kompilacji. Dzięki temu mamy zwiększone type safty oraz czytelność (brak castowania). W tym rozdziale przyjrzymy się jak wyciągnąć z generyków jak najwięcej i jak ominąć komplikacje. Unikaj typów prostych Każdy generyk ma swój typ prosty (ang. raw type) - sama nazwa bez parametrów typu. Czyli dla List&amp;lt;E&amp;gt; jest to List. Typy proste zachowują się tak, jakby wszystkie generyczne informacje zostały usunięte i istnieją ze względu na kompatybilność wsteczną. Nie powinno się ich używać. Przykład: // Raw collection type - don't do this! // My stamp collection. Contains only Stamp instances. private final Collection stamps = ... ; Kolekcja służy do przechowywania instancji klasy Stamp. Jeśli gdzieś po drodze wpadnie tam instancja klasy Coin: // Erroneous insertion of coin into stamp collection stamps.add(new Coin( ... )); // Emits &quot;unchecked call&quot; warning to skompiluje się to bez żadnego błedu. Błąd pojawi się dopiero wtedy, gdy wystąpi próba wyciągnięcia instancji Coin z kolekcji: // Raw iterator type - don't do this! for (Iterator i = stamps.iterator(); i.hasNext(); ) { Stamp stamp = (Stamp) i.next(); // Throws ClassCastException } Kompilator nie może pomóc wcześniej, bo nie wie, że mogą tam lądować tylko obiekty typu Stamp. Używając parametryzowanego typu, jasno to precyzujemy i kompilator jest w stanie wykryć taki błąd: // Parameterized collection type - typesafe private final Collection&amp;lt;Stamp&amp;gt; stamps = ... ; Ta klasa skompiluje się tylko wtedy, kiedy typy będą się zgadzać. W innym wypadku dostaniemy komunikat: Test.java:9: error: incompatible types: Coin cannot be converted to Stamp c.add(new Coin()); ^ Kompilator zastępuje wszystkie typy parametryzowane podczas kompilacji i wstawia casty wszędzie tam, gdzie pobierane są elementy. Informacje generyczne nie istnieją w skompilowanych klasach. Gwarantuje to type safty i kompatybilność wsteczną. Jeśli chcemy używać List do przetrzymywania dowolnych obiektów, to zamiast gołego List powinniśmy użyć List&amp;lt;Object&amp;gt;. Wtedy mamy type safety i jeśli zrobimy coś źle, to program nam się nie skompiluje. Z kolei, jeśli typ jest nieznany lub nie ma znaczenia, to powinniśmy użyć unbounded wildcard type, czyli znaku zapytania zamiast typu. Dla typu generycznego Set&amp;lt;E&amp;gt;, unbounded wildcard type wygląda tak Set&amp;lt;?&amp;gt;. Oznacza to, że możemy przekazać jakikolwiek Set i nie potrzebujemy żadnej informacji o typie. Po prostu nie będziemy go używać - wystarczą nam metody, które nie wymagają konkretnych typów. Złe użycie z gołymi typami: // Use of raw type for unknown element type - don't do this! static int numElementsInCommon(Set s1, Set s2) { int result = 0; for (Object o1 : s1) if (s2.contains(o1)) result++; return result; } Dobre użycie z unbounded wildcard type: // Uses unbounded wildcard type - typesafe and flexible static int numElementsInCommon(Set&amp;lt;?&amp;gt; s1, Set&amp;lt;?&amp;gt; s2) { ... } Różnica między Set&amp;lt;?&amp;gt; i Set jest taka, że ten pierwszy jest type safe. Jasno deklarujemy, że nie obchodzi nas typ i że będziemy używać tylko metod, które od niego nie zależą. W konsekwencji nie możemy wrzucać żadnych elementów do kolekcji - w przeciwieństwie do gołego typu, który pozwala na wrzucenie czegokolwiek. Jeśli takie ograniczenie nam nie pasuje, to powinniśmy użyć metody generycznej lub bounded wildcard type - o nich będzie w następnych wpisach. Czasem jednak jesteśmy zmuszeni do używania gołych typów - m.in. gdy używamy: literałów klasy - parametryczne są niedozwolone przez specyfikację - List.class, String[].class i int.class są cacy, ale List&amp;lt;String&amp;gt;.class i List&amp;lt;?&amp;gt;.class są niecacy. operatora instanceof - wynika to z tego, że generyczne typy są usuwane w runtimie. Możemy użyć unbounded wildcard (?), ale nie wpływa to w żaden sposób na instanceof, więc to tylko zaśmieca kod. Dlatego używając instanceof najlepiej podawać zawsze goły typ i później ewentualnie castować na Set&amp;lt;?&amp;gt;: // Legitimate use of raw type - instanceof operator if (o instanceof Set) { // Raw type Set&amp;lt;?&amp;gt; s = (Set&amp;lt;?&amp;gt;) o; // Wildcard type //... } Ustaliliśmy, że o ma typ Set, więc castujemy to na wildcard type Set&amp;lt;?&amp;gt;, a nie na surowy typ Set. To jest sprawdzone castowanie, więc kompilator nie będzie rzucał “unchecked cast” warningami. Podsumowując, używanie gołych typów opóźnia wykrywanie błędów i nie wnosi żadnych korzyści, dlatego nie powinniśmy ich używać. W Javie są obecne tylko ze względu na kompatybilność wsteczną. Tabelka z używanymi tu pojęciami: Pojęcie Przykład Raw type List Parameterized type List&amp;lt;String&amp;gt; Generic type List&amp;lt;E&amp;gt; Formal type parameter E Unbounded wildcard type List&amp;lt;?&amp;gt; Type token String.class</summary></entry><entry><title type="html">Klasy wewnętrzne</title><link href="https://devcave.pl/effective-java/klasy-wewnetrzne" rel="alternate" type="text/html" title="Klasy wewnętrzne" /><published>2018-09-08T10:00:00+02:00</published><updated>2018-09-08T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/klasy-wewnetrzne</id><content type="html" xml:base="https://devcave.pl/effective-java/klasy-wewnetrzne">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 24&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Classes and Interfaces&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Classes and Interfaces&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
                 &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
@@ -1803,7 +1795,7 @@ c.add(new Coin());
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 21, 22, 23, 25&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Classes and Interfaces&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Classes and Interfaces&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
                 &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
@@ -2032,7 +2024,7 @@ Jeśli wywołamy &lt;code class=&quot;highlighter-rouge&quot;&gt;removeIf&lt;/co
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 20&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Classes and Interfaces&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Classes and Interfaces&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
                 &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
@@ -2228,7 +2220,7 @@ AbstractC
 
 &lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 19&lt;/i&gt; z rozdziału:&lt;/p&gt;
 
-&lt;p class=&quot;m0&quot;&gt;Classes and Interfaces&lt;/p&gt;
+&lt;p class=&quot;m-0&quot;&gt;Classes and Interfaces&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
                 &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members

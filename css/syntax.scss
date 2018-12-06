@@ -7,7 +7,7 @@ figure.highlight,
 code.highlight,
 .highlighter-rouge {
 
-    @extend .box-effect;
+    @extend .box-effect !optional;
 
     background: #272727;
     color: #f92672;
@@ -130,7 +130,7 @@ pre code {
 .folder,
 .path {
 
-    @extend .box-effect;
+    @extend .box-effect !optional;
 
     background-color: #f3f3f3;
     padding: 1px 4px 1px 4px!important;
@@ -166,7 +166,7 @@ pre code {
     border: 1px solid #ffffff00;
     text-align: justify;
     display: block;
-    @extend .box-effect;
+    @extend .box-effect !optional;
 
     .dark-mode & {
         background-color: #2d2d2d;

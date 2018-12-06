@@ -163,7 +163,7 @@ Zatem wybierajmy po prostu to, co jest krótsze, czytelniejsze i łatwiejsze do 
 
 Najczęściej używany typ referencji to referencja do metody statycznej, ale są też cztery inne - *bound*, *unbound* oraz konstruktory klas i tablic:
 
-{: .table .table-sm .table-bordered}
+{: .post-table}
 
 | Method Ref Type   | Example                  | Lambda Equivalent                                  |
 |-------------------|--------------------------|----------------------------------------------------|

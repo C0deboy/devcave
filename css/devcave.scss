@@ -1,10 +1,12 @@
-@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+$secondary-color: #0079cc;
+$secondary-color-hover: #0089e8;
+$secondary-dark: #262626;
+$table-dark-bg: $secondary-dark;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
 @import "libs/fontello.css";
 @import "navbar";
 @import "syntax";
-
-$secondary-color: #0079cc;
-$secondary-color-hover: #0089e8;
 
 body {
     font-family: 'Ubuntu', sans-serif;
@@ -14,7 +16,7 @@ body {
 }
 
 .dark-mode {
-    background: #2a2a2a;
+    background: #232323;
     color: #e2e2e2;
 }
 
@@ -397,6 +399,9 @@ img::-moz-selection {
 }
 
 .skillbar {
+
+    @extend .box-effect;
+
     background: #eee;
     margin-bottom: 15px;
     width: 100%;
@@ -406,6 +411,7 @@ img::-moz-selection {
     text-align: right;
     font-weight: bold;
     font-size: 13px;
+    padding: 0!important;
 
     span {
         position: absolute;
@@ -415,6 +421,7 @@ img::-moz-selection {
 }
 
 .skillbar-title {
+
     float: left;
     width: 130px;
     padding: 0 20px;
@@ -423,17 +430,21 @@ img::-moz-selection {
     height: 35px;
     color: white;
     background: inherit;
+    border-bottom-left-radius: .25em;
+    border-top-left-radius: .25em;
 }
 
 .skillbar-progress {
+
     float: left;
     height: 35px;
     background: inherit;
+    border-bottom-right-radius: .25em;
+    border-top-right-radius: .25em;
 
     &.transition {
         -webkit-transition: width 2s;
         -moz-transition: width 2s;
-        -ms-transition: width 2s;
         -o-transition: width 2s;
         transition: width 2s;
     }
@@ -504,7 +515,7 @@ img::-moz-selection {
     margin: 10px 7px 0 0;
     box-shadow: 0 1px 2px 0 #000000;
     padding: 0 5px;
-    border-radius: 3px;
+    border-radius: .25em;
 
     &:hover {
         transition: background 0.3s;
@@ -523,22 +534,32 @@ img::-moz-selection {
 }
 
 .project-btn {
-    background: #313030;
+    @extend .main-btn;
     color: white;
     text-decoration: none;
-    padding: 10px 0 10px 20px;
+    padding: 10px 0 10px 20px!important;
     white-space: nowrap;
     transition: background .2s linear, transform .2s linear;
+    display: inline!important;
 
-    .fa-circle {
-        color: #313030;
+    .project-btn-circle {
+        background: $secondary-dark;
+        border-radius: 50%;
+        margin: 5px;
+        width: 60px;
+        height: 60px;
+        box-shadow: 0 1px 4px 0 black;
+    }
+
+    &:hover .project-btn-circle {
+        @extend .main-btn:focus;
     }
 }
 
 .project,
 .books {
     margin: 30px 0;
-    background: rgba(222, 222, 222, 0.12);
+    //background: rgba(222, 222, 222, 0.12);
 }
 
 .books {
@@ -630,11 +651,15 @@ img::-moz-selection {
 
 .recommended {
     margin: auto;
+
+    .d-print-none & {
+        width: fit-content;
+    }
 }
 
 .main-btn {
-    background: #262626;
-    border-radius: 5px;
+    background: $secondary-dark;
+    border-radius: .25em;
     color: #ffffff;
     display: inline-block;
     margin: 10px auto 10px auto;
@@ -814,7 +839,6 @@ img::-moz-selection {
     transform: scale(1);
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
-    -ms-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
 }
@@ -822,4 +846,21 @@ img::-moz-selection {
 .zoom.show {
     opacity: 1;
     transform: scale(1.2) translateY(-5px);
+}
+
+
+.post-table {
+    @extend .table;
+    @extend .table-sm;
+    @extend .table-striped;
+    @extend .box-effect;
+
+    .dark-mode & {
+        @extend .table-dark;
+
+        thead th, td {
+            border-bottom: 2px solid rgba(36, 36, 38, 0.36) !important;
+            border-top: 1px solid rgba(20, 20, 22, 0.45) !important;
+        }
+    }
 }

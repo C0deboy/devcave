@@ -6,16 +6,22 @@
 figure.highlight,
 code.highlight,
 .highlighter-rouge {
-    background: #272822;
+
+    @extend .box-effect;
+
+    background: #272727;
     color: #f92672;
     margin: 30px 0;
     padding: 0 3px;
-    box-shadow: 0 1px 1px 0 #00000096;
+
+    .note &, .warning &, .idea & {
+        box-shadow: 0 1px 2px 0 #000;
+    }
 }
 
 code.highlighter-rouge {
     background: none;
-    box-shadow: none;
+    box-shadow: none!important;
 }
 
 pre {
@@ -123,16 +129,16 @@ pre code {
 .file,
 .folder,
 .path {
+
+    @extend .box-effect;
+
     background-color: #f3f3f3;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 1px 4px 1px 4px;
+    padding: 1px 4px 1px 4px!important;
     margin: 0 2px;
     color: #333;
 
     .dark-mode & {
-        background-color: #383838;
-        border: 1px solid #83838385;
+        background-color: #38383894;
         color: inherit;
     }
 }
@@ -158,15 +164,12 @@ pre code {
 .idea {
     background-color: #f3f3f3;
     border: 1px solid #ffffff00;
-    border-radius: 3px;
-    padding: 2px 5px 6px 5px;
     text-align: justify;
     display: block;
-    box-shadow: 0 1px 1px 0 #000000b3;
+    @extend .box-effect;
 
     .dark-mode & {
-        background-color: #383838;
-        border: 1px solid #46464669;
+        background-color: #2d2d2d;
         color: inherit;
     }
 }

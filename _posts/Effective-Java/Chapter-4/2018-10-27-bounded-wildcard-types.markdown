@@ -209,7 +209,7 @@ Dzięki temu wspieramy typy, które nie implementują `Comparable` bezpośrednio
 
 Uzupełniona tabelka z używanymi pojęciami w tym rozdziale:
 
-{: .table .table-sm .table-bordered}
+{: .post-table}
 
 | Pojęcie                 |  Przykład                          |
 |-------------------------|------------------------------------|

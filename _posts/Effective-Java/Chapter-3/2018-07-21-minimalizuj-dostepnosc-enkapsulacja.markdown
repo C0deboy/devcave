@@ -56,7 +56,7 @@ Poprzez "elementy klasy" mam na myśli pola, metody, wewnętrzne klasy i interfe
 
 Łatwiej to zobrazować na podstawie tabelki:
 
-{: .table .table-sm .table-bordered}
+{: .post-table}
 
 | Modyfikator | Klasa | Pakiet | Podklasa | Wszędzie |
 |:------------|:------|:-------|:---------|:---------|
@@ -71,7 +71,7 @@ Dla przykładu rozważmy, że mamy taką strukturę klas:
 
 Wtedy pola klasy `Alpha` oznaczone danym modyfikatorem będą miały taką widoczność w innych klasach:
 
-{: .table .table-sm .table-bordered}
+{: .post-table}
 
 | Modyfikator | Alpha | Beta | AlphaSub | Gamma |
 |:------------|:------|:-----|:---------|:------|

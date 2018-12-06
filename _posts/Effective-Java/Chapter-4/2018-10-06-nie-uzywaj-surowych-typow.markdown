@@ -121,7 +121,7 @@ Podsumowując, używanie gołych typów opóźnia wykrywanie błędów i nie wno
 
 Tabelka z używanymi tu pojęciami:
 
-{: .table .table-sm .table-bordered}
+{: .post-table}
 
 | Pojęcie                 |  Przykład                          |
 |-------------------------|------------------------------------|

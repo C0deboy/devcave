@@ -27,7 +27,7 @@ Mamy więc:
 
 Tabelka z przykładami:
 
-{: .table .table-sm .table-bordered}
+{: .post-table}
 
 | Interface           | Function Signature    | Example               |
 |---------------------|-----------------------|-----------------------|

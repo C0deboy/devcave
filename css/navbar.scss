@@ -41,6 +41,21 @@
         padding: 10px 15px;
     }
 
+    .navbar-toggler {
+        font-size: inherit;
+        padding: 10px 15px;
+        margin-right: 15px;
+
+        .dark-mode & {
+            color: #e2e2e2;
+            border-color: #e2e2e2;
+        }
+
+        :focus, :hover {
+            background: rgba(172, 172, 172, 0.20);
+        }
+    }
+
     &.is-fixed {
         /* when the user scrolls down, we hide the header right above the viewport */
         position: fixed;
@@ -100,16 +115,6 @@
     }
 }
 
-.navbar-default .navbar-toggler:focus,
-.navbar-default .navbar-toggler:hover {
-    background: rgba(172, 172, 172, 0.20);;
-}
-
-.navbar-toggler {
-    font-size: inherit;
-    padding: 10px 15px;
-    margin-right: 15px;
-}
 
 .dark-mode-btn {
     cursor: pointer;

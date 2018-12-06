@@ -27,7 +27,6 @@ code.highlighter-rouge {
 pre {
     background-color: inherit;
     color: inherit;
-    font-size: .7em;
     padding: 9.5px;
 }
 
@@ -40,9 +39,9 @@ pre code {
 
     white-space: pre-wrap;
     word-break: break-all;
+    font-size: .8em;
 
     @media (max-width: 768px) {
-        font-size: .6em;
         white-space: pre;
     }
 }

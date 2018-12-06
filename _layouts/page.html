@@ -5,7 +5,12 @@ layout: default
 <header class="intro-header">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-xl-6 col-xl-offset-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            {% if page.title == "Moje projekty" %}
+                {% assign css = "col-xl-8 col-lg-9 col-md-10" %}
+            {% else %}
+                {% assign css = "col-xl-6 col-lg-8 col-md-10" %}
+            {% endif %}
+            <div class="{{ css }}">
                 <div class="site-heading">
                     <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
                     <hr class="small">
@@ -18,7 +23,7 @@ layout: default
 
 <div class="container-fluid">
 	<div class="row justify-content-center">
-		<div class="col-xl-6 col-xl-offset-3 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+		<div class="{{ css }}">
 			{{ content }}
 		</div>
 	</div>

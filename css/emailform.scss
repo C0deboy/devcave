@@ -57,11 +57,8 @@
     width: 306px;
 
     @media (max-width: 375px) {
-        margin-left: calc((100% - 330px) / 2) !important;
         transform: scale(0.9);
         -webkit-transform: scale(0.9);
-        transform-origin: center center;
-        -webkit-transform-origin: center center;
     }
 
     .g-recaptcha {

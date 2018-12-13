@@ -367,7 +367,7 @@ Passed: 1, Failed: 3
 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">doublyBad</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 </code></pre></div></div>
 
-<p>Przekaz tego itemu jest prosty - używajmy adnotacji, zamiast wymuszania konwencji nazewniczych.</p>
+<p>Przekaz tego tematu jest prosty - używajmy adnotacji, zamiast wymuszania konwencji nazewniczych.</p>
 
 <h1 id="adnotacja-overrride">Adnotacja @Overrride</h1>
 
@@ -403,11 +403,11 @@ from a supertype
     ^
 </code></pre></div></div>
 
-<p>Przekaz z tego itemu jest prosty - używajmy adnotacji <code class="highlighter-rouge">@Override</code> na każdej metodzie, która nadpisuje metodę z nadklasy. Wyjątkiem od tej zasady <strong>mogą</strong> być klasy abstrakcyjne - tak czy siak, jeśli nie zaimplementujemy metody abstrakcyjnej nasz program się nie skompiluje.</p>
+<p>Przekaz z tego tematu jest prosty - używajmy adnotacji <code class="highlighter-rouge">@Override</code> na każdej metodzie, która nadpisuje metodę z nadklasy. Wyjątkiem od tej zasady <strong>mogą</strong> być klasy abstrakcyjne - tak czy siak, jeśli nie zaimplementujemy metody abstrakcyjnej nasz program się nie skompiluje.</p>
 
 <h1 id="marker-interfejs-jako-definicja-typu">Marker interfejs jako definicja typu</h1>
 
-<p>W tym itemie mowa o tzw. <em>marker interface</em>. Jest to interfejs, które nie ma żadnych metod i tylko “zaznacza”, że klasa jest do czegoś przeznaczona. Przykładem jest interfejs <code class="highlighter-rouge">Serializable</code>, który wskazuje, że jego instancje mogą być serializowane.</p>
+<p>W tym temacie mowa o tzw. <em>marker interface</em>. Jest to interfejs, które nie ma żadnych metod i tylko “zaznacza”, że klasa jest do czegoś przeznaczona. Przykładem jest interfejs <code class="highlighter-rouge">Serializable</code>, który wskazuje, że jego instancje mogą być serializowane.</p>
 
 <p>W poprzednim poście była mowa o <em>marker annotation</em>, które też tylko oznaczają dany element, więc jaka jest między nimi różnica?</p>
 
@@ -417,7 +417,7 @@ from a supertype
 
 <p>Dodatkową zaletą marker interfejsów jest to, że mogą bardziej ograniczyć target, dla którego mogą być użyte. Załóżmy, że chcemy mieć marker, który może być stosowany tylko dla implementacji konkretnego interfejsu. Jeśli zadeklarujemy target adnotacji na <code class="highlighter-rouge">Element.Type</code> to będziemy mogli jej użyć na jakimkolwiek interfejsie lub klasie i nie możemy tego ograniczyć. Używając <em>marker interface</em> możemy sprawić, by rozszerzał interfejs, którego implementacje mogą być “oznaczane” przez ten interfejs. Dzięki temu mamy zagwarantowane, że wszystkie “zaznaczone” klasy, będą jednocześnie implementacją interfejsu, dla której są aplikowalne.</p>
 
-<p>Przekaz z tego itemu jest prosty - jeśli chcemy używać “oznaczonych” klas w naszym API, skorzystajmy z <em>marker interface</em> zamiast <em>marker annotation</em>, jeśli możemy skorzystać z którejś z wymienionych zalet.</p>
+<p>Przekaz z tego tematu jest prosty - jeśli chcemy używać “oznaczonych” klas w naszym API, skorzystajmy z <em>marker interface</em> zamiast <em>marker annotation</em>, jeśli możemy skorzystać z którejś z wymienionych zalet.</p>
 
 
       </div>

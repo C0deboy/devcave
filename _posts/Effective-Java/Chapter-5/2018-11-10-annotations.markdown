@@ -229,7 +229,7 @@ Od Javy 8 jest też inny sposób, aby podać kilka argumentów. Możemy oznaczy�
 public static void doublyBad() { ... }
 ```
 
-Przekaz tego itemu jest prosty - używajmy adnotacji, zamiast wymuszania konwencji nazewniczych.
+Przekaz tego tematu jest prosty - używajmy adnotacji, zamiast wymuszania konwencji nazewniczych.
 
 # Adnotacja @Overrride
 
@@ -268,11 +268,11 @@ from a supertype
     ^
 ```
 
-Przekaz z tego itemu jest prosty - używajmy adnotacji `@Override` na każdej metodzie, która nadpisuje metodę z nadklasy. Wyjątkiem od tej zasady **mogą** być klasy abstrakcyjne - tak czy siak, jeśli nie zaimplementujemy metody abstrakcyjnej nasz program się nie skompiluje.
+Przekaz z tego tematu jest prosty - używajmy adnotacji `@Override` na każdej metodzie, która nadpisuje metodę z nadklasy. Wyjątkiem od tej zasady **mogą** być klasy abstrakcyjne - tak czy siak, jeśli nie zaimplementujemy metody abstrakcyjnej nasz program się nie skompiluje.
 
 # Marker interfejs jako definicja typu
 
-W tym itemie mowa o tzw. *marker interface*. Jest to interfejs, które nie ma żadnych metod i tylko "zaznacza", że klasa jest do czegoś przeznaczona. Przykładem jest interfejs `Serializable`, który wskazuje, że jego instancje mogą być serializowane.
+W tym temacie mowa o tzw. *marker interface*. Jest to interfejs, które nie ma żadnych metod i tylko "zaznacza", że klasa jest do czegoś przeznaczona. Przykładem jest interfejs `Serializable`, który wskazuje, że jego instancje mogą być serializowane.
 
 W poprzednim poście była mowa o *marker annotation*, które też tylko oznaczają dany element, więc jaka jest między nimi różnica?
 
@@ -283,4 +283,4 @@ Co ciekawe, metoda `ObjectOutputStream.write` nie korzysta z tej zalety i jej ar
 
 Dodatkową zaletą marker interfejsów jest to, że mogą bardziej ograniczyć target, dla którego mogą być użyte. Załóżmy, że chcemy mieć marker, który może być stosowany tylko dla implementacji konkretnego interfejsu. Jeśli zadeklarujemy target adnotacji na `Element.Type` to będziemy mogli jej użyć na jakimkolwiek interfejsie lub klasie i nie możemy tego ograniczyć. Używając *marker interface* możemy sprawić, by rozszerzał interfejs, którego implementacje mogą być "oznaczane" przez ten interfejs. Dzięki temu mamy zagwarantowane, że wszystkie "zaznaczone" klasy, będą jednocześnie implementacją interfejsu, dla której są aplikowalne.
 
-Przekaz z tego itemu jest prosty - jeśli chcemy używać "oznaczonych" klas w naszym API, skorzystajmy z *marker interface* zamiast *marker annotation*, jeśli możemy skorzystać z którejś z wymienionych zalet.
+Przekaz z tego tematu jest prosty - jeśli chcemy używać "oznaczonych" klas w naszym API, skorzystajmy z *marker interface* zamiast *marker annotation*, jeśli możemy skorzystać z którejś z wymienionych zalet.

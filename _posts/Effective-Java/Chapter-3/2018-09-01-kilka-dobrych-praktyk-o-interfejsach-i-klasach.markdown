@@ -175,7 +175,7 @@ class Rectangle extends Figure {
 }
 ```
 
-I taki płynie też przekaz z tego itemu - preferuj hierarchie klas, zamiast tworów jak z pierwszego kawałka kodu. Nie używaj "tagów" do określenia typu klasy - od tego są właśnie klasy.
+I taki płynie też przekaz z tego tematu - preferuj hierarchie klas, zamiast tworów jak z pierwszego kawałka kodu. Nie używaj "tagów" do określenia typu klasy - od tego są właśnie klasy.
  
 *Tagged classes* nie mają żadnego uzasadnionego prawidłowego użycia ani zalet, nad którymi można by się zastanowić.
 

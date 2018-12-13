@@ -23,7 +23,7 @@ Streamy są wykonywane leniwie tzn. dopóki nie nie wywołamy końcowej operacji
 
 API streamów jest płynne, tzn. możemy dowolnie łączyć różne wywołania w jedno wyrażenie.
 
-Domyślnie streamy wykonywane są sekwencyjnie. Zamienienie ich na pracę współbieżną jest tak proste, jak wywołanie metody `parallel()` na streamie, **jednak nie zawsze jest to odpowiednie** - ten temat poruszę w ostatnim itemie tego rozdziału.
+Domyślnie streamy wykonywane są sekwencyjnie. Zamienienie ich na pracę współbieżną jest tak proste, jak wywołanie metody `parallel()` na streamie, **jednak nie zawsze jest to odpowiednie** - ten temat poruszę w ostatnim temacie tego rozdziału.
 
 Stream API jest bardzo wszechstronne i możemy w nich wykonać niemal wszystko, nie znaczy to jednak, że powinniśmy od teraz robić wszystko w streamach. Dobre używanie streamów może skrócić kod i zwiększyć czytelność naszych programów, jednak nadużywanie ich może sprawić, że będzie odwrotnie. Dlatego najlepiej znaleźć złoty środek.
 

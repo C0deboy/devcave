@@ -17,7 +17,7 @@ item:       34, 35, 36, 37, 38
 
 Ten rozdział zawiera rady dotyczące używania enumów i adnotacji.
 
-Na początku myślałem, że pominę ten rozdział jako że nie wnosi zbyt dużo, ale część porad jest przydatna, dlatego uznałem, że wyciągnę najważniejsze informacje z każdego itemu i podzielę to na 2 posty - o enumach i adnotacjach. Zacznijmy więc enumów:
+Na początku myślałem, że pominę ten rozdział jako że nie wnosi zbyt dużo, ale część porad jest przydatna, dlatego uznałem, że wyciągnę najważniejsze informacje z każdego tematu i podzielę to na 2 posty - o enumach i adnotacjach. Zacznijmy więc enumów:
 
 # Enumy zamiast stałych typu int
 

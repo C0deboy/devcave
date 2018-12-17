@@ -567,8 +567,9 @@ img::-moz-selection {
     padding-bottom: 35px;
 }
 
-.project img {
+.project-preview {
     margin: 20px auto;
+    padding: 0;
 }
 
 .search-value {
@@ -749,6 +750,8 @@ img::-moz-selection {
 
 .fb-page {
     padding: 5px 5px 0;
+    max-width: 100%;
+    overflow: auto;
 
     iframe {
         width: 340px;

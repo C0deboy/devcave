@@ -1,4 +1,5 @@
 import 'bootstrap.native/dist/bootstrap-native-v4';
+import '../node_modules/waypoints/lib/noframework.waypoints.min';
 
 require('../css/devcave.scss');
 
@@ -51,4 +52,16 @@ document.querySelectorAll('.helion-ksiazkasm4 a:first-of-type').forEach((link) =
 
 document.querySelectorAll('.helion-ksiazkasm4 a').forEach((link) => {
   link.classList.add('main-btn');
+});
+
+const gifs = document.querySelectorAll('.gif');
+gifs.forEach((gif) => {
+  new Waypoint({
+    element: gif,
+    handler() {
+      gif.src = gif.src.replace('png', 'gif');
+      this.destroy();
+    },
+    offset: '40%',
+  });
 });

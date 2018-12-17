@@ -32,7 +32,12 @@ permalink: "/moje-projekty/"
     {% for project in section.projects %}
     <div class="project box-effect row" id="{{ project.title | slugify: 'latin'}}">
         <div class="col-md-7">
-            <img class="img-fluid" src="{{ project.img }}" alt="{{ project.title }} demo">
+            {% if project.img contains "gif" %}
+
+            <img class="img-fluid box-effect project-preview gif" src="{{ project.img | replace: 'gif', 'png' }}" alt="{{ project.title }} demo">
+            {% else %}
+            <img class="img-fluid box-effect project-preview" src="{{ project.img }}" alt="{{ project.title }} demo">
+            {% endif %}
         </div>
         <div class="col-md-5 project-description">
             <h3>{{ project.title }}</h3>

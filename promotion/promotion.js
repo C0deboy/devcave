@@ -1,13 +1,13 @@
 const promotions = [
   {
-    start: new Date('2018-11-23'),
-    end: new Date('2018-11-25'),
+    start: new Date('2018-12-17'),
+    end: new Date('2018-12-20'),
     // number: '5060',
     host: 'helion.pl',
     img: '/promotion/p.jpg',
     popup: true,
-    message: 'Black Friday w Helion - [książki 2za1]',
-    adHeader: 'Black Friday w Helion - [książki 2za1]',
+    message: 'Świąteczna promocja w Helion - [książki 2za1]',
+    adHeader: 'Świąteczna promocja w Helion - [książki 2za1]',
     adContent: '',
   },
 ];

@@ -1,4 +1,210 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2018-12-17T19:33:52+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Adnotacje</title><link href="https://devcave.pl/effective-java/annotations" rel="alternate" type="text/html" title="Adnotacje" /><published>2018-11-10T09:00:00+01:00</published><updated>2018-11-10T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/annotations</id><content type="html" xml:base="https://devcave.pl/effective-java/annotations">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-01-05T11:35:58+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Lambdy i referencje do metod</title><link href="https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas" rel="alternate" type="text/html" title="Lambdy i referencje do metod" /><published>2019-01-05T09:00:00+01:00</published><updated>2019-01-05T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas</id><content type="html" xml:base="https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 42, 43&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m-0&quot;&gt;Lambdas and Streams&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/lambdy-zamiast-anonimowych-klas&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 42: Prefer lambdas to anonymous classes
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/lambdy-zamiast-anonimowych-klas&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 43: Prefer method references to lambdas
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 44: Favor the use of standard functional interfaces
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 45: Use streams judiciously
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 46: Prefer side-effect-free functions in streams
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 47: Prefer Collection to Stream as a return type
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 48: Use caution when making streams parallel
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;W tym rozdziale będzie mowa o elementach, które zostały dodane w Javie 8 - interfejsy funkcyjne, referencje do metod, lambdy i streamy.&lt;/p&gt;
+
+&lt;h1 id=&quot;preferuj-lambdy-zamiast-klas-anonimowych&quot;&gt;Preferuj lambdy zamiast klas anonimowych&lt;/h1&gt;
+
+&lt;p&gt;Typy funkcyjne to interfejsy (rzadziej klasy abstrakcyjne), które mają tylko jedną abstrakcyjną metodę. Ich instancje nazywane są obiektami funkcyjnymi i reprezentują jedną konkretną funkcję. Przed Java 8, aby stworzyć obiekt funkcyjny, musieliśmy użyć klasy abstrakcyjnej. Dla przykładu kawałek kodu, który sortuje słowa na podstawie ich długości, definiując to w klasie anonimowej:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Anonymous class instance as a function object - obsolete!&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Programowanie funkcyjne w Javie przy użyciu anonimowych klas wymaga dużo boilerplateu i nie jest zbyt przyjemne, dlatego w Javie 8 dodano lambdy. Są &lt;strong&gt;podobne&lt;/strong&gt; funkcjonalnie do klas anonimowych, jednak dużo bardziej zwięzłe. To samo za pomocą lambdy wygląda tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Lambda expression as function object (replaces anonymous class)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;note&quot;&gt;Typ lambdy &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparator&amp;lt;String&amp;gt;&lt;/code&gt;, typy parametrów (&lt;code class=&quot;highlighter-rouge&quot;&gt;s1&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;s2&lt;/code&gt;, oba &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;) i typ zwracany &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt; nie jest widoczny w kodzie. Kompilator dedukuje te typy dzięki mechanizmowi zwanemu inferencją typów. W niektórych specyficznych przypadkach kompilator nie będzie potrafił tego zrobić i będzie trzeba je podać ręcznie. Szczególnie w lambdach nie powinniśmy używać surowych typów, bo to z generyków kompilator może zebrać najwięcej informacji.&lt;/p&gt;
+
+&lt;p&gt;Możemy to jeszcze nawet bardziej skrócić używając metody do budowania comparatora:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;comparing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Od Javy 8 dodano metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;sort&lt;/code&gt; do interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; z której możemy skorzystać, aby jeszcze nieco skrócić zapis:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;comparing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Lambdy znacznie zwiększają przejrzystość kodu i mogą być zastosowane w wielu miejscach. Weźmy na przykład enuma &lt;code class=&quot;highlighter-rouge&quot;&gt;Operation&lt;/code&gt; z &lt;a href=&quot;/effective-java/enums&quot;&gt;postu o enumach&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Enum type with constant-specific class bodies &amp;amp; data (Item 34)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Operation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;PLUS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;+&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;MINUS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;TIMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DIVIDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;Operation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;symbol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Zamiast definiować osobne ciało dla każdej instancji, możemy przekazać lambdę do konstruktora, która implementuje dane zachowanie. To zachowanie zostanie przechowane w polu &lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleBinaryOperator op&lt;/code&gt;, które potem będzie wywoływane w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Enum with function object fields &amp;amp; constant-specific behavior&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Operation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;PLUS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;+&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;MINUS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;TIMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DIVIDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DoubleBinaryOperator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;Operation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DoubleBinaryOperator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;symbol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;applyAsDouble&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Widać znaczną redukcję boilerplateu i kod jest dużo bardziej czytelny.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleBinaryOperator&lt;/code&gt; jest jednym z wielu predefiniowanych interfejsów w bibliotece Javy, który reprezentuje funkcję, która pobiera dwa argumenty i zwraca wartość typu &lt;code class=&quot;highlighter-rouge&quot;&gt;double&lt;/code&gt;.
+Wszystkie pozostałe interfejsy z tej kategorii będą omówione w następnym poście.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Nie jest jednak tak, że lambdy są niezastąpione.&lt;/strong&gt; W przeciwieństwie do metod i klas, lambdy nie mają nazwy ani dokumentacji. Jeśli operacje w niej wykonywane nie są zwięzłe i oczywiste lub są większe niż kilka linijek, to nie powinny się znaleźć w lambdzie, bo czytelność i łatwość zrozumienia znacznie ucierpi. Idealna lambda powinna być jednolinijkowa, ale kilka linijek to sensowne maximum.&lt;/p&gt;
+
+&lt;p&gt;Innym ograniczeniem w przypadku naszego enuma jest to, że lambda podana do konstruktora, nie ma dostępu do pól czy metod instancji.&lt;/p&gt;
+
+&lt;p&gt;A czy z kolei lambdy wypierają całkiem klasy anonimowe? Też nie do końca. W przeciwieństwie do klas anonimowych nie możemy utworzyć instancji lambdy, co za tym idzie - nie możemy również uzyskać do niej referencji i przekazać jej gdzieś indziej. Ponadto w lambdzie słowo kluczowe &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; odnosi się do obiektu, w którym jest wykonywana, a w klasie anonimowej odnosi się do klasy anonimowej.&lt;/p&gt;
+
+&lt;p&gt;Java dostarcza nawet lepszy sposób, aby stworzyć obiekty funkcyjne, które są jeszcze bardziej zwięzłe niż lambdy - referencje do metod.&lt;/p&gt;
+
+&lt;h1 id=&quot;referencje-do-metod&quot;&gt;Referencje do metod&lt;/h1&gt;
+
+&lt;p&gt;Poprzednie sortowanie z użyciem referencji do metody wyglądałoby tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;comparing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;String:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Nie zmienia to wiele, dlatego lepszym przykładem może być funkcja &lt;code class=&quot;highlighter-rouge&quot;&gt;merge&lt;/code&gt; w interfejsie &lt;code class=&quot;highlighter-rouge&quot;&gt;Map&lt;/code&gt;, która przypisuje podaną wartość do danego klucza, jeśli ten nie istnieje lub sumuje ich wartości, jeśli już jest w mapie:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;merge&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;incr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;incr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;W tym przypadku parametr &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;incr&lt;/code&gt; nie dodają zbyt wiele wartości i zajmują sporo miejsca, a ta lambda po prostu mówi, że zwraca sumę podanych dwóch argumentów. Możemy to zrobić w lepszy sposób - podać referencję do metody &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; w klasie &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;merge&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Integer:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Im więcej argumentów ma lambda, tym więcej boilerplateu można wyeliminować za pomocą referencji do metody. Czasem jednak, jeśli nazwy parametrów dużo jaśniej przedstawiają intencję funkcji, lepiej pozostać przy lambdzie.&lt;/p&gt;
+
+&lt;p&gt;Jeśli lambda zaczyna nam się robić zbyt długa i skompilowana, można wyciąć kod do nowej metody z opisową nazwą lub nawet dokumentacją i podać do lambdy tylko referencję do niej.&lt;/p&gt;
+
+&lt;p&gt;Zatem wybierajmy po prostu to, co jest krótsze, czytelniejsze i łatwiejsze do zrozumienia.&lt;/p&gt;
+
+&lt;p&gt;Najczęściej używany typ referencji to referencja do metody statycznej, ale są też cztery inne - &lt;em&gt;bound&lt;/em&gt;, &lt;em&gt;unbound&lt;/em&gt; oraz konstruktory klas i tablic:&lt;/p&gt;
+
+&lt;table class=&quot;post-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Method Ref Type&lt;/th&gt;
+      &lt;th&gt;Example&lt;/th&gt;
+      &lt;th&gt;Lambda Equivalent&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Static&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Integer::parseInt&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;str -&amp;gt; Integer.parseInt(str)&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bound&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Instant.now()::isAfter&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;t -&amp;gt; Instant.now().isAfter(t)&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Unbound&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String::toLowerCase&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;str -&amp;gt; str.toLowerCase()&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Class Constructor&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;TreeMap&amp;lt;K,V&amp;gt;::new&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;() -&amp;gt; new TreeMap&amp;lt;K,V&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Array Constructor&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;int[]::new&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;len -&amp;gt; new int[len]&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 42, 43 z rozdziału: Lambdas and Streams Item 42: Prefer lambdas to anonymous classes Item 43: Prefer method references to lambdas Item 44: Favor the use of standard functional interfaces Item 45: Use streams judiciously Item 46: Prefer side-effect-free functions in streams Item 47: Prefer Collection to Stream as a return type Item 48: Use caution when making streams parallel W tym rozdziale będzie mowa o elementach, które zostały dodane w Javie 8 - interfejsy funkcyjne, referencje do metod, lambdy i streamy. Preferuj lambdy zamiast klas anonimowych Typy funkcyjne to interfejsy (rzadziej klasy abstrakcyjne), które mają tylko jedną abstrakcyjną metodę. Ich instancje nazywane są obiektami funkcyjnymi i reprezentują jedną konkretną funkcję. Przed Java 8, aby stworzyć obiekt funkcyjny, musieliśmy użyć klasy abstrakcyjnej. Dla przykładu kawałek kodu, który sortuje słowa na podstawie ich długości, definiując to w klasie anonimowej: // Anonymous class instance as a function object - obsolete! Collections.sort(words, new Comparator&amp;lt;String&amp;gt;() { public int compare(String s1, String s2) { return Integer.compare(s1.length(), s2.length()); } }); Programowanie funkcyjne w Javie przy użyciu anonimowych klas wymaga dużo boilerplateu i nie jest zbyt przyjemne, dlatego w Javie 8 dodano lambdy. Są podobne funkcjonalnie do klas anonimowych, jednak dużo bardziej zwięzłe. To samo za pomocą lambdy wygląda tak: // Lambda expression as function object (replaces anonymous class) Collections.sort(words, (s1, s2) -&amp;gt; Integer.compare(s1.length(), s2.length())); Typ lambdy Comparator&amp;lt;String&amp;gt;, typy parametrów (s1 i s2, oba String) i typ zwracany int nie jest widoczny w kodzie. Kompilator dedukuje te typy dzięki mechanizmowi zwanemu inferencją typów. W niektórych specyficznych przypadkach kompilator nie będzie potrafił tego zrobić i będzie trzeba je podać ręcznie. Szczególnie w lambdach nie powinniśmy używać surowych typów, bo to z generyków kompilator może zebrać najwięcej informacji. Możemy to jeszcze nawet bardziej skrócić używając metody do budowania comparatora: Collections.sort(words, Comparator.comparing(s -&amp;gt; s.length())); Od Javy 8 dodano metodę sort do interfejsu List z której możemy skorzystać, aby jeszcze nieco skrócić zapis: words.sort(Comparator.comparing(s -&amp;gt; s.length())); Lambdy znacznie zwiększają przejrzystość kodu i mogą być zastosowane w wielu miejscach. Weźmy na przykład enuma Operation z postu o enumach: // Enum type with constant-specific class bodies &amp;amp; data (Item 34) public enum Operation { PLUS(&quot;+&quot;) { public double apply(double x, double y) { return x + y; } }, MINUS(&quot;-&quot;) { public double apply(double x, double y) { return x - y; } }, TIMES(&quot;*&quot;) { public double apply(double x, double y) { return x * y; } }, DIVIDE(&quot;/&quot;) { public double apply(double x, double y) { return x / y; } }; private final String symbol; Operation(String symbol) { this.symbol = symbol; } @Override public String toString() { return symbol; } public abstract double apply(double x, double y); } Zamiast definiować osobne ciało dla każdej instancji, możemy przekazać lambdę do konstruktora, która implementuje dane zachowanie. To zachowanie zostanie przechowane w polu DoubleBinaryOperator op, które potem będzie wywoływane w metodzie apply: // Enum with function object fields &amp;amp; constant-specific behavior public enum Operation { PLUS(&quot;+&quot;, (x, y) -&amp;gt; x + y), MINUS(&quot;-&quot;, (x, y) -&amp;gt; x - y), TIMES(&quot;*&quot;, (x, y) -&amp;gt; x * y), DIVIDE(&quot;/&quot;, (x, y) -&amp;gt; x / y); private final String symbol; private final DoubleBinaryOperator op; Operation(String symbol, DoubleBinaryOperator op) { this.symbol = symbol; this.op = op; } @Override public String toString() { return symbol; } public double apply(double x, double y) { return op.applyAsDouble(x, y); } } Widać znaczną redukcję boilerplateu i kod jest dużo bardziej czytelny. Interfejs DoubleBinaryOperator jest jednym z wielu predefiniowanych interfejsów w bibliotece Javy, który reprezentuje funkcję, która pobiera dwa argumenty i zwraca wartość typu double. Wszystkie pozostałe interfejsy z tej kategorii będą omówione w następnym poście. Nie jest jednak tak, że lambdy są niezastąpione. W przeciwieństwie do metod i klas, lambdy nie mają nazwy ani dokumentacji. Jeśli operacje w niej wykonywane nie są zwięzłe i oczywiste lub są większe niż kilka linijek, to nie powinny się znaleźć w lambdzie, bo czytelność i łatwość zrozumienia znacznie ucierpi. Idealna lambda powinna być jednolinijkowa, ale kilka linijek to sensowne maximum. Innym ograniczeniem w przypadku naszego enuma jest to, że lambda podana do konstruktora, nie ma dostępu do pól czy metod instancji. A czy z kolei lambdy wypierają całkiem klasy anonimowe? Też nie do końca. W przeciwieństwie do klas anonimowych nie możemy utworzyć instancji lambdy, co za tym idzie - nie możemy również uzyskać do niej referencji i przekazać jej gdzieś indziej. Ponadto w lambdzie słowo kluczowe this odnosi się do obiektu, w którym jest wykonywana, a w klasie anonimowej odnosi się do klasy anonimowej. Java dostarcza nawet lepszy sposób, aby stworzyć obiekty funkcyjne, które są jeszcze bardziej zwięzłe niż lambdy - referencje do metod. Referencje do metod Poprzednie sortowanie z użyciem referencji do metody wyglądałoby tak: words.sort(Comparator.comparing(String::length)); Nie zmienia to wiele, dlatego lepszym przykładem może być funkcja merge w interfejsie Map, która przypisuje podaną wartość do danego klucza, jeśli ten nie istnieje lub sumuje ich wartości, jeśli już jest w mapie: map.merge(key, 1, (count, incr) -&amp;gt; count + incr); W tym przypadku parametr count i incr nie dodają zbyt wiele wartości i zajmują sporo miejsca, a ta lambda po prostu mówi, że zwraca sumę podanych dwóch argumentów. Możemy to zrobić w lepszy sposób - podać referencję do metody sum w klasie Integer: map.merge(key, 1, Integer::sum); Im więcej argumentów ma lambda, tym więcej boilerplateu można wyeliminować za pomocą referencji do metody. Czasem jednak, jeśli nazwy parametrów dużo jaśniej przedstawiają intencję funkcji, lepiej pozostać przy lambdzie. Jeśli lambda zaczyna nam się robić zbyt długa i skompilowana, można wyciąć kod do nowej metody z opisową nazwą lub nawet dokumentacją i podać do lambdy tylko referencję do niej. Zatem wybierajmy po prostu to, co jest krótsze, czytelniejsze i łatwiejsze do zrozumienia. Najczęściej używany typ referencji to referencja do metody statycznej, ale są też cztery inne - bound, unbound oraz konstruktory klas i tablic: Method Ref Type Example Lambda Equivalent Static Integer::parseInt str -&amp;gt; Integer.parseInt(str) Bound Instant.now()::isAfter t -&amp;gt; Instant.now().isAfter(t) Unbound String::toLowerCase str -&amp;gt; str.toLowerCase() Class Constructor TreeMap&amp;lt;K,V&amp;gt;::new () -&amp;gt; new TreeMap&amp;lt;K,V&amp;gt; Array Constructor int[]::new len -&amp;gt; new int[len]</summary></entry><entry><title type="html">Adnotacje</title><link href="https://devcave.pl/effective-java/annotations" rel="alternate" type="text/html" title="Adnotacje" /><published>2018-11-10T09:00:00+01:00</published><updated>2018-11-10T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/annotations</id><content type="html" xml:base="https://devcave.pl/effective-java/annotations">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -2214,115 +2420,4 @@ AbstractC
 
 &lt;p&gt;Klasy &lt;em&gt;skeletal implementation&lt;/em&gt; dostarczają nam zaletę częściowej implementacji z klas abstrakcyjnych, bez narzucania ograniczeń jakie stwarzają, gdy są używane jako definicje typu. Mamy też dowolność czy chcemy skorzystać z klasy abstrakcyjnej czy zaimplementować interfejs bezpośrednio.&lt;/p&gt;
 
-&lt;p&gt;Podsumowując, interfejsy są najlepszym sposobem na zdefiniowanie typu, który pozwala na różne implementacje. Gdy mamy do czynienia z rozbudowanym interfejsem, którego metody mogą mięć domyślną implementację, można rozważyć napisanie &lt;em&gt;skeletal implementation class&lt;/em&gt;. Jeśli mamy taką możliwość, to możemy się ograniczyć tylko do metod domyślnych w interfejsie.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 20 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic</summary></entry><entry><title type="html">Projektowanie klasy pod dziedziczenie</title><link href="https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie" rel="alternate" type="text/html" title="Projektowanie klasy pod dziedziczenie" /><published>2018-08-18T10:00:00+02:00</published><updated>2018-08-18T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie</id><content type="html" xml:base="https://devcave.pl/effective-java/projektowanie-klasy-pod-dziedziczenie">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 19&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m-0&quot;&gt;Classes and Interfaces&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/gettery-i-settery&quot;&gt;Item 16: In public classes, use accessor methods, not public fields
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/klasy-niezmienne&quot;&gt;Item 17: Minimize mutability
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 19: Design and document for inheritance or else prohibit it
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;Item 20: Prefer interfaces to abstract classes
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#domyślne-metody-w-interfejsach&quot;&gt;Item 21: Design interfaces for posterity
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#interfejs-tylko-jako-definicja-typu&quot;&gt;Item 22: Use interfaces only to define types
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#preferuj-hierarchię-klas-zamiast-otagowanych-klas&quot;&gt;Item 23: Prefer class hierarchies to tagged classes
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;W poprzednim poście była mowa o wadach dziedziczenia i kompozycji jako lepszego zamiennika. W tym wpisie omówię, o czym nie zapomnieć projektując klasę pod dziedziczenie, jeśli uznamy, że jest ono stosowne.&lt;/p&gt;
-
-&lt;p&gt;Jeśli projektujemy klasę do publicznego użytku, &lt;strong&gt;powinniśmy jasno udokumentować to, czy metody, które jesteśmy w stanie nadpisać, używają pod spodem innych metod, które również mogą zostać nadpisane.&lt;/strong&gt; Jeśli ma to miejsce, to powinniśmy jasno opisać, jak to się dzieje. Jest do tego specjalne miejsce w Javadocach -  “Implementation Requirements”, które jest generowane za pomocą tagu &lt;code class=&quot;highlighter-rouge&quot;&gt;@implSpec&lt;/code&gt; (dodany w Javie 8).&lt;/p&gt;
-
-&lt;p&gt;Dla przykładu, dla &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.AbstractCollection&lt;/code&gt; wygląda to tak:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;public boolean remove(Object o)&lt;/p&gt;
-
-  &lt;p&gt;Removes a single instance of the specified element from this
-collection, if it is present (optional operation). More formally,
-removes an element &lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt; such that &lt;code class=&quot;highlighter-rouge&quot;&gt;Objects.equals(o, e)&lt;/code&gt;, if this
-collection contains one or more such elements. Returns &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; if this
-collection contained the specified element (or equivalently, if this
-collection changed as a result of the call).&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;Implementation Requirements:&lt;/strong&gt; This implementation iterates over the collection looking for the specified element. If it finds the element,
-it removes the element from the collection using the iterator’s
-&lt;code class=&quot;highlighter-rouge&quot;&gt;remove&lt;/code&gt; method. Note that this implementation throws an
-&lt;code class=&quot;highlighter-rouge&quot;&gt;UnsupportedOperationException&lt;/code&gt; if the iterator returned by this
-collection’s &lt;code class=&quot;highlighter-rouge&quot;&gt;iterator&lt;/code&gt; method does not implement the &lt;code class=&quot;highlighter-rouge&quot;&gt;remove&lt;/code&gt; method
-and this collection contains the specified object.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Jest to tu jasno udokumentowane, że nadpisywanie metody &lt;code class=&quot;highlighter-rouge&quot;&gt;iterator&lt;/code&gt; będzie miało wpływ na zachowanie &lt;code class=&quot;highlighter-rouge&quot;&gt;remove&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Podając szczegóły implementacyjne, naruszamy enkapsulację i zobowiązujemy się nigdy tego nie zmieniać, ale jest to konsekwencja używania dziedziczenia.&lt;/strong&gt; Jest to wymagane, aby można było bezpiecznie tworzyć podklasy danej klasy.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Musimy również zadbać, aby wszystkie kluczowe pola były dostępne dla podklas&lt;/strong&gt;. Jedyny sensowny sposób, aby przetestować naszą klasę, którą projektujemy pod dziedziczenie i przekonać się co jest niezbędne, to napisać kilka podklas (najlepiej, żeby przynajmniej jedna nie była pisana przez nas). Wtedy jasno zobaczymy, co powinniśmy ukryć, a co udostępnić podklasom.&lt;/p&gt;
-
-&lt;p&gt;Kolejną ważną rzeczą jest to, aby &lt;strong&gt;konstruktory nie wywoływały metod, które mogą zostać nadpisane&lt;/strong&gt;. Jeśli ta metoda zależy od pola zainicjowanego przez konstruktor, to nie będzie wtedy działać prawidłowo. Konstruktor nadklasy wywoływany jest przed konstruktorem podklasy, więc nadpisana metoda podklasy będzie wywołana, zanim wywołany zostanie jej konstruktor. Przykład:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Super&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Broken - constructor invokes an overridable method&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;overrideMe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;overrideMe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Sub&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Super&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Blank final, set by constructor&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Instant&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;Sub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;instant&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Instant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Overriding method invoked by superclass constructor&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; 
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;overrideMe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;overrideMe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Spodziewalibyśmy się, że ten program pokaże nam &lt;code class=&quot;highlighter-rouge&quot;&gt;instant&lt;/code&gt; dwa razy, a jak się okazuje, za pierwszym razem będzie to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;. Tak jak była mowa wcześniej, metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;overrideMe&lt;/code&gt; została wywołana przez konstruktor &lt;code class=&quot;highlighter-rouge&quot;&gt;Super&lt;/code&gt; zanim konstruktor podklasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Sub&lt;/code&gt; miał okazję ją zainicjować - łatwy sposób na &lt;code class=&quot;highlighter-rouge&quot;&gt;NullPointerException&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Interfejsy &lt;code class=&quot;highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;Serializable&lt;/code&gt; stwarzają kolejne trudności, gdy projektujemy klasy pod dziedziczenie, więc musimy to wziąć pod uwagę lub po prostu zrezygnować z możliwości rozszerzania klasy, jeśli implementuje któryś z tych interfejsów.&lt;/p&gt;
-
-&lt;p&gt;Podsumowując, jeśli wyeliminujemy z klasy użycia wewnętrznych metod, które mogą zostać nadpisane i udokumentujemy to w przejrzysty sposób, to klasę będzie można dużo łatwiej rozszerzać i tworzyć jej podklasy. Jeśli nie zapewnimy tego, to podklasy mogą być zależne od detalów implementacyjnych nadklasy i mogą przestać działać, jeśli implementacja nadklasy się zmieni.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 19 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic W poprzednim poście była mowa o wadach dziedziczenia i kompozycji jako lepszego zamiennika. W tym wpisie omówię, o czym nie zapomnieć projektując klasę pod dziedziczenie, jeśli uznamy, że jest ono stosowne. Jeśli projektujemy klasę do publicznego użytku, powinniśmy jasno udokumentować to, czy metody, które jesteśmy w stanie nadpisać, używają pod spodem innych metod, które również mogą zostać nadpisane. Jeśli ma to miejsce, to powinniśmy jasno opisać, jak to się dzieje. Jest do tego specjalne miejsce w Javadocach - “Implementation Requirements”, które jest generowane za pomocą tagu @implSpec (dodany w Javie 8). Dla przykładu, dla java.util.AbstractCollection wygląda to tak: public boolean remove(Object o) Removes a single instance of the specified element from this collection, if it is present (optional operation). More formally, removes an element e such that Objects.equals(o, e), if this collection contains one or more such elements. Returns true if this collection contained the specified element (or equivalently, if this collection changed as a result of the call). Implementation Requirements: This implementation iterates over the collection looking for the specified element. If it finds the element, it removes the element from the collection using the iterator’s remove method. Note that this implementation throws an UnsupportedOperationException if the iterator returned by this collection’s iterator method does not implement the remove method and this collection contains the specified object. Jest to tu jasno udokumentowane, że nadpisywanie metody iterator będzie miało wpływ na zachowanie remove. Podając szczegóły implementacyjne, naruszamy enkapsulację i zobowiązujemy się nigdy tego nie zmieniać, ale jest to konsekwencja używania dziedziczenia. Jest to wymagane, aby można było bezpiecznie tworzyć podklasy danej klasy. Musimy również zadbać, aby wszystkie kluczowe pola były dostępne dla podklas. Jedyny sensowny sposób, aby przetestować naszą klasę, którą projektujemy pod dziedziczenie i przekonać się co jest niezbędne, to napisać kilka podklas (najlepiej, żeby przynajmniej jedna nie była pisana przez nas). Wtedy jasno zobaczymy, co powinniśmy ukryć, a co udostępnić podklasom. Kolejną ważną rzeczą jest to, aby konstruktory nie wywoływały metod, które mogą zostać nadpisane. Jeśli ta metoda zależy od pola zainicjowanego przez konstruktor, to nie będzie wtedy działać prawidłowo. Konstruktor nadklasy wywoływany jest przed konstruktorem podklasy, więc nadpisana metoda podklasy będzie wywołana, zanim wywołany zostanie jej konstruktor. Przykład: public class Super { // Broken - constructor invokes an overridable method public Super() { overrideMe(); } public void overrideMe() { } } public final class Sub extends Super { // Blank final, set by constructor private final Instant instant; Sub() { instant = Instant.now(); } // Overriding method invoked by superclass constructor @Override public void overrideMe() { System.out.println(instant); } public static void main(String[] args) { Sub sub = new Sub(); sub.overrideMe(); } } Spodziewalibyśmy się, że ten program pokaże nam instant dwa razy, a jak się okazuje, za pierwszym razem będzie to null. Tak jak była mowa wcześniej, metoda overrideMe została wywołana przez konstruktor Super zanim konstruktor podklasy Sub miał okazję ją zainicjować - łatwy sposób na NullPointerException. Interfejsy Cloneable i Serializable stwarzają kolejne trudności, gdy projektujemy klasy pod dziedziczenie, więc musimy to wziąć pod uwagę lub po prostu zrezygnować z możliwości rozszerzania klasy, jeśli implementuje któryś z tych interfejsów. Podsumowując, jeśli wyeliminujemy z klasy użycia wewnętrznych metod, które mogą zostać nadpisane i udokumentujemy to w przejrzysty sposób, to klasę będzie można dużo łatwiej rozszerzać i tworzyć jej podklasy. Jeśli nie zapewnimy tego, to podklasy mogą być zależne od detalów implementacyjnych nadklasy i mogą przestać działać, jeśli implementacja nadklasy się zmieni.</summary></entry></feed>
+&lt;p&gt;Podsumowując, interfejsy są najlepszym sposobem na zdefiniowanie typu, który pozwala na różne implementacje. Gdy mamy do czynienia z rozbudowanym interfejsem, którego metody mogą mięć domyślną implementację, można rozważyć napisanie &lt;em&gt;skeletal implementation class&lt;/em&gt;. Jeśli mamy taką możliwość, to możemy się ograniczyć tylko do metod domyślnych w interfejsie.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 20 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic</summary></entry></feed>

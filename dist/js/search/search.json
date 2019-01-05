@@ -579,6 +579,15 @@
         "subtitle": "Kilka dobrych praktyk",
         "date": "10 listopada 2018",
         "url": "/effective-java/annotations"
+      },
+    
+      
+      {
+        "title": "Lambdy i referencje do metod",
+        "titleSEO": "Lambdy i referencje do metod",
+        "subtitle": "Czyli zamiennik dla klas anonimowych i nie tylko",
+        "date": "5 stycznia 2019",
+        "url": "/effective-java/lambdy-zamiast-anonimowych-klas"
       }
     
   

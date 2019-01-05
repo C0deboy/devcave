@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Lambdy i referencje do metod">
+<meta property="og:description" content="Czyli zamiennik dla klas anonimowych i nie tylko">
+
+<title>Lambdy i referencje do metod</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Lambdy i referencje do metod</h1>
+            
+            <h2 class="post-subtitle">Czyli zamiennik dla klas anonimowych i nie tylko</h2>
+            
+            <p class="post-meta">
+              
+              5
+              stycznia
+              
+              2019</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#preferuj-lambdy-zamiast-klas-anonimowych">Preferuj lambdy zamiast klas anonimowych</a></li>
+<li class="toc-entry toc-h1"><a href="#referencje-do-metod">Referencje do metod</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 42, 43</i> z rozdziału:</p>
+
+<p class="m-0">Lambdas and Streams</p>
+
+<ul class="fa-ul custom"><li style="list-style-type: none;">
+                    <a href="/effective-java/lambdy-zamiast-anonimowych-klas">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 42: Prefer lambdas to anonymous classes
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/lambdy-zamiast-anonimowych-klas">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 43: Prefer method references to lambdas
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 44: Favor the use of standard functional interfaces
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 45: Use streams judiciously
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 46: Prefer side-effect-free functions in streams
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 47: Prefer Collection to Stream as a return type
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 48: Use caution when making streams parallel
+                </a>
+            </li></ul>
+<hr />
+
+<p>W tym rozdziale będzie mowa o elementach, które zostały dodane w Javie 8 - interfejsy funkcyjne, referencje do metod, lambdy i streamy.</p>
+
+<h1 id="preferuj-lambdy-zamiast-klas-anonimowych">Preferuj lambdy zamiast klas anonimowych</h1>
+
+<p>Typy funkcyjne to interfejsy (rzadziej klasy abstrakcyjne), które mają tylko jedną abstrakcyjną metodę. Ich instancje nazywane są obiektami funkcyjnymi i reprezentują jedną konkretną funkcję. Przed Java 8, aby stworzyć obiekt funkcyjny, musieliśmy użyć klasy abstrakcyjnej. Dla przykładu kawałek kodu, który sortuje słowa na podstawie ich długości, definiując to w klasie anonimowej:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Anonymous class instance as a function object - obsolete!</span>
+<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div></div>
+
+<p>Programowanie funkcyjne w Javie przy użyciu anonimowych klas wymaga dużo boilerplateu i nie jest zbyt przyjemne, dlatego w Javie 8 dodano lambdy. Są <strong>podobne</strong> funkcjonalnie do klas anonimowych, jednak dużo bardziej zwięzłe. To samo za pomocą lambdy wygląda tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Lambda expression as function object (replaces anonymous class)</span>
+<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="o">(</span><span class="n">s1</span><span class="o">,</span> <span class="n">s2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+</code></pre></div></div>
+
+<p class="note">Typ lambdy <code class="highlighter-rouge">Comparator&lt;String&gt;</code>, typy parametrów (<code class="highlighter-rouge">s1</code> i <code class="highlighter-rouge">s2</code>, oba <code class="highlighter-rouge">String</code>) i typ zwracany <code class="highlighter-rouge">int</code> nie jest widoczny w kodzie. Kompilator dedukuje te typy dzięki mechanizmowi zwanemu inferencją typów. W niektórych specyficznych przypadkach kompilator nie będzie potrafił tego zrobić i będzie trzeba je podać ręcznie. Szczególnie w lambdach nie powinniśmy używać surowych typów, bo to z generyków kompilator może zebrać najwięcej informacji.</p>
+
+<p>Możemy to jeszcze nawet bardziej skrócić używając metody do budowania comparatora:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+</code></pre></div></div>
+
+<p>Od Javy 8 dodano metodę <code class="highlighter-rouge">sort</code> do interfejsu <code class="highlighter-rouge">List</code> z której możemy skorzystać, aby jeszcze nieco skrócić zapis:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">words</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+</code></pre></div></div>
+
+<p>Lambdy znacznie zwiększają przejrzystość kodu i mogą być zastosowane w wielu miejscach. Weźmy na przykład enuma <code class="highlighter-rouge">Operation</code> z <a href="/effective-java/enums">postu o enumach</a>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Enum type with constant-specific class bodies &amp; data (Item 34)</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Operation</span> <span class="o">{</span>
+    <span class="n">PLUS</span><span class="o">(</span><span class="s">"+"</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">},</span>
+    <span class="n">MINUS</span><span class="o">(</span><span class="s">"-"</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">},</span>
+    <span class="n">TIMES</span><span class="o">(</span><span class="s">"*"</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">},</span>
+    <span class="n">DIVIDE</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">symbol</span><span class="o">;</span>
+
+    <span class="n">Operation</span><span class="o">(</span><span class="n">String</span> <span class="n">symbol</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">symbol</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Zamiast definiować osobne ciało dla każdej instancji, możemy przekazać lambdę do konstruktora, która implementuje dane zachowanie. To zachowanie zostanie przechowane w polu <code class="highlighter-rouge">DoubleBinaryOperator op</code>, które potem będzie wywoływane w metodzie <code class="highlighter-rouge">apply</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Enum with function object fields &amp; constant-specific behavior</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Operation</span> <span class="o">{</span>
+    <span class="n">PLUS</span><span class="o">(</span><span class="s">"+"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">),</span>
+    <span class="n">MINUS</span><span class="o">(</span><span class="s">"-"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">),</span>
+    <span class="n">TIMES</span><span class="o">(</span><span class="s">"*"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">),</span>
+    <span class="n">DIVIDE</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">);</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">symbol</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">DoubleBinaryOperator</span> <span class="n">op</span><span class="o">;</span>
+
+    <span class="n">Operation</span><span class="o">(</span><span class="n">String</span> <span class="n">symbol</span><span class="o">,</span> <span class="n">DoubleBinaryOperator</span> <span class="n">op</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">op</span> <span class="o">=</span> <span class="n">op</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">symbol</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="na">applyAsDouble</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Widać znaczną redukcję boilerplateu i kod jest dużo bardziej czytelny.</p>
+
+<p class="note">Interfejs <code class="highlighter-rouge">DoubleBinaryOperator</code> jest jednym z wielu predefiniowanych interfejsów w bibliotece Javy, który reprezentuje funkcję, która pobiera dwa argumenty i zwraca wartość typu <code class="highlighter-rouge">double</code>.
+Wszystkie pozostałe interfejsy z tej kategorii będą omówione w następnym poście.</p>
+
+<p><strong>Nie jest jednak tak, że lambdy są niezastąpione.</strong> W przeciwieństwie do metod i klas, lambdy nie mają nazwy ani dokumentacji. Jeśli operacje w niej wykonywane nie są zwięzłe i oczywiste lub są większe niż kilka linijek, to nie powinny się znaleźć w lambdzie, bo czytelność i łatwość zrozumienia znacznie ucierpi. Idealna lambda powinna być jednolinijkowa, ale kilka linijek to sensowne maximum.</p>
+
+<p>Innym ograniczeniem w przypadku naszego enuma jest to, że lambda podana do konstruktora, nie ma dostępu do pól czy metod instancji.</p>
+
+<p>A czy z kolei lambdy wypierają całkiem klasy anonimowe? Też nie do końca. W przeciwieństwie do klas anonimowych nie możemy utworzyć instancji lambdy, co za tym idzie - nie możemy również uzyskać do niej referencji i przekazać jej gdzieś indziej. Ponadto w lambdzie słowo kluczowe <code class="highlighter-rouge">this</code> odnosi się do obiektu, w którym jest wykonywana, a w klasie anonimowej odnosi się do klasy anonimowej.</p>
+
+<p>Java dostarcza nawet lepszy sposób, aby stworzyć obiekty funkcyjne, które są jeszcze bardziej zwięzłe niż lambdy - referencje do metod.</p>
+
+<h1 id="referencje-do-metod">Referencje do metod</h1>
+
+<p>Poprzednie sortowanie z użyciem referencji do metody wyglądałoby tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">words</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Nie zmienia to wiele, dlatego lepszym przykładem może być funkcja <code class="highlighter-rouge">merge</code> w interfejsie <code class="highlighter-rouge">Map</code>, która przypisuje podaną wartość do danego klucza, jeśli ten nie istnieje lub sumuje ich wartości, jeśli już jest w mapie:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map</span><span class="o">.</span><span class="na">merge</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="o">(</span><span class="n">count</span><span class="o">,</span> <span class="n">incr</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">count</span> <span class="o">+</span> <span class="n">incr</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>W tym przypadku parametr <code class="highlighter-rouge">count</code> i <code class="highlighter-rouge">incr</code> nie dodają zbyt wiele wartości i zajmują sporo miejsca, a ta lambda po prostu mówi, że zwraca sumę podanych dwóch argumentów. Możemy to zrobić w lepszy sposób - podać referencję do metody <code class="highlighter-rouge">sum</code> w klasie <code class="highlighter-rouge">Integer</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map</span><span class="o">.</span><span class="na">merge</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="nl">Integer:</span><span class="o">:</span><span class="n">sum</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Im więcej argumentów ma lambda, tym więcej boilerplateu można wyeliminować za pomocą referencji do metody. Czasem jednak, jeśli nazwy parametrów dużo jaśniej przedstawiają intencję funkcji, lepiej pozostać przy lambdzie.</p>
+
+<p>Jeśli lambda zaczyna nam się robić zbyt długa i skompilowana, można wyciąć kod do nowej metody z opisową nazwą lub nawet dokumentacją i podać do lambdy tylko referencję do niej.</p>
+
+<p>Zatem wybierajmy po prostu to, co jest krótsze, czytelniejsze i łatwiejsze do zrozumienia.</p>
+
+<p>Najczęściej używany typ referencji to referencja do metody statycznej, ale są też cztery inne - <em>bound</em>, <em>unbound</em> oraz konstruktory klas i tablic:</p>
+
+<table class="post-table">
+  <thead>
+    <tr>
+      <th>Method Ref Type</th>
+      <th>Example</th>
+      <th>Lambda Equivalent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Static</td>
+      <td><code class="highlighter-rouge">Integer::parseInt</code></td>
+      <td><code class="highlighter-rouge">str -&gt; Integer.parseInt(str)</code></td>
+    </tr>
+    <tr>
+      <td>Bound</td>
+      <td><code class="highlighter-rouge">Instant.now()::isAfter</code></td>
+      <td><code class="highlighter-rouge">t -&gt; Instant.now().isAfter(t)</code></td>
+    </tr>
+    <tr>
+      <td>Unbound</td>
+      <td><code class="highlighter-rouge">String::toLowerCase</code></td>
+      <td><code class="highlighter-rouge">str -&gt; str.toLowerCase()</code></td>
+    </tr>
+    <tr>
+      <td>Class Constructor</td>
+      <td><code class="highlighter-rouge">TreeMap&lt;K,V&gt;::new</code></td>
+      <td><code class="highlighter-rouge">() -&gt; new TreeMap&lt;K,V&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Array Constructor</td>
+      <td><code class="highlighter-rouge">int[]::new</code></td>
+      <td><code class="highlighter-rouge">len -&gt; new int[len]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/annotations"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Adnotacje"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas";
+    this.page.identifier = "/effective-java/lambdy-zamiast-anonimowych-klas";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

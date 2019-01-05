@@ -30,7 +30,7 @@ Collections.sort(words, new Comparator<String>() {
 });
 ```
 
-Programowanie funkcyjne w Javie przy użyciu anonimowych klas wymaga dużo boilerplatu i nie jest zbyt przyjemne, dlatego w Javie 8 dodano lambdy. Są **podobne** funkcjonalnie do klas anonimowych, jednak  dużo bardziej zwięzłe. To samo za pomocą lambdy wygląda tak
+Programowanie funkcyjne w Javie przy użyciu anonimowych klas wymaga dużo boilerplateu i nie jest zbyt przyjemne, dlatego w Javie 8 dodano lambdy. Są **podobne** funkcjonalnie do klas anonimowych, jednak dużo bardziej zwięzłe. To samo za pomocą lambdy wygląda tak:
 
 ```java
 // Lambda expression as function object (replaces anonymous class)
@@ -38,7 +38,7 @@ Collections.sort(words, (s1, s2) -> Integer.compare(s1.length(), s2.length()));
 ```
 
 {: .note}
-Typ lambdy `Comparator<String>`, typy parametrów (s1 i s2, oba `String`) i typ zwracany `int` nie jest widoczny w kodzie. Kompilator dedukuje te typy dzięki procesowi zwanemu inferencją typów. W niektórych specyficznych przypadkach kompilator nie będzie tego potrafił zrobić i będzie trzeba je podać ręcznie. Szczególnie w lambdach nie powinniśmy używać surowych typów, bo to z generyków kompilator może najwięcej zebrać informacji.
+Typ lambdy `Comparator<String>`, typy parametrów (`s1` i `s2`, oba `String`) i typ zwracany `int` nie jest widoczny w kodzie. Kompilator dedukuje te typy dzięki mechanizmowi zwanemu inferencją typów. W niektórych specyficznych przypadkach kompilator nie będzie potrafił tego zrobić i będzie trzeba je podać ręcznie. Szczególnie w lambdach nie powinniśmy używać surowych typów, bo to z generyków kompilator może zebrać najwięcej informacji.
 
 Możemy to jeszcze nawet bardziej skrócić używając metody do budowania comparatora:
 
@@ -121,17 +121,17 @@ public enum Operation {
 }
 ```
 
-Widać znaczną redukcję boilerplatu i kod jest dużo bardziej czytelny.
+Widać znaczną redukcję boilerplateu i kod jest dużo bardziej czytelny.
 
 {: .note}
 Interfejs `DoubleBinaryOperator` jest jednym z wielu predefiniowanych interfejsów w bibliotece Javy, który reprezentuje funkcję, która pobiera dwa argumenty i zwraca wartość typu `double`.
 Wszystkie pozostałe interfejsy z tej kategorii będą omówione w następnym poście.
 
-**Nie jest jednak tak, że lambdy są niezastąpione.** W przeciwieństwie do metod i klas, lambdy nie mają nazwy ani dokumentacji. Jeśli operacje w niej wykonywane nie są zwięzłe i oczywiste lub są większe niż kilka linijek, to nie powinny się znaleźć w lambdzie, bo czytelność i łatwość zrozumienia znacznie ucierpi. Idealnie lambda powinna być jednolinijkowa, ale trzy linijki to sensowne maximum.
+**Nie jest jednak tak, że lambdy są niezastąpione.** W przeciwieństwie do metod i klas, lambdy nie mają nazwy ani dokumentacji. Jeśli operacje w niej wykonywane nie są zwięzłe i oczywiste lub są większe niż kilka linijek, to nie powinny się znaleźć w lambdzie, bo czytelność i łatwość zrozumienia znacznie ucierpi. Idealna lambda powinna być jednolinijkowa, ale kilka linijek to sensowne maximum.
 
 Innym ograniczeniem w przypadku naszego enuma jest to, że lambda podana do konstruktora, nie ma dostępu do pól czy metod instancji.
 
-A czy z kolei lambdy wypierają całkiem klasy anonimowe? Też nie do końca. W przeciwieństwie do klas anonimowych nie możemy utworzyć instancji lambdy, co za tym idzie - nie możemy również uzyskać do niej referencji i przekazać jej gdzieś indziej. Ponadto w lambdzie słowo kluczowe `this` odnosi się do obiektu, w którym jest wykonywana, a w klasie anonimowej odnosi się do niej samej.
+A czy z kolei lambdy wypierają całkiem klasy anonimowe? Też nie do końca. W przeciwieństwie do klas anonimowych nie możemy utworzyć instancji lambdy, co za tym idzie - nie możemy również uzyskać do niej referencji i przekazać jej gdzieś indziej. Ponadto w lambdzie słowo kluczowe `this` odnosi się do obiektu, w którym jest wykonywana, a w klasie anonimowej odnosi się do klasy anonimowej.
 
 Java dostarcza nawet lepszy sposób, aby stworzyć obiekty funkcyjne, które są jeszcze bardziej zwięzłe niż lambdy - referencje do metod.
 
@@ -143,7 +143,7 @@ Poprzednie sortowanie z użyciem referencji do metody wyglądałoby tak:
 words.sort(Comparator.comparing(String::length));
 ```
 
-Nie zmienia to wiele, dlatego lepszym przykładem może być funkcja `merge` w interfejsie `Map`, która przypisuje podaną wartość do danego klucza jeśli ten nie istnieje lub sumuje ich wartości, jeśli już jest w mapie:
+Nie zmienia to wiele, dlatego lepszym przykładem może być funkcja `merge` w interfejsie `Map`, która przypisuje podaną wartość do danego klucza, jeśli ten nie istnieje lub sumuje ich wartości, jeśli już jest w mapie:
 
 ```java
 map.merge(key, 1, (count, incr) -> count + incr);
@@ -155,7 +155,7 @@ W tym przypadku parametr `count` i `incr` nie dodają zbyt wiele wartości i zaj
 map.merge(key, 1, Integer::sum);
 ```
 
-Im więcej argumentów ma lambda, tym więcej boilerplatu można wyeliminować za pomocą referencji do metody. Czasem jednak, jeśli nazwy parametrów dużo jaśniej przedstawiają intencję funkcji, lepiej pozostać przy lambdzie.
+Im więcej argumentów ma lambda, tym więcej boilerplateu można wyeliminować za pomocą referencji do metody. Czasem jednak, jeśli nazwy parametrów dużo jaśniej przedstawiają intencję funkcji, lepiej pozostać przy lambdzie.
 
 Jeśli lambda zaczyna nam się robić zbyt długa i skompilowana, można wyciąć kod do nowej metody z opisową nazwą lub nawet dokumentacją i podać do lambdy tylko referencję do niej.
 

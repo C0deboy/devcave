@@ -12,7 +12,8 @@ code.highlight,
     background: #272727;
     color: #f92672;
     margin: 30px 0;
-    padding: 0 3px;
+    padding: 0!important;
+    font-size: inherit;
 
     .note &, .warning &, .idea & {
         box-shadow: 0 1px 2px 0 #000;

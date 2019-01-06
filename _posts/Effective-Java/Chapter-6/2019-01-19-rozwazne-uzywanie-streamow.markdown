@@ -1,7 +1,7 @@
 ---
 layout:     post
 titleSEO:	"Rozważne używanie streamów"
-title:      "Rozważne używanie streamów"
+title:      "Rozważne i prawidłowe używanie streamów"
 subtitle:   "Co to jest pure function?"
 date:       2019-01-19 8:00:00
 author:     "Codeboy"
@@ -58,7 +58,7 @@ public class Anagrams {
 }
 ```
 
-Czyli tak - czytamy wszystkie słowa i wkładamy je do mapy. Klucz mapy to ułożone alfabetycznie litery danego słowa (np. dla "programowanie" będzie to "aaegimnooprrw"). Jako wartość, będą to kolejne słowa, które mają takie same litery. Potem wyświetlane są te, które spełniają wymóg długości podany do program.
+Czyli tak - czytamy wszystkie słowa i wkładamy je do mapy. Klucz mapy to ułożone alfabetycznie litery danego słowa (np. dla "programowanie" będzie to "aaegimnooprrw"). Jako wartość, będą to kolejne słowa, które mają takie same litery. Potem wyświetlane są te, które spełniają wymóg długości podany do programu.
 
 {: .note}
 Wstawianie wartości do mapy robione jest metodą `computeIfAbsent`, która została dodana w Javie 8. Ta metoda sprawdza, czy klucz jest już w mapie i zwraca jego wartość, jeśli istnieje - jeśli nie, to metoda przypisuje wartość obliczoną w podanym obiekcie funkcyjnym jako drugi argument i zwraca tę wartość. Ta metoda upraszcza implementację map, które przypisują kilka wartości do każdego klucza.
@@ -154,7 +154,7 @@ try (Stream<String> words = new Scanner(file).tokens()) {
 
 Jeśli ktoś pisze kod, podobny do wcześniejszego, to dlatego, że robi to w sposób, w który robił to dotychczas i z którym jest oswojony - niczym się to nie różni od pętli for-each.
 
-Lepsza wersja używa **Collectors API** (metody `groupingBy` i `counting`, które zostały zaimportowane statycznie dla lepszej czytelności). Jest to aż 39 metod, które są swego rodzaju implementacją strategi redukcji, tzn. łączenie elementów (w tym przypadku streamu) w pojedynczy obiekt. 
+Lepsza wersja używa **Collectors API** (metody `groupingBy` i `counting`, które zostały zaimportowane statycznie dla lepszej czytelności). Jest to aż 39 metod, które są swego rodzaju implementacją strategi redukcji, tzn. łączenie elementów (w tym przypadku streamu) w pojedynczy obiekt.
 
 Oprócz tego najczęściej używa się collectory, które zbierają elementy streamu w kolekcję: `toList()`, `toSet()`, i `toCollection(collectionFactory)`. Zwracają kolejno listę, set i inny podany przez nas typ kolekcji. Poza tym są jeszcze różne wariacje zbierania elementów do mapy. 
 

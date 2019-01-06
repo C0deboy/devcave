@@ -2,7 +2,7 @@
 layout:     post
 titleSEO:	"Interfejsy funkcyjne w bibliotece Javy"
 title:      "Interfejsy funkcyjne w bibliotece Javy"
-subtitle:   "Warto je znać chcąc pisać metody wykorzystujące lambdy"
+subtitle:   "Warto je znać chcąc pisać klasy i metody wykorzystujące lambdy"
 date:       2019-01-12 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
@@ -15,7 +15,9 @@ item:       44
 
 {% include effective-java/series-info.html %}
 
-Java udostępnia 43 interfejsy funkcyjne, ale bez obaw - jest tylko 6 głównych typów, które mają wiele wariacji, głównie ze względu na prymitywy. Wystarczy więc znać tylko te 6, a resztę łatwo można wyprowadzić, jakojako że mają dosyć regularne nazwy.
+Chcąc sprawnie pisać metody i klasy, które działają na lambdach warto oswoić się z interfejsami funkcyjnymi dostępnymi w standardowej bibliotece Javy.
+
+Java udostępnia aż 43 interfejsy funkcyjne, ale bez obaw - jest tylko 6 głównych typów, które mają wiele wariacji, głównie ze względu na prymitywy. Wystarczy więc znać tylko te 6, a resztę łatwo można wyprowadzić, jako że mają dosyć regularne nazwy.
 
 Mamy więc:
 
@@ -72,7 +74,7 @@ Nie powinniśmy używać podstawowych interfejsów funkcyjnych z opakowanymi pry
 
 Jeśli którykolwiek interfejs ze standardowej biblioteki pasuje do naszego zastosowania, to w większości przypadków powinniśmy go użyć. To sprawi, że nasze API będzie łatwiejsze do zrozumienia, a ponadto standardowe interfejsy dostarczają przydatne domyślne metody.
 
-Czasem jednak może się zdarzyć, że nie znajdziemy interfejsu do naszego zastosowania, np. będziemy potrzebować `Predicate`, który przyjmuje 3 parametry, lub taki, który rzuca *checked exception*. Może też się zdarzyć, że lepiej będzie napisać swój interfejs funkcyjny, mimomimo że mamy już identyczny strukturalnie w standardowej bibliotece.
+Czasem jednak może się zdarzyć, że nie znajdziemy interfejsu do naszego zastosowania, np. będziemy potrzebować `Predicate`, który przyjmuje 3 parametry, lub taki, który rzuca *checked exception*. Może też się zdarzyć, że lepiej będzie napisać swój interfejs funkcyjny, mimo że mamy już identyczny strukturalnie w standardowej bibliotece.
 
 Jako przykład weźmy znany `Comparator<T>`, który strukturą jest identyczny z `ToIntBiFunction<T,T>`. Dlaczego zasługuje na osobny interfejs?
 
@@ -82,10 +84,10 @@ Jako przykład weźmy znany `Comparator<T>`, który strukturą jest identyczny z
 
 Więc warto rozważyć napisanie swojego interfejsu funkcyjnego gdy:
 
-- Może zyskać na opisowej nazwie i dokumentacji
+- Może zyskać na opisowej nazwie i dokumentacji.
 
-- Ma silny kontrakt z nim powiązany
+- Ma silny kontrakt z nim powiązany.
 
-- Może zyskać na customowych domyślnych metodach
+- Może zyskać na customowych domyślnych metodach.
 
 Tworząc funkcjonalny interfejs, należy go oznaczyć adnotacją `@FunctionalInterface`, który mówi użytkownikom, że obsługuje lambdy, oraz co ważniejsze - skompiluje się tylko wtedy, gdy będzie miał dokładnie jedną metodę abstrakcyjną, co powstrzymuje kogokolwiek, przed dodaniem do interfejsu kolejnej abstrakcyjnej metody.

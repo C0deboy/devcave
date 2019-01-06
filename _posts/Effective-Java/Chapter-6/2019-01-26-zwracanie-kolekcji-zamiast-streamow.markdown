@@ -1,8 +1,8 @@
 ---
 layout:     post
-titleSEO:	"Zwracanie kolekcji zamiast streamów"
-title:      "Zwracanie kolekcji zamiast streamów"
-subtitle:   ""
+titleSEO:	"Zwracanie streamów? Współbieżne streamy."
+title:      "Zwracanie streamów? Współbieżne streamy."
+subtitle:   "Co zwracać - kolekcje czy streamy? Kiedy wywoływać parallel() na streamie?"
 date:       2019-01-26 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
@@ -48,7 +48,7 @@ Interfejs `Collection` jest podtypem `Iterable` i ma metodę `stream`, więc zwr
 
 # Równoległe wykonywanie operacji na streamach
 
-Od Javy 5 mamy bibliotekę `java.util.concurrent` która zawiera konkurencyjne kolekcje i *executor framework*. W Javie 7 dodano pakiet *fork-join*, czyli wydajny framwork do *parallel decomposition*. W Javie 8 dodano streamy, które mogą działać współbieżnie po wywołaniu tylko jednej metody - `parallel()`. Pisanie wielowątkowych programów staje się coraz łatwiejsze, ale napisanie ich, aby działały poprawnie i szybko jest tak samo trudne, jak to było wcześniej.
+Od Javy 5 mamy bibliotekę `java.util.concurrent` która zawiera współbieżne kolekcje i *executor framework*. W Javie 7 dodano pakiet *fork-join*, czyli wydajny framwork do *parallel decomposition*. W Javie 8 dodano streamy, które mogą działać współbieżnie po wywołaniu tylko jednej metody - `parallel()`. Dzięki tym mechanizmom pisanie wielowątkowych programów staje się coraz łatwiejsze, ale napisanie ich, aby działały poprawnie i szybko jest tak samo trudne, jak to było wcześniej.
 
 
 Rozważmy taki program:
@@ -67,13 +67,13 @@ static Stream<BigInteger> primes() {
 }
 ```
 
-Generuje on pierwsze 20 liczb pierwszych Mersenne’a, nie jest jednak ważne, co dokładnie to robi. Na moim laptopie zajmuje to około 14 sekund. Załóżmy teraz, że naiwnie chciałbym przyspieszyć ten proces, wywołując `parallel()`. Czy teraz będzie szybciej? Czy trochę wolniej? Niestety - nie pokaże się nic, a zużycie procesora wskoczy na 100%.
+Generuje on pierwsze 20 liczb pierwszych Mersenne’a, nie jest jednak ważne, co dokładnie to robi. Na moim laptopie zajmuje to około 14 sekund. Załóżmy teraz, że naiwnie chciałbym przyspieszyć ten proces, wywołując `parallel()`, przez co wszystkie operację wywołane zostaną współbieżnie. Czy teraz będzie szybciej? Czy trochę wolniej? Niestety - nie pokaże się nic, a zużycie procesora wskoczy na 100%.
 
 Co się stało? Ano biblioteka streamów nie ma pojęcia jak wykonać tę operację wielowątkowo. Nawet w dobrych warunkach, jeśli źródło streamu to `Stream.iterate` lub jest obecna operacja `limit`, to wywołanie `parallel()` nie przyniesie dobrego rezultatu.
 
 Morał jest więc prosty - nie wywołujmy metody `parallel()` na streamie bezmyślnie.
 
-Z reguły, najlepszy zysk na wydajności zyskujemy wtedy, gdy robimy streamy na instancjach klas takich jak: `ArrayList`, `HashMap`, `HashSet`, `ConcurrentHashMap` oraz tablicach i `IntStream.range()`/`LongStream.range()`, . 
+Z reguły, najlepszy zysk na wydajności zyskujemy wtedy, gdy robimy streamy na instancjach klas takich jak: `ArrayList`, `HashMap`, `HashSet`, `ConcurrentHashMap` oraz tablicach i `IntStream.range()`/`LongStream.range()`. 
 
 To, co mają wspólnego, to to, że mogą być dokładnie i dosyć tanim kosztem podzielone na mniejsze części, co ułatwia rozdzielenie pracy pośród wiele wątków. Używany jest do tego *spliterator*, który jest zwracany przez wywołanie metody `spliterator()` na `Stream` lub `Iterable`.
 
@@ -82,7 +82,7 @@ Również specyfika końcowych operacji wpływa na efektywność współbieżneg
 Najlepsze operacje końcowe, które najlepiej działają współbieżnie to "redukcje", gdzie wszystkie elementy są łączone za pomocą jednej z metod redukujących w `Stream` lub gotowe metody takie jak `min`, `max`, `count` i `sum`. Równie dobrze sprawdzają się operację takie jak `anyMatch`, `allMatch`, i `noneMatch`. Do tej grupy nie należą jednak `collect`, która jest nieco bardziej kosztowna.
 
 {: .note}
-Używając zwykłego `forEach` na streamie, który używa wykonywany jest współbierznie, kolejność elementów nie zostanie zachowana. Aby dostać na koniec tę samą kolejność trzeba użyć `forEachOrdered`.
+Używając zwykłego `forEach` na streamie, który wykonywany jest współbieżnie, kolejność elementów nie zostanie zachowana. Aby dostać na koniec tę samą kolejność trzeba użyć `forEachOrdered`.
 
 Nawet używając źródła streamu, które można łatwo podzielić na kawałki, mało kosztowne operacje kończące i niekolidujące obiekty funkcyjne, **nie uzyskamy lepszej wydajności z wywoływania `parallel` jeśli w streamie nie będą wykonywane ciężkie operacje, które przewyższą koszt przetwarzania wielowątkowego.**
 
@@ -99,7 +99,7 @@ static long pi(long n) {
 ```
 Na moim laptopie, policzenie tym prostym sposobem ilości liczb pierwszych mniejszych od 100 000 zajmuje 32 sekundy. Dodanie `parallel()`:
 
-```
+```java
 // Prime-counting stream pipeline - parallel version
 static long pi(long n) {
     return LongStream.rangeClosed(2, n)

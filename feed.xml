@@ -1,4 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-01-06T21:26:05+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Lambdy i referencje do metod</title><link href="https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas" rel="alternate" type="text/html" title="Lambdy i referencje do metod" /><published>2019-01-05T09:00:00+01:00</published><updated>2019-01-05T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas</id><content type="html" xml:base="https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-01-12T09:58:20+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Interfejsy funkcyjne w bibliotece Javy</title><link href="https://devcave.pl/effective-java/interfejsy-funkcyjne-w-javie" rel="alternate" type="text/html" title="Interfejsy funkcyjne w bibliotece Javy" /><published>2019-01-12T09:00:00+01:00</published><updated>2019-01-12T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/interfejsy-funkcyjne-w-javie</id><content type="html" xml:base="https://devcave.pl/effective-java/interfejsy-funkcyjne-w-javie">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 44&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m-0&quot;&gt;Lambdas and Streams&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/lambdy-zamiast-anonimowych-klas&quot;&gt;Item 42: Prefer lambdas to anonymous classes
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/lambdy-zamiast-anonimowych-klas&quot;&gt;Item 43: Prefer method references to lambdas
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/interfejsy-funkcyjne-w-javie&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 44: Favor the use of standard functional interfaces
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 45: Use streams judiciously
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 46: Prefer side-effect-free functions in streams
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 47: Prefer Collection to Stream as a return type
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 48: Use caution when making streams parallel
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Chcąc sprawnie pisać metody i klasy, które działają na lambdach warto oswoić się z interfejsami funkcyjnymi dostępnymi w standardowej bibliotece Javy.&lt;/p&gt;
+
+&lt;p&gt;Java udostępnia aż 43 interfejsy funkcyjne, ale bez obaw - jest tylko 6 głównych typów, które mają wiele wariacji, głównie ze względu na prymitywy. Wystarczy więc znać tylko te 6, a resztę łatwo można wyprowadzić, jako że mają dosyć regularne nazwy.&lt;/p&gt;
+
+&lt;p&gt;Mamy więc:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Operator-y - interfejsy reprezentujące funkcję, której typ wyniku i argumentu są takie same.&lt;/li&gt;
+  &lt;li&gt;Predicate-y - interfejsy reprezentujące funkcję, która przyjmuje argument i zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;boolean&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Function-y - interfejsy reprezentujące funkcję, której typ wyniku i argumentu się różni.&lt;/li&gt;
+  &lt;li&gt;Supplier-y - interfejsy reprezentujące funkcję, która nie przyjmuję argumentu i zwraca wartość (dostarcza, &lt;em&gt;supplies&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;Consumer-y - interfejsy reprezentujące funkcję, która przyjmuje argument i nie zwraca nic (konsumuje, &lt;em&gt;consumes&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tabelka z przykładami:&lt;/p&gt;
+
+&lt;table class=&quot;post-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Interface&lt;/th&gt;
+      &lt;th&gt;Function Signature&lt;/th&gt;
+      &lt;th&gt;Example&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UnaryOperator&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;T apply(T t)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String::toLowerCase&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BinaryOperator&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;T apply(T t1, T t2)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BigInteger::add&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Predicate&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;boolean test(T t)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Collection::isEmpty&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Function&amp;lt;T,R&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;R apply(T t)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Arrays::asList&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Supplier&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;T get()&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Instant::now&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;void accept(T t)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;System.out::println&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UnaryOperator&amp;lt;T&amp;gt;&lt;/code&gt; różni się od &lt;code class=&quot;highlighter-rouge&quot;&gt;BinaryOperator&amp;lt;T&amp;gt;&lt;/code&gt; tym, że ten drugi przyjmuje dwa argumenty.&lt;/p&gt;
+
+&lt;p&gt;Każdy z tych interfejsów ma wariację do pracy z prymitywami: &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;double&lt;/code&gt;. Nazwy tych interfejsów biorą się z tego, że na początku dodawany jest typ prymitywny, który obsługują. Dla przykładu - &lt;code class=&quot;highlighter-rouge&quot;&gt;Predicate&lt;/code&gt;, który przyjmuje &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;, to &lt;code class=&quot;highlighter-rouge&quot;&gt;IntPredicate&lt;/code&gt;, a &lt;code class=&quot;highlighter-rouge&quot;&gt;BinaryOperator&lt;/code&gt;, który przyjmuje dwie wartości &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt; i zwraca również &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt;, to &lt;code class=&quot;highlighter-rouge&quot;&gt;LongBinaryOperator&lt;/code&gt;. Żaden z tych interfejsów nie jest parametryzowany, z wyjątkiem interfejsów z grupy &lt;code class=&quot;highlighter-rouge&quot;&gt;Function&lt;/code&gt;, które parametryzują zwracany typ np. &lt;code class=&quot;highlighter-rouge&quot;&gt;LongFunction&amp;lt;int[]&amp;gt;&lt;/code&gt; przyjmuje &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt; i zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;int[]&lt;/code&gt;. Wszystkie wariacje:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleUnaryOperator&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;IntUnaryOperator&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LongUnaryOperator&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleBinaryOperator&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;IntBinaryOperator&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LongBinaryOperator&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IntPredicate&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DoublePredicate&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LongPredicate&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IntFunction&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LongFunction&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleFunction&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleSupplier&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LongSupplier&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;IntSupplier&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleConsumer&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;IntConsumer&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LongConsumer&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Do tego jest 9 wariacji interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Function&lt;/code&gt;, w wypadku, gdy zwracany typ to prymityw. Typ argumentu i wyniku powinien zawsze się różnić, bo interfejs funkcyjny, który pobiera i zwraca to samo, to &lt;code class=&quot;highlighter-rouge&quot;&gt;UnaryOperator&lt;/code&gt;. Jeśli oba typy są prymitywami (typ argumentu i ten zwracany), to prefixujemy &lt;code class=&quot;highlighter-rouge&quot;&gt;Function&lt;/code&gt; z &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ArgType&amp;gt;To&amp;lt;Result&amp;gt;&lt;/code&gt; np. &lt;code class=&quot;highlighter-rouge&quot;&gt;LongToIntFunction&lt;/code&gt;. W sumie mamy 6 takich wariacji:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleToIntFunction&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleToLongFunction&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;IntToDoubleFunction&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;IntToLongFunction&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LongToIntFunction&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LongToDoubleFunction&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Jeśli typ argumentu jest prymitywem, a typ zwracany to referencja do obiektu, prefixujemy &lt;code class=&quot;highlighter-rouge&quot;&gt;Function&lt;/code&gt; z &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ArgType&amp;gt;ToObj&lt;/code&gt;, np. &lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleToObjFunction&lt;/code&gt;. Mamy w sumie 3 wariacje:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ToIntFunction&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ToLongFunction&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ToDoubleFunction&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ponadto, są jeszcze 3 dwuargumentowe wersje 3 podstawowych interfejsów (dla których ma to sens): &lt;code class=&quot;highlighter-rouge&quot;&gt;BiPredicate&amp;lt;T,U&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BiFunction&amp;lt;T,U,R&amp;gt;&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;BiConsumer&amp;lt;T,U&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Są również wariacje &lt;code class=&quot;highlighter-rouge&quot;&gt;BiFunction&lt;/code&gt;, które zwracają 3 najważniejsze prymitywy: &lt;code class=&quot;highlighter-rouge&quot;&gt;ToIntBiFunction&amp;lt;T,U&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ToLongBiFunction&amp;lt;T,U&amp;gt;&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;ToDoubleBiFunction&amp;lt;T,U&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Dodatkowo &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer&lt;/code&gt; ma 3 dodatkowe wersje, które pobierają referencję do obiektu i prymityw: &lt;code class=&quot;highlighter-rouge&quot;&gt;ObjDoubleConsumer&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ObjIntConsumer&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ObjLongConsumer&amp;lt;T&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;W sumie mamy 9 dwuargumentowych interfejsów funkcyjnych.&lt;/p&gt;
+
+&lt;p&gt;Ostatni z nich to &lt;code class=&quot;highlighter-rouge&quot;&gt;BooleanSupplier&lt;/code&gt;, który jest wariacją &lt;code class=&quot;highlighter-rouge&quot;&gt;Supplier&lt;/code&gt;-a, który zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;boolean&lt;/code&gt; i jest to jedyny wariant, który korzysta bezpośrednio z &lt;code class=&quot;highlighter-rouge&quot;&gt;boolean&lt;/code&gt;, ale &lt;code class=&quot;highlighter-rouge&quot;&gt;boolean&lt;/code&gt; jako zwracany typ jest wspierany jeszcze w interfejsie &lt;code class=&quot;highlighter-rouge&quot;&gt;Predicate&lt;/code&gt; i jego 4 wariacjach.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Nie powinniśmy używać podstawowych interfejsów funkcyjnych z opakowanymi prymitywami zamiast wariacji z prymitywami. Ich wydajność, jest dużo gorsza, a najbardziej to widać, gdy są używane masowo. Ogólnie powinniśmy unikać autoboxingu, gdzie się da.&lt;/p&gt;
+
+&lt;p&gt;Jeśli którykolwiek interfejs ze standardowej biblioteki pasuje do naszego zastosowania, to w większości przypadków powinniśmy go użyć. To sprawi, że nasze API będzie łatwiejsze do zrozumienia, a ponadto standardowe interfejsy dostarczają przydatne domyślne metody.&lt;/p&gt;
+
+&lt;p&gt;Czasem jednak może się zdarzyć, że nie znajdziemy interfejsu do naszego zastosowania, np. będziemy potrzebować &lt;code class=&quot;highlighter-rouge&quot;&gt;Predicate&lt;/code&gt;, który przyjmuje 3 parametry, lub taki, który rzuca &lt;em&gt;checked exception&lt;/em&gt;. Może też się zdarzyć, że lepiej będzie napisać swój interfejs funkcyjny, mimo że mamy już identyczny strukturalnie w standardowej bibliotece.&lt;/p&gt;
+
+&lt;p&gt;Jako przykład weźmy znany &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparator&amp;lt;T&amp;gt;&lt;/code&gt;, który strukturą jest identyczny z &lt;code class=&quot;highlighter-rouge&quot;&gt;ToIntBiFunction&amp;lt;T,T&amp;gt;&lt;/code&gt;. Dlaczego zasługuje na osobny interfejs?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Jego nazwa dostarcza świetną dokumentację&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Comparator&lt;/code&gt; ma mocne wymagania, co do tego, co stanowi jego prawidłową instancję (co składa się na jego kontrakt). Implementując ten interfejs, zobowiązujemy się, spełnić ten kontrakt.&lt;/li&gt;
+  &lt;li&gt;Zawiera wiele przydatnych metod domyślnych do przekształcania i łączenia komparatorów.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Więc warto rozważyć napisanie swojego interfejsu funkcyjnego gdy:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Może zyskać na opisowej nazwie i dokumentacji.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ma silny kontrakt z nim powiązany.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Może zyskać na customowych domyślnych metodach.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tworząc funkcjonalny interfejs, należy go oznaczyć adnotacją &lt;code class=&quot;highlighter-rouge&quot;&gt;@FunctionalInterface&lt;/code&gt;, który mówi użytkownikom, że obsługuje lambdy, oraz co ważniejsze - skompiluje się tylko wtedy, gdy będzie miał dokładnie jedną metodę abstrakcyjną, co powstrzymuje kogokolwiek, przed dodaniem do interfejsu kolejnej abstrakcyjnej metody.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 44 z rozdziału: Lambdas and Streams Item 42: Prefer lambdas to anonymous classes Item 43: Prefer method references to lambdas Item 44: Favor the use of standard functional interfaces Item 45: Use streams judiciously Item 46: Prefer side-effect-free functions in streams Item 47: Prefer Collection to Stream as a return type Item 48: Use caution when making streams parallel Chcąc sprawnie pisać metody i klasy, które działają na lambdach warto oswoić się z interfejsami funkcyjnymi dostępnymi w standardowej bibliotece Javy. Java udostępnia aż 43 interfejsy funkcyjne, ale bez obaw - jest tylko 6 głównych typów, które mają wiele wariacji, głównie ze względu na prymitywy. Wystarczy więc znać tylko te 6, a resztę łatwo można wyprowadzić, jako że mają dosyć regularne nazwy. Mamy więc: Operator-y - interfejsy reprezentujące funkcję, której typ wyniku i argumentu są takie same. Predicate-y - interfejsy reprezentujące funkcję, która przyjmuje argument i zwraca boolean. Function-y - interfejsy reprezentujące funkcję, której typ wyniku i argumentu się różni. Supplier-y - interfejsy reprezentujące funkcję, która nie przyjmuję argumentu i zwraca wartość (dostarcza, supplies) Consumer-y - interfejsy reprezentujące funkcję, która przyjmuje argument i nie zwraca nic (konsumuje, consumes) Tabelka z przykładami: Interface Function Signature Example UnaryOperator&amp;lt;T&amp;gt; T apply(T t) String::toLowerCase BinaryOperator&amp;lt;T&amp;gt; T apply(T t1, T t2) BigInteger::add Predicate&amp;lt;T&amp;gt; boolean test(T t) Collection::isEmpty Function&amp;lt;T,R&amp;gt; R apply(T t) Arrays::asList Supplier&amp;lt;T&amp;gt; T get() Instant::now Consumer&amp;lt;T&amp;gt; void accept(T t) System.out::println UnaryOperator&amp;lt;T&amp;gt; różni się od BinaryOperator&amp;lt;T&amp;gt; tym, że ten drugi przyjmuje dwa argumenty. Każdy z tych interfejsów ma wariację do pracy z prymitywami: int, long, i double. Nazwy tych interfejsów biorą się z tego, że na początku dodawany jest typ prymitywny, który obsługują. Dla przykładu - Predicate, który przyjmuje int, to IntPredicate, a BinaryOperator, który przyjmuje dwie wartości long i zwraca również long, to LongBinaryOperator. Żaden z tych interfejsów nie jest parametryzowany, z wyjątkiem interfejsów z grupy Function, które parametryzują zwracany typ np. LongFunction&amp;lt;int[]&amp;gt; przyjmuje long i zwraca int[]. Wszystkie wariacje: DoubleUnaryOperator, IntUnaryOperator, LongUnaryOperator DoubleBinaryOperator, IntBinaryOperator, LongBinaryOperator IntPredicate, DoublePredicate, LongPredicate IntFunction&amp;lt;T&amp;gt;, LongFunction&amp;lt;T&amp;gt;, DoubleFunction&amp;lt;T&amp;gt; DoubleSupplier, LongSupplier, IntSupplier DoubleConsumer, IntConsumer, LongConsumer Do tego jest 9 wariacji interfejsu Function, w wypadku, gdy zwracany typ to prymityw. Typ argumentu i wyniku powinien zawsze się różnić, bo interfejs funkcyjny, który pobiera i zwraca to samo, to UnaryOperator. Jeśli oba typy są prymitywami (typ argumentu i ten zwracany), to prefixujemy Function z &amp;lt;ArgType&amp;gt;To&amp;lt;Result&amp;gt; np. LongToIntFunction. W sumie mamy 6 takich wariacji: DoubleToIntFunction, DoubleToLongFunction, IntToDoubleFunction, IntToLongFunction, LongToIntFunction, LongToDoubleFunction Jeśli typ argumentu jest prymitywem, a typ zwracany to referencja do obiektu, prefixujemy Function z &amp;lt;ArgType&amp;gt;ToObj, np. DoubleToObjFunction. Mamy w sumie 3 wariacje: ToIntFunction, ToLongFunction, ToDoubleFunction Ponadto, są jeszcze 3 dwuargumentowe wersje 3 podstawowych interfejsów (dla których ma to sens): BiPredicate&amp;lt;T,U&amp;gt;, BiFunction&amp;lt;T,U,R&amp;gt;, i BiConsumer&amp;lt;T,U&amp;gt;. Są również wariacje BiFunction, które zwracają 3 najważniejsze prymitywy: ToIntBiFunction&amp;lt;T,U&amp;gt;, ToLongBiFunction&amp;lt;T,U&amp;gt;, i ToDoubleBiFunction&amp;lt;T,U&amp;gt;. Dodatkowo Consumer ma 3 dodatkowe wersje, które pobierają referencję do obiektu i prymityw: ObjDoubleConsumer&amp;lt;T&amp;gt;, ObjIntConsumer&amp;lt;T&amp;gt;, ObjLongConsumer&amp;lt;T&amp;gt;. W sumie mamy 9 dwuargumentowych interfejsów funkcyjnych. Ostatni z nich to BooleanSupplier, który jest wariacją Supplier-a, który zwraca boolean i jest to jedyny wariant, który korzysta bezpośrednio z boolean, ale boolean jako zwracany typ jest wspierany jeszcze w interfejsie Predicate i jego 4 wariacjach. Nie powinniśmy używać podstawowych interfejsów funkcyjnych z opakowanymi prymitywami zamiast wariacji z prymitywami. Ich wydajność, jest dużo gorsza, a najbardziej to widać, gdy są używane masowo. Ogólnie powinniśmy unikać autoboxingu, gdzie się da. Jeśli którykolwiek interfejs ze standardowej biblioteki pasuje do naszego zastosowania, to w większości przypadków powinniśmy go użyć. To sprawi, że nasze API będzie łatwiejsze do zrozumienia, a ponadto standardowe interfejsy dostarczają przydatne domyślne metody. Czasem jednak może się zdarzyć, że nie znajdziemy interfejsu do naszego zastosowania, np. będziemy potrzebować Predicate, który przyjmuje 3 parametry, lub taki, który rzuca checked exception. Może też się zdarzyć, że lepiej będzie napisać swój interfejs funkcyjny, mimo że mamy już identyczny strukturalnie w standardowej bibliotece. Jako przykład weźmy znany Comparator&amp;lt;T&amp;gt;, który strukturą jest identyczny z ToIntBiFunction&amp;lt;T,T&amp;gt;. Dlaczego zasługuje na osobny interfejs? Jego nazwa dostarcza świetną dokumentację Comparator ma mocne wymagania, co do tego, co stanowi jego prawidłową instancję (co składa się na jego kontrakt). Implementując ten interfejs, zobowiązujemy się, spełnić ten kontrakt. Zawiera wiele przydatnych metod domyślnych do przekształcania i łączenia komparatorów. Więc warto rozważyć napisanie swojego interfejsu funkcyjnego gdy: Może zyskać na opisowej nazwie i dokumentacji. Ma silny kontrakt z nim powiązany. Może zyskać na customowych domyślnych metodach. Tworząc funkcjonalny interfejs, należy go oznaczyć adnotacją @FunctionalInterface, który mówi użytkownikom, że obsługuje lambdy, oraz co ważniejsze - skompiluje się tylko wtedy, gdy będzie miał dokładnie jedną metodę abstrakcyjną, co powstrzymuje kogokolwiek, przed dodaniem do interfejsu kolejnej abstrakcyjnej metody.</summary></entry><entry><title type="html">Lambdy i referencje do metod</title><link href="https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas" rel="alternate" type="text/html" title="Lambdy i referencje do metod" /><published>2019-01-05T09:00:00+01:00</published><updated>2019-01-05T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas</id><content type="html" xml:base="https://devcave.pl/effective-java/lambdy-zamiast-anonimowych-klas">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -15,7 +169,7 @@
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 43: Prefer method references to lambdas
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 44: Favor the use of standard functional interfaces
+                &lt;a href=&quot;/effective-java/interfejsy-funkcyjne-w-javie&quot;&gt;Item 44: Favor the use of standard functional interfaces
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
                 &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 45: Use streams judiciously
@@ -2224,200 +2378,4 @@ Jeśli wywołamy &lt;code class=&quot;highlighter-rouge&quot;&gt;removeIf&lt;/co
 
 &lt;p&gt;Kolejne dosyć naturalne (przynajmniej dla mnie) zachowanie. Nic dodać, nic ująć.&lt;/p&gt;
 
-&lt;p&gt;Jeśli z kolei klasa rzeczywiście służy tylko jednej - tej w tym samym pliku, to można rozważyć zadeklarowanie jej jako statycznej klasy wewnętrznej. Jest to bardziej czytelne i możemy zredukować dostępność, deklarując ją jako &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;. O klasach wewnętrznych będzie następny wpis.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 21, 22, 23, 25 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic</summary></entry><entry><title type="html">Interfejsy vs klasy abstrakcyjne</title><link href="https://devcave.pl/effective-java/interfejsy-vs-klasy-abstrakcyjne" rel="alternate" type="text/html" title="Interfejsy vs klasy abstrakcyjne" /><published>2018-08-25T10:00:00+02:00</published><updated>2018-08-25T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/interfejsy-vs-klasy-abstrakcyjne</id><content type="html" xml:base="https://devcave.pl/effective-java/interfejsy-vs-klasy-abstrakcyjne">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 20&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m-0&quot;&gt;Classes and Interfaces&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/gettery-i-settery&quot;&gt;Item 16: In public classes, use accessor methods, not public fields
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/klasy-niezmienne&quot;&gt;Item 17: Minimize mutability
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 20: Prefer interfaces to abstract classes
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#domyślne-metody-w-interfejsach&quot;&gt;Item 21: Design interfaces for posterity
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#interfejs-tylko-jako-definicja-typu&quot;&gt;Item 22: Use interfaces only to define types
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#preferuj-hierarchię-klas-zamiast-otagowanych-klas&quot;&gt;Item 23: Prefer class hierarchies to tagged classes
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;Item 24: Favor static member classes over nonstatic
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;W Javie mamy dwa mechanizmy do definiowania abstrakcyjnego typu, który może mieć różne implementacje: interfejsy i klasy abstrakcyjne.&lt;/p&gt;
-
-&lt;p&gt;Od dodania metod domyślnych do interfejsów (Java 8), obydwa mechanizmy pozwalają na zdefiniowanie domyślnej implementacji dla niektórych metod. To, co je od siebie najbardziej odróżnia to to, że aby zaimplementować typ zdefiniowany przez klasę abstrakcyjną, trzeba ją rozszerzyć. &lt;strong&gt;Ze względu na to, że w Javie klasa może być podklasą tylko jednej klasy (&lt;em&gt;single inheritance&lt;/em&gt;), to jest to spore ograniczenie.&lt;/strong&gt; W przypadku interfejsów, takiego ograniczenia nie ma i klasa może implementować wiele interfejsów. To właśnie tu głównie wygrywają interfejsy.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Istniejące klasy mogą w łatwy sposób implementować nowy interfejs.&lt;/strong&gt; Wystarczy, że dodamy &lt;code class=&quot;highlighter-rouge&quot;&gt;implements NazwaInterfejsu&lt;/code&gt;, lub dodamy nowy po przecinku i dodamy wszystkie wymagane metody. Przykładowo, wiele istniejących klas w Javie zostało rozbudowanych, aby implementowały &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;Autocloseable&lt;/code&gt;, kiedy te zostały dodane do biblioteki. &lt;strong&gt;Istniejące klasy nie mogą być rozbudowane tak, aby rozszerzały kolejną nową klasę abstrakcyjną.&lt;/strong&gt; Aby zasymulować, że nasza klasa rozszerza obydwie klasy, musielibyśmy je obie dać wyżej w hierarchii:&lt;/p&gt;
-
-&lt;pre style=&quot;display: inline; border: none&quot;&gt;
-AbstractC
-    └── AbstractB
-            └── ConcrateA
-&lt;/pre&gt;
-
-&lt;p&gt;Niestety psuje to całą hierarchię typów, bo wszystkie klasy, które rozszerzały &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; są zmuszone od teraz implementować &lt;code class=&quot;highlighter-rouge&quot;&gt;C&lt;/code&gt;, bez względu czy tego chcemy, czy nie.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Interfejsy są idealnymi mixinami.&lt;/strong&gt; Upraszczając, &lt;em&gt;mixin&lt;/em&gt; jest typem, który klasa może (dodatkowo do swojego podstawowego typu) zaimplementować, dostarczając dodatkową, odseparowaną funkcjonalność. &lt;em&gt;Mixin&lt;/em&gt; sam w sobie nie może zostać zinstancjowany - jest tylko częścią funkcjonalności innych klas. Dla przykładu, &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; jest mixinem, który deklaruje i dodaje klasie funkcjonalność porównywania i tym samym porządkowania jej instancji.  Klasy abstrakcyjne nie mogą być &lt;em&gt;mixinami&lt;/em&gt; z tego samego powodu co wcześniej - klasa może rozszerzać tylko jedną klasę.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Interfejsy nie tworzą sztywnych hierarchii, dzięki czemu są bardzo elastyczne&lt;/strong&gt;.  Dla przykładu, mamy piosenkarza:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;AudioClip&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;i kompozytora:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Songwriter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chartPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Dzięki temu, że użyliśmy interfejsów, konkretna klasa może implementować zarówno &lt;code class=&quot;highlighter-rouge&quot;&gt;Singer&lt;/code&gt; jak i &lt;code class=&quot;highlighter-rouge&quot;&gt;Songwriter&lt;/code&gt; - tak jak to jest w prawdziwym życiu - piosenkarz jest często kompozytorem. W przypadku klas abstrakcyjnych moglibyśmy być tylko jednym albo drugim.&lt;/p&gt;
-
-&lt;p&gt;Idąc dalej, mamy jeszcze dużo więcej elastyczności. Przykładowo możemy stworzyć dodatkowy typ, który łączy oba poprzednie i dodaje nowe funkcje, które są odpowiednie dla obu ról:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SingerSongwriter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Songwriter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;AudioClip&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actSensitive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I nie ma problemu, aby istniejąca klasa, która implementuje już &lt;code class=&quot;highlighter-rouge&quot;&gt;Singer&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Songwriter&lt;/code&gt; (i nie może zostać zmieniona), implementowała &lt;code class=&quot;highlighter-rouge&quot;&gt;SingerSongwriter&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Concret&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Singer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Songwriter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SingerSongwriter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AudioClip&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actSensitive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AudioClip&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chartPosition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Taka elastyczność nie jest często potrzebna, no ale gdyby tak się stało, to mamy taką możliwość.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Możemy też połączyć zalety interfejsów i klas abstrakcyjnych tworząc coś w rodzaju szkieletu klasy implementującej dany interfejs.&lt;/strong&gt; Interfejs będzie odpowiadał za typ, być może dostarczy też kilka domyślnych metod, podczas gdy klasa abstrakcyjna dostarczy domyślne implementacje metod z interfejsu, które nie mogły być w nim zadeklarowane jako &lt;code class=&quot;highlighter-rouge&quot;&gt;defualt&lt;/code&gt;. Anglojęzyczny termin takiego zabiegu to &lt;em&gt;skeletal implementation class&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p class=&quot;note&quot;&gt;Jeśli jesteśmy w stanie zdefiniować metody domyślne w interfejsie, to klasa abstrakcyjna nie będzie nam potrzebna. Zależne jest to od tego, czy metody te operują na stanie, czy nie. W interfejsie jest to niemożliwe.&lt;/p&gt;
-
-&lt;p&gt;Zazwyczaj takie klasy abstrakcyjne nazywa się &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractNazwaInterfejsu&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Przykładowa klasa:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Skeletal implementation class&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AbstractMapEntry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Entries in a modifiable map must override this method&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UnsupportedOperationException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Implements the general contract of Map.Entry.equals&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Implements the general contract of Map.Entry.hashCode&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p class=&quot;note&quot;&gt;Ta implementacja metod nie mogłaby być bezpośrednio w interfejsie, ponieważ domyślne metody interfejsu nie pozwalają na nadpisywanie metod jak &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode&lt;/code&gt; czy &lt;code class=&quot;highlighter-rouge&quot;&gt;toString&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Przykłady znajdziemy też w standardowym &lt;em&gt;Collections Framework&lt;/em&gt; - &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractCollection&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractSet&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractList&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractMap&lt;/code&gt;. Takie klasy mogą bardzo ułatwić pisanie implementacji interfejsu. Dla przykładu, podaję &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;static factory method&lt;/a&gt;, która tworzy w pełni funkcjonalną implementację &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;, zbudowaną na &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractList&lt;/code&gt; (w formie klasy anonimowej) z tablicy intów:&lt;/p&gt;
-
-&lt;div id=&quot;intArrayAsList&quot; class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Concrete implementation built atop skeletal implementation&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;intArrayAsList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requireNonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// The diamond operator is only legal here in Java 9 and later&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// If you're using an earlier release, specify &amp;lt;Integer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AbstractList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Autoboxing&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldVal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Auto-unboxing&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldVal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Autoboxing&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Jeśli zobaczymy ile &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; udostępnia funkcji, to zdamy sobie sprawę, że masa funkcjonalności została nam dostarczona za darmo.&lt;/p&gt;
-
-&lt;p class=&quot;note&quot;&gt;Przykład jest też wzorcem projektowym  &lt;em&gt;Adapter&lt;/em&gt; - pozwala używać tablicy &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt; jako &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Innym wariantem &lt;em&gt;skeletal implementation&lt;/em&gt; jest  &lt;em&gt;simple implementation,&lt;/em&gt; której przykładem jest  &lt;code class=&quot;highlighter-rouge&quot;&gt;AbstractMap.SimpleEntry&lt;/code&gt; w standardowej bibliotece Javy. &lt;em&gt;Simple implementation&lt;/em&gt; jest jak &lt;em&gt;skeletal implementation&lt;/em&gt;, ale nie jest to klasa abstrakcyjna. Jest to możliwe najprostsza, działająca implementacja. Można jej używać taka jaka jest lub rozszerzać, modyfikując zachowanie.&lt;/p&gt;
-
-&lt;p&gt;Jako ze obydwie implementację są zaprojektowane pod dziedziczenie, to warto korzystać ze wskazówek z poprzedniego postu na temat &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;projaktowania klasy pod dziedziczenie&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Klasy &lt;em&gt;skeletal implementation&lt;/em&gt; dostarczają nam zaletę częściowej implementacji z klas abstrakcyjnych, bez narzucania ograniczeń jakie stwarzają, gdy są używane jako definicje typu. Mamy też dowolność czy chcemy skorzystać z klasy abstrakcyjnej czy zaimplementować interfejs bezpośrednio.&lt;/p&gt;
-
-&lt;p&gt;Podsumowując, interfejsy są najlepszym sposobem na zdefiniowanie typu, który pozwala na różne implementacje. Gdy mamy do czynienia z rozbudowanym interfejsem, którego metody mogą mięć domyślną implementację, można rozważyć napisanie &lt;em&gt;skeletal implementation class&lt;/em&gt;. Jeśli mamy taką możliwość, to możemy się ograniczyć tylko do metod domyślnych w interfejsie.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 20 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic</summary></entry></feed>
+&lt;p&gt;Jeśli z kolei klasa rzeczywiście służy tylko jednej - tej w tym samym pliku, to można rozważyć zadeklarowanie jej jako statycznej klasy wewnętrznej. Jest to bardziej czytelne i możemy zredukować dostępność, deklarując ją jako &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;. O klasach wewnętrznych będzie następny wpis.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 21, 22, 23, 25 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic</summary></entry></feed>

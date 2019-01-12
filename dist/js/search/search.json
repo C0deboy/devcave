@@ -588,6 +588,15 @@
         "subtitle": "Czyli zamiennik dla klas anonimowych i nie tylko",
         "date": "5 stycznia 2019",
         "url": "/effective-java/lambdy-zamiast-anonimowych-klas"
+      },
+    
+      
+      {
+        "title": "Interfejsy funkcyjne w bibliotece Javy",
+        "titleSEO": "Interfejsy funkcyjne w bibliotece Javy",
+        "subtitle": "Warto je znać chcąc pisać klasy i metody wykorzystujące lambdy",
+        "date": "12 stycznia 2019",
+        "url": "/effective-java/interfejsy-funkcyjne-w-javie"
       }
     
   

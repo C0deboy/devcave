@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Rozważne i prawidłowe używanie streamów">
+<meta property="og:description" content="Co to jest pure function?">
+
+<title>Rozważne używanie streamów</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/rozwazne-uzywanie-streamow">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Rozważne i prawidłowe używanie streamów</h1>
+            
+            <h2 class="post-subtitle">Co to jest pure function?</h2>
+            
+            <p class="post-meta">
+              
+              19
+              stycznia
+              
+              2019</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#co-to-są-streamy-i-kiedy-je-używać">Co to są streamy i kiedy je używać</a></li>
+<li class="toc-entry toc-h1"><a href="#pure-functions">Pure functions</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 45, 46</i> z rozdziału:</p>
+
+<p class="m-0">Lambdas and Streams</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/lambdy-zamiast-anonimowych-klas">Item 42: Prefer lambdas to anonymous classes
+                </a>
+            </li><li>
+                <a href="/effective-java/lambdy-zamiast-anonimowych-klas">Item 43: Prefer method references to lambdas
+                </a>
+            </li><li>
+                <a href="/effective-java/interfejsy-funkcyjne-w-javie">Item 44: Favor the use of standard functional interfaces
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/rozwazne-uzywanie-streamow">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 45: Use streams judiciously
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/rozwazne-uzywanie-streamow">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 46: Prefer side-effect-free functions in streams
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 47: Prefer Collection to Stream as a return type
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 48: Use caution when making streams parallel
+                </a>
+            </li></ul>
+<hr />
+
+<h1 id="co-to-są-streamy-i-kiedy-je-używać">Co to są streamy i kiedy je używać</h1>
+
+<p>W Javie 8 dodane zostały streamy, aby ułatwić wykonywanie wielu operacji na zbiorze danych - sekwencyjnie lub równolegle. API dostarcza dwie abstrakcje: <em>stream</em> - czyli skończona lub nieskończona sekwencja danych i <em>stream pipline</em> czyli wieloetapowe przekształcenia i przeliczenia tych danych. Składa się to na zero lub więcej operacji pośrednich (które przekształcają w jakiś sposób <em>stream</em>, np. mapowanie, sortowanie, filtrowanie itd.) i jedną końcową (np. wrzucenie elementów do kolekcji, zwrócenie konkretnego elementu czy wyświetlanie ich w konsoli).</p>
+
+<p>Streamy są wykonywane leniwie tzn. dopóki nie nie wywołamy końcowej operacji, to żadna operacja się nie wykona. To pozwala na pracę z nieskończonymi streamami.</p>
+
+<p>API streamów jest płynne, tzn. możemy dowolnie łączyć różne wywołania w jedno wyrażenie.</p>
+
+<p>Domyślnie streamy wykonywane są sekwencyjnie. Zamienienie ich na pracę współbieżną jest tak proste, jak wywołanie metody <code class="highlighter-rouge">parallel()</code> na streamie, <strong>jednak nie zawsze jest to odpowiednie</strong> - ten temat poruszę w ostatnim temacie tego rozdziału.</p>
+
+<p>Stream API jest bardzo wszechstronne i możemy w nich wykonać niemal wszystko, nie znaczy to jednak, że powinniśmy od teraz robić wszystko w streamach. Dobre używanie streamów może skrócić kod i zwiększyć czytelność naszych programów, jednak nadużywanie ich może sprawić, że będzie odwrotnie. Dlatego najlepiej znaleźć złoty środek.</p>
+
+<p>Zobaczmy to na przykładzie - program, który czyta słowa z pliku i wyświetla wszystkie anagramy (słowa składające się z tych samych liter, jednak w innej kolejności), których długość jest większa niż ta podana przez użytkownika.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Prints all large anagram groups in a dictionary iteratively</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Anagrams</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">File</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+        <span class="kt">int</span> <span class="n">minGroupSize</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">groups</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="k">try</span> <span class="o">(</span><span class="n">Scanner</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">dictionary</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">String</span> <span class="n">word</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+                <span class="n">groups</span><span class="o">.</span><span class="na">computeIfAbsent</span><span class="o">(</span><span class="n">alphabetize</span><span class="o">(</span><span class="n">word</span><span class="o">),</span>
+                    <span class="o">(</span><span class="n">unused</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">TreeSet</span><span class="o">&lt;&gt;()).</span><span class="na">add</span><span class="o">(</span><span class="n">word</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">group</span> <span class="o">:</span> <span class="n">groups</span><span class="o">.</span><span class="na">values</span><span class="o">())</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="o">)</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">group</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">alphabetize</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">char</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+        <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Czyli tak - czytamy wszystkie słowa i wkładamy je do mapy. Klucz mapy to ułożone alfabetycznie litery danego słowa (np. dla “programowanie” będzie to “aaegimnooprrw”). Jako wartość, będą to kolejne słowa, które mają takie same litery. Potem wyświetlane są te, które spełniają wymóg długości podany do programu.</p>
+
+<p class="note">Wstawianie wartości do mapy robione jest metodą <code class="highlighter-rouge">computeIfAbsent</code>, która została dodana w Javie 8. Ta metoda sprawdza, czy klucz jest już w mapie i zwraca jego wartość, jeśli istnieje - jeśli nie, to metoda przypisuje wartość obliczoną w podanym obiekcie funkcyjnym jako drugi argument i zwraca tę wartość. Ta metoda upraszcza implementację map, które przypisują kilka wartości do każdego klucza.</p>
+
+<p>Teraz zobaczymy to samo, tylko wszystko wrzucone do streamów jak leci:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Overuse of streams - don't do this!</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Anagrams</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">Path</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">Paths</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+        <span class="kt">int</span> <span class="n">minGroupSize</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+
+        <span class="k">try</span> <span class="o">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Files</span><span class="o">.</span><span class="na">lines</span><span class="o">(</span><span class="n">dictionary</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">words</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span>
+                <span class="n">groupingBy</span><span class="o">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="n">word</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">sorted</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nl">StringBuilder:</span><span class="o">:</span><span class="k">new</span><span class="o">,</span>
+                        <span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">c</span><span class="o">),</span>
+                        <span class="nl">StringBuilder:</span><span class="o">:</span><span class="n">append</span><span class="o">).</span><span class="na">toString</span><span class="o">()))</span>
+                <span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">group</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jest to nieco krótsze, ale też mniej czytelne, zwłaszcza dla kogoś, kto nie jest zaprzyjaźniony ze streamami. <strong>Złoty środek, o którym mówiłem, to korzystanie z obu sposobów</strong>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Tasteful use of streams enhances clarity and conciseness</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Anagrams</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+      <span class="n">Path</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">Paths</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+      <span class="kt">int</span> <span class="n">minGroupSize</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+
+      <span class="k">try</span> <span class="o">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Files</span><span class="o">.</span><span class="na">lines</span><span class="o">(</span><span class="n">dictionary</span><span class="o">))</span> <span class="o">{</span>
+         <span class="n">words</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">groupingBy</span><span class="o">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="n">alphabetize</span><span class="o">(</span><span class="n">word</span><span class="o">)))</span>
+           <span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+           <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="o">)</span>
+           <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">group</span><span class="o">));</span>
+      <span class="o">}</span>
+   <span class="o">}</span>
+
+   <span class="c1">// alphabetize method is the same as in original version</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Łącząc podejście iteracyjne i funkcyjne (streamy) dostaniemy najlepsze rezultaty. Układanie alfabetycznie liter wyrazu jest wydzielone do osobnej <strong>nazwanej</strong> funkcji, co jasno określa, co się dzieje pod spodem i wyodrębnia szczegóły implementacyjne poza główny kod.</p>
+
+<p class="note">Wobec tego, że typy nie są widoczne w lambdach, warto dobrze nazywać parametry lambd, aby zwiększyć czytelność streamów. Z tego samego powodu używanie metod pomocniczych (jak <code class="highlighter-rouge">alphabetize</code>) w streamach jest dużo ważniejsze niż w kodzie iteracyjnym.</p>
+
+<p>Poza tym jest też kilka rzeczy, które możemy robić w zwykłych blokach kodu, a nie możemy robić w lambdach:</p>
+
+<ul>
+  <li>
+    <p><strong>W lambdzie można tylko czytać zmienne <code class="highlighter-rouge">final</code> lub <code class="highlighter-rouge">effectively final</code> i nie można modyfikować żadnej zmiennej lokalnej</strong>.</p>
+  </li>
+  <li>
+    <p><strong>W lambdzie nie można zwrócić wyniku do zewnętrznej funkcji, wywołać <code class="highlighter-rouge">break</code> lub <code class="highlighter-rouge">continue</code> w zewnętrznej pętli, lub rzucić jakiegokolwiek wyjątku, który zewnętrzna funkcja zadeklarowała.</strong></p>
+  </li>
+</ul>
+
+<h1 id="pure-functions">Pure functions</h1>
+
+<p>Streamy to nie tylko API, to paradygmat oparty na programowaniu funkcyjnym. Aby uzyskać ekspresyjność, wydajność i w niektórych przypadkach zdolność do równoległego przetwarzania, które streamy oferują, trzeba zaadaptować nie tylko API, ale i paradygmat.</p>
+
+<p>Najważniejszą rzeczą, do której powinniśmy dążyć, jest to, aby nasze obiekty funkcyjne były jak najbardziej zbliżone do tzn. <em>pure function</em>. <em>Pure function</em> to taka, która polega tylko na tym, co dostaje w argumencie - nie polega na żadnym innym zmiennym stanie ani nie zmienia stanu żadnego innego obiektu. Jednym słowem jest funkcją bez żadnych efektów ubocznych (<em>pure function = side-effects free function</em>).</p>
+
+<p>Zobaczmy na ten kawałek kodu, który tworzy mapę częstotliwości słów pobranych z pliku:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Uses the streams API but not the paradigm--Don't do this!</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">freq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+<span class="k">try</span> <span class="o">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">file</span><span class="o">).</span><span class="na">tokens</span><span class="o">())</span> <span class="o">{</span>
+    <span class="n">words</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="n">freq</span><span class="o">.</span><span class="na">merge</span><span class="o">(</span><span class="n">word</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">(),</span> <span class="mi">1L</span><span class="o">,</span> <span class="nl">Long:</span><span class="o">:</span><span class="n">sum</span><span class="o">);</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Co jest z tym kodem złego, jest czytelny, używa streamów, lambd i referencji do metod. Nawet działa zgodnie z założeniem. A no to, że to wcale nie jest kod streamowy. Jest to zwykły kod iteracyjny wrzucony do streamu. Nie czerpie żadnych korzyści z używania streamów, jest dłuższy niż powinien być i jest mniej czytelny.</p>
+
+<p>A to wszystko dlatego, że wykonuje wszystko w końcowej operacji <code class="highlighter-rouge">forEach</code>, używając lambdy, która zmienia stan zewnętrznego obiektu (mapy <code class="highlighter-rouge">freq</code>). <strong>Operacja <code class="highlighter-rouge">forEach</code>, która robi coś więcej niż prezentowanie wyniku czy dodanie wyniku do istniejącej już kolekcji, to <em>bad smell</em>.</strong></p>
+
+<p>Właściwe wykorzystanie streamów powinno wyglądać tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Proper use of streams to initialize a frequency table</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">freq</span><span class="o">;</span>
+<span class="k">try</span> <span class="o">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">file</span><span class="o">).</span><span class="na">tokens</span><span class="o">())</span> <span class="o">{</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">groupingBy</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">toLowerCase</span><span class="o">,</span> <span class="n">counting</span><span class="o">()));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jeśli ktoś pisze kod, podobny do wcześniejszego, to dlatego, że robi to w sposób, w który robił to dotychczas i z którym jest oswojony - niczym się to nie różni od pętli for-each.</p>
+
+<p>Lepsza wersja używa <strong>Collectors API</strong> (metody <code class="highlighter-rouge">groupingBy</code> i <code class="highlighter-rouge">counting</code>, które zostały zaimportowane statycznie dla lepszej czytelności). Jest to aż 39 metod, które są swego rodzaju implementacją strategi redukcji, tzn. łączenie elementów (w tym przypadku streamu) w pojedynczy obiekt.</p>
+
+<p>Oprócz tego najczęściej używa się collectory, które zbierają elementy streamu w kolekcję: <code class="highlighter-rouge">toList()</code>, <code class="highlighter-rouge">toSet()</code>, i <code class="highlighter-rouge">toCollection(collectionFactory)</code>. Zwracają kolejno listę, set i inny podany przez nas typ kolekcji. Poza tym są jeszcze różne wariacje zbierania elementów do mapy.</p>
+
+<p>Dla przykładu wyciągnięcie 10 słów z największą częstotliwością z poprzedniej mapy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Pipeline to get a top-ten list of words from a frequency table</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">topTen</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="n">comparing</span><span class="o">(</span><span class="nl">freq:</span><span class="o">:</span><span class="n">get</span><span class="o">).</span><span class="na">reversed</span><span class="o">())</span>
+    <span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>W klasie <code class="highlighter-rouge">Collectors</code> jest jeszcze masa użytecznych metod. Polecam zajrzeć na ten wpis <a href="https://www.baeldung.com/java-8-collectors">baeldung.com/java-8-collectors</a>.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/interfejsy-funkcyjne-w-javie"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Interfejsy funkcyjne w bibliotece Javy"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/rozwazne-uzywanie-streamow";
+    this.page.identifier = "/effective-java/rozwazne-uzywanie-streamow";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

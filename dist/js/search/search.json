@@ -597,6 +597,15 @@
         "subtitle": "Warto je znać chcąc pisać klasy i metody wykorzystujące lambdy",
         "date": "12 stycznia 2019",
         "url": "/effective-java/interfejsy-funkcyjne-w-javie"
+      },
+    
+      
+      {
+        "title": "Rozważne i prawidłowe używanie streamów",
+        "titleSEO": "Rozważne używanie streamów",
+        "subtitle": "Co to jest pure function?",
+        "date": "19 stycznia 2019",
+        "url": "/effective-java/rozwazne-uzywanie-streamow"
       }
     
   

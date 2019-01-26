@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Zwracanie streamów? Współbieżne streamy.">
+<meta property="og:description" content="Co zwracać - kolekcje czy streamy? Kiedy wywoływać parallel() na streamie?">
+
+<title>Zwracanie streamów? Współbieżne streamy.</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/zwracanie-kolekcji-zamiast-streamow">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Zwracanie streamów? Współbieżne streamy.</h1>
+            
+            <h2 class="post-subtitle">Co zwracać - kolekcje czy streamy? Kiedy wywoływać parallel() na streamie?</h2>
+            
+            <p class="post-meta">
+              
+              26
+              stycznia
+              
+              2019</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#zwracanie-kolekcji-zamiast-stremów">Zwracanie kolekcji zamiast stremów</a></li>
+<li class="toc-entry toc-h1"><a href="#równoległe-wykonywanie-operacji-na-streamach">Równoległe wykonywanie operacji na streamach</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 47, 48</i> z rozdziału:</p>
+
+<p class="m-0">Lambdas and Streams</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/lambdy-zamiast-anonimowych-klas">Item 42: Prefer lambdas to anonymous classes
+                </a>
+            </li><li>
+                <a href="/effective-java/lambdy-zamiast-anonimowych-klas">Item 43: Prefer method references to lambdas
+                </a>
+            </li><li>
+                <a href="/effective-java/interfejsy-funkcyjne-w-javie">Item 44: Favor the use of standard functional interfaces
+                </a>
+            </li><li>
+                <a href="/effective-java/rozwazne-uzywanie-streamow">Item 45: Use streams judiciously
+                </a>
+            </li><li>
+                <a href="/effective-java/rozwazne-uzywanie-streamow">Item 46: Prefer side-effect-free functions in streams
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/zwracanie-kolekcji-zamiast-streamow">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 47: Prefer Collection to Stream as a return type
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/zwracanie-kolekcji-zamiast-streamow">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 48: Use caution when making streams parallel
+                    </a>
+                </li></ul>
+<hr />
+
+<h1 id="zwracanie-kolekcji-zamiast-stremów">Zwracanie kolekcji zamiast stremów</h1>
+
+<p>Pisząc metodę zwracającą sekwencję obiektów, powinniśmy przede wszystkim zwrócić jakiś typ kolekcji, a nie tylko <code class="highlighter-rouge">Stream</code>. No, chyba że jesteśmy pewni, że obiekty te będą używane tylko w streamie. Pisząc jakieś publiczne API najlepiej jest udostępnić obie wersje.</p>
+
+<p>Zwracając na przykład tylko <code class="highlighter-rouge">Stream</code> sprawiamy, że klient nie będzie mógł w łatwy sposób przeitreować po elementach za pomocą pętli for-each. Niestety <code class="highlighter-rouge">Stream</code> nie rozszerza <code class="highlighter-rouge">Iterable</code>, chociaż mógłby. Żeby użyć go w pętli, trzeba by zrobić takie paskudztwo:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Hideous workaround to iterate over a stream</span>
+<span class="k">for</span>  <span class="o">(</span><span class="n">ProcessHandle</span> <span class="n">ph</span> <span class="o">:</span> <span class="o">(</span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">ProcessHandle</span><span class="o">&gt;)</span>
+    <span class="n">ProcessHandle</span><span class="o">.</span><span class="na">allProcesses</span><span class="o">()::</span><span class="n">iterator</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Już lepszym obejściem, gdy chcemy użyć elementów streamu w pętli, jest taki adapter:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Adapter from  Stream&lt;E&gt; to Iterable&lt;E&gt;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterableOf</span><span class="o">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">stream</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nl">stream:</span><span class="o">:</span><span class="n">iterator</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Który można użyć potem tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="n">ProcessHandle</span> <span class="n">p</span> <span class="o">:</span> <span class="n">iterableOf</span><span class="o">(</span><span class="n">ProcessHandle</span><span class="o">.</span><span class="na">allProcesses</span><span class="o">()))</span> <span class="o">{</span>
+    <span class="c1">// Process the process</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Interfejs <code class="highlighter-rouge">Collection</code> jest podtypem <code class="highlighter-rouge">Iterable</code> i ma metodę <code class="highlighter-rouge">stream</code>, więc zwracając kolekcje mamy od razu dostęp do iteracji i streamów. Również zwykłe tablice udostępniają łatwy dostęp do tego dzięki <code class="highlighter-rouge">Arrays.asList</code> i <code class="highlighter-rouge">Stream.of</code>.</p>
+
+<h1 id="równoległe-wykonywanie-operacji-na-streamach">Równoległe wykonywanie operacji na streamach</h1>
+
+<p>Od Javy 5 mamy bibliotekę <code class="highlighter-rouge">java.util.concurrent</code> która zawiera współbieżne kolekcje i <em>executor framework</em>. W Javie 7 dodano pakiet <em>fork-join</em>, czyli wydajny framwork do <em>parallel decomposition</em>. W Javie 8 dodano streamy, które mogą działać współbieżnie po wywołaniu tylko jednej metody - <code class="highlighter-rouge">parallel()</code>. Dzięki tym mechanizmom pisanie wielowątkowych programów staje się coraz łatwiejsze, ale napisanie ich, aby działały poprawnie i szybko jest tak samo trudne, jak to było wcześniej.</p>
+
+<p>Rozważmy taki program:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Stream-based program to generate the first 20 Mersenne primes</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">primes</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">p</span> <span class="o">-&gt;</span> <span class="n">TWO</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">intValueExact</span><span class="o">()).</span><span class="na">subtract</span><span class="o">(</span><span class="n">ONE</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">mersenne</span> <span class="o">-&gt;</span> <span class="n">mersenne</span><span class="o">.</span><span class="na">isProbablePrime</span><span class="o">(</span><span class="mi">50</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="mi">20</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">static</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">BigInteger</span><span class="o">&gt;</span> <span class="nf">primes</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Stream</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="n">TWO</span><span class="o">,</span> <span class="nl">BigInteger:</span><span class="o">:</span><span class="n">nextProbablePrime</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Generuje on pierwsze 20 liczb pierwszych Mersenne’a, nie jest jednak ważne, co dokładnie to robi. Na moim laptopie zajmuje to około 14 sekund. Załóżmy teraz, że naiwnie chciałbym przyspieszyć ten proces, wywołując <code class="highlighter-rouge">parallel()</code>, przez co wszystkie operację wywołane zostaną współbieżnie. Czy teraz będzie szybciej? Czy trochę wolniej? Niestety - nie pokaże się nic, a zużycie procesora wskoczy na 100%.</p>
+
+<p>Co się stało? Ano biblioteka streamów nie ma pojęcia jak wykonać tę operację wielowątkowo. Nawet w dobrych warunkach, jeśli źródło streamu to <code class="highlighter-rouge">Stream.iterate</code> lub jest obecna operacja <code class="highlighter-rouge">limit</code>, to wywołanie <code class="highlighter-rouge">parallel()</code> nie przyniesie dobrego rezultatu.</p>
+
+<p>Morał jest więc prosty - nie wywołujmy metody <code class="highlighter-rouge">parallel()</code> na streamie bezmyślnie.</p>
+
+<p>Z reguły, najlepszy zysk na wydajności zyskujemy wtedy, gdy robimy streamy na instancjach klas takich jak: <code class="highlighter-rouge">ArrayList</code>, <code class="highlighter-rouge">HashMap</code>, <code class="highlighter-rouge">HashSet</code>, <code class="highlighter-rouge">ConcurrentHashMap</code> oraz tablicach i <code class="highlighter-rouge">IntStream.range()</code>/<code class="highlighter-rouge">LongStream.range()</code>.</p>
+
+<p>To, co mają wspólnego, to to, że mogą być dokładnie i dosyć tanim kosztem podzielone na mniejsze części, co ułatwia rozdzielenie pracy pośród wiele wątków. Używany jest do tego <em>spliterator</em>, który jest zwracany przez wywołanie metody <code class="highlighter-rouge">spliterator()</code> na <code class="highlighter-rouge">Stream</code> lub <code class="highlighter-rouge">Iterable</code>.</p>
+
+<p>Również specyfika końcowych operacji wpływa na efektywność współbieżnego przetwarzania. Jeśli więcej pracy jest wykonywane w operacji kończącej niż w tych modyfikujących, to wywołanie <code class="highlighter-rouge">parallel()</code> nie wiele zmieni.</p>
+
+<p>Najlepsze operacje końcowe, które najlepiej działają współbieżnie to “redukcje”, gdzie wszystkie elementy są łączone za pomocą jednej z metod redukujących w <code class="highlighter-rouge">Stream</code> lub gotowe metody takie jak <code class="highlighter-rouge">min</code>, <code class="highlighter-rouge">max</code>, <code class="highlighter-rouge">count</code> i <code class="highlighter-rouge">sum</code>. Równie dobrze sprawdzają się operację takie jak <code class="highlighter-rouge">anyMatch</code>, <code class="highlighter-rouge">allMatch</code>, i <code class="highlighter-rouge">noneMatch</code>. Do tej grupy nie należą jednak <code class="highlighter-rouge">collect</code>, która jest nieco bardziej kosztowna.</p>
+
+<p class="note">Używając zwykłego <code class="highlighter-rouge">forEach</code> na streamie, który wykonywany jest współbieżnie, kolejność elementów nie zostanie zachowana. Aby dostać na koniec tę samą kolejność trzeba użyć <code class="highlighter-rouge">forEachOrdered</code>.</p>
+
+<p>Nawet używając źródła streamu, które można łatwo podzielić na kawałki, mało kosztowne operacje kończące i niekolidujące obiekty funkcyjne, <strong>nie uzyskamy lepszej wydajności z wywoływania <code class="highlighter-rouge">parallel</code> jeśli w streamie nie będą wykonywane ciężkie operacje, które przewyższą koszt przetwarzania wielowątkowego.</strong></p>
+
+<p>Przykład streamu, gdzie równoległe wykonywanie ma sens i przynosi duży zysk wydajności:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Prime-counting stream pipeline - benefits from parallelization</span>
+<span class="kd">static</span> <span class="kt">long</span> <span class="nf">pi</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">LongStream</span><span class="o">.</span><span class="na">rangeClosed</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">mapToObj</span><span class="o">(</span><span class="nl">BigInteger:</span><span class="o">:</span><span class="n">valueOf</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">.</span><span class="na">isProbablePrime</span><span class="o">(</span><span class="mi">50</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">count</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Na moim laptopie, policzenie tym prostym sposobem ilości liczb pierwszych mniejszych od 100 000 zajmuje 32 sekundy. Dodanie <code class="highlighter-rouge">parallel()</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Prime-counting stream pipeline - parallel version</span>
+<span class="kd">static</span> <span class="kt">long</span> <span class="nf">pi</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">LongStream</span><span class="o">.</span><span class="na">rangeClosed</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">parallel</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">mapToObj</span><span class="o">(</span><span class="nl">BigInteger:</span><span class="o">:</span><span class="n">valueOf</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">.</span><span class="na">isProbablePrime</span><span class="o">(</span><span class="mi">50</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">count</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>redukuje czas do 9 sekund.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/rozwazne-uzywanie-streamow"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Rozważne i prawidłowe używanie streamów"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/zwracanie-kolekcji-zamiast-streamow";
+    this.page.identifier = "/effective-java/zwracanie-kolekcji-zamiast-streamow";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -1,4 +1,125 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-01-19T16:59:47+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Rozważne i prawidłowe używanie streamów</title><link href="https://devcave.pl/effective-java/rozwazne-uzywanie-streamow" rel="alternate" type="text/html" title="Rozważne i prawidłowe używanie streamów" /><published>2019-01-19T09:00:00+01:00</published><updated>2019-01-19T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/rozwazne-uzywanie-streamow</id><content type="html" xml:base="https://devcave.pl/effective-java/rozwazne-uzywanie-streamow">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-01-26T15:50:24+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Zwracanie streamów? Współbieżne streamy.</title><link href="https://devcave.pl/effective-java/zwracanie-kolekcji-zamiast-streamow" rel="alternate" type="text/html" title="Zwracanie streamów? Współbieżne streamy." /><published>2019-01-26T09:00:00+01:00</published><updated>2019-01-26T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/zwracanie-kolekcji-zamiast-streamow</id><content type="html" xml:base="https://devcave.pl/effective-java/zwracanie-kolekcji-zamiast-streamow">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 47, 48&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m-0&quot;&gt;Lambdas and Streams&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/lambdy-zamiast-anonimowych-klas&quot;&gt;Item 42: Prefer lambdas to anonymous classes
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/lambdy-zamiast-anonimowych-klas&quot;&gt;Item 43: Prefer method references to lambdas
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/interfejsy-funkcyjne-w-javie&quot;&gt;Item 44: Favor the use of standard functional interfaces
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/rozwazne-uzywanie-streamow&quot;&gt;Item 45: Use streams judiciously
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/rozwazne-uzywanie-streamow&quot;&gt;Item 46: Prefer side-effect-free functions in streams
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/zwracanie-kolekcji-zamiast-streamow&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 47: Prefer Collection to Stream as a return type
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/zwracanie-kolekcji-zamiast-streamow&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 48: Use caution when making streams parallel
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;zwracanie-kolekcji-zamiast-stremów&quot;&gt;Zwracanie kolekcji zamiast stremów&lt;/h1&gt;
+
+&lt;p&gt;Pisząc metodę zwracającą sekwencję obiektów, powinniśmy przede wszystkim zwrócić jakiś typ kolekcji, a nie tylko &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt;. No, chyba że jesteśmy pewni, że obiekty te będą używane tylko w streamie. Pisząc jakieś publiczne API najlepiej jest udostępnić obie wersje.&lt;/p&gt;
+
+&lt;p&gt;Zwracając na przykład tylko &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt; sprawiamy, że klient nie będzie mógł w łatwy sposób przeitreować po elementach za pomocą pętli for-each. Niestety &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt; nie rozszerza &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&lt;/code&gt;, chociaż mógłby. Żeby użyć go w pętli, trzeba by zrobić takie paskudztwo:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Hideous workaround to iterate over a stream&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ProcessHandle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ph&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ProcessHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ProcessHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allProcesses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Już lepszym obejściem, gdy chcemy użyć elementów streamu w pętli, jest taki adapter:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Adapter from  Stream&amp;lt;E&amp;gt; to Iterable&amp;lt;E&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;iterableOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;stream:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Który można użyć potem tak:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ProcessHandle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iterableOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ProcessHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allProcesses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Process the process&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Interfejs &lt;code class=&quot;highlighter-rouge&quot;&gt;Collection&lt;/code&gt; jest podtypem &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&lt;/code&gt; i ma metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;stream&lt;/code&gt;, więc zwracając kolekcje mamy od razu dostęp do iteracji i streamów. Również zwykłe tablice udostępniają łatwy dostęp do tego dzięki &lt;code class=&quot;highlighter-rouge&quot;&gt;Arrays.asList&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream.of&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;równoległe-wykonywanie-operacji-na-streamach&quot;&gt;Równoległe wykonywanie operacji na streamach&lt;/h1&gt;
+
+&lt;p&gt;Od Javy 5 mamy bibliotekę &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.concurrent&lt;/code&gt; która zawiera współbieżne kolekcje i &lt;em&gt;executor framework&lt;/em&gt;. W Javie 7 dodano pakiet &lt;em&gt;fork-join&lt;/em&gt;, czyli wydajny framwork do &lt;em&gt;parallel decomposition&lt;/em&gt;. W Javie 8 dodano streamy, które mogą działać współbieżnie po wywołaniu tylko jednej metody - &lt;code class=&quot;highlighter-rouge&quot;&gt;parallel()&lt;/code&gt;. Dzięki tym mechanizmom pisanie wielowątkowych programów staje się coraz łatwiejsze, ale napisanie ich, aby działały poprawnie i szybko jest tak samo trudne, jak to było wcześniej.&lt;/p&gt;
+
+&lt;p&gt;Rozważmy taki program:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Stream-based program to generate the first 20 Mersenne primes&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;primes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TWO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;intValueExact&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;subtract&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ONE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mersenne&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mersenne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isProbablePrime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BigInteger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;primes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TWO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;BigInteger:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nextProbablePrime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Generuje on pierwsze 20 liczb pierwszych Mersenne’a, nie jest jednak ważne, co dokładnie to robi. Na moim laptopie zajmuje to około 14 sekund. Załóżmy teraz, że naiwnie chciałbym przyspieszyć ten proces, wywołując &lt;code class=&quot;highlighter-rouge&quot;&gt;parallel()&lt;/code&gt;, przez co wszystkie operację wywołane zostaną współbieżnie. Czy teraz będzie szybciej? Czy trochę wolniej? Niestety - nie pokaże się nic, a zużycie procesora wskoczy na 100%.&lt;/p&gt;
+
+&lt;p&gt;Co się stało? Ano biblioteka streamów nie ma pojęcia jak wykonać tę operację wielowątkowo. Nawet w dobrych warunkach, jeśli źródło streamu to &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream.iterate&lt;/code&gt; lub jest obecna operacja &lt;code class=&quot;highlighter-rouge&quot;&gt;limit&lt;/code&gt;, to wywołanie &lt;code class=&quot;highlighter-rouge&quot;&gt;parallel()&lt;/code&gt; nie przyniesie dobrego rezultatu.&lt;/p&gt;
+
+&lt;p&gt;Morał jest więc prosty - nie wywołujmy metody &lt;code class=&quot;highlighter-rouge&quot;&gt;parallel()&lt;/code&gt; na streamie bezmyślnie.&lt;/p&gt;
+
+&lt;p&gt;Z reguły, najlepszy zysk na wydajności zyskujemy wtedy, gdy robimy streamy na instancjach klas takich jak: &lt;code class=&quot;highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;HashMap&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;HashSet&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ConcurrentHashMap&lt;/code&gt; oraz tablicach i &lt;code class=&quot;highlighter-rouge&quot;&gt;IntStream.range()&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;LongStream.range()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To, co mają wspólnego, to to, że mogą być dokładnie i dosyć tanim kosztem podzielone na mniejsze części, co ułatwia rozdzielenie pracy pośród wiele wątków. Używany jest do tego &lt;em&gt;spliterator&lt;/em&gt;, który jest zwracany przez wywołanie metody &lt;code class=&quot;highlighter-rouge&quot;&gt;spliterator()&lt;/code&gt; na &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Również specyfika końcowych operacji wpływa na efektywność współbieżnego przetwarzania. Jeśli więcej pracy jest wykonywane w operacji kończącej niż w tych modyfikujących, to wywołanie &lt;code class=&quot;highlighter-rouge&quot;&gt;parallel()&lt;/code&gt; nie wiele zmieni.&lt;/p&gt;
+
+&lt;p&gt;Najlepsze operacje końcowe, które najlepiej działają współbieżnie to “redukcje”, gdzie wszystkie elementy są łączone za pomocą jednej z metod redukujących w &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt; lub gotowe metody takie jak &lt;code class=&quot;highlighter-rouge&quot;&gt;min&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;max&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt;. Równie dobrze sprawdzają się operację takie jak &lt;code class=&quot;highlighter-rouge&quot;&gt;anyMatch&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;allMatch&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;noneMatch&lt;/code&gt;. Do tej grupy nie należą jednak &lt;code class=&quot;highlighter-rouge&quot;&gt;collect&lt;/code&gt;, która jest nieco bardziej kosztowna.&lt;/p&gt;
+
+&lt;p class=&quot;note&quot;&gt;Używając zwykłego &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt; na streamie, który wykonywany jest współbieżnie, kolejność elementów nie zostanie zachowana. Aby dostać na koniec tę samą kolejność trzeba użyć &lt;code class=&quot;highlighter-rouge&quot;&gt;forEachOrdered&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Nawet używając źródła streamu, które można łatwo podzielić na kawałki, mało kosztowne operacje kończące i niekolidujące obiekty funkcyjne, &lt;strong&gt;nie uzyskamy lepszej wydajności z wywoływania &lt;code class=&quot;highlighter-rouge&quot;&gt;parallel&lt;/code&gt; jeśli w streamie nie będą wykonywane ciężkie operacje, które przewyższą koszt przetwarzania wielowątkowego.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Przykład streamu, gdzie równoległe wykonywanie ma sens i przynosi duży zysk wydajności:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Prime-counting stream pipeline - benefits from parallelization&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LongStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rangeClosed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mapToObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;BigInteger:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isProbablePrime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Na moim laptopie, policzenie tym prostym sposobem ilości liczb pierwszych mniejszych od 100 000 zajmuje 32 sekundy. Dodanie &lt;code class=&quot;highlighter-rouge&quot;&gt;parallel()&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Prime-counting stream pipeline - parallel version&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LongStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rangeClosed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parallel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mapToObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;BigInteger:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isProbablePrime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;redukuje czas do 9 sekund.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 47, 48 z rozdziału: Lambdas and Streams Item 42: Prefer lambdas to anonymous classes Item 43: Prefer method references to lambdas Item 44: Favor the use of standard functional interfaces Item 45: Use streams judiciously Item 46: Prefer side-effect-free functions in streams Item 47: Prefer Collection to Stream as a return type Item 48: Use caution when making streams parallel Zwracanie kolekcji zamiast stremów Pisząc metodę zwracającą sekwencję obiektów, powinniśmy przede wszystkim zwrócić jakiś typ kolekcji, a nie tylko Stream. No, chyba że jesteśmy pewni, że obiekty te będą używane tylko w streamie. Pisząc jakieś publiczne API najlepiej jest udostępnić obie wersje. Zwracając na przykład tylko Stream sprawiamy, że klient nie będzie mógł w łatwy sposób przeitreować po elementach za pomocą pętli for-each. Niestety Stream nie rozszerza Iterable, chociaż mógłby. Żeby użyć go w pętli, trzeba by zrobić takie paskudztwo: // Hideous workaround to iterate over a stream for (ProcessHandle ph : (Iterable&amp;lt;ProcessHandle&amp;gt;) ProcessHandle.allProcesses()::iterator) Już lepszym obejściem, gdy chcemy użyć elementów streamu w pętli, jest taki adapter: // Adapter from Stream&amp;lt;E&amp;gt; to Iterable&amp;lt;E&amp;gt; public static &amp;lt;E&amp;gt; Iterable&amp;lt;E&amp;gt; iterableOf(Stream&amp;lt;E&amp;gt; stream) { return stream::iterator; } Który można użyć potem tak: for (ProcessHandle p : iterableOf(ProcessHandle.allProcesses())) { // Process the process } Interfejs Collection jest podtypem Iterable i ma metodę stream, więc zwracając kolekcje mamy od razu dostęp do iteracji i streamów. Również zwykłe tablice udostępniają łatwy dostęp do tego dzięki Arrays.asList i Stream.of. Równoległe wykonywanie operacji na streamach Od Javy 5 mamy bibliotekę java.util.concurrent która zawiera współbieżne kolekcje i executor framework. W Javie 7 dodano pakiet fork-join, czyli wydajny framwork do parallel decomposition. W Javie 8 dodano streamy, które mogą działać współbieżnie po wywołaniu tylko jednej metody - parallel(). Dzięki tym mechanizmom pisanie wielowątkowych programów staje się coraz łatwiejsze, ale napisanie ich, aby działały poprawnie i szybko jest tak samo trudne, jak to było wcześniej. Rozważmy taki program: // Stream-based program to generate the first 20 Mersenne primes public static void main(String[] args) { primes().map(p -&amp;gt; TWO.pow(p.intValueExact()).subtract(ONE)) .filter(mersenne -&amp;gt; mersenne.isProbablePrime(50)) .limit(20) .forEach(System.out::println); } static Stream&amp;lt;BigInteger&amp;gt; primes() { return Stream.iterate(TWO, BigInteger::nextProbablePrime); } Generuje on pierwsze 20 liczb pierwszych Mersenne’a, nie jest jednak ważne, co dokładnie to robi. Na moim laptopie zajmuje to około 14 sekund. Załóżmy teraz, że naiwnie chciałbym przyspieszyć ten proces, wywołując parallel(), przez co wszystkie operację wywołane zostaną współbieżnie. Czy teraz będzie szybciej? Czy trochę wolniej? Niestety - nie pokaże się nic, a zużycie procesora wskoczy na 100%. Co się stało? Ano biblioteka streamów nie ma pojęcia jak wykonać tę operację wielowątkowo. Nawet w dobrych warunkach, jeśli źródło streamu to Stream.iterate lub jest obecna operacja limit, to wywołanie parallel() nie przyniesie dobrego rezultatu. Morał jest więc prosty - nie wywołujmy metody parallel() na streamie bezmyślnie. Z reguły, najlepszy zysk na wydajności zyskujemy wtedy, gdy robimy streamy na instancjach klas takich jak: ArrayList, HashMap, HashSet, ConcurrentHashMap oraz tablicach i IntStream.range()/LongStream.range(). To, co mają wspólnego, to to, że mogą być dokładnie i dosyć tanim kosztem podzielone na mniejsze części, co ułatwia rozdzielenie pracy pośród wiele wątków. Używany jest do tego spliterator, który jest zwracany przez wywołanie metody spliterator() na Stream lub Iterable. Również specyfika końcowych operacji wpływa na efektywność współbieżnego przetwarzania. Jeśli więcej pracy jest wykonywane w operacji kończącej niż w tych modyfikujących, to wywołanie parallel() nie wiele zmieni. Najlepsze operacje końcowe, które najlepiej działają współbieżnie to “redukcje”, gdzie wszystkie elementy są łączone za pomocą jednej z metod redukujących w Stream lub gotowe metody takie jak min, max, count i sum. Równie dobrze sprawdzają się operację takie jak anyMatch, allMatch, i noneMatch. Do tej grupy nie należą jednak collect, która jest nieco bardziej kosztowna. Używając zwykłego forEach na streamie, który wykonywany jest współbieżnie, kolejność elementów nie zostanie zachowana. Aby dostać na koniec tę samą kolejność trzeba użyć forEachOrdered. Nawet używając źródła streamu, które można łatwo podzielić na kawałki, mało kosztowne operacje kończące i niekolidujące obiekty funkcyjne, nie uzyskamy lepszej wydajności z wywoływania parallel jeśli w streamie nie będą wykonywane ciężkie operacje, które przewyższą koszt przetwarzania wielowątkowego. Przykład streamu, gdzie równoległe wykonywanie ma sens i przynosi duży zysk wydajności: // Prime-counting stream pipeline - benefits from parallelization static long pi(long n) { return LongStream.rangeClosed(2, n) .mapToObj(BigInteger::valueOf) .filter(i -&amp;gt; i.isProbablePrime(50)) .count(); } Na moim laptopie, policzenie tym prostym sposobem ilości liczb pierwszych mniejszych od 100 000 zajmuje 32 sekundy. Dodanie parallel(): // Prime-counting stream pipeline - parallel version static long pi(long n) { return LongStream.rangeClosed(2, n) .parallel() .mapToObj(BigInteger::valueOf) .filter(i -&amp;gt; i.isProbablePrime(50)) .count(); } redukuje czas do 9 sekund.</summary></entry><entry><title type="html">Rozważne i prawidłowe używanie streamów</title><link href="https://devcave.pl/effective-java/rozwazne-uzywanie-streamow" rel="alternate" type="text/html" title="Rozważne i prawidłowe używanie streamów" /><published>2019-01-19T09:00:00+01:00</published><updated>2019-01-19T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/rozwazne-uzywanie-streamow</id><content type="html" xml:base="https://devcave.pl/effective-java/rozwazne-uzywanie-streamow">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -24,10 +145,10 @@
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 46: Prefer side-effect-free functions in streams
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 47: Prefer Collection to Stream as a return type
+                &lt;a href=&quot;/effective-java/zwracanie-kolekcji-zamiast-streamow&quot;&gt;Item 47: Prefer Collection to Stream as a return type
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 48: Use caution when making streams parallel
+                &lt;a href=&quot;/effective-java/zwracanie-kolekcji-zamiast-streamow&quot;&gt;Item 48: Use caution when making streams parallel
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -206,10 +327,10 @@
                 &lt;a href=&quot;/effective-java/rozwazne-uzywanie-streamow&quot;&gt;Item 46: Prefer side-effect-free functions in streams
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 47: Prefer Collection to Stream as a return type
+                &lt;a href=&quot;/effective-java/zwracanie-kolekcji-zamiast-streamow&quot;&gt;Item 47: Prefer Collection to Stream as a return type
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 48: Use caution when making streams parallel
+                &lt;a href=&quot;/effective-java/zwracanie-kolekcji-zamiast-streamow&quot;&gt;Item 48: Use caution when making streams parallel
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -361,10 +482,10 @@
                 &lt;a href=&quot;/effective-java/rozwazne-uzywanie-streamow&quot;&gt;Item 46: Prefer side-effect-free functions in streams
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 47: Prefer Collection to Stream as a return type
+                &lt;a href=&quot;/effective-java/zwracanie-kolekcji-zamiast-streamow&quot;&gt;Item 47: Prefer Collection to Stream as a return type
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 48: Use caution when making streams parallel
+                &lt;a href=&quot;/effective-java/zwracanie-kolekcji-zamiast-streamow&quot;&gt;Item 48: Use caution when making streams parallel
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -2093,243 +2214,4 @@ c.add(new Coin());
       &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.class&lt;/code&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 26 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility Klasa lub interfejs, która ma jeden lub więcej typ parametru, jest generyczną klasą/interfejsem (inaczej typem generycznym, generykiem). Np. interfejs List ma pojedynczy typ parametru - E, który odpowiada typowi elementów w liście. Pełna deklaracja wygląda tak: List&amp;lt;E&amp;gt;. Jest to więc interfejs generyczny. Generyki są już od Javy 5 i znacznie ułatwiły życie - wcześniej na przykład trzeba było castować każdy obiekt zwracany z kolekcji, a błędy z tym związane pojawiały się dopiero w runtime. Mianowicie, jeśli znalazłby się tam jakiś nieprawidłowy obiekt, to dostalibyśmy ClassCastException podczas wykonywania programu. Używając generyków, mówimy kompilatorowi, jakich typów używamy i takie błędy wykrywane są już podczas kompilacji. Dzięki temu mamy zwiększone type safty oraz czytelność (brak castowania). W tym rozdziale przyjrzymy się jak wyciągnąć z generyków jak najwięcej i jak ominąć komplikacje. Unikaj typów prostych Każdy generyk ma swój typ prosty (ang. raw type) - sama nazwa bez parametrów typu. Czyli dla List&amp;lt;E&amp;gt; jest to List. Typy proste zachowują się tak, jakby wszystkie generyczne informacje zostały usunięte i istnieją ze względu na kompatybilność wsteczną. Nie powinno się ich używać. Przykład: // Raw collection type - don't do this! // My stamp collection. Contains only Stamp instances. private final Collection stamps = ... ; Kolekcja służy do przechowywania instancji klasy Stamp. Jeśli gdzieś po drodze wpadnie tam instancja klasy Coin: // Erroneous insertion of coin into stamp collection stamps.add(new Coin( ... )); // Emits &quot;unchecked call&quot; warning to skompiluje się to bez żadnego błedu. Błąd pojawi się dopiero wtedy, gdy wystąpi próba wyciągnięcia instancji Coin z kolekcji: // Raw iterator type - don't do this! for (Iterator i = stamps.iterator(); i.hasNext(); ) { Stamp stamp = (Stamp) i.next(); // Throws ClassCastException } Kompilator nie może pomóc wcześniej, bo nie wie, że mogą tam lądować tylko obiekty typu Stamp. Używając parametryzowanego typu, jasno to precyzujemy i kompilator jest w stanie wykryć taki błąd: // Parameterized collection type - typesafe private final Collection&amp;lt;Stamp&amp;gt; stamps = ... ; Ta klasa skompiluje się tylko wtedy, kiedy typy będą się zgadzać. W innym wypadku dostaniemy komunikat: Test.java:9: error: incompatible types: Coin cannot be converted to Stamp c.add(new Coin()); ^ Kompilator zastępuje wszystkie typy parametryzowane podczas kompilacji i wstawia casty wszędzie tam, gdzie pobierane są elementy. Informacje generyczne nie istnieją w skompilowanych klasach. Gwarantuje to type safty i kompatybilność wsteczną. Jeśli chcemy używać List do przetrzymywania dowolnych obiektów, to zamiast gołego List powinniśmy użyć List&amp;lt;Object&amp;gt;. Wtedy mamy type safety i jeśli zrobimy coś źle, to program nam się nie skompiluje. Z kolei, jeśli typ jest nieznany lub nie ma znaczenia, to powinniśmy użyć unbounded wildcard type, czyli znaku zapytania zamiast typu. Dla typu generycznego Set&amp;lt;E&amp;gt;, unbounded wildcard type wygląda tak Set&amp;lt;?&amp;gt;. Oznacza to, że możemy przekazać jakikolwiek Set i nie potrzebujemy żadnej informacji o typie. Po prostu nie będziemy go używać - wystarczą nam metody, które nie wymagają konkretnych typów. Złe użycie z gołymi typami: // Use of raw type for unknown element type - don't do this! static int numElementsInCommon(Set s1, Set s2) { int result = 0; for (Object o1 : s1) if (s2.contains(o1)) result++; return result; } Dobre użycie z unbounded wildcard type: // Uses unbounded wildcard type - typesafe and flexible static int numElementsInCommon(Set&amp;lt;?&amp;gt; s1, Set&amp;lt;?&amp;gt; s2) { ... } Różnica między Set&amp;lt;?&amp;gt; i Set jest taka, że ten pierwszy jest type safe. Jasno deklarujemy, że nie obchodzi nas typ i że będziemy używać tylko metod, które od niego nie zależą. W konsekwencji nie możemy wrzucać żadnych elementów do kolekcji - w przeciwieństwie do gołego typu, który pozwala na wrzucenie czegokolwiek. Jeśli takie ograniczenie nam nie pasuje, to powinniśmy użyć metody generycznej lub bounded wildcard type - o nich będzie w następnych wpisach. Czasem jednak jesteśmy zmuszeni do używania gołych typów - m.in. gdy używamy: literałów klasy - parametryczne są niedozwolone przez specyfikację - List.class, String[].class i int.class są cacy, ale List&amp;lt;String&amp;gt;.class i List&amp;lt;?&amp;gt;.class są niecacy. operatora instanceof - wynika to z tego, że generyczne typy są usuwane w runtimie. Możemy użyć unbounded wildcard (?), ale nie wpływa to w żaden sposób na instanceof, więc to tylko zaśmieca kod. Dlatego używając instanceof najlepiej podawać zawsze goły typ i później ewentualnie castować na Set&amp;lt;?&amp;gt;: // Legitimate use of raw type - instanceof operator if (o instanceof Set) { // Raw type Set&amp;lt;?&amp;gt; s = (Set&amp;lt;?&amp;gt;) o; // Wildcard type //... } Ustaliliśmy, że o ma typ Set, więc castujemy to na wildcard type Set&amp;lt;?&amp;gt;, a nie na surowy typ Set. To jest sprawdzone castowanie, więc kompilator nie będzie rzucał “unchecked cast” warningami. Podsumowując, używanie gołych typów opóźnia wykrywanie błędów i nie wnosi żadnych korzyści, dlatego nie powinniśmy ich używać. W Javie są obecne tylko ze względu na kompatybilność wsteczną. Tabelka z używanymi tu pojęciami: Pojęcie Przykład Raw type List Parameterized type List&amp;lt;String&amp;gt; Generic type List&amp;lt;E&amp;gt; Formal type parameter E Unbounded wildcard type List&amp;lt;?&amp;gt; Type token String.class</summary></entry><entry><title type="html">Klasy wewnętrzne</title><link href="https://devcave.pl/effective-java/klasy-wewnetrzne" rel="alternate" type="text/html" title="Klasy wewnętrzne" /><published>2018-09-08T10:00:00+02:00</published><updated>2018-09-08T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/klasy-wewnetrzne</id><content type="html" xml:base="https://devcave.pl/effective-java/klasy-wewnetrzne">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 24&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m-0&quot;&gt;Classes and Interfaces&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/minimalizuj-dostepnosc-enkapsulacja&quot;&gt;Item 15: Minimize the accessibility of classes and members
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/gettery-i-settery&quot;&gt;Item 16: In public classes, use accessor methods, not public fields
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/klasy-niezmienne&quot;&gt;Item 17: Minimize mutability
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kompozycja-zamiast-dziedziczenia&quot;&gt;Item 18: Favor composition over inheritance
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/projektowanie-klasy-pod-dziedziczenie&quot;&gt;Item 19: Design and document for inheritance or else prohibit it
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne&quot;&gt;Item 20: Prefer interfaces to abstract classes
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#domyślne-metody-w-interfejsach&quot;&gt;Item 21: Design interfaces for posterity
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#interfejs-tylko-jako-definicja-typu&quot;&gt;Item 22: Use interfaces only to define types
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#preferuj-hierarchię-klas-zamiast-otagowanych-klas&quot;&gt;Item 23: Prefer class hierarchies to tagged classes
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/kilka-dobrych-praktyk-o-interfejsach-i-klasach#jedna-top-level-klasa-na-jeden-plik-źródłowy&quot;&gt;Item 25: Limit source files to a single top-level class
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/klasy-wewnetrzne&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 24: Favor static member classes over nonstatic
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Klasa wewnętrzna (ang. &lt;em&gt;nested class&lt;/em&gt;) to po prostu klasa zdefiniowana wewnątrz innej klasy i powinna służyć tylko w klasie, w której się znajduje. Jeśli klasa jest też użyteczna gdzieś indziej, to powinna być zwykłą klasą (ang. &lt;em&gt;top-level class&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;Są cztery typy klas wewnętrznych:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;static member class&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;nonstatic member class&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;anonymous class&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;local class&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Jeśli chodzi o nazewnictwo, to klasa wewnętrzna zadeklarowana jako &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt; nazywana jest też &lt;em&gt;static nested class&lt;/em&gt;, a wszystkie pozostałe &lt;em&gt;inner class&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;statyczne-klasy-wewnętrzne&quot;&gt;Statyczne klasy wewnętrzne&lt;/h1&gt;
-
-&lt;p&gt;Ang. &lt;em&gt;Static Nested Classes&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Statyczne klasy wewnętrzne są najczęściej wykorzystywanymi klasami z tej grupy i często są preferowane.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Mają dostęp do wszystkich &lt;strong&gt;statycznych&lt;/strong&gt; elementów klasy, w której jest zadeklarowana, nawet tych zadeklarowanych jako &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Jak to ze statycznymi elementami, należą do klasy, a nie do jej instancji&lt;/li&gt;
-  &lt;li&gt;Nie potrzebują instnacji klasy, w której się znajdują&lt;/li&gt;
-  &lt;li&gt;Mogą mieć wszystkie modyfikatory dostępu&lt;/li&gt;
-  &lt;li&gt;Można w nich deklarować zarówno elementy statyczne i niestatyczne&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Najczęściej wykorzystuje się je jako publiczne helpery. Często w ten sposób implementuje się np. &lt;a href=&quot;/effective-java/wzorzec-projektowy-builder&quot;&gt;wzorzec projektowy Builder&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Klasy &lt;em&gt;private static member&lt;/em&gt; często wykorzystuje się do reprezentacji poszczególnych komponentów w klasie, w której się znajdują. Przykładowo wiele implementacji interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Map&lt;/code&gt; ma wewnątrz obiekt &lt;code class=&quot;highlighter-rouge&quot;&gt;Entry&lt;/code&gt;, dla każdej pary klucz-wartość. Każdy taki obiekt jest powiązany z mapą, ale metody z &lt;code class=&quot;highlighter-rouge&quot;&gt;Entry&lt;/code&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;getKey&lt;/code&gt;,  &lt;code class=&quot;highlighter-rouge&quot;&gt;getValue&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;setValue&lt;/code&gt;) nie wymagają dostępu do niej. Dlatego użycie niestatycznej klasy w tym przypadku byłoby nieuzasadnione.&lt;/p&gt;
-
-&lt;h1 id=&quot;niestatyczne-klasy-wewnętrzne&quot;&gt;Niestatyczne klasy wewnętrzne&lt;/h1&gt;
-
-&lt;p&gt;Ang. &lt;em&gt;Non-Static Nested Classes&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Tak jak niestatyczne zmienne czy metody, każda instancja niestatycznej klasy wewnętrznej jest powiązana z instancją klasy, w której się znajduje.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Może mieć wszystkie modyfikatory dostępu&lt;/li&gt;
-  &lt;li&gt;Ma dostęp do wszystkich elementów klasy bez względu na to, czy są statycznie, czy nie&lt;/li&gt;
-  &lt;li&gt;Może deklarować tylko elementy niestatyczne&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Outer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Inner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Niemożliwe jest utworzenie niestatycznej klasy wewnętrznej bez instancji klasy, w której się znajduje, więc najpierw trzeba ją stworzyć:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Outer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Outer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Outer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Inner&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Inner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p class=&quot;note&quot;&gt;Jeśli mielibyśmy takie same nazwy metod w obu klasach, to moglibyśmy uzyskać referencję do tej &lt;em&gt;top-level&lt;/em&gt; używając tzw. &lt;em&gt;qualified this&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Enclosing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Inner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;Enclosing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Qualified this, prints &quot;Hello&quot;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Takie klasy często używane są do implementacji Adaptera (Wzorzec projektowy), który pozwala na użycie klasy jako jakiejś innej niepowiązanej klasy. Dla przykładu, implementacje interfejsu &lt;code class=&quot;highlighter-rouge&quot;&gt;Map&lt;/code&gt; używają niestatycznej klasy wewnętrznej, aby zaimplementować różne widoki kolekcji, które są zwracane przez metody &lt;code class=&quot;highlighter-rouge&quot;&gt;keySet&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;entrySet&lt;/code&gt;, i &lt;code class=&quot;highlighter-rouge&quot;&gt;values&lt;/code&gt;. Podobnie implementacje &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; używają ich do implementacji iteratorów. Wygląda to mniej więcej tak:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MySet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AbstractSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Bulk of the class omitted&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MyIterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyIterator&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Jeśli klasa wewnętrzna nie potrzebuję dostępu do instancji klasy, w której się znajduje, to powinna być &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt;&lt;/strong&gt;. Jeśli tego nie zrobimy, to każda instancja wewnętrznej klasy będzie miała zbędną referencję do klasy w której się znajduje, co zajmuję zbędny czas i miejsce, a czasem może wstrzymać &lt;em&gt;garbage collection&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;klasy-anonimowe&quot;&gt;Klasy anonimowe&lt;/h1&gt;
-
-&lt;p&gt;Ang. &lt;em&gt;Anonymous Classes&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Anonimowe klasy są używane do zdefiniowania implementacji klasy “w locie”, bez potrzeby tworzenia osobnej, reużywalnej klasy. Często też używa się do stworzenia instancji klasy z nadpisanymi tylko kilkoma metodami. Daje nam to możliwość zmodyfikowania zachowania, bez tworzenia podklasy. Klasy anonimowe:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Nie mają nazwy&lt;/li&gt;
-  &lt;li&gt;Nie mają modyfikatorów dostępu&lt;/li&gt;
-  &lt;li&gt;Mają dostęp do statycznych i niestatycznych elementów klasy, którą implementują (z wyjątkiem elementów &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;Nie mają kontruktorów&lt;/li&gt;
-  &lt;li&gt;Nie mogą rozszerzać/implementować innych klas i interfejsów&lt;/li&gt;
-  &lt;li&gt;Nie mogą mieć żadnych statycznych elementów oprócz stałych, które są prymitywami lub stringami z modyfikatorem &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Nie możemy użyć żadnych elementów, które zdefiniowaliśmy dodatkowo w klasie anonimowej. Można wywoływać tylko te, które są zdefiniowane w implementowanej klasie.&lt;/li&gt;
-  &lt;li&gt;Nie użyjemy na nich &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;  ani nic innego co wymaga nazwy klasy&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Definiujemy więc najpierw dowolną klasę/interfejs, niech to będzie klasa abstrakcyjna:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleAbstractClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I później w dowolnym miejscu, gdzie legalne jest wyrażenie, deklarujemy klasę i od razu po jej konstruktorze dostarczamy implementację:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AnonymousInnerTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;SimpleAbstractClass&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simpleAbstractClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleAbstractClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;c1&quot;&gt;// method implementation&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;simpleAbstractClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p class=&quot;note&quot;&gt;Klasy anonimowe powinny być krótkie (do 10 linijek). W innym wypadku czytelność znacznie ucierpi.&lt;/p&gt;
-
-&lt;p&gt;Klasy anonimowe często się używa w implementacji &lt;a href=&quot;/effective-java/static-factory-method-zamiast-konstruktora&quot;&gt;static factory method&lt;/a&gt; (Przykład takiego użycia był w &lt;a href=&quot;/effective-java/interfejsy-vs-klasy-abstrakcyjne#intArrayAsList&quot;&gt;poście nr 20&lt;/a&gt; w metodzie &lt;code class=&quot;highlighter-rouge&quot;&gt;intArrayAsList&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;Przed dodaniem lambd w Javie 8, klasy anonimowe były używane do tworzenia małych obiektów funkcyjnych w locie, jednak lambdy całkowicie je wyparły.&lt;/p&gt;
-
-&lt;p&gt;Przykład takiego użycia:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thread&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;New Thread started.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I z to samo z wykorzystaniem lambdy:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thread&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;New Thread started&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Chyba nie trzeba tłumaczyć dlaczego lambdy są preferowane ;)&lt;/p&gt;
-
-&lt;p&gt;Jednak jeśli potrzebujemy użyć &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; to lambdy się nie sprawdzą, bo do lambdy nie możemy się w żaden sposób odwołać. W takim przypadku musimy użyć klasy anonimowej.&lt;/p&gt;
-
-&lt;h1 id=&quot;klasy-lokalne&quot;&gt;Klasy lokalne&lt;/h1&gt;
-
-&lt;p&gt;Ang. &lt;em&gt;Local Classes&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Klasy lokalne to specjalny typ klas wewnętrznych - możemy zdefiniować je wewnątrz metody.&lt;/p&gt;
-
-&lt;p&gt;Wygląda to tak:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NewEnclosing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     
-    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Local&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
- 
-            &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;c1&quot;&gt;// method implementation&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Local&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-     
-    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;NewEnclosing&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newEnclosing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NewEnclosing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;newEnclosing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Nie mają modyfikatorów dostępu&lt;/li&gt;
-  &lt;li&gt;Mają dostęp do statycznych i niestatycznych elementów klasy, w której się znajdują&lt;/li&gt;
-  &lt;li&gt;Nie mogą definiować elementów jako &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Klasy lokalne są najrzadziej wykorzystywanym typem klas. Taka klasa może być zadeklorowana wszędzie tam, gdzie może być zadeklarowana zmienna i jej zasięg jest tak sam, jak w przypadku zmiennych.&lt;/p&gt;
-
-&lt;p&gt;Jeśli mielibyśmy kiedyś skorzystać z takiej klasy, to warto zadbać o to, by była krótka, aby nie ucierpiała czytelność kodu.&lt;/p&gt;
-
-&lt;h1 id=&quot;podsumowując&quot;&gt;Podsumowując&lt;/h1&gt;
-
-&lt;p&gt;Mamy 4 klasy wewnętrzne i każda ma swoje miejsce/zastosowanie. Jeśli klasa musi być widoczna w więcej niż jednej metodzie lub jest zbyt duża, aby była w metodzie, użyj niestatyczną klasę wewnętrzną. Jeśli nie potrzebuje dostępu do instancji klasy, to zadeklaruj ją jako &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt;. Jeśli potrzebujesz jednorazowego użycia klasy wewnątrz metody i istnieje już zdefiniowany typ tej klasy - użyj klasy anonimowej. W przeciwnym wypadku użyj klasy lokalnej.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 24 z rozdziału: Classes and Interfaces Item 15: Minimize the accessibility of classes and members Item 16: In public classes, use accessor methods, not public fields Item 17: Minimize mutability Item 18: Favor composition over inheritance Item 19: Design and document for inheritance or else prohibit it Item 20: Prefer interfaces to abstract classes Item 21: Design interfaces for posterity Item 22: Use interfaces only to define types Item 23: Prefer class hierarchies to tagged classes Item 25: Limit source files to a single top-level class Item 24: Favor static member classes over nonstatic</summary></entry></feed>
+&lt;/table&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 26 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility Klasa lub interfejs, która ma jeden lub więcej typ parametru, jest generyczną klasą/interfejsem (inaczej typem generycznym, generykiem). Np. interfejs List ma pojedynczy typ parametru - E, który odpowiada typowi elementów w liście. Pełna deklaracja wygląda tak: List&amp;lt;E&amp;gt;. Jest to więc interfejs generyczny. Generyki są już od Javy 5 i znacznie ułatwiły życie - wcześniej na przykład trzeba było castować każdy obiekt zwracany z kolekcji, a błędy z tym związane pojawiały się dopiero w runtime. Mianowicie, jeśli znalazłby się tam jakiś nieprawidłowy obiekt, to dostalibyśmy ClassCastException podczas wykonywania programu. Używając generyków, mówimy kompilatorowi, jakich typów używamy i takie błędy wykrywane są już podczas kompilacji. Dzięki temu mamy zwiększone type safty oraz czytelność (brak castowania). W tym rozdziale przyjrzymy się jak wyciągnąć z generyków jak najwięcej i jak ominąć komplikacje. Unikaj typów prostych Każdy generyk ma swój typ prosty (ang. raw type) - sama nazwa bez parametrów typu. Czyli dla List&amp;lt;E&amp;gt; jest to List. Typy proste zachowują się tak, jakby wszystkie generyczne informacje zostały usunięte i istnieją ze względu na kompatybilność wsteczną. Nie powinno się ich używać. Przykład: // Raw collection type - don't do this! // My stamp collection. Contains only Stamp instances. private final Collection stamps = ... ; Kolekcja służy do przechowywania instancji klasy Stamp. Jeśli gdzieś po drodze wpadnie tam instancja klasy Coin: // Erroneous insertion of coin into stamp collection stamps.add(new Coin( ... )); // Emits &quot;unchecked call&quot; warning to skompiluje się to bez żadnego błedu. Błąd pojawi się dopiero wtedy, gdy wystąpi próba wyciągnięcia instancji Coin z kolekcji: // Raw iterator type - don't do this! for (Iterator i = stamps.iterator(); i.hasNext(); ) { Stamp stamp = (Stamp) i.next(); // Throws ClassCastException } Kompilator nie może pomóc wcześniej, bo nie wie, że mogą tam lądować tylko obiekty typu Stamp. Używając parametryzowanego typu, jasno to precyzujemy i kompilator jest w stanie wykryć taki błąd: // Parameterized collection type - typesafe private final Collection&amp;lt;Stamp&amp;gt; stamps = ... ; Ta klasa skompiluje się tylko wtedy, kiedy typy będą się zgadzać. W innym wypadku dostaniemy komunikat: Test.java:9: error: incompatible types: Coin cannot be converted to Stamp c.add(new Coin()); ^ Kompilator zastępuje wszystkie typy parametryzowane podczas kompilacji i wstawia casty wszędzie tam, gdzie pobierane są elementy. Informacje generyczne nie istnieją w skompilowanych klasach. Gwarantuje to type safty i kompatybilność wsteczną. Jeśli chcemy używać List do przetrzymywania dowolnych obiektów, to zamiast gołego List powinniśmy użyć List&amp;lt;Object&amp;gt;. Wtedy mamy type safety i jeśli zrobimy coś źle, to program nam się nie skompiluje. Z kolei, jeśli typ jest nieznany lub nie ma znaczenia, to powinniśmy użyć unbounded wildcard type, czyli znaku zapytania zamiast typu. Dla typu generycznego Set&amp;lt;E&amp;gt;, unbounded wildcard type wygląda tak Set&amp;lt;?&amp;gt;. Oznacza to, że możemy przekazać jakikolwiek Set i nie potrzebujemy żadnej informacji o typie. Po prostu nie będziemy go używać - wystarczą nam metody, które nie wymagają konkretnych typów. Złe użycie z gołymi typami: // Use of raw type for unknown element type - don't do this! static int numElementsInCommon(Set s1, Set s2) { int result = 0; for (Object o1 : s1) if (s2.contains(o1)) result++; return result; } Dobre użycie z unbounded wildcard type: // Uses unbounded wildcard type - typesafe and flexible static int numElementsInCommon(Set&amp;lt;?&amp;gt; s1, Set&amp;lt;?&amp;gt; s2) { ... } Różnica między Set&amp;lt;?&amp;gt; i Set jest taka, że ten pierwszy jest type safe. Jasno deklarujemy, że nie obchodzi nas typ i że będziemy używać tylko metod, które od niego nie zależą. W konsekwencji nie możemy wrzucać żadnych elementów do kolekcji - w przeciwieństwie do gołego typu, który pozwala na wrzucenie czegokolwiek. Jeśli takie ograniczenie nam nie pasuje, to powinniśmy użyć metody generycznej lub bounded wildcard type - o nich będzie w następnych wpisach. Czasem jednak jesteśmy zmuszeni do używania gołych typów - m.in. gdy używamy: literałów klasy - parametryczne są niedozwolone przez specyfikację - List.class, String[].class i int.class są cacy, ale List&amp;lt;String&amp;gt;.class i List&amp;lt;?&amp;gt;.class są niecacy. operatora instanceof - wynika to z tego, że generyczne typy są usuwane w runtimie. Możemy użyć unbounded wildcard (?), ale nie wpływa to w żaden sposób na instanceof, więc to tylko zaśmieca kod. Dlatego używając instanceof najlepiej podawać zawsze goły typ i później ewentualnie castować na Set&amp;lt;?&amp;gt;: // Legitimate use of raw type - instanceof operator if (o instanceof Set) { // Raw type Set&amp;lt;?&amp;gt; s = (Set&amp;lt;?&amp;gt;) o; // Wildcard type //... } Ustaliliśmy, że o ma typ Set, więc castujemy to na wildcard type Set&amp;lt;?&amp;gt;, a nie na surowy typ Set. To jest sprawdzone castowanie, więc kompilator nie będzie rzucał “unchecked cast” warningami. Podsumowując, używanie gołych typów opóźnia wykrywanie błędów i nie wnosi żadnych korzyści, dlatego nie powinniśmy ich używać. W Javie są obecne tylko ze względu na kompatybilność wsteczną. Tabelka z używanymi tu pojęciami: Pojęcie Przykład Raw type List Parameterized type List&amp;lt;String&amp;gt; Generic type List&amp;lt;E&amp;gt; Formal type parameter E Unbounded wildcard type List&amp;lt;?&amp;gt; Type token String.class</summary></entry></feed>

@@ -606,6 +606,15 @@
         "subtitle": "Co to jest pure function?",
         "date": "19 stycznia 2019",
         "url": "/effective-java/rozwazne-uzywanie-streamow"
+      },
+    
+      
+      {
+        "title": "Zwracanie streamów? Współbieżne streamy.",
+        "titleSEO": "Zwracanie streamów? Współbieżne streamy.",
+        "subtitle": "Co zwracać - kolekcje czy streamy? Kiedy wywoływać parallel() na streamie?",
+        "date": "26 stycznia 2019",
+        "url": "/effective-java/zwracanie-kolekcji-zamiast-streamow"
       }
     
   

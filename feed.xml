@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-02-02T11:05:58+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Sprawdzanie parametrów i defensive copy</title><link href="https://devcave.pl/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy" rel="alternate" type="text/html" title="Sprawdzanie parametrów i defensive copy" /><published>2019-02-02T09:00:00+01:00</published><updated>2019-02-02T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy</id><content type="html" xml:base="https://devcave.pl/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-02-02T11:15:49+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Sprawdzanie parametrów i defensive copy</title><link href="https://devcave.pl/effective-java/sprawdzanie-parametrow-i-defensive-copy" rel="alternate" type="text/html" title="Sprawdzanie parametrów i defensive copy" /><published>2019-02-02T09:00:00+01:00</published><updated>2019-02-02T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/sprawdzanie-parametrow-i-defensive-copy</id><content type="html" xml:base="https://devcave.pl/effective-java/sprawdzanie-parametrow-i-defensive-copy">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -7,11 +7,11 @@
 &lt;p class=&quot;m-0&quot;&gt;Methods&lt;/p&gt;
 
 &lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy&quot;&gt;
+                    &lt;a href=&quot;/effective-java/sprawdzanie-parametrow-i-defensive-copy&quot;&gt;
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 49: Check parameters for validity
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy&quot;&gt;
+                    &lt;a href=&quot;/effective-java/sprawdzanie-parametrow-i-defensive-copy&quot;&gt;
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 50: Make defensive copies when needed
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li&gt;

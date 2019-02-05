@@ -132,7 +132,7 @@ Jak widać "defensive copy" to po prostu utworzenie nowego identycznego obiektu 
 
 Dzięki temu poprzedni atak nie zadziała. Ważne jest też to, aby walidacja parametrów była wykonana na kopiach - chroni to klasę przed modyfikowaniem parametrów z innego wątku między czasem, gdy są walidowane, a potem kopiowane. W bezpieczeństwie znane jest to jako atak *time-of-check/time-of-use (TOCTOU)*.
 
-{: .note}
+{ .note}
 Warto zauważyć, że nie użyta jest tu metoda `clone` klasy `Date`. To dlatego, że klasa `Date` nie jest `final` i nie ma gwarancji, że metoda `clone` zwróci obiekt klasy `java.util.Date`. Może również zwrócić instancję niezaufanej podklasy, która jest zaprojektowana by szkodzić. Dlatego nie powinno się używać metody `clone`, aby robić *defensive copy* na obiektach, które mogą być rozszerzane.
 
 To jednak nie wszystko - nasza klasa nadal jest wrażliwa. Nadal można ją modyfikować z zewnątrz dzięki getterom, które udostępniają bezpośrednio wnętrzności klasy:

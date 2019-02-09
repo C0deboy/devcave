@@ -277,6 +277,14 @@
 <lastmod>2019-02-02T09:00:00+01:00</lastmod>
 </url>
 <url>
+<loc>https://devcave.pl/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy</loc>
+<lastmod>2019-02-02T09:00:00+01:00</lastmod>
+</url>
+<url>
+<loc>https://devcave.pl/effective-java/projektowanie-metod-i-przeciazenie</loc>
+<lastmod>2019-02-09T09:00:00+01:00</lastmod>
+</url>
+<url>
 <loc>https://devcave.pl/o-mnie/</loc>
 </url>
 <url>
@@ -332,5 +340,8 @@
 </url>
 <url>
 <loc>https://devcave.pl/page14/</loc>
+</url>
+<url>
+<loc>https://devcave.pl/page15/</loc>
 </url>
 </urlset>

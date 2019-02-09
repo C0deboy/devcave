@@ -624,6 +624,24 @@
         "subtitle": "Czyli chronienie stanu naszego obiektu",
         "date": "2 lutego 2019",
         "url": "/effective-java/sprawdzanie-parametrow-i-defensive-copy"
+      },
+    
+      
+      {
+        "title": "Sprawdzanie parametrów i defensive copy",
+        "titleSEO": "Sprawdzanie parametrów i defensive copy",
+        "subtitle": "Czyli chronienie stanu naszego obiektu",
+        "date": "2 lutego 2019",
+        "url": "/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy"
+      },
+    
+      
+      {
+        "title": "Projektowanie metod",
+        "titleSEO": "Projektowanie metod - Kilka dobrych praktyk",
+        "subtitle": "Kilka dobrych praktyk",
+        "date": "9 lutego 2019",
+        "url": "/effective-java/projektowanie-metod-i-przeciazenie"
       }
     
   

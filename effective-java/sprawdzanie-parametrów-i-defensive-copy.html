@@ -14,7 +14,7 @@
 
 <title>Sprawdzanie parametrów i defensive copy</title>
 
-<link rel="canonical" href="https://devcave.pl/effective-java/sprawdzanie-parametrow-i-defensive-copy">
+<link rel="canonical" href="https://devcave.pl/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy">
 <link rel="shortcut icon" href="/img/logo.ico">
 
 <link rel="stylesheet" href="/dist/css/devcave.min.css">
@@ -131,19 +131,19 @@
 <p class="m-0">Methods</p>
 
 <ul class="fa-ul custom"><li style="list-style-type: none;">
-                    <a href="/effective-java/sprawdzanie-parametrow-i-defensive-copy">
+                    <a href="/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy">
                         <i class="fa-li fa fa-arrow-right"></i>Item 49: Check parameters for validity
                     </a>
                 </li><li style="list-style-type: none;">
-                    <a href="/effective-java/sprawdzanie-parametrow-i-defensive-copy">
+                    <a href="/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy">
                         <i class="fa-li fa fa-arrow-right"></i>Item 50: Make defensive copies when needed
                     </a>
                 </li><li style="list-style-type: none;">
-                    <a href="/effective-java/sprawdzanie-parametrow-i-defensive-copy">
+                    <a href="/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy">
                         <i class="fa-li fa fa-arrow-right"></i>Item 49: Check parameters for validity
                     </a>
                 </li><li style="list-style-type: none;">
-                    <a href="/effective-java/sprawdzanie-parametrow-i-defensive-copy">
+                    <a href="/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy">
                         <i class="fa-li fa fa-arrow-right"></i>Item 50: Make defensive copies when needed
                     </a>
                 </li><li>
@@ -281,8 +281,7 @@
 
 <p>Dzięki temu poprzedni atak nie zadziała. Ważne jest też to, aby walidacja parametrów była wykonana na kopiach - chroni to klasę przed modyfikowaniem parametrów z innego wątku między czasem, gdy są walidowane, a potem kopiowane. W bezpieczeństwie znane jest to jako atak <em>time-of-check/time-of-use (TOCTOU)</em>.</p>
 
-<p>{ .note}
-Warto zauważyć, że nie użyta jest tu metoda <code class="highlighter-rouge">clone</code> klasy <code class="highlighter-rouge">Date</code>. To dlatego, że klasa <code class="highlighter-rouge">Date</code> nie jest <code class="highlighter-rouge">final</code> i nie ma gwarancji, że metoda <code class="highlighter-rouge">clone</code> zwróci obiekt klasy <code class="highlighter-rouge">java.util.Date</code>. Może również zwrócić instancję niezaufanej podklasy, która jest zaprojektowana by szkodzić. Dlatego nie powinno się używać metody <code class="highlighter-rouge">clone</code>, aby robić <em>defensive copy</em> na obiektach, które mogą być rozszerzane.</p>
+<p class="note">Warto zauważyć, że nie użyta jest tu metoda <code class="highlighter-rouge">clone</code> klasy <code class="highlighter-rouge">Date</code>. To dlatego, że klasa <code class="highlighter-rouge">Date</code> nie jest <code class="highlighter-rouge">final</code> i nie ma gwarancji, że metoda <code class="highlighter-rouge">clone</code> zwróci obiekt klasy <code class="highlighter-rouge">java.util.Date</code>. Może również zwrócić instancję niezaufanej podklasy, która jest zaprojektowana by szkodzić. Dlatego nie powinno się używać metody <code class="highlighter-rouge">clone</code>, aby robić <em>defensive copy</em> na obiektach, które mogą być rozszerzane.</p>
 
 <p>To jednak nie wszystko - nasza klasa nadal jest wrażliwa. Nadal można ją modyfikować z zewnątrz dzięki getterom, które udostępniają bezpośrednio wnętrzności klasy:</p>
 
@@ -328,16 +327,16 @@ Warto zauważyć, że nie użyta jest tu metoda <code class="highlighter-rouge">
       <ul class="pagination">
         
         <li class="page-item">
-          <a class="page-link box-effect" href="/effective-java/zwracanie-kolekcji-zamiast-streamow"
-             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Zwracanie streamów? Współbieżne streamy."><i class="fa fa-arrow-left"
+          <a class="page-link box-effect" href="/effective-java/sprawdzanie-parametrow-i-defensive-copy"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Sprawdzanie parametrów i defensive copy"><i class="fa fa-arrow-left"
                                                                                                             aria-hidden="true"></i>
             Poprzedni post</a>
         </li>
         
         
         <li class="page-item ml-auto">
-          <a class="page-link box-effect" href="/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy"
-             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Sprawdzanie parametrów i defensive copy">Następny post <i
+          <a class="page-link box-effect" href="/effective-java/projektowanie-metod-i-przeciazenie"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Projektowanie metod">Następny post <i
                   class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </li>
         
@@ -375,8 +374,8 @@ Warto zauważyć, że nie użyta jest tu metoda <code class="highlighter-rouge">
 <div id="disqus_thread"></div>
 <script>
   const disqus_config = function () {
-    this.page.url = "https://devcave.pl/effective-java/sprawdzanie-parametrow-i-defensive-copy";
-    this.page.identifier = "/effective-java/sprawdzanie-parametrow-i-defensive-copy";
+    this.page.url = "https://devcave.pl/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy";
+    this.page.identifier = "/effective-java/sprawdzanie-parametrów-i-defensive-copy";
   };
 
   (function () { // DON'T EDIT BELOW THIS LINE

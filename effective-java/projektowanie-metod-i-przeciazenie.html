@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Projektowanie metod">
+<meta property="og:description" content="Kilka dobrych praktyk">
+
+<title>Projektowanie metod - Kilka dobrych praktyk</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/projektowanie-metod-i-przeciazenie">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Projektowanie metod</h1>
+            
+            <h2 class="post-subtitle">Kilka dobrych praktyk</h2>
+            
+            <p class="post-meta">
+              
+              9
+              lutego
+              
+              2019</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#projektowanie-metod">Projektowanie metod</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#nazwy-metod">Nazwy metod</a></li>
+<li class="toc-entry toc-h2"><a href="#argumenty-metod">Argumenty metod</a></li>
+<li class="toc-entry toc-h2"><a href="#typy-argumentów">Typy argumentów</a></li>
+<li class="toc-entry toc-h2"><a href="#enumy-zamiast-parametrów-typy-boolean">Enumy zamiast parametrów typy boolean</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#przeciążanie-metod---lepiej-tego-unikać">Przeciążanie metod - lepiej tego unikać</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 51, 52</i> z rozdziału:</p>
+
+<p class="m-0">Methods</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy">Item 49: Check parameters for validity
+                </a>
+            </li><li>
+                <a href="/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy">Item 50: Make defensive copies when needed
+                </a>
+            </li><li>
+                <a href="/effective-java/sprawdzanie-parametrow-i-defensive-copy">Item 49: Check parameters for validity
+                </a>
+            </li><li>
+                <a href="/effective-java/sprawdzanie-parametrow-i-defensive-copy">Item 50: Make defensive copies when needed
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/projektowanie-metod-i-przeciazenie">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 51: Design method signatures carefully
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/projektowanie-metod-i-przeciazenie">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 52: Use overloading judiciously
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 53: Use varargs judiciously
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 54: Return empty collections or arrays, not nulls
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 55: Return optionals judiciously
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 56: Write doc comments for all exposed API elements
+                </a>
+            </li></ul>
+<hr />
+
+<h1 id="projektowanie-metod">Projektowanie metod</h1>
+
+<p>W tym temacie zebrane jest kilka wskazówek na temat projektowania API, aby było łatwiejsze w użyciu i bardziej odporne na błędy.</p>
+
+<h2 id="nazwy-metod">Nazwy metod</h2>
+
+<p>Nazwy metod oczywiście zawsze powinny przestrzegać konwencji nazewniczych, ale równie ważne jest dobranie dobrej nazwy metody. Nazwa powinna być zwięzła, łatwa w zrozumieniu i dobrze opisująca co się w niej dzieje. Dobrze jest też trzymać się podobnej konwencji w obrębie klasy/pakietu.</p>
+
+<h2 id="argumenty-metod">Argumenty metod</h2>
+
+<p>Powinniśmy unikać jak ognia przekazywania zbyt wielu argumentów do metody. Rozsądnym maximum są 4 parametry. Jeśli nie będziemy się tego trzymać, to nasze API stanie się toporne w użyciu, mało czytelne i nie obędzie się bez dokumentacji. Jest to szczególne ważne, jeśli metoda przyjmuje kilka argumentów tego samego typu.</p>
+
+<p>Aby poradzić sobie z problemem dużej ilości parametrów można np.:</p>
+<ul>
+  <li>podzielić metodę na kilka mniejszych, które potrzebują tylko niektórych z nich, ale też trzeba mieć na uwadze to, aby nie naprodukować ich zbyt wiele</li>
+  <li>utworzyć dodatkową pomocniczą klasę, która zgrupuje powiązane ze sobą argumenty (zazwyczaj używa się do tego <a href="/effective-java/klasy-wewnetrzne"><em>static member class</em></a>)</li>
+  <li>skorzystać ze wzorca <a href="/effective-java/wzorzec-projektowy-builder"><em>builder</em></a>, szczególnie jeśli niektóre parametry są opcjonalne.</li>
+</ul>
+
+<h2 id="typy-argumentów">Typy argumentów</h2>
+
+<p>Jeśli istnieje interfejs jakiegoś typu, to powinniśmy preferować jego użycie jako deklaracji typu argumentu do metody, zamiast klasy konkretnej. Dzięki temu metoda będzie bardziej elastyczna i będzie mogła przyjąć różne implementacje.</p>
+
+<h2 id="enumy-zamiast-parametrów-typy-boolean">Enumy zamiast parametrów typy boolean</h2>
+
+<p>Lepiej jest użyć dwuelementowego Enuma, niż booleana, chyba że znaczenie booleana jest jasne dzięki nazwie metody. Enumy są bardziej czytelne i łatwiej się nimi posługiwać. Ułatwiają też dodanie kolejnych opcji w późniejszym czasie.</p>
+
+<p>Dla przykładu, mając klasę <code class="highlighter-rouge">Thermometer</code>, która ma operować na stopniach celsjusza lub farenhaita, zamiast konstruktora, który przyjmuje wartość <code class="highlighter-rouge">true</code>, jeśli chcemy używać farenhaita:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thermometer</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>lepiej by było stworzyć takiego enuma:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="n">TemperatureScale</span> <span class="o">{</span> <span class="n">FAHRENHEIT</span><span class="o">,</span> <span class="n">CELSIUS</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>i jego podawać do konstruktora:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thermometer</span><span class="o">(</span><span class="n">TemperatureScale</span><span class="o">.</span><span class="na">CELSIUS</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Nie dość, że jest to dużo bardziej czytelne, to nie ma później problemu, aby dodać np. kolejną jednostkę - <code class="highlighter-rouge">KELVIN</code>. Ponadto możemy zrobić większy użytek z enumów dodając różne metody np. jedna z nich mogła by wspierać przekonwertowywanie jednostek.</p>
+
+<h1 id="przeciążanie-metod---lepiej-tego-unikać">Przeciążanie metod - lepiej tego unikać</h1>
+
+<p>Przeciążanie metod może być czasem dezorientujące. Przykład nieudolnego zastosowania - klasa która próbuje klasyfikować czy kolekcja jest setem, listą czy jakąś inną kolekcją za pomocą przeciążania metod:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Broken! - What does this program print?</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CollectionClassifier</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">classify</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"Set"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">classify</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span> <span class="n">lst</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"List"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">classify</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"Unknown Collection"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Collection</span><span class="o">&lt;?&gt;[]</span> <span class="n">collections</span> <span class="o">=</span> <span class="o">{</span>
+            <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(),</span>
+            <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">BigInteger</span><span class="o">&gt;(),</span>
+            <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;().</span><span class="na">values</span><span class="o">()</span>
+        <span class="o">};</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span> <span class="o">:</span> <span class="n">collections</span><span class="o">)</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classify</span><span class="o">(</span><span class="n">c</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Intencją jest tutaj, aby program na podstawie typu w <em>runtime</em> wybrał odpowiednie przeciążenie i zwrócił konkretny typ kolekcji. Mogłoby się wydawać, że program wyprintuje kolejno “Set”, “List” i “Unknown Collection” jednak tak się nie dzieje. Zamiast tego dostajemy 3 razy “Unknown Collection”.</p>
+
+<p>Jak to się dzieje? Wybór która przeciążana metoda powinna zostać wywołana dzieje się podczas kompilacji. Dla wszystkich 3 iteracji pętli typ elementu kolekcji jest taki sam - <code class="highlighter-rouge">Collection&lt;?&gt;</code>. Podczas <em>runtime</em> za każdym razem jest to inny typ, ale nie wpływa to na wybór przeciążenia - liczy się tu typ <em>compile-time</em>, dlatego 3 razy wywoływane jest przeciążenie z <code class="highlighter-rouge">Collection&lt;?&gt;</code>.</p>
+
+<p>Działa to dokładnie odwrotnie w przypadku nadpisywania metod. Wybór odpowiedniej nadpisanej metody dzieje się w <em>runtime</em> i bazuje na typie, który widoczny jest w <em>runtime</em>, a nie w <em>compile-time</em>.</p>
+
+<p>Przykład:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Wine</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"wine"</span><span class="o">;</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">SparklingWine</span> <span class="kd">extends</span> <span class="n">Wine</span> <span class="o">{</span>
+    <span class="nd">@Override</span> 
+    <span class="n">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"sparkling wine"</span><span class="o">;</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Champagne</span> <span class="kd">extends</span> <span class="n">SparklingWine</span> <span class="o">{</span>
+    <span class="nd">@Override</span> 
+    <span class="n">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"champagne"</span><span class="o">;</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Overriding</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Wine</span><span class="o">&gt;</span> <span class="n">wineList</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+            <span class="k">new</span> <span class="nf">Wine</span><span class="o">(),</span> <span class="k">new</span> <span class="n">SparklingWine</span><span class="o">(),</span> <span class="k">new</span> <span class="n">Champagne</span><span class="o">());</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="n">Wine</span> <span class="n">wine</span> <span class="o">:</span> <span class="n">wineList</span><span class="o">)</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">wine</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Tu jako wynik dostaniemy zgodnie z założeniem kolejno: “wine”, “sparkling wine” i “champagne” mimo to, że typ <em>compile-time</em> to <code class="highlighter-rouge">Wine</code>.</p>
+
+<p>Takie zachowanie przeciążanych metod może wprowadzać niejasności w API co do kwestii, która metoda zostanie wywołana, jeśli mamy kilka przeciążeń, które przyjmują taką samą ilość parametrów, a ich typy są “wymienialne” ze sobą. Jeśli mamy taki przypadek najlepiej jest użyć po prostu innej nazwy metody. (Dla konstruktorów nie mamy opcji podania innej nazwy, ale można zastosować tutaj <em><a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a></em>)</p>
+
+<p>Weźmy na przykład klasę <code class="highlighter-rouge">ObjectOutputStream</code>. Posiada wariant metody <code class="highlighter-rouge">write</code> dla każdego typu prymitywnego. Zamiast przeciążać te metody, używa dla każdego z nich innej nazwy: np. <code class="highlighter-rouge">writeBoolean(boolean)</code>, <code class="highlighter-rouge">writeInt(int)</code> czy <code class="highlighter-rouge">writeLong(long)</code>. Podobnie jest w przypadku metody <code class="highlighter-rouge">read</code>.</p>
+
+<p>Często możemy się też spotkać z problemem przeciążania, gdy używamy referencji do metod. Weźmy przykład:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+
+<span class="n">ExecutorService</span> <span class="n">exec</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newCachedThreadPool</span><span class="o">();</span>
+<span class="n">exec</span><span class="o">.</span><span class="na">submit</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Zarówno konstruktor <code class="highlighter-rouge">Thread</code> jak i metoda <code class="highlighter-rouge">sumbmit</code> przyjmują <code class="highlighter-rouge">Runnable</code>, jednak wywołanie metody <code class="highlighter-rouge">submit</code> nie skompiluje się poprawnie. Wszystko przez to, że metoda <code class="highlighter-rouge">submit</code> ma dodatkowe przeciążenie, które przyjmuje <code class="highlighter-rouge">Callable&lt;T&gt;</code>. Mogłoby się wydawać, że nie powinno to zrobić żadnej różnicy, bo metoda <code class="highlighter-rouge">println</code> zawsze zwraca <code class="highlighter-rouge">void</code>, więc ta referencja do metody nie mogłaby być <code class="highlighter-rouge">Callable</code>. Ma to sens, jednak nie tak działa algorytm wyboru przeciążenia. Równie zaskakujące jest to, że nie byłoby problemu, gdyby metoda <code class="highlighter-rouge">println</code> nie miała własnych przeciążeń. To kombinacja przeciążeń referencji do metody i tej wywoływanej psuje ten algorytm.</p>
+
+<p>Dlatego nie powinno się tworzyć przeciążeń metod, które mogą przyjąć różne interfejsy funkcjonalne na tej samej pozycji. W powyższym przypadku trzeba by castować tę referencję na <code class="highlighter-rouge">Runnable</code>, aby kod się skompilował.</p>
+
+<p>Jedyne przeciążanie metod, które nie szkodzi jest wtedy, gdy wszystkie te metody robią dokładnie to samo. Można się tym spotkać w przypadku rozszerzania istniejących klas. Miało to miejsce np. w klasie <code class="highlighter-rouge">String</code>, gdy został dodany interfejs <code class="highlighter-rouge">CharSequence</code>. Standardowym sposobem, aby to osiągnąć, jest wywołanie w tym bardziej konkretnym przeciążeniu tego bardziej ogólnego. Tak też zrobiono w klasie <code class="highlighter-rouge">String</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Ensuring that 2 methods have identical behavior by forwarding</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contentEquals</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">sb</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nf">contentEquals</span><span class="o">((</span><span class="n">CharSequence</span><span class="o">)</span> <span class="n">sb</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Podsumowując, przeciążanie metod z taką samą ilością argumentów wprowadza niepotrzebny chaos, którego lepiej unikać.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Sprawdzanie parametrów i defensive copy"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/projektowanie-metod-i-przeciazenie";
+    this.page.identifier = "/effective-java/projektowanie-metod-i-przeciazenie";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

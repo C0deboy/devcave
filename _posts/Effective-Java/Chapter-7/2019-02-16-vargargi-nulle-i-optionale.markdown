@@ -17,8 +17,8 @@ item:       53, 54, 55, 56
 
 # Używanie vararg
 
-Co to są varargs? Jest to po prostu zmienna ilość parametrów jako jeden argument. Można to porównać do tablicy - może przechowaywać zero lub więcej argumentów. 
-Pod spodem działa to tak że tworzona jest tablica wielkości liczby elementów, a następnie te wartości są w niej umieszczane i do metody przekazywana jest tablica.
+Co to są varargs? Jest to po prostu zmienna ilość parametrów zadeklarowana jako jeden argument. Można to porównać do tablicy - może przechowaywać zero lub więcej argumentów. 
+Pod spodem działa to tak że tworzona jest tablica wielkości liczby podanych elementów, a następnie te wartości są w niej umieszczane i do metody przekazywana jest tablica.
 
 Przykładowe proste użycie vargarg:
 
@@ -49,7 +49,7 @@ static int min(int... args) {
 }
 ```
 
-Jednak to rozwiązanie ma nie jest dobre:
+Jednak to rozwiązanie nie jest dobre:
 - sprawdzenie odbywa się dopiero w runtime, więc nie widać błedu podczas pisania kodu
 - jest brzydkie i nadmiarowe.
 
@@ -66,7 +66,7 @@ static int min(int firstArg, int... remainingArgs) {
 }
 ```
 
-W super ekstremalnych warunkach (w których prawdopodobnie nigdy nie będziesz), gdzie liczy się wydajność i wiemy, że np. 90% wywołań na mniej niż 3 argumenty, możemy użyć kilku przeciążeń metody, aby uniknąć nadmiarowego tworzenia tablic: 
+W super ekstremalnych warunkach (w których prawdopodobnie nigdy nie będziesz), gdzie liczy się wydajność i wiemy, że np. 90% wywołań ma mniej niż 3 argumenty, możemy użyć kilku przeciążeń metody, aby uniknąć nadmiarowego tworzenia tablic: 
 
 ```java
 public void foo() { }
@@ -113,15 +113,15 @@ Lekcja z tego tematu jest jasna - nie zwracaj nulli zamiast pustych kolekcji czy
 
 # Zwracanie Optional
 
-Przed Java 8 mieliśmy dwa sposoby na pisanie metod, które nie mogłyby zwrócić danej wartości w określonych warunkach. Można było albo rzucić wyjątkiem, albo po prostu zwrócić null (jeśli zwracany typ nie był prymitywem). Żaden z nich nie był idealnym sposobem. Wyjątki powinny być stosowane tylko w wyjątkowych sytuacjach, a do tego rzucanie wyjątku jest nieco kosztowne, bo cały stack trace jest tworzony wraz z wyjątkiem. 
+Przed Java 8 mieliśmy dwa sposoby na pisanie metod, które nie mogłyby zwrócić danej wartości w określonych warunkach. Można było albo rzucić wyjątkiem, albo po prostu zwrócić null (jeśli zwracany typ nie był prymitywem). Żaden z nich nie był idealnym sposobem. Wyjątki powinny być stosowane tylko w wyjątkowych sytuacjach, a do tego rzucanie wyjątku jest nieco kosztowne, bo wraz z wyjątkiem tworzony jest cały stack trace. 
 
-Zwracanie nulla nie ma tych wad, jednak tak samo wymaga od klienta specjalnego obsłużenia. 
+Zwracanie nulla nie ma tych wad, jednak tak samo wymaga od klienta specjalnego obsłużenia, które czasem nie jest oczywiste. 
 
 Od Javy 8 jest też trzeci wbudowany sposób - klasa `Optional<T>`. Reprezentuje ona niemutowalny kontener, który może przetrzymywać pojedynczą referencję do obiektu (która nie jest nullem) lub nic, czyli może być pusty.
 
 Więc gdy metoda zwraca `T`, ale jak pod jakimiś warunkami może nie być w stanie zwrócić `T`, to wtedy może zadeklarować zwracany typ jako `Optional<T>`. 
 
-Metoda, która zwraca `Optional` jest nieco bardziej elastyczna i łatwiejsza w użyciu niż rzucanie i obsługa wyjątku czy zwracanie nulla + obsługa. Czasem może nie być oczywsite, że metoda może zwrócić null, zwłaszcza gdy nie mamy dostępu do dokumentacji lub jej po prostu nie ma. Dzięki `Optional` mamy tą informację bezpośrednio w API i jest jasne, że metoda może nie być w stanie zwrócić tej wartości. 
+Metoda, która zwraca `Optional` jest nieco bardziej elastyczna i łatwiejsza w użyciu niż rzucanie i obsługa wyjątku czy zwracanie nulla + obsługa. Czasem może nie być oczywsite, że metoda może zwrócić null, zwłaszcza gdy nie mamy dostępu do dokumentacji lub jej po prostu nie ma. Dzięki `Optional` mamy tę informację bezpośrednio w API i jest jasne, że metoda może nie być w stanie zwrócić tej wartości. 
 
 Przykładowe użycie:
 
@@ -141,24 +141,24 @@ public static <E extends Comparable<E>>
 }
 ```
 
-Jak widać, jest to całkiem proste. Bez `Optional` metoda mogłaby rzucić `IllegalArgumentException`, gdyby kolekcja z parametru była pusta, jednak wtedy kod klienta nie byłby tak czysty w użyciu, bo wymagał by boilerplatu try catch.
+Jak widać, jest to całkiem proste. Bez `Optional` metoda mogłaby rzucić `IllegalArgumentException`, gdyby kolekcja z parametru była pusta, jednak wtedy kod klienta nie byłby tak czysty w użyciu, bo wymagałby boilerplatu try catch.
 
 Jest też wariant, który może przyjąć null: `Optional.ofNullable(value)` i zwraca pusty `Optional`, jeśli został podany null. 
 
 Użycie `Optional` można spotkać w standardowej blibliotece np.  używając streamów.
 
-Czy zawsze jednak warto zwracać `Optional` zamiast `null` czy rzucenia wyjątkiem?
+Czy zawsze jednak warto stosować `Optional` zamiast `null` czy rzucenia wyjątkiem?
 
 Optionale są podobne w założeniu co rzucanie *checked exception* - oba jasno informują klienta API, że wartość może być nie zwrócona, jednak te drugie wymagają od niego więcej boilerplate-u. 
 
-Optionale oferują nam do dyspozycji kilka pomoconych metod, które pozwalają pisać zwięzły kod. Np.: możemy podać domyślną wartość:
+Optionale oferują nam do dyspozycji kilka pomocnych metod, które pozwalają pisać zwięzły kod. Np.: możemy podać domyślną wartość:
 
 ```java
 // Using an optional to provide a chosen default value
 String lastWordInLexicon = max(words).orElse("No words...");
 ```
 
-Lub rzucić wyjątkiem:
+lub rzucić wyjątkiem:
 
 ```java
 // Using an optional to throw a chosen exception
@@ -166,13 +166,13 @@ Toy myToy = max(toys).orElseThrow(TemperTantrumException::new);
 ```
 
 {: .note}
-Zauważ, że podawana jest referencja do konstruktora, więc wyjątek nie zostanie utowrzony, dopóki nie zajdzie taka potrzeba.
+Zauważ, że podawana jest referencja do konstruktora, więc wyjątek nie zostanie utworzony, dopóki nie zajdzie taka potrzeba.
 
-Inne przykłady to `orElseGet`, który przyjumje `Supplier<T>`, by uniknąć kosztu tworzenia obiektu zbyt wcześnie oraz `filter`, `map`, `flatMap` czy `ifPresent`.
+Inne przykłady to `orElseGet`, który przyjmuje `Supplier<T>`, by uniknąć kosztu tworzenia obiektu zbyt wcześnie oraz `filter`, `map`, `flatMap` czy `ifPresent`.
 
 W Javie 9 dodano także `or` i `ifPresentOrElse`.
 
-Warto znać te inne metody, bo czasem można zwięźle zastąpić zwykłe sprawdzania `isPresent`. Dla przykładu metoda, która pokazuje ID parenta danego procesu lub N/A, jeśli go nie ma:
+Warto znać te inne metody, bo czasem można zwięźle zastąpić nimi zwykłe sprawdzania `isPresent`. Dla przykładu metoda, która pokazuje ID parenta danego procesu lub N/A, jeśli go nie ma:
 
 ```java
 Optional<ProcessHandle> parentProcess = ph.parent();
@@ -189,11 +189,11 @@ System.out.println("Parent PID: " +
 
 Optionalów nie powinno się używać do opakowywania kolekcji, podobnie jak w przypadku zwracania null, gdy są puste.
 
-Odpowiadając wreszcie na pytanie - Optionale są bardzo dobrą alternatywą dla nulli i rzucania wyjątków, gdy metoda nie może zwrócić danej wartości. Jedyna opcja gdzie mógłby być nieodpowiednie to w sytuacjach gdzie wydajność jest krytyczna i takie mikro optymalizacje mają sens, ale w 95% przypadkach tak nie jest.
+Odpowiadając wreszcie na pytanie - Optionale są bardzo dobrą alternatywą dla nulli i rzucania wyjątków, gdy metoda nie może zwrócić danej wartości. Jedyna opcja gdzie mógłoby to być nieodpowiednie, to w sytuacjach, gdzie wydajność jest krytyczna i takie mikro optymalizacje mają sens, ale w 95% przypadkach tak nie jest.
 
 # Dokumentacja
 
-Jeśli publiczne API ma być użyteczne, powinno być udokumentowane dlatego zwieńczeniem naszej pracy powinna być dokumentacja. 
+Jeśli publiczne API ma być użyteczne, powinno być udokumentowane, dlatego zwieńczeniem naszej pracy powinna być dokumentacja. 
 
 W Javie mamy narzędzie Javadoc, które ułatwia nam to, generując dokumentację API automatycznie z kodu źródłowego. 
 
@@ -205,4 +205,4 @@ Konwencje dokumentacji nie są częścią języka, jednak są swojego rodzaju AP
 
 Publiczne API powinno mieć udokumentowane co najmniej każdą publiczną klasę, interfejs, konstruktor, metodę i pole.
 
-Resztę szczegółów z tego tematu pozwoliłem sobie pominąć, także jakby ktoś chciał zobaczyć przykłady i wprowadzenie w temat to odsyłam do [Introduction to Javadoc](https://www.baeldung.com/javadoc) 
+Resztę szczegółów z tego tematu pozwoliłem sobie pominąć - jakby ktoś chciał zobaczyć przykłady i wprowadzenie w temat to odsyłam do [Introduction to Javadoc](https://www.baeldung.com/javadoc) 

@@ -633,6 +633,15 @@
         "subtitle": "Kilka dobrych praktyk",
         "date": "9 lutego 2019",
         "url": "/effective-java/projektowanie-metod-i-przeciazenie"
+      },
+    
+      
+      {
+        "title": "Vargargi, nulle i Optionale",
+        "titleSEO": "Vargargi, nulle i Optionale",
+        "subtitle": "Kolejna porcja porad na temat projektowania metod",
+        "date": "16 lutego 2019",
+        "url": "/effective-java/vargargi-nulle-i-optionale"
       }
     
   

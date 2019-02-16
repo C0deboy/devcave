@@ -1,4 +1,224 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-02-12T17:29:34+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Projektowanie metod</title><link href="https://devcave.pl/effective-java/projektowanie-metod-i-przeciazenie" rel="alternate" type="text/html" title="Projektowanie metod" /><published>2019-02-09T09:00:00+01:00</published><updated>2019-02-09T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/projektowanie-metod-i-przeciazenie</id><content type="html" xml:base="https://devcave.pl/effective-java/projektowanie-metod-i-przeciazenie">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-02-16T10:34:22+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Vargargi, nulle i Optionale</title><link href="https://devcave.pl/effective-java/vargargi-nulle-i-optionale" rel="alternate" type="text/html" title="Vargargi, nulle i Optionale" /><published>2019-02-16T09:00:00+01:00</published><updated>2019-02-16T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/vargargi-nulle-i-optionale</id><content type="html" xml:base="https://devcave.pl/effective-java/vargargi-nulle-i-optionale">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 53, 54, 55, 56&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m-0&quot;&gt;Methods&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy&quot;&gt;Item 49: Check parameters for validity
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/sprawdzanie-parametr%C3%B3w-i-defensive-copy&quot;&gt;Item 50: Make defensive copies when needed
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/projektowanie-metod-i-przeciazenie&quot;&gt;Item 51: Design method signatures carefully
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a href=&quot;/effective-java/projektowanie-metod-i-przeciazenie&quot;&gt;Item 52: Use overloading judiciously
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 53: Use varargs judiciously
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 54: Return empty collections or arrays, not nulls
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 55: Return optionals judiciously
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 56: Write doc comments for all exposed API elements
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;używanie-vararg&quot;&gt;Używanie vararg&lt;/h1&gt;
+
+&lt;p&gt;Co to są varargs? Jest to po prostu zmienna ilość parametrów zadeklarowana jako jeden argument. Można to porównać do tablicy - może przechowaywać zero lub więcej argumentów. 
+Pod spodem działa to tak że tworzona jest tablica wielkości liczby podanych elementów, a następnie te wartości są w niej umieszczane i do metody przekazywana jest tablica.&lt;/p&gt;
+
+&lt;p&gt;Przykładowe proste użycie vargarg:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Simple use of varargs&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Vargarg deklaruje się za pomocą &lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt; dodanym do typu. I np. &lt;code class=&quot;highlighter-rouge&quot;&gt;sum(1, 2, 3)&lt;/code&gt; zwróci 6, a &lt;code class=&quot;highlighter-rouge&quot;&gt;sum()&lt;/code&gt; zero. Myślę, że działanie jest dosyć jasne.&lt;/p&gt;
+
+&lt;p&gt;Varargs nie nadają się jednak w przypadku, gdy chcemy mieć przynajmniej jeden 
+argument, np. chcąc policzyć minimum. Musielibyśmy wtedy dodać specjalne sprawdzenie:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// The WRONG way to use varargs to pass one or more arguments!&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Too few arguments&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Jednak to rozwiązanie nie jest dobre:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;sprawdzenie odbywa się dopiero w runtime, więc nie widać błedu podczas pisania kodu&lt;/li&gt;
+  &lt;li&gt;jest brzydkie i nadmiarowe.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Jest na to dużo lepszy sposób - zadeklarować metodę przyjmującą pierwszy argument, a jako drugi argument podać varargs:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// The right way to use varargs to pass one or more arguments&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firstArg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remainingArgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firstArg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remainingArgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;W super ekstremalnych warunkach (w których prawdopodobnie nigdy nie będziesz), gdzie liczy się wydajność i wiemy, że np. 90% wywołań ma mniej niż 3 argumenty, możemy użyć kilku przeciążeń metody, aby uniknąć nadmiarowego tworzenia tablic:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Statyczne fabryki dla &lt;code class=&quot;highlighter-rouge&quot;&gt;EnumSet&lt;/code&gt; w standardowej bibliotece używają tej techniki.&lt;/p&gt;
+
+&lt;h1 id=&quot;zwracaj-puste-kolekcje-nie-nulle&quot;&gt;Zwracaj puste kolekcje, nie nulle&lt;/h1&gt;
+
+&lt;p&gt;Czasem można spotkać metody podobne do tej:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Returns null to indicate an empty collection. Don't do this!&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cheese&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cheesesInStock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...;&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**
+ * @return a list containing all of the cheeses in the shop,
+ *     or null if no cheeses are available for purchase.
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cheese&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getCheeses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cheesesInStock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cheesesInStock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Nie ma powodu, aby traktować puste kolekcje w specjalny sposób i zwracać null, jeśli są puste. Na pewno nie jest to też dobra praktyka. Dodatkowo zmusza to klienta, by obsłużyć tę sytuację w miejscach, gdzie normalnie by tego nie robił:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cheese&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cheeses&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCheeses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cheesdes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cheeses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cheese&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;STILTON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Jolly good, just the thing.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Argumenty typu, że powinny być preferowane nulle, ponieważ wtedy nie alokujemy pamięci na pusty kontener, nie mają sensu w dzisiejszych aplikacjach. Martwienie się wydajnością na tym poziomie jest zbędną przedwczesną optymalizacją, która w 95% nie przyniesie żadnej korzyści.&lt;/p&gt;
+
+&lt;p&gt;Ponadto używając niemutowalnych pustych kolekcji typu &lt;code class=&quot;highlighter-rouge&quot;&gt;Collections.emptyList&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Collections.emptySet&lt;/code&gt; czy &lt;code class=&quot;highlighter-rouge&quot;&gt;Collections.emptyMap&lt;/code&gt; całkowicie eliminujemy ten problem, bo wtedy reużywamy jedną i tą samą pustą kolekcję.&lt;/p&gt;
+
+&lt;p&gt;Podobnie wygląda sytuacja dla tablic, nie powinno się zwracać nulli zamiast pustej tablicy.&lt;/p&gt;
+
+&lt;p&gt;Lekcja z tego tematu jest jasna - nie zwracaj nulli zamiast pustych kolekcji czy tablic. Pogarsza to tylko kod klienta i nie ma żadnych sensownych korzyści.&lt;/p&gt;
+
+&lt;h1 id=&quot;zwracanie-optional&quot;&gt;Zwracanie Optional&lt;/h1&gt;
+
+&lt;p&gt;Przed Java 8 mieliśmy dwa sposoby na pisanie metod, które nie mogłyby zwrócić danej wartości w określonych warunkach. Można było albo rzucić wyjątkiem, albo po prostu zwrócić null (jeśli zwracany typ nie był prymitywem). Żaden z nich nie był idealnym sposobem. Wyjątki powinny być stosowane tylko w wyjątkowych sytuacjach, a do tego rzucanie wyjątku jest nieco kosztowne, bo wraz z wyjątkiem tworzony jest cały stack trace.&lt;/p&gt;
+
+&lt;p&gt;Zwracanie nulla nie ma tych wad, jednak tak samo wymaga od klienta specjalnego obsłużenia, które czasem nie jest oczywiste.&lt;/p&gt;
+
+&lt;p&gt;Od Javy 8 jest też trzeci wbudowany sposób - klasa &lt;code class=&quot;highlighter-rouge&quot;&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;. Reprezentuje ona niemutowalny kontener, który może przetrzymywać pojedynczą referencję do obiektu (która nie jest nullem) lub nic, czyli może być pusty.&lt;/p&gt;
+
+&lt;p&gt;Więc gdy metoda zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt;, ale jak pod jakimiś warunkami może nie być w stanie zwrócić &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt;, to wtedy może zadeklarować zwracany typ jako &lt;code class=&quot;highlighter-rouge&quot;&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Metoda, która zwraca &lt;code class=&quot;highlighter-rouge&quot;&gt;Optional&lt;/code&gt; jest nieco bardziej elastyczna i łatwiejsza w użyciu niż rzucanie i obsługa wyjątku czy zwracanie nulla + obsługa. Czasem może nie być oczywsite, że metoda może zwrócić null, zwłaszcza gdy nie mamy dostępu do dokumentacji lub jej po prostu nie ma. Dzięki &lt;code class=&quot;highlighter-rouge&quot;&gt;Optional&lt;/code&gt; mamy tę informację bezpośrednio w API i jest jasne, że metoda może nie być w stanie zwrócić tej wartości.&lt;/p&gt;
+
+&lt;p&gt;Przykładowe użycie:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Returns maximum value in collection as an Optional&amp;lt;E&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        
+    &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requireNonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Jak widać, jest to całkiem proste. Bez &lt;code class=&quot;highlighter-rouge&quot;&gt;Optional&lt;/code&gt; metoda mogłaby rzucić &lt;code class=&quot;highlighter-rouge&quot;&gt;IllegalArgumentException&lt;/code&gt;, gdyby kolekcja z parametru była pusta, jednak wtedy kod klienta nie byłby tak czysty w użyciu, bo wymagałby boilerplatu try catch.&lt;/p&gt;
+
+&lt;p&gt;Jest też wariant, który może przyjąć null: &lt;code class=&quot;highlighter-rouge&quot;&gt;Optional.ofNullable(value)&lt;/code&gt; i zwraca pusty &lt;code class=&quot;highlighter-rouge&quot;&gt;Optional&lt;/code&gt;, jeśli został podany null.&lt;/p&gt;
+
+&lt;p&gt;Użycie &lt;code class=&quot;highlighter-rouge&quot;&gt;Optional&lt;/code&gt; można spotkać w standardowej blibliotece np.  używając streamów.&lt;/p&gt;
+
+&lt;p&gt;Czy zawsze jednak warto stosować &lt;code class=&quot;highlighter-rouge&quot;&gt;Optional&lt;/code&gt; zamiast &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; czy rzucenia wyjątkiem?&lt;/p&gt;
+
+&lt;p&gt;Optionale są podobne w założeniu co rzucanie &lt;em&gt;checked exception&lt;/em&gt; - oba jasno informują klienta API, że wartość może być nie zwrócona, jednak te drugie wymagają od niego więcej boilerplate-u.&lt;/p&gt;
+
+&lt;p&gt;Optionale oferują nam do dyspozycji kilka pomocnych metod, które pozwalają pisać zwięzły kod. Np.: możemy podać domyślną wartość:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Using an optional to provide a chosen default value&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastWordInLexicon&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orElse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;No words...&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;lub rzucić wyjątkiem:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Using an optional to throw a chosen exception&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Toy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myToy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orElseThrow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;TemperTantrumException:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;note&quot;&gt;Zauważ, że podawana jest referencja do konstruktora, więc wyjątek nie zostanie utworzony, dopóki nie zajdzie taka potrzeba.&lt;/p&gt;
+
+&lt;p&gt;Inne przykłady to &lt;code class=&quot;highlighter-rouge&quot;&gt;orElseGet&lt;/code&gt;, który przyjmuje &lt;code class=&quot;highlighter-rouge&quot;&gt;Supplier&amp;lt;T&amp;gt;&lt;/code&gt;, by uniknąć kosztu tworzenia obiektu zbyt wcześnie oraz &lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;flatMap&lt;/code&gt; czy &lt;code class=&quot;highlighter-rouge&quot;&gt;ifPresent&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;W Javie 9 dodano także &lt;code class=&quot;highlighter-rouge&quot;&gt;or&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;ifPresentOrElse&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Warto znać te inne metody, bo czasem można zwięźle zastąpić nimi zwykłe sprawdzania &lt;code class=&quot;highlighter-rouge&quot;&gt;isPresent&lt;/code&gt;. Dla przykładu metoda, która pokazuje ID parenta danego procesu lub N/A, jeśli go nie ma:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ProcessHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parentProcess&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Parent PID: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parentProcess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isPresent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parentProcess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;N/A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A tak wygląda to samo z wykorzystaniem metody &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Parent PID: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orElse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;N/A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Optionalów nie powinno się używać do opakowywania kolekcji, podobnie jak w przypadku zwracania null, gdy są puste.&lt;/p&gt;
+
+&lt;p&gt;Odpowiadając wreszcie na pytanie - Optionale są bardzo dobrą alternatywą dla nulli i rzucania wyjątków, gdy metoda nie może zwrócić danej wartości. Jedyna opcja gdzie mógłoby to być nieodpowiednie, to w sytuacjach, gdzie wydajność jest krytyczna i takie mikro optymalizacje mają sens, ale w 95% przypadkach tak nie jest.&lt;/p&gt;
+
+&lt;h1 id=&quot;dokumentacja&quot;&gt;Dokumentacja&lt;/h1&gt;
+
+&lt;p&gt;Jeśli publiczne API ma być użyteczne, powinno być udokumentowane, dlatego zwieńczeniem naszej pracy powinna być dokumentacja.&lt;/p&gt;
+
+&lt;p&gt;W Javie mamy narzędzie Javadoc, które ułatwia nam to, generując dokumentację API automatycznie z kodu źródłowego.&lt;/p&gt;
+
+&lt;p&gt;Konwencje dokumentacji nie są częścią języka, jednak są swojego rodzaju API, które każdy programista powinien znać. Te konwencje są opisane na stronie &lt;a href=&quot;https://www.oracle.com/technetwork/articles/java/index-137868.html&quot;&gt;How to Write Doc Comments&lt;/a&gt; jednak nie była ona updatowana od Javy 4 i nie ma opisanych kilku tagów dodanych w Javie:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;9 - {@index}&lt;/li&gt;
+  &lt;li&gt;8 - {@implSpec}&lt;/li&gt;
+  &lt;li&gt;5 - {@literal}, {@code}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Publiczne API powinno mieć udokumentowane co najmniej każdą publiczną klasę, interfejs, konstruktor, metodę i pole.&lt;/p&gt;
+
+&lt;p&gt;Resztę szczegółów z tego tematu pozwoliłem sobie pominąć - jakby ktoś chciał zobaczyć przykłady i wprowadzenie w temat to odsyłam do &lt;a href=&quot;https://www.baeldung.com/javadoc&quot;&gt;Introduction to Javadoc&lt;/a&gt;&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 53, 54, 55, 56 z rozdziału: Methods Item 49: Check parameters for validity Item 50: Make defensive copies when needed Item 51: Design method signatures carefully Item 52: Use overloading judiciously Item 53: Use varargs judiciously Item 54: Return empty collections or arrays, not nulls Item 55: Return optionals judiciously Item 56: Write doc comments for all exposed API elements Używanie vararg Co to są varargs? Jest to po prostu zmienna ilość parametrów zadeklarowana jako jeden argument. Można to porównać do tablicy - może przechowaywać zero lub więcej argumentów. Pod spodem działa to tak że tworzona jest tablica wielkości liczby podanych elementów, a następnie te wartości są w niej umieszczane i do metody przekazywana jest tablica. Przykładowe proste użycie vargarg: // Simple use of varargs static int sum(int... args) { int sum = 0; for (int arg : args) sum += arg; return sum; } Vargarg deklaruje się za pomocą ... dodanym do typu. I np. sum(1, 2, 3) zwróci 6, a sum() zero. Myślę, że działanie jest dosyć jasne. Varargs nie nadają się jednak w przypadku, gdy chcemy mieć przynajmniej jeden argument, np. chcąc policzyć minimum. Musielibyśmy wtedy dodać specjalne sprawdzenie: // The WRONG way to use varargs to pass one or more arguments! static int min(int... args) { if (args.length == 0) throw new IllegalArgumentException(&quot;Too few arguments&quot;); int min = args[0]; for (int i = 1; i &amp;lt; args.length; i++) if (args[i] &amp;lt; min) min = args[i]; return min; } Jednak to rozwiązanie nie jest dobre: sprawdzenie odbywa się dopiero w runtime, więc nie widać błedu podczas pisania kodu jest brzydkie i nadmiarowe. Jest na to dużo lepszy sposób - zadeklarować metodę przyjmującą pierwszy argument, a jako drugi argument podać varargs: // The right way to use varargs to pass one or more arguments static int min(int firstArg, int... remainingArgs) { int min = firstArg; for (int arg : remainingArgs) if (arg &amp;lt; min) min = arg; return min; } W super ekstremalnych warunkach (w których prawdopodobnie nigdy nie będziesz), gdzie liczy się wydajność i wiemy, że np. 90% wywołań ma mniej niż 3 argumenty, możemy użyć kilku przeciążeń metody, aby uniknąć nadmiarowego tworzenia tablic: public void foo() { } public void foo(int a1) { } public void foo(int a1, int a2) { } public void foo(int a1, int a2, int a3) { } public void foo(int a1, int a2, int a3, int... rest) { } Statyczne fabryki dla EnumSet w standardowej bibliotece używają tej techniki. Zwracaj puste kolekcje, nie nulle Czasem można spotkać metody podobne do tej: // Returns null to indicate an empty collection. Don't do this! private final List&amp;lt;Cheese&amp;gt; cheesesInStock = ...; /** * @return a list containing all of the cheeses in the shop, * or null if no cheeses are available for purchase. */ public List&amp;lt;Cheese&amp;gt; getCheeses() { return cheesesInStock.isEmpty() ? null : new ArrayList&amp;lt;&amp;gt;(cheesesInStock); } Nie ma powodu, aby traktować puste kolekcje w specjalny sposób i zwracać null, jeśli są puste. Na pewno nie jest to też dobra praktyka. Dodatkowo zmusza to klienta, by obsłużyć tę sytuację w miejscach, gdzie normalnie by tego nie robił: List&amp;lt;Cheese&amp;gt; cheeses = shop.getCheeses(); if (cheesdes != null &amp;amp;&amp;amp; cheeses.contains(Cheese.STILTON)) System.out.println(&quot;Jolly good, just the thing.&quot;); Argumenty typu, że powinny być preferowane nulle, ponieważ wtedy nie alokujemy pamięci na pusty kontener, nie mają sensu w dzisiejszych aplikacjach. Martwienie się wydajnością na tym poziomie jest zbędną przedwczesną optymalizacją, która w 95% nie przyniesie żadnej korzyści. Ponadto używając niemutowalnych pustych kolekcji typu Collections.emptyList, Collections.emptySet czy Collections.emptyMap całkowicie eliminujemy ten problem, bo wtedy reużywamy jedną i tą samą pustą kolekcję. Podobnie wygląda sytuacja dla tablic, nie powinno się zwracać nulli zamiast pustej tablicy. Lekcja z tego tematu jest jasna - nie zwracaj nulli zamiast pustych kolekcji czy tablic. Pogarsza to tylko kod klienta i nie ma żadnych sensownych korzyści. Zwracanie Optional Przed Java 8 mieliśmy dwa sposoby na pisanie metod, które nie mogłyby zwrócić danej wartości w określonych warunkach. Można było albo rzucić wyjątkiem, albo po prostu zwrócić null (jeśli zwracany typ nie był prymitywem). Żaden z nich nie był idealnym sposobem. Wyjątki powinny być stosowane tylko w wyjątkowych sytuacjach, a do tego rzucanie wyjątku jest nieco kosztowne, bo wraz z wyjątkiem tworzony jest cały stack trace. Zwracanie nulla nie ma tych wad, jednak tak samo wymaga od klienta specjalnego obsłużenia, które czasem nie jest oczywiste. Od Javy 8 jest też trzeci wbudowany sposób - klasa Optional&amp;lt;T&amp;gt;. Reprezentuje ona niemutowalny kontener, który może przetrzymywać pojedynczą referencję do obiektu (która nie jest nullem) lub nic, czyli może być pusty. Więc gdy metoda zwraca T, ale jak pod jakimiś warunkami może nie być w stanie zwrócić T, to wtedy może zadeklarować zwracany typ jako Optional&amp;lt;T&amp;gt;. Metoda, która zwraca Optional jest nieco bardziej elastyczna i łatwiejsza w użyciu niż rzucanie i obsługa wyjątku czy zwracanie nulla + obsługa. Czasem może nie być oczywsite, że metoda może zwrócić null, zwłaszcza gdy nie mamy dostępu do dokumentacji lub jej po prostu nie ma. Dzięki Optional mamy tę informację bezpośrednio w API i jest jasne, że metoda może nie być w stanie zwrócić tej wartości. Przykładowe użycie: // Returns maximum value in collection as an Optional&amp;lt;E&amp;gt; public static &amp;lt;E extends Comparable&amp;lt;E&amp;gt;&amp;gt; Optional&amp;lt;E&amp;gt; max(Collection&amp;lt;E&amp;gt; c) { if (c.isEmpty()) return Optional.empty(); E result = null; for (E e : c) if (result == null || e.compareTo(result) &amp;gt; 0) result = Objects.requireNonNull(e); return Optional.of(result); } Jak widać, jest to całkiem proste. Bez Optional metoda mogłaby rzucić IllegalArgumentException, gdyby kolekcja z parametru była pusta, jednak wtedy kod klienta nie byłby tak czysty w użyciu, bo wymagałby boilerplatu try catch. Jest też wariant, który może przyjąć null: Optional.ofNullable(value) i zwraca pusty Optional, jeśli został podany null. Użycie Optional można spotkać w standardowej blibliotece np. używając streamów. Czy zawsze jednak warto stosować Optional zamiast null czy rzucenia wyjątkiem? Optionale są podobne w założeniu co rzucanie checked exception - oba jasno informują klienta API, że wartość może być nie zwrócona, jednak te drugie wymagają od niego więcej boilerplate-u. Optionale oferują nam do dyspozycji kilka pomocnych metod, które pozwalają pisać zwięzły kod. Np.: możemy podać domyślną wartość: // Using an optional to provide a chosen default value String lastWordInLexicon = max(words).orElse(&quot;No words...&quot;); lub rzucić wyjątkiem: // Using an optional to throw a chosen exception Toy myToy = max(toys).orElseThrow(TemperTantrumException::new); Zauważ, że podawana jest referencja do konstruktora, więc wyjątek nie zostanie utworzony, dopóki nie zajdzie taka potrzeba. Inne przykłady to orElseGet, który przyjmuje Supplier&amp;lt;T&amp;gt;, by uniknąć kosztu tworzenia obiektu zbyt wcześnie oraz filter, map, flatMap czy ifPresent. W Javie 9 dodano także or i ifPresentOrElse. Warto znać te inne metody, bo czasem można zwięźle zastąpić nimi zwykłe sprawdzania isPresent. Dla przykładu metoda, która pokazuje ID parenta danego procesu lub N/A, jeśli go nie ma: Optional&amp;lt;ProcessHandle&amp;gt; parentProcess = ph.parent(); System.out.println(&quot;Parent PID: &quot; + (parentProcess.isPresent() ? String.valueOf(parentProcess.get().pid()) : &quot;N/A&quot;)); A tak wygląda to samo z wykorzystaniem metody map: System.out.println(&quot;Parent PID: &quot; + ph.parent().map(h -&amp;gt; String.valueOf(h.pid())).orElse(&quot;N/A&quot;)); Optionalów nie powinno się używać do opakowywania kolekcji, podobnie jak w przypadku zwracania null, gdy są puste. Odpowiadając wreszcie na pytanie - Optionale są bardzo dobrą alternatywą dla nulli i rzucania wyjątków, gdy metoda nie może zwrócić danej wartości. Jedyna opcja gdzie mógłoby to być nieodpowiednie, to w sytuacjach, gdzie wydajność jest krytyczna i takie mikro optymalizacje mają sens, ale w 95% przypadkach tak nie jest. Dokumentacja Jeśli publiczne API ma być użyteczne, powinno być udokumentowane, dlatego zwieńczeniem naszej pracy powinna być dokumentacja. W Javie mamy narzędzie Javadoc, które ułatwia nam to, generując dokumentację API automatycznie z kodu źródłowego. Konwencje dokumentacji nie są częścią języka, jednak są swojego rodzaju API, które każdy programista powinien znać. Te konwencje są opisane na stronie How to Write Doc Comments jednak nie była ona updatowana od Javy 4 i nie ma opisanych kilku tagów dodanych w Javie: 9 - {@index} 8 - {@implSpec} 5 - {@literal}, {@code} Publiczne API powinno mieć udokumentowane co najmniej każdą publiczną klasę, interfejs, konstruktor, metodę i pole. Resztę szczegółów z tego tematu pozwoliłem sobie pominąć - jakby ktoś chciał zobaczyć przykłady i wprowadzenie w temat to odsyłam do Introduction to Javadoc</summary></entry><entry><title type="html">Projektowanie metod</title><link href="https://devcave.pl/effective-java/projektowanie-metod-i-przeciazenie" rel="alternate" type="text/html" title="Projektowanie metod" /><published>2019-02-09T09:00:00+01:00</published><updated>2019-02-09T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/projektowanie-metod-i-przeciazenie</id><content type="html" xml:base="https://devcave.pl/effective-java/projektowanie-metod-i-przeciazenie">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -21,16 +241,16 @@
                         &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 52: Use overloading judiciously
                     &lt;/a&gt;
                 &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 53: Use varargs judiciously
+                &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;Item 53: Use varargs judiciously
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 54: Return empty collections or arrays, not nulls
+                &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;Item 54: Return empty collections or arrays, not nulls
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 55: Return optionals judiciously
+                &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;Item 55: Return optionals judiciously
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 56: Write doc comments for all exposed API elements
+                &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;Item 56: Write doc comments for all exposed API elements
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -192,16 +412,16 @@
                 &lt;a href=&quot;/effective-java/projektowanie-metod-i-przeciazenie&quot;&gt;Item 52: Use overloading judiciously
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 53: Use varargs judiciously
+                &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;Item 53: Use varargs judiciously
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 54: Return empty collections or arrays, not nulls
+                &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;Item 54: Return empty collections or arrays, not nulls
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 55: Return optionals judiciously
+                &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;Item 55: Return optionals judiciously
                 &lt;/a&gt;
             &lt;/li&gt;&lt;li&gt;
-                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Item 56: Write doc comments for all exposed API elements
+                &lt;a href=&quot;/effective-java/vargargi-nulle-i-optionale&quot;&gt;Item 56: Write doc comments for all exposed API elements
                 &lt;/a&gt;
             &lt;/li&gt;&lt;/ul&gt;
 &lt;hr /&gt;
@@ -1941,309 +2161,4 @@ cannot be converted to Iterable&amp;lt;Number&amp;gt;
       &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.class&lt;/code&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 31 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility</summary></entry><entry><title type="html">Używanie generycznych klas i metod</title><link href="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod" rel="alternate" type="text/html" title="Używanie generycznych klas i metod" /><published>2018-10-20T10:00:00+02:00</published><updated>2018-10-20T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod</id><content type="html" xml:base="https://devcave.pl/effective-java/uzywanie-generycznych-klas-i-metod">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 28, 29, 30&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m-0&quot;&gt;Generics&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/nie-uzywaj-surowych-typow&quot;&gt;Item 26: Don’t use raw types
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/eliminuj-unchecked-cast&quot;&gt;Item 27: Eliminate unchecked warnings
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/eliminuj-unchecked-cast&quot;&gt;Item 32: Combine generics and varargs judiciously
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 28: Prefer lists to arrays
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 29: Favor generic types
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 30: Favor generic methods
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/bounded-wildcard-types&quot;&gt;Item 31: Use bounded wildcards to increase API flexibility
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;tablice-a-generyki&quot;&gt;Tablice, a generyki&lt;/h1&gt;
-
-&lt;p&gt;Podczas pracy z generycznymi klasami i metodami lepiej jest używać list zamiast tablic. Dlaczego?&lt;/p&gt;
-
-&lt;p&gt;Tablice mają dwie ważne różnice. Pierwsza, są zamienne. To znaczy, jeśli &lt;code class=&quot;highlighter-rouge&quot;&gt;Sub&lt;/code&gt; jest podtypem &lt;code class=&quot;highlighter-rouge&quot;&gt;Super&lt;/code&gt;, to tablica o typie &lt;code class=&quot;highlighter-rouge&quot;&gt;Sub[]&lt;/code&gt; jest podtypem tablicy &lt;code class=&quot;highlighter-rouge&quot;&gt;Super[]&lt;/code&gt;. Generyki przeciwnie - dla dwóch różnych typów &lt;code class=&quot;highlighter-rouge&quot;&gt;Type1&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;Type2&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;Type1&amp;gt;&lt;/code&gt; nie jest pod ani nad-typem &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;Type2&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Używając tablic, takie coś przejdzie przez kompilator i wysypie się w dopiero w &lt;em&gt;runtime&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Fails at runtime!&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;objectArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;objectArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;I don't fit in&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Throws ArrayStoreException&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Używając odpowiadającej generycznej listy, taki kod nie przejdzie kompilacji:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Won't compile!&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;objectList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Incompatible types&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;objectList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;I don't fit in&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Drugą różnicą jest to, że tablice mają swój typ na stałe i wymuszają go w &lt;em&gt;runtime&lt;/em&gt;. Generyki z kolei są zaimplementowane tak, że ich typy są wymazywane - to znaczy, że wymuszają typy tylko podczas kompilacji, a w &lt;em&gt;runtime&lt;/em&gt; już ich nie ma.&lt;/p&gt;
-
-&lt;p class=&quot;note&quot;&gt;Dzięki wymazywaniu typów generyki mogą bez problemu współpracować z &lt;em&gt;legacy code&lt;/em&gt; sprzed Javy 5.&lt;/p&gt;
-
-&lt;p&gt;Przez te różnice nie możemy na przykład utworzyć generycznej tablicy (&lt;code class=&quot;highlighter-rouge&quot;&gt;new List&amp;lt;E&amp;gt;[]&lt;/code&gt;, new &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;[]&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;new E[]&lt;/code&gt;. Takie operacje nie byłby &lt;em&gt;typesafe&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;To ograniczenie może być denerwujące, bo na przykład nie ma możliwości zwrócenia tablicy o typie, który jest w generycznej kolekcji. Przez to też będziemy dostawać mylące ostrzeżenia, gdy będziemy używać &lt;em&gt;varargs&lt;/em&gt; w metodach w połączeniu z generykami, a to dlatego, że varargi są przekonwertowywane na tablice podczas kompilacji.
-Adnotacja &lt;code class=&quot;highlighter-rouge&quot;&gt;@SafeVarargs&lt;/code&gt;, która była omówiona w poprzednim wpisie, adresuje ten problem.&lt;/p&gt;
-
-&lt;p&gt;Kiedy dostajemy &lt;em&gt;generic array creation error&lt;/em&gt; lub &lt;em&gt;unchecked cast warning&lt;/em&gt; gdy castujemy na tablicę, najlepiej jest zmienić implementację na listę &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt; zamiast tablicy &lt;code class=&quot;highlighter-rouge&quot;&gt;E[]&lt;/code&gt;. Nie będzie to miało dużego wpływu na wydajność czy zwięzłość, a uzyskamy lepsze &lt;em&gt;typesafty&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Przykładowo, prosta klaska, która będzie podawała losowe przedmioty z podanej kolekcji:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Chooser - a class badly in need of generics!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Chooser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choiceArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Chooser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;choiceArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;choose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Random&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rnd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ThreadLocalRandom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choiceArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nextInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;choiceArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)];&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Ta implementacja aż się prosi o generyki. Teraz za każdym razem, gdy pobieramy wartość, musimy ją sami castować i zadbać o zgodność typów.&lt;/p&gt;
-
-&lt;p&gt;Próbując użyć generyków i generycznej tablicy w ten sposób:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// A first cut at making Chooser generic - won't compile&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Chooser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choiceArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Chooser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;choiceArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// choose method unchanged&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Jest nie możliwe, tak jak było to powiedziane wcześniej. Dostaniemy taki błąd kompilacji:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Chooser.java:9: error: incompatible types: Object[] cannot be
-converted to T[]
-        choiceArray = choices.toArray();
-                                     ^
-  where T is a type-variable:
-    T extends Object declared in class Chooser
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Jeśli scastujemy tablicę &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt; na &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;choiceArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To dostaniemy warning:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Chooser.java:9: warning: [unchecked] unchecked cast
-        choiceArray = (T[]) choices.toArray();
-                                           ^
-  required: T[], found: Object[]
-  where T is a type-variable:
-T extends Object declared in class Chooser
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Kompilator mówi tu, że nie da sobie ręki uciąć, że ta operacja jest &lt;em&gt;typesafe&lt;/em&gt;, ponieważ nie będzie wiedział jakim typem będzie &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; (typy są wymazywane). Program będzie działał prawidłowo, no ale kompilator nie może być tego pewny - stąd ostrzeżenie.
-Można by dodać adnotację &lt;code class=&quot;highlighter-rouge&quot;&gt;@SuppressWarning&lt;/code&gt; tak jak to było omawiane w poprzednim wpisie, ale tutaj lepszym rozwiązaniem byłoby wyeliminować przyczynę - użyć &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt; zamiast tablicy:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// List-based Chooser - typesafe&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Chooser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choiceList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Chooser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;choiceList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;choices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;choose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Random&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rnd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ThreadLocalRandom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choiceList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nextInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;choiceList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Podsumowując, tablice zapewniają &lt;em&gt;runtime typesafty&lt;/em&gt;, a generyki &lt;em&gt;compile time typesafty&lt;/em&gt;. Podczas używania generycznych klas i metod, lepiej używać list zamiast tablic.&lt;/p&gt;
-
-&lt;p&gt;Jednak nie zawsze jest to możliwe lub pożądane. Java nie wspiera list natywnie, więc klasy jak &lt;code class=&quot;highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt; muszą być zbudowane na tablicach. Inne generyki jak np. &lt;code class=&quot;highlighter-rouge&quot;&gt;HashMap&lt;/code&gt; są zbudowane na tablicach ze względu na wydajność.&lt;/p&gt;
-
-&lt;p&gt;Są dwa sposoby na używanie tablic z generykami.&lt;/p&gt;
-
-&lt;p&gt;Weźmy na przykład zabawkową klasę &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&lt;/code&gt; z wcześniejszych wpisów:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Object-based collection - a prime candidate for generics&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Stack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DEFAULT_INITIAL_CAPACITY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DEFAULT_INITIAL_CAPACITY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ensureCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;EmptyStackException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Eliminate obsolete reference&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ensureCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;copyOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ta klasa aż się prosi, aby była generyczną. Próbując napisać coś takiego:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Initial attempt to generify Stack - won't compile!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DEFAULT_INITIAL_CAPACITY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DEFAULT_INITIAL_CAPACITY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ensureCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;EmptyStackException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Eliminate obsolete reference&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// no changes in isEmpty or ensureCapacity&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Dostaniemy &lt;em&gt;generic array creation error&lt;/em&gt;. Możemy rozwiązać ten problem na 2 sposoby:&lt;/p&gt;
-
-&lt;p&gt;Pierwszy, stworzyć tablicę typu &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt;, scastować to na generyczną tablicę i wyciszyć ostrzeżenie z komentarzem:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// The elements array will contain only E instances from push(E).&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// This is sufficient to ensure type safety, but the runtime&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// type of the array won't be E[]; it will always be Object[]!&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@SuppressWarnings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;unchecked&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DEFAULT_INITIAL_CAPACITY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ten sposób wymaga castowania tylko raz.&lt;/p&gt;
-
-&lt;p&gt;Drugim sposobem jest zmiana typu tablicy z &lt;code class=&quot;highlighter-rouge&quot;&gt;E[]&lt;/code&gt; na &lt;code class=&quot;highlighter-rouge&quot;&gt;Object[]&lt;/code&gt;, jednak to zmusi nas do castowania każdego pobranego elementu z tablicy:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Appropriate suppression of unchecked warning&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;EmptyStackException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// push requires elements to be of type E, so cast is correct&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@SuppressWarnings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;unchecked&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Eliminate obsolete reference&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Dlatego preferowany jest sposób pierwszy i to z nim częściej się spotkamy.&lt;/p&gt;
-
-&lt;h1 id=&quot;metody-generyczne&quot;&gt;Metody generyczne&lt;/h1&gt;
-
-&lt;p&gt;Generyczne mogą być również same metody. Często się takie przydają w statycznych klasach &lt;em&gt;utility&lt;/em&gt;.
-Wszystkie algorytmiczne metody z &lt;code class=&quot;highlighter-rouge&quot;&gt;Collections&lt;/code&gt; takie jak &lt;code class=&quot;highlighter-rouge&quot;&gt;binarySearch&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sort&lt;/code&gt; itd. są generyczne.&lt;/p&gt;
-
-&lt;p&gt;Przykładowo metoda używająca gołych typów z poprzedniego wpisu:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Uses raw types - unacceptable! (Item 26)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HashSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Mamy w niej dwa ostrzeżenia i aż się prosi, aby była generyczną metodą:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Union.java:5: warning: [unchecked] unchecked call to
-HashSet(Collection&amp;lt;? extends E&amp;gt;) as a member of raw type HashSet
-        Set result = new HashSet(s1);
-                     ^
-Union.java:6: warning: [unchecked] unchecked call to
-addAll(Collection&amp;lt;? extends E&amp;gt;) as a member of raw type Set
-        result.addAll(s2);
-                     ^
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Sparametryzujmy ją zatem. Parametr typu musi znajdować się między modyfikatorami a typem zwrotnym funkcji.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Generic method&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HashSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Taka metoda nie wymaga żadnego castowania po stronie klienta i kompiluje się bez żadnych ostrzeżeń:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Simple program to exercise generic method&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;guys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Tom&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Dick&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Harry&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stooges&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Larry&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Moe&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Curly&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aflCio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;guys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stooges&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aflCio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Tym sposobem, wszystkie trzy sety (oba z argumentów i ten zwracany) muszą być tego samego typu. Możemy sprawić, aby było to bardziej elastyczne, używając &lt;em&gt;bounded wildcard type&lt;/em&gt;. O tym w następnym wpisie.&lt;/p&gt;
-
-&lt;p&gt;Podsumowując, generyki to użyteczne narzędzie - jest bezpieczniejsze i łatwiejsze w użyciu niż ciągłe castowanie i dbanie o &lt;em&gt;typesafty&lt;/em&gt;. Uzywając generyków zrzucamy ten obowiązek na kompilator. Powinniśmy unikać sytuacji, gdzie klient musi castować otrzymywany obiekt i próbować stworzyć generyczną klasę lub metodę. Można to zrobić nawet na istniejących klasach i metodach bez uszkadzania obecnych klientów.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 28, 29, 30 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility</summary></entry></feed>
+&lt;/table&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 31 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility</summary></entry></feed>

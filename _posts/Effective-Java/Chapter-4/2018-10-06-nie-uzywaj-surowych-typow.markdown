@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Nie używaj surowych typów"
+titleSEO:   "Nie używaj surowych typów"
 title:      "Nie używaj surowych typów"
 subtitle:   "Preferuj typy generyczne/parametryzowane"
 date:       2018-10-06 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        false
 chapter:    5

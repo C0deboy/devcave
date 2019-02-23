@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Preferuj try-with-resources - najlepszy sposób na zamknięcie zasobów"
+titleSEO:   "Preferuj try-with-resources - najlepszy sposób na zamknięcie zasobów"
 title:      "Preferuj try-with-resources"
 subtitle:   "Najlepszy sposób na zamknięcie zasobów"
 date:       2018-06-09 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        false
 chapter:    2

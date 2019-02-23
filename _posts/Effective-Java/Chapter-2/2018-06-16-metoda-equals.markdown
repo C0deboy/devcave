@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Metoda equals - czyli określanie równości obiektów"
+titleSEO:   "Metoda equals - czyli określanie równości obiektów"
 title:      "Metoda equals"
 subtitle:   "Czyli określanie równości obiektów. Kiedy i jak ją nadpisywać?"
 date:       2018-06-16 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    3

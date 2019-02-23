@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Klasy wewnętrzne"
+titleSEO:   "Klasy wewnętrzne"
 title:      "Klasy wewnętrzne"
 subtitle:   "Czym się różnią i kiedy z jakiej korzystać"
 date:       2018-09-08 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    4

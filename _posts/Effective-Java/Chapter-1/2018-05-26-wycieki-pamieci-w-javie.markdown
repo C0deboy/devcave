@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Wycieki pamięci, zarządzanie pamięcią i garbage collector w Javie"
+titleSEO:   "Wycieki pamięci, zarządzanie pamięcią i garbage collector w Javie"
 title:      "Wycieki pamięci w Javie"
 subtitle:   "Zarządzanie pamięcią - czy garbage collector zawsze to zrobi za nas?"
 date:       2018-05-26 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    2
@@ -29,33 +29,33 @@ Tutaj jest przykładowa implementacja klasy `Stack`, która pozornie wygląda w 
 
 ```java
 public class Stack {
-	private Object[] elements;
-	private int size = 0;
-	private static final int DEFAULT_INITIAL_CAPACITY = 16;
+   private Object[] elements;
+   private int size = 0;
+   private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-	public Stack() {
-		elements = new Object[DEFAULT_INITIAL_CAPACITY];
-	}
+   public Stack() {
+      elements = new Object[DEFAULT_INITIAL_CAPACITY];
+   }
 
-	public void push(Object e) {
-		ensureCapacity();
-		elements[size++] = e;
-	}
+   public void push(Object e) {
+      ensureCapacity();
+      elements[size++] = e;
+   }
 
-	public Object pop() {
-		if (size == 0)
-			throw new EmptyStackException();
-		return elements[--size];
-	}
+   public Object pop() {
+      if (size == 0)
+         throw new EmptyStackException();
+      return elements[--size];
+   }
 
-	/**
-	* Ensure space for at least one more element, roughly
-	* doubling the capacity each time the array needs to grow.
-	*/
-	private void ensureCapacity() {
-		if (elements.length == size)
-			elements = Arrays.copyOf(elements, 2 * size + 1);
-	}
+   /**
+   * Ensure space for at least one more element, roughly
+   * doubling the capacity each time the array needs to grow.
+   */
+   private void ensureCapacity() {
+      if (elements.length == size)
+         elements = Arrays.copyOf(elements, 2 * size + 1);
+   }
 }
 ```
 
@@ -71,11 +71,11 @@ Poprawna implementacja metody `pop()`:
 
 ```java
 public Object pop() {
-	if (size == 0)
-		throw new EmptyStackException();
-	Object result = elements[--size];
-	elements[size] = null; // Eliminate obsolete reference
-	return result;
+   if (size == 0)
+      throw new EmptyStackException();
+   Object result = elements[--size];
+   elements[size] = null; // Eliminate obsolete reference
+   return result;
 }
 ```
 Dodatkowym plusem jest to, że jeśli potem przez pomyłkę znów program chciałby uzyskać do niej dostęp, to od razu wyrzuci `NullPointerException`, zamiast po cichu robić coś nieplanowanego.
@@ -115,7 +115,7 @@ int MAX_ENTRIES = 3;
 Map<Integer, String> lhm = new LinkedHashMap<Integer, String>(MAX_ENTRIES + 1, .75F, false) {
 
   protected boolean removeEldestEntry(Map.Entry<Integer, String> eldest) {
-	  return size() > MAX_ENTRIES;
+     return size() > MAX_ENTRIES;
   }
 };
 

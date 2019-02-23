@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Gettery i settery - dlaczego unikać publicznych pól"
+titleSEO:   "Gettery i settery - dlaczego unikać publicznych pól"
 title:      "Gettery i settery"
 subtitle:   "Dlaczego unikać publicznych pól"
 date:       2018-07-28 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        false
 chapter:    4

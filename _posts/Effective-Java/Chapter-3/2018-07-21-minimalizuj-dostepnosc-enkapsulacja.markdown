@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Minimalizowanie dostępności - modyfikatory dostępu i enkapsulacja"
+titleSEO:   "Minimalizowanie dostępności - modyfikatory dostępu i enkapsulacja"
 title:      "Minimalizowanie dostępności"
 subtitle:   "Czyli modyfikatory dostępu i enkapsulacja"
 date:       2018-07-21 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    4
@@ -104,7 +104,7 @@ Możemy rozwiązać ten problem zwracając w getterze kopię tablicy.
 private static final Thing[] PRIVATE_VALUES = { ... };
 
 public static final Thing[] values() {
-	return PRIVATE_VALUES.clone();
+   return PRIVATE_VALUES.clone();
 }
 ```
 

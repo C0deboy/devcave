@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Vargargi, nulle i Optionale"
+titleSEO:   "Vargargi, nulle i Optionale"
 title:      "Vargargi, nulle i Optionale"
 subtitle:   "Kolejna porcja porad na temat projektowania metod"
 date:       2019-02-16 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    8

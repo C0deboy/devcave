@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Eliminowanie ostrzeżeń unchecked cast"
+titleSEO:   "Eliminowanie ostrzeżeń unchecked cast"
 title:      "Eliminowanie ostrzeżeń unchecked cast"
 subtitle:   "Skąd się biorą i jak się nimi zająć"
 date:       2018-10-13 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    5

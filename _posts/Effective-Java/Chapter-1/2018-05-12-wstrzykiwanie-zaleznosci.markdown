@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Wstrzykiwanie zależności - elastyczność i łatwiejsze testowanie"
+titleSEO:   "Wstrzykiwanie zależności - elastyczność i łatwiejsze testowanie"
 title:      "Preferuj wstrzykiwanie zależności"
 subtitle:   "Elastyczność i łatwiejsze testowanie"
 date:       2018-05-12 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    2

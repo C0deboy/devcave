@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Unikaj nadmiarowego tworzenia obiektów"
+titleSEO:   "Unikaj nadmiarowego tworzenia obiektów"
 title:      "Unikaj nadmiarowego tworzenia obiektów"
 subtitle:   "Tworzenie zbędnych obiektów może być kosztowne"
 date:       2018-05-19 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        false
 chapter:    2

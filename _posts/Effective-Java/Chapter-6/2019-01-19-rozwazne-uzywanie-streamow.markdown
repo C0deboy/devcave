@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Rozważne używanie streamów"
+titleSEO:   "Rozważne używanie streamów"
 title:      "Rozważne i prawidłowe używanie streamów"
 subtitle:   "Co to jest pure function?"
 date:       2019-01-19 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    7

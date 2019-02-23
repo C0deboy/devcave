@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Interfejs Comparable i Comparator - czyli porównywanie obiektów w Javie"
+titleSEO:   "Interfejs Comparable i Comparator - czyli porównywanie obiektów w Javie"
 title:      "Interfejs Comparable i Comparator"
 subtitle:   "Czyli porównywanie obiektów w Javie"
 date:       2018-07-14 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    3

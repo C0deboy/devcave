@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Zwracanie streamów? Współbieżne streamy."
+titleSEO:   "Zwracanie streamów? Współbieżne streamy."
 title:      "Zwracanie streamów? Współbieżne streamy."
 subtitle:   "Co zwracać - kolekcje czy streamy? Kiedy wywoływać parallel() na streamie?"
 date:       2019-01-26 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	      Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    7

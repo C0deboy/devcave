@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Wzorzec projektowy Builder - kiedy warto używać?"
+titleSEO:   "Wzorzec projektowy Builder - kiedy warto używać?"
 title:      "Wzorzec projektowy Builder"
 subtitle:   "3 warianty. Kiedy jaki stosować? Wady i zalety."
 date:       2018-04-21 10:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java Wzorce-projektowe
 comments:   true
 toc:        true
 chapter:    2

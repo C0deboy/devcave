@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Klasy niemutowalne - jak takie stworzyć i dlaczego są preferowane"
+titleSEO:   "Klasy niemutowalne - jak takie stworzyć i dlaczego są preferowane"
 title:      "Klasy niemutowalne"
 subtitle:   "Jak takie stworzyć i dlaczego są preferowane."
 date:       2018-08-04 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        false
 chapter:    4

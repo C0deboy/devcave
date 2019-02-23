@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Interfejsy funkcyjne w bibliotece Javy"
+titleSEO:   "Interfejsy funkcyjne w bibliotece Javy"
 title:      "Interfejsy funkcyjne w bibliotece Javy"
 subtitle:   "Warto je znać chcąc pisać klasy i metody wykorzystujące lambdy"
 date:       2019-01-12 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    7

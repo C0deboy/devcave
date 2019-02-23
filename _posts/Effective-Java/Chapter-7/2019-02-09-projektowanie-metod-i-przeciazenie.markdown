@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Projektowanie metod - Kilka dobrych praktyk"
+titleSEO:   "Projektowanie metod - Kilka dobrych praktyk"
 title:      "Projektowanie metod"
 subtitle:   "Kilka dobrych praktyk"
 date:       2019-02-09 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    8

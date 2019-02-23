@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Projektowanie interfejsów i klas - kilka dobrych praktyk"
+titleSEO:   "Projektowanie interfejsów i klas - kilka dobrych praktyk"
 title:      "Projektowanie interfejsów i klas"
 subtitle:   "Kilka dobrych praktyk"
 date:       2018-09-01 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    4
@@ -87,8 +87,8 @@ Takie interfejsy można znaleźć nawet w standardowej bibliotece. Np. `java.io.
 Do przetrzymywania stałych są lepsze opcje:
  - Jeśli są mocno związane tylko z jedną klasą, to powinny występować tylko w niej
  - W przeciwnym wypadku można użyć:
-	 - Nieinstancjowalnej klasy *utility*
-	 - Lub Enumów, jeśli jest to bardziej odpowiednie.
+    - Nieinstancjowalnej klasy *utility*
+    - Lub Enumów, jeśli jest to bardziej odpowiednie.
 
 A żeby pozbyć się problemu definiowania nazwy klasy razem z nazwą stałej, wystarczy użyć statycznych importów:
 

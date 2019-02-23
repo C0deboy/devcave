@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Projektowanie klasy pod dziedziczenie"
+titleSEO:   "Projektowanie klasy pod dziedziczenie"
 title:      "Projektowanie klasy pod dziedziczenie"
 subtitle:   "Na co zwrócić uwagę, jeśli uznamy, że jest stosowne"
 date:       2018-08-18 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        false
 chapter:    4

@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Sprawdzanie parametrów i defensive copy"
+titleSEO:   "Sprawdzanie parametrów i defensive copy"
 title:      "Sprawdzanie parametrów i defensive copy"
 subtitle:   "Czyli chronienie stanu naszego obiektu"
 date:       2019-02-02 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    8

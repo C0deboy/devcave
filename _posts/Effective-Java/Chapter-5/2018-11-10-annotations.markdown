@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Adnotacje - kilka dobrych praktyk"
+titleSEO:   "Adnotacje - kilka dobrych praktyk"
 title:      "Adnotacje"
 subtitle:   "Kilka dobrych praktyk"
 date:       2018-11-10 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    6

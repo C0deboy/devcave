@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Enumy - kilka dobrych praktyk"
+titleSEO:   "Enumy - kilka dobrych praktyk"
 title:      "Enumy"
 subtitle:   "Kilka dobrych praktyk"
 date:       2018-11-03 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    6

@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Finalizery i Cleanery - dlaczego powinniśmy ich unikać?"
+titleSEO:   "Finalizery i Cleanery - dlaczego powinniśmy ich unikać?"
 title:      "Finalizery i Cleanery"
 subtitle:   "Dlaczego powinniśmy ich unikać?"
 date:       2018-06-02 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    2

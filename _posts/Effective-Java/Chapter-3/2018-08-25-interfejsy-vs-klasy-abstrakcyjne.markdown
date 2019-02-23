@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Interfejsy vs klasy abstrakcyjne - dlaczego warto preferować interfejsy?"
+titleSEO:   "Interfejsy vs klasy abstrakcyjne - dlaczego warto preferować interfejsy?"
 title:      "Interfejsy vs klasy abstrakcyjne"
 subtitle:   "Dlaczego warto preferować interfejsy?"
 date:       2018-08-25 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        false
 chapter:    4

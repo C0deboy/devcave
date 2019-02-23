@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Metoda toString - kiedy i dlaczego warto ją nadpisywać"
+titleSEO:   "Metoda toString - kiedy i dlaczego warto ją nadpisywać"
 title:      "Metoda toString"
 subtitle:   "Kiedy i dlaczego warto ją nadpisywać"
 date:       2018-06-30 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        false
 chapter:    3

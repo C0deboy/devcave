@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Klonowanie w Javie - interfejs Cloneable nie jest zawsze dobrym rozwiązaniem."
+titleSEO:   "Klonowanie w Javie - interfejs Cloneable nie jest zawsze dobrym rozwiązaniem."
 title:      "Klonowanie w Javie"
 subtitle:   "Interfejs Cloneable nie jest zawsze najlepszym rozwiązaniem"
 date:       2018-07-07 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    3

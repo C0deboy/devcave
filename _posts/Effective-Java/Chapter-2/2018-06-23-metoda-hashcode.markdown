@@ -1,12 +1,12 @@
 ---
 layout:     post
-titleSEO:	"Metoda hashCode - dlaczego zawsze nadpisywać ją razem z equals?"
+titleSEO:   "Metoda hashCode - dlaczego zawsze nadpisywać ją razem z equals?"
 title:      "Metoda hashCode"
 subtitle:   "Do czego służy i dlaczego zawsze nadpisywać ją razem z equals?"
 date:       2018-06-23 8:00:00
 author:     "Codeboy"
 category:   Effective-Java
-tags:	    Notatnik-Juniora Dobre-praktyki Java Effective-Java
+tags:       Notatnik-Juniora Dobre-praktyki Java Effective-Java
 comments:   true
 toc:        true
 chapter:    3

@@ -1,4 +1,212 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-02-16T10:34:22+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Vargargi, nulle i Optionale</title><link href="https://devcave.pl/effective-java/vargargi-nulle-i-optionale" rel="alternate" type="text/html" title="Vargargi, nulle i Optionale" /><published>2019-02-16T09:00:00+01:00</published><updated>2019-02-16T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/vargargi-nulle-i-optionale</id><content type="html" xml:base="https://devcave.pl/effective-java/vargargi-nulle-i-optionale">&lt;p class=&quot;note&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://devcave.pl/feed.xml" rel="self" type="application/atom+xml" /><link href="https://devcave.pl/" rel="alternate" type="text/html" /><updated>2019-02-23T13:25:58+01:00</updated><id>https://devcave.pl/feed.xml</id><title type="html">devcave.pl</title><subtitle>Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)</subtitle><entry><title type="html">Zasięg zmiennych, pętle i biblioteki</title><link href="https://devcave.pl/effective-java/zasieg-zmiennych-petle-i-biblioteki" rel="alternate" type="text/html" title="Zasięg zmiennych, pętle i biblioteki" /><published>2019-02-23T09:00:00+01:00</published><updated>2019-02-23T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/zasieg-zmiennych-petle-i-biblioteki</id><content type="html" xml:base="https://devcave.pl/effective-java/zasieg-zmiennych-petle-i-biblioteki">&lt;p class=&quot;note&quot;&gt;
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+&lt;/p&gt;
+
+&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 57, 58, 59&lt;/i&gt; z rozdziału:&lt;/p&gt;
+
+&lt;p class=&quot;m-0&quot;&gt;General Programming&lt;/p&gt;
+
+&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/zasieg-zmiennych-petle-i-biblioteki&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Minimize the scope of local variables
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/zasieg-zmiennych-petle-i-biblioteki&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Prefer for-each loops to traditional for loops
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
+                    &lt;a href=&quot;/effective-java/zasieg-zmiennych-petle-i-biblioteki&quot;&gt;
+                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Know and use the libraries
+                    &lt;/a&gt;
+                &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Avoid float and double if exact answers are required
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Prefer primitive types to boxed primitives
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Avoid strings where other types are more appropriate
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Beware the performance of string concatenation
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Refer to objects by their interfaces
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Prefer interfaces to reflection
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Use native methods judiciously
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Optimize judiciously
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;li&gt;
+                &lt;a herf=&quot;&quot; class=&quot;disabled&quot;&gt;Adhere to generally accepted naming conventions
+                &lt;/a&gt;
+            &lt;/li&gt;&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;W tym rozdziale jest zawarta kolejna porcja dobrych praktyk dla featureów Javy. Będzie też o refleksji, natywnych metodach i optymalizacji.
+Jednak to potem, najpierw trzy pierwsze tematy:&lt;/p&gt;
+
+&lt;h1 id=&quot;minimalizowanie-zasięgu-zmiennych&quot;&gt;Minimalizowanie zasięgu zmiennych&lt;/h1&gt;
+
+&lt;p&gt;Dlaczego jest to ważne? Ano sprawia, że kod jest bardziej czytelny i mniej podatny na błedy.&lt;/p&gt;
+
+&lt;p&gt;Zmienne powinny być deklarowane najbliżej pierwszego użycia. W przeciwnym wypadku będzie to zaśmiecać inny niepowiązany kawałek kodu i wprowadzać chaos.&lt;/p&gt;
+
+&lt;p&gt;Deklarując zmienną zbyt wcześnie, nie tylko sprawiamy, że zasięg zaczyna się zbyt wcześnie, ale też kończy zbyt późno. Raczej nie powinno się rozdzielać deklaracji od zainicializowania, jedynym wyjątkiem tutaj jest try catch, gdzie jest to wymuszone.&lt;/p&gt;
+
+&lt;p&gt;Pętle oferują dodatkową możliwość na zmniejszenie zasięgu zmiennych. Możemy w nich zadeklarować zmienne pętli, w rezultacie ograniczając ich zasięg tylko do pętli.&lt;/p&gt;
+
+&lt;p&gt;Jednak preferowany sposób na iterowanie po kolekcji to:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Preferred idiom for iterating over a collection or array&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Do Something with e&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Jeśli potrzebujemy dostępu do iteratora, np. żeby wywołać metodę &lt;code class=&quot;highlighter-rouge&quot;&gt;remove()&lt;/code&gt; to:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Idiom for iterating when you need the iterator&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Do something with e and i&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dlaczego te są preferowane, a nie pętle while? Prosty przykład:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// BUG!&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;doSomethingElse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Druga pętla przez przypadek używa pierwszego iteratora, który nadal jest w zasięgu. Kod kompiluje się i wykonuje bez błędu.&lt;/p&gt;
+
+&lt;p&gt;W przypadku zwykłych pętli nie ma takiej opcji:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Do something with e and i&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Compile-time error - cannot find symbol i&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Do something with e2 and i2&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Tu inny przykład na minimalizowanie zasięgu zmiennej:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expensiveComputation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Do something with i;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Deklarujmy 2 zmienne pętli, aby uniknąć kosztownego i niepotrzebnego obliczania &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt; w każdej iteracji pętli jednocześnie ograniczając jej zasięg tylko do pętli.&lt;/p&gt;
+
+&lt;p&gt;Ostatnią ogólną dobrą techniką minimalizowania zasięgu zmiennych jest utrzymywanie metod krótkich i konkretnych. Jeśli połączone są 2 czynności w jednej metodzie i mają zmienne wymieszane między sobą, to dobrze jest je rozdzielić.&lt;/p&gt;
+
+&lt;h1 id=&quot;preferuj-pętle-for-each&quot;&gt;Preferuj pętle for-each&lt;/h1&gt;
+
+&lt;p&gt;Lekcja w tym temacie jest dosyć oczywista i wydaje mi się, że powszechnie stosowana, więc tylko na szybko - używaj zawsze for-each, jeśli nie potrzebujesz dostępu do indexu.&lt;/p&gt;
+
+&lt;p&gt;Redukuje to boilerplate, zmniejsza szum, przez co kod jest bardziej czytelny, oraz nie mamy możliwości popełnienia błędu:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// The preferred idiom for iterating over collections and arrays&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Do something with e&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Co jest ważne - nie ma tu utraty wydajności czy jakiegoś innego skutku ubocznego - kod kompiluje się do niemal identycznej tradycyjnej pętli.&lt;/p&gt;
+
+&lt;p&gt;Te pętle też są łatwiejsze w użyciu w przypadku zagnieżdżonych pętli. Ze zwykłymi pętlami można zrobić następujący błąd:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Can you spot the bug?&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Suit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CLUB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DIAMOND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HEART&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SPADE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Rank&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ACE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DEUCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;THREE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FOUR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FIVE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SEVEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EIGHT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;NINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JACK&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QUEEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KING&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suits&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ranks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;deck&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suits&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ranks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;deck&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Widzisz go? Metoda &lt;code class=&quot;highlighter-rouge&quot;&gt;next()&lt;/code&gt; dla &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; jest wywoływana w złym miejscu. Powinna być wywołana wcześniej:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Fixed, but ugly - you can do better!&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suits&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Suit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ranks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;deck&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Teraz działa, jednak jest to mało czytelne - dużo lepiej jest używać po prostu for-each:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Preferred idiom for nested iteration on collections and arrays&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Suit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suits&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rank&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ranks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;deck&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Jednak są 3 sytuacje, kiedy nie zrobimy z nich użytku:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Gdy chcemy usunąć elementy z kolekcji. Wtedy musimy skorzystać z iteratora lub lepiej - użyć dodanej w Javie 8 metody &lt;code class=&quot;highlighter-rouge&quot;&gt;removeIf&lt;/code&gt; do kolekcji.&lt;/li&gt;
+  &lt;li&gt;Gdy chcemy podmienić jakieś elementy&lt;/li&gt;
+  &lt;li&gt;Współbieżne iterowanie&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Warto zaznaczyć fakt, że możemy iterować pętlą for-each po każdym obiekcie, który implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;poznaj-i-używaj-biblioteki&quot;&gt;Poznaj i używaj biblioteki&lt;/h1&gt;
+
+&lt;p&gt;Trzeci temat mówi o ważności znajomości bibliotek i o tym, by nie wynajdować koła na nowo.&lt;/p&gt;
+
+&lt;p&gt;Weźmy na przykład, że chcemy wygenerować losowe liczby od 0 do n. Natykając się na tak powszechny problem, możesz być niemal pewny, że ktoś już stworzył do tego dobrze działający algorytm.&lt;/p&gt;
+
+&lt;p&gt;By napisać samemu taki algorytm, musiałbyś sporo wiedzieć o pseudolosowych generatorach liczb, teorii liczb i kodzie uzupełnień do dwóch. Na szczęście ten problem mamy już rozwiązany w Javie.&lt;/p&gt;
+
+&lt;p&gt;Od Javy 7 nie powinniśmy już używać do tego klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;Random&lt;/code&gt;. Dla większości użyć dobrym wyborem jest &lt;code class=&quot;highlighter-rouge&quot;&gt;ThreadLocalRandom&lt;/code&gt;. Produkuje lepszej jakości liczby losowe i jest dużo szybszy od poprzednika. Dla &lt;code class=&quot;highlighter-rouge&quot;&gt;ForkJoinPool&lt;/code&gt; i współbieżnych streamów używaj &lt;code class=&quot;highlighter-rouge&quot;&gt;SplittableRandom&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Drugą przewagą bibliotek jest to, że nie musisz tracić czasu na rzeźbienie rozwiązań dla niepowiązanych zbytnio z aplikacją powszechnym problemów, a możesz skupić się na tworzeniu aplikacji i jej funkcjonalności.&lt;/p&gt;
+
+&lt;p&gt;Kolejną przewagą jest to, że biblioteki najczęściej są cały czas rozwijane (czasem przez całe zespoły) i testowane przez tysiące użytkowników, więc dostajemy solidne, wydajne i przetestowane rozwiązanie niemal za darmo.&lt;/p&gt;
+
+&lt;p&gt;Mimo tylu zalet dużo programistów nadal nie używa bibliotek w pełni - czemu? Najprawdopodobniej
+ dlatego, że ich do końca nie znają. Dlatego ważne jest, żeby zaznajamiać się z każdymi nowościami wchodzącymi do Javy i innych bibliotek. Często wprowadzane jest wiele usprawnień, które znacznie poprawiają choćby czytelność i kod klienta.&lt;/p&gt;
+
+&lt;p&gt;Kompletnie podstawowym zestawem bibliotek każdego programisty powinny być przynajmniej te z:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;java.lang&lt;/li&gt;
+  &lt;li&gt;java.util&lt;/li&gt;
+  &lt;li&gt;java.io&lt;/li&gt;
+  &lt;li&gt;collections  framkework&lt;/li&gt;
+  &lt;li&gt;biblioteka stremów&lt;/li&gt;
+  &lt;li&gt;java.util.concurrent&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Jeśli nie możesz znaleźć czegoś w bibliotekach Javy, następnym dobrym wyborem mogą być biblioteki firm trzecich jak np. googlowska &lt;a href=&quot;https://github.com/google/guava&quot;&gt;Guava&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Podsumowując, zmierzając się z jakimiś powszechnym problemem, nie wynajduj koła na nowo - używaj bibliotek w jak najbardziej efektywny sposób, a do rzeźbienia czegoś samemu zabieraj się tylko wtedy, gdy żadna biblioteka nie spełnia twoich potrzeb.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 57, 58, 59 z rozdziału: General Programming Minimize the scope of local variables Prefer for-each loops to traditional for loops Know and use the libraries Avoid float and double if exact answers are required Prefer primitive types to boxed primitives Avoid strings where other types are more appropriate Beware the performance of string concatenation Refer to objects by their interfaces Prefer interfaces to reflection Use native methods judiciously Optimize judiciously Adhere to generally accepted naming conventions W tym rozdziale jest zawarta kolejna porcja dobrych praktyk dla featureów Javy. Będzie też o refleksji, natywnych metodach i optymalizacji. Jednak to potem, najpierw trzy pierwsze tematy: Minimalizowanie zasięgu zmiennych Dlaczego jest to ważne? Ano sprawia, że kod jest bardziej czytelny i mniej podatny na błedy. Zmienne powinny być deklarowane najbliżej pierwszego użycia. W przeciwnym wypadku będzie to zaśmiecać inny niepowiązany kawałek kodu i wprowadzać chaos. Deklarując zmienną zbyt wcześnie, nie tylko sprawiamy, że zasięg zaczyna się zbyt wcześnie, ale też kończy zbyt późno. Raczej nie powinno się rozdzielać deklaracji od zainicializowania, jedynym wyjątkiem tutaj jest try catch, gdzie jest to wymuszone. Pętle oferują dodatkową możliwość na zmniejszenie zasięgu zmiennych. Możemy w nich zadeklarować zmienne pętli, w rezultacie ograniczając ich zasięg tylko do pętli. Jednak preferowany sposób na iterowanie po kolekcji to: // Preferred idiom for iterating over a collection or array for (Element e : c) { ... // Do Something with e } Jeśli potrzebujemy dostępu do iteratora, np. żeby wywołać metodę remove() to: // Idiom for iterating when you need the iterator for (Iterator&amp;lt;Element&amp;gt; i = c.iterator(); i.hasNext(); ) { Element e = i.next(); ... // Do something with e and i } Dlaczego te są preferowane, a nie pętle while? Prosty przykład: Iterator&amp;lt;Element&amp;gt; i = c.iterator(); while (i.hasNext()) { doSomething(i.next()); } ... Iterator&amp;lt;Element&amp;gt; i2 = c2.iterator(); while (i.hasNext()) { // BUG! doSomethingElse(i2.next()); } Druga pętla przez przypadek używa pierwszego iteratora, który nadal jest w zasięgu. Kod kompiluje się i wykonuje bez błędu. W przypadku zwykłych pętli nie ma takiej opcji: for (Iterator&amp;lt;Element&amp;gt; i = c.iterator(); i.hasNext(); ) { Element e = i.next(); ... // Do something with e and i } ... // Compile-time error - cannot find symbol i for (Iterator&amp;lt;Element&amp;gt; i2 = c2.iterator(); i.hasNext(); ) { Element e2 = i2.next(); ... // Do something with e2 and i2 } Tu inny przykład na minimalizowanie zasięgu zmiennej: for (int i = 0, n = expensiveComputation(); i &amp;lt; n; i++) { ... // Do something with i; } Deklarujmy 2 zmienne pętli, aby uniknąć kosztownego i niepotrzebnego obliczania n w każdej iteracji pętli jednocześnie ograniczając jej zasięg tylko do pętli. Ostatnią ogólną dobrą techniką minimalizowania zasięgu zmiennych jest utrzymywanie metod krótkich i konkretnych. Jeśli połączone są 2 czynności w jednej metodzie i mają zmienne wymieszane między sobą, to dobrze jest je rozdzielić. Preferuj pętle for-each Lekcja w tym temacie jest dosyć oczywista i wydaje mi się, że powszechnie stosowana, więc tylko na szybko - używaj zawsze for-each, jeśli nie potrzebujesz dostępu do indexu. Redukuje to boilerplate, zmniejsza szum, przez co kod jest bardziej czytelny, oraz nie mamy możliwości popełnienia błędu: // The preferred idiom for iterating over collections and arrays for (Element e : elements) { ... // Do something with e } Co jest ważne - nie ma tu utraty wydajności czy jakiegoś innego skutku ubocznego - kod kompiluje się do niemal identycznej tradycyjnej pętli. Te pętle też są łatwiejsze w użyciu w przypadku zagnieżdżonych pętli. Ze zwykłymi pętlami można zrobić następujący błąd: // Can you spot the bug? enum Suit { CLUB, DIAMOND, HEART, SPADE } enum Rank { ACE, DEUCE, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING } ... static Collection&amp;lt;Suit&amp;gt; suits = Arrays.asList(Suit.values()); static Collection&amp;lt;Rank&amp;gt; ranks = Arrays.asList(Rank.values()); List&amp;lt;Card&amp;gt; deck = new ArrayList&amp;lt;&amp;gt;(); for (Iterator&amp;lt;Suit&amp;gt; i = suits.iterator(); i.hasNext(); ) for (Iterator&amp;lt;Rank&amp;gt; j = ranks.iterator(); j.hasNext(); ) deck.add(new Card(i.next(), j.next())); Widzisz go? Metoda next() dla i jest wywoływana w złym miejscu. Powinna być wywołana wcześniej: // Fixed, but ugly - you can do better! for (Iterator&amp;lt;Suit&amp;gt; i = suits.iterator(); i.hasNext(); ) { Suit suit = i.next(); for (Iterator&amp;lt;Rank&amp;gt; j = ranks.iterator(); j.hasNext(); ) deck.add(new Card(suit, j.next())); } Teraz działa, jednak jest to mało czytelne - dużo lepiej jest używać po prostu for-each: // Preferred idiom for nested iteration on collections and arrays for (Suit suit : suits) for (Rank rank : ranks) deck.add(new Card(suit, rank)); Jednak są 3 sytuacje, kiedy nie zrobimy z nich użytku: Gdy chcemy usunąć elementy z kolekcji. Wtedy musimy skorzystać z iteratora lub lepiej - użyć dodanej w Javie 8 metody removeIf do kolekcji. Gdy chcemy podmienić jakieś elementy Współbieżne iterowanie Warto zaznaczyć fakt, że możemy iterować pętlą for-each po każdym obiekcie, który implementuje Iterable. Poznaj i używaj biblioteki Trzeci temat mówi o ważności znajomości bibliotek i o tym, by nie wynajdować koła na nowo. Weźmy na przykład, że chcemy wygenerować losowe liczby od 0 do n. Natykając się na tak powszechny problem, możesz być niemal pewny, że ktoś już stworzył do tego dobrze działający algorytm. By napisać samemu taki algorytm, musiałbyś sporo wiedzieć o pseudolosowych generatorach liczb, teorii liczb i kodzie uzupełnień do dwóch. Na szczęście ten problem mamy już rozwiązany w Javie. Od Javy 7 nie powinniśmy już używać do tego klasy Random. Dla większości użyć dobrym wyborem jest ThreadLocalRandom. Produkuje lepszej jakości liczby losowe i jest dużo szybszy od poprzednika. Dla ForkJoinPool i współbieżnych streamów używaj SplittableRandom. Drugą przewagą bibliotek jest to, że nie musisz tracić czasu na rzeźbienie rozwiązań dla niepowiązanych zbytnio z aplikacją powszechnym problemów, a możesz skupić się na tworzeniu aplikacji i jej funkcjonalności. Kolejną przewagą jest to, że biblioteki najczęściej są cały czas rozwijane (czasem przez całe zespoły) i testowane przez tysiące użytkowników, więc dostajemy solidne, wydajne i przetestowane rozwiązanie niemal za darmo. Mimo tylu zalet dużo programistów nadal nie używa bibliotek w pełni - czemu? Najprawdopodobniej dlatego, że ich do końca nie znają. Dlatego ważne jest, żeby zaznajamiać się z każdymi nowościami wchodzącymi do Javy i innych bibliotek. Często wprowadzane jest wiele usprawnień, które znacznie poprawiają choćby czytelność i kod klienta. Kompletnie podstawowym zestawem bibliotek każdego programisty powinny być przynajmniej te z: java.lang java.util java.io collections framkework biblioteka stremów java.util.concurrent Jeśli nie możesz znaleźć czegoś w bibliotekach Javy, następnym dobrym wyborem mogą być biblioteki firm trzecich jak np. googlowska Guava. Podsumowując, zmierzając się z jakimiś powszechnym problemem, nie wynajduj koła na nowo - używaj bibliotek w jak najbardziej efektywny sposób, a do rzeźbienia czegoś samemu zabieraj się tylko wtedy, gdy żadna biblioteka nie spełnia twoich potrzeb.</summary></entry><entry><title type="html">Vargargi, nulle i Optionale</title><link href="https://devcave.pl/effective-java/vargargi-nulle-i-optionale" rel="alternate" type="text/html" title="Vargargi, nulle i Optionale" /><published>2019-02-16T09:00:00+01:00</published><updated>2019-02-16T09:00:00+01:00</updated><id>https://devcave.pl/effective-java/vargargi-nulle-i-optionale</id><content type="html" xml:base="https://devcave.pl/effective-java/vargargi-nulle-i-optionale">&lt;p class=&quot;note&quot;&gt;
   Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 &lt;/p&gt;
 
@@ -1903,262 +2111,4 @@ Weight on NEPTUNE is 79.53844
 
 &lt;p&gt;Wadą tego rozwiązania jest to, że implementacje nie mogą być dziedziczone między enumami.&lt;/p&gt;
 
-&lt;p&gt;Takie użycie możemy znaleźć też w bibliotece Javy np.: enum &lt;code class=&quot;highlighter-rouge&quot;&gt;java.nio.file.LinkOption&lt;/code&gt; implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;CopyOption&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;OpenOption&lt;/code&gt;.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 34, 35, 36, 37, 38 z rozdziału: Enums and Annotations Item 34: Use enums instead of int constants Item 35: Use instance fields instead of ordinals Item 36: Use EnumSet instead of bit fields Item 37: Use EnumMap instead of ordinal indexing Item 38: Emulate extensible enums with interfaces Item 39: Prefer annotations to naming patterns Item 40: Consistently use the Override annotation Item 41: Use marker interfaces to define types</summary></entry><entry><title type="html">Ograniczanie dozwolonych typów w generykach</title><link href="https://devcave.pl/effective-java/bounded-wildcard-types" rel="alternate" type="text/html" title="Ograniczanie dozwolonych typów w generykach" /><published>2018-10-27T10:00:00+02:00</published><updated>2018-10-27T10:00:00+02:00</updated><id>https://devcave.pl/effective-java/bounded-wildcard-types</id><content type="html" xml:base="https://devcave.pl/effective-java/bounded-wildcard-types">&lt;p class=&quot;note&quot;&gt;
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
-&lt;/p&gt;
-
-&lt;p&gt;Ten wpis nawiązuje do tematu z &lt;i&gt;Item 31&lt;/i&gt; z rozdziału:&lt;/p&gt;
-
-&lt;p class=&quot;m-0&quot;&gt;Generics&lt;/p&gt;
-
-&lt;ul class=&quot;fa-ul custom&quot;&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/nie-uzywaj-surowych-typow&quot;&gt;Item 26: Don’t use raw types
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/eliminuj-unchecked-cast&quot;&gt;Item 27: Eliminate unchecked warnings
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/eliminuj-unchecked-cast&quot;&gt;Item 32: Combine generics and varargs judiciously
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;Item 28: Prefer lists to arrays
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;Item 29: Favor generic types
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li&gt;
-                &lt;a href=&quot;/effective-java/uzywanie-generycznych-klas-i-metod&quot;&gt;Item 30: Favor generic methods
-                &lt;/a&gt;
-            &lt;/li&gt;&lt;li style=&quot;list-style-type: none;&quot;&gt;
-                    &lt;a href=&quot;/effective-java/bounded-wildcard-types&quot;&gt;
-                        &lt;i class=&quot;fa-li fa fa-arrow-right&quot;&gt;&lt;/i&gt;Item 31: Use bounded wildcards to increase API flexibility
-                    &lt;/a&gt;
-                &lt;/li&gt;&lt;/ul&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Większość typów generycznych, tak jak nasza zabawkowa klasa &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&lt;/code&gt;, nie ma ograniczeń przekazywanego typu. Możemy podać dowolny typ parametru: &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;Object&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;int[]&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;List&amp;lt;String&amp;gt;&amp;gt;&lt;/code&gt; itd.&lt;/p&gt;
-
-&lt;p class=&quot;note&quot;&gt;Wyjątkiem są prymitywy. Nie możemy utworzyć np. &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;int&amp;gt;&lt;/code&gt; lub &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;double&amp;gt;&lt;/code&gt;. Możemy zamiast tego użyć ich wrpaperów &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Double&lt;/code&gt; itd.&lt;/p&gt;
-
-&lt;p&gt;Z drugiej strony, deklarując &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt; jako typ argumentu dla metody/klasy, narzucamy na nią spore ograniczenie - może przyjmować tylko instancje klasy &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;. Czasem jednak potrzebujemy większej elastyczności, ale jednocześnie nie chcemy pozwalać na dowolny typ.&lt;/p&gt;
-
-&lt;p&gt;Możemy to osiągnać używając &lt;em&gt;bounded type parameter&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;bounded-type-parameter&quot;&gt;Bounded type parameter&lt;/h1&gt;
-
-&lt;p&gt;Dla przykładu weźmy &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.concurrent.DelayQueue&lt;/code&gt;. Jej deklaracja wygląda tak:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DelayQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Delayed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BlockingQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;E extends Delayed&amp;gt;&lt;/code&gt; oznacza, że przekazywana klasa musi być podtypem &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.concurrent.Delayed&lt;/code&gt;. Dzięki temu możemy używać metod zdefiniowanych w tej klasie bez potrzeby castowania.&lt;/p&gt;
-
-&lt;p class=&quot;note&quot;&gt;Wlicza się w to również typ &lt;code class=&quot;highlighter-rouge&quot;&gt;Delayed&lt;/code&gt;. Każdy typ jest uznawany jak podtyp siebie, dlatego możliwe jest utworzenie &lt;code class=&quot;highlighter-rouge&quot;&gt;DelayQueue&amp;lt;Delayed&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Podobnie można tego użyć w deklaracjach metod.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DelayQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;  &lt;span class=&quot;nf&quot;&gt;someMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Możemy również ograniczać typ rekursywnie, używając kolejnego typu zawierającego ten parametr typu. Nazywa się to &lt;em&gt;recursive type bound&lt;/em&gt;. Często jest to używane w połączeniu z interfejsem &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; (który był już &lt;a href=&quot;/effective-java/interfejs-comparable&quot;&gt;omawiany&lt;/a&gt;):&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; określa, do jakiego typu może być porównywany obiekt implementujący &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&amp;lt;T&amp;gt;&lt;/code&gt;. Najczęściej jest to on sam, np. &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt; implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&amp;lt;String&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt; implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&amp;lt;Integer&amp;gt;&lt;/code&gt; itd.&lt;/p&gt;
-
-&lt;p&gt;Wiele metod przyjmuje kolekcje elementów implementujących Comparable, aby ją sortować, przeszukiwać czy kalkulować max/min. Te obiekty muszą być wzajemnie porównywalne, aby było to możliwe. Można to wymusić w ten sposób:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Using a recursive type bound to express mutual comparability&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Cała metoda do wyciągania maksymalnej wartości mogłaby wyglądać tak:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Returns max value in a collection - uses recursive type bound&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Empty collection&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requireNonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Innym rozwiązaniem możę być też &lt;em&gt;bounded wildcard type&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;bounded-wildcard-type&quot;&gt;Bounded wildcard type&lt;/h1&gt;
-
-&lt;p&gt;Przywołajmy jako przykład jeszcze raz klasę &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&lt;/code&gt;. Załóżmy, że chcemy dodać metodę, która dodaje do stosu wszystkie elementy z innej kolekcji. Pierwszą próbą mogłoby być coś takiego:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// pushAll method without wildcard type - deficient!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pushAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Jednak nie jest to do końca elastyczne rozwiązanie. Jeśli typ elementu z &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&lt;/code&gt; jest identyczny tym z &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&lt;/code&gt; to wszystko jest ok. Jeśli jednak będziemy mięć np. &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;Number&amp;gt;&lt;/code&gt;, to nie będziemy mogli dodać kolekcji integerów, mimo że &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt; jest podtypem &lt;code class=&quot;highlighter-rouge&quot;&gt;Number&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numberStack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;numberStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pushAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Błąd:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;StackTest.java:7: error: incompatible types: Iterable&amp;lt;Integer&amp;gt;
-cannot be converted to Iterable&amp;lt;Number&amp;gt;
-        numberStack.pushAll(integers);
-                            ^
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I tu z pomocą przychodzi &lt;em&gt;bounded wildcard type&lt;/em&gt;. Typ przyjmowanego argumentu nie powinien być “Iterable typu E” tylko “Iterable jakiegoś podtypu E” - zapisuje się to w ten sposób: ` Iterable&amp;lt;? extends E&amp;gt;`:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Wildcard type for a parameter that serves as an E producer&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pushAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Dzięki takiej zmianie nasza metoda jest dużo bardziej elastyczna i powyższa próba dorzucenia do &lt;code class=&quot;highlighter-rouge&quot;&gt;Stack&amp;lt;Number&amp;gt;&lt;/code&gt; integerów z &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterable&amp;lt;Integer&amp;gt;&lt;/code&gt; powiedzie się.&lt;/p&gt;
-
-&lt;p&gt;I można też w drugą stronę. Możemy rozszerzyć dozwolone typy o wszystkie nadklasy danego typu. Deklaruje się to tak: &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;? super E&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;W ten sposób można by na przykład zaimplementować metodę, która wyciąga wszystkie wartości do innej kolekcji.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Wildcard type for parameter that serves as an E consumer&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;popAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Dzięki &lt;code class=&quot;highlighter-rouge&quot;&gt;Collection&amp;lt;? super E&amp;gt;&lt;/code&gt; możemy podać kolekcję o dowolnym typie parametru, ktory rozszerza &lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Dlatego dla maksymalnej elastyczności warto używać &lt;em&gt;bounded wildcard type&lt;/em&gt; dla parametrów, które są &lt;em&gt;producerami&lt;/em&gt; lub &lt;em&gt;consumerami&lt;/em&gt;:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Jeśli tylko wyciągamy obiekty, to jest, to &lt;em&gt;producer&lt;/em&gt; i powinniśmy użyć &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;? extends T&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Jeśli tylko wkładamy obiekty do środka, to jest to &lt;em&gt;consumer&lt;/em&gt; i powinniśmy użyć &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;? super T&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Jeśli robimy obie operacje, to nie powinniśmy używać &lt;em&gt;wildcard type&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Podobnie moglibyśmy ulepszyć funkcję &lt;code class=&quot;highlighter-rouge&quot;&gt;union&lt;/code&gt; z poprzedniego wpisu:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Co umożliwia nam wtedy takie użycie:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doubles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;4.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;6.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doubles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;note&quot;&gt;
-
-  &lt;p&gt;Używając Javy starszej niż 8 (również zamieniając &lt;code class=&quot;highlighter-rouge&quot;&gt;Set.of&lt;/code&gt; na starszy odpowiednik), dostaniemy błąd kompilacji:&lt;/p&gt;
-
-  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Union.java:14: error: incompatible types
-        Set&amp;lt;Number&amp;gt; numbers = union(integers, doubles);
-                                   ^
-  required: Set&amp;lt;Number&amp;gt;
-  found:    Set&amp;lt;INT#1&amp;gt;
-  where INT#1,INT#2 are intersection types:
-    INT#1 extends Number,Comparable&amp;lt;? extends INT#2&amp;gt;
-    INT#2 extends Number,Comparable&amp;lt;?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
-
-  &lt;p&gt;Jest to spowodowane tym, że przed Javą 8 wnioskowanie typów nie było na tyle inteligentne, aby wywnioskować, że zwracany typ &lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Set&amp;lt;Number&amp;gt;&lt;/code&gt;. W takiej sytuacji trzeba podać typ argumentu bezpośrednio, co nie jest zbyt ładne:&lt;/p&gt;
-
-  &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Explicit type parameter - required prior to Java 8&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;union&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;integers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doubles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; zalicza się zawsze do &lt;em&gt;consumerów&lt;/em&gt;, więc zazwyczaj powinno się używać &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&amp;lt;? super T&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Aplikując &lt;em&gt;wildcard types&lt;/em&gt; do naszej metody &lt;code class=&quot;highlighter-rouge&quot;&gt;max&lt;/code&gt; z poprzednich rozdziałów, która wyciąga największą wartość z listy, dostaniemy takiego potworka:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Dzięki temu wspieramy typy, które nie implementują &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; bezpośrednio, ale rozszerzają typ, który to robi. Na pierwszy rzut oka jest to mało czytelne, ale nie spotkamy się z takimi deklaracjami zbyt często - najczęściej tego typu złożoność występuje pod spodem bibliotek.&lt;/p&gt;
-
-&lt;h1 id=&quot;porównanie&quot;&gt;Porównanie&lt;/h1&gt;
-
-&lt;p&gt;&lt;em&gt;Bounded wildcard type&lt;/em&gt; może mieć tylko jedno ograniczenie, a &lt;em&gt;bounded type parameter&lt;/em&gt; wiele:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  type parameter bound     T extends Class &amp;amp; Interface1 &amp;amp; … &amp;amp; InterfaceN
-
-  wildcard bound
-      upper bound          ? extends SuperType
-      lower bound          ? super   SubType
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Wildcard&lt;/em&gt; używa się wtedy, gdy nie obchodzi nas właściwy typ parametru, bo nie będziemy nic z niego używać.&lt;/p&gt;
-
-&lt;p&gt;Uzupełniona tabelka z używanymi pojęciami w tym rozdziale:&lt;/p&gt;
-
-&lt;table class=&quot;post-table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Pojęcie&lt;/th&gt;
-      &lt;th&gt;Przykład&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Raw type&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Parameterized type&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Generic type&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Formal type parameter&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;E&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Unbounded wildcard type&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Bounded type parameter&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;E extends Number&amp;gt;&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Recursive type bound&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;T extends Comparable&amp;lt;T&amp;gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Bounded wildcard type&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Generic method&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; asList(E[] a)&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Type token&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.class&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 31 z rozdziału: Generics Item 26: Don’t use raw types Item 27: Eliminate unchecked warnings Item 32: Combine generics and varargs judiciously Item 28: Prefer lists to arrays Item 29: Favor generic types Item 30: Favor generic methods Item 31: Use bounded wildcards to increase API flexibility</summary></entry></feed>
+&lt;p&gt;Takie użycie możemy znaleźć też w bibliotece Javy np.: enum &lt;code class=&quot;highlighter-rouge&quot;&gt;java.nio.file.LinkOption&lt;/code&gt; implementuje &lt;code class=&quot;highlighter-rouge&quot;&gt;CopyOption&lt;/code&gt; i &lt;code class=&quot;highlighter-rouge&quot;&gt;OpenOption&lt;/code&gt;.&lt;/p&gt;</content><author><name>Codeboy</name></author><category term="Effective-Java" /><category term="Notatnik-Juniora" /><category term="Dobre-praktyki" /><category term="Java" /><category term="Effective-Java" /><summary type="html">Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat. Ten wpis nawiązuje do tematu z Item 34, 35, 36, 37, 38 z rozdziału: Enums and Annotations Item 34: Use enums instead of int constants Item 35: Use instance fields instead of ordinals Item 36: Use EnumSet instead of bit fields Item 37: Use EnumMap instead of ordinal indexing Item 38: Emulate extensible enums with interfaces Item 39: Prefer annotations to naming patterns Item 40: Consistently use the Override annotation Item 41: Use marker interfaces to define types</summary></entry></feed>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Zasięg zmiennych, pętle i biblioteki">
+<meta property="og:description" content="Kolejna porcja dobrych praktyk">
+
+<title>Zasięg zmiennych, pętle i biblioteki</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/zasieg-zmiennych-petle-i-biblioteki">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Zasięg zmiennych, pętle i biblioteki</h1>
+            
+            <h2 class="post-subtitle">Kolejna porcja dobrych praktyk</h2>
+            
+            <p class="post-meta">
+              
+              23
+              lutego
+              
+              2019</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#minimalizowanie-zasięgu-zmiennych">Minimalizowanie zasięgu zmiennych</a></li>
+<li class="toc-entry toc-h1"><a href="#preferuj-pętle-for-each">Preferuj pętle for-each</a></li>
+<li class="toc-entry toc-h1"><a href="#poznaj-i-używaj-biblioteki">Poznaj i używaj biblioteki</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 57, 58, 59</i> z rozdziału:</p>
+
+<p class="m-0">General Programming</p>
+
+<ul class="fa-ul custom"><li style="list-style-type: none;">
+                    <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">
+                        <i class="fa-li fa fa-arrow-right"></i>Minimize the scope of local variables
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">
+                        <i class="fa-li fa fa-arrow-right"></i>Prefer for-each loops to traditional for loops
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">
+                        <i class="fa-li fa fa-arrow-right"></i>Know and use the libraries
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Avoid float and double if exact answers are required
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Prefer primitive types to boxed primitives
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Avoid strings where other types are more appropriate
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Beware the performance of string concatenation
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Refer to objects by their interfaces
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Prefer interfaces to reflection
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Use native methods judiciously
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Optimize judiciously
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Adhere to generally accepted naming conventions
+                </a>
+            </li></ul>
+<hr />
+
+<p>W tym rozdziale jest zawarta kolejna porcja dobrych praktyk dla featureów Javy. Będzie też o refleksji, natywnych metodach i optymalizacji.
+Jednak to potem, najpierw trzy pierwsze tematy:</p>
+
+<h1 id="minimalizowanie-zasięgu-zmiennych">Minimalizowanie zasięgu zmiennych</h1>
+
+<p>Dlaczego jest to ważne? Ano sprawia, że kod jest bardziej czytelny i mniej podatny na błedy.</p>
+
+<p>Zmienne powinny być deklarowane najbliżej pierwszego użycia. W przeciwnym wypadku będzie to zaśmiecać inny niepowiązany kawałek kodu i wprowadzać chaos.</p>
+
+<p>Deklarując zmienną zbyt wcześnie, nie tylko sprawiamy, że zasięg zaczyna się zbyt wcześnie, ale też kończy zbyt późno. Raczej nie powinno się rozdzielać deklaracji od zainicializowania, jedynym wyjątkiem tutaj jest try catch, gdzie jest to wymuszone.</p>
+
+<p>Pętle oferują dodatkową możliwość na zmniejszenie zasięgu zmiennych. Możemy w nich zadeklarować zmienne pętli, w rezultacie ograniczając ich zasięg tylko do pętli.</p>
+
+<p>Jednak preferowany sposób na iterowanie po kolekcji to:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Preferred idiom for iterating over a collection or array</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Element</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">...</span> <span class="c1">// Do Something with e</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jeśli potrzebujemy dostępu do iteratora, np. żeby wywołać metodę <code class="highlighter-rouge">remove()</code> to:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Idiom for iterating when you need the iterator</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">Element</span> <span class="n">e</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="o">...</span> <span class="c1">// Do something with e and i</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Dlaczego te są preferowane, a nie pętle while? Prosty przykład:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+    <span class="n">doSomething</span><span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+<span class="o">}</span>
+<span class="o">...</span>
+<span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>             <span class="c1">// BUG!</span>
+    <span class="n">doSomethingElse</span><span class="o">(</span><span class="n">i2</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Druga pętla przez przypadek używa pierwszego iteratora, który nadal jest w zasięgu. Kod kompiluje się i wykonuje bez błędu.</p>
+
+<p>W przypadku zwykłych pętli nie ma takiej opcji:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">Element</span> <span class="n">e</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="o">...</span> <span class="c1">// Do something with e and i</span>
+<span class="o">}</span>
+<span class="o">...</span>
+
+<span class="c1">// Compile-time error - cannot find symbol i</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">Element</span> <span class="n">e2</span> <span class="o">=</span> <span class="n">i2</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="o">...</span> <span class="c1">// Do something with e2 and i2</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Tu inny przykład na minimalizowanie zasięgu zmiennej:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">expensiveComputation</span><span class="o">();</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="o">...</span> <span class="c1">// Do something with i;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Deklarujmy 2 zmienne pętli, aby uniknąć kosztownego i niepotrzebnego obliczania <code class="highlighter-rouge">n</code> w każdej iteracji pętli jednocześnie ograniczając jej zasięg tylko do pętli.</p>
+
+<p>Ostatnią ogólną dobrą techniką minimalizowania zasięgu zmiennych jest utrzymywanie metod krótkich i konkretnych. Jeśli połączone są 2 czynności w jednej metodzie i mają zmienne wymieszane między sobą, to dobrze jest je rozdzielić.</p>
+
+<h1 id="preferuj-pętle-for-each">Preferuj pętle for-each</h1>
+
+<p>Lekcja w tym temacie jest dosyć oczywista i wydaje mi się, że powszechnie stosowana, więc tylko na szybko - używaj zawsze for-each, jeśli nie potrzebujesz dostępu do indexu.</p>
+
+<p>Redukuje to boilerplate, zmniejsza szum, przez co kod jest bardziej czytelny, oraz nie mamy możliwości popełnienia błędu:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The preferred idiom for iterating over collections and arrays</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Element</span> <span class="n">e</span> <span class="o">:</span> <span class="n">elements</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">...</span> <span class="c1">// Do something with e</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Co jest ważne - nie ma tu utraty wydajności czy jakiegoś innego skutku ubocznego - kod kompiluje się do niemal identycznej tradycyjnej pętli.</p>
+
+<p>Te pętle też są łatwiejsze w użyciu w przypadku zagnieżdżonych pętli. Ze zwykłymi pętlami można zrobić następujący błąd:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Can you spot the bug?</span>
+<span class="kd">enum</span> <span class="n">Suit</span> <span class="o">{</span> <span class="n">CLUB</span><span class="o">,</span> <span class="n">DIAMOND</span><span class="o">,</span> <span class="n">HEART</span><span class="o">,</span> <span class="n">SPADE</span> <span class="o">}</span>
+<span class="kd">enum</span> <span class="n">Rank</span> <span class="o">{</span> <span class="n">ACE</span><span class="o">,</span> <span class="n">DEUCE</span><span class="o">,</span> <span class="n">THREE</span><span class="o">,</span> <span class="n">FOUR</span><span class="o">,</span> <span class="n">FIVE</span><span class="o">,</span> <span class="n">SIX</span><span class="o">,</span> <span class="n">SEVEN</span><span class="o">,</span> <span class="n">EIGHT</span><span class="o">,</span>
+            <span class="n">NINE</span><span class="o">,</span> <span class="n">TEN</span><span class="o">,</span> <span class="n">JACK</span><span class="o">,</span> <span class="n">QUEEN</span><span class="o">,</span> <span class="n">KING</span> <span class="o">}</span>
+<span class="o">...</span>
+<span class="kd">static</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Suit</span><span class="o">&gt;</span> <span class="n">suits</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Suit</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
+<span class="kd">static</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&gt;</span> <span class="n">ranks</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Rank</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span> <span class="n">deck</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Suit</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">suits</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&gt;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">j</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span>
+        <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Card</span><span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">(),</span> <span class="n">j</span><span class="o">.</span><span class="na">next</span><span class="o">()));</span>
+</code></pre></div></div>
+
+<p>Widzisz go? Metoda <code class="highlighter-rouge">next()</code> dla <code class="highlighter-rouge">i</code> jest wywoływana w złym miejscu. Powinna być wywołana wcześniej:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Fixed, but ugly - you can do better!</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Suit</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">suits</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="n">Suit</span> <span class="n">suit</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&gt;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">j</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span>
+        <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Card</span><span class="o">(</span><span class="n">suit</span><span class="o">,</span> <span class="n">j</span><span class="o">.</span><span class="na">next</span><span class="o">()));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Teraz działa, jednak jest to mało czytelne - dużo lepiej jest używać po prostu for-each:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Preferred idiom for nested iteration on collections and arrays</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Suit</span> <span class="n">suit</span> <span class="o">:</span> <span class="n">suits</span><span class="o">)</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Rank</span> <span class="n">rank</span> <span class="o">:</span> <span class="n">ranks</span><span class="o">)</span>
+        <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Card</span><span class="o">(</span><span class="n">suit</span><span class="o">,</span> <span class="n">rank</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Jednak są 3 sytuacje, kiedy nie zrobimy z nich użytku:</p>
+
+<ul>
+  <li>Gdy chcemy usunąć elementy z kolekcji. Wtedy musimy skorzystać z iteratora lub lepiej - użyć dodanej w Javie 8 metody <code class="highlighter-rouge">removeIf</code> do kolekcji.</li>
+  <li>Gdy chcemy podmienić jakieś elementy</li>
+  <li>Współbieżne iterowanie</li>
+</ul>
+
+<p>Warto zaznaczyć fakt, że możemy iterować pętlą for-each po każdym obiekcie, który implementuje <code class="highlighter-rouge">Iterable</code>.</p>
+
+<h1 id="poznaj-i-używaj-biblioteki">Poznaj i używaj biblioteki</h1>
+
+<p>Trzeci temat mówi o ważności znajomości bibliotek i o tym, by nie wynajdować koła na nowo.</p>
+
+<p>Weźmy na przykład, że chcemy wygenerować losowe liczby od 0 do n. Natykając się na tak powszechny problem, możesz być niemal pewny, że ktoś już stworzył do tego dobrze działający algorytm.</p>
+
+<p>By napisać samemu taki algorytm, musiałbyś sporo wiedzieć o pseudolosowych generatorach liczb, teorii liczb i kodzie uzupełnień do dwóch. Na szczęście ten problem mamy już rozwiązany w Javie.</p>
+
+<p>Od Javy 7 nie powinniśmy już używać do tego klasy <code class="highlighter-rouge">Random</code>. Dla większości użyć dobrym wyborem jest <code class="highlighter-rouge">ThreadLocalRandom</code>. Produkuje lepszej jakości liczby losowe i jest dużo szybszy od poprzednika. Dla <code class="highlighter-rouge">ForkJoinPool</code> i współbieżnych streamów używaj <code class="highlighter-rouge">SplittableRandom</code>.</p>
+
+<p>Drugą przewagą bibliotek jest to, że nie musisz tracić czasu na rzeźbienie rozwiązań dla niepowiązanych zbytnio z aplikacją powszechnym problemów, a możesz skupić się na tworzeniu aplikacji i jej funkcjonalności.</p>
+
+<p>Kolejną przewagą jest to, że biblioteki najczęściej są cały czas rozwijane (czasem przez całe zespoły) i testowane przez tysiące użytkowników, więc dostajemy solidne, wydajne i przetestowane rozwiązanie niemal za darmo.</p>
+
+<p>Mimo tylu zalet dużo programistów nadal nie używa bibliotek w pełni - czemu? Najprawdopodobniej
+ dlatego, że ich do końca nie znają. Dlatego ważne jest, żeby zaznajamiać się z każdymi nowościami wchodzącymi do Javy i innych bibliotek. Często wprowadzane jest wiele usprawnień, które znacznie poprawiają choćby czytelność i kod klienta.</p>
+
+<p>Kompletnie podstawowym zestawem bibliotek każdego programisty powinny być przynajmniej te z:</p>
+<ul>
+  <li>java.lang</li>
+  <li>java.util</li>
+  <li>java.io</li>
+  <li>collections  framkework</li>
+  <li>biblioteka stremów</li>
+  <li>java.util.concurrent</li>
+</ul>
+
+<p>Jeśli nie możesz znaleźć czegoś w bibliotekach Javy, następnym dobrym wyborem mogą być biblioteki firm trzecich jak np. googlowska <a href="https://github.com/google/guava">Guava</a>.</p>
+
+<p>Podsumowując, zmierzając się z jakimiś powszechnym problemem, nie wynajduj koła na nowo - używaj bibliotek w jak najbardziej efektywny sposób, a do rzeźbienia czegoś samemu zabieraj się tylko wtedy, gdy żadna biblioteka nie spełnia twoich potrzeb.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/vargargi-nulle-i-optionale"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Vargargi, nulle i Optionale"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/zasieg-zmiennych-petle-i-biblioteki";
+    this.page.identifier = "/effective-java/zasieg-zmiennych-petle-i-biblioteki";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

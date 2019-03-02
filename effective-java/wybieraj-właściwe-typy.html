@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Wybieraj właściwe typy">
+<meta property="og:description" content="">
+
+<title>Wybieraj właściwe typy</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/wybieraj-w%C5%82a%C5%9Bciwe-typy">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Wybieraj właściwe typy</h1>
+            
+            <h2 class="post-subtitle"></h2>
+            
+            <p class="post-meta">
+              
+              2
+              marca
+              
+              2019</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#unikaj-float-i-double-kiedy-potrzebujesz-precyzji">Unikaj float i double kiedy potrzebujesz precyzji</a></li>
+<li class="toc-entry toc-h1"><a href="#preferuj-typy-prymitywne">Preferuj typy prymitywne</a></li>
+<li class="toc-entry toc-h1"><a href="#unikaj-używania-stringów-tam-gdzie-istnieją-lepsze-alternatywy">Unikaj używania stringów tam, gdzie istnieją lepsze alternatywy</a></li>
+<li class="toc-entry toc-h1"><a href="#wydajność-konkatenacji-stringów">Wydajność konkatenacji stringów</a></li>
+<li class="toc-entry toc-h1"><a href="#odnoś-się-do-obiektów-po-ich-interfejsach">Odnoś się do obiektów po ich interfejsach</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 60, 61, 62, 63, 64</i> z rozdziału:</p>
+
+<p class="m-0">General Programming</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">Minimize the scope of local variables
+                </a>
+            </li><li>
+                <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">Prefer for-each loops to traditional for loops
+                </a>
+            </li><li>
+                <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">Know and use the libraries
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wybieraj-w%C5%82a%C5%9Bciwe-typy">
+                        <i class="fa-li fa fa-arrow-right"></i>Avoid float and double if exact answers are required
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wybieraj-w%C5%82a%C5%9Bciwe-typy">
+                        <i class="fa-li fa fa-arrow-right"></i>Prefer primitive types to boxed primitives
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wybieraj-w%C5%82a%C5%9Bciwe-typy">
+                        <i class="fa-li fa fa-arrow-right"></i>Avoid strings where other types are more appropriate
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wybieraj-w%C5%82a%C5%9Bciwe-typy">
+                        <i class="fa-li fa fa-arrow-right"></i>Beware the performance of string concatenation
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wybieraj-w%C5%82a%C5%9Bciwe-typy">
+                        <i class="fa-li fa fa-arrow-right"></i>Refer to objects by their interfaces
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Prefer interfaces to reflection
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Use native methods judiciously
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Optimize judiciously
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Adhere to generally accepted naming conventions
+                </a>
+            </li></ul>
+<hr />
+
+<h1 id="unikaj-float-i-double-kiedy-potrzebujesz-precyzji">Unikaj float i double kiedy potrzebujesz precyzji</h1>
+
+<p>Typy <code class="highlighter-rouge">float</code> i <code class="highlighter-rouge">double</code> były zaprojektowane początkowo do naukowych obliczeń. Skupiają się na jak najlepszej wydajności, jednak nie dostarczają one dokładnych wyników. Przykładowo nie powinny być stosowane w obliczeniach walutowych, bo nie jest możliwe precyzyjne reprezentowania 0.1 lub innej ujemnej potęgi 10 jako <code class="highlighter-rouge">float</code> lub <code class="highlighter-rouge">double</code>.</p>
+
+<p>Dla przykładu, mając 1.03 zł i odejmując od tego 42 gr, dostalibyśmy w wyniku 0.6100000000000001.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mf">1.03</span> <span class="o">-</span> <span class="mf">0.42</span><span class="o">);</span>
+<span class="c1">// 0.6100000000000001</span>
+</code></pre></div></div>
+
+<p>Inny przykład - mając 1 zł i odejmując od tego 9 razy coś za 10 gr zostałoby nam 0.09999999999999998 zł.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mf">1.00</span> <span class="o">-</span> <span class="mi">9</span> <span class="o">*</span> <span class="mf">0.10</span><span class="o">);</span>
+<span class="c1">// 0.09999999999999998</span>
+</code></pre></div></div>
+<p>Może się zdawać, że ten problem można by rozwiązać, po prostu zaokrąglając wyniki, jednak nie jest to prawda - nie zawsze by to działało.</p>
+
+<p>Rozwiązanie jest prostsze - tam gdzie jest wymagana precyzja, używaj - <code class="highlighter-rouge">BigDecimal</code>, <code class="highlighter-rouge">int</code>, lub <code class="highlighter-rouge">long</code>.</p>
+
+<p class="note">Najlepiej jest używać konstruktora <code class="highlighter-rouge">BigDecimal</code>, który przyjmuje <code class="highlighter-rouge">String</code> - wtedy unikamy wprowadzania niedokładnych wartości do obliczeń.</p>
+
+<p>Używanie <code class="highlighter-rouge">BigDecimal</code> ma jednak dwie wady:</p>
+<ul>
+  <li>jest dużo mniej wygodne niż używanie prymitywnych typów</li>
+  <li>jest też od nich mniej wydajne</li>
+</ul>
+
+<p>Jednak tym drugim w większości wypadków nie ma się co przejmować.</p>
+
+<h1 id="preferuj-typy-prymitywne">Preferuj typy prymitywne</h1>
+
+<p>Ten temat już był i dobrze go opisałem w poście <a href="/effective-java/unikaj-tworzenia-niepotrzebnych-obiektow">Unikaj nadmiarowego tworzenia obiektów</a>, wyjaśniając i pokazując na przykładzie, dlaczego powinniśmy preferować typy prymitywne zamiast ich odpowiedników klasowych (<em>boxed primitives</em>).</p>
+
+<h1 id="unikaj-używania-stringów-tam-gdzie-istnieją-lepsze-alternatywy">Unikaj używania stringów tam, gdzie istnieją lepsze alternatywy</h1>
+
+<p><code class="highlighter-rouge">String</code> został zaprojektowany by reprezentować tekst, jednak jest tendencja, by go używać do innych celów, podczas gdy mamy do tego lepsze alternatywy.</p>
+
+<p><code class="highlighter-rouge">String</code> często dostajemy w żądaniach z przeglądarki, czytając plik i z wielu innych źródeł - jest to naturalne, jednak nie powinniśmy tego zostawiać w tej postaci, jeśli istnieje lub możemy stworzyć odpowiedni typ reprezentujący te dane. Niby jest to oczywiste, ale i tak często <code class="highlighter-rouge">String</code> jest nadużywane.</p>
+
+<p>Kolejną złą praktyką jest używanie stringów zamiast enumów - opisywałem to w temacie <a href="/effective-java/enums">Enumy - kilka dobrych praktyk</a>.</p>
+
+<p>Przed użyciem <code class="highlighter-rouge">String</code> warto się zastanowić czy nie ma lepszej alternatywy dla danego zastosowania.</p>
+
+<h1 id="wydajność-konkatenacji-stringów">Wydajność konkatenacji stringów</h1>
+
+<p>Jak pewnie Ci wiadomo <code class="highlighter-rouge">String</code> w Javie jest niemutowalny, więc każde użycie operatora <code class="highlighter-rouge">+</code> między stringami (konkatenacja) tworzy nowy obiekt <code class="highlighter-rouge">String</code>. Jest to całkowicie w porządku w przypadku łączeniu kilku stringów o stałej długości, jednak mało wydajne przy budowaniu dużych ciągów tekstu, szczególnie w pętli. Przykład:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Inappropriate use of string concatenation - Performs poorly!</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">lineForItem</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>  <span class="c1">// String concatenation</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Tu dla każdej iteracji pętli tworzy się niepotrzebnie nowy <code class="highlighter-rouge">String</code>, przez co metoda jest mało wydajna. Rozwiązaniem tutaj jest użycie klasy <code class="highlighter-rouge">StringBuilder</code>, która jest mutowalnym odpowiednikiem klasy <code class="highlighter-rouge">String</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">StringBuilder</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">(</span><span class="n">numItems</span><span class="o">()</span> <span class="o">*</span> <span class="n">LINE_WIDTH</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
+        <span class="n">b</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">lineForItem</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+    <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>W prostych przypadkach nie ma sensu używać <code class="highlighter-rouge">StringBuilder</code>-a ponieważ kompilator Javy automatycznie robi to za nas (taka automatyczna optymalizacja z jego strony). Użycie <code class="highlighter-rouge">StringBuilder</code>-a w prostych przypadkach tylko źle wpływa na czytelność kodu. Lepiej jest użyć wtedy po prostu operatora <code class="highlighter-rouge">+</code>. Jednak w przypadku pętli i w bardziej złożonych operacjach konkatenacji, kompilator Javy nie jest w stanie podmienić jej na użycie <code class="highlighter-rouge">StringBuilder</code>-a, więc w takich przypadkach warto go użyć.</p>
+
+<h1 id="odnoś-się-do-obiektów-po-ich-interfejsach">Odnoś się do obiektów po ich interfejsach</h1>
+
+<p>Podobny rada była w poście <a href="/effective-java/projektowanie-metod-i-przeciazenie">Projektowanie metod</a>, gdzie była mowa o używaniu interfejsów w typie parametrów. Ten temat rozszerza tę radę do wszystkich możliwych miejsc deklaracji typu - parametry, wartości zwracane, zmienne czy pola. Jeśli istnieje odpowiedni interfejs, to bez względu na miejsce deklaracji, zawsze powinniśmy deklarować typ jako interfejs zamiast konkretnej klasy.</p>
+
+<p>Jedyny moment, gdzie musimy odnieść się do klasy konkretnej, jest tam, gdzie tworzymy ten obiekt konstruktorem.</p>
+
+<p>Zatem miejmy w nawyku taki kod:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Good - uses interface as type</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Son</span><span class="o">&gt;</span> <span class="n">sonSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
+</code></pre></div></div>
+
+<p>A nie taki:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Bad - uses class as type!</span>
+<span class="n">LinkedHashSet</span><span class="o">&lt;</span><span class="n">Son</span><span class="o">&gt;</span> <span class="n">sonSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
+</code></pre></div></div>
+
+<p>Dostajemy dzięki temu bardziej zwięzły kod, ale co ważniejsze - większą elastyczność. Możemy w każdej chwili zmienić implementację, a cały kod dookoła będzie dalej się kompilował:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Son</span><span class="o">&gt;</span> <span class="n">sonSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+</code></pre></div></div>
+
+<p>I prawdopodobnie działał. Jest jednak jeden wyjątek od tej zasady. Jeśli konkretna implementacja oferuję jakąś specjalną funkcjonalność, która nie jest zagwarantowana przez interfejs i kod polega na tej funkcjonalności, to nie powinniśmy używać ogólnego interfejsu jako deklaracji typu.</p>
+
+<p>Przykładem tutaj mogłoby być to, że nasz kod polegałby na sortowaniu zapewnionym przez <code class="highlighter-rouge">LinkedHashSet</code>. Wtedy byłoby nieodpowiednie zadeklarowanie typu tej zmiennej jako <code class="highlighter-rouge">Set</code> ponieważ interfejs <code class="highlighter-rouge">Set</code> sam w sobie nie daję żadnej gwarancji odnośnie sortowania.</p>
+
+<p>Oczywiście jest wiele przypadków, gdzie klasy nie mają swoich interfejsów, szczególnie tzw. <em>value classes</em> jak np. <code class="highlighter-rouge">String</code> czy <code class="highlighter-rouge">BigInteger</code>. Wtedy naturalnie będziemy używać konkretnych klas i nie ma w tym nic złego. Postarajmy się wtedy używać po prostu klasę najwyżej w hierarchii, która ma wymaganą przez nas funkcjonalność.</p>
+
+<p>Czasem musimy zrobić też użytek z metod, które występują w klasie konkretnej, a nie ma ich na interfejsie - wtedy też użyjemy klasy konkretnej jako deklaracji typu i nie ma w tym nic złego.</p>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/zasieg-zmiennych-petle-i-biblioteki"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Zasięg zmiennych, pętle i biblioteki"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/wybieraj-w%C5%82a%C5%9Bciwe-typy";
+    this.page.identifier = "/effective-java/wybieraj-właściwe-typy";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

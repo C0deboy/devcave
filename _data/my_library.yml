@@ -4,14 +4,21 @@
   subtitle: Książki w trakcie przerabiania, ale z pewnością godne polecenia
   books:
 
+  - title: Uczenie maszynowe z użyciem Scikit-Learn i TensorFlow
+    author: Aurélien Géron
+    helionID: uczema
+
+  - title: Data science od podstaw. Analiza danych w Pythonie
+    author: Joel Grus
+    helionID: dascpo
+
   - title: Czysta architektura. Struktura i design oprogramowania. Przewodnik dla profesjonalistów
     author: Robert C. Martin
     helionID: czarch
 
-  - title: Effective Java (3rd Edition)
+  - title: Java. Efektywne programowanie. Wydanie III
     author: Joshua Bloch
-    img: /img/effective-java.jpg
-    link: https://www.amazon.co.uk/Effective-Java-Joshua-Bloch/dp/0134685997
+    link: javep3
 
   - title: TDD. Programowanie w Javie sterowane testami
     author: Viktor Farcic, Alex Garcia

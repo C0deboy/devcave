@@ -660,6 +660,15 @@
         "subtitle": "Typy zmiennoprzecinkowe, nadużywanie stringów i preferowanie interfejsów",
         "date": "2 marca 2019",
         "url": "/effective-java/wybieraj-wlasciwe-typy"
+      },
+    
+      
+      {
+        "title": "Refleksja i metody natywne",
+        "titleSEO": "Refleksja i metody natywne",
+        "subtitle": "Użycie interfejsów z kodem refleksji i czy metody natywne to zawsze dobry pomysł?",
+        "date": "9 marca 2019",
+        "url": "/effective-java/refleksja-i-metody-natywne"
       }
     
   

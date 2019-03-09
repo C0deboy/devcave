@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Refleksja i metody natywne">
+<meta property="og:description" content="Użycie interfejsów z kodem refleksji i czy metody natywne to zawsze dobry pomysł?">
+
+<title>Refleksja i metody natywne</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/refleksja-i-metody-natywne">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie/">O mnie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum/">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt/">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Refleksja i metody natywne</h1>
+            
+            <h2 class="post-subtitle">Użycie interfejsów z kodem refleksji i czy metody natywne to zawsze dobry pomysł?</h2>
+            
+            <p class="post-meta">
+              
+              9
+              marca
+              
+              2019</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#preferuj-interfejsy-zamiast-bezpośredniej-refleksji">Preferuj interfejsy zamiast bezpośredniej refleksji</a></li>
+<li class="toc-entry toc-h1"><a href="#metody-natywne">Metody natywne</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 65, 66</i> z rozdziału:</p>
+
+<p class="m-0">General Programming</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">Minimize the scope of local variables
+                </a>
+            </li><li>
+                <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">Prefer for-each loops to traditional for loops
+                </a>
+            </li><li>
+                <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">Know and use the libraries
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Avoid float and double if exact answers are required
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Prefer primitive types to boxed primitives
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Avoid strings where other types are more appropriate
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Beware the performance of string concatenation
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Refer to objects by their interfaces
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/refleksja-i-metody-natywne">
+                        <i class="fa-li fa fa-arrow-right"></i>Prefer interfaces to reflection
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/refleksja-i-metody-natywne">
+                        <i class="fa-li fa fa-arrow-right"></i>Use native methods judiciously
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Optimize judiciously
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Adhere to generally accepted naming conventions
+                </a>
+            </li></ul>
+<hr />
+
+<h1 id="preferuj-interfejsy-zamiast-bezpośredniej-refleksji">Preferuj interfejsy zamiast bezpośredniej refleksji</h1>
+
+<p>Refleksja, którą w Javie mamy w pakiecie <code class="highlighter-rouge">java.lang.reflect</code>, umożliwia uzyskać dostęp do konstruktorów, metod i pól każdej klasy, a także do ich nazw, typów, sygnatur itd.</p>
+
+<p>Dzięki temu możemy manipulować niemal każdym elementem klasy. Możemy również budować instancje, wywoływać metody czy nawet uzyskać dostęp do pól, które są zadeklarowane jako <code class="highlighter-rouge">private</code>.</p>
+
+<p>Ponadto refleksja pozwala jednej klasie użyć drugiej, mimo że ta druga nie istniała podczas kompilacji tej pierwszej.</p>
+
+<p>Jest to zatem potężne narzędzie, jednak ma swoją cenę:</p>
+<ul>
+  <li>tracimy wszystkie zalety sprawdzania typów i wyjątków. Jeśli spróbujemy wywołać metodę nieistniejącą metodę refleksją, to program wysypie się dopiero w <em>runtime</em>.</li>
+  <li>Kod refleksji jest zazwyczaj paskudny i rozwlekły - ciężko się go piszę i czyta</li>
+  <li>Wydajność jest dużo gorsza w porównaniu ze zwykłym wywoływaniem metod</li>
+</ul>
+
+<p>Są aplikacje, które wręcz polegają na refleksji. Są to między innymi narzędzia analizy kodu czy frameworki <em>dependency injection</em>.</p>
+
+<p>Można jednak czerpać korzyści z refleksji, jednocześnie redukując przy tym jej koszt poprzez używanie refleksji w ograniczonej formie.</p>
+
+<p>Kiedy program musi używać klasy, która jeszcze nie jest dostępna w czasie kompilacji, możemy posłużyć się istniejącym interfejsem lub nadklasą, by odnosić się do tej klasy. Możemy wtedy utworzyć instancję refleksją i używać jej przez interfejs lub nadklasę.</p>
+
+<p>Dla przykładu program, który tworzy instancje <code class="highlighter-rouge">Set&lt;String&gt;</code>, której klasa jest podawana jako pierwszy argument w cmd. Pozostałe argumenty lądują w tym secie i są printowane na konsolę. Kolejność, w jakiej będą pokazane, zależy od implementacji setu np. jeśli podamy <code class="highlighter-rouge">HashSet</code> to kolejność będzie losowa, a gdy <code class="highlighter-rouge">TreeSet</code> to będzie alfabetycznie:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Reflective instantiation with interface access</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// Translate the class name into a Class object</span>
+    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">cl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="o">(</span><span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;)</span>  <span class="c1">// Unchecked cast!</span>
+                <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fatalError</span><span class="o">(</span><span class="s">"Class not found."</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">// Get the constructor</span>
+    <span class="n">Constructor</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">cons</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">cons</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fatalError</span><span class="o">(</span><span class="s">"No parameterless constructor"</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">// Instantiate the set</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">cons</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fatalError</span><span class="o">(</span><span class="s">"Constructor not accessible"</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InstantiationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fatalError</span><span class="o">(</span><span class="s">"Class not instantiable."</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InvocationTargetException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fatalError</span><span class="o">(</span><span class="s">"Constructor threw "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getCause</span><span class="o">());</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassCastException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fatalError</span><span class="o">(</span><span class="s">"Class doesn't implement Set"</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">// Exercise the set</span>
+    <span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">fatalError</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Np. dla argumentów <code class="highlighter-rouge">java.util.TreeSet b c d g i s a</code> dostalibyśmy w wyniku <code class="highlighter-rouge">[a, b, c, d, g, i, s]</code>.</p>
+
+<p>Ten przykład pokazuję też jak kod refleksji jest rozwlekły i ile wymaga boilerplateru - generuje aż 6 różnych wyjątków. Można by je jednak zredukować, łapiąc <code class="highlighter-rouge">ReflectiveOperationException</code>, który jest nadklasą wyjątków refleksji i został dodany w Javie 7. Używając refleksji dostajemy też wiele <em>unchecked cast warning</em>. Więc ignorując poszczególne wyjątki otrzymalibyśmy taki kod:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Reflective instantiation with interface access</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// Translate the class name into a Class object</span>
+    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">cl</span><span class="o">;</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="o">(</span><span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;)</span>  <span class="c1">// Unchecked cast!</span>
+            <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+        <span class="c1">// Get the constructor</span>
+        <span class="n">Constructor</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">cons</span><span class="o">;</span>
+        <span class="n">cons</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">();</span>
+        <span class="c1">// Instantiate the set</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">cons</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+        <span class="c1">// Exercise the set</span>
+        <span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ReflectiveOperationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Constructor not accessible"</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Nie jest już aż tak rozwlekły, ale nadal nie należy do najpiękniejszych.</p>
+
+<p>Podsumowując, refleksja to potężne narzędzie do specyficznych zastosowań i ma kilka wad. Jeśli jednak musimy jej użyć, powinniśmy (jeśli jest tylko taka możliwość) ograniczyć jej użycie do stworzenia instancji klasy, a później już operować na interfejsie czy nadklasie, która jest dostępna w czasie kompilacji.</p>
+
+<h1 id="metody-natywne">Metody natywne</h1>
+
+<p>Java Native Interface (JNI) pozwala na wywoływanie natywnych metod, które są napisane w natywnych dla danego systemu językach jak C czy C++. Może to być wykorzystane w celu uzyskania dostępu do specyficznych funkcji systemu jak np. rejestry czy do użycia bibliotek, które są napisane w natywnych językach. W natywnych językach mogą też być napisane części systemu, które są krytyczne pod względem wydajności i które później wywołamy z Javy.</p>
+
+<p>Obecnie jednak nie potrzebujemy używania natywnego kodu do większości specyficznych części systemu, bo Java wspiera już wiele z nich sama z siebie. Dla przykładu w Javie 9 dodano <code class="highlighter-rouge">process API</code>, które daje nam wygodny dostęp do procesów systemu operacyjnego.</p>
+
+<p>Również pisanie natywnych metod w celu zapewnienia lepszej wydajności w wielu przypadkach nie jest już zalecane. JVM stał się dużo szybszy, niż to miało miejsce w pierwszych wersjach Javy i obecnie można uzyskać porównywalną wydajność w Javie. Na przykład, historycznie w Javie 1.1, <code class="highlighter-rouge">BigInteger</code> polegał wtedy na szybkiej bibliotece napisanej w C, a w Javie 3 zmieniono implementację na Javę i doprowadzono do tego, że była szybsza niż oryginalna, natywna implementacja.</p>
+
+<p>Wywoływanie metod natywnych wiąże się z kosztowną komunikacją między kodem działającym na JVM a tym natywnym. Używając natywnych metod uzależniamy się od systemu i aplikacja staje się mniej przenośna między systemami. Aplikacje takie są też mniej bezpieczne i trudniejsze w debugowaniu.</p>
+
+<p>Jeśli nigdy nie spotkałeś się z metodami natywnymi, to polecam: <a href="https://www.baeldung.com/jni">Guide to JNI (Java Native Interface)</a></p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/wybieraj-wlasciwe-typy"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Wybieraj właściwe typy"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/refleksja-i-metody-natywne";
+    this.page.identifier = "/effective-java/refleksja-i-metody-natywne";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

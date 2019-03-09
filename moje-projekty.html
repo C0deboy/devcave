@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Moje projekty">
+<meta property="og:description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+
+<title>Moje projekty</title>
+
+<link rel="canonical" href="https://devcave.pl/moje-projekty">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie">O mnie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<header class="intro-header">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            
+            <div class="col-xl-8 col-lg-9 col-md-10">
+                <div class="site-heading">
+                    <h1>Moje projekty</h1>
+                    <hr class="small">
+                    <span class="subheading">i te mniej i te bardziej poważne</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-xl-8 col-lg-9 col-md-10">
+			
+
+
+
+<h2>12<small> - Ilość wszystkich projektów</small></h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Chronologicznie <small>Od najnowszego</small>
+        </h1>
+    </div>
+</div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Rok 2018
+                <small>Praca komercyjna, ale znalazło się trochę czasu na projekty do szuflady ;)</small>
+            </h1>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="scraper-statystyk-jezykow-programowania">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/stats-scraper.png" alt="Scraper statystyk języków programowania demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Scraper statystyk języków programowania</h3>
+            <hr>
+            <small>Kotlin, Jsoup, Klaxon, Apache Commons, Logback, Junit 5, Mockk, AssertJ, Gradle</small>
+            <p>Zrefactoryzowane i całkowicie przepisane na Kotlin narzędzie, które wcześniej napisałem w czystej Javie. Służy do (scrapowania) statystyk dla poszczególnych języków programowania na potrzeby mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Obecnie zbiera dane z Github, Meetup.com, StackOverflow, Tiobe INDEX, Spectrum ranking oraz z Wikipedii (najnowsze wersje języków). Dzieje się to wielowątkowo i całość trwa ok. 9s. Wszystko ląduje do pliku JSON, z którego poźniej czytane są dane przez moją stronę. Narzędzie odpalam mniej więcej raz na miesiąc.</p>
+
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/stats-scraper" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="stepify">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/stepify.png" alt="Stepify demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Stepify</h3>
+            <hr>
+            <small>Angular 6, TypeScript, Java, Spring Boot, Lombok, Gradle</small>
+            <p>Aplikacja do ustalania swoich celów, którą tworzyłem podczas nauki Angulara. Rozdzieliłem tu całkowicie frontend i backend. Backend ma osobne repozytorium - <a href="https://github.com/C0deboy/stepify-server">stepify-server</a>. Frontend komunikuje się z backendem przez REST api.</p>
+
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/stepify" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Rok 2017
+                <small>Pierwsze projekty</small>
+            </h1>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="you-shall-not-pass">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/you-shall-not-pass.png" alt="You Shall Not Pass demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>You Shall Not Pass</h3>
+            <hr>
+            <small>JavaScript, HTML, CSS</small>
+            <p>Mini gierka, którą robiłem na potrzeby konkursu <a href="http://gynvael.coldwind.pl/?id=668">Gynvael's Winter GameDev Challenge 2017</a>. Największym wyzwaniem było umieszczenie gry w pojedynczym pliku html (włącznie z grafikami w base64 - wszystko musiało być zapisane tekstowo w tym pliku) oraz zmieszczeniu się w 20KB - bo takie były zasady. Wygrałem dzięki niej 50$. Gra nie jest jakoś super grywalna, ale jestem zadowolony, że udało mi się coś takiego sklecić w 20KB. Przed zagraniem polecam przeczytać readme na GitHubie.</p>
+
+            
+            <a class="project-btn" href="https://c0deboy.github.io/You-Shall-Not-Pass" target="_blank">Zagraj
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-gamepad fa-stack-1x fa-inverse" aria-hidden="true"></i>
+            </span>
+            </a>
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/You-Shall-Not-Pass" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="scraper-statystyk-jezykow-programowania">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/stats-scraper.png" alt="Scraper statystyk języków programowania demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Scraper statystyk języków programowania</h3>
+            <hr>
+            <small>Java, Jsoup, Json smart, Apache Commons, Logback</small>
+            <p>Narzędzie, które zbiera statystyki dla poszczególnych języków programowania na potrzeby mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Obecnie zbiera dane z Github, Meetup.com, StackOverflow, Tiobe INDEX, Spectrum ranking oraz z Wikipedii (najnowsze wersje języków). Wszystko ląduje do pliku JSON, z które poźniej czytane są dane przez moją stronę. <br><br> Projekt został przepisany całkowicie na Kotlin - <a href="https://github.com/C0deboy/stats-scraper">stats-scraper</a>. Tej wersji już nie używam.</p>
+
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/jjp-stats-scraper" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="aplikacja-do-zarzadzania-todo-listami">
+        <div class="col-md-7">
+            
+            <img class="img-fluid box-effect project-preview" src="/img/my-projects/todo-list-app.JPG" alt="Aplikacja do zarządzania "todo" listami demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Aplikacja do zarządzania "todo" listami</h3>
+            <hr>
+            <small>Java, Servlet, JSP, JSTL, Spring, Hibernate, Maven, JUnit, Mockito, Tomcat</small>
+            <p>Aplikacja która rozwijałem w celu nauki Javy i jej technologii. Obecnie oferuję system logowania/rejestracji oraz podstawowe funkcjonalności CRUD na "todo" listach. Całość jest zabezpieczona przy użyciu Spring Security.</p>
+
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/todo-list-app" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="remake-retro-gry-tank1990-battle-city">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/tank1990.png" alt="Remake retro gry Tank1990/Battle City demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Remake retro gry Tank1990/Battle City</h3>
+            <hr>
+            <small>Phaser, Javascript(ES6)</small>
+            <p>Gra tworzona jako odskocznia od typowych projektów. Remake znanej gry, pewnie każdy grał w dzieciństwie. Nie jest dokończony, zatrzymałem się na podstawowych elementach mechaniki gry (bez leveli, różnych czołgów i zbierania ulepszeń). Było to ciekawe doświadczenie, może kiedyś do tego wrócę :).</p>
+
+            
+            <a class="project-btn" href="https://c0deboy.github.io/tank-1990/" target="_blank">Zagraj
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-gamepad fa-stack-1x fa-inverse" aria-hidden="true"></i>
+            </span>
+            </a>
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/tank-1990" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="jaki-jezyk-programowania-pl">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/jaki-jezyk-programowania.png" alt="Jaki-jezyk-programowania.pl demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Jaki-jezyk-programowania.pl</h3>
+            <hr>
+            <small>HTML, CSS, Javascript (ES6), Boostrap, JQuery, Webpack, Npm</small>
+            <p>Strona internetowa skierowana dla początkujących programistów, która ma na celu pomoc w wyborze technologii do danego zastosowania. Poza tym, można tam znaleźć opisy technologii, statystyki językówm, <a href="https://jaki-jezyk-programowania.pl/ksiazki/">polecane książki</a> i <a href="https://jaki-jezyk-programowania.pl/kursy/">videokursy</a> programistyczne.</p>
+
+            
+            
+            <a class="project-btn" href="https://jaki-jezyk-programowania.pl" target="_blank">Zobacz
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-eye fa-stack-1x fa-inverse" aria-hidden="true"></i>
+            </span>
+            </a>
+            
+            <a class="project-btn" href="https://github.com/C0deboy/jaki-jezyk-programowania" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="blog-devcave-pl">
+        <div class="col-md-7">
+            
+            <img class="img-fluid box-effect project-preview" src="/img/my-projects/devcave.png" alt="Blog devcave.pl demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Blog devcave.pl</h3>
+            <hr>
+            <small>Jekyll, HTML, CSS, Javascript, Boostrap, JQuery, Npm</small>
+            <p>Czyli ten blog, który powstał dzięki inicjatywie DajSiePoznac2017. Blog działa na Jekyllu. Przepisałem niemal od zera jeden z początkowych motywów, więc 90% wyglądu i funkcjonalności stworzyłem sam.</p>
+
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/devcave" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Początki
+                <small>Na tych projektach stawiałem pierwsze kroki</small>
+            </h1>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="animacja-ascii-art">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/swieta-asci-art.png" alt="Animacja - ASCII art demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Animacja - ASCII art</h3>
+            <hr>
+            <small>HTML, CSS, Javascript</small>
+            <p>Animacja dzięki której wygrałem konkurs świąteczny (100zł na książkę :D) zorganizowany przez <a href="https://forum.pasja-informatyki.pl">Forum Pasja Informatyki</a>. Zajęła 1 miejsce z 72 głosami (drugie miało 35). Celem konkursu było wykonanie animacji znaków ASCII o tematyce świątecznej w dowolnej technologii.</p>
+
+            
+            
+            <a class="project-btn" href="https://c0deboy.github.io/christmas-asci-art/" target="_blank">Zobacz
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-eye fa-stack-1x fa-inverse" aria-hidden="true"></i>
+            </span>
+            </a>
+            
+            <a class="project-btn" href="https://github.com/C0deboy/christmas-asci-art/" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="zwierciadla-i-soczewki">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/mirrors-and-lens.png" alt="Zwierciadła i soczewki demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Zwierciadła i soczewki</h3>
+            <hr>
+            <small>HTML, CSS, Javascript</small>
+            <p>Aplikacja symulującą rysowanie odbić w zwierciadłach i soczewkach. Projekt szkolny na fizykę wykonany z kolegą. Wymagało trochę myślenia ;) Bardzo podobał mi się proces tworzenia tej aplikacji. Było to ciekawe doświadczenie na początku przygody z programowaniem.</p>
+
+            
+            
+            <a class="project-btn" href="https://c0deboy.github.io/Mirrors-and-Lens/ConvergingLens.html" target="_blank">Zobacz
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-eye fa-stack-1x fa-inverse" aria-hidden="true"></i>
+            </span>
+            </a>
+            
+            <a class="project-btn" href="https://github.com/C0deboy/Mirrors-and-Lens/" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="game-of-life-johna-conwaya">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/game-of-life.png" alt="Game of Life Johna Conwaya demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Game of Life Johna Conwaya</h3>
+            <hr>
+            <small>HTML, CSS, Javascript</small>
+            <p>Mój drugi projekt. Robiłem go razem z kolegą. Jest to implementacja "Gry w życie" Johna Conwaya w JavaScriptcie. Ciężko nazwać to grą, ale było to ciekawe doświadczenie jak dla początkujących programistów ;).</p>
+
+            
+            <a class="project-btn" href="https://c0deboy.github.io/Game-of-life/" target="_blank">Zagraj
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-gamepad fa-stack-1x fa-inverse" aria-hidden="true"></i>
+            </span>
+            </a>
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/Game-of-life/" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="gra-kolko-i-krzyzyk">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/kolko-krzyzyk.png" alt="Gra kółko i krzyżyk demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Gra kółko i krzyżyk</h3>
+            <hr>
+            <small>HTML, CSS, Javascript</small>
+            <p>Jest to mój pierwszy projekt poza mało poważnymi stronkami wykonanymi na potrzeby szkolne. Zaczynałem wtedy zabawę z Javascript.</p>
+
+            
+            <a class="project-btn" href="https://c0deboy.github.io/Kolko-i-krzyzyk/" target="_blank">Zagraj
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-gamepad fa-stack-1x fa-inverse" aria-hidden="true"></i>
+            </span>
+            </a>
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/Kolko-i-krzyzyk" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+
+
+		</div>
+	</div>
+</div>
+
+<hr>
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -8,6 +8,11 @@
     - skill: Java
       grade: 85%
       color: '#ff5123'
+
+    - skill: Kotlin
+      grade: 40%
+      color: '#7a70e3'
+
 - section: Technologie Javowe
   skills:
     - skill: Spring
@@ -27,12 +32,17 @@
       color: '#ff425d'
 
     - skill: JUnit
-      grade: 40%
+      grade: 70%
       color: '#dc524a'
 
     - skill: Mockito
-      grade: 40%
+      grade: 50%
       color: '#1ca571'
+
+    - skill: AssertJ
+      grade: 50%
+      color: '#ecd9a6'
+
 - section: Technologie webowe
   skills:
     - skill: HTML5
@@ -49,11 +59,16 @@
 
     - skill: Bootstrap
       grade: 80%
-      color: '#ff3300'
+      color: '#563d7c'
 
     - skill: Angular
       grade: 70%
       color: '#de0b32'
+
+    - skill: TypeScript
+      grade: 70%
+      color: '#007acc'
+
 - section: Inne
   skills:
     - skill: Git
@@ -72,8 +87,12 @@
       grade: 90%
       color: '#357bae'
 
-    - skill: Maven
+    - skill: Gradle
       grade: 80%
+      color: '#02303A'
+
+    - skill: Maven
+      grade: 60%
       color: '#002f63'
 
     - skill: Ant
@@ -83,6 +102,7 @@
     - skill: Jekyll
       grade: 80%
       color: '#2acb70'
+
 - section: IDE
   skills:
     - skill: Eclipse
@@ -96,3 +116,7 @@
     - skill: WebStorm
       grade: 90%
       color: '#00d0d9'
+
+    - skill: Visual Studio Code
+      grade: 70%
+      color: '#007acc'

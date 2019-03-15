@@ -216,7 +216,7 @@
 
 <p id="problem-z-dziedziczeniem">Trzeba się też zastanowić, czy klasy, które rozszerzają inną klasę (również, gdy dodają wartość, która ma znaczenie w metodzie <code class="highlighter-rouge">equals</code>), powinny móc być równe nadklasom?</p>
 
-<p>Joshua Bloch w swojej książce mówi, że tak — co jest zgodne z zasadą <a href="/notatnik-juniora/zasady-projektowania-kodu#l---liskov-substitution-principle">Liskov substitution</a>. Ponadto mówi, że nie ma sposobu, aby rozszerzyć instancjowalną klasę i dodać do niej wartość zachowując kontrakt <code class="highlighter-rouge">equals</code>, chyba że, chcemy zrezygnować z zalet obiektowych abstrakcji.</p>
+<p>Joshua Bloch w swojej książce mówi, że tak — co jest zgodne z zasadą <a href="/notatnik-juniora/zasady-projektowania-kodu#l---liskov-substitution-principle">Liskov substitution</a>. Ponadto mówi, że nie ma sposobu, aby rozszerzyć instancjonowalną klasę i dodać do niej wartość zachowując kontrakt <code class="highlighter-rouge">equals</code>, chyba że, chcemy zrezygnować z zalet obiektowych abstrakcji.</p>
 
 <p>Z drugiej strony, przeciwne głosy idą za tym, że możemy zachować kontrakt <code class="highlighter-rouge">equals</code> używając sprawdzenia z <code class="highlighter-rouge">getClass</code> zamiast <code class="highlighter-rouge">instanceof</code>. Dla przykładu, dla prostej klasy <code class="highlighter-rouge">Point</code> będzie to wyglądać tak:</p>
 

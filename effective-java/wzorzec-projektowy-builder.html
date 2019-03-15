@@ -149,7 +149,7 @@
                 <a href="/effective-java/wzorzec-projektowy-singleton">Item 3: Enforce the singleton property with a private constructor or an enum type
                 </a>
             </li><li>
-                <a href="/effective-java/klasy-nieinstancjowalne">Item 4: Enforce noninstantiability with a private constructor
+                <a href="/effective-java/klasy-nieinstancjonowalne">Item 4: Enforce noninstantiability with a private constructor
                 </a>
             </li><li>
                 <a href="/effective-java/wstrzykiwanie-zaleznosci">Item 5: Prefer dependency injection to hardwiring resources
@@ -304,7 +304,7 @@
 
 <p><strong>Istnieje też inny fajny sposób, aby wymusić ustawienie wszystkich pól w builderze</strong> - napisałem o tym osobny post <a href="https://bulldogjob.pl/news/348-idiotoodporne-api-klasy-czyli-jakie">idiotoodporne-api-klasy</a> dla <a href="https://bulldogjob.pl/">bulldogjob.pl</a>.</p>
 
-<p>Stosując wzorzec <em>builder</em> możemy zagwarantować, że stworzona zostanie poprawna i kompletna klasa, zachowując czysty i łatwy w użyciu kod. Instancjowanie klasy wygląda wtedy tak:</p>
+<p>Stosując wzorzec <em>builder</em> możemy zagwarantować, że stworzona zostanie poprawna i kompletna klasa, zachowując czysty i łatwy w użyciu kod. Instancjonowanie klasy wygląda wtedy tak:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
@@ -334,7 +334,7 @@
     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 </code></pre></div></div>
 
-<p>Możemy też uniemożliwić instancjowanie klasy zwykłym konstruktorem dodając go jako prywatny:</p>
+<p>Możemy też uniemożliwić instancjonowanie klasy zwykłym konstruktorem dodając go jako prywatny:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nf">Goal</span><span class="o">()</span> <span class="o">{</span>
 <span class="o">}</span>

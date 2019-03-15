@@ -142,7 +142,7 @@
                 <a href="/effective-java/wzorzec-projektowy-singleton">Item 3: Enforce the singleton property with a private constructor or an enum type
                 </a>
             </li><li>
-                <a href="/effective-java/klasy-nieinstancjowalne">Item 4: Enforce noninstantiability with a private constructor
+                <a href="/effective-java/klasy-nieinstancjonowalne">Item 4: Enforce noninstantiability with a private constructor
                 </a>
             </li><li>
                 <a href="/effective-java/wstrzykiwanie-zaleznosci">Item 5: Prefer dependency injection to hardwiring resources
@@ -281,7 +281,7 @@
 
 <p>Dzięki temu możemy zdefiniować metodę na interfejsie, która zwróci nam konkretną implementację tego interfejsu.</p>
 
-<p class="note">Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu <code class="highlighter-rouge">Type</code> lądowały w nieinstancjowalnej klasie <code class="highlighter-rouge">Types</code>. Dosyć popularnym przykładem jest <code class="highlighter-rouge">java.util.Collections</code>. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.</p>
+<p class="note">Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu <code class="highlighter-rouge">Type</code> lądowały w nieinstancjonowalnej klasie <code class="highlighter-rouge">Types</code>. Dosyć popularnym przykładem jest <code class="highlighter-rouge">java.util.Collections</code>. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.</p>
 
 <p class="pros">Z każdym wywołaniem może być zwrócona inna implementacja</p>
 

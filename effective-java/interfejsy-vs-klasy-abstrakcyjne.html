@@ -171,7 +171,7 @@ AbstractC
 
 <p>Niestety psuje to całą hierarchię typów, bo wszystkie klasy, które rozszerzały <code class="highlighter-rouge">B</code> są zmuszone od teraz implementować <code class="highlighter-rouge">C</code>, bez względu czy tego chcemy, czy nie.</p>
 
-<p><strong>Interfejsy są idealnymi mixinami.</strong> Upraszczając, <em>mixin</em> jest typem, który klasa może (dodatkowo do swojego podstawowego typu) zaimplementować, dostarczając dodatkową, odseparowaną funkcjonalność. <em>Mixin</em> sam w sobie nie może zostać zinstancjowany - jest tylko częścią funkcjonalności innych klas. Dla przykładu, <code class="highlighter-rouge">Comparable</code> jest mixinem, który deklaruje i dodaje klasie funkcjonalność porównywania i tym samym porządkowania jej instancji.  Klasy abstrakcyjne nie mogą być <em>mixinami</em> z tego samego powodu co wcześniej - klasa może rozszerzać tylko jedną klasę.</p>
+<p><strong>Interfejsy są idealnymi mixinami.</strong> Upraszczając, <em>mixin</em> jest typem, który klasa może (dodatkowo do swojego podstawowego typu) zaimplementować, dostarczając dodatkową, odseparowaną funkcjonalność. <em>Mixin</em> sam w sobie nie może zostać zinstancjonowany - jest tylko częścią funkcjonalności innych klas. Dla przykładu, <code class="highlighter-rouge">Comparable</code> jest mixinem, który deklaruje i dodaje klasie funkcjonalność porównywania i tym samym porządkowania jej instancji.  Klasy abstrakcyjne nie mogą być <em>mixinami</em> z tego samego powodu co wcześniej - klasa może rozszerzać tylko jedną klasę.</p>
 
 <p><strong>Interfejsy nie tworzą sztywnych hierarchii, dzięki czemu są bardzo elastyczne</strong>.  Dla przykładu, mamy piosenkarza:</p>
 

@@ -360,9 +360,9 @@
       {
         "title": "Klasy typu utility / helper",
         "titleSEO": "Klasy typu utility / helper. Lepiej ich unikać?",
-        "subtitle": "Czyli klasy nieinstancjowalne. Lepiej ich unikać?",
+        "subtitle": "Czyli klasy nieinstancjonowalne. Lepiej ich unikać?",
         "date": "5 maja 2018",
-        "url": "/effective-java/klasy-nieinstancjowalne"
+        "url": "/effective-java/klasy-nieinstancjonowalne"
       },
     
       

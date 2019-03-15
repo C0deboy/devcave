@@ -29,7 +29,7 @@ AbstractC
 
 Niestety psuje to całą hierarchię typów, bo wszystkie klasy, które rozszerzały `B` są zmuszone od teraz implementować `C`, bez względu czy tego chcemy, czy nie.
 
-**Interfejsy są idealnymi mixinami.** Upraszczając, *mixin* jest typem, który klasa może (dodatkowo do swojego podstawowego typu) zaimplementować, dostarczając dodatkową, odseparowaną funkcjonalność. *Mixin* sam w sobie nie może zostać zinstancjowany - jest tylko częścią funkcjonalności innych klas. Dla przykładu, `Comparable` jest mixinem, który deklaruje i dodaje klasie funkcjonalność porównywania i tym samym porządkowania jej instancji.  Klasy abstrakcyjne nie mogą być *mixinami* z tego samego powodu co wcześniej - klasa może rozszerzać tylko jedną klasę.
+**Interfejsy są idealnymi mixinami.** Upraszczając, *mixin* jest typem, który klasa może (dodatkowo do swojego podstawowego typu) zaimplementować, dostarczając dodatkową, odseparowaną funkcjonalność. *Mixin* sam w sobie nie może zostać zinstancjonowany - jest tylko częścią funkcjonalności innych klas. Dla przykładu, `Comparable` jest mixinem, który deklaruje i dodaje klasie funkcjonalność porównywania i tym samym porządkowania jej instancji.  Klasy abstrakcyjne nie mogą być *mixinami* z tego samego powodu co wcześniej - klasa może rozszerzać tylko jedną klasę.
 
 **Interfejsy nie tworzą sztywnych hierarchii, dzięki czemu są bardzo elastyczne**.  Dla przykładu, mamy piosenkarza:
 

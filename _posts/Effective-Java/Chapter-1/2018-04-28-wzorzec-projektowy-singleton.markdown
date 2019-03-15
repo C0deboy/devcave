@@ -22,7 +22,7 @@ Czasem może się zdarzyć, że:
 Wtedy warto zastosować wzorzec projektowy *Singleton*.
 
 # Singleton
-*Singleton* jest to po prostu klasa, która jest instancjowana w systemie tylko jeden raz. Każde użycie takiej klasy odnosi się do tej samej instancji.
+*Singleton* jest to po prostu klasa, która jest instancjonowana w systemie tylko jeden raz. Każde użycie takiej klasy odnosi się do tej samej instancji.
 
 Jest kilka sposobów implementacji *Singletona*.
 

@@ -87,7 +87,7 @@ Takie interfejsy można znaleźć nawet w standardowej bibliotece. Np. `java.io.
 Do przetrzymywania stałych są lepsze opcje:
  - Jeśli są mocno związane tylko z jedną klasą, to powinny występować tylko w niej
  - W przeciwnym wypadku można użyć:
-    - Nieinstancjowalnej klasy *utility*
+    - Nieinstancjonowalnej klasy *utility*
     - Lub Enumów, jeśli jest to bardziej odpowiednie.
 
 A żeby pozbyć się problemu definiowania nazwy klasy razem z nazwą stałej, wystarczy użyć statycznych importów:

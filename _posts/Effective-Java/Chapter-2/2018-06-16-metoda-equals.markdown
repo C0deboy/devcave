@@ -77,7 +77,7 @@ Jest to **kontrakt**, który metoda `equals` musi spełniać.
 {: #problem-z-dziedziczeniem}
 Trzeba się też zastanowić, czy klasy, które rozszerzają inną klasę (również, gdy dodają wartość, która ma znaczenie w metodzie `equals`), powinny móc być równe nadklasom?
 
-Joshua Bloch w swojej książce mówi, że tak — co jest zgodne z zasadą [Liskov substitution]({% post_url /Notatnik-juniora/2017-11-30-zasady-projektowania-kodu %}#l---liskov-substitution-principle). Ponadto mówi, że nie ma sposobu, aby rozszerzyć instancjowalną klasę i dodać do niej wartość zachowując kontrakt `equals`, chyba że, chcemy zrezygnować z zalet obiektowych abstrakcji.
+Joshua Bloch w swojej książce mówi, że tak — co jest zgodne z zasadą [Liskov substitution]({% post_url /Notatnik-juniora/2017-11-30-zasady-projektowania-kodu %}#l---liskov-substitution-principle). Ponadto mówi, że nie ma sposobu, aby rozszerzyć instancjonowalną klasę i dodać do niej wartość zachowując kontrakt `equals`, chyba że, chcemy zrezygnować z zalet obiektowych abstrakcji.
 
 Z drugiej strony, przeciwne głosy idą za tym, że możemy zachować kontrakt `equals` używając sprawdzenia z `getClass` zamiast `instanceof`. Dla przykładu, dla prostej klasy `Point` będzie to wyglądać tak:
 

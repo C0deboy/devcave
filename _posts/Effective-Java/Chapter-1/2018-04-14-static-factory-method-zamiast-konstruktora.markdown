@@ -151,7 +151,7 @@ Mamy możliwość zwrócenia dowolnego podtypu, co ważne - bez konieczności de
 Dzięki temu możemy zdefiniować metodę na interfejsie, która zwróci nam konkretną implementację tego interfejsu.
 
 {: .note}
-Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu `Type` lądowały w nieinstancjowalnej klasie `Types`. Dosyć popularnym przykładem jest `java.util.Collections`. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.
+Przed Java 8 nie było możliwe definiowanie statycznych metod w interfejsach. Wtedy takie metody np. dla interfejsu `Type` lądowały w nieinstancjonowalnej klasie `Types`. Dosyć popularnym przykładem jest `java.util.Collections`. W Java 8+ możemy umieścić wszystkie statyczne fabryki bezpośrednio w interfejsie. I tak też zrobiono w Javie 9 na interfejsach List, Set i Map.
 
 {: .pros}
 Z każdym wywołaniem może być zwrócona inna implementacja

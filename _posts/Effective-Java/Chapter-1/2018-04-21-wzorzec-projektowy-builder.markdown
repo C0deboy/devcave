@@ -156,7 +156,7 @@ Kolejne metody służą do konfigurowania pól w klasie `Goal` (możemy przeprow
 
 **Istnieje też inny fajny sposób, aby wymusić ustawienie wszystkich pól w builderze** - napisałem o tym osobny post [idiotoodporne-api-klasy](https://bulldogjob.pl/news/348-idiotoodporne-api-klasy-czyli-jakie) dla [bulldogjob.pl](https://bulldogjob.pl/).
 
-Stosując wzorzec *builder* możemy zagwarantować, że stworzona zostanie poprawna i kompletna klasa, zachowując czysty i łatwy w użyciu kod. Instancjowanie klasy wygląda wtedy tak:
+Stosując wzorzec *builder* możemy zagwarantować, że stworzona zostanie poprawna i kompletna klasa, zachowując czysty i łatwy w użyciu kod. Instancjonowanie klasy wygląda wtedy tak:
 
 ```java
 Goal goal = new Goal.Builder()
@@ -189,7 +189,7 @@ Goal goal = Goal.builder()
     .build();
 ```
 
-Możemy też uniemożliwić instancjowanie klasy zwykłym konstruktorem dodając go jako prywatny:
+Możemy też uniemożliwić instancjonowanie klasy zwykłym konstruktorem dodając go jako prywatny:
 
 ```java
 private Goal() {

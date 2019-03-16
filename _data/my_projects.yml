@@ -1,6 +1,23 @@
+- section: Rok 2019
+  subtitle: Kolejny rok pracy komercyjnej i innych aktywności, więc juz coraz mniej czasu na własne projekty
+  projects:
+
+    - title: Kindle editor
+      technologies: Kotlin, SpringBoot, WebSocket, Gradle
+      description: Nieco egzotyczna aplikacja webowa do własnego użytku. Dużo rzeczy robię na komputerze, dlatego chciałem wyeliminować chociaż jedną rzecz - pisanie postów na bloga. Chciałem do tego wykorzystać ekran czytnika Kindle, ale nie widziałem gotowego rozwiązania, z którego mógłbym skorzystać. Zbudowałem więc prostą aplikację wykorzystującą WebSocket, do współdzielenia tekstu w dwóch różnych przeglądarkach. Jako serwer aplikacji wykorzystałem RaspberryPi. Działa to tak, że na malince startuje aplikacja w przeglądarce, podpinam klawiaturę i tu bez ekranu korzystam z klawiatury. Każde użycie klawisza skutkuje rozprowadzeniem go do innych przeglądarek z otwartą aplikacją dzięki WebSocket. W Kindle również odpalam tą aplikację w przeglądarcę i widzę wszystko co piszę. Całość ładnie się synchronizuje, a tekst jest również zapisywany do pliku. Obsłużyłem autoscroll, a nawet zaznaczanie tekstu, więc edytowanie go jest całkiem wygodne. Oczywiście występuje lekkie opóźnienie, głównie ze względu na ekran E-Ink, ale nie przeszkadza to aż tak bardzo.
+      img: /img/my-projects/kindle-editor.gif
+      github: https://github.com/C0deboy/kindle-editor
+
 - section: Rok 2018
   subtitle: Praca komercyjna, ale znalazło się trochę czasu na projekty do szuflady ;)
   projects:
+
+    - title: Narzędzie do publikowania postów
+      technologies: Kotlin, Selenium, JCommander, Gradle
+      description: Narzędzie to całkowicie automatyzuje publikowanie postów na tego bloga. Składa się to na zbudowanie bloga za pomocą Jekylla, wrzucenie zmian na GitHub Pages, zrobieniu screenshota nagłówka posta, zapisanie go na pulpicie i otwrzenie dla mnie strony bloga na facebooku, tak bym mógł już tylko dodać link, grafikę i ewentalnie opis posta.
+      img: /img/my-projects/publish-post.gif
+      github: https://github.com/C0deboy/publish-post
+
 
     - title: Scraper statystyk języków programowania
       technologies: Kotlin, Jsoup, Klaxon, Apache Commons, Logback, Junit 5, Mockk, AssertJ, Gradle
@@ -14,6 +31,7 @@
       description: Aplikacja do ustalania swoich celów, którą tworzyłem podczas nauki Angulara. Rozdzieliłem tu całkowicie frontend i backend. Backend ma osobne repozytorium - <a href="https://github.com/C0deboy/stepify-server">stepify-server</a>. Frontend komunikuje się z backendem przez REST api.
       img: /img/my-projects/stepify.gif
       github: https://github.com/C0deboy/stepify
+
 
 - section: Rok 2017
   subtitle: Pierwsze projekty
@@ -64,11 +82,9 @@
       github: https://github.com/C0deboy/devcave
 
 
-
 - section: Początki
   subtitle: Na tych projektach stawiałem pierwsze kroki
   projects:
-
 
     - title: Animacja - ASCII art
       technologies: HTML, CSS, Javascript

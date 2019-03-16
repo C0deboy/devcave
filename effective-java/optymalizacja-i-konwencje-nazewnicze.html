@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem. Pracuję głownie z językami Java i Javascript, ale na blogu nie zabraknie tematów ogólnych ;)">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Optymalizowanie kodu">
+<meta property="og:description" content="Przedwczesna optymalizacja + konwencje nazewnicze w Javie">
+
+<title>Optymalizowanie kodu + konwencje nazewnicze w Javie</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/optymalizacja-i-konwencje-nazewnicze">
+<link rel="shortcut icon" href="/img/logo.ico">
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie">O mnie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Optymalizowanie kodu</h1>
+            
+            <h2 class="post-subtitle">Przedwczesna optymalizacja + konwencje nazewnicze w Javie</h2>
+            
+            <p class="post-meta">
+              
+              16
+              marca
+              
+              2019</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#optymalizacja---robić-czy-nie">Optymalizacja - robić czy nie?</a></li>
+<li class="toc-entry toc-h1"><a href="#konwencje-nazewnicze-w-javie">Konwencje nazewnicze w Javie</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Blosch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 67, 68</i> z rozdziału 9:</p>
+
+<p class="m-0">General Programming</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">Minimize the scope of local variables
+                </a>
+            </li><li>
+                <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">Prefer for-each loops to traditional for loops
+                </a>
+            </li><li>
+                <a href="/effective-java/zasieg-zmiennych-petle-i-biblioteki">Know and use the libraries
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Avoid float and double if exact answers are required
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Prefer primitive types to boxed primitives
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Avoid strings where other types are more appropriate
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Beware the performance of string concatenation
+                </a>
+            </li><li>
+                <a href="/effective-java/wybieraj-wlasciwe-typy">Refer to objects by their interfaces
+                </a>
+            </li><li>
+                <a href="/effective-java/refleksja-i-metody-natywne">Prefer interfaces to reflection
+                </a>
+            </li><li>
+                <a href="/effective-java/refleksja-i-metody-natywne">Use native methods judiciously
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/optymalizacja-i-konwencje-nazewnicze">
+                        <i class="fa-li fa fa-arrow-right"></i>Optimize judiciously
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/optymalizacja-i-konwencje-nazewnicze">
+                        <i class="fa-li fa fa-arrow-right"></i>Adhere to generally accepted naming conventions
+                    </a>
+                </li></ul>
+<hr />
+
+<h1 id="optymalizacja---robić-czy-nie">Optymalizacja - robić czy nie?</h1>
+
+<p>Są co najmniej 3 znane cytaty odnośnie optymalizacji:</p>
+
+<blockquote>
+  <p>More computing sins are committed in the name of efficiency (without necessarily achieving it) than for any other single reason—including blind stupidity.<br />
+—William A. Wulf</p>
+</blockquote>
+
+<blockquote>
+  <p>We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil.<br />
+—Donald E. Knuth</p>
+</blockquote>
+
+<blockquote>
+  <p>We follow two rules in the matter of optimization:
+Rule 1. Don’t do it.<br />
+Rule 2 (for experts only). Don’t do it yet—that is, not until you have a perfectly clear and unoptimized solution.<br />
+—M. A. Jackson</p>
+</blockquote>
+
+<p>Wszystkie 3 cytaty poprzedzają język programowania Java o co najmniej dwie dekady, jednak nadal są aktualne i mówią świętą prawdę o optymalizacji - łatwiej jest nią narobić więcej szkód niż dobra, szczególnie jeśli mowa o przedwczesnej optymalizacji.</p>
+
+<p>Nie warto poświęcać dobrego designu na rzecz wydajności - lepiej jest pisać dobre programy niż szybkie. Jeśli dobry program nie jest wystarczająco wydajny, jego architektura pozwoli go później zoptymalizować. Dobre programy przestrzegają zasady enkapsulacji danych, więc pojedyncze decyzje mogą być zmienione bez wpływu na pozostałą część systemu.</p>
+
+<p>Nie znaczy to też, że powinniśmy ignorować problemy wydajnościowe, dopóki nie skończymy programu. Problemy implementacyjne mogą być naprawione późniejszą optymalizacją, ale wszechobecne wady architektury ograniczające wydajność mogą nie być możliwe do naprawy bez przepisywania całego systemu od nowa.</p>
+
+<p>Najtrudniej wprowadzić zamianę w komponentach, które zawierają interakcje pomiędzy komponentami a światem zewnętrznym np. API czy formaty przesyłania danych. Mogą też narzucić znaczne ograniczenia wydajności, dlatego te części systemy trzeba zaprojektować z największą starannością.</p>
+
+<p>Więc nie możemy całkiem przestać myśleć o optymalizacji. Zawsze trzeba rozważać konsekwencje naszych wyborów np. tworzac typ mutowalny, możemy wymuszać na kliencie wiele zbędnych kopi defensywnych. Podobnie, używając dziedziczenia w publicznej klasie zamiast kompozycji, zszywamy daną klasę z nadklasa na zawsze, co może skutkować ograniczeniami podklasy. Tak samo używając w API typu implementacji zamiast interfejsu, wymuszamy tylko jedną konkretną implementację, mimo to, że w przyszłości mogłaby być napisana bardziej wydajna wersja. Jeśli system jest używany tylko wewnętrznie i możemy całkowicie przebudowywać kod, to nie ma to aż takiego znaczenia, ale po co sobie utrudniać życie?</p>
+
+<p>Na szczęście zazwyczaj dobry design idzie w parze z dobrą wydajnością lub z łatwą możliwością na jej poprawę. Kiedy zaprojektowaliśmy czysty i dobrze ustrukturyzowany kod, to wtedy może być czas na rozważanie optymalizacji, która w dobrze zaprojektowanym systemie jest łatwa do wprowadzenia. Nigdy nie powinniśmy skupiać się na optymalizacji kosztem spaczonego designu.</p>
+
+<p>W określeniu, gdzie powinniśmy skupić naszą uwagę podczas optymalizowania systemu, mogą nam pomóc profilery. Te narzędzia dają nam takie informacje jak np. czas, w jakim każda metoda się wykonuje i jak wiele razy to miało miejsce. Innym narzędziem, o którym warto wspomnieć, jest framework do benchmarków <a href="https://openjdk.java.net/projects/code-tools/jmh/">JMH</a>, którym możemy zmierzyć wydajność poszczególnych kawałków kodu. Warto skorzystać z tego narzędzia, aby porównać zoptymalizowany kod, czy aby na pewno wydajność jest lepsza, czy tylko nam się tak wydaje.</p>
+
+<h1 id="konwencje-nazewnicze-w-javie">Konwencje nazewnicze w Javie</h1>
+
+<p>Ten temat jest dosyć rozwlekle opisany w książce, jednak myślę, że tu nie ma co się rozdrabniać - podam same konkrety.</p>
+
+<p>W Javie (jak i w każdym innym języku) mamy powszechnie uznawane konwencje nazewnicze, których należy się trzymać.</p>
+
+<p>Można powiedzieć, że dzielą się na dwie grupy - typograficzne i gramatyczne.</p>
+
+<p>Nazwy pakietów i modułów powinny być zwięzłe i składać się wyłącznie z małych liter. Zalecane też są opisowe skróty np. <code class="highlighter-rouge">util</code> zamiast <code class="highlighter-rouge">utilities</code> lub akronimy. Nazwa pakietu, który będzie używany poza naszą organizacją, powinna zaczynać się od odwróconej nazwy domeny np. <code class="highlighter-rouge">com.google</code>.</p>
+
+<p>Klasy i interfejsy włączając w to enumy i adnotacje powinny zaczynać się wielką literą i dalej CamelCase. Często dyskusji podlega problem, czy akronimy powinny być całe pisane wielkimi literami, czy nie. Według mnie nie - tylko pierwsza litera powinna być pisana z dużej, szczególnie gdy mamy w nazwie dwa akronimy. Wolałbyś widzieć klasę nazwaną <code class="highlighter-rouge">HTTPURL</code> czy <code class="highlighter-rouge">HttpUrl</code>?</p>
+
+<p>Metody i pola obowiązują te same zasady tyle, że zaczynamy małą literą.</p>
+
+<p>Wyjątkiem od tej zasady są pola stałe (<code class="highlighter-rouge">static final</code> + niemutowalne), które powinny być zapisane dużymi literami, a poszczególne słowa oddzielone podłogą. Stałymi są również wartości enumów.</p>
+
+<p>Zmienne lokalne mają już większą dowolność co do nazwy, ale powinny być opisowe i oczywiście zaczynać się z małej litery.</p>
+
+<p>Nazwy parametru typu składają się z jednej dużej litery. Najczęściej używa się:</p>
+<ul>
+  <li><code class="highlighter-rouge">T</code> dla jakiegoś typu (jeśli jest więcej niż jeden, to kolejno <code class="highlighter-rouge">T</code>, <code class="highlighter-rouge">U</code>, <code class="highlighter-rouge">V</code> lub <code class="highlighter-rouge">T1</code>, <code class="highlighter-rouge">T2</code>, <code class="highlighter-rouge">T3</code>)</li>
+  <li><code class="highlighter-rouge">E</code> dla typu elementu kolekcji</li>
+  <li><code class="highlighter-rouge">K</code> i <code class="highlighter-rouge">V</code> dla typu klucza i wartości mapy</li>
+  <li><code class="highlighter-rouge">X</code> dla typu wyjątku.</li>
+  <li><code class="highlighter-rouge">R</code> dla typu zwracanego przez funkcję</li>
+</ul>
+
+<p>Podsumowując:</p>
+
+<table class="post-table">
+  <thead>
+    <tr>
+      <th>Element</th>
+      <th>Przykład</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pakiet lub moduł</td>
+      <td>org.junit.jupiter.api, com.google.common.collect</td>
+    </tr>
+    <tr>
+      <td>Klasa lub Interfejs</td>
+      <td>Stream, FutureTask, LinkedHashMap, HttpClient</td>
+    </tr>
+    <tr>
+      <td>Metoda lub pole</td>
+      <td>remove, groupingBy, getCrc</td>
+    </tr>
+    <tr>
+      <td>Stała</td>
+      <td>PI, MIN_VALUE, NEGATIVE_INFINITY</td>
+    </tr>
+    <tr>
+      <td>Zmienna lokalna</td>
+      <td>i, denom, houseNum</td>
+    </tr>
+    <tr>
+      <td>Parametr typu</td>
+      <td>T, E, K, V, X, R, U, V, T1, T2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Odnośnie konwencji gramatycznych, które nie są już tak bardzo konieczne jak te typograficzne, to zazwyczaj nazwy klas instancjonowalnych są rzeczownikiem w liczbie pojedynczej jak np. <code class="highlighter-rouge">Thread</code>, <code class="highlighter-rouge">PriorityQueue</code> czy <code class="highlighter-rouge">ChessPiece</code>. Z kolei nazwy nieinstancjonowalnych klasy typu utility często są w liczbie mnogiej np. <code class="highlighter-rouge">Collectors</code> czy <code class="highlighter-rouge">Collections</code>. Interfejsy zazwyczaj nazywane są tak jak klasy np. <code class="highlighter-rouge">Collection</code> czy <code class="highlighter-rouge">Comparator</code>, ale też z końcówkami <code class="highlighter-rouge">able</code> lub <code class="highlighter-rouge">ible</code> np. <code class="highlighter-rouge">Runnable</code>, <code class="highlighter-rouge">Iterable</code> czy <code class="highlighter-rouge">Accessible</code>.</p>
+
+<p>Metody, które:</p>
+<ul>
+  <li>wykonują jakieś akcje standardowo są czasownikami np. <code class="highlighter-rouge">append</code> lub <code class="highlighter-rouge">drawImage</code></li>
+  <li>zwracają <code class="highlighter-rouge">boolean</code> zazwyczaj zaczynają się od <code class="highlighter-rouge">is</code> lub <code class="highlighter-rouge">has</code> + rzeczownik np. <code class="highlighter-rouge">isDigit</code>, <code class="highlighter-rouge">isProbablePrime</code>, <code class="highlighter-rouge">isEmpty</code>, <code class="highlighter-rouge">isEnabled</code> lub <code class="highlighter-rouge">hasSiblings</code></li>
+  <li>zwracają jakąś daną zazwyczaj zaczynają się od <code class="highlighter-rouge">get</code> lub bezpośrednio nazwa tej danej np. <code class="highlighter-rouge">size</code>, <code class="highlighter-rouge">hashCode</code> lub <code class="highlighter-rouge">getTime</code>.</li>
+  <li>konwertują obiekt w inny zazwyczaj nazywają się <code class="highlighter-rouge">toType</code> np. <code class="highlighter-rouge">toString</code> lub <code class="highlighter-rouge">toArray</code>.</li>
+  <li>zwracają inny widok zazwyczaj nazywają sie <code class="highlighter-rouge">asType</code> np. <code class="highlighter-rouge">asList</code>.</li>
+  <li>są statycznymi fabrykami zazwyczaj nazywają się <code class="highlighter-rouge">from</code>, <code class="highlighter-rouge">of</code>, <code class="highlighter-rouge">valueOf</code>, <code class="highlighter-rouge">instance</code>, <code class="highlighter-rouge">getInstance</code>, <code class="highlighter-rouge">newInstance</code>, <code class="highlighter-rouge">getType</code> lub <code class="highlighter-rouge">newType</code>.</li>
+</ul>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/refleksja-i-metody-natywne"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Refleksja i metody natywne"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/optymalizacja-i-konwencje-nazewnicze";
+    this.page.identifier = "/effective-java/optymalizacja-i-konwencje-nazewnicze";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90973428-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+
+</html>

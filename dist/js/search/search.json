@@ -669,6 +669,15 @@
         "subtitle": "Użycie interfejsów z kodem refleksji i czy metody natywne to zawsze dobry pomysł?",
         "date": "9 marca 2019",
         "url": "/effective-java/refleksja-i-metody-natywne"
+      },
+    
+      
+      {
+        "title": "Optymalizowanie kodu",
+        "titleSEO": "Optymalizowanie kodu + konwencje nazewnicze w Javie",
+        "subtitle": "Przedwczesna optymalizacja + konwencje nazewnicze w Javie",
+        "date": "16 marca 2019",
+        "url": "/effective-java/optymalizacja-i-konwencje-nazewnicze"
       }
     
   

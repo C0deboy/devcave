@@ -97,7 +97,7 @@
 
 
 
-<h2>12<small> - Ilość wszystkich projektów</small></h2>
+<h2>14<small> - Ilość wszystkich projektów</small></h2>
 
 <div class="row">
     <div class="col-lg-12">
@@ -110,9 +110,66 @@
 
     <div class="row">
         <div class="col-lg-12">
+            <h1 class="page-header">Rok 2019
+                <small>Kolejny rok pracy komercyjnej i innych aktywności, więc juz coraz mniej czasu na własne projekty</small>
+            </h1>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="kindle-editor">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/publish-post.png" alt="Kindle editor demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Kindle editor</h3>
+            <hr>
+            <small>Kotlin, SpringBoot, WebSocket, Gradle</small>
+            <p>Nieco egzotyczna aplikacja webowa do własnego użytku. Dużo rzeczy robię na komputerze, dlatego chciałem chociaż jedną rzecz wyeliminować - pisanie bloga. Chciałem wykorzystać ekran czytnika Kindle do pisania postów, ale nie widziałem gotowego rozwiązania, z którego mógłbym skorzystać, więc stworzyłem je sobie sam ;). Zbudowałem prostą aplikację wykorzystującą WebSocket, do współdzielenia tekstu w dwóch różnych przeglądarkach. Jako serwer aplikacji wykorzystałem RaspberryPi, jako że go ostatnio dostałem. Działa to tak, że na malince startuje aplikacja w przeglądarce, podpinam klawiaturę i tu bez ekranu korzystam z klawiatury. Każde użycie klawisza skutkuje rozprowadzeniem go do innych przeglądarek z otwartą aplikacją dzięki WebSocket. W Kindle również odpalam tą aplikację w przeglądarcę i widzę wszystko co piszę. Całość ładnie się synchronizuje, a tekst jest również zapisywany do pliku. Obsłużyłem autoscroll, a nawet zaznaczanie tekstu, więc edytowanie go jest całkiem wygodne. Oczywiście występuje lekkie opóźnienie, głównie ze względu na ekran E-Ink, ale nie przeszkadza to aż tak bardzo.</p>
+
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/kindle-editor" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="col-lg-12">
             <h1 class="page-header">Rok 2018
                 <small>Praca komercyjna, ale znalazło się trochę czasu na projekty do szuflady ;)</small>
             </h1>
+        </div>
+    </div>
+    
+    <div class="project box-effect row" id="narzedzie-do-publikowania-postow">
+        <div class="col-md-7">
+            
+
+            <img class="img-fluid box-effect project-preview gif" src="/img/my-projects/publish-post.png" alt="Narzędzie do publikowania postów demo">
+            
+        </div>
+        <div class="col-md-5 project-description">
+            <h3>Narzędzie do publikowania postów</h3>
+            <hr>
+            <small>Kotlin, Selenium, JCommander, Gradle</small>
+            <p>Narzędzie to całkowicie automatyzuje publikowanie postów dla tego bloga. Składa się to na zbudowanie bloga za pomocą Jekylla, zacomittowanie zmian na GitHub Pages, zrobieniu screenshota nagłówka posta, zapisanie go na pulpicie i otwrzenie dla mnie strony bloga na facebooku, tak bym mógł już tylko dodać link, grafikę i ewentalnie opis posta.</p>
+
+            
+            
+            <a class="project-btn" href="https://github.com/C0deboy/publish-post" target="_blank">Github
+                <span class="fa-stack fa-2x">
+                <i class="fa project-btn-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
         </div>
     </div>
     

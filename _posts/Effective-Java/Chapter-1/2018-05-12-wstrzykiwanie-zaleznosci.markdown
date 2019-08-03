@@ -110,7 +110,7 @@ public class FooFormatter {
 }
 ```
 
-) na 3 sposoby. Dzięki adnotacji {% code java %}@Autowired{% endcode %} obiekt `fooFormatter` będzie automatycznie wstrzykiwany przez Springa i od razu dostępny do użycia. Nie ma potrzeby ręcznego podawania zależności.
+) na 3 sposoby.
 
 ### Wstrzykiwanie bezpośrednio w pole
 
@@ -127,7 +127,9 @@ public class FooService {
 
 }
 ```
-Jest to najczęściej nadużywana opcja, szczególnie przez początkujących i nie jest zalecaną praktyką.
+Dzięki adnotacji {% code java %}@Autowired{% endcode %} obiekt `fooFormatter` będzie automatycznie wstrzykiwany przez Springa i od razu dostępny do użycia. Nie ma potrzeby ręcznego podawania zależności.
+
+**Jest to najczęściej nadużywana opcja, szczególnie przez początkujących i nie jest zalecaną praktyką.**
 
 {: .cons}
 Minusy:

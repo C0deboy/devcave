@@ -9,10 +9,10 @@
 <meta name="author" content="Codeboy">
 
 <meta property="fb:pages" content="2221389098088691">
-<meta property="og:title" content="Vargargi, nulle i Optionale">
+<meta property="og:title" content="Varargi, nulle i Optionale">
 <meta property="og:description" content="Kolejna porcja porad na temat projektowania metod">
 
-<title>Vargargi, nulle i Optionale</title>
+<title>Varargi, nulle i Optionale</title>
 
 <link rel="canonical" href="https://devcave.pl/effective-java/vargargi-nulle-i-optionale">
 <link rel="shortcut icon" href="/img/logo.ico">
@@ -97,7 +97,7 @@
         <header class="post-header">
           <div class="post-heading">
 
-            <h1 class="post-title">Vargargi, nulle i Optionale</h1>
+            <h1 class="post-title">Varargi, nulle i Optionale</h1>
             
             <h2 class="post-subtitle">Kolejna porcja porad na temat projektowania metod</h2>
             
@@ -127,7 +127,7 @@
         <nav class="table-of-contents">
           <p class="m-0">Spis treści:</p>
           <ul class="section-nav">
-<li class="toc-entry toc-h1"><a href="#używanie-vararg">Używanie vararg</a></li>
+<li class="toc-entry toc-h1"><a href="#używanie-varargs">Używanie varargs</a></li>
 <li class="toc-entry toc-h1"><a href="#zwracaj-puste-kolekcje-nie-nulle">Zwracaj puste kolekcje, nie nulle</a></li>
 <li class="toc-entry toc-h1"><a href="#zwracanie-optional">Zwracanie Optional</a></li>
 <li class="toc-entry toc-h1"><a href="#dokumentacja">Dokumentacja</a></li>
@@ -176,12 +176,12 @@
                 </li></ul>
 <hr />
 
-<h1 id="używanie-vararg">Używanie vararg</h1>
+<h1 id="używanie-varargs">Używanie varargs</h1>
 
-<p>Co to są varargs? Jest to po prostu zmienna ilość parametrów zadeklarowana jako jeden argument. Można to porównać do tablicy - może przechowaywać zero lub więcej argumentów. 
+<p>Co to są <em>varargs</em>? Jest to po prostu zmienna ilość parametrów zadeklarowana jako jeden argument. Można to porównać do tablicy - może przechowywać zero lub więcej argumentów. 
 Pod spodem działa to tak że tworzona jest tablica wielkości liczby podanych elementów, a następnie te wartości są w niej umieszczane i do metody przekazywana jest tablica.</p>
 
-<p>Przykładowe proste użycie vargarg:</p>
+<p>Przykładowe proste użycie <em>varargs</em>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simple use of varargs</span>
 <span class="kd">static</span> <span class="kt">int</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">int</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -191,9 +191,9 @@ Pod spodem działa to tak że tworzona jest tablica wielkości liczby podanych e
     <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
-<p>Vargarg deklaruje się za pomocą <code class="highlighter-rouge">...</code> dodanym do typu. I np. <code class="highlighter-rouge">sum(1, 2, 3)</code> zwróci 6, a <code class="highlighter-rouge">sum()</code> zero. Myślę, że działanie jest dosyć jasne.</p>
+<p><em>Varargs</em> deklaruje się za pomocą <code class="highlighter-rouge">...</code> dodanym do typu. I np. <code class="highlighter-rouge">sum(1, 2, 3)</code> zwróci 6, a <code class="highlighter-rouge">sum()</code> zero. Myślę, że działanie jest dosyć jasne.</p>
 
-<p>Varargs nie nadają się jednak w przypadku, gdy chcemy mieć przynajmniej jeden 
+<p><em>Varargs</em> nie nadają się jednak w przypadku, gdy chcemy mieć przynajmniej jeden 
 argument, np. chcąc policzyć minimum. Musielibyśmy wtedy dodać specjalne sprawdzenie:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The WRONG way to use varargs to pass one or more arguments!</span>
@@ -214,7 +214,7 @@ argument, np. chcąc policzyć minimum. Musielibyśmy wtedy dodać specjalne spr
   <li>jest brzydkie i nadmiarowe.</li>
 </ul>
 
-<p>Jest na to dużo lepszy sposób - zadeklarować metodę przyjmującą pierwszy argument, a jako drugi argument podać varargs:</p>
+<p>Jest na to dużo lepszy sposób - zadeklarować metodę przyjmującą pierwszy argument, a jako drugi argument podać <em>varargs</em>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The right way to use varargs to pass one or more arguments</span>
 <span class="kd">static</span> <span class="kt">int</span> <span class="nf">min</span><span class="o">(</span><span class="kt">int</span> <span class="n">firstArg</span><span class="o">,</span> <span class="kt">int</span><span class="o">...</span> <span class="n">remainingArgs</span><span class="o">)</span> <span class="o">{</span>

@@ -1,7 +1,7 @@
 ---
 layout:     post
-titleSEO:   "Vargargi, nulle i Optionale"
-title:      "Vargargi, nulle i Optionale"
+titleSEO:   "Varargi, nulle i Optionale"
+title:      "Varargi, nulle i Optionale"
 subtitle:   "Kolejna porcja porad na temat projektowania metod"
 date:       2019-02-16 8:00:00
 author:     "Codeboy"
@@ -15,12 +15,12 @@ item:       53, 54, 55, 56
 
 {% include effective-java/series-info.html %}
 
-# Używanie vararg
+# Używanie varargs
 
-Co to są varargs? Jest to po prostu zmienna ilość parametrów zadeklarowana jako jeden argument. Można to porównać do tablicy - może przechowaywać zero lub więcej argumentów. 
+Co to są *varargs*? Jest to po prostu zmienna ilość parametrów zadeklarowana jako jeden argument. Można to porównać do tablicy - może przechowywać zero lub więcej argumentów. 
 Pod spodem działa to tak że tworzona jest tablica wielkości liczby podanych elementów, a następnie te wartości są w niej umieszczane i do metody przekazywana jest tablica.
 
-Przykładowe proste użycie vargarg:
+Przykładowe proste użycie *varargs*:
 
 ```java
 // Simple use of varargs
@@ -31,9 +31,9 @@ static int sum(int... args) {
     return sum;
 }
 ```
-Vargarg deklaruje się za pomocą `...` dodanym do typu. I np. `sum(1, 2, 3)` zwróci 6, a `sum()` zero. Myślę, że działanie jest dosyć jasne.
+*Varargs* deklaruje się za pomocą `...` dodanym do typu. I np. `sum(1, 2, 3)` zwróci 6, a `sum()` zero. Myślę, że działanie jest dosyć jasne.
 
-Varargs nie nadają się jednak w przypadku, gdy chcemy mieć przynajmniej jeden 
+*Varargs* nie nadają się jednak w przypadku, gdy chcemy mieć przynajmniej jeden 
 argument, np. chcąc policzyć minimum. Musielibyśmy wtedy dodać specjalne sprawdzenie:
 
 ```java
@@ -53,7 +53,7 @@ Jednak to rozwiązanie nie jest dobre:
 - sprawdzenie odbywa się dopiero w runtime, więc nie widać błedu podczas pisania kodu
 - jest brzydkie i nadmiarowe.
 
-Jest na to dużo lepszy sposób - zadeklarować metodę przyjmującą pierwszy argument, a jako drugi argument podać varargs:
+Jest na to dużo lepszy sposób - zadeklarować metodę przyjmującą pierwszy argument, a jako drugi argument podać *varargs*:
 
 ```java
 // The right way to use varargs to pass one or more arguments

@@ -23,7 +23,7 @@ Spróbowałem chyba każdą możliwą kombinację aria-live, describedby, labele
 Screen readery (testowałem NVDA i ChromeVOX) zachowują się co najmniej dziwnie. Jeśli "tabujemy" od góry do elementu z tooltipem to czyta co innego, jak od dołu (shift+tab) - co innego. I właśnie od tyłu zwykłe słowo z tooltipem jest już prawidłowo interpretowane.
 
 Dwa takie same elementy z identycznymi właściwościami? O nie. Dla screen readerów to całkiem coś innego. Przykład?
-![Dwa elementy span na stronie](/img/dwa-elementy.png)
+![Dwa elementy span na stronie](/img/posts/dwa-elementy.png)
 
 Oba (Jak to działa?) wygenerowane za pomocą tej samej funkcji. Ale jak są odczytywane na mojej stronie? Pierwszy to "Jak to działa - nagłówek". A drugi? "Jak to działa - na podstawie twoich odpowiedzi..." czyli poprawnie... FUCK LOGIC.
 

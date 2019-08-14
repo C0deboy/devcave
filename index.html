@@ -10,7 +10,7 @@ description: "{ Blog programistyczny }"
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="site-heading">
           <div class="inline">
-            <img class="header-logo" src="/img/devcave.png" alt="Logo"/>
+            <img class="header-logo" src="/img/devcave/devcave.png" alt="Logo"/>
           </div>
           <div class="inline">
             <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
@@ -33,7 +33,7 @@ description: "{ Blog programistyczny }"
         {% if post.for %}
         <div class="post-partner">
           <p class="m-0">Post dla:</p>
-          <a href="https://{{ post.for }}.pl"><img src="/img/{{ post.for }}.png" alt="{{ post.for }} logo"/></a>
+          <a href="https://{{ post.for }}.pl"><img src="/img/coop/{{ post.for }}.png" alt="{{ post.for }} logo"/></a>
         </div>
         {% endif %}
         <a href="{{ post.url }}">

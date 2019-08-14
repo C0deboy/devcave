@@ -1,12 +1,12 @@
 ---
 layout:     none
-titleSEO:	  "Idiotoodporne API klasy - czyli API, które prowadzi klienta za rękę"
+titleSEO:	"Idiotoodporne API klasy - czyli API, które prowadzi klienta za rękę"
 title:      "Idiotoodporne API klasy"
 subtitle:   "Czyli API, które prowadzi klienta za rękę"
 date:       2018-04-21 13:00:00
 author:     "Codeboy"
 category:   Notatnik-Juniora
-tags:	      Notatnik-Juniora Dobre-praktyki Java
+tags:	    Notatnik-Juniora Dobre-praktyki Java
 for:        bulldogjob
 ---
 

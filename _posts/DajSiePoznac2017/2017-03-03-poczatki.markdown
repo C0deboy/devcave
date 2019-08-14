@@ -25,5 +25,5 @@ Co bardzo pozytywnie mnie zaskoczyło, to ilość wejść, zarówno w wątki na 
 
 Tak więc, polecam wszystkim dzielenie się projektem, zanim dopniemy wszystko na ostatni guzik. Niesie to ze sobą same pozytywy, jednak należy podejść do tego z dystansem. Nie powinniśmy też uważać się za alfę i omegę, bo zostawimy po sobie złe wrażenie i nikt nie będzie chciał nam pomóc. Gdy będziemy przyjaźni, skorzy do współpracy i będziemy wyciągać wnioski z każdej konstruktywnej krytyki, ludzie będą chętniej nam pomagać. Można trafić też na typowych hejterów i buców, jednak dosyć łatwo to rozróżniać. Wszystkie takie odpowiedzi należy ignorować i nawet nie wdawać się w dyskusję ;).
 
-![Wychillowany Garfield](/img/garfield.png)
+![Wychillowany Garfield](/img/posts/garfield.png)
 

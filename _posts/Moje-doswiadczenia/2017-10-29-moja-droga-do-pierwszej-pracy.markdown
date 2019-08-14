@@ -25,7 +25,7 @@ I tak na początku pomijając jakieś śmieszne stronki na ocenę do szkoły, mo
 
 Gdzieś w między czasie wygrałem konkurs świąteczny (100zł na książkę :D) zajmując 1 miejsce z 72 głosami (drugie miało 35), którego celem było wykonanie animacji znaków ASCII w dowolnej technologii zorganizowany przez [Forum Pasja Informatyki](https://forum.pasja-informatyki.pl/). [Animacja](/moje-projekty/#animacja-ascii-art) w HTML, CSS, Javascript wyglądała tak:
 
-![Animacja świąteczna](/img/swieta-asci-art.gif)
+![Animacja świąteczna](/img/my-projects/swieta-asci-art.gif)
 
 Dało mi to sporo satysfakcji :D
 

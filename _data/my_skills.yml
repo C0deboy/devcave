@@ -1,46 +1,50 @@
 
 - section: Języki programowania
   skills:
-    - skill: JavaScript, ES6
-      grade: '75%'
-      color: '#ffe915'
-
     - skill: Java
-      grade: 85%
+      grade: 90%
       color: '#ff5123'
 
+    - skill: JavaScript
+      grade: 80%
+      color: '#f7e018'
+
     - skill: Kotlin
-      grade: 40%
+      grade: 60%
       color: '#7a70e3'
+
+    - skill: Scala
+      grade: 15%
+      color: '#dc322f'
+
+    - skill: Python
+      grade: 20%
+      color: '#37709f'
 
 - section: Technologie Javowe
   skills:
     - skill: Spring
-      grade: 60%
+      grade: 80%
       color: '#6db33f'
 
     - skill: Hibernate
       grade: 50%
       color: '#bcae79'
 
-    - skill: JSP
+    - skill: Lombok
       grade: 70%
       color: '#20b4ff'
-
-    - skill: Servlets
-      grade: 40%
-      color: '#ff425d'
 
     - skill: JUnit
       grade: 70%
       color: '#dc524a'
 
     - skill: Mockito
-      grade: 50%
+      grade: 70%
       color: '#1ca571'
 
     - skill: AssertJ
-      grade: 50%
+      grade: 70%
       color: '#ecd9a6'
 
 - section: Technologie webowe
@@ -54,7 +58,7 @@
       color: '#1c92ff'
 
     - skill: jQuery
-      grade: 60%
+      grade: 50%
       color: '#ff4059'
 
     - skill: Bootstrap
@@ -79,10 +83,6 @@
       grade: 80%
       color: '#ae4239'
 
-    - skill: npm
-      grade: 90%
-      color: '#5bae5e'
-
     - skill: ESLint
       grade: 90%
       color: '#357bae'
@@ -106,7 +106,7 @@
 - section: IDE
   skills:
     - skill: Eclipse
-      grade: 50%
+      grade: 40%
       color: '#593a94'
 
     - skill: Intelij

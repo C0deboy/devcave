@@ -17,6 +17,7 @@ Trochę minęło czasu od ostatniego postu. Związane to było z pójściem do m
 Szykuję też nową regularną serię na bloga, więc teraz wpisy będą częściej, ale wszystko po kolei.
 
 # Pierwsza praca
+
 ## Pierwszy dzień
 Pierwsze kilka dni to praktycznie same formalności, wprowadzenie do procesów firmy, oprowadzenie po firmie, poznawanie osób itd.
 
@@ -27,29 +28,30 @@ Więc tak jak wspomniałem - nie zostałem rzucony od razu na głęboką wodę, 
 
 - Odświeżenie wiedzy na temat Javy i dobrych praktyk <br>
 mini wykłady + do napisania aplikacja CRUD. Trzeba było to zrobić w czystej JavieEE, bez żadnych framworków. Miało to też na celu poznanie jakie problemy rozwiązują frameworki takie jak Spring.
-- Poznawanie oprogramowania do *Product Lifecycle Management*, którym firma głównie się zajmuje, a następnie 2 różne *case study* z tego tematu
+- Poznawanie dużego narzędzia do *Product Lifecycle Management*, który ma spory udział w firmie, a następnie 2 różne *case study* z tego tematu
 - Umiejętności miękkie
 
-itp. We wszystkich szkoleniach był też kładziony nacisk na kontakt z klientem. Więc wykładowcy przybierali postać klienta, z którym trzeba było się kontaktować, demonstrować i w końcu oddawać tworzony przez nas produkt. Wszystko w języku angielskim, bo wszyscy klienci firmy to klienci zagraniczni.
+itp. We wszystkich szkoleniach był też kładziony nacisk na kontakt z klientem. Więc wykładowcy przybierali postać klienta, z którym trzeba było się kontaktować, demonstrować i w końcu oddawać tworzony przez nas produkt. Wszystko w języku angielskim, bo większość klientów firmy to klienci zagraniczni.
 
 ## Pierwszy projekt
 
-Po szkoleniu przyszedł czas na pierwszy projekt, jednak nie był to jeszcze projekt zewnętrzny, czyli dla jakiegoś klienta firmy. Był to projekt wewnętrzny, a mianowicie narzędzie do ułatwienia pracy testerów w naszej firmie. Miało ono na celu zautomatyzowanie części ich żmudnej i powtarzalnej pracy. Robiłem to razem z tą osobą, o której wspominałem wcześniej. Dostaliśmy na to ponad miesiąc czasu. Narzędzie jest już praktycznie skończone i oddane w ręce testerów. Jak na razie jest pozytywny feedback :)
+Po szkoleniu przyszedł czas na pierwszy projekt, jednak nie był to jeszcze projekt zewnętrzny, czyli dla jakiegoś klienta firmy. Był to projekt wewnętrzny, a mianowicie narzędzie do ułatwienia pracy testerów w naszej firmie. Miało ono na celu zautomatyzowanie części ich żmudnej i powtarzalnej pracy. Robiłem to razem z tą osobą, o której wspominałem wcześniej. Dostaliśmy na to ponad miesiąc czasu. Narzędzie jest już praktycznie skończone i oddane w ręce testerów. Bardzo przyjemnie mi się nad tym narzędziem pracowało i jestem zadowolony z efektów. 
 
-Bardzo przyjemnie mi się nad tym narzędziem pracowało i jestem zadowolony z efektów. Przydzielono mi już zewnętrzny projekt, gdzie wykorzystuje się narzędzie do *Product Lifecycle Management* o którym wcześniej wspominałem. Jest to naprawdę wielka "kobyła" :D Praca z tym już nie będzie pewnie tak przyjemna, jak podczas tworzenia od zera własnego narzędzia. Mniej więcej od połowy kwietnia tym się będę zajmował.
-
+Następnie dostałem już zewnętrzny projekt, gdzie wykorzystuje się narzędzie do wcześniej wspomnianego *Product Lifecycle Management*. Jest to tak jakby gotowy produkt, który się customizuję pod danego klienta. Praca z tym już nie będzie pewnie tak przyjemna, jak podczas tworzenia od zera narzędzia czy aplikacji, ale nadal będzie to dla mnie spore doświadczenie.
 
 ## Ogólne wrażenia
 
-Jestem całkiem zadowolony z mojej pracy. Jest miła i luźna atmosfera. Przyjemnie się pracuje. 
+Jestem całkiem zadowolony z mojej nowej pracy. Jest miła i luźna atmosfera. Przyjemnie się pracuje. 
 
 Nic nie jest wymagane na sztywno. Nie ma wymogu przychodzenia np. równo o 8 i wychodzenia o 17 z przerwą o danej godzinie. Wszystko jest płynne. Jest też możliwość pracy zdalnej z której czasem korzystam. 
 
-W firmie jako budynku też jest całkiem miło. W pełni wyposażona kuchnia z pyszną kawą, gaming room, piłkarzyki i te sprawy. Tłuste czwartki (słodkie bułki dla każdego co czwartek :D) i często inne smakołyki na różne okazje. 
+W firmie jako budynku też jest całkiem miło. W pełni wyposażona kuchnia z pyszną kawą, gaming room, piłkarzyki i te sprawy. 
 
+Tłuste czwartki (słodkie bułki dla każdego :D) i imprezy integracyjne też są fajnym dodatkiem ;)
 
 ### Dylemat jeśli chodzi o studia
-Jak myślę o studiach, to się nawet cieszę, że się nie dostałem tam gdzie chciałem, bo skutkowało to pójściem do pracy i jeśli mam sobie porównać to co mam teraz do zakuwania matmy czy jakichś innych zbędnych rzeczy (wiadomo - nie wszystko), to za każdym razem wybrałbym tą pracę :D. Chociaż cały czas myślę o studiach - bo może się przyda ten papier… z drugiej strony wydaje się to całkiem zbędne, a programistycznej wiedzy tyle co kot napłakał (przynajmniej z takimi opiniami się spotykam). I taki mam z tym mały dylemat. Z jednej strony pewnie dałbym radę zrobić studia zaocznie, ale jak sobie pomyślę, że mam za to jeszcze płacić to mi się odechciewa. No ale chyba innego wyjścia nie ma jeśli już, bo zrezygnowanie z pracy i studia dzienne raczej nie wchodzą w grę. Może ktoś się podzieli jakimiś przemyśleniami na ten temat? ;)
+
+Jak myślę o studiach, to się nawet cieszę, że się nie dostałem tam gdzie chciałem, bo skutkowało to pójściem do pracy i jeśli mam sobie porównać to co mam teraz do zakuwania matmy czy jakichś zbędnych rzeczy (wiadomo - nie wszystko), to za każdym razem wybrałbym tą pracę :D. Chociaż cały czas myślę o studiach - bo może się przyda ten papier… z drugiej strony wydaje się to całkiem zbędne, a programistycznej wiedzy tyle co kot napłakał (przynajmniej z takimi opiniami się spotykam). I taki mam z tym mały dylemat. Z jednej strony pewnie dałbym radę zrobić studia zaocznie, ale jak sobie pomyślę, że mam za to jeszcze płacić to mi się odechciewa. No ale chyba innego wyjścia nie ma jeśli już, bo zrezygnowanie z pracy i studia dzienne nie wchodzą w grę.
 
 # Nowa seria
 

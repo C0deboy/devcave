@@ -410,7 +410,7 @@ img::-moz-selection {
     border-radius: 3px;
     text-align: right;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 0.9em;
     padding: 0!important;
 
     span {
@@ -423,7 +423,7 @@ img::-moz-selection {
 .skillbar-title {
 
     float: left;
-    width: 130px;
+    width: 140px;
     padding: 0 20px;
     text-align: center;
     filter: brightness(95%);
@@ -432,6 +432,7 @@ img::-moz-selection {
     background: inherit;
     border-bottom-left-radius: .25em;
     border-top-left-radius: .25em;
+    text-shadow: black 1px 1px 1px;
 }
 
 .skillbar-progress {

@@ -86,6 +86,12 @@ hr.small {
     border-top: 4px solid #dfdfdf;
 }
 
+@media (max-width: 768px) {
+    ul {
+        padding-left: 20px;
+    }
+}
+
 table.table-bordered,
 table.table-bordered > thead > tr > th,
 table.table-bordered > tbody > tr > td {
@@ -469,12 +475,6 @@ img::-moz-selection {
 
         .post-title {
             display: inline-block;
-        }
-    }
-
-    @media (max-width: 575px) {
-        ul {
-            padding-left: 20px;
         }
     }
 }

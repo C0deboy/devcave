@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -171,20 +169,20 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Raw collection type - don't do this!</span>
   
 <span class="c1">// My stamp collection. Contains only Stamp instances.  </span>
-<span class="kd">private</span> <span class="kd">final</span>  <span class="n">Collection</span>  <span class="n">stamps</span> <span class="o">=</span> <span class="o">...</span> <span class="o">;</span>
+<span class="kd">private</span> <span class="kd">final</span>  <span class="nc">Collection</span>  <span class="n">stamps</span> <span class="o">=</span> <span class="o">...</span> <span class="o">;</span>
 </code></pre></div></div>
 
 <p>Kolekcja służy do przechowywania instancji klasy <code class="highlighter-rouge">Stamp</code>. Jeśli gdzieś po drodze wpadnie tam instancja klasy <code class="highlighter-rouge">Coin</code>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Erroneous insertion of coin into stamp collection</span>
-<span class="n">stamps</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Coin</span><span class="o">(</span> <span class="o">...</span> <span class="o">));</span> <span class="c1">// Emits "unchecked call" warning</span>
+<span class="n">stamps</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Coin</span><span class="o">(</span> <span class="o">...</span> <span class="o">));</span> <span class="c1">// Emits "unchecked call" warning</span>
 </code></pre></div></div>
 
 <p>to skompiluje się to bez żadnego błedu. Błąd pojawi się dopiero wtedy, gdy wystąpi próba wyciągnięcia instancji <code class="highlighter-rouge">Coin</code> z kolekcji:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Raw iterator type - don't do this! </span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span>  <span class="n">i</span> <span class="o">=</span> <span class="n">stamps</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
-    <span class="n">Stamp</span> <span class="n">stamp</span> <span class="o">=</span> <span class="o">(</span><span class="n">Stamp</span><span class="o">)</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span> <span class="c1">// Throws ClassCastException</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Iterator</span>  <span class="n">i</span> <span class="o">=</span> <span class="n">stamps</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Stamp</span> <span class="n">stamp</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Stamp</span><span class="o">)</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span> <span class="c1">// Throws ClassCastException</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -193,7 +191,7 @@
 <p>Używając parametryzowanego typu, jasno to precyzujemy i kompilator jest w stanie wykryć taki błąd:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Parameterized collection type - typesafe</span>
-<span class="kd">private</span> <span class="kd">final</span>  <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Stamp</span><span class="o">&gt;</span>  <span class="n">stamps</span> <span class="o">=</span> <span class="o">...</span> <span class="o">;</span>
+<span class="kd">private</span> <span class="kd">final</span>  <span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">Stamp</span><span class="o">&gt;</span>  <span class="n">stamps</span> <span class="o">=</span> <span class="o">...</span> <span class="o">;</span>
 </code></pre></div></div>
 
 <p>Ta klasa skompiluje się tylko wtedy, kiedy typy będą się zgadzać. W innym wypadku dostaniemy komunikat:</p>
@@ -215,9 +213,9 @@ c.add(new Coin());
 <p>Złe użycie z gołymi typami:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Use of raw type for unknown element type - don't do this!</span>
-<span class="kd">static</span> <span class="kt">int</span> <span class="nf">numElementsInCommon</span><span class="o">(</span><span class="n">Set</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">numElementsInCommon</span><span class="o">(</span><span class="nc">Set</span> <span class="n">s1</span><span class="o">,</span> <span class="nc">Set</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Object</span> <span class="n">o1</span> <span class="o">:</span> <span class="n">s1</span><span class="o">)</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Object</span> <span class="n">o1</span> <span class="o">:</span> <span class="n">s1</span><span class="o">)</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">s2</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o1</span><span class="o">))</span>
             <span class="n">result</span><span class="o">++;</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
@@ -227,7 +225,7 @@ c.add(new Coin());
 <p>Dobre użycie z <em>unbounded wildcard type</em>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Uses unbounded wildcard type - typesafe and flexible </span>
-<span class="kd">static</span> <span class="kt">int</span> <span class="nf">numElementsInCommon</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">numElementsInCommon</span><span class="o">(</span><span class="nc">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="nc">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Różnica między <code class="highlighter-rouge">Set&lt;?&gt;</code> i <code class="highlighter-rouge">Set</code> jest taka, że ten pierwszy jest <em>type safe</em>. Jasno deklarujemy, że nie obchodzi nas typ i że będziemy używać tylko metod, które od niego nie zależą. W konsekwencji nie możemy wrzucać żadnych elementów do kolekcji - w przeciwieństwie do gołego typu, który pozwala na wrzucenie czegokolwiek.</p>
@@ -246,8 +244,8 @@ c.add(new Coin());
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Legitimate use of raw type - instanceof operator</span>
-<span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Set</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Raw type</span>
-    <span class="n">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="o">(</span><span class="n">Set</span><span class="o">&lt;?&gt;)</span> <span class="n">o</span><span class="o">;</span> <span class="c1">// Wildcard type</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="nc">Set</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Raw type</span>
+    <span class="nc">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Set</span><span class="o">&lt;?&gt;)</span> <span class="n">o</span><span class="o">;</span> <span class="c1">// Wildcard type</span>
     <span class="c1">//...</span>
 <span class="o">}</span>
 </code></pre></div></div>

@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -212,47 +210,47 @@
         <span class="k">return</span> <span class="n">im</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Complex</span> <span class="nf">plus</span><span class="o">(</span><span class="n">Complex</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Complex</span> <span class="nf">plus</span><span class="o">(</span><span class="nc">Complex</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">Complex</span><span class="o">(</span><span class="n">re</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="na">re</span><span class="o">,</span> <span class="n">im</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="na">im</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Complex</span> <span class="nf">minus</span><span class="o">(</span><span class="n">Complex</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Complex</span> <span class="nf">minus</span><span class="o">(</span><span class="nc">Complex</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">Complex</span><span class="o">(</span><span class="n">re</span> <span class="o">-</span> <span class="n">c</span><span class="o">.</span><span class="na">re</span><span class="o">,</span> <span class="n">im</span> <span class="o">-</span> <span class="n">c</span><span class="o">.</span><span class="na">im</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Complex</span> <span class="nf">times</span><span class="o">(</span><span class="n">Complex</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Complex</span> <span class="nf">times</span><span class="o">(</span><span class="nc">Complex</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">Complex</span><span class="o">(</span><span class="n">re</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">re</span> <span class="o">-</span> <span class="n">im</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">im</span><span class="o">,</span>
             <span class="n">re</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">im</span> <span class="o">+</span> <span class="n">im</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">re</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Complex</span> <span class="nf">dividedBy</span><span class="o">(</span><span class="n">Complex</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Complex</span> <span class="nf">dividedBy</span><span class="o">(</span><span class="nc">Complex</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">double</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">re</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">re</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="na">im</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">im</span><span class="o">;</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">Complex</span><span class="o">((</span><span class="n">re</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">re</span> <span class="o">+</span> <span class="n">im</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">im</span><span class="o">)</span> <span class="o">/</span> <span class="n">tmp</span><span class="o">,</span>
             <span class="o">(</span><span class="n">im</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">re</span> <span class="o">-</span> <span class="n">re</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="na">im</span><span class="o">)</span> <span class="o">/</span> <span class="n">tmp</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
         <span class="o">}</span>
-        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Complex</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="nc">Complex</span><span class="o">))</span> <span class="o">{</span>
             <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
         <span class="o">}</span>
-        <span class="n">Complex</span> <span class="n">c</span> <span class="o">=</span> <span class="o">(</span><span class="n">Complex</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+        <span class="nc">Complex</span> <span class="n">c</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Complex</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
 
         <span class="c1">// See page 47 to find out why we use compare instead of ==</span>
-        <span class="k">return</span> <span class="n">Double</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">re</span><span class="o">,</span> <span class="n">re</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span>
-            <span class="o">&amp;&amp;</span> <span class="n">Double</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">im</span><span class="o">,</span> <span class="n">im</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nc">Double</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">re</span><span class="o">,</span> <span class="n">re</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="o">&amp;&amp;</span> <span class="nc">Double</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">im</span><span class="o">,</span> <span class="n">im</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">Double</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">re</span><span class="o">)</span> <span class="o">+</span> <span class="n">Double</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">im</span><span class="o">);</span>
+        <span class="k">return</span> <span class="mi">31</span> <span class="o">*</span> <span class="nc">Double</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">re</span><span class="o">)</span> <span class="o">+</span> <span class="nc">Double</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">im</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"("</span> <span class="o">+</span> <span class="n">re</span> <span class="o">+</span> <span class="s">" + "</span> <span class="o">+</span> <span class="n">im</span> <span class="o">+</span> <span class="s">"i)"</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -262,8 +260,8 @@
 
 <p>Podobnie jest w klasach <code class="highlighter-rouge">BigInteger</code>, <code class="highlighter-rouge">BigDecimal</code> czy <code class="highlighter-rouge">String</code>. Dla przykładu:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">BigInteger</span> <span class="n">i</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
-<span class="n">BigInteger</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">20</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">BigInteger</span> <span class="n">i</span> <span class="o">=</span> <span class="nc">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
+<span class="nc">BigInteger</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">20</span><span class="o">));</span>
 <span class="c1">// i = 20</span>
 <span class="c1">// j = 40</span>
 </code></pre></div></div>
@@ -291,9 +289,9 @@
 
 <p class="warning">Gdy tworzono klasy <code class="highlighter-rouge">BigInteger</code> i <code class="highlighter-rouge">BigDecimal</code> nie było jeszcze powszechnie wiadomo, że niemutowalne klasy nie powinny być rozszerzane, dlatego jest to możliwe i wszystkie jej metody mogą zostać nadpisane. Ze względu na kompatybilność wsteczną nie mogło to być poprawione. Dlatego, jeśli piszesz aplikację, która polega na niemutowalności którejś z tych klas podanych jako argument od klienta, to powinieneś sprawdzić, czy jest to “prawdziwy” <code class="highlighter-rouge">BigInteger</code> lub <code class="highlighter-rouge">BigDecimal</code>, a nie jakaś niezaufana podklasa.<br />Można na przykład zwrócić <em>deffensive copy</em>, gdy mamy do czynienia z drugim przypadkiem:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">BigInteger</span> <span class="nf">safeInstance</span><span class="o">(</span><span class="n">BigInteger</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">val</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">==</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">class</span> <span class="o">?</span>
-            <span class="n">val</span> <span class="o">:</span> <span class="k">new</span> <span class="n">BigInteger</span><span class="o">(</span><span class="n">val</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">());</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="nc">BigInteger</span> <span class="nf">safeInstance</span><span class="o">(</span><span class="nc">BigInteger</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">val</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">==</span> <span class="nc">BigInteger</span><span class="o">.</span><span class="na">class</span> <span class="o">?</span>
+            <span class="n">val</span> <span class="o">:</span> <span class="k">new</span> <span class="nc">BigInteger</span><span class="o">(</span><span class="n">val</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">());</span>
 <span class="o">}</span>
 </code></pre></div></div>
 

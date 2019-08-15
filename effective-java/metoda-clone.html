@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -227,10 +225,10 @@ implementation.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Clone method for class with no references to mutable state</span>
 <span class="nd">@Override</span>
-<span class="kd">public</span> <span class="n">ClassWithNoMutableReferences</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="nc">ClassWithNoMutableReferences</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">try</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="o">(</span><span class="n">ClassWithNoMutableReferences</span><span class="o">)</span> <span class="kd">super</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">CloneNotSupportedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="nc">ClassWithNoMutableReferences</span><span class="o">)</span> <span class="kd">super</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">CloneNotSupportedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">();</span> <span class="c1">// Can't happen</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -242,23 +240,23 @@ implementation.</p>
 <p>Jeśli jednak nasz obiekt ma referencje do mutowalnych obiektów, to taka prosta implementacja metody <code class="highlighter-rouge">clone</code> jest zgubna. Weźmy na przykład implementację klasy <code class="highlighter-rouge">Stack</code> ze wcześniejszych wpisów:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[</span><span class="no">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">Object</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="nc">Object</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">ensureCapacity</span><span class="o">();</span>
         <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
             <span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
-        <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+        <span class="nc">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
         <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// Eliminate obsolete reference</span>
         <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
     <span class="o">}</span>
@@ -266,7 +264,7 @@ implementation.</p>
     <span class="c1">// Ensure space for at least one more element.</span>
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">elements</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span>
-            <span class="n">elements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -277,12 +275,12 @@ implementation.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Clone method for class with references to mutable state</span>
 <span class="nd">@Override</span>
-<span class="kd">public</span> <span class="n">Stack</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="nc">Stack</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">try</span> <span class="o">{</span>
-        <span class="n">Stack</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="n">Stack</span><span class="o">)</span> <span class="kd">super</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+        <span class="nc">Stack</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Stack</span><span class="o">)</span> <span class="kd">super</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
         <span class="n">result</span><span class="o">.</span><span class="na">elements</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
         <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">CloneNotSupportedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">CloneNotSupportedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -303,7 +301,7 @@ implementation.</p>
 <p>Jest to konstruktor, który przyjmuje jako argument klasę zawierającą ten konstruktor, np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Copy constructor</span>
-<span class="kd">public</span> <span class="nf">Stack</span><span class="o">(</span><span class="n">Stack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
+<span class="kd">public</span> <span class="nf">Stack</span><span class="o">(</span><span class="nc">Stack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
 </code></pre></div></div>
 
 <h1 id="copy-factory">Copy factory</h1>
@@ -311,13 +309,13 @@ implementation.</p>
 <p>Jest to analogiczny odpowiednik konstruktora w postaci <a href="/effective-java/static-factory-method-zamiast-konstruktora">static method factory</a>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Copy factory</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="n">Stack</span> <span class="nf">copy</span><span class="o">(</span><span class="n">Stack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">Stack</span> <span class="nf">copy</span><span class="o">(</span><span class="nc">Stack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
 </code></pre></div></div>
 
 <p>Następnie ręcznie tworzymy nowy obiekt, kopiując wszystkie pola:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">Stack</span> <span class="nf">copy</span><span class="o">(</span><span class="n">Stack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Stack</span> <span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="nc">Stack</span> <span class="nf">copy</span><span class="o">(</span><span class="nc">Stack</span> <span class="n">stack</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Stack</span> <span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">();</span>
     <span class="n">copy</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">;</span>
     <span class="n">copy</span><span class="o">.</span><span class="na">elements</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">elements</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
     <span class="k">return</span> <span class="n">copy</span><span class="o">;</span>

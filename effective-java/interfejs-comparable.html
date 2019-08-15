@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -166,8 +164,8 @@
 
 <h1 id="comparable">Comparable</h1>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -175,28 +173,28 @@
 
 <p>Aby posortować tablicę obiektów, które implementują <code class="highlighter-rouge">Comparable</code>, wystarczy wywołać:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Podobnie łatwo można wykonać sortowanie kolekcji, wyciągnąć z nich skrajne wartości czy używać takich obiektów w automatycznie sortujących się kolekcjach.</p>
 
 <p>Dla przykładu, polegając na tym, że <code class="highlighter-rouge">String</code> implementuje interfejs <code class="highlighter-rouge">Comparable</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Foo"</span><span class="o">,</span> <span class="s">"Bar"</span><span class="o">,</span> <span class="s">"Andy"</span><span class="o">,</span> <span class="s">"Shop"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Foo"</span><span class="o">,</span> <span class="s">"Bar"</span><span class="o">,</span> <span class="s">"Andy"</span><span class="o">,</span> <span class="s">"Shop"</span><span class="o">);</span>
 
-<span class="n">Collections</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">strings</span><span class="o">);</span><span class="c1">//Shop</span>
+<span class="nc">Collections</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">strings</span><span class="o">);</span><span class="c1">//Shop</span>
 
-<span class="n">Collections</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">strings</span><span class="o">);</span><span class="c1">//Andy</span>
+<span class="nc">Collections</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">strings</span><span class="o">);</span><span class="c1">//Andy</span>
 
-<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">);</span><span class="c1">//Collection for binary search needs to be sorted</span>
+<span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">);</span><span class="c1">//Collection for binary search needs to be sorted</span>
 <span class="c1">//[Andy, Bar, Foo, Shop]</span>
-<span class="n">Collections</span><span class="o">.</span><span class="na">binarySearch</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="s">"Foo"</span><span class="o">);</span><span class="c1">//2</span>
+<span class="nc">Collections</span><span class="o">.</span><span class="na">binarySearch</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="s">"Foo"</span><span class="o">);</span><span class="c1">//2</span>
 
 </code></pre></div></div>
 
 <p>Możemy też łatwo stworzyć zbiór posortowanych automatycznie wyrazów z wyeliminowanymi duplikatami, używając <code class="highlighter-rouge">TreeSet</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">alphabeticalWordList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeSet</span><span class="o">&lt;&gt;(</span><span class="n">strings</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">alphabeticalWordList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TreeSet</span><span class="o">&lt;&gt;(</span><span class="n">strings</span><span class="o">);</span>
 <span class="c1">//[Andy, Bar, Foo, Shop]</span>
 </code></pre></div></div>
 
@@ -246,12 +244,12 @@
 <p>Jeśli porównujemy kilka znaczących pól, oczywiście powinniśmy zacząć od najbardziej znaczącego. Jeśli wynik jest różny od zera, wystarczy zwrócić wynik pierwszego porównania. Np. dla klasy <code class="highlighter-rouge">PhoneNumber</code> z poprzednich wpisów mogłaby wyglądać tak:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Multiple-field Comparable with primitive fields</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">Short</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">areaCode</span><span class="o">,</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="nc">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">Short</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">areaCode</span><span class="o">,</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">);</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">Short</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">prefix</span><span class="o">,</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">);</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nc">Short</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">prefix</span><span class="o">,</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">);</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">Short</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">lineNum</span><span class="o">,</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNum</span><span class="o">);</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="nc">Short</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">lineNum</span><span class="o">,</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNum</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 <span class="o">}</span>
@@ -263,19 +261,19 @@
 
 <p>Możemy napisać swój własny lub wykorzystać już istniejące. Np. klasa <code class="highlighter-rouge">String</code> ma <code class="highlighter-rouge">Comparator</code>, który ignoruje wielkość liter:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span><span class="o">.</span><span class="na">CASE_INSENSITIVE_ORDER</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">,</span> <span class="n">s2</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">.</span><span class="na">CASE_INSENSITIVE_ORDER</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">,</span> <span class="n">s2</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Od Javy 8, interfejs <code class="highlighter-rouge">Comparator</code> dostał zestaw metod, które umożliwiają jego płynne tworzenie. Jest to dużo bardziej zwięzłe rozwiązanie. Używając do tego statycznych importów, dostajemy całkiem przejrzysty kod. Odpowiednik powyższej metody <code class="highlighter-rouge">compareTo</code> z wykorzystanie comparatora wygląda tak:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Comparable with comparator construction methods</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="n">COMPARATOR</span> <span class="o">=</span>
-    <span class="n">comparingInt</span><span class="o">((</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">)</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">PhoneNumber</span><span class="o">&gt;</span> <span class="no">COMPARATOR</span> <span class="o">=</span>
+    <span class="n">comparingInt</span><span class="o">((</span><span class="nc">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">)</span>
         <span class="o">.</span><span class="na">thenComparingInt</span><span class="o">(</span><span class="n">pn</span> <span class="o">-&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">)</span>
         <span class="o">.</span><span class="na">thenComparingInt</span><span class="o">(</span><span class="n">pn</span> <span class="o">-&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNum</span><span class="o">);</span>
 
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">COMPARATOR</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">pn</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="nc">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="no">COMPARATOR</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">pn</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -287,7 +285,7 @@
 
 <p>Jeśli klasa udostępnia gettery do pól, to można użyć referencji do nich, co jest nieco bardziej czytelnym rozwiązaniem:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="n">COMPARATOR</span> <span class="o">=</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">PhoneNumber</span><span class="o">&gt;</span> <span class="no">COMPARATOR</span> <span class="o">=</span>
         <span class="n">comparingInt</span><span class="o">(</span><span class="nl">PhoneNumber:</span><span class="o">:</span><span class="n">getAreaCode</span><span class="o">)</span>
         <span class="o">.</span><span class="na">thenComparingInt</span><span class="o">(</span><span class="nl">PhoneNumber:</span><span class="o">:</span><span class="n">getPrefix</span><span class="o">)</span>
         <span class="o">.</span><span class="na">thenComparingInt</span><span class="o">(</span><span class="nl">PhoneNumber:</span><span class="o">:</span><span class="n">getLineNum</span><span class="o">);</span>
@@ -311,14 +309,14 @@
 <p>Takie płynne budowanie komparatora często przydaję się przy streamach. Jeśli na przykład chcemy posortować elementy, to możemy to zrobić w całkiem dynamiczny sposób:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ranking</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-<span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="nl">RankingEntry:</span><span class="o">:</span><span class="n">getScore</span><span class="o">))</span>
+<span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="nc">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="nl">RankingEntry:</span><span class="o">:</span><span class="n">getScore</span><span class="o">))</span>
 <span class="c1">//...</span>
 </code></pre></div></div>
 
 <p>Chcemy odwróconą kolejność? Wystarczy dodać <code class="highlighter-rouge">reversed()</code>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ranking</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-<span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="nl">RankingEntry:</span><span class="o">:</span><span class="n">getScore</span><span class="o">).</span><span class="na">reversed</span><span class="o">())</span>
+<span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="nc">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="nl">RankingEntry:</span><span class="o">:</span><span class="n">getScore</span><span class="o">).</span><span class="na">reversed</span><span class="o">())</span>
 <span class="c1">//...</span>
 </code></pre></div></div>
 

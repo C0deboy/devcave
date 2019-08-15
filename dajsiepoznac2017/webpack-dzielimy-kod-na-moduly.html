@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -155,16 +153,16 @@
 
 <p>Konfiguracja Webpacka przechowywana jest domyślnie w pliku <span class="file">webpack.config.js</span>, a jej podstawowa wersja wygląda tak:</p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">entry</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">home</span><span class="p">:</span> <span class="s1">'./js/main.js'</span><span class="p">,</span>
-    <span class="na">start</span><span class="p">:</span> <span class="s1">'./js/start.js'</span><span class="p">,</span>
+    <span class="na">home</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./js/main.js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">start</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./js/start.js</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'dist'</span><span class="p">),</span>
-    <span class="na">filename</span><span class="p">:</span> <span class="s1">'[name].bundle.js'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">filename</span><span class="p">:</span> <span class="dl">'</span><span class="s1">[name].bundle.js</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="p">};</span></code></pre></figure>
 
@@ -178,12 +176,12 @@
 <h2 id="lączenie-plików">Lączenie plików</h2>
 
 <p>Aby Webpack wiedział jakie pliki ma połączyć, musimy to podać w plikach zadeklarowanych w entry. Służy do tego metoda:</p>
-<figure class="highlight"><pre><code class="language-js" data-lang="js"> <span class="nx">require</span><span class="p">(</span><span class="s1">'scieżka'</span><span class="p">);</span> </code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">scieżka</span><span class="dl">'</span><span class="p">);</span> </code></pre></figure>
 <p>Dla przykładu:</p>
-<figure class="highlight"><pre><code class="language-js" data-lang="js"> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./nav.js'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./laptop.js'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./typing.js'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./startBtn'</span><span class="p">);</span> </code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">jquery</span><span class="dl">'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./nav.js</span><span class="dl">'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./laptop.js</span><span class="dl">'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./typing.js</span><span class="dl">'</span><span class="p">);</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./startBtn</span><span class="dl">'</span><span class="p">);</span> </code></pre></figure>
 
 <p class="note">
-Zamiast scieżki można też podać nazwę pakietu zainstalowanego przez npm, tak jak w przykładzie: <code class="highlight language-js" data-lang="js"><span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span></code>
+Zamiast scieżki można też podać nazwę pakietu zainstalowanego przez npm, tak jak w przykładzie: <code class="highlight language-js" data-lang="js"><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">jquery</span><span class="dl">'</span><span class="p">);</span></code>
 </p>
 
 <h2 id="webpack--babel">Webpack + Babel</h2>
@@ -192,10 +190,10 @@ Zamiast scieżki można też podać nazwę pakietu zainstalowanego przez npm, ta
 
 <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//...
 </span>
-<span class="s2">"scripts"</span><span class="p">:</span> <span class="p">{</span>
+<span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
 	<span class="c1">//...
 </span>
-    <span class="s2">"build"</span><span class="p">:</span> <span class="s2">"webpack"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">build</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">webpack</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="c1">//...</span></code></pre></figure>
 
@@ -223,9 +221,9 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
     <span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
         <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">js$/</span><span class="p">,</span>
-        <span class="na">loader</span><span class="p">:</span> <span class="s1">'babel-loader'</span><span class="p">,</span>
+        <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">babel-loader</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">query</span><span class="p">:</span> <span class="p">{</span>
-          <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'es2015'</span><span class="p">,</span> <span class="p">{</span> <span class="na">modules</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}],</span>
+          <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">es2015</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">modules</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}],</span>
         <span class="p">},</span>
       <span class="p">},</span>
     <span class="p">],</span>
@@ -240,8 +238,8 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
 <p>Następnie dodajemy loadery oraz plik CSS do <span class="file">webpack.config.js</span>:</p>
 
 <figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">entry</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">home</span><span class="p">:</span> <span class="s1">'./js/home/main.js'</span><span class="p">,</span>
-    <span class="nb">global</span><span class="p">:</span> <span class="s1">'./css/main.css'</span><span class="p">,</span>
+    <span class="nl">home</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./js/home/main.js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nb">global</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./css/main.css</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="c1">//...
 </span>
@@ -249,14 +247,14 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
     <span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
         <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">js$/</span><span class="p">,</span>
-        <span class="na">loader</span><span class="p">:</span> <span class="s1">'babel-loader'</span><span class="p">,</span>
+        <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">babel-loader</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">query</span><span class="p">:</span> <span class="p">{</span>
-          <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'es2015'</span><span class="p">,</span> <span class="p">{</span> <span class="na">modules</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}],</span>
+          <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">es2015</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">modules</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}],</span>
         <span class="p">},</span>
       <span class="p">},</span>
       <span class="p">{</span>
         <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
-        <span class="na">use</span><span class="p">:</span> <span class="p">[</span><span class="s1">'style-loader'</span><span class="p">,</span> <span class="s1">'css-loader'</span><span class="p">],</span>
+        <span class="na">use</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">style-loader</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">css-loader</span><span class="dl">'</span><span class="p">],</span>
       <span class="p">},</span>
     <span class="p">],</span>
   <span class="p">},</span></code></pre></figure>
@@ -274,7 +272,7 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
 
 <p>Następnie w pliku <span class="file">webpack.config.js</span> dodajemy stałą:</p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">ExtractTextPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'extract-text-webpack-plugin'</span><span class="p">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">ExtractTextPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">extract-text-webpack-plugin</span><span class="dl">'</span><span class="p">);</span></code></pre></figure>
 
 <p>Oraz podmieniamy loadery CSS i definiujemy nowy plugin:</p>
 
@@ -286,13 +284,13 @@ Jeżeli używasz ES6, to operacja ta nie powiedzie się, gdyż optymalizacja nie
       <span class="p">{</span>
         <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
         <span class="na">use</span><span class="p">:</span> <span class="nx">ExtractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">({</span>
-          <span class="na">fallback</span><span class="p">:</span> <span class="s1">'style-loader'</span><span class="p">,</span>
-          <span class="na">use</span><span class="p">:</span> <span class="s1">'css-loader'</span><span class="p">,</span>
+          <span class="na">fallback</span><span class="p">:</span> <span class="dl">'</span><span class="s1">style-loader</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">use</span><span class="p">:</span> <span class="dl">'</span><span class="s1">css-loader</span><span class="dl">'</span><span class="p">,</span>
         <span class="p">}),</span>
       <span class="p">},</span>
     <span class="p">],</span>
     <span class="nx">plugins</span><span class="p">:</span> <span class="p">[</span>
-      <span class="k">new</span> <span class="nx">ExtractTextPlugin</span><span class="p">(</span><span class="s1">'./[name].bundle.css'</span><span class="p">),</span>
+      <span class="k">new</span> <span class="nx">ExtractTextPlugin</span><span class="p">(</span><span class="dl">'</span><span class="s1">./[name].bundle.css</span><span class="dl">'</span><span class="p">),</span>
     <span class="p">],</span></code></pre></figure>
 
 <p>Teraz, dzięki Webpackowi, możemy dzielić do woli pliki JS i CSS, a ostatecznie załączymy ich tzw. bundle.</p>
@@ -306,9 +304,9 @@ Jeśli w twoich plikach, które łączysz, wystepują importy czcionek (np. w Bo
 		<span class="p">{</span>
         <span class="nl">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
         <span class="nx">use</span><span class="p">:</span> <span class="nx">ExtractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">({</span>
-          <span class="na">fallback</span><span class="p">:</span> <span class="s1">'style-loader'</span><span class="p">,</span>
+          <span class="na">fallback</span><span class="p">:</span> <span class="dl">'</span><span class="s1">style-loader</span><span class="dl">'</span><span class="p">,</span>
           <span class="na">use</span><span class="p">:</span> <span class="p">{</span>
-            <span class="na">loader</span><span class="p">:</span> <span class="s1">'css-loader'</span><span class="p">,</span>
+            <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">css-loader</span><span class="dl">'</span><span class="p">,</span>
             <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
               <span class="na">url</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
             <span class="p">},</span>
@@ -328,39 +326,39 @@ Jeśli w twoich plikach, które łączysz, wystepują importy czcionek (np. w Bo
 <p class="warning">Okazuje się, że jeśli z podaną konfiguracją używamy kilka "entries" na raz (zarówno pliki JS jak i CSS) powstają duplikaty dla plików CSS w wersji JS. Aby to obejść musimy nieco zmienić konfigurację <span class="file">webpack.config.js</span> :
 </p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">ExtractTextPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'extract-text-webpack-plugin'</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">ExtractTextPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">extract-text-webpack-plugin</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">entry</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">'home.bundle.js'</span><span class="p">:</span> <span class="s1">'./js/home/main.js'</span><span class="p">,</span>
-    <span class="s1">'home.bundle.css'</span><span class="p">:</span> <span class="s1">'./css/home/merge.css'</span><span class="p">,</span>
-    <span class="s1">'faq.bundle.js'</span><span class="p">:</span> <span class="s1">'./js/faq.js'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">home.bundle.js</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./js/home/main.js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">home.bundle.css</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./css/home/merge.css</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">faq.bundle.js</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./js/faq.js</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'dist'</span><span class="p">),</span>
-    <span class="na">filename</span><span class="p">:</span> <span class="s1">'[name]'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">filename</span><span class="p">:</span> <span class="dl">'</span><span class="s1">[name]</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
         <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">js$/</span><span class="p">,</span>
-        <span class="na">loader</span><span class="p">:</span> <span class="s1">'babel-loader'</span><span class="p">,</span> <span class="p">{</span> <span class="na">modules</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+        <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">babel-loader</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">modules</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
         <span class="na">query</span><span class="p">:</span> <span class="p">{</span>
-          <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'es2015'</span><span class="p">],</span>
+          <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">es2015</span><span class="dl">'</span><span class="p">],</span>
         <span class="p">},</span>
       <span class="p">},</span>
       <span class="p">{</span>
         <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span>
         <span class="na">use</span><span class="p">:</span> <span class="nx">ExtractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">({</span>
-          <span class="na">fallback</span><span class="p">:</span> <span class="s1">'style-loader'</span><span class="p">,</span>
-          <span class="na">use</span><span class="p">:</span> <span class="s1">'css-loader'</span><span class="p">,</span>
+          <span class="na">fallback</span><span class="p">:</span> <span class="dl">'</span><span class="s1">style-loader</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">use</span><span class="p">:</span> <span class="dl">'</span><span class="s1">css-loader</span><span class="dl">'</span><span class="p">,</span>
         <span class="p">}),</span>
       <span class="p">},</span>
     <span class="p">],</span>
   <span class="p">},</span>
   <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
-    <span class="k">new</span> <span class="nx">ExtractTextPlugin</span><span class="p">(</span><span class="s1">'./[name]'</span><span class="p">),</span>
+    <span class="k">new</span> <span class="nx">ExtractTextPlugin</span><span class="p">(</span><span class="dl">'</span><span class="s1">./[name]</span><span class="dl">'</span><span class="p">),</span>
   <span class="p">],</span>
 <span class="p">};</span></code></pre></figure>
 

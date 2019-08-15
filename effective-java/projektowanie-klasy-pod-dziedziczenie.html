@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -211,22 +209,22 @@ and this collection contains the specified object.</p>
     <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Sub</span> <span class="kd">extends</span> <span class="n">Super</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Sub</span> <span class="kd">extends</span> <span class="nc">Super</span> <span class="o">{</span>
     <span class="c1">// Blank final, set by constructor</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Instant</span> <span class="n">instant</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Instant</span> <span class="n">instant</span><span class="o">;</span>
 
-    <span class="n">Sub</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">instant</span> <span class="o">=</span> <span class="n">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+    <span class="nc">Sub</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">instant</span> <span class="o">=</span> <span class="nc">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="c1">// Overriding method invoked by superclass constructor</span>
     <span class="nd">@Override</span> 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">overrideMe</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instant</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instant</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Sub</span> <span class="n">sub</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sub</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Sub</span> <span class="n">sub</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sub</span><span class="o">();</span>
         <span class="n">sub</span><span class="o">.</span><span class="na">overrideMe</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>

@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -183,18 +181,18 @@ Treść
 
 <p>Przypominam, że we wcześniejszym poście pobraliśmy sobie wszystkie elementy formularza, na których teraz będziemy pracować:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'from'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="kd">const</span> <span class="nx">subject</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'subject'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'message'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="kd">const</span> <span class="nx">recaptcha</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">".g-recaptcha"</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">formAlert</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">".emailFormAlert"</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">contactForm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#contact'</span><span class="p">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="dl">'</span><span class="s1">from</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">subject</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="dl">'</span><span class="s1">subject</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">recaptcha</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.g-recaptcha</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">formAlert</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.emailFormAlert</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">contactForm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#contact</span><span class="dl">'</span><span class="p">);</span></code></pre></figure>
 
 <p>Dodajemy obsługę zdarzenia - kliknięcie przycisku “Submit”:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">$</span><span class="p">(</span><span class="s1">'.emailFormSubmit'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.emailFormSubmit</span><span class="dl">'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-    <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">'&lt;i class="fa fa-spinner fa-pulse fa-2x fa-fw"&gt;&lt;/i&gt;'</span><span class="p">;</span>
+    <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="dl">'</span><span class="s1">&lt;i class="fa fa-spinner fa-pulse fa-2x fa-fw"&gt;&lt;/i&gt;</span><span class="dl">'</span><span class="p">;</span>
     <span class="c1">//reszta
 </span>
   <span class="p">});</span></code></pre></figure>
@@ -209,26 +207,26 @@ AJAX umożliwia wysyłanie i odbieranie danych z serwera w sposób asynchroniczn
 
 <p>Zanim zaczniemy pisać walidację pobierzemy jeszcze element z odpowiedzią reCAPTCHA:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="kd">const</span> <span class="nx">recaptchaResponse</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"g-recaptcha-response"</span><span class="p">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="kd">const</span> <span class="nx">recaptchaResponse</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">g-recaptcha-response</span><span class="dl">"</span><span class="p">);</span></code></pre></figure>
 
 <p>Do walidacji przygotujemy sobie dwie funkcje:</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">function</span> <span class="nx">validateEmailForm</span><span class="p">()</span>
   <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">userEmail</span><span class="p">.</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valid</span><span class="o">===</span><span class="kc">false</span><span class="p">){</span>
-      <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">userEmail</span><span class="p">,</span><span class="s2">"Podaj poprawny email!"</span><span class="p">);</span>
+      <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">userEmail</span><span class="p">,</span><span class="dl">"</span><span class="s2">Podaj poprawny email!</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">subject</span><span class="p">.</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valueMissing</span><span class="p">){</span>
-      <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">subject</span><span class="p">,</span><span class="s2">"Wpisz jakiś temat!"</span><span class="p">);</span>
+      <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">subject</span><span class="p">,</span><span class="dl">"</span><span class="s2">Wpisz jakiś temat!</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valueMissing</span><span class="p">){</span>
-      <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="s2">"Pusta wiadomość? Napisz coś!"</span><span class="p">);</span>
+      <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="dl">"</span><span class="s2">Pusta wiadomość? Napisz coś!</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">grecaptcha</span><span class="p">.</span><span class="nx">getResponse</span><span class="p">().</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">){</span>
-      <span class="nx">recaptcha</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'shake'</span><span class="p">);</span>
-      <span class="nx">recaptcha</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'shake'</span><span class="p">);</span>
-      <span class="nx">recaptcha</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(){</span><span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'shake'</span><span class="p">)});</span>
-      <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s2">"Potwierdź, że nie jesteś robotem!"</span><span class="p">;</span>
+      <span class="nx">recaptcha</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">shake</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">recaptcha</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">shake</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">recaptcha</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(){</span><span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">shake</span><span class="dl">'</span><span class="p">)});</span>
+      <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="dl">"</span><span class="s2">Potwierdź, że nie jesteś robotem!</span><span class="dl">"</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">else</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
   <span class="p">}</span></code></pre></figure>
@@ -239,12 +237,12 @@ AJAX umożliwia wysyłanie i odbieranie danych z serwera w sposób asynchroniczn
   <li><code class="highlight language-javascript" data-lang="javascript"><span class="nx">grecaptcha</span><span class="p">.</span><span class="nx">getResponse</span><span class="p">().</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span></code> - Ten warunek sprawdza czy zaznaczone jest pole reCAPTCHA. Jeśli długość odpowiedzi = 0 to nie jest zaznaczony.</li>
 </ul>
 
-<p>W każdym przypadku, jak pewnie zauwżyłeś, gdy któryś test zwraca “false” za pomocą drugiej funkcji pomocniczej <code class="highlight language-javascript" data-lang="javascript"><span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span><span class="s2">"Treść komunikatu"</span><span class="p">)</span></code> generujemy komunikat oraz zaznaczamy niepoprawne pole. Wygląda ona tak:</p>
+<p>W każdym przypadku, jak pewnie zauwżyłeś, gdy któryś test zwraca “false” za pomocą drugiej funkcji pomocniczej <code class="highlight language-javascript" data-lang="javascript"><span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span><span class="dl">"</span><span class="s2">Treść komunikatu</span><span class="dl">"</span><span class="p">)</span></code> generujemy komunikat oraz zaznaczamy niepoprawne pole. Wygląda ona tak:</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">function</span> <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">wrongElement</span><span class="p">,</span><span class="nx">alert</span><span class="p">){</span>
     <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="nx">alert</span><span class="p">;</span>
-    <span class="nx">wrongElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'wrongInput'</span><span class="p">);</span>
-    <span class="nx">wrongElement</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"focus"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(){</span><span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'wrongInput'</span><span class="p">)});</span>
+    <span class="nx">wrongElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">wrongInput</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">wrongElement</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">focus</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(){</span><span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">wrongInput</span><span class="dl">'</span><span class="p">)});</span>
   <span class="p">}</span></code></pre></figure>
 
 <p>Jest relatywnie prosta - zmienia treść komunikatu w elemencie “formAlert” i nadaje (i usuwa ją gdy element uzyska focus) klasę ze stylem “wrongInput”, który zawiera animację i wygląda tak:</p>
@@ -280,14 +278,14 @@ AJAX umożliwia wysyłanie i odbieranie danych z serwera w sposób asynchroniczn
 <p>Ostatnim krokiem jest wykonanie żądania AJAX. JQuery strasznie ułatwia sprawę:</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="kd">const</span> <span class="nx">sendEmail</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-      <span class="na">type</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
-      <span class="na">url</span><span class="p">:</span> <span class="s2">"emailform.php"</span><span class="p">,</span>
-      <span class="na">dataType</span> <span class="p">:</span> <span class="s1">'json'</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">emailform.php</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">dataType</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span>
       <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">'userEmail'</span> <span class="p">:</span> <span class="nx">userEmail</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-        <span class="s1">'subject'</span> <span class="p">:</span> <span class="nx">subject</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-        <span class="s1">'message'</span> <span class="p">:</span> <span class="nx">message</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-        <span class="s1">'g-recaptcha-response'</span> <span class="p">:</span> <span class="nx">recaptchaResponse</span><span class="p">.</span><span class="nx">value</span>
+        <span class="dl">'</span><span class="s1">userEmail</span><span class="dl">'</span> <span class="p">:</span> <span class="nx">userEmail</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">subject</span><span class="dl">'</span> <span class="p">:</span> <span class="nx">subject</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">message</span><span class="dl">'</span> <span class="p">:</span> <span class="nx">message</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">g-recaptcha-response</span><span class="dl">'</span> <span class="p">:</span> <span class="nx">recaptchaResponse</span><span class="p">.</span><span class="nx">value</span>
       <span class="p">}</span>
     <span class="p">});</span></code></pre></figure>
 
@@ -305,7 +303,7 @@ Po tych samych zdefiniowanych nazwach (<code class="highlight"><span class="s">'
 gdy coś się nie powiedzie w naszym pliku PHP (czyli wystąpi jakiś error) wyświetlimy komunikat + treść błędu:</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">      <span class="nx">sendEmail</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">'Coś poszło nie tak :( '</span><span class="o">+</span><span class="nx">error</span><span class="p">.</span><span class="nx">responseText</span><span class="p">;</span>
+        <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="dl">'</span><span class="s1">Coś poszło nie tak :( </span><span class="dl">'</span><span class="o">+</span><span class="nx">error</span><span class="p">.</span><span class="nx">responseText</span><span class="p">;</span>
       <span class="p">});</span></code></pre></figure>
 
 <p>gdy wszystko wykona się poprawnie (walidacja nie musi się powieść, chodzi o to, że kod nie zawiera żadnego błędu) wyświetlimy wygenerowaną na podstawie naszego kodu PHP odpowiedź.</p>

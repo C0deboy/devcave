@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -196,13 +194,13 @@
 
 <p>Dla przykładu, mając 1.03 zł i odejmując od tego 42 gr, dostalibyśmy w wyniku 0.6100000000000001.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mf">1.03</span> <span class="o">-</span> <span class="mf">0.42</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mf">1.03</span> <span class="o">-</span> <span class="mf">0.42</span><span class="o">);</span>
 <span class="c1">// 0.6100000000000001</span>
 </code></pre></div></div>
 
 <p>Inny przykład - mając 1 zł i odejmując od tego 9 razy coś za 10 gr zostałoby nam 0.09999999999999998 zł.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mf">1.00</span> <span class="o">-</span> <span class="mi">9</span> <span class="o">*</span> <span class="mf">0.10</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mf">1.00</span> <span class="o">-</span> <span class="mi">9</span> <span class="o">*</span> <span class="mf">0.10</span><span class="o">);</span>
 <span class="c1">// 0.09999999999999998</span>
 </code></pre></div></div>
 <p>Może się zdawać, że ten problem można by rozwiązać, po prostu zaokrąglając wyniki, jednak nie jest to prawda - nie zawsze by to działało.</p>
@@ -238,8 +236,8 @@
 <p>Jak pewnie Ci wiadomo <code class="highlighter-rouge">String</code> w Javie jest niemutowalny, więc każde użycie operatora <code class="highlighter-rouge">+</code> między stringami (konkatenacja) tworzy nowy obiekt <code class="highlighter-rouge">String</code>. Jest to całkowicie w porządku w przypadku łączeniu kilku stringów o stałej długości, jednak mało wydajne przy budowaniu dużych ciągów tekstu, szczególnie w pętli. Przykład:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Inappropriate use of string concatenation - Performs poorly!</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
         <span class="n">result</span> <span class="o">+=</span> <span class="n">lineForItem</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>  <span class="c1">// String concatenation</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
@@ -248,8 +246,8 @@
 
 <p>Tu dla każdej iteracji pętli tworzy się niepotrzebnie nowy <code class="highlighter-rouge">String</code>, przez co metoda jest mało wydajna. Rozwiązaniem tutaj jest użycie klasy <code class="highlighter-rouge">StringBuilder</code>, która jest mutowalnym odpowiednikiem klasy <code class="highlighter-rouge">String</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">StringBuilder</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">(</span><span class="n">numItems</span><span class="o">()</span> <span class="o">*</span> <span class="n">LINE_WIDTH</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">StringBuilder</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">(</span><span class="n">numItems</span><span class="o">()</span> <span class="o">*</span> <span class="no">LINE_WIDTH</span><span class="o">);</span>
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
         <span class="n">b</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">lineForItem</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
     <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
@@ -267,18 +265,18 @@
 <p>Zatem miejmy w nawyku taki kod:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Good - uses interface as type</span>
-<span class="n">Set</span><span class="o">&lt;</span><span class="n">Son</span><span class="o">&gt;</span> <span class="n">sonSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
+<span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Son</span><span class="o">&gt;</span> <span class="n">sonSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
 </code></pre></div></div>
 
 <p>A nie taki:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Bad - uses class as type!</span>
-<span class="n">LinkedHashSet</span><span class="o">&lt;</span><span class="n">Son</span><span class="o">&gt;</span> <span class="n">sonSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
+<span class="nc">LinkedHashSet</span><span class="o">&lt;</span><span class="nc">Son</span><span class="o">&gt;</span> <span class="n">sonSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
 </code></pre></div></div>
 
 <p>Dostajemy dzięki temu bardziej zwięzły kod, ale co ważniejsze - większą elastyczność. Możemy w każdej chwili zmienić implementację, a cały kod dookoła będzie dalej się kompilował:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Son</span><span class="o">&gt;</span> <span class="n">sonSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Son</span><span class="o">&gt;</span> <span class="n">sonSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;();</span>
 </code></pre></div></div>
 
 <p>I prawdopodobnie działał. Jest jednak jeden wyjątek od tej zasady. Jeśli konkretna implementacja oferuję jakąś specjalną funkcjonalność, która nie jest zagwarantowana przez interfejs i kod polega na tej funkcjonalności, to nie powinniśmy używać ogólnego interfejsu jako deklaracji typu.</p>

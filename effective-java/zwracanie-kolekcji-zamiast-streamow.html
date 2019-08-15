@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -176,21 +174,21 @@
 <p>Zwracając na przykład tylko <code class="highlighter-rouge">Stream</code> sprawiamy, że klient nie będzie mógł w łatwy sposób przeitreować po elementach za pomocą pętli for-each. Niestety <code class="highlighter-rouge">Stream</code> nie rozszerza <code class="highlighter-rouge">Iterable</code>, chociaż mógłby. Żeby użyć go w pętli, trzeba by zrobić takie paskudztwo:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Hideous workaround to iterate over a stream</span>
-<span class="k">for</span>  <span class="o">(</span><span class="n">ProcessHandle</span> <span class="n">ph</span> <span class="o">:</span> <span class="o">(</span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">ProcessHandle</span><span class="o">&gt;)</span>
-    <span class="n">ProcessHandle</span><span class="o">.</span><span class="na">allProcesses</span><span class="o">()::</span><span class="n">iterator</span><span class="o">)</span>
+<span class="k">for</span>  <span class="o">(</span><span class="nc">ProcessHandle</span> <span class="n">ph</span> <span class="o">:</span> <span class="o">(</span><span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">ProcessHandle</span><span class="o">&gt;)</span>
+    <span class="nc">ProcessHandle</span><span class="o">.</span><span class="na">allProcesses</span><span class="o">()::</span><span class="n">iterator</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>Już lepszym obejściem, gdy chcemy użyć elementów streamu w pętli, jest taki adapter:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Adapter from  Stream&lt;E&gt; to Iterable&lt;E&gt;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterableOf</span><span class="o">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">stream</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nf">iterableOf</span><span class="o">(</span><span class="nc">Stream</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">stream</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> <span class="nl">stream:</span><span class="o">:</span><span class="n">iterator</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Który można użyć potem tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="n">ProcessHandle</span> <span class="n">p</span> <span class="o">:</span> <span class="n">iterableOf</span><span class="o">(</span><span class="n">ProcessHandle</span><span class="o">.</span><span class="na">allProcesses</span><span class="o">()))</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="nc">ProcessHandle</span> <span class="n">p</span> <span class="o">:</span> <span class="n">iterableOf</span><span class="o">(</span><span class="nc">ProcessHandle</span><span class="o">.</span><span class="na">allProcesses</span><span class="o">()))</span> <span class="o">{</span>
     <span class="c1">// Process the process</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -204,15 +202,15 @@
 <p>Rozważmy taki program:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Stream-based program to generate the first 20 Mersenne primes</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">primes</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">p</span> <span class="o">-&gt;</span> <span class="n">TWO</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">intValueExact</span><span class="o">()).</span><span class="na">subtract</span><span class="o">(</span><span class="n">ONE</span><span class="o">))</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">primes</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">p</span> <span class="o">-&gt;</span> <span class="no">TWO</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">intValueExact</span><span class="o">()).</span><span class="na">subtract</span><span class="o">(</span><span class="no">ONE</span><span class="o">))</span>
         <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">mersenne</span> <span class="o">-&gt;</span> <span class="n">mersenne</span><span class="o">.</span><span class="na">isProbablePrime</span><span class="o">(</span><span class="mi">50</span><span class="o">))</span>
         <span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="mi">20</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="kd">static</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">BigInteger</span><span class="o">&gt;</span> <span class="nf">primes</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">Stream</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="n">TWO</span><span class="o">,</span> <span class="nl">BigInteger:</span><span class="o">:</span><span class="n">nextProbablePrime</span><span class="o">);</span>
+<span class="kd">static</span> <span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">BigInteger</span><span class="o">&gt;</span> <span class="nf">primes</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">Stream</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="no">TWO</span><span class="o">,</span> <span class="nl">BigInteger:</span><span class="o">:</span><span class="n">nextProbablePrime</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -238,7 +236,7 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Prime-counting stream pipeline - benefits from parallelization</span>
 <span class="kd">static</span> <span class="kt">long</span> <span class="nf">pi</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">LongStream</span><span class="o">.</span><span class="na">rangeClosed</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
+    <span class="k">return</span> <span class="nc">LongStream</span><span class="o">.</span><span class="na">rangeClosed</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
         <span class="o">.</span><span class="na">mapToObj</span><span class="o">(</span><span class="nl">BigInteger:</span><span class="o">:</span><span class="n">valueOf</span><span class="o">)</span>
         <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">.</span><span class="na">isProbablePrime</span><span class="o">(</span><span class="mi">50</span><span class="o">))</span>
         <span class="o">.</span><span class="na">count</span><span class="o">();</span>
@@ -248,7 +246,7 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Prime-counting stream pipeline - parallel version</span>
 <span class="kd">static</span> <span class="kt">long</span> <span class="nf">pi</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">LongStream</span><span class="o">.</span><span class="na">rangeClosed</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
+    <span class="k">return</span> <span class="nc">LongStream</span><span class="o">.</span><span class="na">rangeClosed</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
         <span class="o">.</span><span class="na">parallel</span><span class="o">()</span>
         <span class="o">.</span><span class="na">mapToObj</span><span class="o">(</span><span class="nl">BigInteger:</span><span class="o">:</span><span class="n">valueOf</span><span class="o">)</span>
         <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">.</span><span class="na">isProbablePrime</span><span class="o">(</span><span class="mi">50</span><span class="o">))</span>

@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -222,12 +220,17 @@ Komenda serve służy tylko do testowania lokalnie. Wszystkie linki w wygenerowa
 
 <p>Nasze posty przechowywane są w folderze <span class="folder">_posts</span> Nazwy plików mają określone formatowanie i musimy się tego trzymać: rok-miesiąc-dzień-nazwa-postu. W środku tylko mała konfiguracja, domyślnie:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">---
-layout: post
-title:  "Welcome to Jekyll!"
-date:   2017-03-04 20:21:20 +0100
-categories: jekyll update
----</code></pre></figure>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="s">---</span><span class="err">
+</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">post</span><span class="err">
+</span>
+<span class="na">title</span><span class="pi">:</span>  <span class="s2">"</span><span class="s">Welcome</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">Jekyll!"</span><span class="err">
+</span>
+<span class="na">date</span><span class="pi">:</span>   <span class="s">2017-03-04 20:21:20 +0100</span><span class="err">
+</span>
+<span class="na">categories</span><span class="pi">:</span> <span class="s">jekyll update</span><span class="err">
+</span>
+<span class="nn">---</span></code></pre></figure>
 
 <p>gdzie definiujemy dane postu. Dalej pozostaje już tylko dodać treść, którą tworzymy, jak w zwykłym pliku HTML z małym dodatkiem - (językiem szablonowym?) <a href="https://jekyllrb.com/docs/templates/">Liquid</a>. Dzięki niemu m.in. wprowadzamy zmienne i instrukcje, które pobierają treść do szablonów.</p>
 

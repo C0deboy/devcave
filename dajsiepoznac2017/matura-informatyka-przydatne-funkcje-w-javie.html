@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -146,16 +144,16 @@
 
 <p>Od tego zawsze zaczynamy. Ja korzystam z funkcji, która pakuje wszystkie dane z pliku tekstowego do tablicy o rożnych wymiarach, w zależności od zadania. Przykładowo dla tego typu danych:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">AIHAHGHBEAFJAJDI HGIHFEHHJGBCBGD
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">AIHAHGHBEAFJAJDI HGIHFEHHJGBCBGD
 FBJHCFFGADD EHADJAJBJBEGD
 JHGHADJ AGFEHHEHIAEJFC
-...</code></pre></figure>
+</span><span class="c">...</span></code></pre></figure>
 
 <p>wygląda tak:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span><span class="o">[][]</span> <span class="nf">readFile</span><span class="o">(</span><span class="n">String</span> <span class="n">file</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
-    <span class="n">String</span><span class="o">[][]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">1000</span><span class="o">][</span><span class="mi">2</span><span class="o">];</span>
-    <span class="n">Scanner</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"C:\\sciezka\\do\\pliku\\"</span><span class="o">+</span><span class="n">file</span><span class="o">));</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span><span class="o">[][]</span> <span class="nf">readFile</span><span class="o">(</span><span class="nc">String</span> <span class="n">file</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">{</span>
+    <span class="nc">String</span><span class="o">[][]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[</span><span class="mi">1000</span><span class="o">][</span><span class="mi">2</span><span class="o">];</span>
+    <span class="nc">Scanner</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"C:\\sciezka\\do\\pliku\\"</span><span class="o">+</span><span class="n">file</span><span class="o">));</span>
     <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
     <span class="k">while</span> <span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">()){</span>
         <span class="n">array</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
@@ -174,21 +172,21 @@ Należy pamiętać o escape'owaniu ukośników (\\\\) w ścieżce do pliku.
 <p>Jak wiadomo to podstawa. Uzyskamy to szybko dzięki dwóm metodom, które przyjmują liczbę oraz system liczbowy jako argumenty:</p>
 <hX>Z różnych systemów na dziesiętny</hX>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">convertToInt</span><span class="o">(</span><span class="n">String</span> <span class="n">number</span><span class="o">,</span> <span class="kt">int</span> <span class="n">base</span><span class="o">){</span>
-    <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">base</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">convertToInt</span><span class="o">(</span><span class="nc">String</span> <span class="n">number</span><span class="o">,</span> <span class="kt">int</span> <span class="n">base</span><span class="o">){</span>
+    <span class="k">return</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">base</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <hX>I z dziesiętnego na inny:</hX>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">convertInt</span><span class="o">(</span><span class="kt">int</span> <span class="n">number</span><span class="o">,</span> <span class="kt">int</span> <span class="n">base</span><span class="o">){</span>
-    <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">base</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">convertInt</span><span class="o">(</span><span class="kt">int</span> <span class="n">number</span><span class="o">,</span> <span class="kt">int</span> <span class="n">base</span><span class="o">){</span>
+    <span class="k">return</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">base</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <h2 id="zaokroglanie-liczb">Zaokroglanie liczb</h2>
 
 <p>Równie często jest to nam potrzebne. Gdy mamy podać tylko wydrukowany wynik to jest to całkiem proste. Z pomocą przychodzi printf, np:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%.2f%n"</span><span class="o">,</span> <span class="mf">265.335</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%.2f%n"</span><span class="o">,</span> <span class="mf">265.335</span><span class="o">);</span>
 <span class="c1">//265,34</span></code></pre></figure>
 
 <hX>Gdzie:</hX>
@@ -202,15 +200,15 @@ Należy pamiętać o escape'owaniu ukośników (\\\\) w ścieżce do pliku.
 
 <p>Na Stack OverFlow często znajdowałem takie rozwiązanie:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">x</span><span class="o">*</span><span class="mf">100.0</span><span class="o">)/</span><span class="mf">100.0</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">x</span><span class="o">*</span><span class="mf">100.0</span><span class="o">)/</span><span class="mf">100.0</span></code></pre></figure>
 
 <p>gdzie zera określają dokładność “przybliżenia”. Jednak nie zawsze zwraca to prawidłową odpowiedź. Przykładowo, jeśli za “x” podstawimy 265.335, to dostaniemy 265.33, co jest oczywiście niepoprawnym wynikiem, bo powinniśmy dostać 265.34.</p>
 
 <p>Ja rozwiązałem to w ten sposób:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">round</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">rounded</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">Locale</span><span class="o">.</span><span class="na">ROOT</span><span class="o">,</span><span class="s">"%."</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="s">"f"</span><span class="o">,</span> <span class="n">x</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">Double</span><span class="o">.</span><span class="na">parseDouble</span><span class="o">(</span><span class="n">rounded</span><span class="o">);</span>
+    <span class="nc">String</span> <span class="n">rounded</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">Locale</span><span class="o">.</span><span class="na">ROOT</span><span class="o">,</span><span class="s">"%."</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="s">"f"</span><span class="o">,</span> <span class="n">x</span><span class="o">);</span>
+    <span class="k">return</span> <span class="nc">Double</span><span class="o">.</span><span class="na">parseDouble</span><span class="o">(</span><span class="n">rounded</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>Wykorzystuje to podobną metodę co printf, tyle że później parsujemy to na double.</p>
@@ -223,11 +221,11 @@ Zauważ, że tutaj, jako argument podałem jeszcze Locale.ROOT. Wynika to z tego
 <p>W zadaniach zazwyczaj proszą o maksymalną lub minimalną wartość z jakiegoś zbioru. Gdy dane przetrzymujemy w tablicy mamy do tego gotowe funkcje:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">max</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span>
+    <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span>
 <span class="o">}</span>
     
 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">min</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">).</span><span class="na">min</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span>
+    <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">).</span><span class="na">min</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span>
 <span class="o">}</span></code></pre></figure>
 
 <h2 id="suma-wartości">Suma wartości</h2>
@@ -235,18 +233,18 @@ Zauważ, że tutaj, jako argument podałem jeszcze Locale.ROOT. Wynika to z tego
 <p>Również czasem sumowanie wszystkich wartości się zdarza i tu też mamy gotowca:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">).</span><span class="na">sum</span><span class="o">();</span>
+    <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">).</span><span class="na">sum</span><span class="o">();</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>Wszystko dzięki streamom, które są z nami od Java 8. Jeśli operujemy na listach, też mamy gotowe metody do wyznaczania min/max:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-<span class="n">numbers</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">));</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">numbers</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">));</span>
 
-<span class="n">Collections</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
+<span class="nc">Collections</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
 <span class="c1">//4
 </span>
-<span class="n">Collections</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
+<span class="nc">Collections</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
 <span class="c1">//1</span></code></pre></figure>
 
 <p>Chociaż do sumowania już jest nieco mniej przyjaźnie i musimy użyć streamów:</p>
@@ -258,7 +256,7 @@ Zauważ, że tutaj, jako argument podałem jeszcze Locale.ROOT. Wynika to z tego
 
 <p>Często w zadaniach trzeba odwracać stringi (np. aby sprawdzić czy są tzw. “palindromami”). Można to zrobić błyskawicznie z pomocą StringBuildera.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">reverse</span><span class="o">(</span><span class="n">String</span> <span class="n">string</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">reverse</span><span class="o">(</span><span class="nc">String</span> <span class="n">string</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nf">StringBuilder</span><span class="o">(</span><span class="n">string</span><span class="o">).</span><span class="na">reverse</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -284,17 +282,17 @@ Zauważ, że tutaj, jako argument podałem jeszcze Locale.ROOT. Wynika to z tego
 
 <p>Czasem jednak musimy dobrać się do środka ciągów. W jednym zadaniu, z genotypu trzeba było wyciągać geny, które rozpoczynały się od “AA” a kończyły na “BB” i na nich przeprowadzać operację. Do tego typu zadań warto znać klasy Pattern i Matcher oraz umieć posługiwać się regexami. Do tego zadania użyłem metodę podobną do tej, jednak tę przerobiłem do ogólnego użytku, nie tylko pod zadanie:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getMatchesBetween</span><span class="o">(</span><span class="n">String</span> <span class="n">string</span><span class="o">,</span> <span class="n">String</span> <span class="n">a</span><span class="o">,</span> <span class="n">String</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Pattern</span> <span class="n">between</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">a</span><span class="o">+</span><span class="s">"(.*?)"</span><span class="o">+</span><span class="n">b</span><span class="o">);</span>
-    <span class="n">Matcher</span> <span class="n">next</span> <span class="o">=</span> <span class="n">between</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">string</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span><span class="o">[]</span> <span class="nf">getMatchesBetween</span><span class="o">(</span><span class="nc">String</span> <span class="n">string</span><span class="o">,</span> <span class="nc">String</span> <span class="n">a</span><span class="o">,</span> <span class="nc">String</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Pattern</span> <span class="n">between</span> <span class="o">=</span> <span class="nc">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">a</span><span class="o">+</span><span class="s">"(.*?)"</span><span class="o">+</span><span class="n">b</span><span class="o">);</span>
+    <span class="nc">Matcher</span> <span class="n">next</span> <span class="o">=</span> <span class="n">between</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">string</span><span class="o">);</span>
     
-    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">matches</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">matches</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
     
     <span class="k">while</span><span class="o">(</span><span class="n">next</span><span class="o">.</span><span class="na">find</span><span class="o">()){</span>
         <span class="n">matches</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">next</span><span class="o">.</span><span class="na">group</span><span class="o">());</span>
     <span class="o">}</span>
     
-    <span class="k">return</span> <span class="n">matches</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">matches</span><span class="o">.</span><span class="na">size</span><span class="o">()]);</span>
+    <span class="k">return</span> <span class="n">matches</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">[</span><span class="n">matches</span><span class="o">.</span><span class="na">size</span><span class="o">()]);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>W skrócie, znajduję nam wszystkie podciągi miedzy argumentami a i b, oraz pakuje je do listy, którą na koniec konwertujemy na tablicę.</p>
@@ -310,41 +308,41 @@ Kluczowy w tych metodach jest regex: <span class="s">(.\*?)</span> gdzie <span c
 
 <p>Zaprezentuje to na przykładzie. Dajmy na to, że mamy taką o to tablicę z danymi:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">String</span><span class="o">[]</span> <span class="n">genotypes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">String</span><span class="o">[]</span> <span class="n">genotypes</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
         <span class="n">genotypes</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s">"EBEAADDEDCBCAEBABBDBEADBBDAABBDDACDDECECECBBDDBCBEDAEBDAADCE"</span><span class="o">;</span>
         <span class="n">genotypes</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="s">"BCBAAEEDDBEDCBBCCABDAACEBBEBCCCCCABDDDBBAACCEDDCBBCEAAEEADBBDE"</span><span class="o">;</span>
         <span class="n">genotypes</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="s">"AADDEEDBBCCEEBBDEEDDAAAACDCDDCDBBEAADDEDDBBDCDDCDCAA"</span><span class="o">;</span></code></pre></figure>
 
 <p>i wywołując tą metodę na każdym elemencie tej tablicy, dostaniemy nową tablicę z dopasowaniami, które tu w tym przykładzie od razu drukuję:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">genotype</span> <span class="o">:</span> <span class="n">genotypes</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">getMatchesBetween</span><span class="o">(</span><span class="n">genotype</span><span class="o">,</span> <span class="s">"AA"</span><span class="o">,</span> <span class="s">"BB"</span><span class="o">)));</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">genotype</span> <span class="o">:</span> <span class="n">genotypes</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">getMatchesBetween</span><span class="o">(</span><span class="n">genotype</span><span class="o">,</span> <span class="s">"AA"</span><span class="o">,</span> <span class="s">"BB"</span><span class="o">)));</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>i output dla poszczególnych kwantyfikatorów wygląda następująco:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//dla (.*?)
 </span>
-<span class="o">[</span><span class="n">AADDEDCBCAEBABB</span><span class="o">,</span> <span class="n">AABB</span><span class="o">]</span>
-<span class="o">[</span><span class="n">AAEEDDBEDCBB</span><span class="o">,</span> <span class="n">AACEBB</span><span class="o">,</span> <span class="n">AACCEDDCBB</span><span class="o">,</span> <span class="n">AAEEADBB</span><span class="o">]</span>
-<span class="o">[</span><span class="n">AADDEEDBB</span><span class="o">,</span> <span class="n">AAAACDCDDCDBB</span><span class="o">,</span> <span class="n">AADDEDDBB</span><span class="o">]</span>
+<span class="o">[</span><span class="no">AADDEDCBCAEBABB</span><span class="o">,</span> <span class="no">AABB</span><span class="o">]</span>
+<span class="o">[</span><span class="no">AAEEDDBEDCBB</span><span class="o">,</span> <span class="no">AACEBB</span><span class="o">,</span> <span class="no">AACCEDDCBB</span><span class="o">,</span> <span class="no">AAEEADBB</span><span class="o">]</span>
+<span class="o">[</span><span class="no">AADDEEDBB</span><span class="o">,</span> <span class="no">AAAACDCDDCDBB</span><span class="o">,</span> <span class="no">AADDEDDBB</span><span class="o">]</span>
 
 <span class="c1">//dla (.+?)
 </span>
-<span class="o">[</span><span class="n">AADDEDCBCAEBABB</span><span class="o">,</span> <span class="n">AABBDDACDDECECECBB</span><span class="o">]</span>
-<span class="o">[</span><span class="n">AAEEDDBEDCBB</span><span class="o">,</span> <span class="n">AACEBB</span><span class="o">,</span> <span class="n">AACCEDDCBB</span><span class="o">,</span> <span class="n">AAEEADBB</span><span class="o">]</span>
-<span class="o">[</span><span class="n">AADDEEDBB</span><span class="o">,</span> <span class="n">AAAACDCDDCDBB</span><span class="o">,</span> <span class="n">AADDEDDBB</span><span class="o">]</span>
+<span class="o">[</span><span class="no">AADDEDCBCAEBABB</span><span class="o">,</span> <span class="no">AABBDDACDDECECECBB</span><span class="o">]</span>
+<span class="o">[</span><span class="no">AAEEDDBEDCBB</span><span class="o">,</span> <span class="no">AACEBB</span><span class="o">,</span> <span class="no">AACCEDDCBB</span><span class="o">,</span> <span class="no">AAEEADBB</span><span class="o">]</span>
+<span class="o">[</span><span class="no">AADDEEDBB</span><span class="o">,</span> <span class="no">AAAACDCDDCDBB</span><span class="o">,</span> <span class="no">AADDEDDBB</span><span class="o">]</span>
 
 <span class="c1">//dla (.*)
 </span>
-<span class="o">[</span><span class="n">AADDEDCBCAEBABBDBEADBBDAABBDDACDDECECECBB</span><span class="o">]</span>
-<span class="o">[</span><span class="n">AAEEDDBEDCBBCCABDAACEBBEBCCCCCABDDDBBAACCEDDCBBCEAAEEADBB</span><span class="o">]</span>
-<span class="o">[</span><span class="n">AADDEEDBBCCEEBBDEEDDAAAACDCDDCDBBEAADDEDDBB</span><span class="o">]</span></code></pre></figure>
+<span class="o">[</span><span class="no">AADDEDCBCAEBABBDBEADBBDAABBDDACDDECECECBB</span><span class="o">]</span>
+<span class="o">[</span><span class="no">AAEEDDBEDCBBCCABDAACEBBEBCCCCCABDDDBBAACCEDDCBBCEAAEEADBB</span><span class="o">]</span>
+<span class="o">[</span><span class="no">AADDEEDBBCCEEBBDEEDDAAAACDCDDCDBBEAADDEDDBB</span><span class="o">]</span></code></pre></figure>
 
 <h2 id="ilości-liter---statystyka">Ilości liter - statystyka</h2>
 <p>Trafiały się też zadania gdzie trzeba było znaleźć ilości liter w słowie i wykonać na tym różne operacje (np. sprawdzanie czy słowa są anagramami). Napisałem do tego taką funkcję, która zwraca tablicę z liczbą poszczególnych liter:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">countLetters</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">countLetters</span><span class="o">(</span><span class="nc">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">int</span><span class="o">[]</span> <span class="n">letters</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">26</span><span class="o">];</span><span class="c1">//26 liter w alfabecie
 </span>
     <span class="k">for</span> <span class="o">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">word</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++</span> <span class="o">)</span> <span class="o">{</span>
@@ -373,15 +371,15 @@ Warto wiedzieć też, że można inkrementować znaki!
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">char</span> <span class="n">a</span> <span class="o">=</span> <span class="sc">'A'</span><span class="o">;</span>
 <span class="n">a</span><span class="o">++;</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
 <span class="c1">//B</span></code></pre></figure>
 
 <p>Mając już taką wiedzę, możemy dostarczyć pełne statystyki jakiegoś tekstu. W jednym z zadań to własnie trzeba było zrobić. Najpierw wpakowałem wszystkie słowa do tablicy i następnie stworzyłem funkcję, która na podstawie podananej tablicy ze słowami, drukuje nam statystyki danego tekstu:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">letterStats</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">letterStats</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">int</span><span class="o">[]</span> <span class="n">lettersCount</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">26</span><span class="o">];</span>
     
-    <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">word</span> <span class="o">:</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">word</span> <span class="o">:</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
         
         <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">word</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
             <span class="n">lettersCount</span><span class="o">[</span><span class="n">word</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)-</span><span class="sc">'A'</span><span class="o">]++;</span>
@@ -389,43 +387,43 @@ Warto wiedzieć też, że można inkrementować znaki!
         <span class="o">}</span>
     <span class="o">}</span>
     
-    <span class="kt">double</span> <span class="n">numberOfallLetters</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">lettersCount</span><span class="o">).</span><span class="na">sum</span><span class="o">();</span>
+    <span class="kt">double</span> <span class="n">numberOfallLetters</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">lettersCount</span><span class="o">).</span><span class="na">sum</span><span class="o">();</span>
     <span class="kt">char</span> <span class="n">a</span> <span class="o">=</span> <span class="sc">'A'</span><span class="o">;</span>
     
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">count</span> <span class="o">:</span> <span class="n">lettersCount</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">double</span> <span class="n">percentage</span> <span class="o">=</span> <span class="n">count</span><span class="o">*</span><span class="mf">100.0</span><span class="o">/</span><span class="n">numberOfallLetters</span><span class="o">;</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">++</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">" ("</span> <span class="o">+</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">Locale</span><span class="o">.</span><span class="na">ROOT</span><span class="o">,</span> <span class="s">"%.2f"</span><span class="o">,</span> <span class="n">percentage</span><span class="o">)</span> <span class="o">+</span> <span class="s">"%)"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">++</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">" ("</span> <span class="o">+</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="nc">Locale</span><span class="o">.</span><span class="na">ROOT</span><span class="o">,</span> <span class="s">"%.2f"</span><span class="o">,</span> <span class="n">percentage</span><span class="o">)</span> <span class="o">+</span> <span class="s">"%)"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>A wyglądało to tak:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">A: 632 (7.55%)
-B: 196 (2.34%)
-C: 162 (1.94%)
-D: 422 (5.04%)
-E: 1093 (13.06%)
-F: 213 (2.55%)
-G: 151 (1.80%)
-H: 566 (6.76%)
-I: 522 (6.24%)
-J: 2 (0.02%)
-K: 64 (0.76%)
-L: 402 (4.80%)
-M: 193 (2.31%)
-N: 557 (6.66%)
-O: 641 (7.66%)
-P: 93 (1.11%)
-Q: 6 (0.07%)
-R: 524 (6.26%)
-S: 485 (5.80%)
-T: 792 (9.46%)
-U: 185 (2.21%)
-V: 84 (1.00%)
-W: 196 (2.34%)
-X: 3 (0.04%)
-Y: 185 (2.21%)
-Z: 0 (0.00%)</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">A: 632 <span class="o">(</span>7.55%<span class="o">)</span>
+B: 196 <span class="o">(</span>2.34%<span class="o">)</span>
+C: 162 <span class="o">(</span>1.94%<span class="o">)</span>
+D: 422 <span class="o">(</span>5.04%<span class="o">)</span>
+E: 1093 <span class="o">(</span>13.06%<span class="o">)</span>
+F: 213 <span class="o">(</span>2.55%<span class="o">)</span>
+G: 151 <span class="o">(</span>1.80%<span class="o">)</span>
+H: 566 <span class="o">(</span>6.76%<span class="o">)</span>
+I: 522 <span class="o">(</span>6.24%<span class="o">)</span>
+J: 2 <span class="o">(</span>0.02%<span class="o">)</span>
+K: 64 <span class="o">(</span>0.76%<span class="o">)</span>
+L: 402 <span class="o">(</span>4.80%<span class="o">)</span>
+M: 193 <span class="o">(</span>2.31%<span class="o">)</span>
+N: 557 <span class="o">(</span>6.66%<span class="o">)</span>
+O: 641 <span class="o">(</span>7.66%<span class="o">)</span>
+P: 93 <span class="o">(</span>1.11%<span class="o">)</span>
+Q: 6 <span class="o">(</span>0.07%<span class="o">)</span>
+R: 524 <span class="o">(</span>6.26%<span class="o">)</span>
+S: 485 <span class="o">(</span>5.80%<span class="o">)</span>
+T: 792 <span class="o">(</span>9.46%<span class="o">)</span>
+U: 185 <span class="o">(</span>2.21%<span class="o">)</span>
+V: 84 <span class="o">(</span>1.00%<span class="o">)</span>
+W: 196 <span class="o">(</span>2.34%<span class="o">)</span>
+X: 3 <span class="o">(</span>0.04%<span class="o">)</span>
+Y: 185 <span class="o">(</span>2.21%<span class="o">)</span>
+Z: 0 <span class="o">(</span>0.00%<span class="o">)</span></code></pre></figure>
 
 <p>I do tej pory to by było na tyle. Jeśli uzbieram większy zbiór przydatnych funkcji lub algorytmów, to przeleję to na kolejny wpis.</p>
 

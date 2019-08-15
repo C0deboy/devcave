@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -162,9 +160,9 @@
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">formDataElements</span> <span class="o">=</span> <span class="p">{};</span>
 
-<span class="kd">const</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.form-data'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">.form-data</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">inputs</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">el</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)]</span> <span class="o">=</span> <span class="nx">el</span><span class="p">;</span>
+    <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">)]</span> <span class="o">=</span> <span class="nx">el</span><span class="p">;</span>
 <span class="p">});</span></code></pre></figure>
 
 <p>Dzięki temu możemy w wygodny sposób operować na naszych elementach z wykorzystaniem pętli.</p>
@@ -176,24 +174,24 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
 <p>Nasze komunikaty o błędach teraz przechowywane są w jednym obiekcie JSON, aby można było je łatwiej modyfikować, a co najważniejsze, tylko w jednym miejscu. Dodatkowo posługuję się funkcjami strzałkowymi, które w czytelny sposób budują komunikat ze zmiennych podanych w ich parametrach.</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">customErrors</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'tooShort'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">min</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">"Pole "</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s2">" musi zawierać co najmniej "</span> <span class="o">+</span> <span class="nx">min</span> <span class="o">+</span> <span class="s2">" znaki!"</span><span class="p">,</span>
-    <span class="s1">'tooLong'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">"Pole "</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s2">" może zawierać co najwyżej "</span> <span class="o">+</span> <span class="nx">max</span> <span class="o">+</span> <span class="s2">" znaków!"</span><span class="p">,</span>
-    <span class="s1">'empty'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">"Pole "</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s2">" nie może być puste!"</span><span class="p">,</span>
-    <span class="s1">'type'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s2">"Pole "</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="s2">" jest niepoprawne!"</span><span class="p">,</span>
-    <span class="s1">'errorsInForm'</span><span class="p">:</span> <span class="s2">"W formularzu występują błędy!"</span><span class="p">,</span>
-    <span class="s1">'recaptcha'</span><span class="p">:</span> <span class="s2">"Potwierdź, że nie jesteś robotem!"</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">tooShort</span><span class="dl">'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">min</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">Pole </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> musi zawierać co najmniej </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">min</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> znaki!</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">tooLong</span><span class="dl">'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">Pole </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> może zawierać co najwyżej </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">max</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> znaków!</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">empty</span><span class="dl">'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">Pole </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> nie może być puste!</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">type</span><span class="dl">'</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">Pole </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">fieldName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> jest niepoprawne!</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">errorsInForm</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">W formularzu występują błędy!</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">recaptcha</span><span class="dl">'</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Potwierdź, że nie jesteś robotem!</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span></code></pre></figure>
 
 <p>Mniejsza zmiana dotknęła zamykania formularza, gdzie teraz wszystkie pola są czyszczone przez pętlę, a nie ręcznie:</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">input</span> <span class="k">in</span> <span class="nx">formDataElements</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">input</span><span class="p">].</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">input</span><span class="p">].</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>oraz również wartości inputów do wysłania pobierane są pętlą (z wyjątkiem recaptcha):</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'g-recaptcha-response'</span><span class="p">:</span> <span class="nx">grecaptcha</span><span class="p">.</span><span class="nx">getResponse</span><span class="p">(),</span>
+    <span class="dl">'</span><span class="s1">g-recaptcha-response</span><span class="dl">'</span><span class="p">:</span> <span class="nx">grecaptcha</span><span class="p">.</span><span class="nx">getResponse</span><span class="p">(),</span>
 <span class="p">};</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">el</span> <span class="k">in</span> <span class="nx">formDataElements</span><span class="p">)</span> <span class="p">{</span>
@@ -207,7 +205,7 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">sendEmail</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">el</span> <span class="k">in</span> <span class="nx">error</span><span class="p">.</span><span class="nx">responseJSON</span><span class="p">.</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">el</span> <span class="o">===</span> <span class="s1">'recaptcha'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">el</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">recaptcha</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">recaptcha</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">responseJSON</span><span class="p">.</span><span class="nx">errors</span><span class="p">[</span><span class="nx">el</span><span class="p">]);</span>
         <span class="p">}</span>
         <span class="k">else</span> <span class="p">{</span>
@@ -215,7 +213,7 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">customErrors</span><span class="p">[</span><span class="s1">'errorsInForm'</span><span class="p">];</span>
+    <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">customErrors</span><span class="p">[</span><span class="dl">'</span><span class="s1">errorsInForm</span><span class="dl">'</span><span class="p">];</span>
 <span class="p">});</span></code></pre></figure>
 
 <p>Podobnie wygląda walidacja po stronie JS. Tu każde pole jest sprawdzane za pomocą HTML5 validation API dla określonych reguł oraz generowane są wcześniej utworzone przez nas komunikaty.</p>
@@ -226,25 +224,25 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
 	    <span class="kd">const</span> <span class="nx">fieldName</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">innerText</span><span class="p">;</span>
 
 	    <span class="k">if</span> <span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valueMissing</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="s1">'empty'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">));</span>
+	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="dl">'</span><span class="s1">empty</span><span class="dl">'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">));</span>
 	    <span class="p">}</span>
 	    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">validity</span><span class="p">.</span><span class="nx">tooShort</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-	        <span class="kd">const</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'minlength'</span><span class="p">);</span>
-	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="s1">'tooShort'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">min</span><span class="p">));</span>
+	        <span class="kd">const</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">minlength</span><span class="dl">'</span><span class="p">);</span>
+	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="dl">'</span><span class="s1">tooShort</span><span class="dl">'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">min</span><span class="p">));</span>
 	    <span class="p">}</span>
 	    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">validity</span><span class="p">.</span><span class="nx">tooLong</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-	        <span class="kd">const</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'maxlength'</span><span class="p">);</span>
-	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="s1">'tooLong'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">max</span><span class="p">));</span>
+	        <span class="kd">const</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">maxlength</span><span class="dl">'</span><span class="p">);</span>
+	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="dl">'</span><span class="s1">tooLong</span><span class="dl">'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">max</span><span class="p">));</span>
 	    <span class="p">}</span>
 	    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">validity</span><span class="p">.</span><span class="nx">typeMismatch</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="s1">'type'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">));</span>
+	        <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">],</span> <span class="nx">customErrors</span><span class="p">[</span><span class="dl">'</span><span class="s1">type</span><span class="dl">'</span><span class="p">](</span><span class="nx">fieldName</span><span class="p">));</span>
 	    <span class="p">}</span>
 	    <span class="k">if</span> <span class="p">(</span><span class="nx">formDataElements</span><span class="p">[</span><span class="nx">el</span><span class="p">].</span><span class="nx">validity</span><span class="p">.</span><span class="nx">valid</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
 	        <span class="nx">valid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 	    <span class="p">}</span>
 	<span class="p">}</span>
 	<span class="k">if</span> <span class="p">(</span><span class="nx">grecaptcha</span><span class="p">.</span><span class="nx">getResponse</span><span class="p">().</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-	    <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">recaptcha</span><span class="p">,</span> <span class="nx">customErrors</span><span class="p">[</span><span class="s1">'recaptcha'</span><span class="p">]);</span>
+	    <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">recaptcha</span><span class="p">,</span> <span class="nx">customErrors</span><span class="p">[</span><span class="dl">'</span><span class="s1">recaptcha</span><span class="dl">'</span><span class="p">]);</span>
 	    <span class="nx">valid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 	<span class="p">}</span>
 	<span class="k">return</span> <span class="nx">valid</span><span class="p">;</span>
@@ -254,26 +252,26 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">markWrongInput</span><span class="p">(</span><span class="nx">wrongElement</span><span class="p">,</span> <span class="nx">alert</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">wrongElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">'wrongInput'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">wrongElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="dl">'</span><span class="s1">wrongInput</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="kd">const</span> <span class="nx">errorMessageEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
-    <span class="nx">errorMessageEl</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"error"</span><span class="p">);</span>
-    <span class="nx">errorMessageEl</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'wrongInput'</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">errorMessageEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">p</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">errorMessageEl</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">errorMessageEl</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">wrongInput</span><span class="dl">'</span><span class="p">);</span>
     <span class="nx">errorMessageEl</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">alert</span><span class="p">;</span>
 
     <span class="nx">wrongElement</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">errorMessageEl</span><span class="p">);</span>
-    <span class="nx">wrongElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'wrongInput'</span><span class="p">);</span>
-    <span class="nx">wrongElement</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"focus"</span><span class="p">,</span> <span class="nx">clearErrors</span><span class="p">);</span>
+    <span class="nx">wrongElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">wrongInput</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">wrongElement</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">focus</span><span class="dl">"</span><span class="p">,</span> <span class="nx">clearErrors</span><span class="p">);</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>I jak widać, odseparowałem funkcję do czyszczenia błędów, która jest uruchamiana, gdy pole uzyska focus:</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">clearErrors</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'wrongInput'</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">'error'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
-    <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">wrongInput</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>Osobno na callbacku od recaptchy musiałem podpiąć dla niej focus (tabindex wymagany), co aktywuje funkcję czyszczącą komunikat (clearErrors):</p>
@@ -284,7 +282,7 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
 <span class="c">&lt;!--...--&gt;</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">RecaptchaClearMsg</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.g-recaptcha'</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.g-recaptcha</span><span class="dl">'</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
 <span class="p">}</span></code></pre></figure>
 
 <h1 id="php">PHP</h1>
@@ -302,7 +300,7 @@ Używam tu anonimowych funkcji strzałkowych ( () =&gt; {} ), jest to składnia 
     <span class="nv">$validationMessages</span> <span class="o">=</span> <span class="p">(</span><span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/settings.php'</span><span class="p">)[</span><span class="s1">'validationMessages'</span><span class="p">];</span>
 
     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$rules</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$validator</span><span class="p">)</span> <span class="p">{</span>
-        <span class="sd">/** @var $validator Validator */</span>
+        <span class="cd">/** @var $validator Validator */</span>
         <span class="k">try</span> <span class="p">{</span>
             <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="nv">$key</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">assert</span><span class="p">(</span><span class="nv">$form</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">??</span> <span class="kc">null</span><span class="p">);</span>
         <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">NestedValidationException</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>

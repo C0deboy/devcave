@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -187,18 +185,18 @@
 <p>Weźmy na przykład taką oto klasę:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Goal</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">description</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">achieved</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Posiada 6 pól do zainicjowania, nie wszystkie są wymagane, ale część jest kluczowa. Jak w takim przypadku będzie wyglądał konstruktor, jeśli chcemy użyć tego podejścia?</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Goal</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">,</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">achieved</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Goal</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">,</span> <span class="nc">Checklist</span> <span class="n">checklist</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">achieved</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
     <span class="k">this</span><span class="o">.</span><span class="na">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="o">;</span>
     <span class="k">this</span><span class="o">.</span><span class="na">checklist</span> <span class="o">=</span> <span class="n">checklist</span><span class="o">;</span>
@@ -207,31 +205,31 @@
 </code></pre></div></div>
 <p>Nie jest źle, ilość wymaganych argumentów nie jest jeszcze przytłaczająca. Jak wygląda tworzenie instancji takiej klasy przez klienta?</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">));</span>
-<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">));</span>
-<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"25km"</span><span class="o">,</span> <span class="s">"New laptop"</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Level</span><span class="o">&gt;</span> <span class="n">levels</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">));</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">));</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Level</span><span class="o">(</span><span class="s">"25km"</span><span class="o">,</span> <span class="s">"New laptop"</span><span class="o">));</span>
 
-<span class="n">Checklist</span> <span class="n">checklist</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Checklist</span><span class="o">(</span><span class="s">"Todos"</span><span class="o">);</span>
-<span class="n">checklist</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="n">ListItem</span><span class="o">(</span><span class="s">"Buy shoes"</span><span class="o">));</span>
-<span class="n">checklist</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="n">ListItem</span><span class="o">(</span><span class="s">"Run every second day"</span><span class="o">));</span>
-<span class="n">checklist</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="n">ListItem</span><span class="o">(</span><span class="s">"Other"</span><span class="o">));</span>
+<span class="nc">Checklist</span> <span class="n">checklist</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Checklist</span><span class="o">(</span><span class="s">"Todos"</span><span class="o">);</span>
+<span class="n">checklist</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="nc">ListItem</span><span class="o">(</span><span class="s">"Buy shoes"</span><span class="o">));</span>
+<span class="n">checklist</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="nc">ListItem</span><span class="o">(</span><span class="s">"Run every second day"</span><span class="o">));</span>
+<span class="n">checklist</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="nc">ListItem</span><span class="o">(</span><span class="s">"Other"</span><span class="o">));</span>
 
 
-<span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">,</span> <span class="s">"My goal"</span><span class="o">,</span> <span class="n">levels</span><span class="o">,</span> <span class="n">checklist</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+<span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Goal</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">,</span> <span class="s">"My goal"</span><span class="o">,</span> <span class="n">levels</span><span class="o">,</span> <span class="n">checklist</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
 
 <span class="c1">//goal.setDeadline();  //Optional</span>
 </code></pre></div></div>
 <p>Opcjonalnymi i wymaganymi polami można łatwo zarządzać używając konstruktorów. Możemy przypisać im wartości domyślne, wymusić utworzenie obiektu z określonymi parametrami itd.. Jednak to co zaczyna być mało praktyczne to konstruktor:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">,</span> <span class="s">"My goal"</span><span class="o">,</span> <span class="n">levels</span><span class="o">,</span> <span class="n">checklist</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Goal</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">,</span> <span class="s">"My goal"</span><span class="o">,</span> <span class="n">levels</span><span class="o">,</span> <span class="n">checklist</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Ma 5 argumentów i zaczyna to być już mało czytelne. Szczególnie dla osoby, która nie pisała tego kodu. Po jakimś czasie i dla nas samych. Nie jest od razu jasne co jest czym. Przekazujemy jakieś dwa stringi, dwie listy i jakąś wartość boolean. Obecnie niektóre IDE np. InteliJ mają funkcje, które dopisują nazwę argumentu przed nim. Jest to małe ułatwienie, jednak nie powinniśmy na tym polegać. Kod powinien być czysty sam w sobie, a nie polegać na IDE.</p>
 
 <p>Użycie podejścia z bezargumentowym konstruktorem i setterami poprawia czytelność kodu:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Goal</span><span class="o">();</span>
 <span class="n">goal</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">);</span>
 <span class="n">goal</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">);</span>
 <span class="n">goal</span><span class="o">.</span><span class="na">setLevels</span><span class="o">(</span><span class="n">levels</span><span class="o">);</span>
@@ -248,52 +246,52 @@
 <h2 id="inner-static-fluent-builder">Inner Static Fluent Builder</h2>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Goal</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">description</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">achieved</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Builder</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="n">String</span> <span class="n">description</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
         <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">achieved</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">name</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">name</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">description</span><span class="o">(</span><span class="n">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">description</span><span class="o">(</span><span class="nc">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
            <span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">levels</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">levels</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="o">;</span>
             <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">checklist</span><span class="o">(</span><span class="n">Checklist</span> <span class="n">checklist</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">checklist</span><span class="o">(</span><span class="nc">Checklist</span> <span class="n">checklist</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">checklist</span> <span class="o">=</span> <span class="n">checklist</span><span class="o">;</span>
             <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">deadline</span><span class="o">(</span><span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">deadline</span><span class="o">(</span><span class="nc">LocalDate</span> <span class="n">deadline</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">deadline</span> <span class="o">=</span> <span class="n">deadline</span><span class="o">;</span>
             <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">achieved</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">achieved</span><span class="o">()</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">achieved</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
             <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">Goal</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Goal</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
             <span class="k">if</span><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span>
                <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Name cannot be empty"</span><span class="o">);</span>
             <span class="o">}</span>
@@ -301,7 +299,7 @@
                 <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Levels cannot be empty"</span><span class="o">);</span>
             <span class="o">}</span>
 
-            <span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">();</span>
+            <span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Goal</span><span class="o">();</span>
             <span class="n">goal</span><span class="o">.</span><span class="na">deadline</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">deadline</span><span class="o">;</span>
             <span class="n">goal</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
             <span class="n">goal</span><span class="o">.</span><span class="na">checklist</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">checklist</span><span class="o">;</span>
@@ -313,13 +311,13 @@
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
-<p>Kolejne metody służą do konfigurowania pól w klasie <code class="highlighter-rouge">Goal</code> (możemy przeprowadzić też w nich walidację), które zwracają obiekt buildera, aby umożliwić ciągłe wywoływanie kolejnych metod (Fluent API). Ostatnia z nich - <code class="highlight language-java" data-lang="java"><span class="kd">public</span> <span class="n">Goal</span> <span class="nf">build</span><span class="o">()</span></code> służy do zbudowania obiektu i najczęściej przed tym do zweryfikowania czy wszystkie wymagane pola zostały zainicjowane.</p>
+<p>Kolejne metody służą do konfigurowania pól w klasie <code class="highlighter-rouge">Goal</code> (możemy przeprowadzić też w nich walidację), które zwracają obiekt buildera, aby umożliwić ciągłe wywoływanie kolejnych metod (Fluent API). Ostatnia z nich - <code class="highlight language-java" data-lang="java"><span class="kd">public</span> <span class="nc">Goal</span> <span class="nf">build</span><span class="o">()</span></code> służy do zbudowania obiektu i najczęściej przed tym do zweryfikowania czy wszystkie wymagane pola zostały zainicjowane.</p>
 
 <p><strong>Istnieje też inny fajny sposób, aby wymusić ustawienie wszystkich pól w builderze</strong> - napisałem o tym osobny post <a href="https://bulldogjob.pl/news/348-idiotoodporne-api-klasy-czyli-jakie">idiotoodporne-api-klasy</a> dla <a href="https://bulldogjob.pl/">bulldogjob.pl</a>.</p>
 
 <p>Stosując wzorzec <em>builder</em> możemy zagwarantować, że stworzona zostanie poprawna i kompletna klasa, zachowując czysty i łatwy w użyciu kod. Instancjonowanie klasy wygląda wtedy tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Goal</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">levels</span><span class="o">(</span><span class="n">levels</span><span class="o">)</span>
@@ -329,16 +327,16 @@
 </code></pre></div></div>
 <p>Jak widać jest to dużo łatwiejsze do czytania jak i używania. Kolejne pola możemy podać w dowolnej kolejności, ze względu na wspomniane wcześniej <em>fluent API</em>.</p>
 
-<p>Osobiście dla mnie składnia <code class="highlight language-java" data-lang="java"><span class="k">new</span> <span class="n">Goal</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span></code> wygląda paskudnie, dlatego preferuję użyć tutaj <a href="/effective-java/static-factory-method-zamiast-konstruktora"><em>static factory method</em></a>, żeby uzyskać dostęp do buildera w statyczny sposób, bez użycia <em>new</em> :</p>
+<p>Osobiście dla mnie składnia <code class="highlight language-java" data-lang="java"><span class="k">new</span> <span class="nc">Goal</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span></code> wygląda paskudnie, dlatego preferuję użyć tutaj <a href="/effective-java/static-factory-method-zamiast-konstruktora"><em>static factory method</em></a>, żeby uzyskać dostęp do buildera w statyczny sposób, bez użycia <em>new</em> :</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">Builder</span> <span class="nf">builder</span><span class="o">()</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="nc">Builder</span> <span class="nf">builder</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nf">Builder</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>I wtedy <em>buildera</em> możemy używać tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="n">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="nc">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">levels</span><span class="o">(</span><span class="n">levels</span><span class="o">)</span>
@@ -370,19 +368,19 @@
 <p>Dodatkowym plusem jest to, że możemy dodawać elementy np. do list w dynamiczny sposób, zamiast wypełniać całą listę wcześniej i przekazywać ją do konstruktora. W przykładzie <em>buildera</em> można to zrobić np. dla listy poziomów:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//...</span>
-    <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">addLevel</span><span class="o">(</span><span class="n">Level</span> <span class="n">level</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">addLevel</span><span class="o">(</span><span class="nc">Level</span> <span class="n">level</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">level</span><span class="o">);</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="c1">//...</span>
 </code></pre></div></div>
 <p>i wtedy zamiast takiego podawania poziomów:</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">));</span>
-<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">));</span>
-<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"25km"</span><span class="o">,</span> <span class="s">"New laptop"</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Level</span><span class="o">&gt;</span> <span class="n">levels</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">));</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">));</span>
+<span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Level</span><span class="o">(</span><span class="s">"25km"</span><span class="o">,</span> <span class="s">"New laptop"</span><span class="o">));</span>
 
-<span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="n">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+<span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="nc">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">levels</span><span class="o">(</span><span class="n">levels</span><span class="o">)</span>
@@ -393,12 +391,12 @@
 
 <p>Można podać tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="n">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="nc">Goal</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
-    <span class="o">.</span><span class="na">addLevel</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">))</span>
-    <span class="o">.</span><span class="na">addLevel</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">))</span>
-    <span class="o">.</span><span class="na">addLevel</span><span class="o">(</span><span class="k">new</span> <span class="n">Level</span><span class="o">(</span><span class="s">"25km"</span><span class="o">,</span> <span class="s">"New laptop"</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">addLevel</span><span class="o">(</span><span class="k">new</span> <span class="nc">Level</span><span class="o">(</span><span class="s">"5km"</span><span class="o">,</span> <span class="s">"Cookie"</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">addLevel</span><span class="o">(</span><span class="k">new</span> <span class="nc">Level</span><span class="o">(</span><span class="s">"10km"</span><span class="o">,</span> <span class="s">"Wine"</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">addLevel</span><span class="o">(</span><span class="k">new</span> <span class="nc">Level</span><span class="o">(</span><span class="s">"25km"</span><span class="o">,</span> <span class="s">"New laptop"</span><span class="o">))</span>
     <span class="o">.</span><span class="na">checklist</span><span class="o">(</span><span class="n">checklist</span><span class="o">)</span>
     <span class="o">.</span><span class="na">achieved</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
@@ -411,21 +409,21 @@
 <p>Ten różni się od pierwszego tym, że <em>Builder</em> implementujemy jako osobną klasę:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">GoalBuilder</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">description</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Checklist</span> <span class="n">checklist</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">LocalDate</span> <span class="n">deadline</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">achieved</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">GoalBuilder</span> <span class="nf">name</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">GoalBuilder</span> <span class="nf">name</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="c1">//other methods..</span>
 
-    <span class="kd">public</span> <span class="n">Goal</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Goal</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
         <span class="c1">//...</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -441,7 +439,7 @@
 
 <p>Użycie wygląda podobnie:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GoalBuilder</span><span class="o">()</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GoalBuilder</span><span class="o">()</span>
         <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"Run the marathon"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"My goal"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">levels</span><span class="o">(</span><span class="n">levels</span><span class="o">)</span>
@@ -471,11 +469,11 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">DataScraper</span> <span class="o">{</span>
 
-  <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">);</span>
+  <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">);</span>
 
-  <span class="n">String</span> <span class="nf">getName</span><span class="o">();</span>
+  <span class="nc">String</span> <span class="nf">getName</span><span class="o">();</span>
 
-  <span class="n">JSONObject</span> <span class="nf">getData</span><span class="o">();</span>
+  <span class="nc">JSONObject</span> <span class="nf">getData</span><span class="o">();</span>
 
 <span class="o">}</span>
 </code></pre></div></div>
@@ -484,64 +482,64 @@
 
 <p><em>ConcreteBuilders</em>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GithubDataScraper</span> <span class="kd">implements</span> <span class="n">DataScraper</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NAME</span> <span class="o">=</span> <span class="s">"Github"</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">JSONObject</span><span class="o">&gt;</span> <span class="n">githubData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GithubDataScraper</span> <span class="kd">implements</span> <span class="nc">DataScraper</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">NAME</span> <span class="o">=</span> <span class="s">"Github"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">JSONObject</span><span class="o">&gt;</span> <span class="n">githubData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
        <span class="c1">//scraping implementation for Github</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-       <span class="k">return</span> <span class="n">NAME</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="no">NAME</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">JSONObject</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">JSONObject</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">JSONObject</span><span class="o">(</span><span class="n">githubData</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StackOverflowDataScraper</span> <span class="kd">implements</span> <span class="n">DataScraper</span> <span class="o">{</span>
-   <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NAME</span> <span class="o">=</span> <span class="s">"StackOverflow"</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">JSONObject</span><span class="o">&gt;</span> <span class="n">stackOverflowData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StackOverflowDataScraper</span> <span class="kd">implements</span> <span class="nc">DataScraper</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">NAME</span> <span class="o">=</span> <span class="s">"StackOverflow"</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">JSONObject</span><span class="o">&gt;</span> <span class="n">stackOverflowData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
 
    <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
       <span class="c1">//scraping implementation for StackOverflow</span>
    <span class="o">}</span>
 
    <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-       <span class="k">return</span> <span class="n">NAME</span><span class="o">;</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="no">NAME</span><span class="o">;</span>
    <span class="o">}</span>
 
    <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="n">JSONObject</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">JSONObject</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
        <span class="k">return</span> <span class="k">new</span> <span class="nf">JSONObject</span><span class="o">(</span><span class="n">stackOverflowData</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MeetupDataScraper</span> <span class="kd">implements</span> <span class="n">DataScraper</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NAME</span> <span class="o">=</span> <span class="s">"Meetup"</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">JSONObject</span><span class="o">&gt;</span> <span class="n">meetupData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MeetupDataScraper</span> <span class="kd">implements</span> <span class="nc">DataScraper</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">NAME</span> <span class="o">=</span> <span class="s">"Meetup"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">JSONObject</span><span class="o">&gt;</span> <span class="n">meetupData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scrapDataFor</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">//scraping implementation for Meetup</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">NAME</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="no">NAME</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">JSONObject</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">JSONObject</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">JSONObject</span><span class="o">(</span><span class="n">meetupData</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -551,14 +549,14 @@
 <p><em>Director</em>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Statistics</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">collectFor</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">collectFor</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">languages</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">languages</span> <span class="o">=</span> <span class="n">languages</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">JSONObject</span> <span class="nf">build</span><span class="o">(</span><span class="n">DataScraper</span> <span class="n">dataScraper</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">JSONObject</span> <span class="n">statistics</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="nc">JSONObject</span> <span class="nf">build</span><span class="o">(</span><span class="nc">DataScraper</span> <span class="n">dataScraper</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">JSONObject</span> <span class="n">statistics</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">();</span>
         <span class="n">dataScraper</span><span class="o">.</span><span class="na">scrapDataFor</span><span class="o">(</span><span class="n">languages</span><span class="o">);</span>
         <span class="n">statistics</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="n">dataScraper</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
         <span class="n">statistics</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"data"</span><span class="o">,</span> <span class="n">dataScraper</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
@@ -569,15 +567,15 @@
 <p>Tu jest nieco zmodyfikowana wersja. W książkowym przykładzie <em>Director</em> dostaje <em>Builder</em> w konstruktorze, jednak nie do końca rozumiem dlaczego tak jest. Wymusza to tworzenie nowej instancji <em>Directora</em> za każdym razem, gdy tworzymy nowy obiekt. Ja zaimplementowałem to tak, że używamy cały czas tego samego <em>Directora</em> do budowania różnych obiektów. A tak wygląda użycie przez klienta:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
-    <span class="n">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
+    <span class="nc">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
 
-    <span class="n">Statistics</span> <span class="n">statistics</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">();</span>
+    <span class="nc">Statistics</span> <span class="n">statistics</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">();</span>
     <span class="n">statistics</span><span class="o">.</span><span class="na">collectFor</span><span class="o">(</span><span class="n">languages</span><span class="o">);</span>
 
-    <span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">());</span>
-    <span class="n">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">MeetupDataScraper</span><span class="o">());</span>
-    <span class="n">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">StackOverflowDataScraper</span><span class="o">());</span>
-    <span class="n">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">SpectrumDataScraper</span><span class="o">());</span>
+    <span class="nc">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="nc">TiobeIndexDataScraper</span><span class="o">());</span>
+    <span class="nc">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="nc">MeetupDataScraper</span><span class="o">());</span>
+    <span class="nc">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="nc">StackOverflowDataScraper</span><span class="o">());</span>
+    <span class="nc">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="nc">SpectrumDataScraper</span><span class="o">());</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -585,44 +583,44 @@
 
 <p>Jeśli chciałbym to zrobić jak w książkowym przykładzie to wyglądałoby to tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
-<span class="n">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">MeetupDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
-<span class="n">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">StackOverflowDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
-<span class="n">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">SpectrumDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">TiobeIndexDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">MeetupDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">StackOverflowDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">SpectrumDataScraper</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
 </code></pre></div></div>
 
 <p>Tylko problem pojawia się w tym, że nie mam jak podać do <em>Directora</em> listy języków dla których ma zebrać dane. Musiałbym za każdym razem podawać go do konstruktora <em>Directora</em> lub <em>Scrapera</em>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
 
-<span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
-<span class="n">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">MeetupDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
-<span class="n">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">StackOverflowDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
-<span class="n">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">SpectrumDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">TiobeIndexDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">MeetupDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">StackOverflowDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">SpectrumDataScraper</span><span class="o">(),</span> <span class="n">languages</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
 </code></pre></div></div>
 
 <p>lub</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">languages</span> <span class="o">=</span> <span class="o">{</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"C++"</span><span class="o">,</span> <span class="s">"Java"</span><span class="o">,</span> <span class="s">"JavaScript"</span><span class="o">,</span> <span class="s">"Python"</span><span class="o">,</span> <span class="s">"Swift"</span><span class="o">,</span> <span class="s">"R"</span><span class="o">,</span> <span class="s">"Csharp"</span><span class="o">,</span> <span class="s">"Ruby"</span><span class="o">,</span> <span class="s">"PHP"</span><span class="o">};</span>
 
-<span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
-<span class="n">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">MeetupDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
-<span class="n">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">StackOverflowDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
-<span class="n">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">SpectrumDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">TiobeIndexDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">meetupStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">MeetupDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">stackOverFlowStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">StackOverflowDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">spectrumStats</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">SpectrumDataScraper</span><span class="o">(</span><span class="n">languages</span><span class="o">)).</span><span class="na">build</span><span class="o">();</span>
 </code></pre></div></div>
 
 <p>Co jest nieco nadmiarowe i przynajmniej w tym wypadku robienie nowej instancji <em>Directora</em> za każdym razem jest zbędne.</p>
 
 <p>Widziałem też przykłady gdzie wszystko było instancjonowane w osobnej linijce… Według mnie to <em>overkill</em> bo zamiast jednej linijki:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">());</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="k">new</span> <span class="nc">TiobeIndexDataScraper</span><span class="o">());</span>
 </code></pre></div></div>
 <p>byłoby coś takiego:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TiobeIndexDataScraper</span> <span class="n">tiobeIndexDataScraper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">();</span>
-<span class="n">Statistics</span> <span class="n">tiobeIndexDirector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="n">TiobeIndexDataScraper</span><span class="o">());</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TiobeIndexDataScraper</span> <span class="n">tiobeIndexDataScraper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TiobeIndexDataScraper</span><span class="o">();</span>
+<span class="nc">Statistics</span> <span class="n">tiobeIndexDirector</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Statistics</span><span class="o">(</span><span class="k">new</span> <span class="nc">TiobeIndexDataScraper</span><span class="o">());</span>
 <span class="n">tiobeIndexDirector</span><span class="o">.</span><span class="na">collectFor</span><span class="o">(</span><span class="n">languages</span><span class="o">):</span>
-<span class="n">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">tiobeIndexDirector</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">JSONObject</span> <span class="n">tiobeIndexStats</span> <span class="o">=</span> <span class="n">tiobeIndexDirector</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
 </code></pre></div></div>
 
 <p>To mówi chyba samo za siebie ;)</p>
@@ -635,7 +633,7 @@
 
 <p class="note">Gdyby w Javie występowały parametry nazwane (tak jak np. w Kotlinie), to ten wzorzec byłby zbędny. Można by powiedzieć, ze jest to bardziej obejście dla brakującej funkcjonalności języka niż wzorzec projektowy. Gdyby Java miała taki <em>feature</em> to wystarczyłoby użyć konstruktora:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Goal</span><span class="o">(</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Goal</span> <span class="n">goal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Goal</span><span class="o">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s">"Run the marathon"</span><span class="o">,</span>
     <span class="n">description</span><span class="o">=</span><span class="s">"My goal"</span><span class="o">,</span>
     <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="o">,</span>

@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -154,7 +152,7 @@
 
 <p>Metoda <code class="highlighter-rouge">toString</code> jest zdefiniowana w klasie <code class="highlighter-rouge">Object</code>, dzięki czemu wszystkie obiekty dostają jej domyślną implementację. Służy do zwracania tekstowej, czytelnej dla człowieka reprezentacji obiektu. Jednak domyślna implementacja nie jest zbyt użyteczna, bo wygląda tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getClass</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="sc">'@'</span> <span class="o">+</span> <span class="n">Integer</span><span class="o">.</span><span class="na">toHexString</span><span class="o">(</span><span class="n">hashCode</span><span class="o">());</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getClass</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="sc">'@'</span> <span class="o">+</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toHexString</span><span class="o">(</span><span class="n">hashCode</span><span class="o">());</span>
 </code></pre></div></div>
 <p>czyli zwracana jest nazwa klasy + @ + heksadecymalna reprezentacja <em>hash code</em>, np. <code class="highlighter-rouge">PhoneNumber@163b91</code>.</p>
 
@@ -175,7 +173,7 @@
 
 <p>Często przydaję się to do logowania informacji. Jeśli dostarczymy dobrą implementację <code class="highlighter-rouge">toString</code> dla przykładowej klasy <code class="highlighter-rouge">PhoneNumber</code>, to wystarczy podać obiekt:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Failed to connect to "</span> <span class="o">+</span> <span class="n">phoneNumber</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Failed to connect to "</span> <span class="o">+</span> <span class="n">phoneNumber</span><span class="o">);</span>
 </code></pre></div></div>
 <p>Nie trzeba za każdym razem ręcznie wyciągać i sklejać numeru z klasy.</p>
 
@@ -187,8 +185,8 @@
 
 <p><strong>Metoda <code class="highlighter-rouge">toString</code> powinna zawierać wszystkie kluczowe informacje zawarte w obiekcie</strong>. Nie chcielibyśmy, żeby coś było pominięte i na przykład podczas testowania zobaczyć taki błąd:</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Assertion failure: expected {abc, 123}, but was {abc, 123}.
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Assertion failure: expected {abc, 123}, but was {abc, 123}.
+</span></code></pre></div></div>
 
 <p><strong>Ważnym aspektem metody <code class="highlighter-rouge">toString</code>, który trzeba rozważyć to to, czy będzie miała określony stały format i będzie on określony w dokumentacji.</strong></p>
 
@@ -198,7 +196,7 @@
 
 <p>Dla przykładu klasa <code class="highlighter-rouge">Integer</code> udostępnia konstruktor z argumentem typu <code class="highlighter-rouge">String</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Integer</span> <span class="n">number</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="s">"123"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Integer</span> <span class="n">number</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Integer</span><span class="o">(</span><span class="s">"123"</span><span class="o">);</span>
 </code></pre></div></div>
 <p>Z drugiej strony, jeśli zdecydujemy się na stały format i nasza klasa będzie szeroko używana (np. jeśli jest częścią publicznej biblioteki), to jesteśmy z nim uwięzieni do końca życia i nie mamy opcji go zmienić. Jeśli w kolejnej aktualizacji zmienilibyśmy format, to popsulibyśmy każdą aplikację, która używała naszej klasy.</p>
 

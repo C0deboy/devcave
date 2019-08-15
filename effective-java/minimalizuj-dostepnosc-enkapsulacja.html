@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -329,7 +327,7 @@ Dzięki temu możemy pracować na nich równolegle, bez ryzyka uszkodzenia innyc
 
 <p>To samo tyczy się statycznych pól, z wyjątkiem stałych, które są integralną częścią abstrakcji klasy. Takie pola zazwyczaj upubliczniamy za pomocą <code class="highlighter-rouge">public static final</code> i przyjęło się je nazywać za pomocą drukowanych wyrazów rozdzielonymi podłogą, np.:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DAYS_IN_WEEK</span> <span class="o">=</span> <span class="mi">7</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">DAYS_IN_WEEK</span> <span class="o">=</span> <span class="mi">7</span><span class="o">;</span>
 </code></pre></div></div>
 <p>Ważne jest to, żeby takie pola zawierały tylko prymitywy lub referencje do obiektów <em>immutable</em>. Referencje do obiektów <em>mutable</em> mają wszystkie wady pola niezadeklarowanego jako <code class="highlighter-rouge">final</code>. Referencja nie może być zmieniona, ale sam obiekt już może.</p>
 
@@ -337,10 +335,10 @@ Dzięki temu możemy pracować na nich równolegle, bez ryzyka uszkodzenia innyc
 
 <p>Możemy rozwiązać ten problem zwracając w getterze kopię tablicy.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[]</span> <span class="n">PRIVATE_VALUES</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Thing</span><span class="o">[]</span> <span class="no">PRIVATE_VALUES</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[]</span> <span class="nf">values</span><span class="o">()</span> <span class="o">{</span>
-   <span class="k">return</span> <span class="n">PRIVATE_VALUES</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Thing</span><span class="o">[]</span> <span class="nf">values</span><span class="o">()</span> <span class="o">{</span>
+   <span class="k">return</span> <span class="no">PRIVATE_VALUES</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre></div></div>
 

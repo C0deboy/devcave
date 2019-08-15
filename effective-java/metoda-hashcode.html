@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -184,13 +182,13 @@
 
 <p>Teraz dla przykładu załóżmy, że będziemy chcieli użyć <code class="highlighter-rouge">PhoneNumber</code> z poprzedniego postu jako klucze w <code class="highlighter-rouge">HashMap</code> bez definiowania <code class="highlighter-rouge">hashCode</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-<span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="k">new</span> <span class="n">PhoneNumber</span><span class="o">(</span><span class="mi">707</span><span class="o">,</span> <span class="mi">867</span><span class="o">,</span> <span class="mi">5309</span><span class="o">),</span> <span class="s">"Jenny"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">PhoneNumber</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+<span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="k">new</span> <span class="nc">PhoneNumber</span><span class="o">(</span><span class="mi">707</span><span class="o">,</span> <span class="mi">867</span><span class="o">,</span> <span class="mi">5309</span><span class="o">),</span> <span class="s">"Jenny"</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Wydawałoby się, że wywołując:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="k">new</span> <span class="n">PhoneNumber</span><span class="o">(</span><span class="mi">707</span><span class="o">,</span> <span class="mi">867</span><span class="o">,</span> <span class="mi">5309</span><span class="o">))</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="k">new</span> <span class="nc">PhoneNumber</span><span class="o">(</span><span class="mi">707</span><span class="o">,</span> <span class="mi">867</span><span class="o">,</span> <span class="mi">5309</span><span class="o">))</span>
 </code></pre></div></div>
 
 <p>Dostaniemy <code class="highlighter-rouge">"Jenny"</code>, ale tak się nie stanie, bo dostaniemy <code class="highlighter-rouge">null</code>. Zauważ, że są używane dwie instancje <code class="highlighter-rouge">PhoneNumber</code>. Są one identyczne, ale z punktu widzenia <code class="highlighter-rouge">hashCode</code>, na którym bazuje <code class="highlighter-rouge">HashMap</code>, nie są.</p>
@@ -207,7 +205,7 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// One-line hashCode method - mediocre performance</span>
 <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">Objects</span><span class="o">.</span><span class="na">hash</span><span class="o">(</span><span class="n">lineNum</span><span class="o">,</span> <span class="n">prefix</span><span class="o">,</span> <span class="n">areaCode</span><span class="o">);</span>
+    <span class="k">return</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">hash</span><span class="o">(</span><span class="n">lineNum</span><span class="o">,</span> <span class="n">prefix</span><span class="o">,</span> <span class="n">areaCode</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -221,10 +219,10 @@
     <ol>
       <li>Przelicz hash code<code class="highlighter-rouge">c</code>:
         <ul>
-          <li>Jeśli jest to prymityw używaj <code class="highlight language-java" data-lang="java"><span class="n">Type</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">f</span><span class="o">)</span></code>, gdzie<code class="highlighter-rouge">Type</code> to odpowiednia klasa opakowująca. Np. dla int - <code class="highlight language-java" data-lang="java"><span class="n">Integer</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">f</span><span class="o">)</span></code>.</li>
+          <li>Jeśli jest to prymityw używaj <code class="highlight language-java" data-lang="java"><span class="nc">Type</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">f</span><span class="o">)</span></code>, gdzie<code class="highlighter-rouge">Type</code> to odpowiednia klasa opakowująca. Np. dla int - <code class="highlight language-java" data-lang="java"><span class="nc">Integer</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">f</span><span class="o">)</span></code>.</li>
           <li>Jeśli pole jest obiektem i w metodzie <code class="highlighter-rouge">equals</code> jest wywoływane <code class="highlighter-rouge">equals</code> tego obiektu, to analogicznie powinniśmy wywołaś <code class="highlighter-rouge">hashCode</code> tego obiektu.</li>
           <li>Jeśli pole jest <code class="highlighter-rouge">null</code> to użyj<code class="highlighter-rouge">0</code> .</li>
-          <li>Jeśli pole jest tablicą, to przelicz hash code dla każdego znaczącego elementu. Jeśli tablica nie ma znaczących pól, użyj stałej (ale nie<code class="highlighter-rouge">0</code>). Jeśli wszystkie elementy są znaczące użyj <code class="highlight language-java" data-lang="java"><span class="n">Arrays</span><span class="o">.</span><span class="na">hashCode</span></code>.</li>
+          <li>Jeśli pole jest tablicą, to przelicz hash code dla każdego znaczącego elementu. Jeśli tablica nie ma znaczących pól, użyj stałej (ale nie<code class="highlighter-rouge">0</code>). Jeśli wszystkie elementy są znaczące użyj <code class="highlight language-java" data-lang="java"><span class="nc">Arrays</span><span class="o">.</span><span class="na">hashCode</span></code>.</li>
         </ul>
       </li>
       <li>Połącz hash code<code class="highlighter-rouge">c</code>policzony w kroku 2.1 z <code class="highlighter-rouge">result</code> w następujący sposób <code class="highlight language-java" data-lang="java"><span class="n">result</span> <span class="o">=</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">c</span><span class="o">;</span></code>.</li>
@@ -241,9 +239,9 @@
 <p>Aplikując powyższe wskazówki metoda <code class="highlighter-rouge">hashCode</code> klasy <code class="highlighter-rouge">PhoneNumber</code> będzie wyglądać tak:</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Typical hashCode method</span>
 <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">Short</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">areaCode</span><span class="o">);</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">Short</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">prefix</span><span class="o">);</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">Short</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">lineNum</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">Short</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">areaCode</span><span class="o">);</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="nc">Short</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">prefix</span><span class="o">);</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="nc">Short</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">lineNum</span><span class="o">);</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>

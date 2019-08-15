@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -168,11 +166,11 @@
 
 <p>Metody te mają swoje domyślne zachowania, ale najczęściej, jeśli ich potrzebujemy, to je nadpisujemy. <strong>Prawidłowa implementacja tych metod jest szczególnie ważna, bo wiele innych klas na nich polega, dlatego warto poświęcić im chwilę.</strong></p>
 
-<p>W tym wpisie zajmiemy się metodą <code class="highlight language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span></code>, która, jak sama nazwa wskazuje, służy do określania czy dany obiekt jest równy innemu, według określonych przez nas warunków.</p>
+<p>W tym wpisie zajmiemy się metodą <code class="highlight language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">obj</span><span class="o">)</span></code>, która, jak sama nazwa wskazuje, służy do określania czy dany obiekt jest równy innemu, według określonych przez nas warunków.</p>
 
 <p>Domyślnie implementacja wygląda tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">obj</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -192,7 +190,7 @@
 <p>Jeśli chcemy być ekstremalnie ostrożni, to możemy się upewnić, że metoda <code class="highlighter-rouge">equals</code> nie zostanie nigdy wywołana (zgodnie z założeniami):</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">();</span> <span class="c1">// Method is never called</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -235,10 +233,10 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Broken - violates Liskov substitution principle (page 43)</span>
 <span class="nd">@Override</span> 
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">o</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">getClass</span><span class="o">())</span>
         <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="n">Point</span> <span class="n">p</span> <span class="o">=</span> <span class="o">(</span><span class="n">Point</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+    <span class="nc">Point</span> <span class="n">p</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Point</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
     <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="na">x</span> <span class="o">==</span> <span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">.</span><span class="na">y</span> <span class="o">==</span> <span class="n">y</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -251,25 +249,25 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Adds a value component without violating the equals contract</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColorPoint</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Point</span> <span class="n">point</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Color</span> <span class="n">color</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Point</span> <span class="n">point</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Color</span> <span class="n">color</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">ColorPoint</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="n">Color</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">point</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Point</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">color</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="nf">ColorPoint</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="nc">Color</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">color</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="cm">/**
     * Returns the point-view of this color point.
     */</span>
-    <span class="kd">public</span> <span class="n">Point</span> <span class="nf">asPoint</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Point</span> <span class="nf">asPoint</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">point</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">ColorPoint</span><span class="o">))</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="nc">ColorPoint</span><span class="o">))</span>
             <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="n">ColorPoint</span> <span class="n">cp</span> <span class="o">=</span> <span class="o">(</span><span class="n">ColorPoint</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+        <span class="nc">ColorPoint</span> <span class="n">cp</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ColorPoint</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
         <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="na">point</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">point</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">cp</span><span class="o">.</span><span class="na">color</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">color</span><span class="o">);</span>
     <span class="o">}</span>
 
@@ -298,9 +296,9 @@
     <ul>
       <li>Dla prymitywów z wyjątkiem <code class="highlighter-rouge">float</code> i <code class="highlighter-rouge">double</code> używaj operatora <code class="highlighter-rouge">==</code> do porównywania.</li>
       <li>Dla pól przechowujących referencje do obiektów wywołuj ich <code class="highlighter-rouge">equals</code>.</li>
-      <li>Dla pól typu <code class="highlighter-rouge">float</code> używaj metody <code class="highlight language-java" data-lang="java"><span class="n">Float</span><span class="o">.</span><span class="na">compare</span></code>, a dla <code class="highlighter-rouge">double</code> używaj <code class="highlight language-java" data-lang="java"><span class="n">Double</span><span class="o">.</span><span class="na">compare</span></code>.</li>
-      <li>Dla tablic stosuj te wskazówki dla każdego elementu. Jeśli każdy element tablicy ma znaczenie, użyj metody <code class="highlight language-java" data-lang="java"><span class="n">Arrays</span><span class="o">.</span><span class="na">equals</span></code>.</li>
-      <li>Niektóre z pól mogą być <code class="highlighter-rouge">null</code>. Aby uniknąć <code class="highlighter-rouge">NullPointerException</code> użyj do porównywania <code class="highlight language-java" data-lang="java"><span class="n">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">Object</span><span class="o">,</span> <span class="n">Object</span><span class="o">)</span></code>.</li>
+      <li>Dla pól typu <code class="highlighter-rouge">float</code> używaj metody <code class="highlight language-java" data-lang="java"><span class="nc">Float</span><span class="o">.</span><span class="na">compare</span></code>, a dla <code class="highlighter-rouge">double</code> używaj <code class="highlight language-java" data-lang="java"><span class="nc">Double</span><span class="o">.</span><span class="na">compare</span></code>.</li>
+      <li>Dla tablic stosuj te wskazówki dla każdego elementu. Jeśli każdy element tablicy ma znaczenie, użyj metody <code class="highlight language-java" data-lang="java"><span class="nc">Arrays</span><span class="o">.</span><span class="na">equals</span></code>.</li>
+      <li>Niektóre z pól mogą być <code class="highlighter-rouge">null</code>. Aby uniknąć <code class="highlighter-rouge">NullPointerException</code> użyj do porównywania <code class="highlight language-java" data-lang="java"><span class="nc">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="nc">Object</span><span class="o">,</span> <span class="nc">Object</span><span class="o">)</span></code>.</li>
       <li>Wydajność metody <code class="highlighter-rouge">equals</code> zależy od kolejności kolejnych sprawdzeń. Aby uzyskać najlepszą wydajność, najpierw sprawdzaj pola, które najczęściej będą się różnić i ich porównywanie jest mniej kosztowne.</li>
       <li>Nie porównuj obiektów, które nie są częścią stanu logicznego obiektu.</li>
       <li>Nie porównuj pól, które są pochodnymi innych (ich wynik zależy od innych pól, które już sprawdzasz).</li>
@@ -320,18 +318,18 @@
         <span class="k">this</span><span class="o">.</span><span class="na">lineNum</span>  <span class="o">=</span> <span class="n">rangeCheck</span><span class="o">(</span><span class="n">lineNum</span><span class="o">,</span>  <span class="mi">9999</span><span class="o">,</span> <span class="s">"line num"</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">short</span> <span class="nf">rangeCheck</span><span class="o">(</span><span class="kt">int</span> <span class="n">val</span><span class="o">,</span> <span class="kt">int</span> <span class="n">max</span><span class="o">,</span> <span class="n">String</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">short</span> <span class="nf">rangeCheck</span><span class="o">(</span><span class="kt">int</span> <span class="n">val</span><span class="o">,</span> <span class="kt">int</span> <span class="n">max</span><span class="o">,</span> <span class="nc">String</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span>
            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="n">arg</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">val</span><span class="o">);</span>
         <span class="k">return</span> <span class="o">(</span><span class="kt">short</span><span class="o">)</span> <span class="n">val</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span>
             <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">PhoneNumber</span><span class="o">))</span>
+        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="nc">PhoneNumber</span><span class="o">))</span>
             <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="n">PhoneNumber</span> <span class="n">pn</span> <span class="o">=</span> <span class="o">(</span><span class="n">PhoneNumber</span><span class="o">)</span><span class="n">o</span><span class="o">;</span>
+        <span class="nc">PhoneNumber</span> <span class="n">pn</span> <span class="o">=</span> <span class="o">(</span><span class="nc">PhoneNumber</span><span class="o">)</span><span class="n">o</span><span class="o">;</span>
         <span class="k">return</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNum</span> <span class="o">==</span> <span class="n">lineNum</span> <span class="o">&amp;&amp;</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span> <span class="o">==</span> <span class="n">prefix</span>
                 <span class="o">&amp;&amp;</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span> <span class="o">==</span> <span class="n">areaCode</span><span class="o">;</span>
     <span class="o">}</span>

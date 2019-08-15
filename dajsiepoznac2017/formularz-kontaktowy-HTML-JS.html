@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -273,12 +271,12 @@ nieprawidłowa domena dla klucza witryny".
 
 <p>Wczytujemy wszystkie elementy formularza:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'from'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="kd">const</span> <span class="nx">subject</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'subject'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">'message'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="kd">const</span> <span class="nx">recaptcha</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">".g-recaptcha"</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">formAlert</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">".emailFormAlert"</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">contactForm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#contact'</span><span class="p">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="dl">'</span><span class="s1">from</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">subject</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="dl">'</span><span class="s1">subject</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">recaptcha</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.g-recaptcha</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">formAlert</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.emailFormAlert</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">contactForm</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#contact</span><span class="dl">'</span><span class="p">);</span></code></pre></figure>
 
 <p class="note">
 Część za pomocą JS, jeden za pomocą JQuery. Ma to znaczenie, ponieważ metody Jquery są dostępne tylko dla obiektów JQuery. I odwrotnie. Metody JS są dostępne tylko dla obieków JS'a.
@@ -287,25 +285,25 @@ Część za pomocą JS, jeden za pomocą JQuery. Ma to znaczenie, ponieważ meto
 <p>I tworzymy funkcję, która w zależności od podanego argumentu true/false, otworzy lub zamknie formularz. Gdy wywołane zostanie zamknięcie dodatkowo czyści pola i resetuje reCAPTCHE (posiada również mały test, który sprawdza czy podany argument jest wartością true/false):</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">function</span> <span class="nx">toggleContactForm</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">state</span> <span class="o">!==</span> <span class="s1">'boolean'</span><span class="p">)</span> <span class="k">return</span> <span class="nx">TypeError</span><span class="p">(</span><span class="s1">'State must be a boolean'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">state</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span><span class="p">)</span> <span class="k">return</span> <span class="nx">TypeError</span><span class="p">(</span><span class="dl">'</span><span class="s1">State must be a boolean</span><span class="dl">'</span><span class="p">);</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">state</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">contactForm</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">();</span>
     <span class="p">}</span>
     <span class="k">else</span> <span class="p">{</span>
       <span class="nx">contactForm</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">();</span>
-      <span class="nx">userEmail</span><span class="p">.</span><span class="nx">value</span><span class="o">=</span><span class="s1">''</span><span class="p">;</span>
-      <span class="nx">subject</span><span class="p">.</span><span class="nx">value</span><span class="o">=</span><span class="s1">''</span><span class="p">;</span>
-      <span class="nx">message</span><span class="p">.</span><span class="nx">value</span><span class="o">=</span><span class="s1">''</span><span class="p">;</span>
-      <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">''</span><span class="p">;</span>
+      <span class="nx">userEmail</span><span class="p">.</span><span class="nx">value</span><span class="o">=</span><span class="dl">''</span><span class="p">;</span>
+      <span class="nx">subject</span><span class="p">.</span><span class="nx">value</span><span class="o">=</span><span class="dl">''</span><span class="p">;</span>
+      <span class="nx">message</span><span class="p">.</span><span class="nx">value</span><span class="o">=</span><span class="dl">''</span><span class="p">;</span>
+      <span class="nx">formAlert</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="dl">''</span><span class="p">;</span>
       <span class="nx">grecaptcha</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span></code></pre></figure>
 
 <p>oraz dwie funkcje dla przycisków, które po kliknięciu otwierają/zamykają formularz. Pobierzemy również przyciski do stałych, gdyż póżniej będziemy je jeszcze wykorzystywać, więc nie ma sensu za każdym razem robić nowego odwołania:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">closeContactBtn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#close-contact-btn'</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">openContactBtn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#open-contact-btn'</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">closeContactBtn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#close-contact-btn</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">openContactBtn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#open-contact-btn</span><span class="dl">'</span><span class="p">);</span>
 
   <span class="nx">openContactBtn</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nx">toggleContactForm</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>

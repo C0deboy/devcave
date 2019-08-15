@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -159,18 +157,18 @@
 
 <p>Tak więc dodajemy obsługę kliknięcia:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.dark-mode-btn'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">darkMode</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">'dark-mode'</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.dark-mode-btn</span><span class="dl">'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">darkMode</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="dl">'</span><span class="s1">dark-mode</span><span class="dl">'</span><span class="p">);</span>
   <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span>
-  <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'dark-mode'</span><span class="p">,</span> <span class="nx">darkMode</span><span class="p">);</span>
+  <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">dark-mode</span><span class="dl">'</span><span class="p">,</span> <span class="nx">darkMode</span><span class="p">);</span>
 <span class="p">});</span></code></pre></figure>
 
 <p><code class="highlight language-javascript" data-lang="javascript"><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span></code> odznacza przycisk po kliknięciu, bez tego byłby aktywny.</p>
 
 <p>Poza tym, przy otwieraniu strony powinien zostać wczytany zapamiętany wybór i zmieniony motyw jeśli jest taka potrzeba:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">'dark-mode'</span><span class="p">)))</span> <span class="p">{</span>
-  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'dark-mode'</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">dark-mode</span><span class="dl">'</span><span class="p">)))</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">dark-mode</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>U mnie klasa CSS zmieniającą motyw jest aż tak prosta:</p>
@@ -186,9 +184,11 @@
     <span class="py">key</span><span class="p">:</span> <span class="n">property</span><span class="p">;</span>
     <span class="py">key</span><span class="p">:</span> <span class="n">property</span><span class="p">;</span>
     <span class="py">key</span><span class="p">:</span> <span class="n">property</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
 
-<span class="nt">W</span> <span class="nt">rezultacie</span> <span class="nt">te</span> <span class="nt">warto</span><span class="err">ś</span><span class="nt">ci</span> <span class="nt">b</span><span class="err">ę</span><span class="nt">d</span><span class="err">ą</span> <span class="nt">si</span><span class="err">ę</span> <span class="nt">za</span><span class="err">łą</span><span class="nt">cza</span><span class="err">ć</span> <span class="nt">tylko</span> <span class="nt">wtedy</span><span class="o">,</span> <span class="nt">kiedy</span> <span class="nt">body</span> <span class="nt">b</span><span class="err">ę</span><span class="nt">dzie</span> <span class="nt">mia</span><span class="err">ł</span><span class="nt">o</span> <span class="nt">klas</span><span class="err">ę</span> <span class="o">&lt;</span><span class="nt">code</span> <span class="nt">class</span><span class="o">=</span><span class="s1">"highlight"</span><span class="o">&gt;&lt;</span><span class="nt">span</span> <span class="nt">class</span><span class="o">=</span><span class="s1">"na"</span><span class="o">&gt;</span><span class="nc">.dark-mode</span><span class="o">&lt;/</span><span class="nt">span</span><span class="o">&gt;&lt;/</span><span class="nt">code</span><span class="o">&gt;.</span></code></pre></figure>
+<p>W rezultacie te wartości będą się załączać tylko wtedy, kiedy body będzie miało klasę:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;code</span> <span class="na">class=</span><span class="s">"highlight"</span><span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">"na"</span><span class="nt">&gt;</span>.dark-mode<span class="nt">&lt;/span&gt;&lt;/code&gt;</span></code></pre></figure>
 
 <h1 id="dostosowywanie-strony-do-zmian">Dostosowywanie strony do zmian</h1>
 

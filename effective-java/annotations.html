@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -202,9 +200,9 @@
  * Indicates that the annotated method is a test method.
  * Use only on parameterless static methods.
  */</span>
-<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
-<span class="nd">@Target</span><span class="o">(</span><span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">Test</span> <span class="o">{</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Test</span> <span class="o">{</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -256,25 +254,25 @@
 <span class="kn">import</span> <span class="nn">java.lang.reflect.*</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">RunTests</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
         <span class="kt">int</span> <span class="n">tests</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="kt">int</span> <span class="n">passed</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">testClass</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">Method</span> <span class="n">m</span> <span class="o">:</span> <span class="n">testClass</span><span class="o">.</span><span class="na">getDeclaredMethods</span><span class="o">())</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">isAnnotationPresent</span><span class="o">(</span><span class="n">Test</span><span class="o">.</span><span class="na">class</span><span class="o">))</span> <span class="o">{</span>
+        <span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">testClass</span> <span class="o">=</span> <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Method</span> <span class="n">m</span> <span class="o">:</span> <span class="n">testClass</span><span class="o">.</span><span class="na">getDeclaredMethods</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">isAnnotationPresent</span><span class="o">(</span><span class="nc">Test</span><span class="o">.</span><span class="na">class</span><span class="o">))</span> <span class="o">{</span>
                 <span class="n">tests</span><span class="o">++;</span>
                 <span class="k">try</span> <span class="o">{</span>
                     <span class="n">m</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
                     <span class="n">passed</span><span class="o">++;</span>
-                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InvocationTargetException</span> <span class="n">wrappedExc</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">Throwable</span> <span class="n">exc</span> <span class="o">=</span> <span class="n">wrappedExc</span><span class="o">.</span><span class="na">getCause</span><span class="o">();</span>
-                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m</span> <span class="o">+</span> <span class="s">" failed: "</span> <span class="o">+</span> <span class="n">exc</span><span class="o">);</span>
-                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Invalid @Test: "</span> <span class="o">+</span> <span class="n">m</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InvocationTargetException</span> <span class="n">wrappedExc</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="nc">Throwable</span> <span class="n">exc</span> <span class="o">=</span> <span class="n">wrappedExc</span><span class="o">.</span><span class="na">getCause</span><span class="o">();</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m</span> <span class="o">+</span> <span class="s">" failed: "</span> <span class="o">+</span> <span class="n">exc</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Invalid @Test: "</span> <span class="o">+</span> <span class="n">m</span><span class="o">);</span>
                 <span class="o">}</span>
             <span class="o">}</span>
         <span class="o">}</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Passed: %d, Failed: %d%n"</span><span class="o">,</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Passed: %d, Failed: %d%n"</span><span class="o">,</span>
                           <span class="n">passed</span><span class="o">,</span> <span class="n">tests</span> <span class="o">-</span> <span class="n">passed</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -297,10 +295,10 @@ Passed: 1, Failed: 3
  * Indicates that the annotated method is a test method that
  * must throw the designated exception to succeed.
  */</span>
-<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
-<span class="nd">@Target</span><span class="o">(</span><span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">ExceptionTest</span> <span class="o">{</span>
-    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Throwable</span><span class="o">&gt;</span> <span class="nf">value</span><span class="o">();</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">ExceptionTest</span> <span class="o">{</span>
+    <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Throwable</span><span class="o">&gt;</span> <span class="nf">value</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -308,41 +306,41 @@ Passed: 1, Failed: 3
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Program containing annotations with a parameter</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sample2</span> <span class="o">{</span>
-    <span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">ArithmeticException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="nd">@ExceptionTest</span><span class="o">(</span><span class="nc">ArithmeticException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m1</span><span class="o">()</span> <span class="o">{</span>  <span class="c1">// Test should pass</span>
         <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">i</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">ArithmeticException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="nd">@ExceptionTest</span><span class="o">(</span><span class="nc">ArithmeticException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m2</span><span class="o">()</span> <span class="o">{</span>  <span class="c1">// Should fail (wrong exception)</span>
         <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
         <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
     <span class="o">}</span>
-    <span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">ArithmeticException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="nd">@ExceptionTest</span><span class="o">(</span><span class="nc">ArithmeticException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">m3</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>  <span class="c1">// Should fail (no exception)</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Trzeba też obsłużyć nową adnotację w <em>runnerze</em>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">isAnnotationPresent</span><span class="o">(</span><span class="n">ExceptionTest</span><span class="o">.</span><span class="na">class</span><span class="o">))</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">isAnnotationPresent</span><span class="o">(</span><span class="nc">ExceptionTest</span><span class="o">.</span><span class="na">class</span><span class="o">))</span> <span class="o">{</span>
     <span class="n">tests</span><span class="o">++;</span>
     <span class="k">try</span> <span class="o">{</span>
         <span class="n">m</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Test %s failed: no exception%n"</span><span class="o">,</span> <span class="n">m</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InvocationTargetException</span> <span class="n">wrappedEx</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Throwable</span> <span class="n">exc</span> <span class="o">=</span> <span class="n">wrappedEx</span><span class="o">.</span><span class="na">getCause</span><span class="o">();</span>
-        <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Throwable</span><span class="o">&gt;</span> <span class="n">excType</span> <span class="o">=</span>
-            <span class="n">m</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="n">ExceptionTest</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">value</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Test %s failed: no exception%n"</span><span class="o">,</span> <span class="n">m</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InvocationTargetException</span> <span class="n">wrappedEx</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Throwable</span> <span class="n">exc</span> <span class="o">=</span> <span class="n">wrappedEx</span><span class="o">.</span><span class="na">getCause</span><span class="o">();</span>
+        <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Throwable</span><span class="o">&gt;</span> <span class="n">excType</span> <span class="o">=</span>
+            <span class="n">m</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="nc">ExceptionTest</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">value</span><span class="o">();</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">excType</span><span class="o">.</span><span class="na">isInstance</span><span class="o">(</span><span class="n">exc</span><span class="o">))</span> <span class="o">{</span>
             <span class="n">passed</span><span class="o">++;</span>
         <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span>
                 <span class="s">"Test %s failed: expected %s, got %s%n"</span><span class="o">,</span>
                 <span class="n">m</span><span class="o">,</span> <span class="n">excType</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">exc</span><span class="o">);</span>
         <span class="o">}</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Invalid @Test: "</span> <span class="o">+</span> <span class="n">m</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Invalid @Test: "</span> <span class="o">+</span> <span class="n">m</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -352,10 +350,10 @@ Passed: 1, Failed: 3
 <p>Adnotacje wspierają również dostarczenie na raz kilku elementów. Wystarczy zamienić zwracany typ przez metodę <code class="highlighter-rouge">value</code> na tablice:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Annotation type with an array parameter</span>
-<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
-<span class="nd">@Target</span><span class="o">(</span><span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">ExceptionTest</span> <span class="o">{</span>
-    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Exception</span><span class="o">&gt;[]</span> <span class="nf">value</span><span class="o">();</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">ExceptionTest</span> <span class="o">{</span>
+    <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Exception</span><span class="o">&gt;[]</span> <span class="nf">value</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>Co więcej wszystkie poprzednie definicje adnotacji (z jednym parametrem) dalej będą poprawne, bo składnia jest elastyczna - po prostu będą potraktowane jako jednoelementowa tablica.</p>
@@ -363,9 +361,9 @@ Passed: 1, Failed: 3
 <p>Chcąc podać kilka, używamy dodatkowych nawiasów i wypisujemy je po przecinku:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Code containing an annotation with an array parameter</span>
-<span class="nd">@ExceptionTest</span><span class="o">({</span> <span class="n">IndexOutOfBoundsException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">NullPointerException</span><span class="o">.</span><span class="na">class</span> <span class="o">})</span>
+<span class="nd">@ExceptionTest</span><span class="o">({</span> <span class="nc">IndexOutOfBoundsException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">NullPointerException</span><span class="o">.</span><span class="na">class</span> <span class="o">})</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">doublyBad</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 
     <span class="c1">// The spec permits this method to throw either</span>
     <span class="c1">// IndexOutOfBoundsException or NullPointerException</span>
@@ -375,8 +373,8 @@ Passed: 1, Failed: 3
 
 <p class="note">Od Javy 8 jest też inny sposób, aby podać kilka argumentów. Możemy oznaczyć naszą adnotację za pomocą <code class="highlighter-rouge">@Repeatable</code>, która oznacza, że adnotacja może być wielokrotnie użyta na jednym elemencie, jednak wymaga to dodatkowej uwagi przy obsłudze. Można jej wtedy używać w ten sposób:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">IndexOutOfBoundsException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-<span class="nd">@ExceptionTest</span><span class="o">(</span><span class="n">NullPointerException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionTest</span><span class="o">(</span><span class="nc">IndexOutOfBoundsException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@ExceptionTest</span><span class="o">(</span><span class="nc">NullPointerException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">doublyBad</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 </code></pre></div></div>
 
@@ -396,7 +394,7 @@ Passed: 1, Failed: 3
         <span class="k">this</span><span class="o">.</span><span class="na">second</span> <span class="o">=</span> <span class="n">second</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Bigram</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Bigram</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="na">first</span> <span class="o">==</span> <span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">.</span><span class="na">second</span> <span class="o">==</span> <span class="n">second</span><span class="o">;</span>
     <span class="o">}</span>
 

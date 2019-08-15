@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -208,42 +206,42 @@
 <p>Dla przykładu program, który tworzy instancje <code class="highlighter-rouge">Set&lt;String&gt;</code>, której klasa jest podawana jako pierwszy argument w cmd. Pozostałe argumenty lądują w tym secie i są printowane na konsolę. Kolejność, w jakiej będą pokazane, zależy od implementacji setu np. jeśli podamy <code class="highlighter-rouge">HashSet</code> to kolejność będzie losowa, a gdy <code class="highlighter-rouge">TreeSet</code> to będzie alfabetycznie:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Reflective instantiation with interface access</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// Translate the class name into a Class object</span>
-    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">cl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">cl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
     <span class="k">try</span> <span class="o">{</span>
-        <span class="n">cl</span> <span class="o">=</span> <span class="o">(</span><span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;)</span>  <span class="c1">// Unchecked cast!</span>
-                <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;)</span>  <span class="c1">// Unchecked cast!</span>
+                <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">fatalError</span><span class="o">(</span><span class="s">"Class not found."</span><span class="o">);</span>
     <span class="o">}</span>
     <span class="c1">// Get the constructor</span>
-    <span class="n">Constructor</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">cons</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="nc">Constructor</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">cons</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
     <span class="k">try</span> <span class="o">{</span>
         <span class="n">cons</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">();</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">fatalError</span><span class="o">(</span><span class="s">"No parameterless constructor"</span><span class="o">);</span>
     <span class="o">}</span>
     <span class="c1">// Instantiate the set</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
     <span class="k">try</span> <span class="o">{</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">cons</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">fatalError</span><span class="o">(</span><span class="s">"Constructor not accessible"</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InstantiationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InstantiationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">fatalError</span><span class="o">(</span><span class="s">"Class not instantiable."</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InvocationTargetException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InvocationTargetException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">fatalError</span><span class="o">(</span><span class="s">"Constructor threw "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getCause</span><span class="o">());</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassCastException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ClassCastException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">fatalError</span><span class="o">(</span><span class="s">"Class doesn't implement Set"</span><span class="o">);</span>
     <span class="o">}</span>
     <span class="c1">// Exercise the set</span>
-    <span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">fatalError</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">fatalError</span><span class="o">(</span><span class="nc">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>Np. dla argumentów <code class="highlighter-rouge">java.util.TreeSet b c d g i s a</code> dostalibyśmy w wyniku <code class="highlighter-rouge">[a, b, c, d, g, i, s]</code>.</p>
@@ -251,28 +249,28 @@
 <p>Ten przykład pokazuję też jak kod refleksji jest rozwlekły i ile wymaga boilerplateru - generuje aż 6 różnych wyjątków. Można by je jednak zredukować, łapiąc <code class="highlighter-rouge">ReflectiveOperationException</code>, który jest nadklasą wyjątków refleksji i został dodany w Javie 7. Używając refleksji dostajemy też wiele <em>unchecked cast warning</em>. Więc ignorując poszczególne wyjątki otrzymalibyśmy taki kod:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Reflective instantiation with interface access</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="c1">// Translate the class name into a Class object</span>
-    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">cl</span><span class="o">;</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">cl</span><span class="o">;</span>
+    <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
     <span class="k">try</span> <span class="o">{</span>
-        <span class="n">cl</span> <span class="o">=</span> <span class="o">(</span><span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;)</span>  <span class="c1">// Unchecked cast!</span>
-            <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;)</span>  <span class="c1">// Unchecked cast!</span>
+            <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
         <span class="c1">// Get the constructor</span>
-        <span class="n">Constructor</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">cons</span><span class="o">;</span>
+        <span class="nc">Constructor</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">cons</span><span class="o">;</span>
         <span class="n">cons</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">();</span>
         <span class="c1">// Instantiate the set</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">cons</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
         <span class="c1">// Exercise the set</span>
-        <span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ReflectiveOperationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Constructor not accessible"</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ReflectiveOperationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Constructor not accessible"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 

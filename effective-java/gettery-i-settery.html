@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -215,16 +213,16 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Public class with exposed immutable fields - questionable</span>
 <span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Time</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">HOURS_PER_DAY</span> <span class="o">=</span> <span class="mi">24</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">MINUTES_PER_HOUR</span> <span class="o">=</span> <span class="mi">60</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">HOURS_PER_DAY</span> <span class="o">=</span> <span class="mi">24</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">MINUTES_PER_HOUR</span> <span class="o">=</span> <span class="mi">60</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">hour</span><span class="o">;</span>
     <span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">minute</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="nf">Time</span><span class="o">(</span><span class="kt">int</span> <span class="n">hour</span><span class="o">,</span> <span class="kt">int</span> <span class="n">minute</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">hour</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">hour</span> <span class="o">&gt;=</span> <span class="n">HOURS_PER_DAY</span><span class="o">)</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">hour</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">hour</span> <span class="o">&gt;=</span> <span class="no">HOURS_PER_DAY</span><span class="o">)</span>
             <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">"Hour: "</span> <span class="o">+</span> <span class="n">hour</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">minute</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">minute</span> <span class="o">&gt;=</span> <span class="n">MINUTES_PER_HOUR</span><span class="o">)</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">minute</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">minute</span> <span class="o">&gt;=</span> <span class="no">MINUTES_PER_HOUR</span><span class="o">)</span>
             <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">"Min: "</span> <span class="o">+</span> <span class="n">minute</span><span class="o">);</span>
         <span class="k">this</span><span class="o">.</span><span class="na">hour</span> <span class="o">=</span> <span class="n">hour</span><span class="o">;</span>
         <span class="k">this</span><span class="o">.</span><span class="na">minute</span> <span class="o">=</span> <span class="n">minute</span><span class="o">;</span>
@@ -237,11 +235,11 @@
 
 <p>Jeśli chodzi o kwestię nazewniczą getterów i setterów, to nie zawsze powinny to być nazwy zaczynające się od <em>set</em> lub <em>get</em>. Jeśli istnieje inne słowo, które lepiej pasuje do wykonywanej czynności, to powinniśmy je użyć. Jest to bardziej zgodne z OOP. Dla przykładu:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dog</span><span class="o">.</span><span class="na">take</span><span class="o">(</span><span class="k">new</span> <span class="n">Ball</span><span class="o">());</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dog</span><span class="o">.</span><span class="na">take</span><span class="o">(</span><span class="k">new</span> <span class="nc">Ball</span><span class="o">());</span>
 </code></pre></div></div>
 <p>ma dużo więcej sensu niż:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dog</span><span class="o">.</span><span class="na">setBall</span><span class="o">(</span><span class="k">new</span> <span class="n">Ball</span><span class="o">());</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dog</span><span class="o">.</span><span class="na">setBall</span><span class="o">(</span><span class="k">new</span> <span class="nc">Ball</span><span class="o">());</span>
 </code></pre></div></div>
 <p>No może z wyjątkiem, gdy klasa (w tym przypadku <code class="highlighter-rouge">Dog</code>) jest tylko rekordem w bazie danych.</p>
 

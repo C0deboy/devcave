@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -185,21 +183,21 @@
 <h2 id="konfiguracja">Konfiguracja</h2>
 <p>Potrzebny będzie nam plik konfiguracyjny <span class="file">.eslintrc.json </span>. Możemy automatycznie go wygenerować za pomocą polecenia:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">node_modules\.bin\eslint --init</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">node_modules<span class="se">\.</span>bin<span class="se">\e</span>slint <span class="nt">--init</span></code></pre></figure>
 
 <p>i odpowiedzi na kilka pytań. Teraz możemy dodać skrypt NPM dla ESlinta, który będziemy mogli uruchamiać w terminalu.</p>
 
 <p>W naszym pliku powinien się znajdować już jeden skrypt (jeśli zostawiliśmy pytanie “test command” puste):</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">"scripts": {
-    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
-},</code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span></code></pre></figure>
 
 <p>Możemy edytować ten lub dodać nowy:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">"scripts": {
-    "lint": "eslint js/*.js"
-},</code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"lint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eslint js/*.js"</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span></code></pre></figure>
 
 <p>Dzięki temu skryptowi będziemy mogli w konsoli uruchomić polecenie:</p>
 
@@ -217,10 +215,10 @@ Jeśli używasz PHPStorm lub WebStorm to znajdziesz taką opcję w: File | Setti
 Jeśli ESLint zgłasza błedy z elementów Jquery(np. $), DOM(np. document) dodaj do pliku <span class="file">.eslintrc.json </span>
 informację:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">  "env": {
-    "browser": true,
-    "jquery": true
-  },</code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="w">  </span><span class="nl">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"jquery"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="err">,</span></code></pre></figure>
 
 
       </div>

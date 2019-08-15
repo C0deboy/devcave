@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -181,7 +179,7 @@
 
 <p>Dla przykładu weźmy <code class="highlighter-rouge">java.util.concurrent.DelayQueue</code>. Jej deklaracja wygląda tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">DelayQueue</span><span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Delayed</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">DelayQueue</span><span class="o">&lt;</span><span class="no">E</span> <span class="kd">extends</span> <span class="nc">Delayed</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">BlockingQueue</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span>
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">&lt;E extends Delayed&gt;</code> oznacza, że przekazywana klasa musi być podtypem <code class="highlighter-rouge">java.util.concurrent.Delayed</code>. Dzięki temu możemy używać metod zdefiniowanych w tej klasie bez potrzeby castowania.</p>
@@ -190,15 +188,15 @@
 
 <p>Podobnie można tego użyć w deklaracjach metod.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">DelayQueue</span><span class="o">&gt;</span> <span class="kt">void</span>  <span class="nf">someMethod</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="o">&lt;</span><span class="no">E</span> <span class="kd">extends</span> <span class="nc">DelayQueue</span><span class="o">&gt;</span> <span class="kt">void</span>  <span class="nf">someMethod</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">//...</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Możemy również ograniczać typ rekursywnie, używając kolejnego typu zawierającego ten parametr typu. Nazywa się to <em>recursive type bound</em>. Często jest to używane w połączeniu z interfejsem <code class="highlighter-rouge">Comparable</code> (który był już <a href="/effective-java/interfejs-comparable">omawiany</a>):</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">T</span> <span class="n">o</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="no">T</span> <span class="n">o</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -207,20 +205,20 @@
 <p>Wiele metod przyjmuje kolekcje elementów implementujących Comparable, aby ją sortować, przeszukiwać czy kalkulować max/min. Te obiekty muszą być wzajemnie porównywalne, aby było to możliwe. Można to wymusić w ten sposób:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using a recursive type bound to express mutual comparability</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="n">E</span> <span class="nf">max</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">E</span> <span class="kd">extends</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;&gt;</span> <span class="no">E</span> <span class="nf">max</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Cała metoda do wyciągania maksymalnej wartości mogłaby wyglądać tak:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Returns max value in a collection - uses recursive type bound</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="n">E</span> <span class="nf">max</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">E</span> <span class="kd">extends</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;&gt;</span> <span class="no">E</span> <span class="nf">max</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">"Empty collection"</span><span class="o">);</span>
 
-    <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span>
+    <span class="no">E</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="no">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">e</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">result</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
 
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 <span class="o">}</span>
@@ -233,16 +231,16 @@
 <p>Przywołajmy jako przykład jeszcze raz klasę <code class="highlighter-rouge">Stack</code>. Załóżmy, że chcemy dodać metodę, która dodaje do stosu wszystkie elementy z innej kolekcji. Pierwszą próbą mogłoby być coś takiego:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// pushAll method without wildcard type - deficient!</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">pushAll</span><span class="o">(</span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">src</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">pushAll</span><span class="o">(</span><span class="nc">Iterable</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="no">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">src</span><span class="o">)</span>
         <span class="n">push</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Jednak nie jest to do końca elastyczne rozwiązanie. Jeśli typ elementu z <code class="highlighter-rouge">Iterable</code> jest identyczny tym z <code class="highlighter-rouge">Stack</code> to wszystko jest ok. Jeśli jednak będziemy mięć np. <code class="highlighter-rouge">Stack&lt;Number&gt;</code>, to nie będziemy mogli dodać kolekcji integerów, mimo że <code class="highlighter-rouge">Integer</code> jest podtypem <code class="highlighter-rouge">Number</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">numberStack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;();</span>
-<span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">integers</span> <span class="o">=</span> <span class="o">...</span> <span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;</span> <span class="n">numberStack</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+<span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">integers</span> <span class="o">=</span> <span class="o">...</span> <span class="o">;</span>
 <span class="n">numberStack</span><span class="o">.</span><span class="na">pushAll</span><span class="o">(</span><span class="n">integers</span><span class="o">);</span>
 </code></pre></div></div>
 
@@ -257,8 +255,8 @@ cannot be converted to Iterable&lt;Number&gt;
 <p>I tu z pomocą przychodzi <em>bounded wildcard type</em>. Typ przyjmowanego argumentu nie powinien być “Iterable typu E” tylko “Iterable jakiegoś podtypu E” - zapisuje się to w ten sposób: ` Iterable&lt;? extends E&gt;`:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Wildcard type for a parameter that serves as an E producer</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">pushAll</span><span class="o">(</span><span class="n">Iterable</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">src</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">pushAll</span><span class="o">(</span><span class="nc">Iterable</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="no">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">src</span><span class="o">)</span>
         <span class="n">push</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -270,7 +268,7 @@ cannot be converted to Iterable&lt;Number&gt;
 <p>W ten sposób można by na przykład zaimplementować metodę, która wyciąga wszystkie wartości do innej kolekcji.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Wildcard type for parameter that serves as an E consumer</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">popAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">dst</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">popAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">E</span><span class="o">&gt;</span> <span class="n">dst</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">while</span> <span class="o">(!</span><span class="n">isEmpty</span><span class="o">())</span>
         <span class="n">dst</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pop</span><span class="o">());</span>
 <span class="o">}</span>
@@ -289,14 +287,14 @@ cannot be converted to Iterable&lt;Number&gt;
 
 <p>Podobnie moglibyśmy ulepszyć funkcję <code class="highlighter-rouge">union</code> z poprzedniego wpisu:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="o">(</span><span class="nc">Set</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="nc">Set</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>Co umożliwia nam wtedy takie użycie:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">integers</span> <span class="o">=</span> <span class="n">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
-<span class="n">Set</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">doubles</span> <span class="o">=</span> <span class="n">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mf">2.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">,</span> <span class="mf">6.0</span><span class="o">);</span>
-<span class="n">Set</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">union</span><span class="o">(</span><span class="n">integers</span><span class="o">,</span> <span class="n">doubles</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">integers</span> <span class="o">=</span> <span class="nc">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+<span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="n">doubles</span> <span class="o">=</span> <span class="nc">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mf">2.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">,</span> <span class="mf">6.0</span><span class="o">);</span>
+<span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">union</span><span class="o">(</span><span class="n">integers</span><span class="o">,</span> <span class="n">doubles</span><span class="o">);</span>
 </code></pre></div></div>
 
 <div class="note">
@@ -316,7 +314,7 @@ cannot be converted to Iterable&lt;Number&gt;
   <p>Jest to spowodowane tym, że przed Javą 8 wnioskowanie typów nie było na tyle inteligentne, aby wywnioskować, że zwracany typ <code class="highlighter-rouge">E</code> to <code class="highlighter-rouge">Set&lt;Number&gt;</code>. W takiej sytuacji trzeba podać typ argumentu bezpośrednio, co nie jest zbyt ładne:</p>
 
   <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Explicit type parameter - required prior to Java 8</span>
-<span class="n">Set</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">Union</span><span class="o">.&lt;</span><span class="n">Number</span><span class="o">&gt;</span><span class="n">union</span><span class="o">(</span><span class="n">integers</span><span class="o">,</span> <span class="n">doubles</span><span class="o">);</span>
+<span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="nc">Union</span><span class="o">.&lt;</span><span class="nc">Number</span><span class="o">&gt;</span><span class="n">union</span><span class="o">(</span><span class="n">integers</span><span class="o">,</span> <span class="n">doubles</span><span class="o">);</span>
 </code></pre></div>  </div>
 
 </div>
@@ -325,7 +323,7 @@ cannot be converted to Iterable&lt;Number&gt;
 
 <p>Aplikując <em>wildcard types</em> do naszej metody <code class="highlighter-rouge">max</code> z poprzednich rozdziałów, która wyciąga największą wartość z listy, dostaniemy takiego potworka:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">T</span> <span class="nf">max</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;&gt;</span> <span class="no">T</span> <span class="nf">max</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>Dzięki temu wspieramy typy, które nie implementują <code class="highlighter-rouge">Comparable</code> bezpośrednio, ale rozszerzają typ, który to robi. Na pierwszy rzut oka jest to mało czytelne, ale nie spotkamy się z takimi deklaracjami zbyt często - najczęściej tego typu złożoność występuje pod spodem bibliotek.</p>

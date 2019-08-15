@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -235,20 +233,20 @@
 
 <p>Niemożliwe jest utworzenie niestatycznej klasy wewnętrznej bez instancji klasy, w której się znajduje, więc najpierw trzeba ją stworzyć:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Outer</span> <span class="n">outer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Outer</span><span class="o">();</span>
-<span class="n">Outer</span><span class="o">.</span><span class="na">Inner</span> <span class="n">inner</span> <span class="o">=</span> <span class="n">outer</span><span class="o">.</span><span class="na">new</span> <span class="nf">Inner</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Outer</span> <span class="n">outer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Outer</span><span class="o">();</span>
+<span class="nc">Outer</span><span class="o">.</span><span class="na">Inner</span> <span class="n">inner</span> <span class="o">=</span> <span class="n">outer</span><span class="o">.</span><span class="na">new</span> <span class="nf">Inner</span><span class="o">();</span>
 </code></pre></div></div>
 
 <p class="note">Jeśli mielibyśmy takie same nazwy metod w obu klasach, to moglibyśmy uzyskać referencję do tej <em>top-level</em> używając tzw. <em>qualified this</em>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Enclosing</span> <span class="o">{</span>
   <span class="kt">void</span> <span class="nf">x</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
   <span class="o">}</span>
 
   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Inner</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">x</span><span class="o">()</span> <span class="o">{</span>
-      <span class="n">Enclosing</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">x</span><span class="o">();</span> <span class="c1">// Qualified this, prints "Hello"</span>
+      <span class="nc">Enclosing</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">x</span><span class="o">();</span> <span class="c1">// Qualified this, prints "Hello"</span>
     <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -256,15 +254,15 @@
 
 <p>Takie klasy często używane są do implementacji Adaptera (Wzorzec projektowy), który pozwala na użycie klasy jako jakiejś innej niepowiązanej klasy. Dla przykładu, implementacje interfejsu <code class="highlighter-rouge">Map</code> używają niestatycznej klasy wewnętrznej, aby zaimplementować różne widoki kolekcji, które są zwracane przez metody <code class="highlighter-rouge">keySet</code>, <code class="highlighter-rouge">entrySet</code>, i <code class="highlighter-rouge">values</code>. Podobnie implementacje <code class="highlighter-rouge">Set</code> i <code class="highlighter-rouge">List</code> używają ich do implementacji iteratorów. Wygląda to mniej więcej tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MySet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MySet</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">AbstractSet</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="c1">// Bulk of the class omitted</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Iterator</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">MyIterator</span><span class="o">();</span>
     <span class="o">}</span>
 
-    <span class="kd">private</span> <span class="kd">class</span> <span class="nc">MyIterator</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">class</span> <span class="nc">MyIterator</span> <span class="kd">implements</span> <span class="nc">Iterator</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
         <span class="c1">//...</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -301,7 +299,7 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnonymousInnerTest</span> <span class="o">{</span>
      
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">SimpleAbstractClass</span> <span class="n">simpleAbstractClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleAbstractClass</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">SimpleAbstractClass</span> <span class="n">simpleAbstractClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleAbstractClass</span><span class="o">()</span> <span class="o">{</span>
             <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
                 <span class="c1">// method implementation</span>
             <span class="o">}</span>
@@ -319,17 +317,17 @@
 
 <p>Przykład takiego użycia:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"New Thread started."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"New Thread started."</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">});</span>
 </code></pre></div></div>
 
 <p>I z to samo z wykorzystaniem lambdy:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"New Thread started"</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"New Thread started"</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>Chyba nie trzeba tłumaczyć dlaczego lambdy są preferowane ;)</p>
@@ -353,13 +351,13 @@
                 <span class="c1">// method implementation</span>
             <span class="o">}</span>
         <span class="o">}</span>
-        <span class="n">Local</span> <span class="n">local</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Local</span><span class="o">();</span>
+        <span class="nc">Local</span> <span class="n">local</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Local</span><span class="o">();</span>
         <span class="n">local</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
     <span class="o">}</span>
      
     <span class="nd">@Test</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">NewEnclosing</span> <span class="n">newEnclosing</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NewEnclosing</span><span class="o">();</span>
+        <span class="nc">NewEnclosing</span> <span class="n">newEnclosing</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NewEnclosing</span><span class="o">();</span>
         <span class="n">newEnclosing</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>

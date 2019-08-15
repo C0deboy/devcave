@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -241,23 +239,23 @@ argument, np. chcąc policzyć minimum. Musielibyśmy wtedy dodać specjalne spr
 <p>Czasem można spotkać metody podobne do tej:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Returns null to indicate an empty collection. Don't do this!</span>
-<span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Cheese</span><span class="o">&gt;</span> <span class="n">cheesesInStock</span> <span class="o">=</span> <span class="o">...;</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Cheese</span><span class="o">&gt;</span> <span class="n">cheesesInStock</span> <span class="o">=</span> <span class="o">...;</span>
 
 <span class="cm">/**
  * @return a list containing all of the cheeses in the shop,
  *     or null if no cheeses are available for purchase.
  */</span>
-<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Cheese</span><span class="o">&gt;</span> <span class="nf">getCheeses</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Cheese</span><span class="o">&gt;</span> <span class="nf">getCheeses</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">cheesesInStock</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">?</span> <span class="kc">null</span>
-        <span class="o">:</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">cheesesInStock</span><span class="o">);</span>
+        <span class="o">:</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">cheesesInStock</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Nie ma powodu, aby traktować puste kolekcje w specjalny sposób i zwracać null, jeśli są puste. Na pewno nie jest to też dobra praktyka. Dodatkowo zmusza to klienta, by obsłużyć tę sytuację w miejscach, gdzie normalnie by tego nie robił:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Cheese</span><span class="o">&gt;</span> <span class="n">cheeses</span> <span class="o">=</span> <span class="n">shop</span><span class="o">.</span><span class="na">getCheeses</span><span class="o">();</span>
-<span class="k">if</span> <span class="o">(</span><span class="n">cheesdes</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cheeses</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">Cheese</span><span class="o">.</span><span class="na">STILTON</span><span class="o">))</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Jolly good, just the thing."</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Cheese</span><span class="o">&gt;</span> <span class="n">cheeses</span> <span class="o">=</span> <span class="n">shop</span><span class="o">.</span><span class="na">getCheeses</span><span class="o">();</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">cheesdes</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cheeses</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="nc">Cheese</span><span class="o">.</span><span class="na">STILTON</span><span class="o">))</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Jolly good, just the thing."</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Argumenty typu, że powinny być preferowane nulle, ponieważ wtedy nie alokujemy pamięci na pusty kontener, nie mają sensu w dzisiejszych aplikacjach. Martwienie się wydajnością na tym poziomie jest zbędną przedwczesną optymalizacją, która w 95% nie przyniesie żadnej korzyści.</p>
@@ -283,17 +281,17 @@ argument, np. chcąc policzyć minimum. Musielibyśmy wtedy dodać specjalne spr
 <p>Przykładowe użycie:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Returns maximum value in collection as an Optional&lt;E&gt;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span>
-        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">max</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">E</span> <span class="kd">extends</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;&gt;</span>
+        <span class="nc">Optional</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nf">max</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
-        <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
+        <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
         
-    <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span>
+    <span class="no">E</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="no">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">e</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">result</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
 
-    <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+    <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -310,13 +308,13 @@ argument, np. chcąc policzyć minimum. Musielibyśmy wtedy dodać specjalne spr
 <p>Optionale oferują nam do dyspozycji kilka pomocnych metod, które pozwalają pisać zwięzły kod. Np.: możemy podać domyślną wartość:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using an optional to provide a chosen default value</span>
-<span class="n">String</span> <span class="n">lastWordInLexicon</span> <span class="o">=</span> <span class="n">max</span><span class="o">(</span><span class="n">words</span><span class="o">).</span><span class="na">orElse</span><span class="o">(</span><span class="s">"No words..."</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">lastWordInLexicon</span> <span class="o">=</span> <span class="n">max</span><span class="o">(</span><span class="n">words</span><span class="o">).</span><span class="na">orElse</span><span class="o">(</span><span class="s">"No words..."</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>lub rzucić wyjątkiem:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using an optional to throw a chosen exception</span>
-<span class="n">Toy</span> <span class="n">myToy</span> <span class="o">=</span> <span class="n">max</span><span class="o">(</span><span class="n">toys</span><span class="o">).</span><span class="na">orElseThrow</span><span class="o">(</span><span class="nl">TemperTantrumException:</span><span class="o">:</span><span class="k">new</span><span class="o">);</span>
+<span class="nc">Toy</span> <span class="n">myToy</span> <span class="o">=</span> <span class="n">max</span><span class="o">(</span><span class="n">toys</span><span class="o">).</span><span class="na">orElseThrow</span><span class="o">(</span><span class="nl">TemperTantrumException:</span><span class="o">:</span><span class="k">new</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p class="note">Zauważ, że podawana jest referencja do konstruktora, więc wyjątek nie zostanie utworzony, dopóki nie zajdzie taka potrzeba.</p>
@@ -327,15 +325,15 @@ argument, np. chcąc policzyć minimum. Musielibyśmy wtedy dodać specjalne spr
 
 <p>Warto znać te inne metody, bo czasem można zwięźle zastąpić nimi zwykłe sprawdzania <code class="highlighter-rouge">isPresent</code>. Dla przykładu metoda, która pokazuje ID parenta danego procesu lub N/A, jeśli go nie ma:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">ProcessHandle</span><span class="o">&gt;</span> <span class="n">parentProcess</span> <span class="o">=</span> <span class="n">ph</span><span class="o">.</span><span class="na">parent</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Parent PID: "</span> <span class="o">+</span> <span class="o">(</span><span class="n">parentProcess</span><span class="o">.</span><span class="na">isPresent</span><span class="o">()</span> <span class="o">?</span>
-    <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">parentProcess</span><span class="o">.</span><span class="na">get</span><span class="o">().</span><span class="na">pid</span><span class="o">())</span> <span class="o">:</span> <span class="s">"N/A"</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">ProcessHandle</span><span class="o">&gt;</span> <span class="n">parentProcess</span> <span class="o">=</span> <span class="n">ph</span><span class="o">.</span><span class="na">parent</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Parent PID: "</span> <span class="o">+</span> <span class="o">(</span><span class="n">parentProcess</span><span class="o">.</span><span class="na">isPresent</span><span class="o">()</span> <span class="o">?</span>
+    <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">parentProcess</span><span class="o">.</span><span class="na">get</span><span class="o">().</span><span class="na">pid</span><span class="o">())</span> <span class="o">:</span> <span class="s">"N/A"</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>A tak wygląda to samo z wykorzystaniem metody <code class="highlighter-rouge">map</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Parent PID: "</span> <span class="o">+</span>
-  <span class="n">ph</span><span class="o">.</span><span class="na">parent</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">h</span> <span class="o">-&gt;</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">h</span><span class="o">.</span><span class="na">pid</span><span class="o">())).</span><span class="na">orElse</span><span class="o">(</span><span class="s">"N/A"</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Parent PID: "</span> <span class="o">+</span>
+  <span class="n">ph</span><span class="o">.</span><span class="na">parent</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">h</span> <span class="o">-&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">h</span><span class="o">.</span><span class="na">pid</span><span class="o">())).</span><span class="na">orElse</span><span class="o">(</span><span class="s">"N/A"</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>Optionalów nie powinno się używać do opakowywania kolekcji, podobnie jak w przypadku zwracania null, gdy są puste.</p>

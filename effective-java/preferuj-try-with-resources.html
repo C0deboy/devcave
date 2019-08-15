@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -169,8 +167,8 @@
 <p>Kiedyś (przed Java 7), najlepszym sposobem na poprawne zamknięcie zasobów było <em>try-finally</em>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// try-finally - No longer the best way to close resources!</span>
-<span class="kd">static</span> <span class="n">String</span> <span class="nf">firstLineOfFile</span><span class="o">(</span><span class="n">String</span> <span class="n">path</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-    <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">path</span><span class="o">));</span>
+<span class="kd">static</span> <span class="nc">String</span> <span class="nf">firstLineOfFile</span><span class="o">(</span><span class="nc">String</span> <span class="n">path</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+    <span class="nc">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="n">path</span><span class="o">));</span>
     <span class="k">try</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
     <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
@@ -184,12 +182,12 @@
 <p>Nie wygląda to źle, ale z każdym kolejnym zasobem jest coraz gorzej:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// try-finally is ugly when used with more than one resource!</span>
-<span class="kd">static</span> <span class="kt">void</span> <span class="nf">copy</span><span class="o">(</span><span class="n">String</span> <span class="n">src</span><span class="o">,</span> <span class="n">String</span> <span class="n">dst</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">src</span><span class="o">);</span>
+<span class="kd">static</span> <span class="kt">void</span> <span class="nf">copy</span><span class="o">(</span><span class="nc">String</span> <span class="n">src</span><span class="o">,</span> <span class="nc">String</span> <span class="n">dst</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+    <span class="nc">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">src</span><span class="o">);</span>
     <span class="k">try</span> <span class="o">{</span>
-        <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">dst</span><span class="o">);</span>
+        <span class="nc">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">dst</span><span class="o">);</span>
         <span class="k">try</span> <span class="o">{</span>
-            <span class="kt">byte</span><span class="o">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">BUFFER_SIZE</span><span class="o">];</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="no">BUFFER_SIZE</span><span class="o">];</span>
             <span class="kt">int</span> <span class="n">n</span><span class="o">;</span>
             <span class="k">while</span> <span class="o">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buf</span><span class="o">))</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span>
                 <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buf</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">);</span>
@@ -213,10 +211,10 @@
 <p>Drugi przykład (który wraz z kolejnym zasobem robił się coraz brzydszy), z <em>try-with-resources</em> wygląda tak:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// try-with-resources on multiple resources - short and sweet</span>
-<span class="kd">static</span> <span class="kt">void</span> <span class="nf">copy</span><span class="o">(</span><span class="n">String</span> <span class="n">src</span><span class="o">,</span> <span class="n">String</span> <span class="n">dst</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-    <span class="k">try</span> <span class="o">(</span><span class="n">InputStream</span>   <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">src</span><span class="o">);</span>
-         <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">dst</span><span class="o">))</span> <span class="o">{</span>
-        <span class="kt">byte</span><span class="o">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">BUFFER_SIZE</span><span class="o">];</span>
+<span class="kd">static</span> <span class="kt">void</span> <span class="nf">copy</span><span class="o">(</span><span class="nc">String</span> <span class="n">src</span><span class="o">,</span> <span class="nc">String</span> <span class="n">dst</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">(</span><span class="nc">InputStream</span>   <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">src</span><span class="o">);</span>
+         <span class="nc">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">dst</span><span class="o">))</span> <span class="o">{</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="no">BUFFER_SIZE</span><span class="o">];</span>
         <span class="kt">int</span> <span class="n">n</span><span class="o">;</span>
         <span class="k">while</span> <span class="o">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buf</span><span class="o">))</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span>
             <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buf</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">);</span>
@@ -232,11 +230,11 @@
 
 <p><em>Catch</em> może też służyć do innych celów. Np. w przypadku wystąpienia wyjątku w <em>try</em> - zwrócenie domyślnej wartości. Dla przykładu:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">static</span> <span class="n">String</span> <span class="nf">firstLineOfFile</span><span class="o">(</span><span class="n">String</span> <span class="n">path</span><span class="o">,</span> <span class="n">String</span> <span class="n">defaultVal</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">try</span> <span class="o">(</span><span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">static</span> <span class="nc">String</span> <span class="nf">firstLineOfFile</span><span class="o">(</span><span class="nc">String</span> <span class="n">path</span><span class="o">,</span> <span class="nc">String</span> <span class="n">defaultVal</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">(</span><span class="nc">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
            <span class="k">new</span> <span class="nf">FileReader</span><span class="o">(</span><span class="n">path</span><span class="o">)))</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">defaultVal</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>

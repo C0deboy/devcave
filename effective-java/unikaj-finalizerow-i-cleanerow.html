@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -204,33 +202,33 @@ Furthermore, the timing of finalization is unpredictable with no guarantee that 
 
 <p>Spróbujmy zobrazować to na przykładzie klasy <code class="highlighter-rouge">Room</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Room</span> <span class="kd">implements</span> <span class="n">AutoCloseable</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Cleaner</span> <span class="n">cleaner</span> <span class="o">=</span> <span class="n">Cleaner</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Room</span> <span class="kd">implements</span> <span class="nc">AutoCloseable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Cleaner</span> <span class="n">cleaner</span> <span class="o">=</span> <span class="nc">Cleaner</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
 
     <span class="c1">// Resource that requires cleaning. Must not refer to Room!</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">State</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">State</span> <span class="kd">implements</span> <span class="nc">Runnable</span> <span class="o">{</span>
         <span class="kt">int</span> <span class="n">numJunkPiles</span><span class="o">;</span> <span class="c1">// Number of junk piles in this room</span>
 
-        <span class="n">State</span><span class="o">(</span><span class="kt">int</span> <span class="n">numJunkPiles</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">State</span><span class="o">(</span><span class="kt">int</span> <span class="n">numJunkPiles</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">numJunkPiles</span> <span class="o">=</span> <span class="n">numJunkPiles</span><span class="o">;</span>
         <span class="o">}</span>
 
         <span class="c1">// Invoked by close method or cleaner</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cleaning room"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cleaning room"</span><span class="o">);</span>
             <span class="n">numJunkPiles</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">}</span>
 
     <span class="c1">// The state of this room, shared with our cleanable</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">State</span> <span class="n">state</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">State</span> <span class="n">state</span><span class="o">;</span>
 
     <span class="c1">// Our cleanable. Cleans the room when it’s eligible for gc</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Cleaner</span><span class="o">.</span><span class="na">Cleanable</span> <span class="n">cleanable</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Cleaner</span><span class="o">.</span><span class="na">Cleanable</span> <span class="n">cleanable</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="nf">Room</span><span class="o">(</span><span class="kt">int</span> <span class="n">numJunkPiles</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="k">new</span> <span class="n">State</span><span class="o">(</span><span class="n">numJunkPiles</span><span class="o">);</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">State</span><span class="o">(</span><span class="n">numJunkPiles</span><span class="o">);</span>
         <span class="n">cleanable</span> <span class="o">=</span> <span class="n">cleaner</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">state</span><span class="o">);</span>
     <span class="o">}</span>
 
@@ -249,20 +247,20 @@ Furthermore, the timing of finalization is unpredictable with no guarantee that 
 
 <p>Używając takiej klasy z <em>try-with-resources</em> nie będzie problemu i automatyczne czyszczenie nie będzie nigdy potrzebne:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">(</span><span class="n">Room</span> <span class="n">myRoom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Room</span><span class="o">(</span><span class="mi">7</span><span class="o">))</span> <span class="o">{</span>
-  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Goodbye"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">(</span><span class="nc">Room</span> <span class="n">myRoom</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Room</span><span class="o">(</span><span class="mi">7</span><span class="o">))</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Goodbye"</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>Najpierw zobaczymy komunikat “Goodbye”, a następnie “Cleaning”. Jednak jeśli klient tego nie zrobi, zachowanie jest nieprzewidywalne:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Room</span> <span class="n">myRoom2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Room</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Peace out"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Room</span> <span class="n">myRoom2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Room</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Peace out"</span><span class="o">);</span>
 </code></pre></div></div>
 <p>Pojawi się komunikat “Peace out”, ale w moim przypadku “Cleaning” nigdy się nie uruchomi. I to jest ta nieprzewidywalność, o której była mowa.</p>
 
 <p>Dopiero dorzucenie:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
 </code></pre></div></div>
 
 <p>Sprawia, że u mnie “Cleaning” się uruchomi, ale to również nie gwarantuje takiego samego zachowania na każdej maszynie ani nie jest dobrą praktyką.</p>

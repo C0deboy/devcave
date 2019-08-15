@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -189,14 +187,14 @@ AbstractC
 <p><strong>Interfejsy nie tworzą sztywnych hierarchii, dzięki czemu są bardzo elastyczne</strong>.  Dla przykładu, mamy piosenkarza:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Singer</span> <span class="o">{</span>
-    <span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
+    <span class="nc">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="nc">Song</span> <span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>i kompozytora:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Songwriter</span> <span class="o">{</span>
-    <span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">int</span> <span class="n">chartPosition</span><span class="o">);</span>
+    <span class="nc">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">int</span> <span class="n">chartPosition</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -204,8 +202,8 @@ AbstractC
 
 <p>Idąc dalej, mamy jeszcze dużo więcej elastyczności. Przykładowo możemy stworzyć dodatkowy typ, który łączy oba poprzednie i dodaje nowe funkcje, które są odpowiednie dla obu ról:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">SingerSongwriter</span> <span class="kd">extends</span> <span class="n">Singer</span><span class="o">,</span> <span class="n">Songwriter</span> <span class="o">{</span>
-    <span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">SingerSongwriter</span> <span class="kd">extends</span> <span class="nc">Singer</span><span class="o">,</span> <span class="nc">Songwriter</span> <span class="o">{</span>
+    <span class="nc">AudioClip</span> <span class="nf">strum</span><span class="o">();</span>
 
     <span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">();</span>
 <span class="o">}</span>
@@ -213,10 +211,10 @@ AbstractC
 
 <p>I nie ma problemu, aby istniejąca klasa, która implementuje już <code class="highlighter-rouge">Singer</code>, <code class="highlighter-rouge">Songwriter</code> (i nie może zostać zmieniona), implementowała <code class="highlighter-rouge">SingerSongwriter</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Concret</span> <span class="kd">implements</span> <span class="n">Singer</span><span class="o">,</span> <span class="n">Songwriter</span><span class="o">,</span> <span class="n">SingerSongwriter</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Concret</span> <span class="kd">implements</span> <span class="nc">Singer</span><span class="o">,</span> <span class="nc">Songwriter</span><span class="o">,</span> <span class="nc">SingerSongwriter</span> <span class="o">{</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">AudioClip</span> <span class="nf">strum</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -225,12 +223,12 @@ AbstractC
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="nc">Song</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">int</span> <span class="n">chartPosition</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">int</span> <span class="n">chartPosition</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -246,36 +244,36 @@ AbstractC
 <p>Przykładowa klasa:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Skeletal implementation class</span>
-<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractMapEntry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractMapEntry</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="c1">// Entries in a modifiable map must override this method</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">V</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="no">V</span> <span class="nf">setValue</span><span class="o">(</span><span class="no">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nf">UnsupportedOperationException</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="c1">// Implements the general contract of Map.Entry.equals</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
         <span class="o">}</span>
-        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">))</span> <span class="o">{</span>
             <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;?,</span> <span class="o">?&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getKey</span><span class="o">(),</span> <span class="n">getKey</span><span class="o">())</span>
-            <span class="o">&amp;&amp;</span> <span class="n">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getValue</span><span class="o">(),</span> <span class="n">getValue</span><span class="o">());</span>
+        <span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;?,</span> <span class="o">?&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getKey</span><span class="o">(),</span> <span class="n">getKey</span><span class="o">())</span>
+            <span class="o">&amp;&amp;</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getValue</span><span class="o">(),</span> <span class="n">getValue</span><span class="o">());</span>
     <span class="o">}</span>
 
     <span class="c1">// Implements the general contract of Map.Entry.hashCode</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Objects</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">getKey</span><span class="o">())</span> <span class="o">^</span> <span class="n">Objects</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">getValue</span><span class="o">());</span>
+        <span class="k">return</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">getKey</span><span class="o">())</span> <span class="o">^</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="n">getValue</span><span class="o">());</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="nf">getKey</span><span class="o">()</span> <span class="o">+</span> <span class="s">"="</span> <span class="o">+</span> <span class="n">getValue</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -286,19 +284,19 @@ AbstractC
 <p>Przykłady znajdziemy też w standardowym <em>Collections Framework</em> - <code class="highlighter-rouge">AbstractCollection</code>, <code class="highlighter-rouge">AbstractSet</code>, <code class="highlighter-rouge">AbstractList</code>, i <code class="highlighter-rouge">AbstractMap</code>. Takie klasy mogą bardzo ułatwić pisanie implementacji interfejsu. Dla przykładu, podaję <a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a>, która tworzy w pełni funkcjonalną implementację <code class="highlighter-rouge">List</code>, zbudowaną na <code class="highlighter-rouge">AbstractList</code> (w formie klasy anonimowej) z tablicy intów:</p>
 
 <div id="intArrayAsList" class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Concrete implementation built atop skeletal implementation</span>
-<span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">intArrayAsList</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+<span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="nf">intArrayAsList</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
 
     <span class="c1">// The diamond operator is only legal here in Java 9 and later</span>
     <span class="c1">// If you're using an earlier release, specify &lt;Integer&gt;</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="n">AbstractList</span><span class="o">&lt;&gt;()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">AbstractList</span><span class="o">&lt;&gt;()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="c1">// Autoboxing</span>
         <span class="o">}</span>
 
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">set</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">set</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="nc">Integer</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
             <span class="kt">int</span> <span class="n">oldVal</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
             <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span> <span class="c1">// Auto-unboxing</span>
             <span class="k">return</span> <span class="n">oldVal</span><span class="o">;</span> <span class="c1">// Autoboxing</span>

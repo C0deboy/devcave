@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -186,7 +184,7 @@
 
 <p>Kiedy konstruktor jest prywatny, nie ma możliwości stworzenia instancji klasy poza jej wnętrzem.</p>
 
-<p><code class="highlight language-java" data-lang="java"><span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="o">();</span></code> jest tutaj opcjonalnie - zapewnia, aby konstruktor nie zostanie wywołany omyłkowo wewnątrz tej klasy lub poprzez refleksję.</p>
+<p><code class="highlight language-java" data-lang="java"><span class="k">throw</span> <span class="k">new</span> <span class="nc">AssertionError</span><span class="o">();</span></code> jest tutaj opcjonalnie - zapewnia, aby konstruktor nie zostanie wywołany omyłkowo wewnątrz tej klasy lub poprzez refleksję.</p>
 
 <p>Kiedy implementujemy takie klasy trzeba rozważyć następujące problemy:</p>
 
@@ -194,7 +192,7 @@
 
 <p class="cons">Trudność w testowaniu jednostkowym.</p>
 
-<p>Podczas gdy klasę utility można łatwo przetestować w izolacji, to klasy, które ją używają już nie. Klasy utility najczęściej wykorzystywane są bezpośrednio (<code class="highlight language-java" data-lang="java"><span class="n">UtilityClass</span><span class="o">.</span><span class="na">DoStuff</span><span class="o">()</span></code>) co w konsekwencji utrudnia ich mockowanie. Ma to tym większe znaczenie im klasa utility wykonuje cięższe operacje (najczęsciej na , które chcielibyśmy zmockować, aby zwiększyć wydajność testu.</p>
+<p>Podczas gdy klasę utility można łatwo przetestować w izolacji, to klasy, które ją używają już nie. Klasy utility najczęściej wykorzystywane są bezpośrednio (<code class="highlight language-java" data-lang="java"><span class="nc">UtilityClass</span><span class="o">.</span><span class="na">DoStuff</span><span class="o">()</span></code>) co w konsekwencji utrudnia ich mockowanie. Ma to tym większe znaczenie im klasa utility wykonuje cięższe operacje (najczęsciej na , które chcielibyśmy zmockować, aby zwiększyć wydajność testu.</p>
 
 <p>*W Javie istnieje narzędzie do testowania o nazwie <a href="https://github.com/powermock/powermock">Powermock</a>, które to potrafi, ale uznawane jest, że jeśli twoja aplikacja potrzebuję tego narzędzia, aby coś mogło zostać przetestowane, to najprawdopodobniej twoja aplikacja jest źle zaprojektowana i na tym powinieneś się skupić.</p>
 

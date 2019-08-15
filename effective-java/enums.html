@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -187,45 +185,45 @@
 <p>Typ enum reprezentuje stały zbiór wartości, który jest nam znany przed uruchomieniem programu, np. pory roku, planety, czy kolory kart. Zanim enumy były dodane do Javy, często deklarowano grupę podobnie nazwanych stałych typu int:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The int enum pattern - severely deficient!</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">APPLE_FUJI</span>         <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">APPLE_PIPPIN</span>       <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">APPLE_GRANNY_SMITH</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_NAVEL</span>  <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_TEMPLE</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_BLOOD</span>  <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">APPLE_FUJI</span>         <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">APPLE_PIPPIN</span>       <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">APPLE_GRANNY_SMITH</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ORANGE_NAVEL</span>  <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ORANGE_TEMPLE</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ORANGE_BLOOD</span>  <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
 </code></pre></div></div>
 
 <p>Jest to znane jako <em>int enum pattern</em> i ma wiele wad i braków - nie powinniśmy już korzystać z tego typu stałych. Nie mamy tu żadnego bezpieczeństwa typów. Nie mają reprezentacji tekstowej, więc np. debuggując zobaczymy tylko cyferki. Nie mamy też możliwości iterowania po wszystkich elementach ani sprawdzenia ile ich jest. Wszystkie te problemy rozwiązują enumy, a nawet dają jeszcze więcej korzyści. Odpowiednik można zdefiniować tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Apple</span>  <span class="o">{</span> <span class="n">FUJI</span><span class="o">,</span> <span class="n">PIPPIN</span><span class="o">,</span> <span class="n">GRANNY_SMITH</span> <span class="o">}</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Orange</span> <span class="o">{</span> <span class="n">NAVEL</span><span class="o">,</span> <span class="n">TEMPLE</span><span class="o">,</span> <span class="n">BLOOD</span> <span class="o">}</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Apple</span>  <span class="o">{</span> <span class="no">FUJI</span><span class="o">,</span> <span class="no">PIPPIN</span><span class="o">,</span> <span class="no">GRANNY_SMITH</span> <span class="o">}</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Orange</span> <span class="o">{</span> <span class="no">NAVEL</span><span class="o">,</span> <span class="no">TEMPLE</span><span class="o">,</span> <span class="no">BLOOD</span> <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Enumy w Javie to pełnoprawne klasy, więc oferują dużo więcej niż zwykłe wartości <code class="highlighter-rouge">int</code>. Są to klasy, które dostarczają tylko jedną instancję dla każdej stałej i udostępniają ją poprzez pole <code class="highlighter-rouge">public static final</code>. Enumy są niemutowalne, nie posiadają publicznego konstruktora. Dostajemy też <em>type safty</em>, jako że są to pełnoprawne klasy. Dostarczają również implementacje wszystkich metod z klasy <code class="highlighter-rouge">Object</code> (były omawiane w <a href="/effective-java/metoda-equals">rozdziale 3</a>) oraz implementują <code class="highlighter-rouge">Comparable</code> i <code class="highlighter-rouge">Serializable</code>. Co więcej, pozwalają też na zdefiniowanie własnych metod i pól. Przykład bogatej klasy enum:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Enum type with data and behavior</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Planet</span> <span class="o">{</span>
-    <span class="n">MERCURY</span><span class="o">(</span><span class="mf">3.302</span><span class="n">e</span><span class="o">+</span><span class="mi">23</span><span class="o">,</span> <span class="mf">2.439e6</span><span class="o">),</span>
-    <span class="n">VENUS</span><span class="o">(</span><span class="mf">4.869</span><span class="n">e</span><span class="o">+</span><span class="mi">24</span><span class="o">,</span> <span class="mf">6.052e6</span><span class="o">),</span>
-    <span class="n">EARTH</span><span class="o">(</span><span class="mf">5.975</span><span class="n">e</span><span class="o">+</span><span class="mi">24</span><span class="o">,</span> <span class="mf">6.378e6</span><span class="o">),</span>
-    <span class="n">MARS</span><span class="o">(</span><span class="mf">6.419</span><span class="n">e</span><span class="o">+</span><span class="mi">23</span><span class="o">,</span> <span class="mf">3.393e6</span><span class="o">),</span>
-    <span class="n">JUPITER</span><span class="o">(</span><span class="mf">1.899</span><span class="n">e</span><span class="o">+</span><span class="mi">27</span><span class="o">,</span> <span class="mf">7.149e7</span><span class="o">),</span>
-    <span class="n">SATURN</span><span class="o">(</span><span class="mf">5.685</span><span class="n">e</span><span class="o">+</span><span class="mi">26</span><span class="o">,</span> <span class="mf">6.027e7</span><span class="o">),</span>
-    <span class="n">URANUS</span><span class="o">(</span><span class="mf">8.683</span><span class="n">e</span><span class="o">+</span><span class="mi">25</span><span class="o">,</span> <span class="mf">2.556e7</span><span class="o">),</span>
-    <span class="n">NEPTUNE</span><span class="o">(</span><span class="mf">1.024</span><span class="n">e</span><span class="o">+</span><span class="mi">26</span><span class="o">,</span> <span class="mf">2.477e7</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Planet</span> <span class="o">{</span>
+    <span class="no">MERCURY</span><span class="o">(</span><span class="mf">3.302</span><span class="n">e</span><span class="o">+</span><span class="mi">23</span><span class="o">,</span> <span class="mf">2.439e6</span><span class="o">),</span>
+    <span class="no">VENUS</span><span class="o">(</span><span class="mf">4.869</span><span class="n">e</span><span class="o">+</span><span class="mi">24</span><span class="o">,</span> <span class="mf">6.052e6</span><span class="o">),</span>
+    <span class="no">EARTH</span><span class="o">(</span><span class="mf">5.975</span><span class="n">e</span><span class="o">+</span><span class="mi">24</span><span class="o">,</span> <span class="mf">6.378e6</span><span class="o">),</span>
+    <span class="no">MARS</span><span class="o">(</span><span class="mf">6.419</span><span class="n">e</span><span class="o">+</span><span class="mi">23</span><span class="o">,</span> <span class="mf">3.393e6</span><span class="o">),</span>
+    <span class="no">JUPITER</span><span class="o">(</span><span class="mf">1.899</span><span class="n">e</span><span class="o">+</span><span class="mi">27</span><span class="o">,</span> <span class="mf">7.149e7</span><span class="o">),</span>
+    <span class="no">SATURN</span><span class="o">(</span><span class="mf">5.685</span><span class="n">e</span><span class="o">+</span><span class="mi">26</span><span class="o">,</span> <span class="mf">6.027e7</span><span class="o">),</span>
+    <span class="no">URANUS</span><span class="o">(</span><span class="mf">8.683</span><span class="n">e</span><span class="o">+</span><span class="mi">25</span><span class="o">,</span> <span class="mf">2.556e7</span><span class="o">),</span>
+    <span class="no">NEPTUNE</span><span class="o">(</span><span class="mf">1.024</span><span class="n">e</span><span class="o">+</span><span class="mi">26</span><span class="o">,</span> <span class="mf">2.477e7</span><span class="o">);</span>
 
     <span class="kd">private</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">mass</span><span class="o">;</span>           <span class="c1">// In kilograms</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">radius</span><span class="o">;</span>         <span class="c1">// In meters</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">surfaceGravity</span><span class="o">;</span> <span class="c1">// In m / s^2</span>
 
     <span class="c1">// Universal gravitational constant in m^3 / kg s^2</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">G</span> <span class="o">=</span> <span class="mf">6.67300</span><span class="n">E</span><span class="o">-</span><span class="mi">11</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="no">G</span> <span class="o">=</span> <span class="mf">6.67300</span><span class="no">E</span><span class="o">-</span><span class="mi">11</span><span class="o">;</span>
 
     <span class="c1">// Constructor</span>
-    <span class="n">Planet</span><span class="o">(</span><span class="kt">double</span> <span class="n">mass</span><span class="o">,</span> <span class="kt">double</span> <span class="n">radius</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Planet</span><span class="o">(</span><span class="kt">double</span> <span class="n">mass</span><span class="o">,</span> <span class="kt">double</span> <span class="n">radius</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">mass</span> <span class="o">=</span> <span class="n">mass</span><span class="o">;</span>
         <span class="k">this</span><span class="o">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">radius</span><span class="o">;</span>
-        <span class="n">surfaceGravity</span> <span class="o">=</span> <span class="n">G</span> <span class="o">*</span> <span class="n">mass</span> <span class="o">/</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">);</span>
+        <span class="n">surfaceGravity</span> <span class="o">=</span> <span class="no">G</span> <span class="o">*</span> <span class="n">mass</span> <span class="o">/</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kt">double</span> <span class="nf">mass</span><span class="o">()</span> <span class="o">{</span>
@@ -253,15 +251,15 @@
 <p>Tak wygląda użycie:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">earthWeight</span> <span class="o">=</span> <span class="mi">50</span><span class="o">;</span>
-<span class="kt">double</span> <span class="n">mass</span> <span class="o">=</span> <span class="n">earthWeight</span> <span class="o">/</span> <span class="n">Planet</span><span class="o">.</span><span class="na">EARTH</span><span class="o">.</span><span class="na">surfaceGravity</span><span class="o">();</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Planet</span> <span class="n">planet</span> <span class="o">:</span> <span class="n">Planet</span><span class="o">.</span><span class="na">values</span><span class="o">())</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Weight on %s is %f%n"</span><span class="o">,</span> <span class="n">planet</span><span class="o">,</span> <span class="n">planet</span><span class="o">.</span><span class="na">surfaceWeight</span><span class="o">(</span><span class="n">mass</span><span class="o">));</span>
+<span class="kt">double</span> <span class="n">mass</span> <span class="o">=</span> <span class="n">earthWeight</span> <span class="o">/</span> <span class="nc">Planet</span><span class="o">.</span><span class="na">EARTH</span><span class="o">.</span><span class="na">surfaceGravity</span><span class="o">();</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Planet</span> <span class="n">planet</span> <span class="o">:</span> <span class="nc">Planet</span><span class="o">.</span><span class="na">values</span><span class="o">())</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"Weight on %s is %f%n"</span><span class="o">,</span> <span class="n">planet</span><span class="o">,</span> <span class="n">planet</span><span class="o">.</span><span class="na">surfaceWeight</span><span class="o">(</span><span class="n">mass</span><span class="o">));</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>i wynik:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Weight on MERCURY is 26.453469
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Weight on MERCURY is 26.453469
 Weight on VENUS is 63.353571
 Weight on EARTH is 70.000000
 Weight on MARS is 26.572280
@@ -269,16 +267,16 @@ Weight on JUPITER is 177.077561
 Weight on SATURN is 74.585988
 Weight on URANUS is 63.339884
 Weight on NEPTUNE is 79.53844
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>Czasem potrzebujemy innego zachowania dla każdej stałej i jak najbardziej enumy to wspierają. Możemy to zrobić to tak:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Enum type with constant-specific method implementations</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Operation</span> <span class="o">{</span>
-  <span class="n">PLUS</span>  <span class="o">{</span><span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span><span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;}},</span>
-  <span class="n">MINUS</span> <span class="o">{</span><span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span><span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">;}},</span>
-  <span class="n">TIMES</span> <span class="o">{</span><span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span><span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">;}},</span>
-  <span class="n">DIVIDE</span><span class="o">{</span><span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span><span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">;}};</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Operation</span> <span class="o">{</span>
+  <span class="no">PLUS</span>  <span class="o">{</span><span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span><span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;}},</span>
+  <span class="no">MINUS</span> <span class="o">{</span><span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span><span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">;}},</span>
+  <span class="no">TIMES</span> <span class="o">{</span><span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span><span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">;}},</span>
+  <span class="no">DIVIDE</span><span class="o">{</span><span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">){</span><span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">;}};</span>
 
   <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">);</span>
 <span class="o">}</span>
@@ -293,9 +291,9 @@ Weight on NEPTUNE is 79.53844
 <p>Tutaj omawiany jest dosyć specyficzny przypadek użycia metody <code class="highlighter-rouge">ordinal</code>, która zwraca liczbę będącą pozycją stałej, na której nie powinniśmy polegać:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Abuse of ordinal to derive an associated value - DON'T DO THIS</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Ensemble</span> <span class="o">{</span>
-    <span class="n">SOLO</span><span class="o">,</span>   <span class="n">DUET</span><span class="o">,</span>   <span class="n">TRIO</span><span class="o">,</span> <span class="n">QUARTET</span><span class="o">,</span> <span class="n">QUINTET</span><span class="o">,</span>
-    <span class="n">SEXTET</span><span class="o">,</span> <span class="n">SEPTET</span><span class="o">,</span> <span class="n">OCTET</span><span class="o">,</span> <span class="n">NONET</span><span class="o">,</span>  <span class="n">DECTET</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Ensemble</span> <span class="o">{</span>
+    <span class="no">SOLO</span><span class="o">,</span>   <span class="no">DUET</span><span class="o">,</span>   <span class="no">TRIO</span><span class="o">,</span> <span class="no">QUARTET</span><span class="o">,</span> <span class="no">QUINTET</span><span class="o">,</span>
+    <span class="no">SEXTET</span><span class="o">,</span> <span class="no">SEPTET</span><span class="o">,</span> <span class="no">OCTET</span><span class="o">,</span> <span class="no">NONET</span><span class="o">,</span>  <span class="no">DECTET</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">numberOfMusicians</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">ordinal</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="o">}</span>
 <span class="o">}</span>
@@ -309,13 +307,13 @@ Weight on NEPTUNE is 79.53844
 
 <p>W takich przypadkach lepiej skorzystać po prostu z pól instancyjnych:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Ensemble</span> <span class="o">{</span>
-    <span class="n">SOLO</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span> <span class="n">DUET</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span> <span class="n">TRIO</span><span class="o">(</span><span class="mi">3</span><span class="o">),</span> <span class="n">QUARTET</span><span class="o">(</span><span class="mi">4</span><span class="o">),</span> <span class="n">QUINTET</span><span class="o">(</span><span class="mi">5</span><span class="o">),</span>
-    <span class="n">SEXTET</span><span class="o">(</span><span class="mi">6</span><span class="o">),</span> <span class="n">SEPTET</span><span class="o">(</span><span class="mi">7</span><span class="o">),</span> <span class="n">OCTET</span><span class="o">(</span><span class="mi">8</span><span class="o">),</span> <span class="n">DOUBLE_QUARTET</span><span class="o">(</span><span class="mi">8</span><span class="o">),</span>
-    <span class="n">NONET</span><span class="o">(</span><span class="mi">9</span><span class="o">),</span> <span class="n">DECTET</span><span class="o">(</span><span class="mi">10</span><span class="o">),</span> <span class="n">TRIPLE_QUARTET</span><span class="o">(</span><span class="mi">12</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Ensemble</span> <span class="o">{</span>
+    <span class="no">SOLO</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span> <span class="no">DUET</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span> <span class="no">TRIO</span><span class="o">(</span><span class="mi">3</span><span class="o">),</span> <span class="no">QUARTET</span><span class="o">(</span><span class="mi">4</span><span class="o">),</span> <span class="no">QUINTET</span><span class="o">(</span><span class="mi">5</span><span class="o">),</span>
+    <span class="no">SEXTET</span><span class="o">(</span><span class="mi">6</span><span class="o">),</span> <span class="no">SEPTET</span><span class="o">(</span><span class="mi">7</span><span class="o">),</span> <span class="no">OCTET</span><span class="o">(</span><span class="mi">8</span><span class="o">),</span> <span class="no">DOUBLE_QUARTET</span><span class="o">(</span><span class="mi">8</span><span class="o">),</span>
+    <span class="no">NONET</span><span class="o">(</span><span class="mi">9</span><span class="o">),</span> <span class="no">DECTET</span><span class="o">(</span><span class="mi">10</span><span class="o">),</span> <span class="no">TRIPLE_QUARTET</span><span class="o">(</span><span class="mi">12</span><span class="o">);</span>
 
     <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">numberOfMusicians</span><span class="o">;</span>
-    <span class="n">Ensemble</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">numberOfMusicians</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span> <span class="o">}</span>
+    <span class="nc">Ensemble</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">numberOfMusicians</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span> <span class="o">}</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">numberOfMusicians</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">numberOfMusicians</span><span class="o">;</span> <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -326,10 +324,10 @@ Weight on NEPTUNE is 79.53844
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Bit field enumeration constants - OBSOLETE!</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Text</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_BOLD</span>          <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">// 1</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_ITALIC</span>        <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="o">;</span>  <span class="c1">// 2</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_UNDERLINE</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="o">;</span>  <span class="c1">// 4</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_STRIKETHROUGH</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="o">;</span>  <span class="c1">// 8</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">STYLE_BOLD</span>          <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">// 1</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">STYLE_ITALIC</span>        <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="o">;</span>  <span class="c1">// 2</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">STYLE_UNDERLINE</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="o">;</span>  <span class="c1">// 4</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">STYLE_STRIKETHROUGH</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="o">;</span>  <span class="c1">// 8</span>
 
     <span class="c1">// Parameter is bitwise OR of zero or more STYLE_ constants</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">applyStyles</span><span class="o">(</span><span class="kt">int</span> <span class="n">styles</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
@@ -338,23 +336,23 @@ Weight on NEPTUNE is 79.53844
 
 <p>Ta reprezentacja stałych pozwala łączyć je, używając operacji bitowej OR:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">text</span><span class="o">.</span><span class="na">applyStyles</span><span class="o">(</span><span class="n">STYLE_BOLD</span> <span class="o">|</span> <span class="n">STYLE_ITALIC</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">text</span><span class="o">.</span><span class="na">applyStyles</span><span class="o">(</span><span class="no">STYLE_BOLD</span> <span class="o">|</span> <span class="no">STYLE_ITALIC</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>A tak powinno to wyglądać w dzisiejszych czasach:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// EnumSet - a modern replacement for bit fields</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Text</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">enum</span> <span class="n">Style</span> <span class="o">{</span> <span class="n">BOLD</span><span class="o">,</span> <span class="n">ITALIC</span><span class="o">,</span> <span class="n">UNDERLINE</span><span class="o">,</span> <span class="n">STRIKETHROUGH</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Style</span> <span class="o">{</span> <span class="no">BOLD</span><span class="o">,</span> <span class="no">ITALIC</span><span class="o">,</span> <span class="no">UNDERLINE</span><span class="o">,</span> <span class="no">STRIKETHROUGH</span> <span class="o">}</span>
 
     <span class="c1">// Any Set could be passed in, but EnumSet is clearly best</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">applyStyles</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Style</span><span class="o">&gt;</span> <span class="n">styles</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">applyStyles</span><span class="o">(</span><span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Style</span><span class="o">&gt;</span> <span class="n">styles</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>I użycie:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">text</span><span class="o">.</span><span class="na">applyStyles</span><span class="o">(</span><span class="n">EnumSet</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">Style</span><span class="o">.</span><span class="na">BOLD</span><span class="o">,</span> <span class="n">Style</span><span class="o">.</span><span class="na">ITALIC</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">text</span><span class="o">.</span><span class="na">applyStyles</span><span class="o">(</span><span class="nc">EnumSet</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="nc">Style</span><span class="o">.</span><span class="na">BOLD</span><span class="o">,</span> <span class="nc">Style</span><span class="o">.</span><span class="na">ITALIC</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>Cały ciężar implementacji i poprawności operacji bitowych zrzucamy na <code class="highlighter-rouge">EnumSet</code> dodatkowo zyskując przejrzystość i <em>type safty</em>.</p>
@@ -366,17 +364,17 @@ Weight on NEPTUNE is 79.53844
 <p>Na przykładzie prostej klasy <code class="highlighter-rouge">Plant</code>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Plant</span> <span class="o">{</span>
-    <span class="kd">enum</span> <span class="n">LifeCycle</span> <span class="o">{</span> <span class="n">ANNUAL</span><span class="o">,</span> <span class="n">PERENNIAL</span><span class="o">,</span> <span class="n">BIENNIAL</span> <span class="o">}</span>
+    <span class="kd">enum</span> <span class="nc">LifeCycle</span> <span class="o">{</span> <span class="no">ANNUAL</span><span class="o">,</span> <span class="no">PERENNIAL</span><span class="o">,</span> <span class="no">BIENNIAL</span> <span class="o">}</span>
 
-    <span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">final</span> <span class="n">LifeCycle</span> <span class="n">lifeCycle</span><span class="o">;</span>
+    <span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">final</span> <span class="nc">LifeCycle</span> <span class="n">lifeCycle</span><span class="o">;</span>
 
-    <span class="n">Plant</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">LifeCycle</span> <span class="n">lifeCycle</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Plant</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">LifeCycle</span> <span class="n">lifeCycle</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
         <span class="k">this</span><span class="o">.</span><span class="na">lifeCycle</span> <span class="o">=</span> <span class="n">lifeCycle</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="nd">@Override</span> <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -385,31 +383,31 @@ Weight on NEPTUNE is 79.53844
 <p>Załóżmy, że mamy tablicę roślin i chcemy poukładać je według cyklu życia. Potrzebowalibyśmy 3 setów, jeden dla każdego cyklu, i przeiterować po tablicy wkładając rośliny do odpowiednich setów. Można byłoby to zrobić indexując tablice przy pomocy metody <code class="highlighter-rouge">ordinal</code>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using ordinal() to index into an array - DON'T DO THIS!</span>
-<span class="n">Set</span><span class="o">&lt;</span><span class="n">Plant</span><span class="o">&gt;[]</span> <span class="n">plantsByLifeCycle</span> <span class="o">=</span>
-    <span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Plant</span><span class="o">&gt;[])</span> <span class="k">new</span> <span class="n">Set</span><span class="o">[</span><span class="n">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">];</span>
+<span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Plant</span><span class="o">&gt;[]</span> <span class="n">plantsByLifeCycle</span> <span class="o">=</span>
+    <span class="o">(</span><span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Plant</span><span class="o">&gt;[])</span> <span class="k">new</span> <span class="nc">Set</span><span class="o">[</span><span class="nc">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">];</span>
 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">plantsByLifeCycle</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
-    <span class="n">plantsByLifeCycle</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+    <span class="n">plantsByLifeCycle</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;();</span>
 
-<span class="k">for</span> <span class="o">(</span><span class="n">Plant</span> <span class="n">p</span> <span class="o">:</span> <span class="n">garden</span><span class="o">)</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Plant</span> <span class="n">p</span> <span class="o">:</span> <span class="n">garden</span><span class="o">)</span>
     <span class="n">plantsByLifeCycle</span><span class="o">[</span><span class="n">p</span><span class="o">.</span><span class="na">lifeCycle</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()].</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
 
 <span class="c1">// Print the results</span>
 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">plantsByLifeCycle</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%s: %s%n"</span><span class="o">,</span>
-        <span class="n">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="n">i</span><span class="o">],</span> <span class="n">plantsByLifeCycle</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%s: %s%n"</span><span class="o">,</span>
+        <span class="nc">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="n">i</span><span class="o">],</span> <span class="n">plantsByLifeCycle</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Jednak takie użycie nie jest zbyt dobre. Jest na to dużo lepszy sposób, który nie naraża nas na żadne błędy - użycie wydajnej implementacji mapy zaprojektowanej do pracy z enumami - <code class="highlighter-rouge">EnumMap</code>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using an EnumMap to associate data with an enum</span>
-<span class="n">Map</span><span class="o">&lt;</span><span class="n">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Plant</span><span class="o">&gt;&gt;</span>  <span class="n">plantsByLifeCycle</span> <span class="o">=</span>
-    <span class="k">new</span> <span class="n">EnumMap</span><span class="o">&lt;&gt;(</span><span class="n">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Plant</span><span class="o">.</span><span class="na">LifeCycle</span> <span class="n">lc</span> <span class="o">:</span> <span class="n">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">.</span><span class="na">values</span><span class="o">())</span>
-    <span class="n">plantsByLifeCycle</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">lc</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Plant</span> <span class="n">p</span> <span class="o">:</span> <span class="n">garden</span><span class="o">)</span>
+<span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">,</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Plant</span><span class="o">&gt;&gt;</span>  <span class="n">plantsByLifeCycle</span> <span class="o">=</span>
+    <span class="k">new</span> <span class="nc">EnumMap</span><span class="o">&lt;&gt;(</span><span class="nc">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Plant</span><span class="o">.</span><span class="na">LifeCycle</span> <span class="n">lc</span> <span class="o">:</span> <span class="nc">Plant</span><span class="o">.</span><span class="na">LifeCycle</span><span class="o">.</span><span class="na">values</span><span class="o">())</span>
+    <span class="n">plantsByLifeCycle</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">lc</span><span class="o">,</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;());</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Plant</span> <span class="n">p</span> <span class="o">:</span> <span class="n">garden</span><span class="o">)</span>
     <span class="n">plantsByLifeCycle</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">lifeCycle</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">plantsByLifeCycle</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">plantsByLifeCycle</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Program jest krótszy, czystszy, bezpieczniejszy i porównywalny w wydajności. Nie ma ostrzeżenia <code class="highlighter-rouge">unsafe cast</code>, wartości od razu przechowują swoją reprezentację tekstową i nie ma możliwości na błąd podczas przeliczania indexów.</p>
@@ -430,26 +428,26 @@ Weight on NEPTUNE is 79.53844
 
 <p>i enum, który jest jego standardową implementacją:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="n">BasicOperation</span> <span class="kd">implements</span> <span class="n">Operation</span> <span class="o">{</span>
-    <span class="n">PLUS</span><span class="o">(</span><span class="s">"+"</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">BasicOperation</span> <span class="kd">implements</span> <span class="nc">Operation</span> <span class="o">{</span>
+    <span class="no">PLUS</span><span class="o">(</span><span class="s">"+"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">},</span>
-    <span class="n">MINUS</span><span class="o">(</span><span class="s">"-"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="no">MINUS</span><span class="o">(</span><span class="s">"-"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">},</span>
-    <span class="n">TIMES</span><span class="o">(</span><span class="s">"*"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="no">TIMES</span><span class="o">(</span><span class="s">"*"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">},</span>
-    <span class="n">DIVIDE</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="no">DIVIDE</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">};</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">symbol</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">symbol</span><span class="o">;</span>
 
-    <span class="n">BasicOperation</span><span class="o">(</span><span class="n">String</span> <span class="n">symbol</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">BasicOperation</span><span class="o">(</span><span class="nc">String</span> <span class="n">symbol</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="nd">@Override</span> <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">symbol</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -458,25 +456,25 @@ Weight on NEPTUNE is 79.53844
 <p>Warunkiem jest tutaj to, aby API używało wszędzie interfejsu jako typu operacji. Dzięki temu możemy stworzyć nowy enum, który implementuje ten interfejs i stworzyć dodatkowe implementacje np.:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Emulated extension enum</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="n">ExtendedOperation</span> <span class="kd">implements</span> <span class="n">Operation</span> <span class="o">{</span>
-    <span class="n">EXP</span><span class="o">(</span><span class="s">"^"</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExtendedOperation</span> <span class="kd">implements</span> <span class="nc">Operation</span> <span class="o">{</span>
+    <span class="no">EXP</span><span class="o">(</span><span class="s">"^"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">},</span>
-    <span class="n">REMAINDER</span><span class="o">(</span><span class="s">"%"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="no">REMAINDER</span><span class="o">(</span><span class="s">"%"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">};</span>
 
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">symbol</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">symbol</span><span class="o">;</span>
 
-    <span class="n">ExtendedOperation</span><span class="o">(</span><span class="n">String</span> <span class="n">symbol</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">ExtendedOperation</span><span class="o">(</span><span class="nc">String</span> <span class="n">symbol</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="nd">@Override</span> <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">symbol</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -484,13 +482,13 @@ Weight on NEPTUNE is 79.53844
 
 <p>Tak by wyglądało użycie:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">test</span><span class="o">(</span><span class="n">ExtendedOperation</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">test</span><span class="o">(</span><span class="nc">ExtendedOperation</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="kd">private</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Enum</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">Operation</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">opEnumType</span><span class="o">,</span> <span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Operation</span> <span class="n">op</span> <span class="o">:</span> <span class="n">opEnumType</span><span class="o">.</span><span class="na">getEnumConstants</span><span class="o">())</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%f %s %f = %f%n"</span><span class="o">,</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Enum</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="nc">Operation</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(</span><span class="nc">Class</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">opEnumType</span><span class="o">,</span> <span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Operation</span> <span class="n">op</span> <span class="o">:</span> <span class="n">opEnumType</span><span class="o">.</span><span class="na">getEnumConstants</span><span class="o">())</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%f %s %f = %f%n"</span><span class="o">,</span>
                           <span class="n">x</span><span class="o">,</span> <span class="n">op</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">op</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">));</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -499,14 +497,14 @@ Weight on NEPTUNE is 79.53844
 
 <p>Alternatywnie moglibyśmy przekazać <code class="highlighter-rouge">Collection&lt;? extends Operation&gt;</code> zamiast tokenu klasy:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">test</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">ExtendedOperation</span><span class="o">.</span><span class="na">values</span><span class="o">()),</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">test</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="nc">ExtendedOperation</span><span class="o">.</span><span class="na">values</span><span class="o">()),</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Operation</span><span class="o">&gt;</span> <span class="n">opSet</span><span class="o">,</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Operation</span><span class="o">&gt;</span> <span class="n">opSet</span><span class="o">,</span>
         <span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Operation</span> <span class="n">op</span> <span class="o">:</span> <span class="n">opSet</span><span class="o">)</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%f %s %f = %f%n"</span><span class="o">,</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Operation</span> <span class="n">op</span> <span class="o">:</span> <span class="n">opSet</span><span class="o">)</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%f %s %f = %f%n"</span><span class="o">,</span>
                           <span class="n">x</span><span class="o">,</span> <span class="n">op</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">op</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">));</span>
 <span class="o">}</span>
 </code></pre></div></div>

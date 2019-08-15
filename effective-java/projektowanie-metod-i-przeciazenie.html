@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -208,17 +206,17 @@
 
 <p>Dla przykładu, mając klasę <code class="highlighter-rouge">Thermometer</code>, która ma operować na stopniach celsjusza lub farenhaita, zamiast konstruktora, który przyjmuje wartość <code class="highlighter-rouge">true</code>, jeśli chcemy używać farenhaita:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thermometer</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">Thermometer</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>lepiej by było stworzyć takiego enuma:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="n">TemperatureScale</span> <span class="o">{</span> <span class="n">FAHRENHEIT</span><span class="o">,</span> <span class="n">CELSIUS</span> <span class="o">}</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">TemperatureScale</span> <span class="o">{</span> <span class="no">FAHRENHEIT</span><span class="o">,</span> <span class="no">CELSIUS</span> <span class="o">}</span>
 </code></pre></div></div>
 
 <p>i jego podawać do konstruktora:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thermometer</span><span class="o">(</span><span class="n">TemperatureScale</span><span class="o">.</span><span class="na">CELSIUS</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">Thermometer</span><span class="o">(</span><span class="nc">TemperatureScale</span><span class="o">.</span><span class="na">CELSIUS</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>Nie dość, że jest to dużo bardziej czytelne, to nie ma później problemu, aby dodać np. kolejną jednostkę - <code class="highlighter-rouge">KELVIN</code>. Ponadto możemy zrobić większy użytek z enumów dodając różne metody np. jedna z nich mogła by wspierać przekonwertowywanie jednostek.</p>
@@ -229,27 +227,27 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Broken! - What does this program print?</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CollectionClassifier</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">classify</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">classify</span><span class="o">(</span><span class="nc">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"Set"</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">classify</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span> <span class="n">lst</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">classify</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?&gt;</span> <span class="n">lst</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"List"</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">classify</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">classify</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"Unknown Collection"</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Collection</span><span class="o">&lt;?&gt;[]</span> <span class="n">collections</span> <span class="o">=</span> <span class="o">{</span>
-            <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(),</span>
-            <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">BigInteger</span><span class="o">&gt;(),</span>
-            <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;().</span><span class="na">values</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Collection</span><span class="o">&lt;?&gt;[]</span> <span class="n">collections</span> <span class="o">=</span> <span class="o">{</span>
+            <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;(),</span>
+            <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">BigInteger</span><span class="o">&gt;(),</span>
+            <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;().</span><span class="na">values</span><span class="o">()</span>
         <span class="o">};</span>
 
-        <span class="k">for</span> <span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span> <span class="o">:</span> <span class="n">collections</span><span class="o">)</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classify</span><span class="o">(</span><span class="n">c</span><span class="o">));</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span> <span class="o">:</span> <span class="n">collections</span><span class="o">)</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classify</span><span class="o">(</span><span class="n">c</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -263,26 +261,26 @@
 <p>Przykład:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Wine</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"wine"</span><span class="o">;</span> <span class="o">}</span>
+    <span class="nc">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"wine"</span><span class="o">;</span> <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="kd">class</span> <span class="nc">SparklingWine</span> <span class="kd">extends</span> <span class="n">Wine</span> <span class="o">{</span>
+<span class="kd">class</span> <span class="nc">SparklingWine</span> <span class="kd">extends</span> <span class="nc">Wine</span> <span class="o">{</span>
     <span class="nd">@Override</span> 
-    <span class="n">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"sparkling wine"</span><span class="o">;</span> <span class="o">}</span>
+    <span class="nc">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"sparkling wine"</span><span class="o">;</span> <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="kd">class</span> <span class="nc">Champagne</span> <span class="kd">extends</span> <span class="n">SparklingWine</span> <span class="o">{</span>
+<span class="kd">class</span> <span class="nc">Champagne</span> <span class="kd">extends</span> <span class="nc">SparklingWine</span> <span class="o">{</span>
     <span class="nd">@Override</span> 
-    <span class="n">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"champagne"</span><span class="o">;</span> <span class="o">}</span>
+    <span class="nc">String</span> <span class="nf">name</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"champagne"</span><span class="o">;</span> <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Overriding</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Wine</span><span class="o">&gt;</span> <span class="n">wineList</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
-            <span class="k">new</span> <span class="nf">Wine</span><span class="o">(),</span> <span class="k">new</span> <span class="n">SparklingWine</span><span class="o">(),</span> <span class="k">new</span> <span class="n">Champagne</span><span class="o">());</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Wine</span><span class="o">&gt;</span> <span class="n">wineList</span> <span class="o">=</span> <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+            <span class="k">new</span> <span class="nf">Wine</span><span class="o">(),</span> <span class="k">new</span> <span class="nc">SparklingWine</span><span class="o">(),</span> <span class="k">new</span> <span class="nc">Champagne</span><span class="o">());</span>
 
-        <span class="k">for</span> <span class="o">(</span><span class="n">Wine</span> <span class="n">wine</span> <span class="o">:</span> <span class="n">wineList</span><span class="o">)</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">wine</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Wine</span> <span class="n">wine</span> <span class="o">:</span> <span class="n">wineList</span><span class="o">)</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">wine</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -295,10 +293,10 @@
 
 <p>Często możemy się też spotkać z problemem przeciążania, gdy używamy referencji do metod. Weźmy przykład:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-<span class="n">ExecutorService</span> <span class="n">exec</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newCachedThreadPool</span><span class="o">();</span>
-<span class="n">exec</span><span class="o">.</span><span class="na">submit</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+<span class="nc">ExecutorService</span> <span class="n">exec</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newCachedThreadPool</span><span class="o">();</span>
+<span class="n">exec</span><span class="o">.</span><span class="na">submit</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Zarówno konstruktor <code class="highlighter-rouge">Thread</code> jak i metoda <code class="highlighter-rouge">sumbmit</code> przyjmują <code class="highlighter-rouge">Runnable</code>, jednak wywołanie metody <code class="highlighter-rouge">submit</code> nie skompiluje się poprawnie. Wszystko przez to, że metoda <code class="highlighter-rouge">submit</code> ma dodatkowe przeciążenie, które przyjmuje <code class="highlighter-rouge">Callable&lt;T&gt;</code>. Mogłoby się wydawać, że nie powinno to zrobić żadnej różnicy, bo metoda <code class="highlighter-rouge">println</code> zawsze zwraca <code class="highlighter-rouge">void</code>, więc ta referencja do metody nie mogłaby być <code class="highlighter-rouge">Callable</code>. Ma to sens, jednak nie tak działa algorytm wyboru przeciążenia. Równie zaskakujące jest to, że nie byłoby problemu, gdyby metoda <code class="highlighter-rouge">println</code> nie miała własnych przeciążeń. To kombinacja przeciążeń referencji do metody i tej wywoływanej psuje ten algorytm.</p>
@@ -308,8 +306,8 @@
 <p>Jedyne przeciążanie metod, które nie szkodzi jest wtedy, gdy wszystkie te metody robią dokładnie to samo. Można się tym spotkać w przypadku rozszerzania istniejących klas. Miało to miejsce np. w klasie <code class="highlighter-rouge">String</code>, gdy został dodany interfejs <code class="highlighter-rouge">CharSequence</code>. Standardowym sposobem, aby to osiągnąć, jest wywołanie w tym bardziej konkretnym przeciążeniu tego bardziej ogólnego. Tak też zrobiono w klasie <code class="highlighter-rouge">String</code>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Ensuring that 2 methods have identical behavior by forwarding</span>
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contentEquals</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">sb</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="nf">contentEquals</span><span class="o">((</span><span class="n">CharSequence</span><span class="o">)</span> <span class="n">sb</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contentEquals</span><span class="o">(</span><span class="nc">StringBuffer</span> <span class="n">sb</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nf">contentEquals</span><span class="o">((</span><span class="nc">CharSequence</span><span class="o">)</span> <span class="n">sb</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 

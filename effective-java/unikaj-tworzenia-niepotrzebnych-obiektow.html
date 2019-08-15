@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -172,7 +170,7 @@
 
 <p>Jednym z sposobów, na to jest <a href="/effective-java/static-factory-method-zamiast-konstruktora">static factory method</a> o której była mowa w pierwszym wpisie.</p>
 
-<p>Np. <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span></code> jest preferowanym sposobem tworzenia <code class="highlighter-rouge">Boolean</code>, zamiast poprzez konstruktor <code class="highlight language-java" data-lang="java"><span class="n">Boolean</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span></code> (który swoją drogą jest <em>deprecated</em> od Javy 9). Tworzy on za każdym wywołaniem nowy obiekt, co w przypadku klasy <code class="highlighter-rouge">Boolean</code>, która ma tylko dwa stany (<code class="highlighter-rouge">true</code> i <code class="highlighter-rouge">false</code>) jest całkowicie zbędne.</p>
+<p>Np. <code class="highlight language-java" data-lang="java"><span class="nc">Boolean</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span></code> jest preferowanym sposobem tworzenia <code class="highlighter-rouge">Boolean</code>, zamiast poprzez konstruktor <code class="highlight language-java" data-lang="java"><span class="nc">Boolean</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span></code> (który swoją drogą jest <em>deprecated</em> od Javy 9). Tworzy on za każdym wywołaniem nowy obiekt, co w przypadku klasy <code class="highlighter-rouge">Boolean</code>, która ma tylko dwa stany (<code class="highlighter-rouge">true</code> i <code class="highlighter-rouge">false</code>) jest całkowicie zbędne.</p>
 
 <p><strong>Szczególnie obiekty, które są bardzo często używane zasługują na naszą uwagę w tej kwestii.</strong></p>
 
@@ -181,23 +179,23 @@
 <p><strong>Dobrym przykładem tutaj jest <em>autoboxing</em></strong>, który pozwala nam mieszać prymitywy (np. <code class="highlighter-rouge">int</code>, <code class="highlighter-rouge">boolean</code>) z ich <em>wrapperami</em> (np. <code class="highlighter-rouge">Integer</code>, <code class="highlighter-rouge">Boolean</code>). Jako przykład weźmy funkcję, która zlicza sumę wszystkich pozytywnych wartości <code class="highlighter-rouge">int</code>. W takiej sytuacji do przetrzymywania wyniku użyjemy <code class="highlighter-rouge">long</code>, bo <code class="highlighter-rouge">int</code> nie jest wystarczająco duży, aby pomieścić wynik:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">sum</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">Long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+    <span class="nc">Long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
         <span class="n">sum</span> <span class="o">+=</span> <span class="n">i</span><span class="o">;</span>
 
     <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
-<p>Przez jeden mały szczegół w tym kodzie wydajność programu jest dużo słabsza niż powinna być. Mowa tu o deklaracji <code class="highlight language-java" data-lang="java"><span class="n">Long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span></code>. Zamiast <code class="highlighter-rouge">long</code> jest użyty wrapper <code class="highlighter-rouge">Long</code>, co skutkuje tym, że program tworzy 2<sup>31</sup> niepotrzebnych instancji <code class="highlighter-rouge">Long</code>. Dzieję się to w miejscu, kiedy do <code class="highlighter-rouge">Long sum</code> jest dodawane <code class="highlighter-rouge">long i</code>, a więc <code class="highlighter-rouge">long i</code> jest <em>autoboxowane</em> na <code class="highlighter-rouge">Long</code>.</p>
+<p>Przez jeden mały szczegół w tym kodzie wydajność programu jest dużo słabsza niż powinna być. Mowa tu o deklaracji <code class="highlight language-java" data-lang="java"><span class="nc">Long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span></code>. Zamiast <code class="highlighter-rouge">long</code> jest użyty wrapper <code class="highlighter-rouge">Long</code>, co skutkuje tym, że program tworzy 2<sup>31</sup> niepotrzebnych instancji <code class="highlighter-rouge">Long</code>. Dzieję się to w miejscu, kiedy do <code class="highlighter-rouge">Long sum</code> jest dodawane <code class="highlighter-rouge">long i</code>, a więc <code class="highlighter-rouge">long i</code> jest <em>autoboxowane</em> na <code class="highlighter-rouge">Long</code>.</p>
 
 <p>Przez tą jedną literkę wykonanie tej funkcji na moim laptopie trwało ~7 sekund zamiast ~1 sekundy. Joshua Bloch podał, że na jego sprzęcie było odpowiednio 6.3 sekundy i 0.59 sekundy. Polecam sprawdzić różnicę u siebie ;)</p>
 
 <p><strong>Wniosek: preferuj prymitywy i zwracaj uwagę na autoboxing</strong></p>
 
-<p>Innym dobrym przykładem jest często wykorzystywana metoda <code class="highlight language-java" data-lang="java"><span class="n">String</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"regexp"</span><span class="o">)</span></code>. Dajmy na to, że mamy taką oto metodę, która sprawdza, czy liczba jest poprawną liczbą rzymską:</p>
+<p>Innym dobrym przykładem jest często wykorzystywana metoda <code class="highlight language-java" data-lang="java"><span class="nc">String</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"regexp"</span><span class="o">)</span></code>. Dajmy na to, że mamy taką oto metodę, która sprawdza, czy liczba jest poprawną liczbą rzymską:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RomanNumerals</span> <span class="o">{</span>
-    <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isRomanNumeral</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isRomanNumeral</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"^(?=.)M*(C[MD]|D?C{0,3})"</span>
                 <span class="o">+</span> <span class="s">"(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$"</span><span class="o">);</span>
     <span class="o">}</span>
@@ -207,12 +205,12 @@
 <p>Użycie takiej funkcji w pętli jest mało wydajnym rozwiązaniem. Jest tak dlatego, że metoda <code class="highlighter-rouge">matches</code> wewnętrznie tworzy obiekt <code class="highlighter-rouge">Pattern</code> z podanego przez nas w stringu <em>regexpa</em>. Tworzenie obiektu <code class="highlighter-rouge">Pattern</code> jest całkiem kosztowne, a tworzenie go w pętli za każdym razem takiego samego jest całkowicie zbędne. W takich przypadkach powinniśmy operować na jednej instancji <code class="highlighter-rouge">Pattern</code>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RomanNumerals</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Pattern</span> <span class="n">ROMAN</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Pattern</span> <span class="no">ROMAN</span> <span class="o">=</span> <span class="nc">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span>
             <span class="s">"^(?=.)M*(C[MD]|D?C{0,3})"</span>
             <span class="o">+</span> <span class="s">"(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$"</span><span class="o">);</span>
 
-    <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isRomanNumeral</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">ROMAN</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">s</span><span class="o">).</span><span class="na">matches</span><span class="o">();</span>
+    <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isRomanNumeral</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="no">ROMAN</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">s</span><span class="o">).</span><span class="na">matches</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -229,7 +227,7 @@
 
 <p>Nieco inny, trochę ekstremalny przypadek, który jest też podany w książce to:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"bikini"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"bikini"</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Jest to nadmiarowe tworzenie nowej instancji stringa za każdym razem kiedy ta linijka jest wykonywana. Argument konstruktora <code class="s highlighter-rouge">"bikini"</code> jest już sam w sobie instancją klasy <code class="highlighter-rouge">String</code>. Zauważ, że można normalnie na nim wykonywać metody, np.:</p>
@@ -241,21 +239,21 @@
 
 <p class="note">Każda klasa ma swój <a href="https://en.wikipedia.org/wiki/Java_class_file#The_constant_pool">constant pool</a> - listę stałych wartości, które mogą być reużywane, jeśli często występują w kodzie źródłowym. Zaliczamy do tego stringi, numery, nazwy metod, itd.</p>
 
-<p>Jednak <code class="highlight language-java" data-lang="java"><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"abc"</span><span class="o">)</span></code> nie jest aż tak kosztowną operacją jaką mogłoby się wydawać, bo wewnętrzna reprezentacja tekstu jest reużywana. Co nie oznacza, że nie powinieneś unikać takiej konstrukcji.</p>
+<p>Jednak <code class="highlight language-java" data-lang="java"><span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"abc"</span><span class="o">)</span></code> nie jest aż tak kosztowną operacją jaką mogłoby się wydawać, bo wewnętrzna reprezentacja tekstu jest reużywana. Co nie oznacza, że nie powinieneś unikać takiej konstrukcji.</p>
 
 <p>Dlatego zawsze stosuj po prostu:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"bikini"</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"bikini"</span><span class="o">;</span>
 </code></pre></div></div>
 
 <p><strong>Jak wspomniałem wcześniej, nie zawsze tworzenie dodatkowych obiektów jest kosztowne. Czasem nawet kod, który wydaje się być osobną operacją wcale nią nie jest.</strong></p>
 
 <p>Dobrym przykładem jest konkatenacja stringów. <strong>Jeśli stringi są znane podczas kompilacji</strong>, to te dwie operacje niczym się nie różnią:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">one</span> <span class="o">=</span> <span class="s">"abc"</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">one</span> <span class="o">=</span> <span class="s">"abc"</span><span class="o">;</span>
 </code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">two</span> <span class="o">=</span> <span class="s">"ab"</span> <span class="o">+</span> <span class="s">"c"</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">two</span> <span class="o">=</span> <span class="s">"ab"</span> <span class="o">+</span> <span class="s">"c"</span><span class="o">;</span>
 </code></pre></div></div>
 <p>Druga opcja wcale nie jest dodatkową operacją. Kompilator wykona konkatenację podczas czasu kompilacji i wygenerowany kod nie będzie się niczym różnił. Są one nawet referencjami do tych samych obiektów, o czym była mowa w notatce wcześniej:</p>
 
@@ -264,12 +262,12 @@
 
 <p>Z kolei używając konstruktora:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">three</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"abc"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">three</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"abc"</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>co jest tym samym co:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">String</span> <span class="n">three</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">one</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">three</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">one</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>wartości będą te same, ale nie będą już to referencje do tych samych obiektów:</p>

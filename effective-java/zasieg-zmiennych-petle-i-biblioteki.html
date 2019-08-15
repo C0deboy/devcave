@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -202,7 +200,7 @@ Jednak to potem, najpierw trzy pierwsze tematy:</p>
 <p>Jednak preferowany sposób na iterowanie po kolekcji to:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Preferred idiom for iterating over a collection or array</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Element</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Element</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
     <span class="o">...</span> <span class="c1">// Do Something with e</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -210,20 +208,20 @@ Jednak to potem, najpierw trzy pierwsze tematy:</p>
 <p>Jeśli potrzebujemy dostępu do iteratora, np. żeby wywołać metodę <code class="highlighter-rouge">remove()</code> to:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Idiom for iterating when you need the iterator</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
-    <span class="n">Element</span> <span class="n">e</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Element</span> <span class="n">e</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
     <span class="o">...</span> <span class="c1">// Do something with e and i</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Dlaczego te są preferowane, a nie pętle while? Prosty przykład:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
 <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
     <span class="n">doSomething</span><span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
 <span class="o">}</span>
 <span class="o">...</span>
-<span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
 <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>             <span class="c1">// BUG!</span>
     <span class="n">doSomethingElse</span><span class="o">(</span><span class="n">i2</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
 <span class="o">}</span>
@@ -233,15 +231,15 @@ Jednak to potem, najpierw trzy pierwsze tematy:</p>
 
 <p>W przypadku zwykłych pętli nie ma takiej opcji:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
-    <span class="n">Element</span> <span class="n">e</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Element</span> <span class="n">e</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
     <span class="o">...</span> <span class="c1">// Do something with e and i</span>
 <span class="o">}</span>
 <span class="o">...</span>
 
 <span class="c1">// Compile-time error - cannot find symbol i</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
-    <span class="n">Element</span> <span class="n">e2</span> <span class="o">=</span> <span class="n">i2</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Element</span> <span class="n">e2</span> <span class="o">=</span> <span class="n">i2</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
     <span class="o">...</span> <span class="c1">// Do something with e2 and i2</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -264,7 +262,7 @@ Jednak to potem, najpierw trzy pierwsze tematy:</p>
 <p>Redukuje to boilerplate, zmniejsza szum, przez co kod jest bardziej czytelny, oraz nie mamy możliwości popełnienia błędu:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The preferred idiom for iterating over collections and arrays</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Element</span> <span class="n">e</span> <span class="o">:</span> <span class="n">elements</span><span class="o">)</span> <span class="o">{</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Element</span> <span class="n">e</span> <span class="o">:</span> <span class="n">elements</span><span class="o">)</span> <span class="o">{</span>
     <span class="o">...</span> <span class="c1">// Do something with e</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -274,35 +272,35 @@ Jednak to potem, najpierw trzy pierwsze tematy:</p>
 <p>Te pętle też są łatwiejsze w użyciu w przypadku zagnieżdżonych pętli. Ze zwykłymi pętlami można zrobić następujący błąd:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Can you spot the bug?</span>
-<span class="kd">enum</span> <span class="n">Suit</span> <span class="o">{</span> <span class="n">CLUB</span><span class="o">,</span> <span class="n">DIAMOND</span><span class="o">,</span> <span class="n">HEART</span><span class="o">,</span> <span class="n">SPADE</span> <span class="o">}</span>
-<span class="kd">enum</span> <span class="n">Rank</span> <span class="o">{</span> <span class="n">ACE</span><span class="o">,</span> <span class="n">DEUCE</span><span class="o">,</span> <span class="n">THREE</span><span class="o">,</span> <span class="n">FOUR</span><span class="o">,</span> <span class="n">FIVE</span><span class="o">,</span> <span class="n">SIX</span><span class="o">,</span> <span class="n">SEVEN</span><span class="o">,</span> <span class="n">EIGHT</span><span class="o">,</span>
-            <span class="n">NINE</span><span class="o">,</span> <span class="n">TEN</span><span class="o">,</span> <span class="n">JACK</span><span class="o">,</span> <span class="n">QUEEN</span><span class="o">,</span> <span class="n">KING</span> <span class="o">}</span>
+<span class="kd">enum</span> <span class="nc">Suit</span> <span class="o">{</span> <span class="no">CLUB</span><span class="o">,</span> <span class="no">DIAMOND</span><span class="o">,</span> <span class="no">HEART</span><span class="o">,</span> <span class="no">SPADE</span> <span class="o">}</span>
+<span class="kd">enum</span> <span class="nc">Rank</span> <span class="o">{</span> <span class="no">ACE</span><span class="o">,</span> <span class="no">DEUCE</span><span class="o">,</span> <span class="no">THREE</span><span class="o">,</span> <span class="no">FOUR</span><span class="o">,</span> <span class="no">FIVE</span><span class="o">,</span> <span class="no">SIX</span><span class="o">,</span> <span class="no">SEVEN</span><span class="o">,</span> <span class="no">EIGHT</span><span class="o">,</span>
+            <span class="no">NINE</span><span class="o">,</span> <span class="no">TEN</span><span class="o">,</span> <span class="no">JACK</span><span class="o">,</span> <span class="no">QUEEN</span><span class="o">,</span> <span class="no">KING</span> <span class="o">}</span>
 <span class="o">...</span>
-<span class="kd">static</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Suit</span><span class="o">&gt;</span> <span class="n">suits</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Suit</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
-<span class="kd">static</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&gt;</span> <span class="n">ranks</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Rank</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
+<span class="kd">static</span> <span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">Suit</span><span class="o">&gt;</span> <span class="n">suits</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="nc">Suit</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
+<span class="kd">static</span> <span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">Rank</span><span class="o">&gt;</span> <span class="n">ranks</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="nc">Rank</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
 
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span> <span class="n">deck</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Suit</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">suits</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&gt;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">j</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span>
-        <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Card</span><span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">(),</span> <span class="n">j</span><span class="o">.</span><span class="na">next</span><span class="o">()));</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Card</span><span class="o">&gt;</span> <span class="n">deck</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Suit</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">suits</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Rank</span><span class="o">&gt;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">j</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span>
+        <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Card</span><span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">(),</span> <span class="n">j</span><span class="o">.</span><span class="na">next</span><span class="o">()));</span>
 </code></pre></div></div>
 
 <p>Widzisz go? Metoda <code class="highlighter-rouge">next()</code> dla <code class="highlighter-rouge">i</code> jest wywoływana w złym miejscu. Powinna być wywołana wcześniej:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Fixed, but ugly - you can do better!</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Suit</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">suits</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
-    <span class="n">Suit</span> <span class="n">suit</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Rank</span><span class="o">&gt;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">j</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span>
-        <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Card</span><span class="o">(</span><span class="n">suit</span><span class="o">,</span> <span class="n">j</span><span class="o">.</span><span class="na">next</span><span class="o">()));</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Suit</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">suits</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Suit</span> <span class="n">suit</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Rank</span><span class="o">&gt;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">j</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span>
+        <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Card</span><span class="o">(</span><span class="n">suit</span><span class="o">,</span> <span class="n">j</span><span class="o">.</span><span class="na">next</span><span class="o">()));</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>Teraz działa, jednak jest to mało czytelne - dużo lepiej jest używać po prostu for-each:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Preferred idiom for nested iteration on collections and arrays</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Suit</span> <span class="n">suit</span> <span class="o">:</span> <span class="n">suits</span><span class="o">)</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Rank</span> <span class="n">rank</span> <span class="o">:</span> <span class="n">ranks</span><span class="o">)</span>
-        <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Card</span><span class="o">(</span><span class="n">suit</span><span class="o">,</span> <span class="n">rank</span><span class="o">));</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">Suit</span> <span class="n">suit</span> <span class="o">:</span> <span class="n">suits</span><span class="o">)</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Rank</span> <span class="n">rank</span> <span class="o">:</span> <span class="n">ranks</span><span class="o">)</span>
+        <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Card</span><span class="o">(</span><span class="n">suit</span><span class="o">,</span> <span class="n">rank</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>Jednak są 3 sytuacje, kiedy nie zrobimy z nich użytku:</p>

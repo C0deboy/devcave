@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -190,24 +188,24 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Inappropriate use of static utility - inflexible &amp; untestable!</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpellChecker</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Lexicon</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="o">...;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Lexicon</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="o">...;</span>
 
     <span class="kd">private</span> <span class="nf">SpellChecker</span><span class="o">()</span> <span class="o">{}</span> <span class="c1">// Noninstantiable</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isValid</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">suggestions</span><span class="o">(</span><span class="n">String</span> <span class="n">typo</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isValid</span><span class="o">(</span><span class="nc">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">suggestions</span><span class="o">(</span><span class="nc">String</span> <span class="n">typo</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Inappropriate use of singleton - inflexible &amp; untestable!</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpellChecker</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Lexicon</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="o">...;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Lexicon</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="o">...;</span>
 
     <span class="kd">private</span> <span class="nf">SpellChecker</span><span class="o">(...)</span> <span class="o">{}</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpellChecker</span><span class="o">(...);</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="no">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpellChecker</span><span class="o">(...);</span>
 
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isValid</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">suggestions</span><span class="o">(</span><span class="n">String</span> <span class="n">typo</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isValid</span><span class="o">(</span><span class="nc">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">suggestions</span><span class="o">(</span><span class="nc">String</span> <span class="n">typo</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>Oba rozwiązania są niepoprawne, bo zakładają, że istnieje tylko jeden słownik, który jest warty używania. W praktyce każdy język ma swój własny, a tu nie mamy możliwości reużycia tego kodu z innym. Również podczas testowania moglibyśmy chcieć użyć jakiegoś specjalnego słownika.</p>
@@ -222,7 +220,7 @@
 
 <p>Najprostszy i zarazem najczęściej wykorzystywany sposób na wstrzykiwanie zależności polega na podaniu ich poprzez konstruktor:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Client</span><span class="o">(</span><span class="n">Service</span> <span class="n">service</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Client</span><span class="o">(</span><span class="nc">Service</span> <span class="n">service</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">this</span><span class="o">.</span><span class="na">service</span> <span class="o">=</span> <span class="n">service</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -236,13 +234,13 @@
 <p>Co wcale nie musi być minusem, bo jest to pierwszy krok, aby klasa była <em>immutable</em> i <em>thread safe</em>.</p>
 
 <p>Innym wariantem tego wzorca jest podanie fabryki zależności (wzorzec <em>Factory Method</em>) do konstruktora.
-Interfejs <code class="highlight language-java" data-lang="java"><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span></code> nadaję się do tego idealnie.</p>
+Interfejs <code class="highlight language-java" data-lang="java"><span class="nc">Supplier</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span></code> nadaję się do tego idealnie.</p>
 
 <h2 id="setter-injection">Setter injection</h2>
 
 <p>Tu zależności ustawiamy <em>setterem</em>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setService</span><span class="o">(</span><span class="n">Service</span> <span class="n">service</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setService</span><span class="o">(</span><span class="nc">Service</span> <span class="n">service</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">this</span><span class="o">.</span><span class="na">service</span> <span class="o">=</span> <span class="n">service</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -264,7 +262,7 @@ Interfejs <code class="highlight language-java" data-lang="java"><span class="n"
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooFormatter</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">format</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">format</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"foo"</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -277,7 +275,7 @@ Interfejs <code class="highlight language-java" data-lang="java"><span class="n"
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooService</span> <span class="o">{</span>
 
     <span class="nd">@Autowired</span>
-    <span class="kd">private</span> <span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">fooFormatter</span><span class="o">.</span><span class="na">format</span><span class="o">();</span>
@@ -297,7 +295,7 @@ Interfejs <code class="highlight language-java" data-lang="java"><span class="n"
   <li>Ukrywany jest fakt, że klasa ma zależność. Nic nie stoi na przeszkodzie, żeby zrobić coś takiego:</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FooService</span> <span class="n">fooService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FooService</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FooService</span> <span class="n">fooService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FooService</span><span class="o">();</span>
 <span class="n">fooService</span><span class="o">.</span><span class="na">doSomething</span><span class="o">();</span>
 </code></pre></div></div>
 
@@ -309,10 +307,10 @@ Interfejs <code class="highlight language-java" data-lang="java"><span class="n"
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooService</span> <span class="o">{</span>
 
-    <span class="kd">private</span> <span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">;</span>
 
     <span class="nd">@Autowired</span>
-    <span class="kd">public</span> <span class="nf">FooService</span><span class="o">(</span><span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">FooService</span><span class="o">(</span><span class="nc">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">fooFormatter</span> <span class="o">=</span> <span class="n">fooFormatter</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -335,10 +333,10 @@ Interfejs <code class="highlight language-java" data-lang="java"><span class="n"
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooService</span> <span class="o">{</span>
 
-    <span class="kd">private</span> <span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">;</span>
 
     <span class="nd">@Autowired</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFooFormatter</span><span class="o">(</span><span class="n">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFooFormatter</span><span class="o">(</span><span class="nc">FooFormatter</span> <span class="n">fooFormatter</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">fooFormatter</span> <span class="o">=</span> <span class="n">fooFormatter</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>

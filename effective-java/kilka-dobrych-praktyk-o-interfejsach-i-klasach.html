@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -198,10 +196,10 @@
 <p>Przykładem może być metoda <code class="highlighter-rouge">removeIf</code>, która została dodana do interfejsu <code class="highlighter-rouge">Collection</code> w Javie 8 i usuwa wszystkie elementy, które spełnią warunek w funkcji podanej jako argument:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Default method added to the Collection interface in Java 8</span>
-<span class="k">default</span> <span class="kt">boolean</span> <span class="nf">removeIf</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">filter</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">filter</span><span class="o">);</span>
+<span class="k">default</span> <span class="kt">boolean</span> <span class="nf">removeIf</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">E</span><span class="o">&gt;</span> <span class="n">filter</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">filter</span><span class="o">);</span>
     <span class="kt">boolean</span> <span class="n">removed</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="kd">final</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">each</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">();</span>
+    <span class="kd">final</span> <span class="nc">Iterator</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">each</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">();</span>
     <span class="k">while</span> <span class="o">(</span><span class="n">each</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">filter</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">each</span><span class="o">.</span><span class="na">next</span><span class="o">()))</span> <span class="o">{</span>
             <span class="n">each</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
@@ -236,13 +234,13 @@ Jeśli wywołamy <code class="highlighter-rouge">removeIf</code> na <code class=
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Constant interface antipattern - do not use! </span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PhysicalConstants</span> <span class="o">{</span>
     <span class="c1">// Avogadro's number (1/mol)  </span>
-    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">AVOGADROS_NUMBER</span> <span class="o">=</span> <span class="mf">6.022_140_857e23</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="no">AVOGADROS_NUMBER</span> <span class="o">=</span> <span class="mf">6.022_140_857e23</span><span class="o">;</span>
 
     <span class="c1">// Boltzmann constant (J/K)  </span>
-    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">BOLTZMANN_CONSTANT</span> <span class="o">=</span> <span class="mf">1.380_648_52</span><span class="n">e</span><span class="o">-</span><span class="mi">23</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="no">BOLTZMANN_CONSTANT</span> <span class="o">=</span> <span class="mf">1.380_648_52</span><span class="n">e</span><span class="o">-</span><span class="mi">23</span><span class="o">;</span>
 
     <span class="c1">// Mass of the electron (kg)  </span>
-    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">ELECTRON_MASS</span> <span class="o">=</span> <span class="mf">9.109_383_56</span><span class="n">e</span><span class="o">-</span><span class="mi">31</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="no">ELECTRON_MASS</span> <span class="o">=</span> <span class="mf">9.109_383_56</span><span class="n">e</span><span class="o">-</span><span class="mi">31</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -271,10 +269,10 @@ Jeśli wywołamy <code class="highlighter-rouge">removeIf</code> na <code class=
 <p>Tutaj Joshua wspomina o <em>tagged classes</em>. Są to klasy, które mają jakby pod spodem typ (tag), zależnie od którego zmieniają zachowanie. Przykładowo:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Figure</span> <span class="o">{</span>
-    <span class="kd">enum</span> <span class="n">Shape</span> <span class="o">{</span><span class="n">RECTANGLE</span><span class="o">,</span> <span class="n">CIRCLE</span><span class="o">};</span>
+    <span class="kd">enum</span> <span class="nc">Shape</span> <span class="o">{</span><span class="no">RECTANGLE</span><span class="o">,</span> <span class="no">CIRCLE</span><span class="o">};</span>
 
     <span class="c1">// Tag field - the shape of this figure  </span>
-    <span class="kd">final</span> <span class="n">Shape</span> <span class="n">shape</span><span class="o">;</span>
+    <span class="kd">final</span> <span class="nc">Shape</span> <span class="n">shape</span><span class="o">;</span>
 
     <span class="c1">// These fields are used only if shape is RECTANGLE  </span>
     <span class="kt">double</span> <span class="n">length</span><span class="o">;</span>
@@ -284,14 +282,14 @@ Jeśli wywołamy <code class="highlighter-rouge">removeIf</code> na <code class=
     <span class="kt">double</span> <span class="n">radius</span><span class="o">;</span>
 
     <span class="c1">// Constructor for circle  </span>
-    <span class="n">Figure</span><span class="o">(</span><span class="kt">double</span> <span class="n">radius</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">shape</span> <span class="o">=</span> <span class="n">Shape</span><span class="o">.</span><span class="na">CIRCLE</span><span class="o">;</span>
+    <span class="nc">Figure</span><span class="o">(</span><span class="kt">double</span> <span class="n">radius</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="nc">Shape</span><span class="o">.</span><span class="na">CIRCLE</span><span class="o">;</span>
         <span class="k">this</span><span class="o">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">radius</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="c1">// Constructor for rectangle  </span>
-    <span class="n">Figure</span><span class="o">(</span><span class="kt">double</span> <span class="n">length</span><span class="o">,</span> <span class="kt">double</span> <span class="n">width</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">shape</span> <span class="o">=</span> <span class="n">Shape</span><span class="o">.</span><span class="na">RECTANGLE</span><span class="o">;</span>
+    <span class="nc">Figure</span><span class="o">(</span><span class="kt">double</span> <span class="n">length</span><span class="o">,</span> <span class="kt">double</span> <span class="n">width</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="nc">Shape</span><span class="o">.</span><span class="na">RECTANGLE</span><span class="o">;</span>
         <span class="k">this</span><span class="o">.</span><span class="na">length</span> <span class="o">=</span> <span class="n">length</span><span class="o">;</span>
         <span class="k">this</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
     <span class="o">}</span>
@@ -301,7 +299,7 @@ Jeśli wywołamy <code class="highlighter-rouge">removeIf</code> na <code class=
             <span class="k">case</span> <span class="nl">RECTANGLE:</span>
                 <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span><span class="o">;</span>
             <span class="k">case</span> <span class="nl">CIRCLE:</span>
-                <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">*</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">);</span>
+                <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">*</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">);</span>
             <span class="k">default</span><span class="o">:</span>
                 <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">(</span><span class="n">shape</span><span class="o">);</span>
         <span class="o">}</span>
@@ -316,22 +314,22 @@ Jeśli wywołamy <code class="highlighter-rouge">removeIf</code> na <code class=
     <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">area</span><span class="o">();</span>
 <span class="o">}</span>
 
-<span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">extends</span> <span class="n">Figure</span> <span class="o">{</span>
+<span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">extends</span> <span class="nc">Figure</span> <span class="o">{</span>
     <span class="kd">final</span> <span class="kt">double</span> <span class="n">radius</span><span class="o">;</span>
 
-    <span class="n">Circle</span><span class="o">(</span><span class="kt">double</span> <span class="n">radius</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">radius</span><span class="o">;</span> <span class="o">}</span>
+    <span class="nc">Circle</span><span class="o">(</span><span class="kt">double</span> <span class="n">radius</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">radius</span><span class="o">;</span> <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kt">double</span> <span class="nf">area</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">*</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">*</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">extends</span> <span class="n">Figure</span> <span class="o">{</span>
+<span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">extends</span> <span class="nc">Figure</span> <span class="o">{</span>
     <span class="kd">final</span> <span class="kt">double</span> <span class="n">length</span><span class="o">;</span>
     <span class="kd">final</span> <span class="kt">double</span> <span class="n">width</span><span class="o">;</span>
 
-    <span class="n">Rectangle</span><span class="o">(</span><span class="kt">double</span> <span class="n">length</span><span class="o">,</span> <span class="kt">double</span> <span class="n">width</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Rectangle</span><span class="o">(</span><span class="kt">double</span> <span class="n">length</span><span class="o">,</span> <span class="kt">double</span> <span class="n">width</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">length</span> <span class="o">=</span> <span class="n">length</span><span class="o">;</span>
         <span class="k">this</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
     <span class="o">}</span>
@@ -353,11 +351,11 @@ Jeśli wywołamy <code class="highlighter-rouge">removeIf</code> na <code class=
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Two classes defined in one file. Don't ever do this!</span>
 <span class="kd">class</span> <span class="nc">Utensil</span> <span class="o">{</span> <span class="c1">// top level class</span>
-    <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NAME</span> <span class="o">=</span> <span class="s">"pan"</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">NAME</span> <span class="o">=</span> <span class="s">"pan"</span><span class="o">;</span>
 <span class="o">}</span>
 
 <span class="kd">class</span> <span class="nc">Dessert</span> <span class="o">{</span> <span class="c1">// top level class</span>
-    <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NAME</span> <span class="o">=</span> <span class="s">"cake"</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">NAME</span> <span class="o">=</span> <span class="s">"cake"</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p><strong>ale nie powinniśmy nigdy z tej możliwości korzystać</strong>. Deklarując klasy w tym samym pliku dużo łatwiej o kolizję i czytelność projektu znacznie spada.</p>

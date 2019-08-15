@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -179,14 +177,14 @@
 <p>Używając tablic, takie coś przejdzie przez kompilator i wysypie się w dopiero w <em>runtime</em>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Fails at runtime!</span>
-<span class="n">Object</span><span class="o">[]</span> <span class="n">objectArray</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+<span class="nc">Object</span><span class="o">[]</span> <span class="n">objectArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Long</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
 <span class="n">objectArray</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s">"I don't fit in"</span><span class="o">;</span> <span class="c1">// Throws ArrayStoreException</span>
 </code></pre></div></div>
 
 <p>Używając odpowiadającej generycznej listy, taki kod nie przejdzie kompilacji:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Won't compile!</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">objectList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;();</span> <span class="c1">// Incompatible types</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">objectList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">&gt;();</span> <span class="c1">// Incompatible types</span>
 <span class="n">objectList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"I don't fit in"</span><span class="o">);</span>
 </code></pre></div></div>
 
@@ -205,14 +203,14 @@ Adnotacja <code class="highlighter-rouge">@SafeVarargs</code>, która była omó
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Chooser - a class badly in need of generics!</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Chooser</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">choiceArray</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">choiceArray</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">Chooser</span><span class="o">(</span><span class="n">Collection</span> <span class="n">choices</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Chooser</span><span class="o">(</span><span class="nc">Collection</span> <span class="n">choices</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">choiceArray</span> <span class="o">=</span> <span class="n">choices</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">choose</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">Random</span> <span class="n">rnd</span> <span class="o">=</span> <span class="n">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">choose</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Random</span> <span class="n">rnd</span> <span class="o">=</span> <span class="nc">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">();</span>
         <span class="k">return</span> <span class="n">choiceArray</span><span class="o">[</span><span class="n">rnd</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">choiceArray</span><span class="o">.</span><span class="na">length</span><span class="o">)];</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -222,10 +220,10 @@ Adnotacja <code class="highlighter-rouge">@SafeVarargs</code>, która była omó
 <p>Próbując użyć generyków i generycznej tablicy w ten sposób:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// A first cut at making Chooser generic - won't compile</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Chooser</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">T</span><span class="o">[]</span> <span class="n">choiceArray</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Chooser</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="no">T</span><span class="o">[]</span> <span class="n">choiceArray</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">Chooser</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">choices</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Chooser</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">choices</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">choiceArray</span> <span class="o">=</span> <span class="n">choices</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
     <span class="o">}</span>
 
@@ -245,7 +243,7 @@ converted to T[]
 
 <p>Jeśli scastujemy tablicę <code class="highlighter-rouge">Object</code> na <code class="highlighter-rouge">T</code>:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">choiceArray</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">[])</span> <span class="n">choices</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">choiceArray</span> <span class="o">=</span> <span class="o">(</span><span class="no">T</span><span class="o">[])</span> <span class="n">choices</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
 </code></pre></div></div>
 
 <p>To dostaniemy warning:</p>
@@ -261,15 +259,15 @@ T extends Object declared in class Chooser
 Można by dodać adnotację <code class="highlighter-rouge">@SuppressWarning</code> tak jak to było omawiane w poprzednim wpisie, ale tutaj lepszym rozwiązaniem byłoby wyeliminować przyczynę - użyć <code class="highlighter-rouge">List</code> zamiast tablicy:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// List-based Chooser - typesafe</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Chooser</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">choiceList</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Chooser</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">choiceList</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">Chooser</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">choices</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">choiceList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">choices</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="nf">Chooser</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">choices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">choiceList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">choices</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">T</span> <span class="nf">choose</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">Random</span> <span class="n">rnd</span> <span class="o">=</span> <span class="n">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="no">T</span> <span class="nf">choose</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Random</span> <span class="n">rnd</span> <span class="o">=</span> <span class="nc">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">();</span>
         <span class="k">return</span> <span class="n">choiceList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">rnd</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">choiceList</span><span class="o">.</span><span class="na">size</span><span class="o">()));</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -285,23 +283,23 @@ Można by dodać adnotację <code class="highlighter-rouge">@SuppressWarning</co
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Object-based collection - a prime candidate for generics</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[</span><span class="no">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">Object</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="nc">Object</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">ensureCapacity</span><span class="o">();</span>
         <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
             <span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
-        <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+        <span class="nc">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
         <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// Eliminate obsolete reference</span>
         <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
     <span class="o">}</span>
@@ -312,7 +310,7 @@ Można by dodać adnotację <code class="highlighter-rouge">@SuppressWarning</co
 
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">elements</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span>
-            <span class="n">elements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -320,24 +318,24 @@ Można by dodać adnotację <code class="highlighter-rouge">@SuppressWarning</co
 <p>Ta klasa aż się prosi, aby była generyczną. Próbując napisać coś takiego:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Initial attempt to generify Stack - won't compile!</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">E</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="no">E</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">E</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="no">E</span><span class="o">[</span><span class="no">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">ensureCapacity</span><span class="o">();</span>
         <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">E</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="no">E</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
             <span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
-        <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+        <span class="no">E</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
         <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// Eliminate obsolete reference</span>
         <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
     <span class="o">}</span>
@@ -351,14 +349,14 @@ Można by dodać adnotację <code class="highlighter-rouge">@SuppressWarning</co
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//...</span>
 
-<span class="kd">private</span> <span class="n">E</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+<span class="kd">private</span> <span class="no">E</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
 
 <span class="c1">// The elements array will contain only E instances from push(E).</span>
 <span class="c1">// This is sufficient to ensure type safety, but the runtime</span>
 <span class="c1">// type of the array won't be E[]; it will always be Object[]!</span>
 <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">elements</span> <span class="o">=</span> <span class="o">(</span><span class="n">E</span><span class="o">[])</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="o">(</span><span class="no">E</span><span class="o">[])</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[</span><span class="no">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
 <span class="o">}</span>
 
 <span class="c1">//...</span>
@@ -368,18 +366,18 @@ Można by dodać adnotację <code class="highlighter-rouge">@SuppressWarning</co
 
 <p>Drugim sposobem jest zmiana typu tablicy z <code class="highlighter-rouge">E[]</code> na <code class="highlighter-rouge">Object[]</code>, jednak to zmusi nas do castowania każdego pobranego elementu z tablicy:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
 
 <span class="c1">//...</span>
 
 <span class="c1">// Appropriate suppression of unchecked warning</span>
-<span class="kd">public</span> <span class="n">E</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="no">E</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nf">EmptyStackException</span><span class="o">();</span>
 
     <span class="c1">// push requires elements to be of type E, so cast is correct</span>
-    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span> <span class="n">E</span> <span class="n">result</span> <span class="o">=</span>
-        <span class="o">(</span><span class="n">E</span><span class="o">)</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span> <span class="no">E</span> <span class="n">result</span> <span class="o">=</span>
+        <span class="o">(</span><span class="no">E</span><span class="o">)</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
 
     <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// Eliminate obsolete reference</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
@@ -398,8 +396,8 @@ Wszystkie algorytmiczne metody z <code class="highlighter-rouge">Collections</co
 <p>Przykładowo metoda używająca gołych typów z poprzedniego wpisu:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Uses raw types - unacceptable! (Item 26)</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="n">Set</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Set</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">(</span><span class="n">s1</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">Set</span> <span class="nf">union</span><span class="o">(</span><span class="nc">Set</span> <span class="n">s1</span><span class="o">,</span> <span class="nc">Set</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Set</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">(</span><span class="n">s1</span><span class="o">);</span>
     <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">s2</span><span class="o">);</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 <span class="o">}</span>
@@ -420,8 +418,8 @@ addAll(Collection&lt;? extends E&gt;) as a member of raw type Set
 <p>Sparametryzujmy ją zatem. Parametr typu musi znajdować się między modyfikatorami a typem zwrotnym funkcji.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Generic method</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">s1</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="o">(</span><span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">s1</span><span class="o">);</span>
     <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">s2</span><span class="o">);</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 <span class="o">}</span>
@@ -430,11 +428,11 @@ addAll(Collection&lt;? extends E&gt;) as a member of raw type Set
 <p>Taka metoda nie wymaga żadnego castowania po stronie klienta i kompiluje się bez żadnych ostrzeżeń:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simple program to exercise generic method</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">guys</span> <span class="o">=</span> <span class="n">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"Tom"</span><span class="o">,</span> <span class="s">"Dick"</span><span class="o">,</span> <span class="s">"Harry"</span><span class="o">);</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stooges</span> <span class="o">=</span> <span class="n">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"Larry"</span><span class="o">,</span> <span class="s">"Moe"</span><span class="o">,</span> <span class="s">"Curly"</span><span class="o">);</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">aflCio</span> <span class="o">=</span> <span class="n">union</span><span class="o">(</span><span class="n">guys</span><span class="o">,</span> <span class="n">stooges</span><span class="o">);</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">aflCio</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">guys</span> <span class="o">=</span> <span class="nc">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"Tom"</span><span class="o">,</span> <span class="s">"Dick"</span><span class="o">,</span> <span class="s">"Harry"</span><span class="o">);</span>
+    <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stooges</span> <span class="o">=</span> <span class="nc">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"Larry"</span><span class="o">,</span> <span class="s">"Moe"</span><span class="o">,</span> <span class="s">"Curly"</span><span class="o">);</span>
+    <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">aflCio</span> <span class="o">=</span> <span class="n">union</span><span class="o">(</span><span class="n">guys</span><span class="o">,</span> <span class="n">stooges</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">aflCio</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 

@@ -63,13 +63,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/o-mnie">O mnie</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/archiwum">Archiwum</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
@@ -176,9 +174,9 @@
 <p>Typy funkcyjne to interfejsy (rzadziej klasy abstrakcyjne), które mają tylko jedną abstrakcyjną metodę. Ich instancje nazywane są obiektami funkcyjnymi i reprezentują jedną konkretną funkcję. Przed Java 8, aby stworzyć obiekt funkcyjny, musieliśmy użyć klasy abstrakcyjnej. Dla przykładu kawałek kodu, który sortuje słowa na podstawie ich długości, definiując to w klasie anonimowej:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Anonymous class instance as a function object - obsolete!</span>
-<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;()</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+<span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="nc">String</span> <span class="n">s1</span><span class="o">,</span> <span class="nc">String</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">});</span>
 </code></pre></div></div>
@@ -186,53 +184,53 @@
 <p>Programowanie funkcyjne w Javie przy użyciu anonimowych klas wymaga dużo boilerplateu i nie jest zbyt przyjemne, dlatego w Javie 8 dodano lambdy. Są <strong>podobne</strong> funkcjonalnie do klas anonimowych, jednak dużo bardziej zwięzłe. To samo za pomocą lambdy wygląda tak:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Lambda expression as function object (replaces anonymous class)</span>
-<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="o">(</span><span class="n">s1</span><span class="o">,</span> <span class="n">s2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+<span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="o">(</span><span class="n">s1</span><span class="o">,</span> <span class="n">s2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
 </code></pre></div></div>
 
 <p class="note">Typ lambdy <code class="highlighter-rouge">Comparator&lt;String&gt;</code>, typy parametrów (<code class="highlighter-rouge">s1</code> i <code class="highlighter-rouge">s2</code>, oba <code class="highlighter-rouge">String</code>) i typ zwracany <code class="highlighter-rouge">int</code> nie jest widoczny w kodzie. Kompilator dedukuje te typy dzięki mechanizmowi zwanemu inferencją typów. W niektórych specyficznych przypadkach kompilator nie będzie potrafił tego zrobić i będzie trzeba je podać ręcznie. Szczególnie w lambdach nie powinniśmy używać surowych typów, bo to z generyków kompilator może zebrać najwięcej informacji.</p>
 
 <p>Możemy to jeszcze nawet bardziej skrócić używając metody do budowania comparatora:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="nc">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
 </code></pre></div></div>
 
 <p>Od Javy 8 dodano metodę <code class="highlighter-rouge">sort</code> do interfejsu <code class="highlighter-rouge">List</code> z której możemy skorzystać, aby jeszcze nieco skrócić zapis:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">words</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">words</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="nc">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
 </code></pre></div></div>
 
 <p>Lambdy znacznie zwiększają przejrzystość kodu i mogą być zastosowane w wielu miejscach. Weźmy na przykład enuma <code class="highlighter-rouge">Operation</code> z <a href="/effective-java/enums">postu o enumach</a>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Enum type with constant-specific class bodies &amp; data (Item 34)</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Operation</span> <span class="o">{</span>
-    <span class="n">PLUS</span><span class="o">(</span><span class="s">"+"</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Operation</span> <span class="o">{</span>
+    <span class="no">PLUS</span><span class="o">(</span><span class="s">"+"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">},</span>
-    <span class="n">MINUS</span><span class="o">(</span><span class="s">"-"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="no">MINUS</span><span class="o">(</span><span class="s">"-"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">},</span>
-    <span class="n">TIMES</span><span class="o">(</span><span class="s">"*"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="no">TIMES</span><span class="o">(</span><span class="s">"*"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">},</span>
-    <span class="n">DIVIDE</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="no">DIVIDE</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">};</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">symbol</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">symbol</span><span class="o">;</span>
 
-    <span class="n">Operation</span><span class="o">(</span><span class="n">String</span> <span class="n">symbol</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">symbol</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">symbol</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -243,22 +241,22 @@
 <p>Zamiast definiować osobne ciało dla każdej instancji, możemy przekazać lambdę do konstruktora, która implementuje dane zachowanie. To zachowanie zostanie przechowane w polu <code class="highlighter-rouge">DoubleBinaryOperator op</code>, które potem będzie wywoływane w metodzie <code class="highlighter-rouge">apply</code>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Enum with function object fields &amp; constant-specific behavior</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="n">Operation</span> <span class="o">{</span>
-    <span class="n">PLUS</span><span class="o">(</span><span class="s">"+"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">),</span>
-    <span class="n">MINUS</span><span class="o">(</span><span class="s">"-"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">),</span>
-    <span class="n">TIMES</span><span class="o">(</span><span class="s">"*"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">),</span>
-    <span class="n">DIVIDE</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Operation</span> <span class="o">{</span>
+    <span class="no">PLUS</span><span class="o">(</span><span class="s">"+"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">),</span>
+    <span class="no">MINUS</span><span class="o">(</span><span class="s">"-"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">),</span>
+    <span class="no">TIMES</span><span class="o">(</span><span class="s">"*"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">),</span>
+    <span class="no">DIVIDE</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">);</span>
 
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">symbol</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">DoubleBinaryOperator</span> <span class="n">op</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">symbol</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">DoubleBinaryOperator</span> <span class="n">op</span><span class="o">;</span>
 
-    <span class="n">Operation</span><span class="o">(</span><span class="n">String</span> <span class="n">symbol</span><span class="o">,</span> <span class="n">DoubleBinaryOperator</span> <span class="n">op</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">symbol</span><span class="o">,</span> <span class="nc">DoubleBinaryOperator</span> <span class="n">op</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">;</span>
         <span class="k">this</span><span class="o">.</span><span class="na">op</span> <span class="o">=</span> <span class="n">op</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">symbol</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -285,7 +283,7 @@ Wszystkie pozostałe interfejsy z tej kategorii będą omówione w następnym po
 
 <p>Poprzednie sortowanie z użyciem referencji do metody wyglądałoby tak:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">words</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">words</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="nc">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>Nie zmienia to wiele, dlatego lepszym przykładem może być funkcja <code class="highlighter-rouge">merge</code> w interfejsie <code class="highlighter-rouge">Map</code>, która przypisuje podaną wartość do danego klucza, jeśli ten nie istnieje lub sumuje ich wartości, jeśli już jest w mapie:</p>

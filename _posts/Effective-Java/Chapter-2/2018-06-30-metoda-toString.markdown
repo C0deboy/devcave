@@ -50,7 +50,7 @@ W przypadku klas abstrakcyjnych może czasem się przydać, jeśli podklasy maj�
 
 **Metoda `toString` powinna zawierać wszystkie kluczowe informacje zawarte w obiekcie**. Nie chcielibyśmy, żeby coś było pominięte i na przykład podczas testowania zobaczyć taki błąd:
 
-```text
+```console
 Assertion failure: expected {abc, 123}, but was {abc, 123}.
 ```
 

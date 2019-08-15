@@ -17,7 +17,7 @@ W tym poście zaprezentuję funkcje, z których korzystałem rozwiązując zadan
 
 Od tego zawsze zaczynamy. Ja korzystam z funkcji, która pakuje wszystkie dane z pliku tekstowego do tablicy o rożnych wymiarach, w zależności od zadania. Przykładowo dla tego typu danych:
 
-{% highlight text %}
+{% highlight console %}
 AIHAHGHBEAFJAJDI HGIHFEHHJGBCBGD
 FBJHCFFGADD EHADJAJBJBEGD
 JHGHADJ AGFEHHEHIAEJFC
@@ -297,7 +297,7 @@ private static void letterStats(String[] text) {
 
 A wyglądało to tak:
 
-{% highlight text %}
+{% highlight bash %}
 A: 632 (7.55%)
 B: 196 (2.34%)
 C: 162 (1.94%)

@@ -102,7 +102,7 @@ for (Planet planet : Planet.values()) {
 
 i wynik:
 
-```
+```console
 Weight on MERCURY is 26.453469
 Weight on VENUS is 63.353571
 Weight on EARTH is 70.000000

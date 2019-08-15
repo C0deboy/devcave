@@ -85,10 +85,15 @@ Wiadomo, jęśli masz więcej elementów, którym będziesz chciał zmienić wyg
     key: property;
 }
 
-W rezultacie te wartości będą się załączać tylko wtedy, kiedy body będzie miało klasę <code class="highlight"><span class="na">.dark-mode</span></code>.
-
 {% endhighlight %}
 
+W rezultacie te wartości będą się załączać tylko wtedy, kiedy body będzie miało klasę:
+
+{% highlight html %}
+
+<code class="highlight"><span class="na">.dark-mode</span></code>
+
+{% endhighlight %}
 
 # Dostosowywanie strony do zmian
 

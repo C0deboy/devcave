@@ -101,7 +101,6 @@ description: "{ Blog programistyczny }"
 
       <div class="top-posts">
         <h1>Najpopularniejsze wpisy:</h1>
-        <span class="text-muted">Top {{ site.data.top_posts | size }}</span>
         <ul>
           {% for postUrl in site.data.top_posts %}
           {% assign post = site.posts | where:"url", postUrl | first %}

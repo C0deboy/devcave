@@ -50,7 +50,7 @@ Jekyll posiada zmienną środowiskową {% code text %} jekyll.environment {% end
 
 Tak więc jeśli nie chcemy, aby coś pojawiało się podczas testowania strony, opakowujemy to w tagi liquid z następującym ifem:
 
-{% highlight text %}
+{% highlight liquid %}
 {% raw %}
 {% if jekyll.environment == "production" %}
    //tu zawartość, której nie chcemy podczas testowania

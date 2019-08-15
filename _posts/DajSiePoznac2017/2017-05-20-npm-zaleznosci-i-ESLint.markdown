@@ -66,19 +66,19 @@ npm install eslint --save-dev
 
 ## Konfiguracja
 Potrzebny będzie nam plik konfiguracyjny <span class="file">.eslintrc.json </span>. Możemy automatycznie go wygenerować za pomocą polecenia:
-{% highlight text %}
+{% highlight bash %}
 node_modules\.bin\eslint --init
 {% endhighlight %}
 i odpowiedzi na kilka pytań. Teraz możemy dodać skrypt NPM dla ESlinta, który będziemy mogli uruchamiać w terminalu.
 
 W naszym pliku powinien się znajdować już jeden skrypt (jeśli zostawiliśmy pytanie "test command" puste):
-{% highlight text %}
+{% highlight json %}
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
 },
 {% endhighlight %}
 Możemy edytować ten lub dodać nowy:
-{% highlight text %}
+{% highlight json %}
 "scripts": {
     "lint": "eslint js/*.js"
 },
@@ -99,7 +99,7 @@ Jeśli używasz PHPStorm lub WebStorm to znajdziesz taką opcję w: File | Setti
 Jeśli ESLint zgłasza błedy z elementów Jquery(np. $), DOM(np. document) dodaj do pliku <span class="file">.eslintrc.json </span>
 informację:</p>
 
-{% highlight text %}
+{% highlight json %}
   "env": {
     "browser": true,
     "jquery": true

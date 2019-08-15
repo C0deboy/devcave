@@ -110,7 +110,7 @@ W folderze <span class="folder">_includes</span> znajdują się, powtarzające s
 
 Nasze posty przechowywane są w folderze <span class="folder">_posts</span> Nazwy plików mają określone formatowanie i musimy się tego trzymać: rok-miesiąc-dzień-nazwa-postu. W środku tylko mała konfiguracja, domyślnie:
 
-{% highlight text %}
+{% highlight yaml %}
 ---
 layout: post
 title:  "Welcome to Jekyll!"

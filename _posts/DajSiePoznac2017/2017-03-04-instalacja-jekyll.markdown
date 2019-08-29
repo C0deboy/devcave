@@ -26,7 +26,7 @@ Jekyll sparsuje otrzymane pliki i wyrzuci nam całą strukturę statycznych plik
 
 ## Jekyll na Windows
 
-Jekyll nie jest oficjalnie wspierany na systemie Windows, jednak jest możliwe, żeby na nim działał -- [link](https://jekyllrb.com/docs/windows/#installation). Na Linuxie cały proces jest mniej skomplikowany, dodatkowo jestem zwolennikiem konsoli Linuxowej, więc i na tym systemie chciałem Jekylla. Sam używam obu systemów, z tym, że częściej Windowsa (w tym do zarządzania projektem), dlatego też wybrałem drogę pośrodku. Co to znaczy? Zainstalowałem Jekylla na Ubuntu wbudowanego w Windowsa ;). Tak, Windows 10 (64 bit) ma wbudowany podsystem Ubuntu i lubię utrudniać sobie życie.
+Jekyll nie jest oficjalnie wspierany na systemie Windows, jednak jest możliwe, żeby na nim działał -- [link](https://jekyllrb.com/docs/windows/#installation). Na Linuxie cały proces jest mniej skomplikowany, dodatkowo jestem zwolennikiem konsoli Linuxowej, więc i na tym systemie chciałem Jekylla. Sam używam obu systemów, z tym, że częściej Windowsa (w tym do zarządzania projektem), dlatego też wybrałem drogę pośrodku. Co to znaczy? Zainstalowałem Jekylla na Ubuntu wbudowanego w Windowsa :slightly_smiling_face:. Tak, Windows 10 (64 bit) ma wbudowany podsystem Ubuntu i lubię utrudniać sobie życie.
 
 ## Wymagania
 

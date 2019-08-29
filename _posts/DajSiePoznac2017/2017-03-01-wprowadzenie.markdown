@@ -11,7 +11,7 @@ toc: true
 ---
 ## Słowo wstępu
 
-Chciałbym zaznaczyć, że jest to mój pierwszy większy projekt, a o pisaniu bloga nie mam zielonego pojęcia ;). Do konkursu musiałem podejść dwa razy, żeby się przekonać. Za pierwszym razem myślałem sobie „Blogowanie? To chyba nie dla mnie. O czym ja będę pisał? Nie sądzę, że mógłbym dzielić się przydatną wiedzą / doświadczeniami na aktualnym etapie rozwoju. To nie ma sensu. Zresztą nie mam czasu, matura zaraz…” Jednak za drugim podejściem poczytałem trochę więcej o konkursie i stwierdziłem „projekt, nad którym pracuję już mam, więc czemu by nie pisać do tego bloga? W sumie nie mam nic do stracenia, konkurs dla każdego. Spróbuję!” I oto jestem ;)
+Chciałbym zaznaczyć, że jest to mój pierwszy większy projekt, a o pisaniu bloga nie mam zielonego pojęcia :slightly_smiling_face:. Do konkursu musiałem podejść dwa razy, żeby się przekonać. Za pierwszym razem myślałem sobie „Blogowanie? To chyba nie dla mnie. O czym ja będę pisał? Nie sądzę, że mógłbym dzielić się przydatną wiedzą / doświadczeniami na aktualnym etapie rozwoju. To nie ma sensu. Zresztą nie mam czasu, matura zaraz…” Jednak za drugim podejściem poczytałem trochę więcej o konkursie i stwierdziłem „projekt, nad którym pracuję już mam, więc czemu by nie pisać do tego bloga? W sumie nie mam nic do stracenia, konkurs dla każdego. Spróbuję!” I oto jestem :wink:
 
 ## O projekcie - założenia
 
@@ -25,4 +25,4 @@ Przeglądając fora internetowe cały czas natrafiałem na sterty pytań typu �
 
 ![jaki-język-programowania-mapa](/img/posts/chosinglang.jpg)
 
- Od razu po tym nasunął mi się ten pomysł. Troszkę entuzjazm spadł, gdy znalazłem podobny projekt w wersji angielskiej. Nawet design był podobny do mojej wizji strony. Jednak nie zrezygnowałem. I tak to się zaczęło. Chcę, aby osoby zaczynające naukę programowania miały ułatwioną sprawę, a odpowiedź na ich pytania była krótka – [Jaki-język-programowania.pl](https://www.jaki-jezyk-programowania.pl/) ;)
+ Od razu po tym nasunął mi się ten pomysł. Troszkę entuzjazm spadł, gdy znalazłem podobny projekt w wersji angielskiej. Nawet design był podobny do mojej wizji strony. Jednak nie zrezygnowałem. I tak to się zaczęło. Chcę, aby osoby zaczynające naukę programowania miały ułatwioną sprawę, a odpowiedź na ich pytania była krótka – [Jaki-język-programowania.pl](https://www.jaki-jezyk-programowania.pl/) :slightly_smiling_face:

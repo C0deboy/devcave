@@ -9,7 +9,8 @@
       github: https://github.com/C0deboy/kindle-editor
 
 - section: Rok 2018
-  subtitle: Praca komercyjna, ale znalazło się trochę czasu na projekty do szuflady ;)
+  subtitle: >
+    Praca komercyjna, ale znalazło się trochę czasu na projekty do szuflady :slightly_smiling_face:
   projects:
 
     - title: Narzędzie do publikowania postów
@@ -61,7 +62,7 @@
 
     - title: Remake retro gry Tank1990/Battle City
       technologies: Phaser, Javascript(ES6)
-      description: Gra tworzona jako odskocznia od typowych projektów. Remake znanej gry, pewnie każdy grał w dzieciństwie. Nie jest dokończony, zatrzymałem się na podstawowych elementach mechaniki gry (bez leveli, różnych czołgów i zbierania ulepszeń). Było to ciekawe doświadczenie, może kiedyś do tego wrócę :).
+      description: Gra tworzona jako odskocznia od typowych projektów. Remake znanej gry, pewnie każdy grał w dzieciństwie. Nie jest dokończony, zatrzymałem się na podstawowych elementach mechaniki gry (bez leveli, różnych czołgów i zbierania ulepszeń). Było to ciekawe doświadczenie, może kiedyś do tego wrócę :slightly_smiling_face:.
       img: /img/my-projects/tank1990.gif
       github: https://github.com/C0deboy/tank-1990
       play: https://c0deboy.github.io/tank-1990/
@@ -88,7 +89,7 @@
 
     - title: Animacja - ASCII art
       technologies: HTML, CSS, Javascript
-      description: Animacja dzięki której wygrałem konkurs świąteczny (100zł na książkę :D) zorganizowany przez <a href="https://forum.pasja-informatyki.pl">Forum Pasja Informatyki</a>. Zajęła 1 miejsce z 72 głosami (drugie miało 35). Celem konkursu było wykonanie animacji znaków ASCII o tematyce świątecznej w dowolnej technologii.
+      description: Animacja dzięki której wygrałem konkurs świąteczny (100zł na książkę :joy:) zorganizowany przez <a href="https://forum.pasja-informatyki.pl">Forum Pasja Informatyki</a>. Zajęła 1 miejsce z 72 głosami (drugie miało 35). Celem konkursu było wykonanie animacji znaków ASCII o tematyce świątecznej w dowolnej technologii.
       img: /img/my-projects/swieta-asci-art.gif
       github: https://github.com/C0deboy/christmas-asci-art/
       see: https://c0deboy.github.io/christmas-asci-art/
@@ -96,7 +97,8 @@
 
     - title: Zwierciadła i soczewki
       technologies: HTML, CSS, Javascript
-      description: Aplikacja symulującą rysowanie odbić w zwierciadłach i soczewkach. Projekt szkolny na fizykę wykonany z kolegą. Wymagało trochę myślenia ;) Bardzo podobał mi się proces tworzenia tej aplikacji. Było to ciekawe doświadczenie na początku przygody z programowaniem.
+      description: >
+        Aplikacja symulującą rysowanie odbić w zwierciadłach i soczewkach. Projekt szkolny na fizykę wykonany z kolegą. Wymagało trochę myślenia :slightly_smiling_face: Bardzo podobał mi się proces tworzenia tej aplikacji. Było to ciekawe doświadczenie na początku przygody z programowaniem.
       img: /img/my-projects/mirrors-and-lens.gif
       github: https://github.com/C0deboy/Mirrors-and-Lens/
       see: https://c0deboy.github.io/Mirrors-and-Lens/ConvergingLens.html
@@ -104,7 +106,7 @@
 
     - title: Game of Life Johna Conwaya
       technologies: HTML, CSS, Javascript
-      description: Mój drugi projekt. Robiłem go razem z kolegą. Jest to implementacja "Gry w życie" Johna Conwaya w JavaScriptcie. Ciężko nazwać to grą, ale było to ciekawe doświadczenie jak dla początkujących programistów ;).
+      description: Mój drugi projekt. Robiłem go razem z kolegą. Jest to implementacja "Gry w życie" Johna Conwaya w JavaScriptcie. Ciężko nazwać to grą, ale było to ciekawe doświadczenie jak dla początkujących programistów :slightly_smiling_face:.
       img: /img/my-projects/game-of-life.gif
       github: https://github.com/C0deboy/Game-of-life/
       play: https://c0deboy.github.io/Game-of-life/

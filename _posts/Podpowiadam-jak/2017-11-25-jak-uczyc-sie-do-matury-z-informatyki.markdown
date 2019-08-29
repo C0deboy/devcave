@@ -38,7 +38,7 @@ Tak więc będziesz musiał opanować Excela, Accesa i jeden z języków program
 - Java
 
 I od roku szkolnego 2018/2019 będzie można wybrać język
-programowania **Python**, więc się załapiecie - trochę zazdroszczę :) Sam wybrałem Jave, bo w tym kierunku zamierzałem się rozwijać.
+programowania **Python**, więc się załapiecie - trochę zazdroszczę :slightly_smiling_face: Sam wybrałem Jave, bo w tym kierunku zamierzałem się rozwijać.
 
 Zadania polegają mniej więcej na:
 
@@ -74,13 +74,13 @@ Na początku polecam zaprzyjaźnić się z zadaniami maturalnymi ze [zbioru zada
 Tą drogą również ja podążałem, ponieważ w moim technikum **informatycznym** nikt nie przygotowywał do matury z informatyki. ¯\\_(ツ)_/¯. Zresztą, jeśli celujemy w dobry wynik, tak czy siak musimy pracować samodzielnie.
 
 ## Arkusze maturalne
-Jako ostatni szlif (np. miesiąc lub dwa przed maturą) polecam przerobić zwykłe oraz próbne arkusze maturalne z poprzednich lat. Tylko tu już z mierzeniem czasu itd. żeby poczuć mniej więcej presję i zobaczyć jak, bardzo cenny jest dla nas czas na maturze ;)
+Jako ostatni szlif (np. miesiąc lub dwa przed maturą) polecam przerobić zwykłe oraz próbne arkusze maturalne z poprzednich lat. Tylko tu już z mierzeniem czasu itd. żeby poczuć mniej więcej presję i zobaczyć jak, bardzo cenny jest dla nas czas na maturze :wink:
 
 Wszystkie arkusze i odpowiedzi znajdziesz w Internecie. Jak nie na oficjalnej stronie CKE to na innych stronach czy nawet na YouTube.
 
 Osobiście przerobiłem wszystkie od roku 2014. Głębiej nie ma co iść bo to już stare dzieje.
 
-**Jeśli na maturze zamierzasz używać Javy**, to polecam zobaczyć post [przydatne funkcje w Javie do matury]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-04-25-matura-informatyka-przydatne-funkcje-w-javie %}). Podczas nauki zebrałem większość przydatnych metod w Javie, które mogą się przydać do matury i je tam upamiętniłem dla innych. Mam nadzieję, że coś się przyda! ;)
+**Jeśli na maturze zamierzasz używać Javy**, to polecam zobaczyć post [przydatne funkcje w Javie do matury]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-04-25-matura-informatyka-przydatne-funkcje-w-javie %}). Podczas nauki zebrałem większość przydatnych metod w Javie, które mogą się przydać do matury i je tam upamiętniłem dla innych. Mam nadzieję, że coś się przyda! :slightly_smiling_face:
 
 To powinno być wystarczające do uzyskania satysfakcjonującego wyniku, jednak nie jest to łatwe. Tych zadań jest naprawdę dużo, szczególnie w zbiorze zadań. Sam nie dałem rady przerobić wszystkiego.
 

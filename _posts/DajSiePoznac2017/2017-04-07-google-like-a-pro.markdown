@@ -15,7 +15,7 @@ Google to najlepszy przyjaciel programisty. Sprawne wyszukiwanie informacji to b
 ## 1# Nie wiem jak zrobić x
 Można próbować po polsku, ale 90% rozwiązań jest w języku angielskim. Wystarczy, że wyszukasz problem w stylu "How to x", a nawet jest duże prawdopodobieństwo, że znajdziesz to, czego szukasz wpisując same słowa kluczowe (oczywiście w języku angielskim).
 
-Szukając odpowiedzi na dany problem <u>zwracaj uwagę na daty opublikowania odpowiedzi/postu</u>, bo po drodze można się natknąć na masę przestarzałych rozwiązań, a nie jest to coś, co my jako programiści chcielibyśmy stosować. Dotyczy to również Stack OverFlow ;)
+Szukając odpowiedzi na dany problem <u>zwracaj uwagę na daty opublikowania odpowiedzi/postu</u>, bo po drodze można się natknąć na masę przestarzałych rozwiązań, a nie jest to coś, co my jako programiści chcielibyśmy stosować. Dotyczy to również Stack OverFlow :wink:
 
 Warto korzystać z opcji wyszukiwania oferowaną przez Google: Narzędzia -> Kiedykolwiek i wybieramy interesujący nas okres
 

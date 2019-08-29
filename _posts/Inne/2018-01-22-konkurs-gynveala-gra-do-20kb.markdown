@@ -2,7 +2,7 @@
 layout:     post
 titleSEO:	"Konkurs Gynveala - gra do 20KB (strategia turowa)"
 title:      "Konkurs Gynveala - gra do 20KB (strategia turowa)"
-subtitle:   "Brałem udział, więc pokazuję co mi wyszło ;)"
+subtitle:   "Brałem udział, więc pokazuję co mi wyszło :slightly_smiling_face:"
 date:       2018-01-22 12:00:00
 author:     "Codeboy"
 category:   Inne
@@ -79,7 +79,7 @@ Mimo wszystko jestem zadowolony z rezultatów.
 
 # Głosowanie
 
-Do 28.01.2018r trwa głosowanie, więc byłbym wdzięczny jeśli zostawiłbyś/zostawiłabyś swój głos ;)
+Do 28.01.2018r trwa głosowanie, więc byłbym wdzięczny jeśli zostawiłbyś/zostawiłabyś swój głos :wink:
 
 Głosowanie społeczności odbywa się poprzez like-i pod video na YouTube - [link](https://youtu.be/3Nbu50KgFbw)
 

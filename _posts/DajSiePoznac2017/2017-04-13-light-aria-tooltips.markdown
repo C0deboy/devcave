@@ -29,7 +29,7 @@ Oba (Jak to działa?) wygenerowane za pomocą tej samej funkcji. Ale jak są odc
 
 Już nie wspomnę o tym, że co innego czytają, gdy odpalimy tooltipa kliknięciem, co innego, gdy tabem, a co innego gdy jest hover.
 
-Może ktoś pomoże? ;)
+Może ktoś pomoże? :wink:
 
 Obecnie testuje dwie wersje:
 * 1 - tooltipy są generowane i wstawiane do DOM od razu po wczytaniu strony, a tylko pokazywane, gdy dany element usyska focus

@@ -494,7 +494,7 @@ tiobeIndexDirector.collectFor(languages):
 JSONObject tiobeIndexStats = tiobeIndexDirector.build();
 ```
 
-To mówi chyba samo za siebie ;)
+To mówi chyba samo za siebie :wink:
 
 ## Wady
 

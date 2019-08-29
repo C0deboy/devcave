@@ -166,7 +166,7 @@ I z to samo z wykorzystaniem lambdy:
 Thread thread = new Thread(() -> System.out.println("New Thread started"));
 ```
 
-Chyba nie trzeba tłumaczyć dlaczego lambdy są preferowane ;)
+Chyba nie trzeba tłumaczyć dlaczego lambdy są preferowane :slightly_smiling_face:
 
 Jednak jeśli potrzebujemy użyć `this` to lambdy się nie sprawdzą, bo do lambdy nie możemy się w żaden sposób odwołać. W takim przypadku musimy użyć klasy anonimowej.
 

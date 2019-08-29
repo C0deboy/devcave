@@ -11,7 +11,7 @@ comments:   true
 toc:        true
 ---
 
-Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami ;)
+Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami :wink:
 
 # Ogólne
 
@@ -28,7 +28,7 @@ Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowani
 - Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc łatwy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku.
 - Większość systemów działa najlepiej, gdy polegają na prostocie, a nie na złożoności.
 - Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia.
-- Gdy po jakimś czasie wracasz do **swojego** kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;)
+- Gdy po jakimś czasie wracasz do **swojego** kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować :wink:
 
 Można to rozszerzyć o zasadę:
 

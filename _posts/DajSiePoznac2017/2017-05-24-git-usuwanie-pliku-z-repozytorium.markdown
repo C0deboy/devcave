@@ -55,7 +55,7 @@ I uruchamiamy komendę:
 {% highlight bash %}
 git reflog expire --expire=now --all && git gc --prune=now --aggressive
 {% endhighlight %}
-Gdy nie było po drodze żadnych błędów i jesteśmy zadowoleni z wyniku, możemy pushować ;)
+Gdy nie było po drodze żadnych błędów i jesteśmy zadowoleni z wyniku, możemy pushować :wink:
 
 {% highlight bash %}
 git push

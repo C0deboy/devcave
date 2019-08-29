@@ -47,20 +47,20 @@ Nic nie jest wymagane na sztywno. Nie ma wymogu przychodzenia np. równo o 8 i w
 
 W firmie jako budynku też jest całkiem miło. W pełni wyposażona kuchnia z pyszną kawą, gaming room, piłkarzyki i te sprawy. 
 
-Tłuste czwartki (słodkie bułki dla każdego :D) i imprezy integracyjne też są fajnym dodatkiem ;)
+Tłuste czwartki (słodkie bułki dla każdego :smile:) i imprezy integracyjne też są fajnym dodatkiem :slightly_smiling_face:
 
 ### Dylemat jeśli chodzi o studia
 
-Jak myślę o studiach, to się nawet cieszę, że się nie dostałem tam gdzie chciałem, bo skutkowało to pójściem do pracy i jeśli mam sobie porównać to co mam teraz do zakuwania matmy czy jakichś zbędnych rzeczy (wiadomo - nie wszystko), to za każdym razem wybrałbym tą pracę :D. Chociaż cały czas myślę o studiach - bo może się przyda ten papier… z drugiej strony wydaje się to całkiem zbędne, a programistycznej wiedzy tyle co kot napłakał (przynajmniej z takimi opiniami się spotykam). I taki mam z tym mały dylemat. Z jednej strony pewnie dałbym radę zrobić studia zaocznie, ale jak sobie pomyślę, że mam za to jeszcze płacić to mi się odechciewa. No ale chyba innego wyjścia nie ma jeśli już, bo zrezygnowanie z pracy i studia dzienne nie wchodzą w grę.
+Jak myślę o studiach, to się nawet cieszę, że się nie dostałem tam gdzie chciałem, bo skutkowało to pójściem do pracy i jeśli mam sobie porównać to co mam teraz do zakuwania matmy czy jakichś zbędnych rzeczy (wiadomo - nie wszystko), to za każdym razem wybrałbym tą pracę :smile:. Chociaż cały czas myślę o studiach - bo może się przyda ten papier… z drugiej strony wydaje się to całkiem zbędne, a programistycznej wiedzy tyle co kot napłakał (przynajmniej z takimi opiniami się spotykam). I taki mam z tym mały dylemat. Z jednej strony pewnie dałbym radę zrobić studia zaocznie, ale jak sobie pomyślę, że mam za to jeszcze płacić to mi się odechciewa. No ale chyba innego wyjścia nie ma jeśli już, bo zrezygnowanie z pracy i studia dzienne nie wchodzą w grę.
 
 # Nowa seria
 
-Tak jak na początku wspomniałem, robię nową serię na bloga, a mianowicie "Effective Java" w ramach "Notatnika Juniora", gdzie krok po kroku będę robił wpisy na kolejne tematy poruszane w  książce - trzeciej edycji *Effective Java*, której autorem jest Joshua Blosh. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie (wydanie ze stycznia 2018). Dostałem ją jeszcze ciepłą od mojej dziewczyny, która kupiła ją z Amazonu za ponad 200zł :O. Także przerobię ją najlepiej jak potrafię, taki prezent nie może się zmarnować ;)
+Tak jak na początku wspomniałem, robię nową serię na bloga, a mianowicie "Effective Java" w ramach "Notatnika Juniora", gdzie krok po kroku będę robił wpisy na kolejne tematy poruszane w  książce - trzeciej edycji *Effective Java*, której autorem jest Joshua Blosh. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie (wydanie ze stycznia 2018). Dostałem ją jeszcze ciepłą od mojej dziewczyny, która kupiła ją z Amazonu za ponad 200zł :O. Także przerobię ją najlepiej jak potrafię, taki prezent nie może się zmarnować :slightly_smiling_face:
 
 Będę to robił w formie notatki z wybranego tematu. Każdy wpis będzie miał informację do którego *itemu* z książki się odnosi. Nie będę ograniczał się jednak tylko do książki, więc czasem może się trafić jakiś przykład ode mnie lub z innych źródeł na ten sam temat. Będę chciał ugryźć dany temat na wiele sposobów. Myślę, że wpisy będą całkiem wartościowe.
 
 Obecnie mam już przygotowane 6 wpisów i zamierzam je wypuszczać co tydzień. Wszystkich *itemów* w książce jest 90 więc jeśli chciałbym każdy z nich poruszyć to seria skończyła by się 28 grudnia 2019 roku ;D Zobaczymy jak to wyjdzie, może jak dany temat będzie krótki to wpisy będą częściej (w co wątpię) i nie gwarantuję, że przerobię wszystko.
 
-Ale trzymajcie za mnie kciuki! Pierwszy wpis w następną sobotę :)
+Ale trzymajcie za mnie kciuki! Pierwszy wpis w następną sobotę :slightly_smiling_face:
 
 Miłego dnia!

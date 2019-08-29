@@ -15,7 +15,7 @@ Zastanawiałem się niedawno czy możliwe jest zrobienie wyszukiwarki na statycz
 
 # Generowanie pliku z mapą wyszukiwania
 
-Bez tego nasza wyszukiwarka się nie obejdzie. To w nim będzie się odbywało wyszukiwanie elementów. Jeśli mamy możliwość wygenerować taki plik, to będziemy mogli zrobić wyszukiwarkę. Dlatego nie jest to ograniczone do Jekylla jak nazwa wskazuje. Zapewne można to zrobić na co najmniej kilka sposobów ;)
+Bez tego nasza wyszukiwarka się nie obejdzie. To w nim będzie się odbywało wyszukiwanie elementów. Jeśli mamy możliwość wygenerować taki plik, to będziemy mogli zrobić wyszukiwarkę. Dlatego nie jest to ograniczone do Jekylla jak nazwa wskazuje. Zapewne można to zrobić na co najmniej kilka sposobów :slightly_smiling_face:
 
 W Jekyllu jest to całkiem proste. Po ściągnięciu paczki z Githuba umieszczamy ją w zasobach projektu i otwieramy plik <span class="file">search.json</span>. W domyślnej wersji do wyszukiwarki trafią nie tylko posty, ale również podstrony. Na blogu chciałem wyszukiwarkę tylko dla postów i zmodyfikowałem nieco kod:
 
@@ -180,7 +180,7 @@ Pozostało nam dołączyć wyszukiwarkę do naszej strony, czyli:
 
 
 
-A oto efekt - działa zaskakująco dobrze ;)
+A oto efekt - działa zaskakująco dobrze :slightly_smiling_face:
 
 <div class="search-engine">
   <label>

@@ -47,7 +47,7 @@ Znajdziesz w niej większość odpowiedzi na pytania, które sobie zadajesz, alb
 
  Dowiesz się "gdzie jesteś", "co już umiesz" i "nad czym jeszcze musisz popracować".
 
-Zgadzam się z większością rad i poglądów autora. Opisywane ścieżki rozwoju i gotowość do pierwszej pracy również mogę potwierdzić. Sam podążałem podobnymi drogami i pracę udało się dostać. I to po pierwszej rozmowie ;)
+Zgadzam się z większością rad i poglądów autora. Opisywane ścieżki rozwoju i gotowość do pierwszej pracy również mogę potwierdzić. Sam podążałem podobnymi drogami i pracę udało się dostać. I to po pierwszej rozmowie :slightly_smiling_face:
 
 Książka napisana jest lekkim językiem - czyta ją się szybko i przyjemnie.
 

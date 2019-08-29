@@ -6,4 +6,5 @@ group :jekyll_plugins do
   gem "jekyll-feed"
   gem "jekyll"
   gem 'jekyll-toc'
+  gem 'jemoji'
 end

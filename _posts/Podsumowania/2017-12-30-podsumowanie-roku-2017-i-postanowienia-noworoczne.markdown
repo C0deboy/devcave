@@ -21,19 +21,19 @@ Rok 2017 był dla mnie dosyć intensywnym rokiem. Sporo się działo, ale nie wy
 - Nauczyłem się podstaw Javy i technologii z nią związanych (m.in. Spring i Hibernate).
 - Podczas nauki programowania zrobiłem [7 mniejszych większych projektów/gier](/moje-projekty/) + do tego kilka pomocnych narzędzi, które nie są jako osobne repozytoria. W tym, zwycięska animacja w konkursie od forum Pasja Informatyki.
 - Do wakacji udawało mi się dosyć regularnie ćwiczyć kalistenikę (czyli tylko z ciężarem własnego ciała), jednak później nieco się zapuściłem i moja aktywność fizyczna podupadła, ale wkrótce to się zmieni, o tym później w postanowieniach.
-- Zdałem maturę z polskiego :D. Zdałem też rozszerzenia (mat-inf-ang), jednak na niewystarczająco dobrym poziomie, bo nie dostałem się na studia na PWR.
-- Około 2 miesięcy pracowałem na budowie (głównie wykończenia) w Paryżu (w poprzednich latach też mi się zdarzało, więc nie jestem w tym zielony). Czasem coś w Polsce, ale to mniejsze robótki :D Tak sobie dorabiałem, a w międzyczasie cały czas rozwijałem się jako programista.
+- Zdałem maturę z polskiego :joy:. Zdałem też rozszerzenia (mat-inf-ang), jednak na niewystarczająco dobrym poziomie, bo nie dostałem się na studia na PWR.
+- Około 2 miesięcy pracowałem na budowie (głównie wykończenia) w Paryżu (w poprzednich latach też mi się zdarzało, więc nie jestem w tym zielony). Czasem coś w Polsce, ale to mniejsze robótki :smile: Tak sobie dorabiałem, a w międzyczasie cały czas rozwijałem się jako programista.
 - Znalazłem pracę jako Junior Java Developer
 - Pracę miałem zacząć od nowego roku, więc miałem jeszcze jakieś 2 miesiące wolnego. Poświęciłem ten czas w dużej mierze na rozwój własnych projektów oraz dalszy samorozwój.
 - Przez cały rok pochłonąłem masę książek (zobacz [moją bibliotekę](/moja-biblioteka), poza tym też kilka nietechnicznych), konferencji (głównie nagrania online, ale ostatnio powstał JUG (Java User Group) nawet w Kielcach i już zaliczyłem 2 spotkania), podcastów itp.
-- Na koniec roku biorę udział w konkursie Gynvaela - [Gynvael's Winter GameDev Challenge 2017](http://gynvael.coldwind.pl/?id=668). Wyniki 7 stycznia. Gra do 20kb. Ten limit trochę mnie wykańcza :D Zobaczymy czy uda się coś sensownego sklecić i coś wygrać. Jakiś prototyp już jest, ale ten limit eh ;)
+- Na koniec roku biorę udział w konkursie Gynvaela - [Gynvael's Winter GameDev Challenge 2017](http://gynvael.coldwind.pl/?id=668). Wyniki 7 stycznia. Gra do 20kb. Ten limit trochę mnie wykańcza :smile: Zobaczymy czy uda się coś sensownego sklecić i coś wygrać. Jakiś prototyp już jest, ale ten limit eh :wink:
 
-Żeby nie było, że cały czas tylko pracuję, uczę się i jestem nie wiadomo jak produktywny, to trochę o wakacjach. Zanim wróciłem z Paryża, przyjechała do mnie moja dziewczyna, gdzie spędziliśmy razem tydzień. Ledwo wróciliśmy do Polski (Kielce, rano), a pod wieczór byliśmy już w drodze do Gdyni - na tegoroczny Opener. Głównie ze względu na koncert G-Eaziego. Minął niecały tydzień i razem ze znajomymi wybraliśmy się na pare dni nad jezioro. Pod koniec wakacji prawie z tą samą paczką pojechaliśmy na obóz do Chorwacji. Tegoroczny sylwester planujemy spędzić w Lublinie, gdzie studiuje kilka osób z naszej paczki. Z większych rzeczy to tyle, ale wydaję mi się, że na brak odpoczynku nie mogę narzekać. W końcu - wydaję mi się, że zasłużony ;)
+Żeby nie było, że cały czas tylko pracuję, uczę się i jestem nie wiadomo jak produktywny, to trochę o wakacjach. Zanim wróciłem z Paryża, przyjechała do mnie moja dziewczyna, gdzie spędziliśmy razem tydzień. Ledwo wróciliśmy do Polski (Kielce, rano), a pod wieczór byliśmy już w drodze do Gdyni - na tegoroczny Opener. Głównie ze względu na koncert G-Eaziego. Minął niecały tydzień i razem ze znajomymi wybraliśmy się na pare dni nad jezioro. Pod koniec wakacji prawie z tą samą paczką pojechaliśmy na obóz do Chorwacji. Tegoroczny sylwester planujemy spędzić w Lublinie, gdzie studiuje kilka osób z naszej paczki. Z większych rzeczy to tyle, ale wydaję mi się, że na brak odpoczynku nie mogę narzekać. W końcu - wydaję mi się, że zasłużony :wink:
 
 # Postanowienia noworoczne i plany na kolejny rok
 
 ## Praca
-Jako, że 03.01.2017 jest mój pierwszy dzień w pracy jako programista, to z pewnością na niej najbardziej się skupię. Mam nadzieję, że nie będzie wymagała ode mnie zaangażowania 24/7, tylko moje zadania będą w miarę odpowiednie do moich możliwości, tym bardziej, że nie płacą mi JESZCZE 15k hyhy :D. Ale zdaję sobie sprawę, że pierwsze miesiące mogą być intensywne. Pewnie częstotliwość postów znacznie zmaleje, ale na pewno podzielę się wrażeniami z pierwszych dni pracy i kilka innych wpisów powinno wpaść. Dosyć dużym dylematem są dla mnie studia, bo nie wiem co z nimi, więc też pewnie o tym zrobię jakiś research i wrzucę wpis z moimi przemyśleniami.
+Jako, że 03.01.2017 jest mój pierwszy dzień w pracy jako programista, to z pewnością na niej najbardziej się skupię. Mam nadzieję, że nie będzie wymagała ode mnie zaangażowania 24/7, tylko moje zadania będą w miarę odpowiednie do moich możliwości, tym bardziej, że nie płacą mi JESZCZE 15k :joy:. Ale zdaję sobie sprawę, że pierwsze miesiące mogą być intensywne. Pewnie częstotliwość postów znacznie zmaleje, ale na pewno podzielę się wrażeniami z pierwszych dni pracy i kilka innych wpisów powinno wpaść. Dosyć dużym dylematem są dla mnie studia, bo nie wiem co z nimi, więc też pewnie o tym zrobię jakiś research i wrzucę wpis z moimi przemyśleniami.
 
 Od następnego roku chciałbym pracować już tylko w swoim zawodzie.
 
@@ -96,11 +96,11 @@ Niedługo w ebookpoint, od 01.01.2017 do 03.01.2017 będzie spora [promocja](htt
  
 Tak więc te książki są kolejnym planem na rok 2018.
  
-Więcej konkretnych planów nie mam. Reszta wyjdzie w praniu ;)
+Więcej konkretnych planów nie mam. Reszta wyjdzie w praniu :wink:
  
 # Podsumowując
   
-Z tego roku jestem naprawdę zadowolony. Czuję satysfakcję z moich małych osiągnięć i mam dużo motywacji do dalszego działania. Oby kolejny rok był jeszcze lepszy ;)
+Z tego roku jestem naprawdę zadowolony. Czuję satysfakcję z moich małych osiągnięć i mam dużo motywacji do dalszego działania. Oby kolejny rok był jeszcze lepszy :slightly_smiling_face:
  
 Szczęśliwego nowego roku i wytrwałości w swoich postanowieniach!
  

@@ -32,7 +32,7 @@ Również doceniam trud Macieja włożony w całą swoją działalność, budowa
 
 Swoją drogą tego typu książka jest relatywnie nowatorska na naszym rynku. Można by ją tylko porównywać z książką Junior Developer, której autorem jest Mateusz Kupilas. Jest najbardziej zbliżona, ale ma nieco inne założenia. Skupia się bardziej na konkretach przydatnych dla Juniora, a Zawód: Programista porusza tematy świadomego programisty w ogóle i zwraca większą uwagę na błędy i pułapki na które możesz wpaść - często na przykładzie autora.  Więc jak najbardziej takiej pozycji brakowało i luka została trafnie zapełniona.
 
-Wraz z książka dostajemy naklejkę na laptopa i fajną zakładkę do książek - kość ram ;)
+Wraz z książka dostajemy naklejkę na laptopa i fajną zakładkę do książek - kość ram :slightly_smiling_face:
 
 ![Zakładka do książki Zawód: Programista](/img/reviews/zawod-dev/bonus.jpg)
 
@@ -79,7 +79,7 @@ Według mnie, książka jest skierowana (i pod tym względem jest bardzo dobra) 
  
  Przez książkę przeplatały się czasem te same wątki, czasem z innego punktu widzenia, czasem z rozwinięciem, ale myślę, że można było to ułożyć bardziej spójnie, co też ludzie punktują w opiniach.
  
- Jedno zdanie pojawiło się tak często, że mogłoby się śnić po nocach :D. A szło to mniej więcej tak:
+ Jedno zdanie pojawiło się tak często, że mogłoby się śnić po nocach :joy:. A szło to mniej więcej tak:
   
  > Programista, który wykonuje te same zadania przez 10 lat nie ma 10 lat doświadczenia, tylko rok doświadczenia powtórzony dziesięciokrotnie.
    

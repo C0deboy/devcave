@@ -42,7 +42,7 @@ private static long sum() {
 ```
 Przez jeden mały szczegół w tym kodzie wydajność programu jest dużo słabsza niż powinna być. Mowa tu o deklaracji {% code java %}Long sum = 0L;{% endcode %}. Zamiast `long` jest użyty wrapper `Long`, co skutkuje tym, że program tworzy 2<sup>31</sup> niepotrzebnych instancji `Long`. Dzieję się to w miejscu, kiedy do `Long sum` jest dodawane `long i`, a więc `long i` jest *autoboxowane* na `Long`.
 
-Przez tą jedną literkę wykonanie tej funkcji na moim laptopie trwało ~7 sekund zamiast ~1 sekundy. Joshua Bloch podał, że na jego sprzęcie było odpowiednio 6.3 sekundy i 0.59 sekundy. Polecam sprawdzić różnicę u siebie ;)
+Przez tą jedną literkę wykonanie tej funkcji na moim laptopie trwało ~7 sekund zamiast ~1 sekundy. Joshua Bloch podał, że na jego sprzęcie było odpowiednio 6.3 sekundy i 0.59 sekundy. Polecam sprawdzić różnicę u siebie :slightly_smiling_face:
 
 **Wniosek: preferuj prymitywy i zwracaj uwagę na autoboxing**
 

@@ -249,7 +249,7 @@ table.table-bordered > tbody > tr > td {
 }
 
 
-.post img {
+.post img:not(.emoji) {
     vertical-align: text-bottom;
     display: block;
     margin-right: auto;

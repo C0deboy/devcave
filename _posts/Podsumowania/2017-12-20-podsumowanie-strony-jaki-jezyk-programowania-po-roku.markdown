@@ -16,7 +16,7 @@ Podczas inicjatywy DSP2017 powstały 3 wpisy, które opisują powstanie i zało�
 - [Początki projektu](/dajsiepoznac2017/poczatki)
 - [Co dalej z projektem jaki-jezyk-programowania.pl](/dajsiepoznac2017/co-dalej-z-projektem-jaki-jezyk-programowania)
 
-W tym wpisie opowiem jak to wygląda obecnie + dorzucę kilka liczb ;)
+W tym wpisie opowiem jak to wygląda obecnie + dorzucę kilka liczb :wink:
 
 # Początki
 
@@ -89,6 +89,6 @@ I reszta na podobnym poziomie nieco dalej. Wygląda to podobnie do obecnych tren
 
 # Podsumowując
 
-Jak na pierwszy projekt to według mnie jest dobrze. Nie można nazwać tego porażką czy coś. Projekt będzie pewnie dalej rozwijany i aktualizowany, ale już raczej z mniejszą częstotliwością. Tym bardziej, że zaczynam swoją pierwszą pracę jako Java Junior Developer. Właśnie, tak btw: oprócz matury, podczas rozwijania projektu rozwijałem się w kierunku Javy, bo z tą technologią chciałem pracować. Brałem również udział w DSP2017, gdzie trzeba było blogować z częstotliwością 2 posty na tydzień ([lista postów](/archiwum/#dajsiepoznac2017)). Ponadto, 2 miesiące spędziłem dorabiając/na wakacjach za granicą, gdzie mało dotykałem komputera. Więc był to naprawdę intensywny rok i sporo udało się zrobić :)
+Jak na pierwszy projekt to według mnie jest dobrze. Nie można nazwać tego porażką czy coś. Projekt będzie pewnie dalej rozwijany i aktualizowany, ale już raczej z mniejszą częstotliwością. Tym bardziej, że zaczynam swoją pierwszą pracę jako Java Junior Developer. Właśnie, tak btw: oprócz matury, podczas rozwijania projektu rozwijałem się w kierunku Javy, bo z tą technologią chciałem pracować. Brałem również udział w DSP2017, gdzie trzeba było blogować z częstotliwością 2 posty na tydzień ([lista postów](/archiwum/#dajsiepoznac2017)). Ponadto, 2 miesiące spędziłem dorabiając/na wakacjach za granicą, gdzie mało dotykałem komputera. Więc był to naprawdę intensywny rok i sporo udało się zrobić :slightly_smiling_face:
 
 Z projektu jestem jak najbardziej zadowolony i cieszę się, że nie wyszła z tego porażka - jak wiele osób spekulowało na forach.

@@ -15,4 +15,4 @@ paginate: 5
 exclude: ["node_modules","webpack.config.js","package.json","README.md", "npm-debug.log", "Gemfile", "Gemfile.lock", "package-lock.json", ".idea"]
 include: ["_pages"]
 keep_files: [.git, .gitignore, CNAME]
-plugins: [jekyll-paginate, jekyll-feed, rouge, jekyll-sitemap, jekyll-toc]
+plugins: [jekyll-paginate, jekyll-feed, rouge, jekyll-sitemap, jekyll-toc, jemoji]

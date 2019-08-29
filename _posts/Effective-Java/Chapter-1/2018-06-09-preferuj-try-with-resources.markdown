@@ -98,4 +98,4 @@ static String firstLineOfFile(String path, String defaultVal) {
 }
 ```
 
-Zatem używajmy tylko *try-with-resources*, aby kod był bardziej zwięzły, czytelniejszy, a rzucane wyjątki bardziej użyteczne. Jeśli tylko napotkasz w systemie kilka zagnieżdżeń *try-finally*, zamień je na *try-with-resources*, aby żyło nam się lepiej ;)
+Zatem używajmy tylko *try-with-resources*, aby kod był bardziej zwięzły, czytelniejszy, a rzucane wyjątki bardziej użyteczne. Jeśli tylko napotkasz w systemie kilka zagnieżdżeń *try-finally*, zamień je na *try-with-resources*, aby żyło nam się lepiej :wink:

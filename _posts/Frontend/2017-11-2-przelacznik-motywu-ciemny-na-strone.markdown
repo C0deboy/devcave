@@ -13,7 +13,7 @@ toc:        true
 
 Zawszę doceniam, gdy na stronach/blogach mamy możliwość zmiany motywu na ciemny. Jest to świetna opcja do czytania lub do przeglądania strony bez światła. Dlatego też zaimplementowałem taką funkcję na swoim blogu (w prawym górnym rogu w navbarze).
 
-Pokażę jak to wykonałem - relatywnie szybko i bezboleśnie, na przykładzie tego bloga ;)
+Pokażę jak to wykonałem - relatywnie szybko i bezboleśnie, na przykładzie tego bloga :slightly_smiling_face:
 
 # Przygotowywujemy przycisk
 
@@ -38,7 +38,7 @@ To kwestia gustu. Tutaj jest w navbarze - na liście opcji, z tooltipem i ikonam
 
 Zaimplementowałem to w ten sposób, że po kliknięciu przycisku przełączany jest motyw (u mnie dodawana jest klasa "dark-mode" do body) oraz zapamiętywany jest nasz wybór w [localStorage](https://developer.mozilla.org/pl/docs/Web/API/Window/localStorage) - czyli w pamięci cache przeglądarki dopóki jej nie wyczyścimy.
 
-Dałoby się to zrobić za pomocą ciasteczek, ale wykorzystanie localStorage jest bardziej odpowiednie, gdyż nie wysyłamy nic w nagłówku HTTP (nie marnujemy łącza :D) i nie wygaśnie nam to po jakimś czasie. Wszystkie dzieje się w przeglądarce użytkownika. Poza tym, ciasteczka są przeznaczone do odczytywania po stronie serwera.
+Dałoby się to zrobić za pomocą ciasteczek, ale wykorzystanie localStorage jest bardziej odpowiednie, gdyż nie wysyłamy nic w nagłówku HTTP (nie marnujemy łącza :smile:) i nie wygaśnie nam to po jakimś czasie. Wszystkie dzieje się w przeglądarce użytkownika. Poza tym, ciasteczka są przeznaczone do odczytywania po stronie serwera.
 
 Tak więc dodajemy obsługę kliknięcia:
 
@@ -100,7 +100,7 @@ W rezultacie te wartości będą się załączać tylko wtedy, kiedy body będzi
 Pozostało nam dostosować bloga/stronę do takiej zmiany i w niektórych elementach CSS pozmieniać wartości <code class="highlight">background</code> i <code class="highlight">color</code> na <code class="highlight"><span class="m">inherit</span></code>, aby kolory były dziedziczone z klasy <code class="highlight"><span class="na">.dark-mode</span></code>. Poza tym, prawdopodobnie czeka nas kilka zmian kolorystycznych, aby dopasować się do dwóch trybów.
 
 <p class="note">
-    Zdaję sobię, że nie u każdego będzie to takie banalne i czasem wasza strona może wymagać głębszej modyfikacji css, aby nasza strona wyglądała dobrze po zmianie motywu. Dlatego dobrze jest dobierać kolory, które wyglądają ładnie w obu motywach. Wtedy pójdzie to tak szybko jak u mnie ;)
+    Zdaję sobię, że nie u każdego będzie to takie banalne i czasem wasza strona może wymagać głębszej modyfikacji css, aby nasza strona wyglądała dobrze po zmianie motywu. Dlatego dobrze jest dobierać kolory, które wyglądają ładnie w obu motywach. Wtedy pójdzie to tak szybko jak u mnie :wink:
 </p>
 
 <p class="idea">
@@ -114,7 +114,7 @@ try {
 
 {% endhighlight %}
 
-Jest to w try catch, ponieważ zakładam, że nie na każdej stronie masz sekcję komentarzy ;)
+Jest to w try catch, ponieważ zakładam, że nie na każdej stronie masz sekcję komentarzy :slightly_smiling_face:
 
 
 

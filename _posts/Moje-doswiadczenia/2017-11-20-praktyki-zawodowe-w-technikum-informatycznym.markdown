@@ -38,7 +38,7 @@ Dla mnie, jak to pisałem w poście [Liceum vs Technikum]({{ site.baseurl }}{% p
 
 Bardzo dużym plusem całego projektu jest to, że wyjaz nas praktycznie nic nie kosztuje. Jest w pełni dofinansowywany. Nie płacimy za zakwaterowanie, za wyżywienie - za nic.  Do tego dostajemy jeszcze kieszonkowe na drobne wydatki, więc praktycznie wychodzimy na 0.
 
-Niektórzy mieli nawet takie szczęście (w tym ja :D), że dostawali drobne "na kawę" od pracodawców w postaci 5 funtów. Niby to mało, ale nie powinniśmy dostawać nic. Na te 20 osób były chyba tylko 3, które tak miały. Osobiście uważam, że to było sporo, bo 5 funtów * 20 (5 dni w tygodniu) = 100 funtów, a to daje w przybliżeniu 475 zł - **dodatkowo**. Dzięki temu cały wyjazd wyszedł nawet na plus, mimo kilku większych "niekontrolowanych" wydatków. M.in. jedno wyjście do pubu, gdzie z kolegą zostawiliśmy razem jakieś 400 zł czy przejażdżka publicznymi rowerami za około 100zł, bo nie do końca dobrze doczytaliśmy jak naliczane są opłaty :D
+Niektórzy mieli nawet takie szczęście (w tym ja :joy:), że dostawali drobne "na kawę" od pracodawców w postaci 5 funtów. Niby to mało, ale nie powinniśmy dostawać nic. Na te 20 osób były chyba tylko 3, które tak miały. Osobiście uważam, że to było sporo, bo 5 funtów * 20 (5 dni w tygodniu) = 100 funtów, a to daje w przybliżeniu 475 zł - **dodatkowo**. Dzięki temu cały wyjazd wyszedł nawet na plus, mimo kilku większych "niekontrolowanych" wydatków. M.in. jedno wyjście do pubu, gdzie z kolegą zostawiliśmy razem jakieś 400 zł czy przejażdżka publicznymi rowerami za około 100zł, bo nie do końca dobrze doczytaliśmy jak naliczane są opłaty :joy:
 
 ## Warunki życia
 
@@ -53,7 +53,7 @@ Mieliśmy do dyspozycji dosyć mały pokój dwuosobowy, łazienkę, kuchnię i t
 
 
 ### Właściciele
-Razem z nami mieszkało małżeństwo, a na weekend przyjeżdżały ich dzieci. Nie zapytaliśmy o ich pochodzenie, ale nie byli to rodowici Anglicy - zresztą takich chyba już jest tam mało ;)
+Razem z nami mieszkało małżeństwo, a na weekend przyjeżdżały ich dzieci. Nie zapytaliśmy o ich pochodzenie, ale nie byli to rodowici Anglicy - zresztą takich chyba już jest tam mało :slightly_smiling_face:
 
 Ogólnie byli bardzo mili i sympatyczni. Można się było bez problemu dogadać praktycznie ze wszystkim. Czasem zamienialiśmy kilka słów, ale na ogół zajmowaliśmy się swoimi sprawami.
 
@@ -65,7 +65,7 @@ Podczas wyjazdu mieliśmy zagwarantowane śniadanie, obiad i kolację. We własn
 
 I tutaj muszę bardzo pochwalić panią domu, bo gotowała świetnie. Jak wracałem z pracy z kolegą to myśleliśmy tylko o tym co będzie dziś dobrego i jak bardzo się najemy. Czasem były tak duże porcje, że mieliśmy po 1-2 dokładki.
 
-Jednak z tego co słyszeliśmy, nie każdy miał tak dobrze jak my. Na przykład, jedna koleżanka narzekała, że codziennie na śniadanie dają jej jakąś pasze dla zwierząt :D
+Jednak z tego co słyszeliśmy, nie każdy miał tak dobrze jak my. Na przykład, jedna koleżanka narzekała, że codziennie na śniadanie dają jej jakąś pasze dla zwierząt :joy:
 
 ## Obowiązki
 
@@ -74,7 +74,7 @@ To, z czego musieliśmy się wywiązywać i było obowiązkowe to:
 - co drugi weekend były obowiązkowe wycieczki po Londynie
 - kilka spotkań formalnych, które były w godzinach pracy, więc nie zabierały nam dodatkowo wolnego czasu
 
-Poza tym byliśmy całkowicie wolni i mogliśmy robić co tylko chcieliśmy. Formalnie max do 22, ale z właścicielami domu mieliśmy bardzo dobre relacje i mogliśmy wracać duuużo później. Jednak nie każdy mógł sobie na to pozwolić, a niektórzy już się spalili niedługo po przyjeździe. Więc no, trzeba zrobić dobre pierwsze wrażenie ;)
+Poza tym byliśmy całkowicie wolni i mogliśmy robić co tylko chcieliśmy. Formalnie max do 22, ale z właścicielami domu mieliśmy bardzo dobre relacje i mogliśmy wracać duuużo później. Jednak nie każdy mógł sobie na to pozwolić, a niektórzy już się spalili niedługo po przyjeździe. Więc no, trzeba zrobić dobre pierwsze wrażenie :wink:
 
 ## Praktyki
 
@@ -82,7 +82,7 @@ Czyli wreszcie główny cel wyjazdu. Niestety, nawet na organizowanych praktykac
 
  Na szczęście ja miałem trochę lepiej, ale też bez szału. Pracowałem w serwisie komputerowym po drugiej stronie Londynu. Dojazd tam zajmował mi jakoś 45 min w jedną stronę, ale nie narzekałem bardzo na to. Jeździłem tylko 2 liniami metra (w przeciwieństwie do kolegi, który musiał dojeżdżać kilkoma autobusami i metrem), zawszę miałem miejsce siedzące i mogłem sobie coś robić. Dzięki temu przeczytałem kilka książek, więc nie było to dla mnie uciążliwe.
 
- Moja praca polegała na drobnych naprawach laptopów, czasem telefonów i PC. Niestety nie było to nic związanego z programowaniem, a liczyłem na to. Szczerze mówiąc to niewiele osób miało pracę z tym związaną. Jeden znajomy zajmował się poprawianiem stronki na WordPressie i to była chyba najbardziej programistyczna praca na tym wyjeździe. Po zakończonych praktykach zaproponowali mu nawet dalsze prowadzenie strony zdalnie, więc jak widać można sobie nawet wyrobić kilka kontaktów czy znaleźć dodatkową pracę ;)
+ Moja praca polegała na drobnych naprawach laptopów, czasem telefonów i PC. Niestety nie było to nic związanego z programowaniem, a liczyłem na to. Szczerze mówiąc to niewiele osób miało pracę z tym związaną. Jeden znajomy zajmował się poprawianiem stronki na WordPressie i to była chyba najbardziej programistyczna praca na tym wyjeździe. Po zakończonych praktykach zaproponowali mu nawet dalsze prowadzenie strony zdalnie, więc jak widać można sobie nawet wyrobić kilka kontaktów czy znaleźć dodatkową pracę :wink:
 
 Ogólnie nie wspominam tego źle, przyjemnie się pracowało. Właściciele serwisu byli sympatyczni i można było spędzić dzień w "pracy" w miłej atmosferze. Trochę z tych praktyk wyniosłem, nie można powiedzieć, że nie, ale też często naprawa polegała na reinstalacji systemu i softu + backup danych, co było dosyć nużące. Tak czy siak nie miałem najgorzej.
 
@@ -92,4 +92,4 @@ Praktyki zagraniczne wspominam wyjątkowo dobrze. Dużo się działo, zwiedziłe
 
 Co do uzyskanego papierka i doświadczenia z praktyk, osobiście uważam, że nie jest to zbyt wartościowe, tym bardziej dla programisty. No chyba, że trafimy na coś programistycznego, ale tak jak pisałem - z tym jest ciężko. Nie umieszczałem w swoim CV ani kwalifikacji zawodowych, ani odbytych praktyk, a pracę dostałem bez żadnych znajomości od razu po szkole. Czy jakbym załączył te informacje w CV to byłoby mi łatwiej? Nie sądzę, bo na rozmowach nawet słowo nie padło w tym kierunku.
 
-Jedynie czego żałuję w tym wyjeździe to tego, że nie miałem praktyk związanych z programowaniem. No ale na to nie mamy wpływu. Dostajemy to z góry. Ogólnie wyjazd oceniam na 9/10 i szczerze polecam tę opcję. Było tak dobrze, że nie chciało nam się wracać do Polski ;)
+Jedynie czego żałuję w tym wyjeździe to tego, że nie miałem praktyk związanych z programowaniem. No ale na to nie mamy wpływu. Dostajemy to z góry. Ogólnie wyjazd oceniam na 9/10 i szczerze polecam tę opcję. Było tak dobrze, że nie chciało nam się wracać do Polski :slightly_smiling_face:

@@ -56,8 +56,7 @@
 
     <a class="navbar-brand" href="/"><img src="/img/devcave/devcave.png" alt="logo"> devcave.pl</a>
 
-    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
-            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
 
         Menu <i class="fa fa-bars" aria-hidden="true"></i>
     </button>
@@ -80,8 +79,7 @@
                 <a class="nav-link" href="/moje-projekty">Moje projekty</a>
             </li>
             <li class="nav-item">
-                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
-                        title="Zmień motyw">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom" title="Zmień motyw">
                     <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
                 </button>
             </li>
@@ -116,7 +114,7 @@
 <div class="row">
     <div class="col-md-12">
         <p>Odpowiadam na wszystkie maile. Nie ma głupich pytań. Chętnie nawiąże nowe znajomości i rozważę
-            wszelkie propozycje. Jestem otwarty na współpracę. Jeśli jestem w stanie to pomogę ;) </p>
+            wszelkie propozycje. Jestem otwarty na współpracę. Jeśli jestem w stanie to pomogę <img class="emoji" title=":slightly_smiling_face:" alt=":slightly_smiling_face:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f642.png" height="20" width="20"> </p>
     </div>
 
     <div class="col-md-12">
@@ -127,12 +125,12 @@
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </a>
             </li>
-            <li class="list-inline-item">
-                <button class="main-btn" type="button" id="open-contact-btn" data-toggle="modal" data-target="#formularz-kontaktowy">
-                    Formularz kontaktowy
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                </button>
-            </li>
+<!--            <li class="list-inline-item">-->
+<!--                <button class="main-btn" type="button" id="open-contact-btn" data-toggle="modal" data-target="#formularz-kontaktowy">-->
+<!--                    Formularz kontaktowy-->
+<!--                    <i class="fa fa-envelope" aria-hidden="true"></i>-->
+<!--                </button>-->
+<!--            </li>-->
         </ul>
     </div>
 </div>
@@ -144,10 +142,7 @@
 </div>
 
 <div class="fb-page inline box-effect">
-    <iframe
-        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
-        width="340" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-        allowTransparency="true"></iframe>
+    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&amp;tabs&amp;width=340&amp;height=130&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=false&amp;appId" width="340" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
 </div>
 
 <div class="row">
@@ -186,8 +181,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel">Formularz kontaktowy</h5>
-                <button type="button" class="close" id="close-contact-btn" data-dismiss="modal" aria-label="Zamknij formularz kontaktowy"
-                        title="Zamknij formularz kontaktowy">
+                <button type="button" class="close" id="close-contact-btn" data-dismiss="modal" aria-label="Zamknij formularz kontaktowy" title="Zamknij formularz kontaktowy">
                     <i class="fa fa-times close-form"></i>
                 </button>
             </div>
@@ -200,21 +194,17 @@
                     </label>
                     <label class="form-group col-md-6 col-xs-12" aria-live="polite">
                         Temat
-                        <input class="form-data form-control" name="_subject" placeholder="Wpisz tu temat wiadomości" minlength="4"
-                               maxlength="78"
-                               required>
+                        <input class="form-data form-control" name="_subject" placeholder="Wpisz tu temat wiadomości" minlength="4" maxlength="78" required>
                     </label>
                 </div>
                 <div class="row flex-column justify-content-center">
                     <label class="form-group col-md-12 col-xs-12" aria-live="polite">
                         Wiadomość
-                        <textarea class="form-data form-control" rows="8" name="message" placeholder="Wpisz tu twoją wiadomość" minlength="4"
-                                  maxlength="6000" required></textarea>
+                        <textarea class="form-data form-control" rows="8" name="message" placeholder="Wpisz tu twoją wiadomość" minlength="4" maxlength="6000" required></textarea>
                     </label>
 
                     <label class="recaptcha-label mx-auto" aria-live="polite">
-                        <div class="g-recaptcha" tabindex="-1" data-sitekey="6LcyTjYUAAAAAAzWkuwU9AEYynQaZWAHRM5nVTNj"
-                             data-callback="recaptchaClearErr"></div>
+                        <div class="g-recaptcha" tabindex="-1" data-sitekey="6LcyTjYUAAAAAAzWkuwU9AEYynQaZWAHRM5nVTNj" data-callback="recaptchaClearErr"></div>
                     </label>
                 </div>
             </div>

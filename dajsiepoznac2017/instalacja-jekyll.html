@@ -52,8 +52,7 @@
 
     <a class="navbar-brand" href="/"><img src="/img/devcave/devcave.png" alt="logo"> devcave.pl</a>
 
-    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
-            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
 
         Menu <i class="fa fa-bars" aria-hidden="true"></i>
     </button>
@@ -76,8 +75,7 @@
                 <a class="nav-link" href="/moje-projekty">Moje projekty</a>
             </li>
             <li class="nav-item">
-                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
-                        title="Zmień motyw">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom" title="Zmień motyw">
                     <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
                 </button>
             </li>
@@ -106,9 +104,9 @@
               
               2017</p>
             <div class="tags">
-              <div class="site-tag"><a href='/archiwum#dajsiepoznac2017'>DajSiePoznac2017</a></div>
+              <div class="site-tag"><a href="/archiwum#dajsiepoznac2017">DajSiePoznac2017</a></div>
               
-              <div class="site-tag"><a href='/archiwum#jekyll'>Jekyll</a></div>
+              <div class="site-tag"><a href="/archiwum#jekyll">Jekyll</a></div>
               
             </div>
 
@@ -126,7 +124,8 @@
 <li class="toc-entry toc-h2"><a href="#wymagania">Wymagania</a></li>
 <li class="toc-entry toc-h2"><a href="#konfiguracja-jekyll">Konfiguracja Jekyll</a></li>
 <li class="toc-entry toc-h2"><a href="#uruchamiamy-ubuntu-w-windows-10">Uruchamiamy Ubuntu w Windows 10</a></li>
-<li class="toc-entry toc-h1"><a href="#instalacja-jekyll-na-podsystemie-ubuntu-w-windows-10">Instalacja Jekyll na podsystemie Ubuntu w Windows 10</a>
+<li class="toc-entry toc-h1">
+<a href="#instalacja-jekyll-na-podsystemie-ubuntu-w-windows-10">Instalacja Jekyll na podsystemie Ubuntu w Windows 10</a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#ruby">Ruby</a></li>
 <li class="toc-entry toc-h2"><a href="#gcc-i-make">GCC i Make:</a></li>
@@ -155,7 +154,7 @@
 
 <h2 id="jekyll-na-windows">Jekyll na Windows</h2>
 
-<p>Jekyll nie jest oficjalnie wspierany na systemie Windows, jednak jest możliwe, żeby na nim działał – <a href="https://jekyllrb.com/docs/windows/#installation">link</a>. Na Linuxie cały proces jest mniej skomplikowany, dodatkowo jestem zwolennikiem konsoli Linuxowej, więc i na tym systemie chciałem Jekylla. Sam używam obu systemów, z tym, że częściej Windowsa (w tym do zarządzania projektem), dlatego też wybrałem drogę pośrodku. Co to znaczy? Zainstalowałem Jekylla na Ubuntu wbudowanego w Windowsa ;). Tak, Windows 10 (64 bit) ma wbudowany podsystem Ubuntu i lubię utrudniać sobie życie.</p>
+<p>Jekyll nie jest oficjalnie wspierany na systemie Windows, jednak jest możliwe, żeby na nim działał – <a href="https://jekyllrb.com/docs/windows/#installation">link</a>. Na Linuxie cały proces jest mniej skomplikowany, dodatkowo jestem zwolennikiem konsoli Linuxowej, więc i na tym systemie chciałem Jekylla. Sam używam obu systemów, z tym, że częściej Windowsa (w tym do zarządzania projektem), dlatego też wybrałem drogę pośrodku. Co to znaczy? Zainstalowałem Jekylla na Ubuntu wbudowanego w Windowsa <img class="emoji" title=":slightly_smiling_face:" alt=":slightly_smiling_face:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f642.png" height="20" width="20">. Tak, Windows 10 (64 bit) ma wbudowany podsystem Ubuntu i lubię utrudniać sobie życie.</p>
 
 <h2 id="wymagania">Wymagania</h2>
 
@@ -194,7 +193,7 @@ make –v</code></pre></figure>
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">bundle <span class="nb">exec </span>jekyll serve</code></pre></figure>
 
 <p>Dostępna jest pod adresem <a href="http://localhost:4000">localhost:4000</a>. Domyślny szablon wygląda tak:
-<img src="/img/posts/default-theme-jekyll.jpg" alt="Domyślny szablon Jekyll" /></p>
+<img src="/img/posts/default-theme-jekyll.jpg" alt="Domyślny szablon Jekyll"></p>
 
 <p>Oczywiście możemy sobie pobrać inne gotowe szablony np. <a href="http://jekyllthemes.org/">stąd</a> lub <a href="http://jekyllthemes.io/">stąd</a>. Jest tego cała masa, a instalacja prosta - ściągamy dany motyw z GitHuba i podmieniamy wszystkie pliki w naszym folderze projektu.</p>
 
@@ -323,17 +322,13 @@ Jeśli chcemy swobodnie edytować pliki na systemie Windows musimy stworzyć pro
       <ul class="pagination">
         
         <li class="page-item">
-          <a class="page-link box-effect" href="/dajsiepoznac2017/poczatki"
-             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Początki projektu"><i class="fa fa-arrow-left"
-                                                                                                            aria-hidden="true"></i>
+          <a class="page-link box-effect" href="/dajsiepoznac2017/poczatki" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Początki projektu"><i class="fa fa-arrow-left" aria-hidden="true"></i>
             Poprzedni post</a>
         </li>
         
         
         <li class="page-item ml-auto">
-          <a class="page-link box-effect" href="/dajsiepoznac2017/rss-feed-kategorii-jekyll"
-             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Dodajemy RSS feed kategorii">Następny post <i
-                  class="fa fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="page-link box-effect" href="/dajsiepoznac2017/rss-feed-kategorii-jekyll" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Dodajemy RSS feed kategorii">Następny post <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </li>
         
       </ul>
@@ -342,22 +337,21 @@ Jeśli chcemy swobodnie edytować pliki na systemie Windows musimy stworzyć pro
     <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
 
     <div class="fb-page inline box-effect">
-        <iframe
-            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&amp;tabs&amp;width=340&amp;height=130&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=false&amp;appId"></iframe>
     </div>
 </div>
 
       <div class="recommended">
     <div class="box-effect books-ad ">
         <a href="https://jaki-jezyk-programowania.pl/ksiazki">
-            <img src="/img/reuse/books.png" alt="książki"/>
+            <img src="/img/reuse/books.png" alt="książki">
             <h3>Zobacz polecane książki</h3>
         </a>
     </div>
 
     <div class="box-effect books-ad ">
         <a href="https://jaki-jezyk-programowania.pl/kursy">
-            <img src="/img/reuse/video-courses.png" alt="video kursy"/>
+            <img src="/img/reuse/video-courses.png" alt="video kursy">
             <h3>Zobacz polecane video kursy</h3>
         </a>
     </div>
@@ -382,7 +376,8 @@ Jeśli chcemy swobodnie edytować pliki na systemie Windows musimy stworzyć pro
   })();
 </script>
 <noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
-    Disqus.</a></noscript>
+    Disqus.</a>
+</noscript>
 
 
 

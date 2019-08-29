@@ -52,8 +52,7 @@
 
     <a class="navbar-brand" href="/"><img src="/img/devcave/devcave.png" alt="logo"> devcave.pl</a>
 
-    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
-            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse" data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
 
         Menu <i class="fa fa-bars" aria-hidden="true"></i>
     </button>
@@ -76,8 +75,7 @@
                 <a class="nav-link" href="/moje-projekty">Moje projekty</a>
             </li>
             <li class="nav-item">
-                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
-                        title="Zmień motyw">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom" title="Zmień motyw">
                     <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
                 </button>
             </li>
@@ -106,9 +104,9 @@
               
               2017</p>
             <div class="tags">
-              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              <div class="site-tag"><a href="/archiwum#dobre-praktyki">Dobre-praktyki</a></div>
               
-              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              <div class="site-tag"><a href="/archiwum#notatnik-juniora">Notatnik-Juniora</a></div>
               
             </div>
 
@@ -121,16 +119,19 @@
         <nav class="table-of-contents">
           <p class="m-0">Spis treści:</p>
           <ul class="section-nav">
-<li class="toc-entry toc-h1"><a href="#ogólne">Ogólne</a>
+<li class="toc-entry toc-h1">
+<a href="#og%C3%B3lne">Ogólne</a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#dry---dont-repeat-yourself">DRY - Don’t Repeat Yourself</a></li>
-<li class="toc-entry toc-h2"><a href="#kiss---keep-it-simple-stupid">KISS - Keep it simple, stupid!</a>
+<li class="toc-entry toc-h2">
+<a href="#kiss---keep-it-simple-stupid">KISS - Keep it simple, stupid!</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#code-for-the-maintainer">Code for the Maintainer</a></li>
 <li class="toc-entry toc-h3"><a href="#boy-scout-rule">Boy scout rule</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#solid">SOLID</a>
+<li class="toc-entry toc-h2">
+<a href="#solid">SOLID</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#s---single-responsibility-principle">S - Single responsibility principle</a></li>
 <li class="toc-entry toc-h3"><a href="#o---openclosed-principle">O - Open/closed principle</a></li>
@@ -145,14 +146,16 @@
 <li class="toc-entry toc-h2"><a href="#encapsulate-what-changes">Encapsulate What Changes</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h1"><a href="#projektowanie-pakietów">Projektowanie pakietów</a>
+<li class="toc-entry toc-h1">
+<a href="#projektowanie-pakiet%C3%B3w">Projektowanie pakietów</a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#cpp---common-closure-principle">CPP - Common Closure Principle</a></li>
 <li class="toc-entry toc-h2"><a href="#rep---reuse-release-equivalence-principle">REP - Reuse-release equivalence principle</a></li>
 <li class="toc-entry toc-h2"><a href="#crp---common-reuse-principle">CRP - Common-reuse principle</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h1"><a href="#zależności-miedzy-pakietami--klasami">Zależności miedzy pakietami / klasami</a>
+<li class="toc-entry toc-h1">
+<a href="#zale%C5%BCno%C5%9Bci-miedzy-pakietami--klasami">Zależności miedzy pakietami / klasami</a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#minimise-coupling">Minimise Coupling</a></li>
 <li class="toc-entry toc-h2"><a href="#adp---acyclic-dependencies-principle">ADP - Acyclic dependencies principle</a></li>
@@ -166,7 +169,7 @@
         </nav>
         
 
-        <p>Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami ;)</p>
+        <p>Przez proces swojej nauki zebrałem całkiem pokaźną listę zasad projektowania obiektowego, tym samym dobrych praktyk, do których warto się stosować. Zostawiam to tutaj jako swój notatnik. Nie można tego traktować jako pełne źródło wiedzy. Samo przeczytanie wymienionych zasad mało da, dlatego zachęcam do zgłębienia każdej z nich na własną rękę - najlepiej z przykładami <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20"></p>
 
 <h1 id="ogólne">Ogólne</h1>
 
@@ -188,7 +191,8 @@
   <li>Prostota (i unikanie złożoności) powinna być priorytetem podczas programowania. Kod powinien byc łatwy do odczytania i zrozumienia wymagając do tego jak najmniej wysiłku.</li>
   <li>Większość systemów działa najlepiej, gdy polegają na prostocie, a nie na złożoności.</li>
   <li>Staraj się, aby twój kod podczas analizy nie zmuszał do zbytniego myślenia.</li>
-  <li>Gdy po jakimś czasie wracasz do <strong>swojego</strong> kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować ;)</li>
+  <li>Gdy po jakimś czasie wracasz do <strong>swojego</strong> kodu i nie wiesz co tam się dzieje, to znak, że musisz nad tym popracować <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20">
+</li>
 </ul>
 
 <p>Można to rozszerzyć o zasadę:</p>
@@ -259,14 +263,16 @@
 <ul>
   <li>Wiele mniejszych, konkretnych interfejsów jest lepsze od pojedynczego ogólnego interfejsu.</li>
   <li>Powinno się projektować małe i zwarte interfejsy.</li>
-  <li>Klasa nie powinna implementować interfejsu, przez który naruszy <a href="#S---Single-responsibility-principle">Single responsibility principle</a></li>
+  <li>Klasa nie powinna implementować interfejsu, przez który naruszy <a href="#S---Single-responsibility-principle">Single responsibility principle</a>
+</li>
   <li>Klasa która implementuje interfejs nie może być zmuszana do implementowania metod, których nie potrzebuje, a tak jest często w przypadku dużych iterfejsów.</li>
 </ul>
 
 <p class="pros">Plusy</p>
 <ul>
   <li>Lepsza reużywalność interfejsów, czasem nie wszystkie metody są potrzebne z “dużego” interfejsu.</li>
-  <li>Nie naruszanie <a href="#S---Single-responsibility-principle">Single responsibility principle</a></li>
+  <li>Nie naruszanie <a href="#S---Single-responsibility-principle">Single responsibility principle</a>
+</li>
 </ul>
 
 <h3 id="d---dependency-inversion-principle">D - Dependency inversion principle</h3>
@@ -283,7 +289,7 @@
   <li>Elastyczność - łatwiej wprowadzać zmiany</li>
 </ul>
 
-<hr />
+<hr>
 
 <h2 id="lod---law-of-demeter">LoD - Law of Demeter</h2>
 <ul>
@@ -324,7 +330,8 @@
 <p class="pros">Plusy</p>
 <ul>
   <li>Zmniejsza to zależności między klasami</li>
-  <li>Używając dziedziczenia łatwiej też o złamanie <a href="#l---liskov-substitution-principle">Liskov substitution principle</a></li>
+  <li>Używając dziedziczenia łatwiej też o złamanie <a href="#l---liskov-substitution-principle">Liskov substitution principle</a>
+</li>
 </ul>
 
 <h2 id="encapsulate-what-changes">Encapsulate What Changes</h2>
@@ -337,7 +344,7 @@
   <li>Minimalizuje wymagane modyfikacje, gdy musimy wprowadzić zmianę</li>
 </ul>
 
-<hr />
+<hr>
 
 <h1 id="projektowanie-pakietów">Projektowanie pakietów</h1>
 
@@ -378,14 +385,15 @@
   <li>Lepsza spójność i czytelność systemu</li>
 </ul>
 
-<hr />
+<hr>
 
 <h1 id="zależności-miedzy-pakietami--klasami">Zależności miedzy pakietami / klasami</h1>
 
 <h2 id="minimise-coupling">Minimise Coupling</h2>
 <ul>
   <li>Minimalizuj powiązania między pakietami/klasami. Mniejsza ilość zależności jest lepsza.</li>
-  <li>Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie <a href="#LoD---Law-of-Demeter">Law of Demeter</a></li>
+  <li>Można to zrobić przez ukrywanie szczegółów implementacji czy stosowanie <a href="#LoD---Law-of-Demeter">Law of Demeter</a>
+</li>
 </ul>
 
 <p class="pros">Plusy</p>
@@ -396,12 +404,13 @@
 <h2 id="adp---acyclic-dependencies-principle">ADP - Acyclic dependencies principle</h2>
 <ul>
   <li>Zasada ta mówi, że w strukturze zależności nie powinno być zapętleń/cykli.</li>
-  <li>Przykładowa struktura łamiąca tą zasadę będzie gdy: pakiet A ma zależność w pakiecie B, który ma zależność w pakiecie C, który z kolei ma zależność w pakiecie A.<br /></li>
+  <li>Przykładowa struktura łamiąca tą zasadę będzie gdy: pakiet A ma zależność w pakiecie B, który ma zależność w pakiecie C, który z kolei ma zależność w pakiecie A.<br>
+</li>
 </ul>
 <pre class="text-diagram">
-A &larr;-------- C
-|           &uarr;
-'---&rarr; B ----<sup>|</sup>
+A ←-------- C
+|           ↑
+'---→ B ----<sup>|</sup>
 </pre>
 <ul>
   <li>Możemy temu zapobiec stosując <a href="#D---Dependency-inversion-principle">Dependency inversion principle</a>, wzorce projektowe np. Observer lub stworzyć nowy pakiet i wrzucić tam wszystkie wspólne zależności.</li>
@@ -445,17 +454,13 @@ A &larr;-------- C
       <ul class="pagination">
         
         <li class="page-item">
-          <a class="page-link box-effect" href="/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki"
-             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Jak uczyć się do matury z informatyki?"><i class="fa fa-arrow-left"
-                                                                                                            aria-hidden="true"></i>
+          <a class="page-link box-effect" href="/podpowiadam-jak/jak-uczyc-sie-do-matury-z-informatyki" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Jak uczyć się do matury z informatyki?"><i class="fa fa-arrow-left" aria-hidden="true"></i>
             Poprzedni post</a>
         </li>
         
         
         <li class="page-item ml-auto">
-          <a class="page-link box-effect" href="/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz"
-             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Recenzja książki Zawód: Programista">Następny post <i
-                  class="fa fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="page-link box-effect" href="/recenzje/recenzja-ksiazki-zawod-programista-maciej-aniserowicz" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Recenzja książki Zawód: Programista">Następny post <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </li>
         
       </ul>
@@ -464,22 +469,21 @@ A &larr;-------- C
     <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
 
     <div class="fb-page inline box-effect">
-        <iframe
-            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&amp;tabs&amp;width=340&amp;height=130&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=false&amp;appId"></iframe>
     </div>
 </div>
 
       <div class="recommended">
     <div class="box-effect books-ad ">
         <a href="https://jaki-jezyk-programowania.pl/ksiazki">
-            <img src="/img/reuse/books.png" alt="książki"/>
+            <img src="/img/reuse/books.png" alt="książki">
             <h3>Zobacz polecane książki</h3>
         </a>
     </div>
 
     <div class="box-effect books-ad ">
         <a href="https://jaki-jezyk-programowania.pl/kursy">
-            <img src="/img/reuse/video-courses.png" alt="video kursy"/>
+            <img src="/img/reuse/video-courses.png" alt="video kursy">
             <h3>Zobacz polecane video kursy</h3>
         </a>
     </div>
@@ -504,7 +508,8 @@ A &larr;-------- C
   })();
 </script>
 <noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
-    Disqus.</a></noscript>
+    Disqus.</a>
+</noscript>
 
 
 

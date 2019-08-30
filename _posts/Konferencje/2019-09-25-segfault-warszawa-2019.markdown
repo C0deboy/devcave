@@ -3,7 +3,7 @@ layout:     post
 titleSEO:   "Konferencja SegFault Warszawa 2019 - kod rabatowy"
 title:      "Konferencja SegFault Warszawa 2019"
 subtitle:   "27 września - Data Engineering, Applied ML / AI + kod rabatowy i darmowa wejściówka dla jednej osoby"
-date:       2019-08-29 8:00:00
+date:       2019-09-25 8:00:00
 author:     "Codeboy"
 category:   Konferencje
 tags:       Konferencje

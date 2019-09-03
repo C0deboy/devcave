@@ -16,7 +16,8 @@ class JekyllSearch {
     this.resultsList.innerHTML = '<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>';
     const inputValue = this.searchField.value.trim();
     const allWordsRegex = new RegExp('.*(' + inputValue.replace(/\s/g, ').*(') + ').*', 'i');
-    const anyWordRegex = new RegExp('(^|\\s)' + inputValue.replace(/\s\w{1,2}\s/g, ' ').replace(/\s/g, ' | ') + '(\\s|$)', 'i');
+    const anyWordRegex = new RegExp('(^|\\s)' + inputValue.replace(/\s\w{1,2}\s/g, ' ')
+      .replace(/\s/g, ' | ') + '(\\s|$)', 'i');
 
     const data = await this.fetchedData();
 
@@ -27,11 +28,10 @@ class JekyllSearch {
 
     if (results.length > 0) {
       return results;
-    }
-    else {
+    } else {
       return data.filter((item) => {
         const searchIn = escapePolishLetters(item.title + ' ' + item.subtitle);
-        if(searchIn.match(anyWordRegex)){
+        if (searchIn.match(anyWordRegex)) {
           console.log(searchIn);
           return true;
         }
@@ -92,7 +92,8 @@ class JekyllSearch {
       xhr.open('GET', href, true);
       xhr.onload = (e) => {
         if (xhr.status === 404) {
-          const searchedPost = href.substr(href.lastIndexOf('/') + 1);
+          const link = href.endsWith('/') ? href.substring(0, href.length - 1) : href;
+          const searchedPost = link.substr(link.lastIndexOf('/') + 1);
           this.searchField.value = searchedPost.replace(/-/g, ' ');
           this.displayResults();
         }

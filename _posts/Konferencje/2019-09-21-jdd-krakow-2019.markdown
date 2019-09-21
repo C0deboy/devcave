@@ -1,0 +1,80 @@
+---
+layout:     post
+titleSEO:   "Konferencja JDD Kraków 2019 - kod rabatowy"
+title:      "Konferencja JDD Kraków 2019"
+subtitle:   "14-15 październik - różnorodne tematy + kod rabatowy i darmowa wejściówka"
+date:       2019-09-21 7:00:00
+author:     "Codeboy"
+category:   Konferencje
+tags:       Konferencje
+comments:   true
+toc:        true
+---
+
+![Grafika JDD Kraków 2019](/img/konferencje/JDD Kraków 2019.png)
+
+Wreszcie coś nowego dla Was z mojej strony :slightly_smiling_face:
+ 
+Zostałem partnerem medialnym konferencji JDD, na którą również się wybieram i tak jak zapowiadałem, mam dla was **kod rabatowy** oraz **1 darmową wejściówkę**. Info o nich znajdziesz na [końcu tego posta](#kod-rabatowy--wejściówka).
+
+## Opis konferencji JDD:
+
+Zbliża się jedna z największych konferencji o tematyce Java w Polsce – różnorodność to domena tegorocznej edycji JDD!
+
+![JDD 1](/img/konferencje/JDD 1.jpg)
+
+Zapowiada się kolejne, wielkie zgrupowanie fanatyków programowania w Javie. Prelegenci z różnych stron świata, doświadczeni profesjonaliści, reprezentanci różnorodnych społeczności ze świata IT, pełni zapału studenci oraz deweloperzy na przeróżnych stopniach zaawansowania – wszyscy, który kochają Javę będą tam!
+
+W tym roku JDD odbędzie się **14-15 października 2019**, jak zawsze, **w Krakowie**!
+
+**Organizatorzy stawiają na różnorodność.**
+
+![JDD 2](/img/konferencje/JDD 2.jpg)
+
+Ścieżki podzielone ze względu na poziom zaawansowania i język prezentacji, inspirujące wykłady oraz nowe twarze na scenie – na to możemy się nastawiać, myśląc o JDD 2019. 
+
+Organizatorzy planują ścieżkę technologiczną oraz szereg zróżnicowanych tematów: front-end, Metodologie DevOps, JAVA 9/10/11, testing, dobre praktyki, soft skills, Machine Learning, AI, Mobile, Chatbots, Blockchain, Reactive, Functional Programming, Databases, Big Data, NoSQL, Industry 4.0 /ERP/ Erp in cloud.
+
+Czego możemy się spodziewać po XIV edycji legendarnej konferencji Java?
+
+Przygotujcie się na:
+- najnowsze trendy, najbardziej efektywne rozwiązania i liczne case studies 
+- praktyczne przykłady, sesje live coding
+- jeszcze więcej specjalistów i ekspertów
+- tematy dla wszystkich: junior, mid i senior deweloperów
+- agendę opartą m.in. na zgłoszeniach CFP oraz propozycjach, które uczestnicy podawali w zeszłorocznych ankietach  
+- warsztaty, żywe i wciągające panele dyskusyjne, beer-talks
+- spotkanie ze społecznościami Java z całej Polski
+- ogromny entuzjazm i niezapomniana, luźna atmosfera (wszystko dzięki niezwykłym uczestnikom konferencji i AfterParty!)
+
+W Radzie Programowej zasiadają:
+Sławomir Sobótka, Andrzej Grzesik, Wojciech Oczkowski, 
+Marcin Świerczyński, Magda Stożek, Damian Leszczyński, Łukasz Dziedziul, 
+Michał Gruca, JakubPilimon, Grzegorz Piwowarek, Marcin Zajączkowski, Jarek Pałka
+
+![JDD 3](/img/konferencje/JDD 3.jpg)
+
+**Kolejna edycja konkursu JUGmajster**
+
+W tym roku również, tradycyjnie, odbędzie się konkurs JUGmajster! To kultowy element JDD - debiutujący specjaliści Java konkurują ze sobą na scenie. Tylko jeden z nich powali widownię na łopatki i zostanie okrzyknięty JUGmajstrem 2019. Podczas zeszłorocznej edycji rywalizacja okazała się niezwykle zacięta - „Chcemy, by ta edycja konkursu odznaczała się jeszcze większymi emocjami i wyższym poziomem rywalizacji”, twierdzą organizatorzy. Konkurs JUGmajster to ogromna dawka praktycznej wiedzy i najnowsze rozwiązania prosto od debiutantów, walczących ze sobą o miano wschodzącej gwiazdy polskiej sceny IT. 
+
+Więcej informacji o konferencji na stronie: [jdd.org.pl](https://jdd.org.pl) oraz na Facebooku i Twitterze.
+
+
+# Kod rabatowy + wejściówka
+
+**Na darmową wejściówkę mogę zabrać tylko jedną osobę** - kto chętny to zapraszam do [kontaktu](/kontakt). Fajnie by było żebyśmy mieli o czym pogadać, dlatego zajrzyj na stronę [o mnie](/o-mnie) i na mój [LinkedIn](https://www.linkedin.com/in/marcin-lasota/), żeby mnie trochę poznać i zobaczyć na jakim etapie kariery programisty jestem. 
+
+Jeśli będziesz chętny, to wystarczy, że się przedstawisz i napiszesz coś o sobie, a jeśli masz konto na LinkedIn, to mnie dodaj i pogadamy bezpośrednio tam.
+
+Status wejściówki: `CZEKA_NA_CIEBIE`
+
+Jeśli nie uda Ci się dostać tej darmowej wejściówki to możesz skorzystać z kodu rabatowego **15%** :slightly_smiling_face:
+
+> **DEVCAVE_15**
+
+Zostałem też partnerem medialnym innej konferencji, na którą również mogę wziąć jedną osobę, więc jeśli nie uda Ci się dostać tej wejściówki, to jeszcze będziesz miał co najmniej 2 szanse na inne konferencje :slightly_smiling_face:
+
+Bądźcie na bieżąco, info o następnej konferencji będzie prawdopodobnie za tydzień :wink:
+
+

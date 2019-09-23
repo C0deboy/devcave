@@ -63,17 +63,25 @@ Więcej informacji o konferencji na stronie: [jdd.org.pl](https://jdd.org.pl) or
 
 # Kod rabatowy + wejściówka
 
-**Na darmową wejściówkę mogę zabrać tylko jedną osobę** - kto chętny to zapraszam do [kontaktu](/kontakt). Fajnie by było żebyśmy mieli o czym pogadać, dlatego zajrzyj na stronę [o mnie](/o-mnie) i na mój [LinkedIn](https://www.linkedin.com/in/marcin-lasota/), żeby mnie trochę poznać i zobaczyć na jakim etapie kariery programisty jestem. 
+**Darmowa wejściówka jest tylko dla jednej osoby** - kto chętny to zapraszam do [kontaktu](/kontakt). Fajnie by było żebyśmy mieli o czym pogadać, dlatego zajrzyj na stronę [o mnie](/o-mnie) i na mój [LinkedIn](https://www.linkedin.com/in/marcin-lasota/), żeby mnie trochę poznać i zobaczyć na jakim etapie kariery programisty jestem. 
 
-Jeśli będziesz chętny, to wystarczy, że się przedstawisz i napiszesz coś o sobie, a jeśli masz konto na LinkedIn, to mnie dodaj i pogadamy bezpośrednio tam.
+Jeśli będziesz chętny, to wystarczy, że się przedstawisz i napiszesz coś o sobie, np. jakimi technologiami się interesujesz, ile masz doświadczenia, jakie jest twoje aktualne stanowisko i czy byłeś już na jakichś konferencjach, a **jeśli masz konto na LinkedIn, to mnie po prostu dodaj i pogadamy bezpośrednio tam**.
 
-Status wejściówki: `CZEKA_NA_CIEBIE`
+Status wejściówki: `ODEBRANA`
 
-Jeśli nie uda Ci się dostać tej darmowej wejściówki to możesz skorzystać z kodu rabatowego **15%** :slightly_smiling_face:
+Wejściówkę odebrał Sebastian, a zdecydował o tym fakt, że był po prostu pierwszy :slightly_smiling_face:
+Wszystko rozegrało się na slacku devspl.slack.com, oto dowód :slightly_smiling_face:
+
+![JDD rozmowa odebranie wejściówki](/img/konferencje/jdd-odebranie.jpg)
+
+{: .warning}
+Niestety wejściówka została już odebrana, ale zachęcam do śledzenia bloga, wkrótce pojawią się 2 kolejne posty z wejściówkami na konferencję SegFault.
+
+Jeśli nie udało Ci się dostać darmowej wejściówki to możesz skorzystać z kodu rabatowego **15%** :slightly_smiling_face:
 
 > **DEVCAVE_15**
 
-Zostałem też partnerem medialnym innej konferencji, na którą również mogę wziąć jedną osobę, więc jeśli nie uda Ci się dostać tej wejściówki, to jeszcze będziesz miał co najmniej 2 szanse na inne konferencje :slightly_smiling_face:
+Zostałem też partnerem medialnym innej konferencji, na które również będę miał wejściówki, więc będziesz jeszcze miał co najmniej 2 szanse na inne konferencje :slightly_smiling_face:
 
 Bądźcie na bieżąco, info o następnej konferencji będzie prawdopodobnie za tydzień :wink:
 

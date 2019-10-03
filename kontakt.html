@@ -125,12 +125,12 @@
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </a>
             </li>
-<!--            <li class="list-inline-item">-->
-<!--                <button class="main-btn" type="button" id="open-contact-btn" data-toggle="modal" data-target="#formularz-kontaktowy">-->
-<!--                    Formularz kontaktowy-->
-<!--                    <i class="fa fa-envelope" aria-hidden="true"></i>-->
-<!--                </button>-->
-<!--            </li>-->
+            <li class="list-inline-item">
+                <button class="main-btn" type="button" id="open-contact-btn" data-toggle="modal" data-target="#formularz-kontaktowy">
+                    Formularz kontaktowy
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </button>
+            </li>
         </ul>
     </div>
 </div>
@@ -177,7 +177,7 @@
 </div>
 
 <div id="formularz-kontaktowy" class="modal fade" role="dialog" aria-label="Formularz kontaktowy" aria-hidden="true">
-    <form class="modal-dialog modal-lg emailForm" method="POST" action="https://formspree.io/lasota.marcinm@gmail.com">
+    <form class="modal-dialog modal-lg emailForm" method="POST" action="https://formspree.io/lasota.marcinm@gmail.com" target="formresponse">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel">Formularz kontaktowy</h5>
@@ -203,20 +203,30 @@
                         <textarea class="form-data form-control" rows="8" name="message" placeholder="Wpisz tu twoją wiadomość" minlength="4" maxlength="6000" required></textarea>
                     </label>
 
-                    <label class="recaptcha-label mx-auto" aria-live="polite">
-                        <div class="g-recaptcha" tabindex="-1" data-sitekey="6LcyTjYUAAAAAAzWkuwU9AEYynQaZWAHRM5nVTNj" data-callback="recaptchaClearErr"></div>
-                    </label>
-                </div>
-            </div>
+                    <input type="hidden" name="_language" value="pl">
 
-            <div class="text-center">
-                <button class="emailFormSubmit main-btn" name="submit" type="button">Wyślij</button>
-                <div class="emailFormAlert" aria-live="polite"></div>
+                    <button type="submit" class="emailFormSubmit main-btn" name="submit">Wyślij</button>
+                </div>
             </div>
         </div>
     </form>
+</div>
 
-
+<div id="email-form-response" class="modal fade emailForm" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Potwierdź, że nie jesteś robotem</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij formularz kontaktowy" title="Zamknij formularz kontaktowy">
+                    <i class="fa fa-times close-form"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe name="formresponse" scrolling="no"></iframe>
+                <button class="main-btn mt-4 d-block" data-dismiss="modal" aria-label="Zamknij" title="Zamknij">Zamknij</button>
+            </div>
+        </div>
+    </div>
 </div>
 
         </div>

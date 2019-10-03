@@ -13,7 +13,8 @@ toc:        true
 
 Podczas DSP2017 tworzyłem formularz kontaktowy dla [jaki-jezyk-programowania.pl](https://jaki-jezyk-programowania.pl/) z wykorzystaniem PHP, który działał na wykupionym serwerze. Później  jednak przeniosłem swoją stronę i bloga na Github Pages, gdzie z PHP już nie można było zrobić użytku. Wysyłanie wiadomości email bez backendu wydawało mi się niemożliwe i myślałem, że już muszę zrezygnować z formularza kontaktowego na stronie. Jednak na ratunek przyszła mi strona [formspree.io](https://formspree.io/), za pośrednictwem której możliwe jest wysyłanie wiadomości email na dowolnego maila.
 
-
+{: .warning}
+Ten sposób już nie działa jako że formspree ograniczyło darmowe funkcje i asynchroniczne żądanie, czyli bez przeładowania strony, nie zadziała. Nadal można korzystać z formspree w tradycyjny sposób.
 
 # Co zawiera i jak działa formularz?
 Formularz jest ulepszoną wersją tego, który tworzyłem podczas DSP2017. Tyle, że bez PHP. Jednak jeśli nie widziałeś wcześniejszych postów to:

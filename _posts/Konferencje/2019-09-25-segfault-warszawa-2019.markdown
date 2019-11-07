@@ -14,9 +14,9 @@ comments:   true
 
 Zostałem partnerem medialnym konferencji SegFault i tak jak zapowiadałem, mam dla was **darmową wejściówkę** oraz **kod rabatowy** na w sumie 2 konferencje, ale po kolei, na razie pierwsza, jednodniowa, która odbędzie się w Warszawie :slightly_smiling_face:
 
-Pod koniec listopada będzie [dwudniowa edycja Krakowska](https://segfault.events/krakow2019/), o innej tematyce, na którą też się wybieram, więc bądźcie na bieżąco, wejściówka czeka :slightly_smiling_face:
+Pod koniec listopada będzie [dwudniowa edycja krakowska](https://segfault.events/krakow2019/), o innej tematyce, na którą też się wybieram, więc bądźcie na bieżąco, wejściówka czeka :slightly_smiling_face:
 
-Tymczasem zobaczcie czy Was zainteresuje tematyką edycja Warszawska.
+Tymczasem zobaczcie czy Was zainteresuje tematyką edycja warszawska.
 
 ## Opis konferencji:
 
@@ -39,13 +39,13 @@ Rzućcie okiem na [agendę](https://segfault.events/warszawa2019/#schedule).
 
 # Kod rabatowy + wejściówka
 
-**Darmowa wejściówka jest tylko dla jednej osoby** - kto chętny to zapraszam do [kontaktu](/kontakt).  
+**Darmowa wejściówka jest tylko dla jednej osoby** - kto chętny to zapraszam do [kontaktu](/kontakt).
 
-Wystarczy, że się przedstawisz i napiszesz coś o sobie, np. jakimi technologiami się interesujesz, ile masz doświadczenia, jakie jest twoje aktualne stanowisko i czy byłeś już na jakichś konferencjach, a **jeśli masz konto na LinkedIn, to mnie po prostu [dodaj](https://www.linkedin.com/in/marcin-lasota/) i pogadamy bezpośrednio tam**.
+Jeśli masz konto na LinkedIn, to mnie po prostu [dodaj](https://www.linkedin.com/in/marcin-lasota/) i pogadamy bezpośrednio tam.
 
 Jeśli chciałbyś się dowiedzieć czegoś o mnie to zajrzyj na stronę [o mnie](/o-mnie) i na mój [LinkedIn](https://www.linkedin.com/in/marcin-lasota/).
 
-Status wejściówki: `CZEKA_NA_CIEBIE`
+Status wejściówki: `ODEBRANA`
 
 Jeśli nie udało Ci się zgarnąć darmowej wejściówki to możesz skorzystać z kodu rabatowego **10%** :slightly_smiling_face:
 

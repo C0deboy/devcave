@@ -1,5 +1,10 @@
 import 'bootstrap.native/dist/bootstrap-native-v4';
 import '../node_modules/waypoints/lib/noframework.waypoints.min';
+import '../font/fontello.eot';
+import '../font/fontello.svg';
+import '../font/fontello.ttf';
+import '../font/fontello.woff';
+import '../font/fontello.woff2';
 
 require('../css/devcave.scss');
 

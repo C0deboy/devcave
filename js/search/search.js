@@ -1,3 +1,4 @@
+
 class JekyllSearch {
   constructor(dataSource, searchField, resultsList) {
     this.dataSource = dataSource;

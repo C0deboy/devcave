@@ -8,6 +8,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
   entry: {
     'search/search': './js/search/search.js',
+    'search/fetch': './js/search/fetch.js',
     'skillbar': './js/skillbar.js',
     'emailform': './js/emailform.js',
     'devcave': './js/devcave.js',
@@ -48,6 +49,18 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'font/',
             },
           },
         ],

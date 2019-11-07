@@ -93,7 +93,7 @@ Trzeba wiedzieć, że do statystyk liczą się też wejścia z localhost lub 127
 <p class="note">Filtry działają tylko dla przyszłego ruchu, co oznacza ze wcześniej zebrane dane z localhost nie zostaną wykluczone.</p>
 
 {: .warning}
-W moim przypadku to filtrowanie jednak nie działało dla localhost, więc zrobiłem to w nieco inny sposób. Zajrzyj do tego [postu]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-04-02-jekyll-filtrowanie-danych-localhost %})
+W moim przypadku to filtrowanie jednak nie działało dla localhost, więc zrobiłem to w nieco inny sposób. Zajrzyj do tego [postu]({% post_url DajSiePoznac2017/2017-04-02-jekyll-filtrowanie-danych-localhost %})
 
 # Komentarze Disqus
 

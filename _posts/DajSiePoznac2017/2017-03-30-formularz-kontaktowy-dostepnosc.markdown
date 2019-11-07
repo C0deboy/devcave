@@ -13,18 +13,18 @@ toc:        true
 
 <u>W tym poście zajmuję się dostępnością formularza.</u>
 
-Jeśli trafiłeś tu bezpośrednio, zajrzyj do [pierwszego postu]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %}), gdzie opisuję założenia i tworzę podstawową strukturę formularza.
+Jeśli trafiłeś tu bezpośrednio, zajrzyj do [pierwszego postu]({% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %}), gdzie opisuję założenia i tworzę podstawową strukturę formularza.
 
 <hX>Wpisy w tej serii:</hX>
-1. [HTML + otwieranie / zamykanie JQuery]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %})
-2. [Walidacja HTML5/JS + AJAX]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-23-formularz-kontaktowy-walidacja-ajax %})
-3. [Walidacja PHP + Swiftmailer]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-26-formularz-kontaktowy-php-swiftmailer %})
-4. [Dostępność formularza]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-30-formularz-kontaktowy-dostepnosc %})
-5. [Zrefaktoryzowana wersja + Github]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-05-18-formularz-kontaktowy-refaktoryzacja %})
+1. [HTML + otwieranie / zamykanie JQuery]({% post_url DajSiePoznac2017/2017-03-16-formularz-kontaktowy-HTML-JS %})
+2. [Walidacja HTML5/JS + AJAX]({% post_url DajSiePoznac2017/2017-03-23-formularz-kontaktowy-walidacja-ajax %})
+3. [Walidacja PHP + Swiftmailer]({% post_url DajSiePoznac2017/2017-03-26-formularz-kontaktowy-php-swiftmailer %})
+4. [Dostępność formularza]({% post_url DajSiePoznac2017/2017-03-30-formularz-kontaktowy-dostepnosc %})
+5. [Zrefaktoryzowana wersja + Github]({% post_url DajSiePoznac2017/2017-05-18-formularz-kontaktowy-refaktoryzacja %})
 
 # Dostępność
 
-Co to jest i dlaczego jest to ważne pisałem już [wcześniej]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-03-14-dostepnosc-strony-wprowadzenie %}).
+Co to jest i dlaczego jest to ważne pisałem już [wcześniej]({% post_url DajSiePoznac2017/2017-03-14-dostepnosc-strony-wprowadzenie %}).
 
 W kodzie, który stworzyliśmy, mamy już dwa elementy, które wpływają na dostępność. Mowa o:
 

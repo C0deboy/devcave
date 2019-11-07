@@ -80,7 +80,7 @@ Wszystkie arkusze i odpowiedzi znajdziesz w Internecie. Jak nie na oficjalnej st
 
 Osobiście przerobiłem wszystkie od roku 2014. Głębiej nie ma co iść bo to już stare dzieje.
 
-**Jeśli na maturze zamierzasz używać Javy**, to polecam zobaczyć post [przydatne funkcje w Javie do matury]({{ site.baseurl }}{% post_url DajSiePoznac2017/2017-04-25-matura-informatyka-przydatne-funkcje-w-javie %}). Podczas nauki zebrałem większość przydatnych metod w Javie, które mogą się przydać do matury i je tam upamiętniłem dla innych. Mam nadzieję, że coś się przyda! :slightly_smiling_face:
+**Jeśli na maturze zamierzasz używać Javy**, to polecam zobaczyć post [przydatne funkcje w Javie do matury]({% post_url DajSiePoznac2017/2017-04-25-matura-informatyka-przydatne-funkcje-w-javie %}). Podczas nauki zebrałem większość przydatnych metod w Javie, które mogą się przydać do matury i je tam upamiętniłem dla innych. Mam nadzieję, że coś się przyda! :slightly_smiling_face:
 
 To powinno być wystarczające do uzyskania satysfakcjonującego wyniku, jednak nie jest to łatwe. Tych zadań jest naprawdę dużo, szczególnie w zbiorze zadań. Sam nie dałem rady przerobić wszystkiego.
 

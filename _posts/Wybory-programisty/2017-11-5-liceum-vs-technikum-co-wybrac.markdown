@@ -20,7 +20,7 @@ Pierwszą, oczywistą różnicą jest to, że w technikum spędzimy rok dłużej
 
 **Czy to lepiej czy gorzej to raczej indywidualna kwestia.**
 
-Mi ten dodatkowy rok się przydał, **ale** wynikało to z tego, że nie byłem do końca zdecydowany, co chcę robić w życiu. Dopiero pod koniec klasy 3 określiłem się, że chciałbym rozpocząć karierę programisty. Więc ten ostatni rok był w sam raz, bo dzięki niemu miałem okazję nadrobić zaległości i zrobiłem jakoś 5 razy więcej niż przez całe gimnazjum i 2 pierwsze klasy technikum razem wzięte. Po maturze, na którą poświęciłem masę czasu, miałem już solidne podstawy programowania, nawet, by zacząć pierwszą pracę, co w końcu się stało :wink: Jeśli nie widziałeś to zobacz [moją drogę od 0 do pierwszej pracy]({{ site.baseurl }}{% post_url Moje-doswiadczenia/2017-10-29-moja-droga-do-pierwszej-pracy %})
+Mi ten dodatkowy rok się przydał, **ale** wynikało to z tego, że nie byłem do końca zdecydowany, co chcę robić w życiu. Dopiero pod koniec klasy 3 określiłem się, że chciałbym rozpocząć karierę programisty. Więc ten ostatni rok był w sam raz, bo dzięki niemu miałem okazję nadrobić zaległości i zrobiłem jakoś 5 razy więcej niż przez całe gimnazjum i 2 pierwsze klasy technikum razem wzięte. Po maturze, na którą poświęciłem masę czasu, miałem już solidne podstawy programowania, nawet, by zacząć pierwszą pracę, co w końcu się stało :wink: Jeśli nie widziałeś to zobacz [moją drogę od 0 do pierwszej pracy]({% post_url Moje-doswiadczenia/2017-10-29-moja-droga-do-pierwszej-pracy %})
 
 Jednak dziś, gdy już wiem co chcę robić w życiu i zakładając, że byłoby tak wcześniej - wybrałbym liceum pod tym względem. Ten dodatkowy rok to również sporo czasu, przez który możemy się czuć nieco w tyle, porównując się ze znajomymi z liceum. Ponadto, jeśli szkoła nie oferuje nam tego, czego oczekujemy (tak jak w moim wypadku), może to być nawet czas zmarnowany.
 
@@ -77,7 +77,7 @@ Nic nie umiejąc, wystarczy przyjść chwilę wcześniej na egzamin, wystukać p
 
 ## Praktyki
 
-W technikum mamy miesięczne praktyki i jest to jedyna rzecz, którą dobrze wspominam ze swojej szkoły. To dlatego, że miałem okazję wyjechać do Anglii (praktycznie za free) na miesiąc. Było to przyjemne doświadczenie, jednak nie związane z programowaniem. Z tego powodu to również nie przydało mi się to do budowania CV. Pewnie napiszę kiedyś o tym osobny post i tu podlinkuję.  I oto on - [wpis]({{ site.baseurl }}{% post_url /Moje-doswiadczenia/2017-11-20-praktyki-zawodowe-w-technikum-informatycznym %}) :wink:
+W technikum mamy miesięczne praktyki i jest to jedyna rzecz, którą dobrze wspominam ze swojej szkoły. To dlatego, że miałem okazję wyjechać do Anglii (praktycznie za free) na miesiąc. Było to przyjemne doświadczenie, jednak nie związane z programowaniem. Z tego powodu to również nie przydało mi się to do budowania CV. Pewnie napiszę kiedyś o tym osobny post i tu podlinkuję.  I oto on - [wpis]({% post_url /Moje-doswiadczenia/2017-11-20-praktyki-zawodowe-w-technikum-informatycznym %}) :wink:
 
 W skrócie, jeśli uda Ci się trafić na coś fajnego (co nie jest łatwe) to będzie to przyjemnie doświadczenie. W przeciwnym wypadku będziesz podawał papier do drukarki i zapisywał sobie odbyte godziny praktyk (może się tak trafić nawet na projekcie zagranicznym).
 

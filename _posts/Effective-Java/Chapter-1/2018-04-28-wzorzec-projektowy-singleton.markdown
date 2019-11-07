@@ -246,7 +246,7 @@ Zwiększa powiązania w kodzie (*tight coupling*)
 Klasa zaimplementowana jako singleton z założenia jest już odpowiedzialna za dwie rzeczy: za realizację swoich funkcji biznesowych oraz zarządzanie instancją.
 
 {: .cons}
-Łamie zasadę [otwarte-zamknięte]({{ site.baseurl }}{% post_url /Notatnik-juniora/2017-11-30-zasady-projektowania-kodu %}#o---openclosed-principle) (Open/Closed principle), ponieważ nie można go rozszerzać
+Łamie zasadę [otwarte-zamknięte]({% post_url /Notatnik-juniora/2017-11-30-zasady-projektowania-kodu %}#o---openclosed-principle) (Open/Closed principle), ponieważ nie można go rozszerzać
 
 W pierwotnej wersji wzorca rzeczywiście ciężko jest go rozszerzać. Można jednak połączyć singleton z fabryką i nie będzie stanowiło to już problemu.
 

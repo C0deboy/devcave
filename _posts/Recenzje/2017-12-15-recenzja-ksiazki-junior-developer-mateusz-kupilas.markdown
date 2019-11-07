@@ -13,7 +13,7 @@ toc:        true
 
 ![Książka Junior Developer](/img/reviews/junior-dev/book.png)
 
-W recenzji będę się odnosił i porównywał z książka Macieja Aniserowicza - Zawód: Programista, którą też [recenzowałem]({{ site.baseurl }}{% post_url Recenzje/2017-12-5-recenzja-ksiazki-zawod-programista-maciej-aniserowicz %}).
+W recenzji będę się odnosił i porównywał z książka Macieja Aniserowicza - Zawód: Programista, którą też [recenzowałem]({% post_url Recenzje/2017-12-5-recenzja-ksiazki-zawod-programista-maciej-aniserowicz %}).
 
 # O autorze
 

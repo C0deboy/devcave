@@ -12,7 +12,7 @@ toc:        true
 permalink:  /moje-doswiadczenia/:title
 ---
 
-W poście [Liceum vs Technikum]({{ site.baseurl }}{% post_url /Wybory-programisty/2017-11-5-liceum-vs-technikum-co-wybrac %}) temat praktyk zawodowych dotknąłem tylko delikatnie i zapowiedziałem, że napiszę o tym osobny post. I oto on. Całość opiszę z perspektywy programisty.
+W poście [Liceum vs Technikum]({% post_url /Wybory-programisty/2017-11-5-liceum-vs-technikum-co-wybrac %}) temat praktyk zawodowych dotknąłem tylko delikatnie i zapowiedziałem, że napiszę o tym osobny post. I oto on. Całość opiszę z perspektywy programisty.
 
 # Praktyki zawodowe w Technikum Informatycznym
 
@@ -32,7 +32,7 @@ Jest to projekt, który umożliwia wyjazd zagraniczny na miesięczne praktyki za
 
 Według mnie jest to najlepsza opcja na praktyki zawodowe, ponieważ najczęściej będzie to przyjemne doświadczenie, bez względu na to czy trafimy na jakieś dobre praktyki czy nie.
 
-Dla mnie, jak to pisałem w poście [Liceum vs Technikum]({{ site.baseurl }}{% post_url /Wybory-programisty/2017-11-5-liceum-vs-technikum-co-wybrac %}), był to prawie jedyny plus pójścia do technikum. Streszczę mniej więcej jak to wyglądało z mojego punktu widzenia.
+Dla mnie, jak to pisałem w poście [Liceum vs Technikum]({% post_url /Wybory-programisty/2017-11-5-liceum-vs-technikum-co-wybrac %}), był to prawie jedyny plus pójścia do technikum. Streszczę mniej więcej jak to wyglądało z mojego punktu widzenia.
 
 ## Kwestie finansowe
 

@@ -2,7 +2,7 @@
 
 {% assign chapterIndex = page.chapter | minus: 2 %}
 {% assign chapter = site.data.effective_java_chapters[chapterIndex] %}
-{% assign posts = site.categories.["Effective-Java"] | where: 'chapter': page.chapter | sort: 'date' %}
+{% assign posts = site.categories.["Effective-Java"] | where_exp:"post","post.chapter == page.chapter" | sort: 'date' %}
 
 <p>Ten wpis nawiązuje do {% if item.length > 1 %}tematów{% else %}tematu{% endif %} z <i>Item {{ page.item | join: ', '}}</i> z rozdziału {{ page.chapter }}:</p>
 

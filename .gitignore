@@ -48,12 +48,12 @@ fabric.properties
 
 target
 
-.sass-cache
+_site/
+*-cache/
 .jekyll-metadata
 
 node_modules
 
 _drafts
-_site
 dist
 promotion

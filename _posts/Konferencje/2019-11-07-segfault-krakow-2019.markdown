@@ -47,7 +47,7 @@ Jeśli masz konto na LinkedIn, to mnie po prostu [dodaj](https://www.linkedin.co
 
 Jeśli chciałbyś się dowiedzieć czegoś o mnie to zajrzyj na stronę [o mnie](/o-mnie) i na mój [LinkedIn](https://www.linkedin.com/in/marcin-lasota/).
 
-Status wejściówki: `CZEKA_NA_CIEBIE`
+Status wejściówki: `ODEBRANA`
 
 Jeśli nie udało Ci się zgarnąć darmowej wejściówki to możesz skorzystać z kodu rabatowego **10%** :slightly_smiling_face:
 

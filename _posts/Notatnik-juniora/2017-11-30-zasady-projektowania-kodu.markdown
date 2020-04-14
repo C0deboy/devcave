@@ -87,7 +87,7 @@ Można to rozszerzyć o zasadę:
 - Nie naruszanie [Single responsibility principle](#S---Single-responsibility-principle)
 
 ### D - Dependency inversion principle
-- Niskopoziomowe klasy powinny zależeć od klas wysoko poziomowych, a obie od swoich abstrakcji.
+- Niskopoziomowe klasy nie powinny zależeć od klas wysoko poziomowych. Obie grupy powinny zależeć od swoich abstrakcji.
 - Abstrakcję nie powinny polegać na szczegółach implementacyjnych. 
 - Szczegóły implementacyjne powinny polegać na abstrakcji.
 - Czyli w żadnej definicji funkcji i w żadnej deklaracji zmiennej nie powinniśmy używać nazwy klasy, tylko jej abstrakcji (np. interfejs, klasa abstrakcyjna).

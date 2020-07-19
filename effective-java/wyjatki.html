@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem w Javie.">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Wyjątki">
+<meta property="og:description" content="Kiedy używać, rodzaje, checked vs unchecked">
+
+<title>Wyjątki - kiedy używać, rodzaje, checked vs unchecked</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/wyjatki">
+<link rel="shortcut icon" href="/img/devcave/logo.ico">
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90973428-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-90973428-2');
+</script>
+
+
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie">O mnie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Wyjątki</h1>
+            
+            <h2 class="post-subtitle">Kiedy używać, rodzaje, checked vs unchecked</h2>
+            
+            <p class="post-meta">
+              
+              18
+              lipca
+              
+              2020</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#wyjątki-powinny-być-używane-tylko-w-wyjątkowych-sytuacjach">Wyjątki powinny być używane tylko w wyjątkowych sytuacjach</a></li>
+<li class="toc-entry toc-h1"><a href="#rodzaje-wyjątków-i-kiedy-jakie-używać">Rodzaje wyjątków i kiedy jakie używać</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#więc-kiedy-używać-checked-exceptions-a-kiedy-unchecked-exceptions">Więc kiedy używać checked exceptions, a kiedy unchecked exceptions?</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#dlaczego-checked-exceptions-są-problematyczne-i-lepiej-ich-unikać">Dlaczego checked exceptions są problematyczne i lepiej ich unikać</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii, w której tworzę wpisy na podstawie wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Bloch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 69, 70, 71</i> z rozdziału 10:</p>
+
+<p class="m-0">Exceptions</p>
+
+<ul class="fa-ul custom"><li style="list-style-type: none;">
+                    <a href="/effective-java/wyjatki">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 69: Use exceptions only for exceptional conditions
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wyjatki">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wyjatki">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 71: Avoid unnecessary use of checked exceptions
+                    </a>
+                </li><li>
+                <a herf="" class="disabled">Item 72: Favor the use of standard exceptions
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 73: Throw exceptions appropriate to the abstraction
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 74: Document all exceptions thrown by each method
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 75: Include failure-capture information in detail messages
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 76: Strive for failure atomicity
+                </a>
+            </li><li>
+                <a herf="" class="disabled">Item 77: Don’t ignore exceptions
+                </a>
+            </li></ul>
+<hr />
+
+<p>Zaczynamy rozdział 10 po długiej przerwie :)</p>
+
+<p>W tym rozdziale będzie mowa o wyjątkach.</p>
+
+<p>Wyjątki w Javie są, jakie są, ale ogólnie jest to całkiem użyteczne narzędzie. Gdy są używane prawidłowo, mogą zwiększyć czytelność programu, jego stabilność i utrzymywalność. Z kolei, jeśli będą używane niepoprawnie, uzyskamy dokładnie odwrotny efekt, dlatego warto poświęcić im kilka słów.</p>
+
+<h1 id="wyjątki-powinny-być-używane-tylko-w-wyjątkowych-sytuacjach">Wyjątki powinny być używane tylko w wyjątkowych sytuacjach</h1>
+
+<p>Zresztą sama nazwa na to wskazuje. Niestety nie każdy o tym pamięta i dlatego wyjątki są często nadużywane.</p>
+
+<p>Oto przykład:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Horrible abuse of exceptions. Don't ever do this!</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+        <span class="n">range</span><span class="o">[</span><span class="n">i</span><span class="o">++].</span><span class="na">climb</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ArrayIndexOutOfBoundsException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Co ten kod robi? Nie jest to oczywiste na pierwszy rzut oka, ale jest to po prostu najzwyklejsza iteracja po elementach tablicy. Nieskończona pętla <code class="highlighter-rouge">while</code> jest przerywana przez rzucenie wyjątku <code class="highlighter-rouge">ArrayIndexOutOfBoundsException</code>, złapanie go, a następnie zignorowanie.</p>
+
+<p>Normalny człowiek napisałby to tak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="nc">Mountain</span> <span class="n">m</span> <span class="o">:</span> <span class="n">range</span><span class="o">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="na">climb</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>W poprzednim przykładzie mamy wiele przykładów złych praktyk:</p>
+<ul>
+  <li>użycie wyjątku tam, gdzie jest to zbędne</li>
+  <li>ignorowanie wyjątku</li>
+  <li>wynajdowanie koła na nowo</li>
+  <li>użycie wyjątków do sterowania przepływem programu</li>
+</ul>
+
+<p>Poza tym samo umieszczanie kodu w <code class="highlighter-rouge">try-catch</code> uniemożliwia niektóre optymalizacje JVM, które bez niego zostałyby zastosowane.</p>
+
+<p>Wyjątków nie powinno się używać do sterowania przepływu programu, ponieważ wtedy łatwiej o bugi, które nawet mogą być przez to ukryte, co również utrudnia debugowanie.</p>
+
+<p>Wystarczy sobie wyobrazić, że w pętli byłaby wykonywana jakaś inna metoda, która też miałaby możliwość rzucić <code class="highlighter-rouge">ArrayIndexOutOfBoundsException</code> z całkiem innej, niepowiązanej tablicy. W takiej sytuacji ten błąd spowodowałby, że pętla zakończyłaby się wcześniej, niż powinna i zostałoby to potraktowane jako prawidłowe zachowanie (wyjątek jest ignorowany, nieważne co go wywołało).</p>
+
+<p>Te same zasady dotyczą projektowania API. Dobrze zaprojektowane API nie powinno zmuszać użytkownika, by używał wyjątków do sterowania przepływem programu.</p>
+
+<p>Klasa, która ma metodę zależną od stanu, która może być wywołana tylko pod określonymi warunkami, powinna udostępniać metodę sprawdzającą stan i określającą czy użycie metody zależnej od stanu jest odpowiednie.</p>
+
+<p>Przykładem może być interfejs <code class="highlighter-rouge">Iterator</code>, który ma metodę zależną od stanu <code class="highlighter-rouge">next</code> i sprawdzającą stan <code class="highlighter-rouge">hasNext</code>. Dzięki temu mamy możliwość użycia go w zwykłych pętlach for:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Foo</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Jeśli nie byłoby metody <code class="highlighter-rouge">hasNext</code>, wtedy bylibyśmy zmuszeni do tego:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Do not use this hideous code for iteration over a collection!</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Foo</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+    <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">NoSuchElementException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Co ma wszystkie wady wspomniane wcześniej.</p>
+
+<p>Alternatywą dla metod testujących stan jest by metody zależne od stanu zwracały pusty <code class="highlighter-rouge">Optional</code> lub inną rozróżnialną wartość jak np. <code class="highlighter-rouge">null</code>.</p>
+
+<p>Należy to stosować, jeśli obiekt jest używany współbieżnie bez zewnętrznej synchronizacji lub udostępnia zmianę stanu z zewnątrz, ponieważ stan obiektu mógłby być zmieniony pomiędzy wywołaniami metody sprawdzającej, a tej zależnej od stanu.</p>
+
+<p>Obawy o wydajność mogłyby dyktować użycie klasy <code class="highlighter-rouge">Optional</code> czy innej rozróżnialnej wartości, gdy metoda testująca duplikowałaby pracę metody zależnej od stanu, jednak ze wpisów o optymalizacji wiemy, że w większości wypadków nie powinniśmy się martwić o takie mikro optymalizacje. Metoda testująca stan oferuje lepszą czytelność i nieprawidłowe użycie jest łatwiejsze do wykrycia — jeśli zapomnimy wywołać metodę testującą, to metoda zależna od stanu rzuci wyjątek i błąd będzie oczywisty. Jeśli zapomnimy sprawdzić rozróżnialną wartość, która oznacza błąd, wtedy błąd może być trudniejszy do wychwycenia. Oczywiście nie dotyczy to użycia <code class="highlighter-rouge">Optional</code>, ponieważ jest jasne, że metoda może nie zwrócić danej wartości i należy sprawdzić, czy istnieje.</p>
+
+<p>Kiedyś ta zasada miała dużo większe znaczenie, bo miała znaczny wpływ na wydajność. Obecnie w większości przypadków powinniśmy się kierować przejrzystością i prostotą kodu. Warto zerknąć na link <a href="https://softwareengineering.stackexchange.com/questions/184654/ive-been-told-that-exceptions-should-only-be-used-in-exceptional-cases-how-do">I’ve been told that Exceptions should only be used in exceptional cases. How do I know if my case is exceptional?</a></p>
+
+<p>A szczególnie na odpowiedź:</p>
+
+<blockquote>
+  <p>Exceptions were invented to help make error handling easier with less code clutter. You should use them in cases when they make error handling easier with less code clutter. This “exceptions only for exceptional circumstances” business stems from a time when exception handling was deemed an unacceptable performance hit. That’s no longer the case in the vast majority of code, but people still spout the rule without remembering the reason behind it.</p>
+
+  <p>Especially in Java, which is maybe the most exception-loving language ever conceived, <strong>you shouldn’t feel bad about using exceptions when it simplifies your code</strong>.</p>
+</blockquote>
+
+<p>Warto również rzucić okiem na <a href="https://java.programmingpedia.net/en/tutorial/5381/java-pitfalls-exception-usage">Java Pitfalls - Exception usage</a>, gdzie znajdziemy przykłady problemów związanych z obsługą wyjątków.</p>
+
+<h1 id="rodzaje-wyjątków-i-kiedy-jakie-używać">Rodzaje wyjątków i kiedy jakie używać</h1>
+
+<p>W Javie mamy trzy rodzaje wyjątków: <em>checked exceptions</em>, <em>runtime exceptions</em> i <em>errors</em>. Dwa ostatnie należą do grupy <em>unchecked exceptions</em>.</p>
+
+<p>Różnica pomiędzy nimi jest taka, że używając <em>checked exceptions</em> w metodzie, musimy go zadeklarować w sekcji <code class="highlighter-rouge">throws</code> i zmuszamy użytkownika tej metody, by obsłużył dany wyjątek używając <code class="highlighter-rouge">try catch</code> lub aby podał go do obsługi wyżej deklarując ten wyjątek w sekcji <code class="highlighter-rouge">throws</code>. Z kolei <em>unchecked exceptions</em> są bardziej elastyczne w użyciu i nie ma przymusu ich obsługi czy deklarowania w sekcji <code class="highlighter-rouge">throws</code>.</p>
+
+<p>Decyzja, kiedy jaki rodzaj wyjątku użyć nie jest zawsze jednoznaczna, ale są ogólnie akceptowalne reguły i wskazówki, którymi powinniśmy się kierować.</p>
+
+<p class="warning">W Javie jest silne akceptowalna konwencja, że <em>errors</em> są zarezerwowane do użycia przez JVM i najlepiej nie implementować żadnych nowych podklas klasy <code class="highlighter-rouge">Error</code> jak również nigdy nie rzucać tych już istniejących, z wyjątkiem <code class="highlighter-rouge">AssertionError</code>. <strong>Implementując <em>unchecked exception</em> powinniśmy rozszerzać klasę <code class="highlighter-rouge">RuntimeException</code></strong>.</p>
+
+<h2 id="więc-kiedy-używać-checked-exceptions-a-kiedy-unchecked-exceptions">Więc kiedy używać <em>checked exceptions</em>, a kiedy <em>unchecked exceptions</em>?</h2>
+
+<p>Najczęściej spotkamy się z zasadą, że <em>checked exceptions</em> powinny być używane w sytuacjach, gdy wiemy, że użytkownik ma szansę wyjść z tego błędu cało.</p>
+
+<p>Jeśli metoda rzuca <em>unchecked exception</em> to zazwyczaj oznacza, że nie może kontynuować wykonywania operacji, bo zakończyłoby się to niepowodzeniem i wyrządziłoby to więcej szkód niż dobra.</p>
+
+<p>Najczęstszym przypadkiem w tej sytuacji jest złe użycie API przez użytkownika, który nie dotrzymał wymagań specyfikacji API. Dla przykładu aby dostać się do wartości tablicy, specyfikacja mówi, że index musi być pomiędzy 0, a długością tablicy odjąć 1. Jeśli popełnimy błąd i podamy niepoprawny index to dostaniemy <code class="highlighter-rouge">ArrayIndexOutOfBoundsException</code>.</p>
+
+<p><em>Unchecked exceptions</em> są zatem najczęściej używane, by wskazać błąd programistyczny, z którego nie można już łatwo wyjść.</p>
+
+<p>Jak sam autor zauważa w książce, niestety nie zawsze jest jasne, kiedy mamy do czynienia z „<em>recoverable condition</em>”, a kiedy z „<em>programming error</em>”. Musimy więc kierować się własnym przeczuciem i stwierdzić czy dany błąd ma być „z góry” widoczny dla użytkownika i wymusić na nim obsługę tego błędu (i wtedy użyć <em>checked exception</em>), czy chcemy wskazać błąd „po cichu” w trakcie wykonywania programu, bez wymuszania obsługi tego błędu (korzystając z <em>unchecked exception</em>).</p>
+
+<p>Trzeba też wziąć pod uwagę, że <em>checked exception</em> są bardziej problematyczne w użyciu — o tym w następnej sekcji.</p>
+
+<p class="note">Warto pamiętać, że wyjątki to pełnoprawne klasy, które mogą mieć pola i metody. Podstawowe zastosowanie takich metod to udostępnienie poszczególnych szczegółów, które były przyczyną wystąpienia danego wyjątku. Gdy brakuje takich metod, programiści mogliby próbować wyciągnąć te dane, parsując message, co jest złą praktyką — taki message może się zmienić w każdej chwili i nasz kod przestanie działać. Szczególnie jest to ważne w przypadku <em>checked exception</em>, bo oczekujemy, że użytkownik będzie chciał obsłużyć ten błąd, więc może potrzebować tych szczegółów.</p>
+
+<h1 id="dlaczego-checked-exceptions-są-problematyczne-i-lepiej-ich-unikać">Dlaczego checked exceptions są problematyczne i lepiej ich unikać</h1>
+
+<p>Jak już sobie powiedzieliśmy, <em>checked exceptions</em> użyte prawidłowo poprawiają jakość API i programów. W przeciwieństwie do kodów błędów czy <em>unchecked exceptions</em> zmuszają programistów do obsłużenia możliwych problemów, zwiększając niezawodność programu.</p>
+
+<p>Z drugiej strony wielu programistów Java nie lubi <em>checked exceptions</em> ponieważ są nieprzyjemne w użyciu. Nakładają z góry na użytkownika obowiązek obsłużenia danego błędu w jednym lub wielu blokach <code class="highlighter-rouge">catch</code>, co generuje masę boilerplate-u. Również definicja metody rozciąga się mocno przez deklarowanie wszystkich wyjątków w sekcji <code class="highlighter-rouge">throws</code>.</p>
+
+<p>W Javie 8+ jest jeszcze gorzej, bo w streamach nie można bezpośrednio używać metod, które rzucają <em>checked exceptions</em>.</p>
+
+<p>Pisanie prostych programów jest przez to problematyczne, bo nie zawsze chcemy od razu obsługiwać milion casów. Dobrym przykładem są problemy IO, gdy chcemy dostać się do pliku. W prostym programie wysypanie się programu ze stosownym komunikatem byłoby wystarczające, ale nie, w Javie musimy od razu obsłużyć te sytuacje. Ewentualnie powstają twory takie jak:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">{</span>
+    <span class="c1">// checked exception throwing method call</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">TheCheckedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">();</span> <span class="c1">// Can't happen!</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>czy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">{</span>
+    <span class="c1">// checked exception throwing method call</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">TheCheckedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>        <span class="c1">// Oh well, we lose.</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>To obciążenie może być uzasadnione tylko w przypadkach, gdy poprawne użycie API nie załatwi sprawy i użytkownik korzystający z metody rzeczywiście powinien coś z tym zrobić — w przeciwnym wypadku powinniśmy użyć <em>unchecked exception</em>.</p>
+
+<p>Dobrym kompromisem może też być użycie klasy <code class="highlighter-rouge">Optional</code> i całkowita rezygnacja z wykorzystania wyjątków, jednak w tym rozwiązaniu nie będziemy mogli udostępnić żadnych szczegółów na temat błędu.</p>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/konferencje/segfault-krakow-2019"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Konferencja SegFault Kraków 2019"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/reuse/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/reuse/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/wyjatki";
+    this.page.identifier = "/effective-java/wyjatki";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2020</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+</body>
+
+</html>

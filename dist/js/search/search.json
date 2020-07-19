@@ -705,6 +705,15 @@
         "subtitle": "25-26 listopada - języki programowania, systemy rozproszone, narzędzia i umiejętności miękkie + kod rabatowy i darmowa wejściówka",
         "date": "7 listopada 2019",
         "url": "/konferencje/segfault-krakow-2019"
+      },
+    
+      
+      {
+        "title": "Wyjątki",
+        "titleSEO": "Wyjątki - kiedy używać, rodzaje, checked vs unchecked",
+        "subtitle": "Kiedy używać, rodzaje, checked vs unchecked",
+        "date": "18 lipca 2020",
+        "url": "/effective-java/wyjatki"
       }
     
   

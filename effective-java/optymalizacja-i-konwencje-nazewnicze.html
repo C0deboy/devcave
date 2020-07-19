@@ -134,7 +134,7 @@
         
 
         <p class="note">
-  Ten wpis jest częścią serii (nowy wpis co sobotę), w której tworzę wpisy w formie notatki z wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Bloch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+  Ten wpis jest częścią serii, w której tworzę wpisy na podstawie wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Bloch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
 </p>
 
 <p>Ten wpis nawiązuje do tematu z <i>Item 67, 68</i> z rozdziału 9:</p>
@@ -203,15 +203,15 @@ Rule 2 (for experts only). Don’t do it yet—that is, not until you have a per
 —M. A. Jackson</p>
 </blockquote>
 
-<p>Wszystkie 3 cytaty poprzedzają język programowania Java o co najmniej dwie dekady, jednak nadal są aktualne i mówią świętą prawdę o optymalizacji - łatwiej jest nią narobić więcej szkód niż dobra, szczególnie jeśli mowa o przedwczesnej optymalizacji.</p>
+<p>Wszystkie 3 cytaty poprzedzają język programowania Java o co najmniej dwie dekady, jednak nadal są aktualne i mówią świętą prawdę o optymalizacji — łatwiej jest nią narobić więcej szkód niż dobra, szczególnie jeśli mowa o przedwczesnej optymalizacji.</p>
 
-<p>Nie warto poświęcać dobrego designu na rzecz wydajności - lepiej jest pisać dobre programy niż szybkie. Jeśli dobry program nie jest wystarczająco wydajny, jego architektura pozwoli go później zoptymalizować. Dobre programy przestrzegają zasady enkapsulacji danych, więc pojedyncze decyzje mogą być zmienione bez wpływu na pozostałą część systemu.</p>
+<p>Nie warto poświęcać dobrego designu na rzecz wydajności – lepiej jest pisać dobre programy niż szybkie. Jeśli dobry program nie jest wystarczająco wydajny, jego architektura pozwoli go później zoptymalizować. Dobre programy przestrzegają zasady enkapsulacji danych, więc pojedyncze decyzje mogą być zmienione bez wpływu na pozostałą część systemu.</p>
 
 <p>Nie znaczy to też, że powinniśmy ignorować problemy wydajnościowe, dopóki nie skończymy programu. Problemy implementacyjne mogą być naprawione późniejszą optymalizacją, ale wszechobecne wady architektury ograniczające wydajność mogą nie być możliwe do naprawy bez przepisywania całego systemu od nowa.</p>
 
 <p>Najtrudniej wprowadzić zamianę w komponentach, które zawierają interakcje pomiędzy komponentami a światem zewnętrznym np. API czy formaty przesyłania danych. Mogą też narzucić znaczne ograniczenia wydajności, dlatego te części systemy trzeba zaprojektować z największą starannością.</p>
 
-<p>Więc nie możemy całkiem przestać myśleć o optymalizacji. Zawsze trzeba rozważać konsekwencje naszych wyborów np. tworzac typ mutowalny, możemy wymuszać na kliencie wiele zbędnych kopi defensywnych. Podobnie, używając dziedziczenia w publicznej klasie zamiast kompozycji, zszywamy daną klasę z nadklasa na zawsze, co może skutkować ograniczeniami podklasy. Tak samo używając w API typu implementacji zamiast interfejsu, wymuszamy tylko jedną konkretną implementację, mimo to, że w przyszłości mogłaby być napisana bardziej wydajna wersja. Jeśli system jest używany tylko wewnętrznie i możemy całkowicie przebudowywać kod, to nie ma to aż takiego znaczenia, ale po co sobie utrudniać życie?</p>
+<p>Więc nie możemy całkiem przestać myśleć o optymalizacji. Zawsze trzeba rozważać konsekwencje naszych wyborów, np. tworząc typ mutowalny, możemy wymuszać na kliencie wiele zbędnych kopii defensywnych. Podobnie, używając dziedziczenia w publicznej klasie zamiast kompozycji, zszywamy daną klasę z nadklasa na zawsze, co może skutkować ograniczeniami podklasy. Tak samo używając w API typu implementacji zamiast interfejsu, wymuszamy tylko jedną konkretną implementację, mimo to, że w przyszłości mogłaby być napisana bardziej wydajna wersja. Jeśli system jest używany tylko wewnętrznie i możemy całkowicie przebudowywać kod, to nie ma to aż takiego znaczenia, ale po co sobie utrudniać życie?</p>
 
 <p>Na szczęście zazwyczaj dobry design idzie w parze z dobrą wydajnością lub z łatwą możliwością na jej poprawę. Kiedy zaprojektowaliśmy czysty i dobrze ustrukturyzowany kod, to wtedy może być czas na rozważanie optymalizacji, która w dobrze zaprojektowanym systemie jest łatwa do wprowadzenia. Nigdy nie powinniśmy skupiać się na optymalizacji kosztem spaczonego designu.</p>
 
@@ -223,17 +223,17 @@ Rule 2 (for experts only). Don’t do it yet—that is, not until you have a per
 
 <p>W Javie (jak i w każdym innym języku) mamy powszechnie uznawane konwencje nazewnicze, których należy się trzymać.</p>
 
-<p>Można powiedzieć, że dzielą się na dwie grupy - typograficzne i gramatyczne.</p>
+<p>Można powiedzieć, że dzielą się na dwie grupy — typograficzne i gramatyczne.</p>
 
 <p>Nazwy pakietów i modułów powinny być zwięzłe i składać się wyłącznie z małych liter. Zalecane też są opisowe skróty np. <code class="highlighter-rouge">util</code> zamiast <code class="highlighter-rouge">utilities</code> lub akronimy. Nazwa pakietu, który będzie używany poza naszą organizacją, powinna zaczynać się od odwróconej nazwy domeny np. <code class="highlighter-rouge">com.google</code>.</p>
 
-<p>Klasy i interfejsy włączając w to enumy i adnotacje powinny zaczynać się wielką literą i dalej CamelCase. Często dyskusji podlega problem, czy akronimy powinny być całe pisane wielkimi literami, czy nie. Według mnie nie - tylko pierwsza litera powinna być pisana z dużej, szczególnie gdy mamy w nazwie dwa akronimy. Wolałbyś widzieć klasę nazwaną <code class="highlighter-rouge">HTTPURL</code> czy <code class="highlighter-rouge">HttpUrl</code>?</p>
+<p>Klasy i interfejsy włączając w to enumy i adnotacje powinny zaczynać się wielką literą i dalej CamelCase. Często dyskusji podlega problem, czy akronimy powinny być całe pisane wielkimi literami, czy nie. Według mnie nie — tylko pierwsza litera powinna być pisana z dużej, szczególnie gdy mamy w nazwie dwa akronimy. Wolałbyś widzieć klasę nazwaną <code class="highlighter-rouge">HTTPURL</code> czy <code class="highlighter-rouge">HttpUrl</code>?</p>
 
 <p>Metody i pola obowiązują te same zasady tyle, że zaczynamy małą literą.</p>
 
 <p>Wyjątkiem od tej zasady są pola stałe (<code class="highlighter-rouge">static final</code> + niemutowalne), które powinny być zapisane dużymi literami, a poszczególne słowa oddzielone podłogą. Stałymi są również wartości enumów.</p>
 
-<p>Zmienne lokalne mają już większą dowolność co do nazwy, ale powinny być opisowe i oczywiście zaczynać się z małej litery.</p>
+<p>Zmienne lokalne mają już większą dowolność co do nazwy, ale powinny być opisowe i oczywiście zaczynać się małą literą.</p>
 
 <p>Nazwy parametru typu składają się z jednej dużej litery. Najczęściej używa się:</p>
 <ul>
@@ -281,11 +281,11 @@ Rule 2 (for experts only). Don’t do it yet—that is, not until you have a per
   </tbody>
 </table>
 
-<p>Odnośnie konwencji gramatycznych, które nie są już tak bardzo konieczne jak te typograficzne, to zazwyczaj nazwy klas instancjonowalnych są rzeczownikiem w liczbie pojedynczej jak np. <code class="highlighter-rouge">Thread</code>, <code class="highlighter-rouge">PriorityQueue</code> czy <code class="highlighter-rouge">ChessPiece</code>. Z kolei nazwy nieinstancjonowalnych klasy typu utility często są w liczbie mnogiej np. <code class="highlighter-rouge">Collectors</code> czy <code class="highlighter-rouge">Collections</code>. Interfejsy zazwyczaj nazywane są tak jak klasy np. <code class="highlighter-rouge">Collection</code> czy <code class="highlighter-rouge">Comparator</code>, ale też z końcówkami <code class="highlighter-rouge">able</code> lub <code class="highlighter-rouge">ible</code> np. <code class="highlighter-rouge">Runnable</code>, <code class="highlighter-rouge">Iterable</code> czy <code class="highlighter-rouge">Accessible</code>.</p>
+<p>Odnośnie do konwencji gramatycznych, które nie są już tak bardzo konieczne, jak te typograficzne, to zazwyczaj nazwy klas instancjonowalnych są rzeczownikiem w liczbie pojedynczej jak np. <code class="highlighter-rouge">Thread</code>, <code class="highlighter-rouge">PriorityQueue</code> czy <code class="highlighter-rouge">ChessPiece</code>. Z kolei nazwy nieinstancjonowalnych klasy typu utility często są w liczbie mnogiej np. <code class="highlighter-rouge">Collectors</code> czy <code class="highlighter-rouge">Collections</code>. Interfejsy zazwyczaj nazywane są tak jak klasy np. <code class="highlighter-rouge">Collection</code> czy <code class="highlighter-rouge">Comparator</code>, ale też z końcówkami <code class="highlighter-rouge">able</code> lub <code class="highlighter-rouge">ible</code> np. <code class="highlighter-rouge">Runnable</code>, <code class="highlighter-rouge">Iterable</code> czy <code class="highlighter-rouge">Accessible</code>.</p>
 
 <p>Metody, które:</p>
 <ul>
-  <li>wykonują jakieś akcje standardowo są czasownikami np. <code class="highlighter-rouge">append</code> lub <code class="highlighter-rouge">drawImage</code></li>
+  <li>wykonują jakieś akcje zazwyczaj ich nazwa to czasownik np. <code class="highlighter-rouge">append</code> lub <code class="highlighter-rouge">drawImage</code></li>
   <li>zwracają <code class="highlighter-rouge">boolean</code> zazwyczaj zaczynają się od <code class="highlighter-rouge">is</code> lub <code class="highlighter-rouge">has</code> + rzeczownik np. <code class="highlighter-rouge">isDigit</code>, <code class="highlighter-rouge">isProbablePrime</code>, <code class="highlighter-rouge">isEmpty</code>, <code class="highlighter-rouge">isEnabled</code> lub <code class="highlighter-rouge">hasSiblings</code></li>
   <li>zwracają jakąś daną zazwyczaj zaczynają się od <code class="highlighter-rouge">get</code> lub bezpośrednio nazwa tej danej np. <code class="highlighter-rouge">size</code>, <code class="highlighter-rouge">hashCode</code> lub <code class="highlighter-rouge">getTime</code>.</li>
   <li>konwertują obiekt w inny zazwyczaj nazywają się <code class="highlighter-rouge">toType</code> np. <code class="highlighter-rouge">toString</code> lub <code class="highlighter-rouge">toArray</code>.</li>

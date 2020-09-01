@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Devcave - blog programisty na tematy związane z branżą IT, a szczególnie z programowaniem w Javie.">
+<meta name="author" content="Codeboy">
+
+<meta property="fb:pages" content="2221389098088691">
+<meta property="og:title" content="Wyjątki - dobre praktyki">
+<meta property="og:description" content="6 dobrych praktyk zebranych w jeden wpis">
+
+<title>Wyjątki - dobre praktyki</title>
+
+<link rel="canonical" href="https://devcave.pl/effective-java/wyjatki-dobre-praktyki">
+<link rel="shortcut icon" href="/img/devcave/logo.ico">
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90973428-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-90973428-2');
+</script>
+
+
+
+<link rel="stylesheet" href="/dist/css/devcave.min.css">
+
+<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link type="application/atom+xml" rel="alternate" href="https://devcave.pl/feed.xml" title="devcave.pl" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-custom">
+
+    <a class="navbar-brand" href="/"><img src="/img/devcave/devcave.png" alt="logo"> devcave.pl</a>
+
+    <button type="button" id="navbar-toggle-btn" class="navbar-toggler" data-toggle="collapse"
+            data-target="#site-nav" aria-expanded="false" aria-controls="site-nav">
+
+        Menu <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="site-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav ml-auto text-right">
+            <li class="nav-item">
+                <a class="nav-link" href="/o-mnie">O mnie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archiwum">Archiwum</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link books-btn" href="/moja-biblioteka">Moja biblioteka</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/moje-projekty">Moje projekty</a>
+            </li>
+            <li class="nav-item">
+                <button class="dark-mode-btn nav-link" data-toggle="tooltip" data-placement="bottom"
+                        title="Zmień motyw">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>/<i class="fa fa-moon-o" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<article>
+
+  <div class="container post">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+        <header class="post-header">
+          <div class="post-heading">
+
+            <h1 class="post-title">Wyjątki - dobre praktyki</h1>
+            
+            <h2 class="post-subtitle">6 dobrych praktyk zebranych w jeden wpis</h2>
+            
+            <p class="post-meta">
+              
+              1
+              września
+              
+              2020</p>
+            <div class="tags">
+              <div class="site-tag"><a href='/archiwum#dobre-praktyki'>Dobre-praktyki</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#effective-java'>Effective-Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#java'>Java</a></div>
+              
+              <div class="site-tag"><a href='/archiwum#notatnik-juniora'>Notatnik-Juniora</a></div>
+              
+            </div>
+
+          </div>
+
+          <hr>
+        </header>
+
+        
+        <nav class="table-of-contents">
+          <p class="m-0">Spis treści:</p>
+          <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#reużywaj-istniejące-wyjątki-w-javie">Reużywaj istniejące wyjątki w Javie</a></li>
+<li class="toc-entry toc-h1"><a href="#rzucajmy-wyjątki-odpowiednie-dla-poziomu-abstrakcji-metody">Rzucajmy wyjątki odpowiednie dla poziomu abstrakcji metody</a></li>
+<li class="toc-entry toc-h1"><a href="#dokumentuj-wszystkie-wyjątki-rzucane-przez-metodę">Dokumentuj wszystkie wyjątki rzucane przez metodę</a></li>
+<li class="toc-entry toc-h1"><a href="#uwzględniaj-parametry-które-wywołały-błąd-generując-message">Uwzględniaj parametry, które wywołały błąd generując message</a></li>
+<li class="toc-entry toc-h1"><a href="#po-błędzie-obiekt-powinien-mieć-pierwotny-stan">Po błędzie obiekt powinien mieć pierwotny stan</a></li>
+<li class="toc-entry toc-h1"><a href="#nie-ignoruj-wyjątków">Nie ignoruj wyjątków</a></li>
+</ul>
+
+          <hr>
+        </nav>
+        
+
+        <p class="note">
+  Ten wpis jest częścią serii, w której tworzę wpisy na podstawie wybranego tematu z książki Effective Java (3rd edition 2018), której autorem jest Joshua Bloch. Jest to uaktualnione wydanie pod Jave 9 jednej z najlepszych książek o Javie. Nie ograniczam się jednak tylko do książki, więc czasem temat będzie rozbudowany i trafią się informacje z innych źródeł na ten sam temat.
+</p>
+
+<p>Ten wpis nawiązuje do tematu z <i>Item 72, 73, 74, 75, 76, 77</i> z rozdziału 10:</p>
+
+<p class="m-0">Exceptions</p>
+
+<ul class="fa-ul custom"><li>
+                <a href="/effective-java/wyjatki">Item 69: Use exceptions only for exceptional conditions
+                </a>
+            </li><li>
+                <a href="/effective-java/wyjatki">Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors
+                </a>
+            </li><li>
+                <a href="/effective-java/wyjatki">Item 71: Avoid unnecessary use of checked exceptions
+                </a>
+            </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wyjatki-dobre-praktyki">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 72: Favor the use of standard exceptions
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wyjatki-dobre-praktyki">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 73: Throw exceptions appropriate to the abstraction
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wyjatki-dobre-praktyki">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 74: Document all exceptions thrown by each method
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wyjatki-dobre-praktyki">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 75: Include failure-capture information in detail messages
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wyjatki-dobre-praktyki">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 76: Strive for failure atomicity
+                    </a>
+                </li><li style="list-style-type: none;">
+                    <a href="/effective-java/wyjatki-dobre-praktyki">
+                        <i class="fa-li fa fa-arrow-right"></i>Item 77: Don’t ignore exceptions
+                    </a>
+                </li></ul>
+<hr />
+
+<p>Kolejne tematy dotyczą dobrych praktyk dla wyjątków i są dosyć rozwlekle opisane w książce, więc postanowiłem zebrać je i krótko opisać w jednym poście.</p>
+
+<h1 id="reużywaj-istniejące-wyjątki-w-javie">Reużywaj istniejące wyjątki w Javie</h1>
+
+<p>Reużywanie kodu jest pożądaną rzeczą i wyjątki nie są tu wyjątkiem.</p>
+
+<p>Ma to kilka swoich zalet:</p>
+
+<ul>
+  <li>API jest łatwiejsze do nauczenia, ponieważ korzysta z wszystkim dobrze znanych konwencji</li>
+</ul>
+
+<p>Z czym jak najbardziej się zgadzam, jednak dwie kolejne zalety wymienione przez autora są już trochę na siłę:</p>
+
+<ul>
+  <li>API jest łatwiejsze w czytaniu, ponieważ nie jest zaśmiecone nieznanymi wyjątkami</li>
+  <li>Mniej klas wyjątków równa się mniejszemu odcisku na pamięci i mniejszym czasem spędzonym na ładowaniu klas</li>
+</ul>
+
+<p>Według mnie druga to to samo co pierwsza, a trzecia może miała większe znaczenie jakiś czas temu. Teraz ważniejsza jest czytelność kodu niż to, że zaoszczędzimy jedną klasę reużywając inną, która może nie do końca spełnia nasze wymagania.</p>
+
+<p>Wyjątki, które można reużywać w Javie to:</p>
+
+<p><code class="highlighter-rouge">IllegalArgumentException</code> — rzucany, gdy został podany niepoprawny argument np. podanie ujemnej liczby, która miała reprezentować liczbę powtórzeń danej akcji.</p>
+
+<p><code class="highlighter-rouge">IllegalStateException</code> — rzucany, gdy stan obiektu nie jest odpowiedni, a została wywołana zależna metoda np. próba użycia obiektu, który nie został jeszcze zainicjalizowany.</p>
+
+<p><code class="highlighter-rouge">NullPointerException</code> — to samo co <code class="highlighter-rouge">IllegalArgumentException</code> tylko gdy podana jest wartość <code class="highlighter-rouge">null</code> i jest nieakceptowalna.</p>
+
+<p><code class="highlighter-rouge">IndexOutOfBoundsException</code> — to samo co <code class="highlighter-rouge">IllegalArgumentException</code> tylko dla konkretnego przypadku: index jest poza dozwolonym zakresem</p>
+
+<p><code class="highlighter-rouge">ConcurrentModificationException</code> — rzucany, gdy obiekt był zaprojektowany do użycia przez tylko jeden wątek (lub z zewnętrzną synchronizacją), a wykrył zmianę, która odbyła się współbieżnie. To w najlepszym wypadku jest tylko wskazówką, bo tak naprawdę nie jest możliwe wykrycie takich zmian w 100% wiarygodny sposób.</p>
+
+<p><code class="highlighter-rouge">UnsupportedOperationException</code> - rzucany, gdy obiekt umyślnie nie wspiera danej operacji np. zdefiniowanej w interfejsie. Przykładem może być tu implementacja <code class="highlighter-rouge">List</code>, do której możemy tylko dorzucać kolejne elementy. Wtedy metoda <code class="highlighter-rouge">delete()</code> rzuciła by ten wyjątek.</p>
+
+<p class="note">Nie reużywaj bezpośrednio <code class="highlighter-rouge">**Exception**</code>,  <code class="highlighter-rouge">**RuntimeException**</code>,  <code class="highlighter-rouge">**Throwable**</code> i <code class="highlighter-rouge">**Error**</code>. Traktuje te klasy jakby były abstrakcyjne.</p>
+
+<p>Podsumowanie:</p>
+
+<table class="post-table">
+  <thead>
+    <tr>
+      <th><strong>Wyjątek</strong></th>
+      <th><strong>Okazja do użycia</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">IllegalArgumentException</code></td>
+      <td>Parametr nie będący <code class="highlighter-rouge">null</code> jest niepoprawny</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">IllegalStateException</code></td>
+      <td>Stan obiektu jest niepoprawny w chwili wywoływania metody</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">NullPointerException</code></td>
+      <td>Parametr przekazany jest jako <code class="highlighter-rouge">null</code>, a jest to nie akceptowalne</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">IndexOutOfBoundsException</code></td>
+      <td>Index jest poza dozwolonym zakresem</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ConcurrentModificationException</code></td>
+      <td>Wykrycie niedozwolonej modyfikacji współbieżnej</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">UnsupportedOperationException</code></td>
+      <td>Obiekt nie wspiera danej metody</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Są jeszcze inne rzadziej używane wyjątki, które można by reużyć np. <code class="highlighter-rouge">ArithmeticException</code> i <code class="highlighter-rouge">NumberFormatException</code>, gdy projektujemy klasę zajmującą się arytmetyką.</p>
+
+<p>Na ogół zasada jest taka, że jeśli jakikolwiek wyjątek spełnia nasze potrzeby, to możemy go śmiało reużyć, jednak ważne jest to, żeby dokumentacja wyjątku była zgodna z naszym użyciem, nie tylko nazwa.</p>
+
+<h1 id="rzucajmy-wyjątki-odpowiednie-dla-poziomu-abstrakcji-metody">Rzucajmy wyjątki odpowiednie dla poziomu abstrakcji metody</h1>
+
+<p>Gdy metoda rzuca wyjątek, który nie ma oczywistego połączenia z zadaniem, które miała wykonać, w najlepszym wypadku spowoduje to lekkie zdezorientowanie programisty. Poza tym w takich wypadkach wysokopoziomowy kod jest zanieczyszczany detalami implementacyjnymi i jeśli zostaną one zmienione, mogą spowodować, że programy klienckie przestaną działać.</p>
+
+<p>Aby pozbyć się takiego problemu, <strong>warstwy wysokopoziomowe powinny łapać wyjątki z niższego poziomu i zamiast nich rzucać wyjątki, które są odpowiednie dla abstrakcji wysokopoziomowej</strong>. Nazywa się to <strong><em>exception translation</em></strong>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Exception Translation</span>
+<span class="k">try</span> <span class="o">{</span>  
+    <span class="o">...</span> <span class="c1">// Use lower-level abstraction to do our bidding  </span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">LowerLevelException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="k">throw</span> <span class="k">new</span> <span class="nf">HigherLevelException</span><span class="o">(...);</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Przykład z Javy, gdzie akurat <strong><em>exception translation</em></strong> jest wymuszone przez specyfikację metody <code class="highlighter-rouge">get</code> w interfejsie <code class="highlighter-rouge">List&lt;E&gt;</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**  
+* Returns the element at the specified position in this list.  
+* @throws IndexOutOfBoundsException if the index is out of range  
+* ({@code index &lt; 0 || index &gt;= size()}).  
+*/</span>  
+<span class="kd">public</span> <span class="no">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="nc">ListIterator</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">listIterator</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>  
+    <span class="k">try</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>  
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">NoSuchElementException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>  
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IndexOutOfBoundsException</span><span class="o">(</span><span class="s">"Index: "</span> <span class="o">+</span> <span class="n">index</span><span class="o">);</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Czasem warto też przekazać niskopoziomowy wyjątek do tego wysokopoziomowego. Może ułatwić to debugowanie problemów, ponieważ dzięki metodzie <code class="highlighter-rouge">getCause</code> mamy dostęp do pierwotnego powodu wystąpienia problemu (wyjątku) oraz cały jego stack trace jest dołączany do naszego wysokopoziomowego wyjątku. Nazywa się to <strong><em>exception chaining</em></strong>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Exception Chaining</span>
+<span class="k">try</span> <span class="o">{</span>  
+    <span class="o">...</span> <span class="c1">// Use lower-level abstraction to do our bidding  </span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">LowerLevelException</span> <span class="n">cause</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="k">throw</span> <span class="k">new</span> <span class="nf">HigherLevelException</span><span class="o">(</span><span class="n">cause</span><span class="o">);</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Wyjątki powinny mieć <em>chaining-aware constructor</em>, aby to umożliwić:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Exception with chaining-aware constructor</span>
+<span class="kd">class</span> <span class="nc">HigherLevelException</span> <span class="kd">extends</span> <span class="nc">Exception</span> <span class="o">{</span>  
+    <span class="nc">HigherLevelException</span><span class="o">(</span><span class="nc">Throwable</span> <span class="n">cause</span><span class="o">)</span> <span class="o">{</span>  
+        <span class="kd">super</span><span class="o">(</span><span class="n">cause</span><span class="o">);</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>A jeśli nie mają, to można skorzystać z metody <code class="highlighter-rouge">initCause</code> z <code class="highlighter-rouge">Throwable</code>.</p>
+
+<p><strong>Oczywiście jak większość rzeczy w programowaniu nie powinniśmy tego nadużywać i w pierwszej kolejności dobrą praktyką jest unikanie propagowania wyjątków niskopoziomowych.</strong> Najpierw zastanówmy się, czy mamy możliwość je obsłużyć, obejść lub upewnić się wcześniej, że metoda wykona się pomyślnie.</p>
+
+<p>Kolejne tematy są nieco rozwlekle opisane w książce, a przedstawiają kilka prostych dobrych praktyk, więc skrócę je znacznie:</p>
+
+<h1 id="dokumentuj-wszystkie-wyjątki-rzucane-przez-metodę">Dokumentuj wszystkie wyjątki rzucane przez metodę</h1>
+
+<p>Dokumentowanie wyjątków jest niezwykle pomocne, dlatego powinniśmy dokumentować każdy rzucany wyjątek osobno i jasno opisywać, pod jakimi warunkami wystąpi. Dotyczy się to zarówno wyjątków <em>checked</em> oraz <em>unchecked</em>. Szczególnie pomocne jest dokumentowanie wyjątków <em>unchecked</em>, bo bez tego nawet nie mamy pojęcia, że w ogóle występują — możemy dowiedzieć się jedynie w <em>runtime</em>.</p>
+
+<p>Aby łatwo rozróżnić w dokumentacji <em>checked exception</em> oraz <em>unchecked exception</em>, powinno używać się <code class="highlighter-rouge">@throws</code> tylko do tych <em>checked</em>.</p>
+
+<h1 id="uwzględniaj-parametry-które-wywołały-błąd-generując-message">Uwzględniaj parametry, które wywołały błąd generując message</h1>
+
+<p>Dokładne opisanie błędu znacznie ułatwia zrozumienie powodu jego wystąpienia, dlatego powinniśmy załączyć jak najwięcej informacji generując <code class="highlighter-rouge">message</code> dla danego wyjątku.</p>
+
+<p>Dobrym pomysłem jest wymuszenie podania kluczowych parametrów już w samym konstruktorze wyjątku:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**  
+* Constructs an IndexOutOfBoundsException.  
+*  
+* @param lowerBound the lowest legal index value  
+* @param upperBound the highest legal index value plus one  
+* @param index the actual index value  
+*/</span>  
+<span class="kd">public</span> <span class="nf">IndexOutOfBoundsException</span><span class="o">(</span><span class="kt">int</span> <span class="n">lowerBound</span><span class="o">,</span> <span class="kt">int</span> <span class="n">upperBound</span><span class="o">,</span>  <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="c1">// Generate a detail message that captures the failure</span>
+    <span class="kd">super</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Lower bound: %d, Upper bound: %d, Index: %d"</span><span class="o">,</span>  
+        <span class="n">lowerBound</span><span class="o">,</span> <span class="n">upperBound</span><span class="o">,</span> <span class="n">index</span><span class="o">));</span>  
+      
+    <span class="c1">// Save failure information for programmatic access  </span>
+    <span class="k">this</span><span class="o">.</span><span class="na">lowerBound</span> <span class="o">=</span> <span class="n">lowerBound</span><span class="o">;</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">upperBound</span> <span class="o">=</span> <span class="n">upperBound</span><span class="o">;</span>  
+    <span class="k">this</span><span class="o">.</span><span class="na">index</span> <span class="o">=</span> <span class="n">index</span><span class="o">;</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="po-błędzie-obiekt-powinien-mieć-pierwotny-stan">Po błędzie obiekt powinien mieć pierwotny stan</h1>
+
+<p>Stan obiektu po błędnym wywołaniu metody powinien być taki jak przed wywołaniem, aby była możliwość jego dalszego bezbłędnego używania.</p>
+
+<p>Jeśli metoda ma taką właściwość, to można powiedzieć, że jest <em>failure-atomic</em>.</p>
+
+<p>Jest kilka sposobów, żeby to osiągnąć:</p>
+
+<ul>
+  <li>Projektowanie niemutowalnych obiektów — wtedy <em>failure atomicity</em> mamy za darmo</li>
+  <li>Sprawdzanie parametrów przed wykonywaniem modyfikacji stanu</li>
+  <li>Ułożenie operacji w takich sposób, że te, co mogą się nie powieść, są na początku, a te modyfikujące są na końcu</li>
+  <li>Pracowanie na kopii obiektu i podmiana, jeśli wszystko jest ok</li>
+  <li>Napisanie kodu przywracającego poprzedni stan — czyli jeśli mamy błąd to robimy <em>rollback</em> (wycofanie zmian)</li>
+</ul>
+
+<h1 id="nie-ignoruj-wyjątków">Nie ignoruj wyjątków</h1>
+
+<p>W kołko wszędzie powtarzana zasada — nie ignorujmy wyjątków:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Empty catch block ignores exception - Highly suspect! </span>
+<span class="k">try</span> <span class="o">{</span>  
+<span class="o">...</span>  
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SomeException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Powoduje to, że błąd idzie w eter i nigdy się o nim nie dowiemy, co jest źródłem wielu problemów.</p>
+
+<p>Absolutnym minimum jest przynajmniej wylogowanie tego błędu, to nie wymaga dużej pracy, a przynajmniej będziemy mieć jakiekolwiek pojęcie o tym, że coś się wydarzyło.</p>
+
+<p>Są jednak sytuacje, że ignorowanie wyjątku jest odpowiednie. W takich sytuacjach powinniśmy to jasno pokazać:</p>
+
+<ul>
+  <li>wyjątek powinniśmy nazwać <code class="highlighter-rouge">ignored</code></li>
+  <li>dodać komentarz/log, który nam powie, dlaczego zignorowaliśmy wyjątek i że to jest ok</li>
+</ul>
+
+<p>Przykład:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Future</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">exec</span><span class="o">.</span><span class="na">submit</span><span class="o">(</span><span class="nl">planarMap:</span><span class="o">:</span><span class="n">chromaticNumber</span><span class="o">);</span>  
+<span class="kt">int</span> <span class="n">numColors</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span> <span class="c1">// Default; guaranteed sufficient for any map  </span>
+<span class="k">try</span> <span class="o">{</span>  
+    <span class="n">numColors</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1L</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>  
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">TimeoutException</span> <span class="o">|</span> <span class="nc">ExecutionException</span>  <span class="n">ignored</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="c1">// Use default: minimal coloring is desirable, not required  </span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<div class="container d-print-none">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <hr>
+
+      <ul class="pagination">
+        
+        <li class="page-item">
+          <a class="page-link box-effect" href="/effective-java/wyjatki"
+             data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Wyjątki"><i class="fa fa-arrow-left"
+                                                                                                            aria-hidden="true"></i>
+            Poprzedni post</a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="text-center">
+    <p class="text-center">Jeśli uważasz, że to co robię jest przydatne, polub stronę bloga na Facebooku. Wrzucam tam m.in. informacje o nowych wpisach, o promocjach dla programistów i inne.</p>
+
+    <div class="fb-page inline box-effect">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdevcavepl&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"></iframe>
+    </div>
+</div>
+
+      <div class="recommended">
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/ksiazki">
+            <img src="/img/reuse/books.png" alt="książki"/>
+            <h3>Zobacz polecane książki</h3>
+        </a>
+    </div>
+
+    <div class="box-effect books-ad ">
+        <a href="https://jaki-jezyk-programowania.pl/kursy">
+            <img src="/img/reuse/video-courses.png" alt="video kursy"/>
+            <h3>Zobacz polecane video kursy</h3>
+        </a>
+    </div>
+</div>
+
+      <hr>
+
+      
+
+<div id="disqus_thread"></div>
+<script>
+  const disqus_config = function () {
+    this.page.url = "https://devcave.pl/effective-java/wyjatki-dobre-praktyki";
+    this.page.identifier = "/effective-java/wyjatki-dobre-praktyki";
+  };
+
+  (function () { // DON'T EDIT BELOW THIS LINE
+    const d = document, s = d.createElement('script');
+    s.src = 'https://jaki-jezyk-programowania.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Włacz JavaScript w twojej przeglądarce, aby zobaczyć <a href="https://disqus.com/?ref_noscript"> komentarze by
+    Disqus.</a></noscript>
+
+
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<script src="/promotion/promotion.js"></script>
+
+
+
+<footer class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center social-buttons">
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="/feed.xml" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="RSS">
+                            <i class="fa fa-rss fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://www.linkedin.com/in/marcin-lasota/" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="LinkedIn">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="https://github.com/C0deboy" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="Github">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="main-btn" href="mailto:lasota.marcinm@gmail.com" data-toggle="tooltip" data-animation="zoom" data-delay="50" title="lasota.marcinm@gmail.com">
+                            <i class="fa fa-envelope fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> devcave 2017 - 2020</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/dist/js/devcave.min.js"></script>
+
+
+</body>
+
+</html>

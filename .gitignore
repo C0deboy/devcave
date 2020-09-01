@@ -57,3 +57,4 @@ node_modules
 _drafts
 dist
 promotion
+.idea/checkstyle-idea.xml

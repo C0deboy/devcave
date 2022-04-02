@@ -1,99 +1,19 @@
-- section: Rok 2019
-  subtitle: Kolejny rok pracy komercyjnej i innych aktywności, więc już coraz mniej czasu na własne projekty
-  projects:
-
-    - title: Kindle editor
-      technologies: Kotlin, SpringBoot, WebSocket, Gradle
-      description: Nieco egzotyczna aplikacja webowa do własnego użytku. Dużo rzeczy robię na komputerze, dlatego chciałem wyeliminować chociaż jedną rzecz - pisanie postów na bloga. Chciałem do tego wykorzystać ekran czytnika Kindle, ale nie widziałem gotowego rozwiązania, z którego mógłbym skorzystać. Zbudowałem więc prostą aplikację wykorzystującą WebSocket, do współdzielenia tekstu w dwóch różnych przeglądarkach. Jako serwer aplikacji wykorzystałem RaspberryPi. Działa to tak, że na malince startuje aplikacja w przeglądarce, podpinam klawiaturę i tu bez ekranu korzystam z klawiatury. Każde użycie klawisza skutkuje rozprowadzeniem go do innych przeglądarek z otwartą aplikacją dzięki WebSocket. W Kindle również odpalam tę aplikację w przeglądarce i widzę wszystko co piszę. Całość ładnie się synchronizuje, a tekst jest również zapisywany do pliku. Obsłużyłem autoscroll, a nawet zaznaczanie tekstu, więc edytowanie go jest całkiem wygodne. Oczywiście występuje lekkie opóźnienie, głównie ze względu na ekran E-Ink, ale nie przeszkadza to aż tak bardzo.
-      img: /img/my-projects/kindle-editor.gif
-      github: https://github.com/C0deboy/kindle-editor
-
-- section: Rok 2018
-  subtitle: >
-    Praca komercyjna, ale znalazło się trochę czasu na projekty do szuflady :slightly_smiling_face:
-  projects:
-
-    - title: Narzędzie do publikowania postów
-      technologies: Kotlin, Selenium, JCommander, Gradle
-      description: Narzędzie to całkowicie automatyzuje publikowanie postów na tego bloga. Składa się to na zbudowanie bloga przy pomocy Jekylla, wrzucenie zmian na GitHub Pages, zrobieniu screenshota nagłówka posta, zapisanie go na pulpicie i otworzenie dla mnie strony bloga na facebooku, tak bym mógł już tylko dodać link, pobraną grafikę i ewentualnie opis posta.
-      img: /img/my-projects/publish-post.gif
-      github: https://github.com/C0deboy/publish-post
-
-
-    - title: Scraper statystyk języków programowania
-      technologies: Kotlin, Jsoup, Klaxon, Apache Commons, Logback, Junit 5, Mockk, AssertJ, Gradle
-      description: Zrefactoryzowane i całkowicie przepisane na Kotlin narzędzie, które wcześniej napisałem w czystej Javie. Służy do (scrapowania) statystyk dla poszczególnych języków programowania na potrzeby mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Obecnie zbiera dane z Github, Meetup.com, StackOverflow, Tiobe INDEX, Spectrum ranking oraz z Wikipedii (najnowsze wersje języków). Dzieje się to wielowątkowo i całość trwa ok. 9s. Wszystko ląduje do pliku JSON, z którego później czytane są dane przez moją stronę. Narzędzie odpalam mniej więcej raz na miesiąc.
-      img: /img/my-projects/stats-scraper.gif
-      github: https://github.com/C0deboy/stats-scraper
-
-
-    - title: Stepify
-      technologies: Angular 6, TypeScript, Java, Spring Boot, Lombok, Gradle
-      description: Aplikacja do ustalania swoich celów, którą tworzyłem podczas nauki Angulara. Rozdzieliłem tu całkowicie frontend i backend. Backend ma osobne repozytorium - <a href="https://github.com/C0deboy/stepify-server">stepify-server</a>. Frontend komunikuje się z backendem przez REST api.
-      img: /img/my-projects/stepify.gif
-      github: https://github.com/C0deboy/stepify
-
-
-- section: Rok 2017
-  subtitle: Pierwsze projekty
-  projects:
-
-    - title: You Shall Not Pass
-      technologies: JavaScript, HTML, CSS
-      description: Mini gierka, którą robiłem na potrzeby konkursu <a href="http://gynvael.coldwind.pl/?id=668">Gynvael's Winter GameDev Challenge 2017</a>. Największym wyzwaniem było umieszczenie gry w pojedynczym pliku html (włącznie z grafikami w base64 - wszystko musiało być zapisane tekstowo w tym pliku) oraz zmieszczeniu się w 20KB - bo takie były zasady. Wygrałem dzięki niej 50$. Gra nie jest jakoś super grywalna, ale jestem zadowolony, że udało mi się coś takiego sklecić w 20KB. Przed zagraniem polecam przeczytać readme na GitHubie.
-      img: /img/my-projects/you-shall-not-pass.gif
-      github: https://github.com/C0deboy/You-Shall-Not-Pass
-      play: https://c0deboy.github.io/You-Shall-Not-Pass
-
-
-    - title: Scraper statystyk języków programowania
-      technologies: Java, Jsoup, Json smart, Apache Commons, Logback
-      description: Narzędzie, które zbiera statystyki dla poszczególnych języków programowania na potrzeby mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Obecnie zbiera dane z Github, Meetup.com, StackOverflow, Tiobe INDEX, Spectrum ranking oraz z Wikipedii (najnowsze wersje języków). Wszystko ląduje do pliku JSON, z które poźniej czytane są dane przez moją stronę. <br><br> Projekt został przepisany całkowicie na Kotlin - <a href="https://github.com/C0deboy/stats-scraper">stats-scraper</a>. Tej wersji już nie używam.
-      img: /img/my-projects/stats-scraper.gif
-      github: https://github.com/C0deboy/jjp-stats-scraper
-
-
-    - title: Aplikacja do zarządzania "todo" listami
-      technologies: Java, Servlet, JSP, JSTL, Spring, Hibernate, Maven, JUnit, Mockito, Tomcat
-      description: Aplikacja która rozwijałem w celu nauki Javy i jej technologii. Obecnie oferuję system logowania/rejestracji oraz podstawowe funkcjonalności CRUD na "todo" listach. Całość jest zabezpieczona przy użyciu Spring Security.
-      img: /img/my-projects/todo-list-app.JPG
-      github: https://github.com/C0deboy/todo-list-app
-
-
-    - title: Remake retro gry Tank1990/Battle City
-      technologies: Phaser, Javascript(ES6)
-      description: Gra tworzona jako odskocznia od typowych projektów. Remake znanej gry, pewnie każdy grał w dzieciństwie. Nie jest dokończony, zatrzymałem się na podstawowych elementach mechaniki gry (bez leveli, różnych czołgów i zbierania ulepszeń). Było to ciekawe doświadczenie, może kiedyś do tego wrócę :slightly_smiling_face:.
-      img: /img/my-projects/tank1990.gif
-      github: https://github.com/C0deboy/tank-1990
-      play: https://c0deboy.github.io/tank-1990/
-
-
-    - title: Jaki-jezyk-programowania.pl
-      technologies: HTML, CSS, Javascript (ES6), Boostrap, JQuery, Webpack, Npm
-      description: Strona internetowa skierowana dla początkujących programistów, która ma na celu pomoc w wyborze technologii do danego zastosowania. Poza tym można tam znaleźć opisy technologii, statystyki języków, <a href="https://jaki-jezyk-programowania.pl/ksiazki/">polecane książki</a> i <a href="https://jaki-jezyk-programowania.pl/kursy/">videokursy</a> programistyczne.
-      img: /img/my-projects/jaki-jezyk-programowania.gif
-      github: https://github.com/C0deboy/jaki-jezyk-programowania
-      see: https://jaki-jezyk-programowania.pl
-
-
-    - title: Blog devcave.pl
-      technologies: Jekyll, HTML, CSS, Javascript, Boostrap, JQuery, Npm
-      description: Czyli ten blog, który powstał dzięki inicjatywie DajSiePoznac2017. Blog działa na Jekyllu. Przepisałem niemal od zera jeden z początkowych motywów, więc 90% wyglądu i funkcjonalności stworzyłem sam.
-      img: /img/my-projects/devcave.png
-      github: https://github.com/C0deboy/devcave
-
-
 - section: Początki
   subtitle: Na tych projektach stawiałem pierwsze kroki
   projects:
-
-    - title: Animacja - ASCII art
+    - title: Gra kółko i krzyżyk
       technologies: HTML, CSS, Javascript
-      description: Animacja dzięki której wygrałem konkurs świąteczny (100zł na książkę :joy:) zorganizowany przez <a href="https://forum.pasja-informatyki.pl">Forum Pasja Informatyki</a>. Zajęła 1 miejsce z 72 głosami (drugie miało 35). Celem konkursu było wykonanie animacji znaków ASCII o tematyce świątecznej w dowolnej technologii.
-      img: /img/my-projects/swieta-asci-art.gif
-      github: https://github.com/C0deboy/christmas-asci-art/
-      see: https://c0deboy.github.io/christmas-asci-art/
+      description: Jest to mój pierwszy projekt poza mało poważnymi stronkami wykonanymi na potrzeby szkolne. Zaczynałem wtedy zabawę z Javascript.
+      img: /img/my-projects/kolko-krzyzyk.gif
+      github: https://github.com/C0deboy/Kolko-i-krzyzyk
+      play: https://c0deboy.github.io/Kolko-i-krzyzyk/
 
+    - title: Game of Life Johna Conwaya
+      technologies: HTML, CSS, Javascript
+      description: Mój drugi projekt. Robiłem go razem z kolegą. Jest to implementacja "Gry w życie" Johna Conwaya w JavaScriptcie. Ciężko nazwać to grą, ale było to ciekawe doświadczenie jak dla początkujących programistów :slightly_smiling_face:.
+      img: /img/my-projects/game-of-life.gif
+      github: https://github.com/C0deboy/Game-of-life/
+      play: https://c0deboy.github.io/Game-of-life/
 
     - title: Zwierciadła i soczewki
       technologies: HTML, CSS, Javascript
@@ -103,18 +23,84 @@
       github: https://github.com/C0deboy/Mirrors-and-Lens/
       see: https://c0deboy.github.io/Mirrors-and-Lens/ConvergingLens.html
 
-
-    - title: Game of Life Johna Conwaya
+    - title: Animacja - ASCII art
       technologies: HTML, CSS, Javascript
-      description: Mój drugi projekt. Robiłem go razem z kolegą. Jest to implementacja "Gry w życie" Johna Conwaya w JavaScriptcie. Ciężko nazwać to grą, ale było to ciekawe doświadczenie jak dla początkujących programistów :slightly_smiling_face:.
-      img: /img/my-projects/game-of-life.gif
-      github: https://github.com/C0deboy/Game-of-life/
-      play: https://c0deboy.github.io/Game-of-life/
+      description: Animacja dzięki której wygrałem konkurs świąteczny (100zł na książkę :joy:) zorganizowany przez <a href="https://forum.pasja-informatyki.pl">Forum Pasja Informatyki</a>. Zajęła 1 miejsce z 72 głosami (drugie miało 35). Celem konkursu było wykonanie animacji znaków ASCII o tematyce świątecznej w dowolnej technologii.
+      img: /img/my-projects/swieta-asci-art.gif
+      github: https://github.com/C0deboy/christmas-asci-art/
+      see: https://c0deboy.github.io/christmas-asci-art/
 
+- section: Rok 2017
+  subtitle: Pierwsze projekty
+  projects:
+    - title: Blog devcave.pl
+      technologies: Jekyll, HTML, CSS, Javascript, Boostrap, JQuery, Npm
+      description: Czyli ten blog, który powstał dzięki inicjatywie DajSiePoznac2017. Blog działa na Jekyllu. Przepisałem niemal od zera jeden z początkowych motywów, więc 90% wyglądu i funkcjonalności stworzyłem sam.
+      img: /img/my-projects/devcave.png
+      github: https://github.com/C0deboy/devcave
 
-    - title: Gra kółko i krzyżyk
-      technologies: HTML, CSS, Javascript
-      description: Jest to mój pierwszy projekt poza mało poważnymi stronkami wykonanymi na potrzeby szkolne. Zaczynałem wtedy zabawę z Javascript.
-      img: /img/my-projects/kolko-krzyzyk.gif
-      github: https://github.com/C0deboy/Kolko-i-krzyzyk
-      play: https://c0deboy.github.io/Kolko-i-krzyzyk/
+    - title: Jaki-jezyk-programowania.pl
+      technologies: HTML, CSS, Javascript (ES6), Boostrap, JQuery, Webpack, Npm
+      description: Strona internetowa skierowana dla początkujących programistów, która ma na celu pomoc w wyborze technologii do danego zastosowania. Poza tym można tam znaleźć opisy technologii, statystyki języków, <a href="https://jaki-jezyk-programowania.pl/ksiazki/">polecane książki</a> i <a href="https://jaki-jezyk-programowania.pl/kursy/">videokursy</a> programistyczne.
+      img: /img/my-projects/jaki-jezyk-programowania.gif
+      github: https://github.com/C0deboy/jaki-jezyk-programowania
+      see: https://jaki-jezyk-programowania.pl
+
+    - title: Remake retro gry Tank1990/Battle City
+      technologies: Phaser, Javascript(ES6)
+      description: Gra tworzona jako odskocznia od typowych projektów. Remake znanej gry, pewnie każdy grał w dzieciństwie. Nie jest dokończony, zatrzymałem się na podstawowych elementach mechaniki gry (bez leveli, różnych czołgów i zbierania ulepszeń). Było to ciekawe doświadczenie, może kiedyś do tego wrócę :slightly_smiling_face:.
+      img: /img/my-projects/tank1990.gif
+      github: https://github.com/C0deboy/tank-1990
+      play: https://c0deboy.github.io/tank-1990/
+
+    - title: Aplikacja do zarządzania "todo" listami
+      technologies: Java, Servlet, JSP, JSTL, Spring, Hibernate, Maven, JUnit, Mockito, Tomcat
+      description: Aplikacja która rozwijałem w celu nauki Javy i jej technologii. Obecnie oferuję system logowania/rejestracji oraz podstawowe funkcjonalności CRUD na "todo" listach. Całość jest zabezpieczona przy użyciu Spring Security.
+      img: /img/my-projects/todo-list-app.JPG
+      github: https://github.com/C0deboy/todo-list-app
+
+    - title: Scraper statystyk języków programowania
+      technologies: Java, Jsoup, Json smart, Apache Commons, Logback
+      description: Narzędzie, które zbiera statystyki dla poszczególnych języków programowania na potrzeby mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Obecnie zbiera dane z Github, Meetup.com, StackOverflow, Tiobe INDEX, Spectrum ranking oraz z Wikipedii (najnowsze wersje języków). Wszystko ląduje do pliku JSON, z które poźniej czytane są dane przez moją stronę. <br><br> Projekt został przepisany całkowicie na Kotlin - <a href="https://github.com/C0deboy/stats-scraper">stats-scraper</a>. Tej wersji już nie używam.
+      img: /img/my-projects/stats-scraper.gif
+      github: https://github.com/C0deboy/jjp-stats-scraper
+
+    - title: You Shall Not Pass
+      technologies: JavaScript, HTML, CSS
+      description: Mini gierka, którą robiłem na potrzeby konkursu <a href="http://gynvael.coldwind.pl/?id=668">Gynvael's Winter GameDev Challenge 2017</a>. Największym wyzwaniem było umieszczenie gry w pojedynczym pliku html (włącznie z grafikami w base64 - wszystko musiało być zapisane tekstowo w tym pliku) oraz zmieszczeniu się w 20KB - bo takie były zasady. Wygrałem dzięki niej 50$. Gra nie jest jakoś super grywalna, ale jestem zadowolony, że udało mi się coś takiego sklecić w 20KB. Przed zagraniem polecam przeczytać readme na GitHubie.
+      img: /img/my-projects/you-shall-not-pass.gif
+      github: https://github.com/C0deboy/You-Shall-Not-Pass
+      play: https://c0deboy.github.io/You-Shall-Not-Pass
+
+- section: Rok 2018
+  subtitle: >
+    Już dostałem pierwszą pracę, ale znalazło się trochę czasu na projekty do szuflady :slightly_smiling_face:
+  projects:
+    - title: Stepify
+      technologies: Angular 6, TypeScript, Java, Spring Boot, Lombok, Gradle
+      description: Aplikacja do ustalania swoich celów, którą tworzyłem podczas nauki Angulara. Rozdzieliłem tu całkowicie frontend i backend. Backend ma osobne repozytorium - <a href="https://github.com/C0deboy/stepify-server">stepify-server</a>. Frontend komunikuje się z backendem przez REST api.
+      img: /img/my-projects/stepify.gif
+      github: https://github.com/C0deboy/stepify
+
+    - title: Scraper statystyk języków programowania
+      technologies: Kotlin, Jsoup, Klaxon, Apache Commons, Logback, Junit 5, Mockk, AssertJ, Gradle
+      description: Zrefactoryzowane i całkowicie przepisane na Kotlin narzędzie, które wcześniej napisałem w czystej Javie. Służy do (scrapowania) statystyk dla poszczególnych języków programowania na potrzeby mojej strony <a href="https://jaki-jezyk-programowania.pl/">jaki-jezyk-programowania.pl</a>. Obecnie zbiera dane z Github, Meetup.com, StackOverflow, Tiobe INDEX, Spectrum ranking oraz z Wikipedii (najnowsze wersje języków). Dzieje się to wielowątkowo i całość trwa ok. 9s. Wszystko ląduje do pliku JSON, z którego później czytane są dane przez moją stronę. Narzędzie odpalam mniej więcej raz na miesiąc.
+      img: /img/my-projects/stats-scraper.gif
+      github: https://github.com/C0deboy/stats-scraper
+
+    - title: Narzędzie do publikowania postów
+      technologies: Kotlin, Selenium, JCommander, Gradle
+      description: Narzędzie to całkowicie automatyzuje publikowanie postów na tego bloga. Składa się to na zbudowanie bloga przy pomocy Jekylla, wrzucenie zmian na GitHub Pages, zrobieniu screenshota nagłówka posta, zapisanie go na pulpicie i otworzenie dla mnie strony bloga na facebooku, tak bym mógł już tylko dodać link, pobraną grafikę i ewentualnie opis posta.
+      img: /img/my-projects/publish-post.gif
+      github: https://github.com/C0deboy/publish-post
+
+- section: Rok 2019
+  subtitle: >
+    Ostatni projekt. Od tego czasu skupiłem się na pracy i innych aktywnościach :slightly_smiling_face:
+  projects:
+
+    - title: Kindle editor
+      technologies: Kotlin, SpringBoot, WebSocket, Gradle
+      description: Nieco egzotyczna aplikacja webowa do własnego użytku. Dużo rzeczy robię na komputerze, dlatego chciałem wyeliminować chociaż jedną rzecz - pisanie postów na bloga. Chciałem do tego wykorzystać ekran czytnika Kindle, ale nie widziałem gotowego rozwiązania, z którego mógłbym skorzystać. Zbudowałem więc prostą aplikację wykorzystującą WebSocket, do współdzielenia tekstu w dwóch różnych przeglądarkach. Jako serwer aplikacji wykorzystałem RaspberryPi. Działa to tak, że na malince startuje aplikacja w przeglądarce, podpinam klawiaturę i tu bez ekranu korzystam z klawiatury. Każde użycie klawisza skutkuje rozprowadzeniem go do innych przeglądarek z otwartą aplikacją dzięki WebSocket. W Kindle również odpalam tę aplikację w przeglądarce i widzę wszystko co piszę. Całość ładnie się synchronizuje, a tekst jest również zapisywany do pliku. Obsłużyłem autoscroll, a nawet zaznaczanie tekstu, więc edytowanie go jest całkiem wygodne. Oczywiście występuje lekkie opóźnienie, głównie ze względu na ekran E-Ink, ale nie przeszkadza to aż tak bardzo.
+      img: /img/my-projects/kindle-editor.gif
+      github: https://github.com/C0deboy/kindle-editor

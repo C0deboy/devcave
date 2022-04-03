@@ -58,5 +58,5 @@ _drafts
 dist
 promotion
 .idea/checkstyle-idea.xml
-.idea/sonarlint/issuestore/index.pb
+.idea/sonarlint/**
 .idea/google-java-format.xml

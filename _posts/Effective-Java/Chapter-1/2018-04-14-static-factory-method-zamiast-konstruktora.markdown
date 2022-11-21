@@ -95,7 +95,7 @@ public class Coordinate {
     public Coordinate(double dist, double angle) {
         angle = Math.toRadians(angle);
         this.x = Math.round(dist * Math.cos(angle));
-        this.y = Math.round(dist * Math.sin(angle)));
+        this.y = Math.round(dist * Math.sin(angle));
     }
 }
 ```

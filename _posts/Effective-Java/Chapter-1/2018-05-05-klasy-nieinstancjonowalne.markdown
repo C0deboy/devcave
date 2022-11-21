@@ -48,9 +48,10 @@ Nie ma możliwości rozszerzania klasy z prywatnym konstruktorem.
 {: .cons}
 Trudność w testowaniu jednostkowym.
 
-Podczas gdy klasę utility można łatwo przetestować w izolacji, to klasy, które ją używają już nie. Klasy utility najczęściej wykorzystywane są bezpośrednio ({% code java %}UtilityClass.DoStuff(){% endcode %}) co w konsekwencji utrudnia ich mockowanie. Ma to tym większe znaczenie im klasa utility wykonuje cięższe operacje (najczęsciej na , które chcielibyśmy zmockować, aby zwiększyć wydajność testu.
+Podczas gdy klasę utility można łatwo przetestować w izolacji, to klasy, które ją używają już nie. Klasy utility najczęściej wykorzystywane są bezpośrednio ({% code java %}UtilityClass.doStuff(){% endcode %}) co w konsekwencji utrudnia ich mockowanie. Ma to jeszcze większe znaczenie, gdy klasa utility wykonuje cięższe operacje, które chcielibyśmy zmockować, aby zwiększyć wydajność testu.
 
-*W Javie istnieje narzędzie do testowania o nazwie [Powermock](https://github.com/powermock/powermock), które to potrafi, ale uznawane jest, że jeśli twoja aplikacja potrzebuję tego narzędzia, aby coś mogło zostać przetestowane, to najprawdopodobniej twoja aplikacja jest źle zaprojektowana i na tym powinieneś się skupić.
+{: .note}
+W Javie istnieje narzędzie do testowania o nazwie [Powermock](https://github.com/powermock/powermock), które to potrafi, ale uznawane jest, że jeśli twoja aplikacja potrzebuję tego narzędzia, aby coś mogło zostać przetestowane, to najprawdopodobniej twoja aplikacja jest źle zaprojektowana i na tym powinieneś się skupić.
 
 Szczególne znaczenie ma to podczas korzystania z frameworków *Dependency Injection* jak np. Spring. Wtedy takie klasy powinniśmy być w stanie wstrzyknąć jako zależność, żeby później można było łatwo je zmockować. W takich przypadkach powinny to być instancjonowalne klasy bez statycznych metod, które można wstrzyknąć jako Singletony.
 

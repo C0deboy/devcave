@@ -237,7 +237,7 @@ Goal goal = Goal.builder()
     .description("My goal")
     .levels(levels)
     .checklist(checklist)
-    .achieved(false)
+    .achieved()
     .build();
 ```
 
@@ -251,7 +251,7 @@ Goal goal = Goal.builder()
     .addLevel(new Level("10km", "Wine"))
     .addLevel(new Level("25km", "New laptop"))
     .checklist(checklist)
-    .achieved(false)
+    .achieved()
     .build();
 ```
 
@@ -304,7 +304,7 @@ Goal goal = new GoalBuilder()
         .description("My goal")
         .levels(levels)
         .checklist(checklist)
-        .achieved(false)
+        .achieved()
         .build();
 ```
 
@@ -511,6 +511,6 @@ Goal goal = new Goal(
     name="Run the marathon",
     description="My goal",
     levels=levels,
-    checList=checklist
+    checklist=checklist,
     achieved=false);
 {% endhighlight %}

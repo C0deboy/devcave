@@ -3,10 +3,11 @@ const promotions = [
     start: new Date('2022-04-12'),
     end: new Date('2022-04-18'),
     number: '13996',
+    host: 'helion.pl',
     img: '/promotion/p.jpg',
     popup: true,
     message: 'Promocja w [Helion] - Wielkanocny kiermasz książkowy! Wolisz video-kursy? Zajrzyj na [Udemy]',
-    adHeader: 'Promocja w [Helion] - Wielkanocny kiermasz książkowy!',
+    adHeader: 'Promocja w [Helion]! Wolisz video-kursy? Zajrzyj na [Udemy]',
     adContent: '',
   },
 ];
@@ -15,8 +16,8 @@ const customMessage = '';
 
 promotions.forEach((promotion, i) => {
   if (isPromotionActive(promotion)) {
-    // const helionUrl = `http://helion.pl/page/9102Q/kategorie/promocja-2za1`;
-    const helionUrl = `https://helion.pl/page/9102Q/promocja/${promotion.number}`;
+    // const url = `http://${promotion.host}/page/9102Q/kategorie/promocja-2za1`;
+    const helionUrl = `http://${promotion.host}/page/9102Q/promocja/${promotion.number}`;
     const udemyUrl = 'https://click.linksynergy.com/deeplink?id=0Bz3A2CPbI4&mid=39197&murl=https%3A%2F%2Fwww.udemy.com%2Fcourses%2Fdevelopment%2F';
 
     promotion.url = new URL(helionUrl);
@@ -84,9 +85,8 @@ function positionPromotionPopup(booksBtn, popup) {
 
   if (document.documentElement.clientWidth <= 992) {
     popup.style.right = '25px';
-    popup.style.left = '';
   } else {
-    popup.style.left = `${left}px`;
+    popup.style.left = left + 'px';
     popup.style.right = '';
   }
 }
@@ -104,14 +104,15 @@ function getWhenEndMessage(promotion) {
   } else {
     to = 'Promocja tylko dziś!';
   }
-  return `(${to})`;
+  return '(' + to + ')';
 }
 
 function cloneAd(promotionLink, i) {
   const newPromotionLink = promotionLink.cloneNode(true);
   promotionLink.parentElement.insertBefore(newPromotionLink, promotionLink);
   newPromotionLink.classList.add(`link-${i}`);
-  return document.querySelector(`.promotion.link-${i}`);
+  promotionLink = document.querySelector(`.promotion.link-${i}`);
+  return promotionLink;
 }
 
 function showPromotionAd(promotion, i) {
@@ -145,7 +146,6 @@ function showPromotionAd(promotion, i) {
     imageLink.appendChild(img);
     promoDesc.appendChild(imageLink);
     const endsAt = document.createElement('span');
-    endsAt.classList.add('promotion-end-info');
     endsAt.innerText = getWhenEndMessage(promotion);
     promotionLink.appendChild(endsAt);
   }

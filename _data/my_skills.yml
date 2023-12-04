@@ -10,15 +10,11 @@
       color: '#f7e018'
 
     - skill: Kotlin
-      grade: 40%
+      grade: 35%
       color: '#7a70e3'
 
-    - skill: Scala
-      grade: 15%
-      color: '#dc322f'
-
     - skill: Python
-      grade: 25%
+      grade: 20%
       color: '#37709f'
 
 - section: Technologie Javowe
@@ -31,10 +27,6 @@
       grade: 60%
       color: '#bcae79'
 
-    - skill: Lombok
-      grade: 90%
-      color: '#20b4ff'
-
     - skill: JUnit
       grade: 90%
       color: '#dc524a'
@@ -42,10 +34,6 @@
     - skill: Mockito
       grade: 90%
       color: '#1ca571'
-
-    - skill: AssertJ
-      grade: 90%
-      color: '#ecd9a6'
 
 - section: Technologie webowe
   skills:
@@ -73,31 +61,31 @@
       grade: 70%
       color: '#007acc'
 
+    - skill: Jasmine
+      grade: 70%
+      color: '#8A4182'
+
 - section: Inne
   skills:
     - skill: Git
       grade: 80%
       color: '#1b9612'
 
-    - skill: Webpack
-      grade: 80%
-      color: '#ae4239'
-
-    - skill: ESLint
-      grade: 90%
-      color: '#357bae'
-
     - skill: Gradle
       grade: 80%
       color: '#02303A'
 
     - skill: Maven
-      grade: 60%
+      grade: 80%
       color: '#002f63'
 
-    - skill: Jekyll
+    - skill: Webpack
       grade: 80%
-      color: '#2acb70'
+      color: '#ae4239'
+
+    - skill: Npm
+      grade: 80%
+      color: '#357bae'
 
 - section: IDE
   skills:

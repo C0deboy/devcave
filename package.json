@@ -10,8 +10,8 @@
     "scripts": {
         "webpack:watch": "webpack --watch --mode development",
         "build:production": "bash -i -c buildblog",
-        "build:web:production": "webpack -p --mode production",
-        "build:all:production": "webpack -p --mode production && bash -i -c buildblog",
+        "build:web:prod": "webpack -p --mode production",
+        "build:all:prod": "webpack -p --mode production && bash -i -c buildblog",
         "serve": "bash -l -i -c serveblog",
         "serve:future": "bash -l -i -c serveblog-f http://localhost:4000/",
         "serve:all": "bash -l -i -c serveblog-a"

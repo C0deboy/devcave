@@ -10,7 +10,6 @@ module.exports = {
     'search/search': './js/search/search.js',
     'search/fetch': './js/search/fetch.js',
     'skillbar': './js/skillbar.js',
-    'emailform': './js/emailform.js',
     'devcave': './js/devcave.js',
     'archive': './js/archive.js',
     'syntax': './css/syntax.scss',

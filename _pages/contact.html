@@ -24,12 +24,6 @@ permalink: /kontakt
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </a>
             </li>
-            <li class="list-inline-item">
-                <button class="main-btn" type="button" id="open-contact-btn" data-toggle="modal" data-target="#formularz-kontaktowy">
-                    Formularz kontaktowy
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                </button>
-            </li>
         </ul>
     </div>
 </div>
@@ -57,12 +51,6 @@ permalink: /kontakt
     <div class="col-md-12">
         <ul class="list-inline">
             <li class="list-inline-item">
-                <a class="contact-link" href="https://github.com/C0deboy">
-                    Github
-                    <i class="fa fa-github" aria-hidden="true"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
                 <a class="contact-link" href="https://www.linkedin.com/in/marcin-lasota/">
                     LinkedIn
                     <i class="fa fa-linkedin-square" aria-hidden="true"></i>
@@ -75,63 +63,5 @@ permalink: /kontakt
                 </a>
             </li>
         </ul>
-    </div>
-</div>
-
-<div id="formularz-kontaktowy" class="modal fade" role="dialog" aria-label="Formularz kontaktowy" aria-hidden="true">
-    <form class="modal-dialog modal-lg emailForm" method="POST" action="https://formspree.io/lasota.marcinm@gmail.com" target="formresponse">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Formularz kontaktowy</h5>
-                <button type="button" class="close" id="close-contact-btn" data-dismiss="modal" aria-label="Zamknij formularz kontaktowy"
-                        title="Zamknij formularz kontaktowy">
-                    <i class="fa fa-times close-form"></i>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <div class="row">
-                    <label class="form-group col-md-6 col-xs-12" aria-live="polite">
-                        Twój email
-                        <input class="form-data form-control" name="email" type="email" placeholder="Wpisz tu twój email" required>
-                    </label>
-                    <label class="form-group col-md-6 col-xs-12" aria-live="polite">
-                        Temat
-                        <input class="form-data form-control" name="_subject" placeholder="Wpisz tu temat wiadomości" minlength="4"
-                               maxlength="78"
-                               required>
-                    </label>
-                </div>
-                <div class="row flex-column justify-content-center">
-                    <label class="form-group col-md-12 col-xs-12" aria-live="polite">
-                        Wiadomość
-                        <textarea class="form-data form-control" rows="8" name="message" placeholder="Wpisz tu twoją wiadomość" minlength="4"
-                                  maxlength="6000" required></textarea>
-                    </label>
-
-                    <input type="hidden" name="_language" value="pl" />
-
-                    <button type="submit" class="emailFormSubmit main-btn" name="submit">Wyślij</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div id="email-form-response" class="modal fade emailForm" role="dialog" >
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" >Potwierdź, że nie jesteś robotem</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij formularz kontaktowy"
-                        title="Zamknij formularz kontaktowy">
-                    <i class="fa fa-times close-form"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <iframe name='formresponse' scrolling="no"></iframe>
-                <button class="main-btn mt-4 d-block" data-dismiss="modal" aria-label="Zamknij" title="Zamknij">Zamknij</button>
-            </div>
-        </div>
     </div>
 </div>

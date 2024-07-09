@@ -43,18 +43,6 @@
 - section: Do przeczytania
   subtitle: Książki w trakcie przerabiania, ale godne polecenia
   books:
-    - title: Warsztat hakera. Testy penetracyjne i inne techniki wykrywania podatności
-      author: Matthew Hickey, Jennifer Arcuri
-      helionID: warhak
-
-    - title: Sztuka podstępu. Łamałem ludzi, nie hasła
-      author: Kevin D. Mitnick, William L. Simon
-      helionID: artd2v
-
-    - title: Duch w sieci. Moje przygody jako najbardziej poszukiwanego hakera wszech czasów
-      author: Kevin Mitnick
-      helionID: duchsv
-
     - title: Angular. Programowanie z użyciem języka TypeScript
       author: Yakov Fain, Anton Moiseev
       helionID: anpro2
@@ -63,36 +51,7 @@
       author: Adam Freeman
       helionID: reac16
 
-    - title: Uczenie maszynowe z użyciem Scikit-Learn i TensorFlow
-      author: Aurélien Géron
-      helionID: uczem2
+    - title: Warsztat hakera. Testy penetracyjne i inne techniki wykrywania podatności
+      author: Matthew Hickey, Jennifer Arcuri
+      helionID: warhak
 
-    - title: Data science od podstaw. Analiza danych w Pythonie
-      author: Joel Grus
-      helionID: dascp2
-
-    - title: Getting Things Done, czyli sztuka bezstresowej efektywności. Wydanie II
-      author: David Allen
-      helionID: getti2
-
-    - title: Wzorce projektowe. Elementy oprogramowania obiektowego wielokrotnego użytku
-      author: Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides
-      helionID: wzoelv
-
-### Przeczytane, ale nie polecam ###
-- section: Przeczytane, ale nie polecam
-  subtitle: Książki przeciętne lub już nieaktualne
-  books:
-    - title: JavaScript. Programowanie zaawansowane
-      author: Tomasz "Comandeer" Jakut
-      helionID: jascpz
-
-    - title: Junior Developer
-      author: Mateusz Kupilas
-      img: /img/reviews/junior-dev/junior-developer.png
-      link: http://javadevmatt.shoplo.com/
-
-    - title: 'Zawód: Programista'
-      author: Maciej Aniserowicz
-      img: /img/reviews/zawod-dev/zawod-programista.jpg
-      link: https://zawodprogramista.pl/
